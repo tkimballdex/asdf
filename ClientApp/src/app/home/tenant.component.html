@@ -1,0 +1,4 @@
+<div *ngIf="tenantList" style="margin: 1em">
+    <h6 style="margin-top: 2em">Tenant:</h6>
+    <ejs-dropdownlist [dataSource]="tenantList" [fields]="{ text: 'name', id: 'id' }" [(value)]="tenant" (change)="changeTenant()" placeholder="Choose Tenant"></ejs-dropdownlist>
+</div>

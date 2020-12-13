@@ -1,0 +1,31 @@
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { RoleListComponent } from './list.component'
+import { RoleEditComponent } from './edit.component'
+import { MsalGuard } from '@azure/msal-angular';
+
+import { RadioButtonModule, ButtonModule, CheckBoxModule } from '@syncfusion/ej2-angular-buttons';
+import { GridModule, SortService, PageService, EditService, ToolbarService, CommandColumnService } from '@syncfusion/ej2-angular-grids';
+import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
+import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
+
+@NgModule({
+    declarations: [
+        RoleListComponent,
+        RoleEditComponent
+    ],
+    imports: [
+        GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule,
+        CommonModule,
+        RouterModule.forChild([
+            { path: 'role/list', component: RoleListComponent, canActivate: [MsalGuard] },
+            { path: 'role/add', component: RoleEditComponent, canActivate: [MsalGuard] },
+            { path: 'role/edit/:id', component: RoleEditComponent, canActivate: [MsalGuard] },
+        ])
+    ],
+    providers: [
+        PageService, SortService, EditService, ToolbarService, CommandColumnService
+    ]
+})
+export class RoleModule { }

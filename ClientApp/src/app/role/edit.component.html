@@ -1,0 +1,63 @@
+<div class="form-title">
+    <span>Role Detail</span>
+</div>
+<div *ngIf="record" class="form-content">
+    <div class="form-group">
+        <div class="e-float-input">
+            <ejs-textbox [(value)]="record.name" placeholder="Role Name" floatLabelType="Always"></ejs-textbox>
+        </div>
+    </div>
+
+    <h6 style="margin-top: 2em">Privileges:</h6>
+
+    <ejs-grid #grid [dataSource]='record.featureRoles' [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="true">
+        <e-columns>
+            <e-column field='name' headerText='Name'></e-column>
+
+            <e-column field='create' headerText='Create' textAlign='Center' width="120">
+                <ng-template #template let-data>
+                    <ejs-checkbox [(checked)]="record.featureRoles[data.index].create"></ejs-checkbox>
+                </ng-template>
+            </e-column>
+
+            <e-column field='read' headerText='Read' textAlign='Center' width="120">
+                <ng-template #template let-data>
+                    <ejs-checkbox [(checked)]="record.featureRoles[data.index].read"></ejs-checkbox>
+                </ng-template>
+            </e-column>
+
+            <e-column field='update' headerText='Update' textAlign='Center' width="120">
+                <ng-template #template let-data>
+                    <ejs-checkbox [(checked)]="record.featureRoles[data.index].update"></ejs-checkbox>
+                </ng-template>
+            </e-column>
+
+            <e-column field='delete' headerText='Delete' textAlign='Center' width="120">
+                <ng-template #template let-data>
+                    <ejs-checkbox [(checked)]="record.featureRoles[data.index].delete"></ejs-checkbox>
+                </ng-template>
+            </e-column>
+
+            <e-column field='approve' headerText='Approve' textAlign='Center' width="120">
+                <ng-template #template let-data>
+                    <ejs-checkbox [(checked)]="record.featureRoles[data.index].approve"></ejs-checkbox>
+                </ng-template>
+            </e-column>
+
+            <e-column field='download' headerText='Download' textAlign='Center' width="120">
+                <ng-template #template let-data>
+                    <ejs-checkbox [(checked)]="record.featureRoles[data.index].download"></ejs-checkbox>
+                </ng-template>
+            </e-column>
+        </e-columns>
+    </ejs-grid>
+
+    <br />
+    <button ejs-button isPrimary="true" cssClass="e-outline" (click)="save()" [disabled]="loading">Save</button>
+    &nbsp;
+    <button ejs-button cssClass="e-outline" (click)="delete()" [disabled]="loading || !record.id">Delete</button>
+    &nbsp;
+    <button ejs-button cssClass="e-outline" [routerLink]="['/role/list']">Close</button>
+    <ejs-toast #toast></ejs-toast>
+</div>
+

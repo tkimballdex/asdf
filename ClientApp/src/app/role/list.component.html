@@ -1,0 +1,17 @@
+ROLE ADMIN
+
+<div *ngIf="list">
+    <ejs-grid [dataSource]='list' [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="true">
+        <e-columns>
+            <e-column width="100">
+                <ng-template #template let-data>
+                    <a [routerLink]="['/role/edit', data.id]">edit</a>
+                </ng-template>
+            </e-column>
+            <e-column field='name' headerText='Name'></e-column>
+        </e-columns>
+    </ejs-grid>
+
+    <br />
+    <button ejs-button cssClass="e-outline" [routerLink]="['/role/add']">Add</button>
+</div>
