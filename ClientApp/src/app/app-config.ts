@@ -27,13 +27,13 @@ export const b2cPolicies = {
     },
     authorities: {
         signUpSignIn: {
-            authority: "https://servicerover.b2clogin.com/servicerover.onmicrosoft.com/B2C_1_CustomerPortalLogin"
+            authority: "https://interomeb2c.b2clogin.com/interomeb2c.onmicrosoft.com/B2C_1_CustomerPortalLogin"
         },
         resetPassword: {
-          authority: "https://servicerover.b2clogin.com/servicerover.onmicrosoft.com/B2C_1_CustomerPortalReset"
+          authority: "https://interomeb2c.b2clogin.com/interomeb2c.onmicrosoft.com/B2C_1_CustomerPortalReset"
         },
         editProfile: {
-          authority: "https://servicerover.b2clogin.com/servicerover.onmicrosoft.com/B2C_1_CustomerPortalProfile"
+          authority: "https://interomeb2c.b2clogin.com/interomeb2c.onmicrosoft.com/B2C_1_CustomerPortalProfile"
         }
     }
 }
@@ -46,7 +46,7 @@ export const b2cPolicies = {
  * The current application coordinates were pre-registered in a B2C tenant.
  */
 export const apiConfig: { b2cScopes: string[], webApi: string } = {
-    b2cScopes: ['https://servicerover.onmicrosoft.com/serviceroverbe/jobs'],
+    b2cScopes: ['https://interomeb2c.onmicrosoft.com/interomephbe/data'],
     webApi: environment.webApi
 };
 // #endregion
@@ -60,7 +60,7 @@ export const apiConfig: { b2cScopes: string[], webApi: string } = {
  */
 export const msalConfig: Configuration = {
   auth: {
-    clientId: "9a1a2559-4b30-45cc-abc5-b5932210cabb",
+        clientId: "9d141870-8aab-4153-a821-907c751ab7ba",
     authority: b2cPolicies.authorities.signUpSignIn.authority,
     redirectUri: window.location.origin,
     postLogoutRedirectUri: window.location.origin,
@@ -83,7 +83,7 @@ export const loginRequest: {scopes: string[]} = {
 
 // Scopes you enter will be used for the access token request for your web API
 export const tokenRequest: {scopes: string[]} = {
-    scopes: apiConfig.b2cScopes // i.e. [https://servicerover.onmicrosoft.com/helloapi/demo.read]
+    scopes: apiConfig.b2cScopes // i.e. [https://interomeb2c.onmicrosoft.com/helloapi/demo.read]
 };
 // #endregion
 
@@ -92,7 +92,7 @@ export const tokenRequest: {scopes: string[]} = {
 // #region 4) MSAL-Angular Configuration
 // here you can define the coordinates and required permissions for your protected resources
 export const protectedResourceMap: [string, string[]][] = [
-    [apiConfig.webApi, apiConfig.b2cScopes] // i.e. [https://serviceroverhello.azurewebsites.net/hello, ['https://servicerover.onmicrosoft.com/helloapi/demo.read']]
+    [apiConfig.webApi, apiConfig.b2cScopes] // i.e. [https://interomephhello.azurewebsites.net/hello, ['https://interomeb2c.onmicrosoft.com/helloapi/demo.read']]
 ];
 
 /** 

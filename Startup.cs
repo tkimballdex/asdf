@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.IO;
 
-namespace ServiceRoverWebApp
+namespace InteromePhWebApp
 {
 	public class Startup
 	{

@@ -4,7 +4,7 @@
     "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:52271",
-      "sslPort": 44345
+      "sslPort": 44346
     }
   },
   "profiles": {
@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "ServiceRoverWebApp": {
+    "InteromePhWebApp": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

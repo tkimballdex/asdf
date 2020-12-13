@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ServiceRoverWebApp": {
+    "InteromePhWebApp": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -53,18 +53,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ServiceRoverWebApp:build"
+            "browserTarget": "InteromePhWebApp:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ServiceRoverWebApp:build:production"
+              "browserTarget": "InteromePhWebApp:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ServiceRoverWebApp:build"
+            "browserTarget": "InteromePhWebApp:build"
           }
         },
         "test": {
@@ -123,7 +123,7 @@
         }
       }
     },
-    "ServiceRoverWebApp-e2e": {
+    "InteromePhWebApp-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -131,7 +131,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ServiceRoverWebApp:serve"
+            "devServerTarget": "InteromePhWebApp:serve"
           }
         },
         "lint": {
@@ -146,7 +146,7 @@
       }
     }
   },
-  "defaultProject": "ServiceRoverWebApp",
+  "defaultProject": "InteromePhWebApp",
   "cli": {
     "analytics": "e794bb76-696f-44d9-942f-8b8d590c1650"
   }

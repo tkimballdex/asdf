@@ -17,13 +17,11 @@ export class MsalHttpClient {
                 if (postback) postback(data);
             },
             error: (err: AuthError) => {
-                if (InteractionRequiredAuthError.isInteractionRequiredError(err.errorCode)) {
-                    this.authService.acquireTokenPopup({
-                        scopes: this.authService.getScopesForEndpoint(url)
-                    }).then(() => {
-                        this.http.post(url, dataToPost).toPromise().then(data => { if (postback) postback(data); });
-                    });
-                }
+                this.authService.acquireTokenPopup({
+                    scopes: this.authService.getScopesForEndpoint(url)
+                }).then(() => {
+                    this.http.post(url, dataToPost).toPromise().then(data => { if (postback) postback(data); });
+                });
             }
         });
     }
