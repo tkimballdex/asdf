@@ -20,8 +20,7 @@ export class RoleEditComponent extends PageComponent implements OnInit {
     @ViewChild('grid', null) public grid: GridComponent;
 
     async ngOnInit() {
-        var id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
-        if (isNaN(id)) id = 0;
+        var id = this.route.snapshot.paramMap.get('id');
 
         this.showSpinner();
         this.record = await this.repository.get(id);

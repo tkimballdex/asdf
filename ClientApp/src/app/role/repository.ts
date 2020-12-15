@@ -14,7 +14,7 @@ export class RoleRepository {
         return this.http.post<boolean>(`/role/delete/${id}`);
     }
 
-    public get(id: number) {
+    public get(id: string) {
         return this.http.post(`/role/get/${id}`);
     }
 
