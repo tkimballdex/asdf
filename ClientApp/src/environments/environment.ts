@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    webApi: 'https://localhost:44303'
+    webApi: 'https://interomeph-be.azurewebsites.net'
 };
 
 /*
