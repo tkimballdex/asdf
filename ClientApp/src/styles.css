@@ -1,13 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import '../node_modules/@syncfusion/ej2-base/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-inputs/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-lists/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-calendars/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-angular-calendars/styles/material.css'; 
+@import '../node_modules/@syncfusion/ej2-base/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-buttons/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-inputs/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-popups/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-lists/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-calendars/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-angular-calendars/styles/fabric.css'; 
 
 /* Provide sufficient contrast against white background */
 a {
@@ -22,4 +22,65 @@ code {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
+}
+
+#list-view {
+    border:0px solid red;
+}
+
+#list-view .list-header {
+    padding-bottom: 20px;
+    padding-left:0px!important;
+}
+
+#list-view .list-header-icon {
+    display: inline-block;
+    font-size:1.5em;
+    color:#0366d6;
+    padding-right:10px;
+}
+
+#list-view .list-header-title {
+    display: inline-block;
+    font-size: 1.5em;
+    font-weight: bold;
+    color:#0366d6;
+    padding-right:20px;
+}
+
+#list-view .list-header-add {
+    display: inline-block;
+    padding-left: 20px;
+    border-left: 1px dotted #0366d6;
+}
+
+#list-view .list-content {
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding-top:15px;
+    padding-bottom:15px;
+    border: 1px solid #e6ecf5;
+}
+
+#list-view .list-content .e-pager {
+    padding-top:10px;
+    padding-bottom:3px;
+}
+
+.e-search:before {
+    font: normal normal normal 14px/1 FontAwesome;
+    content: "\f002";
+    padding-right:10px;
+    opacity:0.5;
+}
+
+/*#list-view .list-content .col-md-3,
+#list-view .list-content .col-md-12 {
+    padding-left: 0px;
+}*/
+.pad-b20 {
+    padding-bottom: 20px;
+}
+.pad-t20 {
+    padding-top: 20px;
 }

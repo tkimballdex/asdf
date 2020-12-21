@@ -1,29 +1,35 @@
-USER ADMIN
+<div id="list-view" class="container-fluid">
+    <div class="row d-flex align-items-end">
+        <div class="col d-flex align-items-end list-header">
+            <span class="list-header-icon"><i class="fas fa-user-friends"></i></span>
+            <span class="list-header-title">Users</span>
+            <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['/user/add']">+ Add</button></span>
+        </div>
+    </div>
+    <div class="row d-flex align-items-end list-content">        
+        <div class="col-md-3">
+            <ejs-dropdownlist [dataSource]="tenantList" [fields]="{ text: 'name', id: 'id' }" [(value)]="tenant" (change)="changeTenant()" placeholder="Tenant" floatLabelType="Always"></ejs-dropdownlist>
+        </div>
+        <div class="col-3">
+            <ejs-textbox [(value)]="username" placeholder="Username" floatLabelType="Auto"></ejs-textbox>
+        </div>
+        <div class="col-3">
+            <button ejs-button cssClass="e-primary" iconCss= "e-search" (click)="search()">Search</button>
+        </div>
+        <div class="col-12 pad-t20">
+            <ejs-grid [dataSource]='list' [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="true" *ngIf="list">
+                <e-columns>
+                    <e-column width="80">
+                        <ng-template #template let-data>
+                            <a [routerLink]="['/user/edit', data.id]">edit</a>
+                        </ng-template>
+                    </e-column>
+                    <e-column field='email' headerText='Username'></e-column>
+                    <e-column field='firstName' headerText='First Name'></e-column>
+                    <e-column field='lastName' headerText='Last Name'></e-column>
+                </e-columns>
+            </ejs-grid>
+        </div>
+    </div>
+</div>
 
-<h6 style="margin-top: 2em">Tenant:</h6>
-<ejs-dropdownlist [dataSource]="tenantList" [fields]="{ text: 'name', id: 'id' }" [(value)]="tenant" (change)="changeTenant()" placeholder="Choose Tenant"></ejs-dropdownlist>
-
-<h6 style="margin-top: 2em">Username:</h6>
-<ejs-textbox [(value)]="username"></ejs-textbox>
-
-<br />
-<br />
-<button ejs-button cssClass="e-outline" (click)="search()">Search</button>
-
-<br />
-<br />
-<ejs-grid [dataSource]='list' [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="true" *ngIf="list">
-    <e-columns>
-        <e-column field='email' headerText='Username'></e-column>
-        <e-column field='firstName' headerText='First Name'></e-column>
-        <e-column field='lastName' headerText='Last Name'></e-column>
-        <e-column width="300">
-            <ng-template #template let-data>
-                <a [routerLink]="['/user/edit', data.id]">edit</a>
-            </ng-template>
-        </e-column>
-    </e-columns>
-</ejs-grid>
-
-<br />
-<button ejs-button cssClass="e-outline" [routerLink]="['/user/add']">Add</button>
