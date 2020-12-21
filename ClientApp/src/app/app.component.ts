@@ -3,6 +3,7 @@ import { SidebarComponent, MenuEventArgs } from '@syncfusion/ej2-angular-navigat
 import { Menu, MenuItemModel } from '@syncfusion/ej2-navigations';
 import { MsalService } from '@azure/msal-angular';
 import { Router } from "@angular/router";
+import { MsalHttpClient } from './shared/msal-http';
 
 
 @Component({
@@ -19,8 +20,24 @@ export class AppComponent {
     public target: string = '.main-content';
     public dockSize: string = '70px';
     public enableDock: boolean = true;
-    constructor(private authService: MsalService, private router: Router) {
+    constructor(private authService: MsalService, private router: Router, private http: MsalHttpClient) {
+        console.dir(this.authService.getAccount());
 
+        this.AccountMenuItem = [
+            {
+                text: 'Account',
+                items: [
+                    { id: 'tenant', text: 'Tenant' },
+                ]
+            }
+        ];
+
+        if (this.authService.getAccount() != null) {
+            this.AccountMenuItem[0].items.push({ id: 'logout', text: 'Sign out' });
+        }
+        else {
+            this.AccountMenuItem[0].items.push({ id: 'login', text: 'Log In' });
+        }
     }
 
     public selectMainMenu(args: MenuEventArgs): void {
@@ -32,6 +49,12 @@ export class AppComponent {
     public selectAccountMenu(args: MenuEventArgs): void {
         if (args.item.id == 'logout') {
             this.authService.logout();
+        }
+        else if (args.item.id == 'login') {
+            this.authService.loginPopup().then(() => {
+                this.router.navigate(['/']);
+                setTimeout(() => window.location.reload(), 500);
+            });
         }
         else if (args.item.id == 'tenant') {
             this.router.navigate(['/account/tenant']);
@@ -71,18 +94,10 @@ export class AppComponent {
             ]
         }
     ];
-    public AccountMenuItem: MenuItemModel[] = [
-        {
-            text: 'Account',
-            items: [
-                { id: 'tenant', text: 'Tenant' },
-                { id: 'logout', text: 'Sign out' },
-            ]
-        }
-    ];
+
+    public AccountMenuItem: MenuItemModel[];
 
     openClick() {
         this.sidebarMenuInstance.toggle();
     }
 };
-// open new tab

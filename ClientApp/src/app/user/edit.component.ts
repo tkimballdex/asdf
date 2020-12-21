@@ -38,18 +38,22 @@ export class UserEditComponent extends PageComponent implements OnInit {
     async save() {
         var add = !this.record.id;
         this.showSpinner();
-        this.record = await this.repository.save(this.record);
+        var returnValue = await this.repository.save(this.record);
         this.hideSpinner();
 
-        if (this.record && this.record.error) {
-            this.showErrorMessage(this.record.description);
+        if (returnValue && returnValue.error) {
+            this.showErrorMessage(returnValue.description);
         }
         else {
-            var success = this.record && this.record.updated;
+            var success = returnValue && returnValue.updated;
             this.showSaveMessage(success);
 
+            if (success) {
+                this.record = returnValue;
+            }
+
             if (success && add) {
-                setTimeout(() => this.router.navigate(['/user/edit', this.record.id]), 1000);
+                setTimeout(() => this.router.navigate(['/user/edit', returnValue.id]), 1000);
             }
         }
     }

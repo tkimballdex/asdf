@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
 import { MsalHttpClient } from './msal-http';
+import { MsalService } from '@azure/msal-angular';
 
 @Injectable({ providedIn : 'root'})
 export class AppRepository {
-    constructor(private http: MsalHttpClient) {
+    constructor(private http: MsalHttpClient, private authService: MsalService) {
 	}
 
 	appData: Promise<Object>;
@@ -33,6 +34,11 @@ export class AppRepository {
 
     public set tenant(value: string) {
         sessionStorage.setItem('tenant', value);
+    }
+
+    public get userName() {
+        var account = this.authService.getAccount();
+        return account ? account.name : null;
     }
 }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MsalHttpClient } from '../shared/msal-http';
 import { PageComponent } from '../shared/page.component';
+import { AppRepository } from '../shared/app.repository';
 import { UserRepository } from '../user/repository';
 
 @Component({
@@ -8,16 +9,18 @@ import { UserRepository } from '../user/repository';
   templateUrl: './home.component.html',
 })
 export class HomeComponent extends PageComponent implements OnInit {
-    constructor(private http: MsalHttpClient, private repository: UserRepository) {
+    constructor(private http: MsalHttpClient, private repository: UserRepository, private app: AppRepository) {
         super();
     }
 
     public tenantList: any;
-    public tenant: any;
+    public tenant: string;
+    public username: string;
 
     async ngOnInit() {
         this.http.postWithErrorCheck('/home/getdata2', null, (data) => console.dir(data));
         this.tenantList = await this.repository.tenantList();
         this.tenant = localStorage.getItem('tenant');
+        this.username = this.app.userName;
     }
 }

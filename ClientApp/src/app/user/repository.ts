@@ -7,7 +7,7 @@ export class UserRepository {
     }
 
     public save(record: any) {
-        return this.http.post(`/user/save`, record);
+        return this.http.post<any>(`/user/save`, record);
     }
 
     public delete(id: string) {
