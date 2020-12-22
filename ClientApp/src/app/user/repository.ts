@@ -23,6 +23,6 @@ export class UserRepository {
     }
 
     public tenantList() {
-        return this.http.post(`/user/tenantList`);
+        return this.http.post(`/user/getTenantList`);
     }
 }
