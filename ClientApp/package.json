@@ -1,15 +1,16 @@
 {
   "name": "InteromePhWebApp",
   "version": "0.0.0",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "build:ssr": "ng run InteromePhWebApp:server:dev",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
-  },
+    "scripts": {
+        "ng": "ng",
+        "start": "ng serve",
+        "build": "ng build",
+        "build:ssr": "ng run InteromePhWebApp:server:dev",
+        "build-staging": "ng build --configuration=staging",
+        "test": "ng test",
+        "lint": "ng lint",
+        "e2e": "ng e2e"
+    },
   "private": true,
   "dependencies": {
     "@angular/animations": "8.2.12",
