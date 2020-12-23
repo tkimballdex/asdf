@@ -83,3 +83,39 @@ code {
 .pad-t20 {
     padding-top: 20px;
 }
+
+#main-treeview
+{
+    text-align:left;
+}
+#main-treeview ul
+{
+    padding-left:0px;
+}
+#main-treeview ul li {
+    padding-left: 20px;
+}
+#main-treeview .e-text-content
+{
+    text-align:left;
+    padding-left:0px;
+}
+#main-treeview .e-list-item .e-icon-expandable,
+#main-treeview .e-list-item .e-icon-collapsible {
+    float: right;
+    padding-top: 5px;
+}
+
+#sidebar-menu.e-dock.e-close #main-treeview ul .e-list-icon
+{
+    width: 60px;
+    font-size:30px;
+    color:#0080ff;
+}
+#sidebar-menu.e-dock.e-close #main-treeview .e-text-content {
+    text-align:center;
+}
+#main-treeview .e-fullrow
+{
+    
+}

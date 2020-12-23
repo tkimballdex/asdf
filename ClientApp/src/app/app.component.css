@@ -36,6 +36,18 @@
      }
  }
 
+#header .e-menu-wrapper,
+#header .e-menu-wrapper ul li.e-focused,
+#header .e-menu-wrapper ul li.e-selected {
+    background-color: transparent;
+}
+#header .e-menu-wrapper ul .e-menu-item {
+    color:#fff;
+}
+#header .e-menu-item.e-focused:hover {
+    background-color: #1784c7;
+}
+
 /* end of text input styles */
 /* end of header-section styles */
 
@@ -103,8 +115,8 @@
     }
  }
 
-#sidebar-menu .e-menu-wrapper ul .e-menu-item:hover,
-.e-menu-item.e-focused:hover {
+#sidebar-menu .e-menu-wrapper ul .e-menu-item:hover
+{
     color: #000000;
     background-color: #ffffff !important;
 }
@@ -118,7 +130,7 @@
 #sidebar-menu .action-btn,
 #header .e-menu-item .e-caret,
 .dock-menu .e-menu-wrapper ul .e-menu-item {
-    color: #fff !important;
+    /*color: #fff !important;*/
 }
 
 .dock-menu.e-close .e-menu-wrapper ul .e-menu-item {
