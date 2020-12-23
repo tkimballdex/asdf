@@ -100,4 +100,34 @@ export class AppComponent {
     openClick() {
         this.sidebarMenuInstance.toggle();
     }
+
+    public data: Object[] = [
+        {
+            nodeId: '01', nodeText: 'Home', iconCss: 'e-icons home',
+        },
+        {
+            nodeId: '02', nodeText: 'Dashboard', iconCss: 'icon-thumbs-up-alt icon',
+        },
+        {
+            nodeId: '03', nodeText: 'Samples', iconCss: 'icon-docs icon',
+        },
+        {
+            nodeId: '04', nodeText: 'Manage', iconCss: 'icon-th icon',
+            nodeChild: [
+                { nodeId: '04-01', nodeText: 'Customers', iconCss: 'icon-circle-thin icon' },
+                { nodeId: '04-02', nodeText: 'Sites', iconCss: 'icon-circle-thin icon' },
+                { nodeId: '04-03', nodeText: 'Locations', iconCss: 'icon-circle-thin icon' }
+            ]
+        },
+        {
+            nodeId: '05', nodeText: 'Settings', iconCss: 'icon-code icon',
+            nodeChild: [
+                { nodeId: 'user/list', nodeText: 'Users', iconCss: 'icon-circle-thin icon' },
+                { nodeId: '/role/list', nodeText: 'Roles', iconCss: 'icon-circle-thin icon' },
+                { nodeId: '05-03', nodeText: 'Tenants', iconCss: 'icon-circle-thin icon' },
+                { nodeId: '05-04', nodeText: 'Labs', iconCss: 'icon-circle-thin icon' }
+            ]
+        }        
+    ];
+    public field: Object = { dataSource: this.data, id: 'nodeId', text: 'nodeText', navigateUrl: 'nodeId', child: 'nodeChild', iconCss: 'iconCss' };
 };

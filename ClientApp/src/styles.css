@@ -35,16 +35,15 @@ code {
 
 #list-view .list-header-icon {
     display: inline-block;
-    font-size:1.5em;
-    color:#0366d6;
-    padding-right:10px;
+    font-size: 1.5em;
+    color: #0080ff;
+    padding-right: 10px;
 }
 
 #list-view .list-header-title {
     display: inline-block;
     font-size: 1.5em;
-    font-weight: bold;
-    color:#0366d6;
+    font-weight: 400;
     padding-right:20px;
 }
 

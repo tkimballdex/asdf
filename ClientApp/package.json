@@ -41,7 +41,7 @@
     "@syncfusion/ej2-angular-lineargauge": "^18.3.35",
     "@syncfusion/ej2-angular-lists": "^18.3.35",
     "@syncfusion/ej2-angular-maps": "^18.3.35",
-    "@syncfusion/ej2-angular-navigations": "^18.3.35",
+    "@syncfusion/ej2-angular-navigations": "^18.4.30",
     "@syncfusion/ej2-angular-notifications": "^18.3.35",
     "@syncfusion/ej2-angular-pdfviewer": "^18.3.35",
     "@syncfusion/ej2-angular-pivotview": "^18.3.35",

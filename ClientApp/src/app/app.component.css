@@ -1,6 +1,5 @@
 /* header-section styles */
-#header.header-section,
-#header .search-icon {
+#header.header-section {
     height: 50px;
 }
 
@@ -8,6 +7,8 @@
     font-size: 24px;
     float: left;
     line-height: 50px;
+    color:white;
+    font-family:inherit;
 }
 
 #header .right-header {
@@ -24,7 +25,7 @@
 }
 
 #header .header-list {
-    padding-left: 15px;
+    padding-left: 20px;
     margin: 0;
 }
 
@@ -35,21 +36,6 @@
      }
  }
 
-/* text input styles */
-#header .search-icon {
-    float: left;
-    padding-left: 15px;
-    border: 0px solid #33383e !important;
-    /*JOHN -- background-color: #33383e;*/
-    cursor: text;
-    width: 5em;
-}
-
-#header .search-icon:focus {
-    outline: none;
-    cursor: default;
-}
-
 /* end of text input styles */
 /* end of header-section styles */
 
@@ -57,14 +43,13 @@
 #maintext.main-content {
     height: 100vh;
     z-index: 1000;
-    padding: 0px 20px 20px 20px;
-    background-color: #f6f7fb;
-    border-top: 1px solid #e6ecf5;
+    padding: 0px 20px 20px 0px;
+    /*background-color: #f6f7fb;*/
 }
 
 #maintext .sidebar-menu-content {
-    margin-top: 1em;
-    margin-left: 1em;
+    margin-top: 0px;
+    margin-left: 0px;
 }
 
 #maintext .form-title {
@@ -81,8 +66,11 @@
     border-radius: 5px;
 }
 
+#maintext .content-section
+{
+    padding:20px;
+}
 /* end of content area styles */
-
 /* menu styles */
 /* horizontal-menu styles */
 #header .header-list .horizontal-menu .e-menu-item {
@@ -105,7 +93,6 @@
 }
 #sidebar-menu .e-menu-wrapper ul .e-menu-item.e-menu-caret-icon {
     width: 220px;
-    background-color: #ffffff;
 }
 
 @media(max-width: 500px) {
@@ -119,6 +106,7 @@
 #sidebar-menu .e-menu-wrapper ul .e-menu-item:hover,
 .e-menu-item.e-focused:hover {
     color: #000000;
+    background-color: #ffffff !important;
 }
 
 /* end of vertical-menu styles */
@@ -127,11 +115,10 @@
 /* Sidebar styles */
 /* docksidebar styles */
 .dock-menu .e-menu-wrapper ul .e-menu-item .e-caret,
-#header .search-icon,
 #sidebar-menu .action-btn,
 #header .e-menu-item .e-caret,
 .dock-menu .e-menu-wrapper ul .e-menu-item {
-    /*JOHN --color: #fff !important; */
+    color: #fff !important;
 }
 
 .dock-menu.e-close .e-menu-wrapper ul .e-menu-item {
@@ -141,6 +128,11 @@
 .dock-menu.e-close ul .e-menu-item.e-menu-caret-icon {
     padding-right: 5px;
     height:50px;
+}
+
+#sidebar-menu {
+    margin-top:60px;
+    border-radius:0px 5px 0px 0px;
 }
 
 #sidebar-menu.e-dock.e-close .e-menu-wrapper ul .e-menu-item .e-caret,
@@ -159,7 +151,7 @@
 
 #sidebar-menu.e-dock.e-close .e-menu-wrapper ul .e-menu-item.e-menu-caret-icon e-selected e-focused,
 #sidebar-menu.e-dock.e-close .e-menu-wrapper ul.e-vertical {
-    color:#ff0000!important;
+  
 }
 
 #sidebar-menu.e-dock.e-close .e-menu-wrapper ul.e-menu {
@@ -173,16 +165,18 @@
 }
 
 #sidebar-menu,
-#sidebar-menu ul,
-#header ul,
+#sidebar-menu ul {
+    color: #333333 !important;
+    overflow: hidden;
+    background-color: #ffffff;
+}
 .dock-menu .e-menu-wrapper,
 .dock-menu.e-menu-wrapper,
 .dock-menu.e-menu-wrapper ul > *,
 .dock-menu .e-menu-wrapper ul > * {
-    /* JOHN -- background-color: #33383e !important;
-    color: #fff !important;*/
     overflow: hidden;
     background-color: #ffffff;
+    color: #333333!important;
 }
 /* end of docksidebar styles */
 /*end of  Sidebar styles */
@@ -190,7 +184,6 @@
 /*main-menu-header  styles */
 #sidebar-menu .main-menu-header {
     padding: 4px 0 0 18px;
-    color: #ff0000;
 }
 
 /*end of main-menu-header  styles */
@@ -225,8 +218,7 @@
     display: block;
 }
 #sidebar-menu{
-    margin-left: -1px;
-    border-right: 1px solid #e6ecf5;
+    margin-left: 0px;
 }
 /*body styles */
 body {
@@ -234,6 +226,10 @@ body {
     overflow-y: hidden;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     -webkit-tap-highlight-color: transparent;
+    background-color: #f6f7fb;
+    height: 100px;
+    background-image: linear-gradient(#4680ff, #4680ff);
+    background-repeat: no-repeat;
 }
 /* custom code end */
 /*end of body styles */
@@ -328,6 +324,7 @@ body {
 
 #header .icon-menu:before {
     content: '\e812';
+    padding-right:10px;
 }
 
 #sidebar-menu .icon,
@@ -355,11 +352,3 @@ body {
 }
 /* end of custom generated icons styles */
 
-
-
-
-.facebook::before {
-    font-family: "Font Awesome 5 Pro";
-    font-weight: 300;
-    content: "\f09a";
-}
