@@ -24,7 +24,7 @@ import { msalConfig, msalAngularConfig } from './app-config';
 
 import { ListViewAllModule } from '@syncfusion/ej2-angular-lists';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
-import { SidebarModule, MenuAllModule, TreeViewAllModule, MenuModel } from '@syncfusion/ej2-angular-navigations';
+import { SidebarModule, MenuAllModule, TreeViewAllModule, MenuModule } from '@syncfusion/ej2-angular-navigations';
 
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHome, faHomeAlt } from '@fortawesome/pro-solid-svg-icons';
@@ -59,7 +59,7 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
             { path: 'account/logout', component: LogoutComponent }
       ]),
         MsalModule,
-        SidebarModule, MenuAllModule, DropDownListModule, TreeViewAllModule, ListViewAllModule,
+        SidebarModule, MenuAllModule, DropDownListModule, TreeViewAllModule, ListViewAllModule, MenuModule,
         FontAwesomeModule
     ],
     providers: [
