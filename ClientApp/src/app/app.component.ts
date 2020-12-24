@@ -27,7 +27,7 @@ export class AppComponent {
             {
                 text: 'Account',
                 items: [
-                    { id: 'tenant', text: 'Tenant' },
+                    { id: 'tenant', text: 'Switch Tenant' },
                 ]
             }
         ];
@@ -64,35 +64,38 @@ export class AppComponent {
     public menuItems: MenuItemModel[] = [
         {
             text: 'Home',
-            iconCss: 'e-icons home',
+            iconCss: 'fas fa-home-alt',
             id: '/'
         },
         {
+            text: 'Dashboard',
+            iconCss: 'fas fa-chart-pie',
+            id: '/'
+        },
+        {
+            text: 'Samples',
+            iconCss: 'fas fa-vials',
+            id: '/'
+        },
+        {
+            text: 'Manage',
+            iconCss: 'fas fa-cubes',
+            items: [
+                { id: '/role/list', text: 'Customers' },
+                { id: '/user/list', text: 'Sites' },
+                { id: '/user/list', text: 'Locations' },
+                { id: '/role/list', text: 'Labs' }
+            ]
+        },
+        {
             text: 'Settings',
-            iconCss: 'e-icons settings',
+            iconCss: 'fas fa-cog',
             items: [
-                { id: '/role/list', text: 'Roles' },
                 { id: '/user/list', text: 'Users' },
+                { id: '/role/list', text: 'Roles' },
+                { id: '/role/list', text: 'Tenants' }                
             ]
-        },
-        {
-            text: 'Notification',
-            iconCss: 'icon-bell-alt icon',
-            items: [
-                { text: 'Message' },
-                { text: 'Facebook' },
-                { text: 'Twitter' }
-            ]
-        },
-        {
-            text: 'Comments',
-            iconCss: 'icon-comment-inv-alt2 icon',
-            items: [
-                { text: 'Category1' },
-                { text: 'Category2' },
-                { text: 'Category3' }
-            ]
-        }
+        }        
     ];
 
     public AccountMenuItem: MenuItemModel[];

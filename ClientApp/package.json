@@ -1,16 +1,16 @@
 {
   "name": "InteromePhWebApp",
   "version": "0.0.0",
-    "scripts": {
-        "ng": "ng",
-        "start": "ng serve",
-        "build": "ng build",
-        "build:ssr": "ng run InteromePhWebApp:server:dev",
-        "build-staging": "ng build --configuration=staging",
-        "test": "ng test",
-        "lint": "ng lint",
-        "e2e": "ng e2e"
-    },
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "build:ssr": "ng run InteromePhWebApp:server:dev",
+    "build-staging": "ng build --configuration=staging",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "8.2.12",
@@ -23,7 +23,12 @@
     "@angular/platform-server": "8.2.12",
     "@angular/router": "8.2.12",
     "@azure/msal-angular": "^1.1.1",
-    "@fortawesome/fontawesome-pro": "^5.15.1",
+    "@fortawesome/angular-fontawesome": "^0.5.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/pro-light-svg-icons": "^5.15.1",
+    "@fortawesome/pro-regular-svg-icons": "^5.15.1",
+    "@fortawesome/pro-solid-svg-icons": "^5.15.1",
     "@nguniversal/module-map-ngfactory-loader": "8.1.1",
     "@syncfusion/ej2-angular-buttons": "^18.3.35",
     "@syncfusion/ej2-angular-calendars": "^18.3.35",
@@ -69,6 +74,7 @@
     "@angular/cli": "8.3.14",
     "@angular/compiler-cli": "8.2.12",
     "@angular/language-service": "8.2.12",
+    "@fortawesome/fontawesome-pro": "^5.15.1",
     "@types/jasmine": "~3.4.4",
     "@types/jasminewd2": "~2.0.8",
     "@types/node": "~12.11.6",

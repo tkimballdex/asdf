@@ -3,16 +3,14 @@
       <div class="col-lg-12 col-sm-12 col-md-12" id="sidebar-section">
           <!--end of header-section  declaration -->
           <!-- sidebar element declaration -->
-          
               <ejs-sidebar id="sidebar-menu" class="dock-menu" #sidebarMenuInstance [enableDock]='enableDock' [width]='width' [dockSize]='dockSize' [mediaQuery]='mediaQuery' [target]='target'>
                   <div class="app-name">SWAP</div>
                   <div class="main-menu">
                       <!-- Menu element declaration -->
                       <ejs-menu [items]='menuItems' orientation='Vertical' cssClass='dock-menu' (select)='selectMainMenu($event)'></ejs-menu>
-                      <ejs-treeview id="main-treeview" [fields]='field' expandOn='Click'></ejs-treeview>
                   </div>
               </ejs-sidebar>
-          
+              
           <!-- end of sidebar element -->
             <!--header-section  declaration -->
          
