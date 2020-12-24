@@ -8,6 +8,7 @@
 @import '../node_modules/@syncfusion/ej2-splitbuttons/styles/fabric.css';
 @import '../node_modules/@syncfusion/ej2-calendars/styles/fabric.css';
 @import '../node_modules/@syncfusion/ej2-angular-calendars/styles/fabric.css';
+@import "../node_modules/@syncfusion/ej2-navigations/styles/fabric.css";
 @import '../node_modules/@fortawesome/fontawesome-pro/css/all.min.css';
 
 /* Provide sufficient contrast against white background */

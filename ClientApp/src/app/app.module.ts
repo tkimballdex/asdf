@@ -24,11 +24,10 @@ import { msalConfig, msalAngularConfig } from './app-config';
 
 import { ListViewAllModule } from '@syncfusion/ej2-angular-lists';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
-import { SidebarModule, MenuAllModule, TreeViewAllModule } from '@syncfusion/ej2-angular-navigations';
+import { SidebarModule, MenuAllModule, TreeViewAllModule, MenuModel } from '@syncfusion/ej2-angular-navigations';
 
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHome, faHomeAlt } from '@fortawesome/pro-solid-svg-icons';
-
 
 import { RoleModule } from './role/module'
 import { UserModule } from './user/module'
