@@ -15,15 +15,15 @@
             <!--header-section  declaration -->
          
           <!-- main-content declaration -->
-          <div class="main-content" id="maintext">             
+          <div id="maintext" class="main-content">             
               <div class="sidebar-menu-content">
                   <div class="header-section" id="header">
                       <ul class="header-list">
-                          <li id="hamburger" class="icon-menu icon list" (click)="openClick()">Tenant Name</li>                       
+                          <li id="hamburger" class="far fa-bars icon list" (click)="openClick()">Tenant Name</li>                       
                           <li class="right-header list">
                               <div class="horizontal-menu">
                                   <!-- Menu element declaration -->
-                                  <ejs-menu [items]='AccountMenuItem' (select)='selectAccountMenu($event)'></ejs-menu>
+                                  <ejs-menu [items]='AccountMenuItem' (select)='selectAccountMenu($event)' enableRtl="true"></ejs-menu>
                               </div>
                           </li>
                       </ul>

@@ -11,6 +11,7 @@
 @import "../node_modules/@syncfusion/ej2-navigations/styles/fabric.css";
 @import '../node_modules/@fortawesome/fontawesome-pro/css/all.min.css';
 
+
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
@@ -31,8 +32,10 @@ code {
 }
 
 #list-view .list-header {
-    padding-bottom: 20px;
-    padding-left:0px!important;
+    padding: 15px;
+    border-radius: 5px 5px 0px 0px;
+    border: 1px solid #e6ecf5;
+    background-color:#ffffff;
 }
 
 #list-view .list-header-icon {
@@ -56,10 +59,10 @@ code {
 }
 
 #list-view .list-content {
-    background-color: #ffffff;
-    border-radius: 5px;
-    padding-top:15px;
-    padding-bottom:15px;
+    background-color: #ffffff!important;
+    border-radius: 0px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     border: 1px solid #e6ecf5;
 }
 
@@ -68,12 +71,22 @@ code {
     padding-bottom:3px;
 }
 
-.e-search:before {
-    font: normal normal normal 14px/1 FontAwesome;
-    content: "\f002";
-    padding-right:10px;
-    opacity:0.5;
+#list-view .edit-icon {
+    padding-left: 15px;
+    padding-right: 15px;
+    color: #fd7e14;
 }
+
+    #list-view label{
+        top:70%;
+    }
+
+    .e-search:before {
+        font: normal normal normal 14px/1 FontAwesome;
+        content: "\f002";
+        padding-right: 10px;
+        opacity: 0.5;
+    }
 
 /*#list-view .list-content .col-md-3,
 #list-view .list-content .col-md-12 {
@@ -88,4 +101,6 @@ code {
 .pad-r10 {
     padding-right: 10px;
 }
+
+
 

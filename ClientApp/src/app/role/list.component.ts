@@ -12,10 +12,18 @@ export class RoleListComponent extends PageComponent implements OnInit {
     }
 
     public list: any;
+    public rolename: any;
 
     async ngOnInit() {
         this.showSpinner();
         this.list = await this.repository.list();
         this.hideSpinner();
     }
+
+    async search() {
+        this.showSpinner();
+        this.list = await this.repository.list();
+        this.hideSpinner();
+    }
 }
+

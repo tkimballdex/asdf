@@ -8,17 +8,17 @@
     </div>
     <div class="row d-flex align-items-end list-content">
         <div class="col-3">
-            <ejs-textbox [(value)]="rolename" placeholder="Role Name" floatLabelType="Auto"></ejs-textbox>
+            <ejs-textbox [(value)]="rolename" placeholder="Role Name" floatLabelType="Always"></ejs-textbox>
         </div>
         <div class="col-3">
-            <button ejs-button cssClass="e-primary" iconCss="e-search" (click)="search()">Search</button>
+            <button ejs-button cssClass="e-primary" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>
         </div>
         <div class="col-12 pad-t20">
             <ejs-grid [dataSource]='list' [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="true" *ngIf="list">
                 <e-columns>
-                    <e-column width="100">
-                        <ng-template #template let-data>
-                            <a [routerLink]="['/role/edit', data.id]">edit</a>
+                    <e-column width="70">
+                        <ng-template #template let-data>                            
+                            <a [routerLink]="['/role/edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
                         </ng-template>
                     </e-column>
                     <e-column field='name' headerText='Name'></e-column>
