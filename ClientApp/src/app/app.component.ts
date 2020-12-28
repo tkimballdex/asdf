@@ -90,7 +90,7 @@ export class AppComponent implements OnInit {
             items: [
                 { id: '/customer/list', text: 'Customers' },
                 { id: '/site/list', text: 'Sites' },
-                { id: '/user/list', text: 'Locations' },
+                { id: '/location/list', text: 'Locations' },
                 { id: '/role/list', text: 'Labs' }
             ]
         },

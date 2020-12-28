@@ -1,0 +1,50 @@
+<div *ngIf="record" style="margin: 1em">
+    <h6 style="margin-top: 2em">Email:</h6>
+    <ejs-textbox [(value)]="record.email"></ejs-textbox>
+
+    <h6 style="margin-top: 2em">First Name:</h6>
+    <ejs-textbox [(value)]="record.firstName"></ejs-textbox>
+
+    <h6 style="margin-top: 2em">Last Name:</h6>
+    <ejs-textbox [(value)]="record.lastName"></ejs-textbox>
+
+    <h6 style="margin-top: 2em">Phone:</h6>
+    <ejs-textbox [(value)]="record.phone"></ejs-textbox>
+
+    <h6 style="margin-top: 2em">Roles:</h6>
+
+    <ejs-grid #grid [dataSource]='record.roles' [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="true">
+        <e-columns>
+            <e-column field='name' headerText='Name'></e-column>
+
+            <e-column headerText='' width="100">
+                <ng-template #template let-data>
+                    <ejs-checkbox [(checked)]="record.roles[data.index].hasRole"></ejs-checkbox>
+                </ng-template>
+            </e-column>
+        </e-columns>
+    </ejs-grid>
+
+    <h6 style="margin-top: 2em">Tenants:</h6>
+
+    <ejs-grid #grid [dataSource]='record.tenants' [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="true">
+        <e-columns>
+            <e-column field='name' headerText='Name'></e-column>
+
+            <e-column headerText='' width="100">
+                <ng-template #template let-data>
+                    <ejs-checkbox [(checked)]="record.tenants[data.index].active"></ejs-checkbox>
+                </ng-template>
+            </e-column>
+        </e-columns>
+    </ejs-grid>
+
+    <br />
+    <button ejs-button isPrimary="true" cssClass="e-outline" (click)="save()" [disabled]="loading">Save</button>
+    &nbsp;
+    <button ejs-button cssClass="e-outline" (click)="delete()" [disabled]="loading || !record.id">Delete</button>
+    &nbsp;
+    <button ejs-button cssClass="e-outline" [routerLink]="['/user/list']">Close</button>
+    <ejs-toast #toast></ejs-toast>
+</div>
+
