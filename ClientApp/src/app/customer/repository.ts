@@ -21,8 +21,4 @@ export class CustomerRepository {
     public list(filter: any) {
         return this.http.post(`/customer/list`, filter);
     }
-
-    public tenantList() {
-        return this.http.post(`/customer/getTenantList`);
-    }
 }

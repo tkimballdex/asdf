@@ -14,13 +14,11 @@ export class CustomerListComponent extends PageComponent implements OnInit {
     }
 
     public list: any;
-    public tenantList: any;
     public tenant: any;
     public name: any;
 
     async ngOnInit() {
         this.showSpinner();
-        this.tenantList = await this.repository.tenantList();
         this.tenant = this.app.tenant;
         this.hideSpinner();
 
@@ -31,11 +29,7 @@ export class CustomerListComponent extends PageComponent implements OnInit {
 
     async search() {
         this.showSpinner();
-        this.list = await this.repository.list({ tenant: this.tenant, name: this.name });
+        this.list = await this.repository.list({ tenant: this.app.tenant, name: this.name });
         this.hideSpinner();
-    }
-
-    changeTenant() {
-        this.search();
     }
 }

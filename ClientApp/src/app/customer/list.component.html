@@ -6,10 +6,7 @@
             <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['/customer/add']">+ Add</button></span>
         </div>
     </div>
-    <div class="row d-flex align-items-end list-content">        
-        <div class="col-md-3">
-            <ejs-dropdownlist [dataSource]="tenantList" [fields]="{ text: 'name', id: 'id' }" [(value)]="tenant" (change)="changeTenant()" placeholder="Tenant" floatLabelType="Always"></ejs-dropdownlist>
-        </div>
+    <div class="row d-flex align-items-end list-content">   
         <div class="col-3">
             <ejs-textbox [(value)]="name" placeholder="Name" floatLabelType="Always"></ejs-textbox>
         </div>
