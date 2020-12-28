@@ -89,7 +89,7 @@ export class AppComponent implements OnInit {
             iconCss: 'fal fa-cubes',
             items: [
                 { id: '/customer/list', text: 'Customers' },
-                { id: '/user/list', text: 'Sites' },
+                { id: '/site/list', text: 'Sites' },
                 { id: '/user/list', text: 'Locations' },
                 { id: '/role/list', text: 'Labs' }
             ]
