@@ -36,6 +36,6 @@ export class CustomerListComponent extends PageComponent implements OnInit {
     }
 
     changeTenant() {
-
+        this.search();
     }
 }
