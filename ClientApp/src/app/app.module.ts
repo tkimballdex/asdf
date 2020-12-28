@@ -33,6 +33,7 @@ import { faHome, faHomeAlt } from '@fortawesome/pro-solid-svg-icons';
 
 import { RoleModule } from './role/module'
 import { UserModule } from './user/module'
+import { CustomerModule } from './customer/module'
 
 export function MSALConfigFactory(): Configuration {
   return msalConfig;
@@ -55,6 +56,7 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
         FormsModule,
         RoleModule,
         UserModule,
+        CustomerModule,
         RouterModule.forRoot([
             { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [MsalGuard] },
             { path: 'account/tenant', component: ChooseTenantComponent, canActivate: [MsalGuard] },

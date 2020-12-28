@@ -88,7 +88,7 @@ export class AppComponent implements OnInit {
             text: 'Manage',
             iconCss: 'fal fa-cubes',
             items: [
-                { id: '/role/list', text: 'Customers' },
+                { id: '/customer/list', text: 'Customers' },
                 { id: '/user/list', text: 'Sites' },
                 { id: '/user/list', text: 'Locations' },
                 { id: '/role/list', text: 'Labs' }
