@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import '../node_modules/@fortawesome/fontawesome-pro/css/all.min.css';
 @import '../node_modules/@syncfusion/ej2-base/styles/fabric.css';
 @import '../node_modules/@syncfusion/ej2-buttons/styles/fabric.css';
 @import '../node_modules/@syncfusion/ej2-inputs/styles/fabric.css';
@@ -9,7 +9,9 @@
 @import '../node_modules/@syncfusion/ej2-calendars/styles/fabric.css';
 @import '../node_modules/@syncfusion/ej2-angular-calendars/styles/fabric.css';
 @import "../node_modules/@syncfusion/ej2-navigations/styles/fabric.css";
-@import '../node_modules/@fortawesome/fontawesome-pro/css/all.min.css';
+@import '../node_modules/@syncfusion/ej2-angular-grids/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-dropdowns/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-angular-dropdowns/styles/fabric.css';
 
 body {
     margin: 0;

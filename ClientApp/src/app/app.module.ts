@@ -22,8 +22,9 @@ import {
 
 import { msalConfig, msalAngularConfig } from './app-config';
 
+import { GridModule } from '@syncfusion/ej2-angular-grids';
 import { ListViewAllModule } from '@syncfusion/ej2-angular-lists';
-import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
+import { DropDownListModule, ComboBoxModule } from '@syncfusion/ej2-angular-dropdowns';
 import { SidebarModule, MenuAllModule, TreeViewAllModule, MenuModule } from '@syncfusion/ej2-angular-navigations';
 import { DropDownButtonModule, SplitButtonModule, ProgressButtonModule } from '@syncfusion/ej2-angular-splitbuttons';
 
@@ -60,8 +61,8 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
             { path: 'account/logout', component: LogoutComponent }
       ]),
         MsalModule,
-        SidebarModule, MenuAllModule, DropDownListModule, TreeViewAllModule, ListViewAllModule, MenuModule, DropDownButtonModule,
-        FontAwesomeModule
+        SidebarModule, MenuAllModule, DropDownListModule, TreeViewAllModule, ListViewAllModule, MenuModule, 
+        DropDownButtonModule, GridModule, ComboBoxModule, FontAwesomeModule
     ],
     providers: [
         {
