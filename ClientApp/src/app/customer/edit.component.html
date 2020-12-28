@@ -1,12 +1,27 @@
-<div *ngIf="record" style="margin: 1em">
-    <h6 style="margin-top: 2em">Email:</h6>
-    <ejs-textbox [(value)]="record.email"></ejs-textbox>
+<div id="edit-view" class="container-fluid">
+    <div class="row d-flex align-items-end">
+        <div class="col col-12 d-flex">
+            <ejs-textbox [(value)]="record.email" placeholder="Email" floatLabelType="Always"></ejs-textbox>
+        </div>
+    </div>
+    <div class="row d-flex align-items-end mar-t20">
+        <div class="col col-6 d-flex">
+            <ejs-textbox [(value)]="record.firstName" placeholder="First Name" floatLabelType="Always"></ejs-textbox>
+        </div>
+        <div class="col col-6 d-flex">
+            <ejs-textbox [(value)]="record.lastName" placeholder="Last Name" floatLabelType="Always"></ejs-textbox>
+        </div>
+    </div>
+    <div class="row d-flex align-items-end">
+        <div class="col col-12 d-flex">
 
-    <h6 style="margin-top: 2em">First Name:</h6>
-    <ejs-textbox [(value)]="record.firstName"></ejs-textbox>
+        </div>
+    </div>
+</div>
 
-    <h6 style="margin-top: 2em">Last Name:</h6>
-    <ejs-textbox [(value)]="record.lastName"></ejs-textbox>
+
+
+<div *ngIf="record" style="margin: 1em">    
 
     <h6 style="margin-top: 2em">Phone:</h6>
     <ejs-textbox [(value)]="record.phone"></ejs-textbox>
