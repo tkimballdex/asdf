@@ -15,23 +15,24 @@
             <!--header-section  declaration -->
          
           <!-- main-content declaration -->
-          <div id="maintext" class="main-content">             
+          <div id="maintext" class="col-lg-12 col-sm-12 col-md-12 main-content">             
               <div class="sidebar-menu-content">
-                  <div class="header-section" id="header">
+                  <div id="header" class="col-lg-12 col-sm-12 col-md-12 header-section">                  
                       <ul class="header-list">
-                          <li id="hamburger" class="far fa-bars icon list" (click)="openClick()">Tenant Name</li>                       
+                          <li id="hamburger" class="far fa-bars icon list" (click)="openClick()"> </li>
+                          <li class="tenant-name list">{{tenantname}}</li>
                           <li class="right-header list">
                               <div class="horizontal-menu">
                                   <!-- Menu element declaration -->
-                                  <ejs-menu [items]='AccountMenuItem' (select)='selectAccountMenu($event)' enableRtl="true"></ejs-menu>
+                                  <!--<ejs-menu id="AccountMenu" [items]='AccountMenuItem' class="account-menu" (select)='selectAccountMenu($event)' enableRtl="true"></ejs-menu>-->
+                                  <button ejs-dropdownbutton id="accountMenu" [items]='AccountMenuItem' content="My Account" (select)='selectAccountMenu($event)' iconCss="fal fa-user"></button>
                               </div>
                           </li>
-                      </ul>
-                  </div>
-                  <div class="content-section">
+                  </ul>
+              </div>
+                  <div class="col-lg-12 col-sm-12 col-md-12 content-section">
                       <router-outlet></router-outlet>
-                  </div>
-                  
+                  </div>                  
               </div>
           </div>
           <!-- end of main-content -->

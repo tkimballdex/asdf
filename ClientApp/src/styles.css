@@ -11,6 +11,13 @@
 @import "../node_modules/@syncfusion/ej2-navigations/styles/fabric.css";
 @import '../node_modules/@fortawesome/fontawesome-pro/css/all.min.css';
 
+body {
+    margin: 0;
+    overflow-y: hidden;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    background-color: #f6f7fb;
+}
 
 /* Provide sufficient contrast against white background */
 a {
@@ -33,7 +40,7 @@ code {
 
 #list-view .list-header {
     padding: 15px;
-    border-radius: 5px 5px 0px 0px;
+    border-radius: 10px 0px 0px 0px;
     border: 1px solid #e6ecf5;
     background-color:#ffffff;
 }
