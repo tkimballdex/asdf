@@ -26,16 +26,15 @@ a {
   color: #0366d6;
 }
 
-code {
-  color: #e01a76;
+#wrapper .e-control {
+    width: 100%;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
 
+
+
+
+/* Start - List View styles*/
 #list-view {
     border:0px solid red;
 }
@@ -86,21 +85,69 @@ code {
     color: #fd7e14;
 }
 
-    #list-view label{
-        top:70%;
-    }
+#list-view label{
+    top:70%;
+}
 
-    .e-search:before {
-        font: normal normal normal 14px/1 FontAwesome;
-        content: "\f002";
-        padding-right: 10px;
-        opacity: 0.5;
-    }
+.e-search:before {
+    font: normal normal normal 14px/1 FontAwesome;
+    content: "\f002";
+    padding-right: 10px;
+    opacity: 0.5;
+}
+/* End - List View styles*/
+/* Start - Edit View styles*/
+#edit-view {
+    padding: 15px;
+    border-radius: 10px 0px 0px 0px;
+    border: 1px solid #e6ecf5;
+    background-color: #ffffff;
+    width:100%;
+}
 
-/*#list-view .list-content .col-md-3,
-#list-view .list-content .col-md-12 {
-    padding-left: 0px;
-}*/
+#edit-view .edit-header {
+    border-bottom: 1px solid #e6ecf5;
+    padding-bottom:15px;
+}
+
+#edit-view .edit-header-icon {
+    display: inline-block;
+    font-size: 1.5em;
+    color: #0080ff;
+    padding-right: 10px;
+}
+
+#edit-view .edit-header-title {
+    display: inline-block;
+    font-size: 1.5em;
+    font-weight: 400;
+    padding-right: 20px;
+}
+
+#edit-view .e-control {
+    width: 100%;
+}
+#edit-view label {
+    top: 70%;
+}
+#edit-view .edit-footer {
+    border-top: 1px solid #e6ecf5;
+    padding-top: 15px;
+}
+#edit-view .edit-footer button
+{
+    max-width:100px;
+    height:40px;
+}
+#edit-view .edit-footer .save-button {
+    max-width: 150px;
+}
+#edit-view .edit-footer .close-button {
+    margin-left:30px;
+}
+/* End - Edit View styles*/
+
+
 .pad-b20 {
     padding-bottom: 20px;
 }
