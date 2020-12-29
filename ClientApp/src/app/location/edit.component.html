@@ -1,50 +1,62 @@
-<div *ngIf="record" style="margin: 1em">
-    <h6 style="margin-top: 2em">Email:</h6>
-    <ejs-textbox [(value)]="record.email"></ejs-textbox>
+<div id="edit-view" *ngIf="record" class="container-fluid">
+    <div class="row d-flex align-items-end edit-header">
+        <div class="col-9 d-flex">
+            <span class="edit-header-icon"><i class="fas fa-users-crown"></i></span>
+            <span class="edit-header-title">Location</span>
+        </div>
+        <div class="col-3 d-flex">
+            active
+        </div>
+    </div>
 
-    <h6 style="margin-top: 2em">First Name:</h6>
-    <ejs-textbox [(value)]="record.firstName"></ejs-textbox>
+    <div class="row d-flex">
+        <div class="col-md-6 d-flex">
+            <ejs-textbox [(value)]="record.name" placeholder="Name" floatLabelType="Always"></ejs-textbox>
+        </div>
+    </div>
+    <div class="row d-flex pad-t20">
+        <div class="col-md-6 d-flex">
+            <ejs-textbox [(value)]="record.sampler" placeholder="Sampler" floatLabelType="Always"></ejs-textbox>
+        </div>
+    </div>
 
-    <h6 style="margin-top: 2em">Last Name:</h6>
-    <ejs-textbox [(value)]="record.lastName"></ejs-textbox>
+    <div class="row d-flex pad-t20">
+        <div class="col-md-6 d-flex">
+            <ejs-textbox [(value)]="record.latitude" placeholder="Latitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
+        </div>
+        <div class="col-md-6 d-flex">
+            <ejs-textbox [(value)]="record.Longitude" placeholder="Longitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
+        </div>
+    </div>
 
-    <h6 style="margin-top: 2em">Phone:</h6>
-    <ejs-textbox [(value)]="record.phone"></ejs-textbox>
+    <div class="row d-flex pad-t20">
+        <div class="col-md-4 d-flex">
+            <ejs-textbox [(value)]="record.serviceStartDate" placeholder="Service Start Date" floatLabelType="Always"></ejs-textbox>
+        </div>
+        <div class="col-md-4 d-flex">
+            <ejs-textbox [(value)]="record.serviceEndDate" placeholder="Service End Date" floatLabelType="Always"></ejs-textbox>
+        </div>
+        <div class="col-md-4 d-flex">
+            <ejs-textbox [(value)]="record.active" placeholder="Active" floatLabelType="Always"></ejs-textbox>
+        </div>
+    </div>
 
-    <h6 style="margin-top: 2em">Roles:</h6>
+    <div class="row d-flex pad-t20 pad-b20">
+        <div class="col-12 d-flex">
+            <ejs-textbox [(value)]="record.notes" placeholder="Notes" floatLabelType="Always"></ejs-textbox>
+        </div>
+    </div>
 
-    <ejs-grid #grid [dataSource]='record.roles' [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="true">
-        <e-columns>
-            <e-column field='name' headerText='Name'></e-column>
+    <div class="row d-flex edit-footer">
+        <div class="col-md-6 d-flex justify-content-start">
+            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading">Save</button>
+            <ejs-toast #toast></ejs-toast>
+        </div>
 
-            <e-column headerText='' width="100">
-                <ng-template #template let-data>
-                    <ejs-checkbox [(checked)]="record.roles[data.index].hasRole"></ejs-checkbox>
-                </ng-template>
-            </e-column>
-        </e-columns>
-    </ejs-grid>
-
-    <h6 style="margin-top: 2em">Tenants:</h6>
-
-    <ejs-grid #grid [dataSource]='record.tenants' [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="true">
-        <e-columns>
-            <e-column field='name' headerText='Name'></e-column>
-
-            <e-column headerText='' width="100">
-                <ng-template #template let-data>
-                    <ejs-checkbox [(checked)]="record.tenants[data.index].active"></ejs-checkbox>
-                </ng-template>
-            </e-column>
-        </e-columns>
-    </ejs-grid>
-
-    <br />
-    <button ejs-button isPrimary="true" cssClass="e-outline" (click)="save()" [disabled]="loading">Save</button>
-    &nbsp;
-    <button ejs-button cssClass="e-outline" (click)="delete()" [disabled]="loading || !record.id">Delete</button>
-    &nbsp;
-    <button ejs-button cssClass="e-outline" [routerLink]="['/user/list']">Close</button>
-    <ejs-toast #toast></ejs-toast>
+        <div class="col-md-6 d-flex justify-content-end">
+            <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id">Delete</button>
+            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/user/list']">Close</button>            
+        </div>        
+    </div>
 </div>
 
