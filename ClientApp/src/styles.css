@@ -130,6 +130,10 @@ a {
 #edit-view label {
     top: 70%;
 }
+
+#edit-view .date-picker {
+    max-width: 250px;
+}
 #edit-view .edit-footer {
     border-top: 1px solid #e6ecf5;
     padding-top: 15px;
