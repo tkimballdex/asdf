@@ -22,7 +22,7 @@ import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
         RouterModule.forChild([
             { path: 'site/list', component: SiteListComponent, canActivate: [MsalGuard] },
             { path: 'site/add', component: SiteEditComponent, canActivate: [MsalGuard] },
-           { path: 'site/edit/:id', component: SiteEditComponent, canActivate: [MsalGuard] },
+           { path: 'customer/edit/:id', component: SiteEditComponent, canActivate: [MsalGuard] },
         ])
     ],
     providers: [
