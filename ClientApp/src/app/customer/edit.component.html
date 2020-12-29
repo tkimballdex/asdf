@@ -16,6 +16,16 @@
     </div>
 
     <div class="row d-flex pad-t20">
+        <div class="col-md-6 d-flex">
+            <ejs-datepicker [(value)]="record.serviceStartDate" class="date-picker" placeholder="Service Start Date" floatLabelType="Always"></ejs-datepicker>
+        </div>
+
+        <div class="col-md-6 d-flex">
+            <ejs-datepicker [(value)]="record.serviceEndDate" class="date-picker" placeholder="Service End Date" floatLabelType="Always"></ejs-datepicker>
+        </div>
+    </div>
+
+    <div class="row d-flex pad-t20">
         <div class="col-12 d-flex">
             <ejs-textbox [(value)]="record.address" placeholder="Address" floatLabelType="Always"></ejs-textbox>
         </div>
@@ -35,7 +45,7 @@
 
     <div class="row d-flex">
         <div class="col-md-6 d-flex">
-
+            <ejs-dropdownlist [fields]="{ text: 'name', id: 'id' }" [(value)]="state" placeholder="State" floatLabelType="Always"></ejs-dropdownlist>
         </div>
         <div class="col-md-6 d-flex">
             <ejs-textbox [(value)]="record.postalCode" placeholder="Postal Code" floatLabelType="Always"></ejs-textbox>
@@ -75,21 +85,11 @@
         </div>
     </div>
 
-    <div class="row d-flex pad-t20">
+    <div class="row d-flex pad-t20 pad-b20">
         <div class="col-12 d-flex">
             <ejs-textbox [(value)]="record.notificationEmail" placeholder="Notification Email(s)" floatLabelType="Always"></ejs-textbox>
         </div>
-    </div>
-
-    <div class="row d-flex pad-t20 pad-b20">
-        <div class="col-md-6 d-flex">
-            <ejs-textbox [(value)]="record.serviceStartDate" placeholder="Service Start Date" floatLabelType="Always"></ejs-textbox>
-        </div>
-
-        <div class="col-md-6 d-flex">
-            <ejs-textbox [(value)]="record.serviceEndDate" placeholder="Service End Date" floatLabelType="Always"></ejs-textbox>
-        </div>
-    </div>
+    </div>    
 
     <div class="row d-flex edit-footer">
         <div class="col-md-6 d-flex justify-content-start">
