@@ -10,6 +10,7 @@ import { GridModule, SortService, PageService, EditService, ToolbarService, Comm
 import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
+import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 
 @NgModule({
     declarations: [
@@ -18,11 +19,12 @@ import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
     ],
     imports: [
         GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule,
+        DatePickerModule,
         CommonModule,
         RouterModule.forChild([
             { path: 'site/list', component: SiteListComponent, canActivate: [MsalGuard] },
             { path: 'site/add', component: SiteEditComponent, canActivate: [MsalGuard] },
-           { path: 'customer/edit/:id', component: SiteEditComponent, canActivate: [MsalGuard] },
+           { path: 'site/edit/:id', component: SiteEditComponent, canActivate: [MsalGuard] },
         ])
     ],
     providers: [
