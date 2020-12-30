@@ -80,8 +80,8 @@
     </div>
 
     <div class="row d-flex">
-        <div class="col-md-12 d-flex">
-            <ejs-textbox [(value)]="record.Notes" placeholder="Notes" floatLabelType="Always"></ejs-textbox>
+        <div class="multiline" class="col-md-12 d-flex">
+            <ejs-textbox [multiline]='true' [(value)]="record.Notes" placeholder="Notes" floatLabelType="Always"></ejs-textbox>
         </div>
     </div>
 
@@ -89,7 +89,7 @@
 
     <div class="row d-flex pad-t20 pad-b20">
         <div class="col-md-12 d-flex">
-            <ejs-textbox [(value)]="record.FrequencyID" placeholder="Frequency Id" floatLabelType="Always"></ejs-textbox>
+            <ejs-dropdownlist [(value)]="record.FrequencyID" placeholder="Frequency Id" floatLabelType="Always"></ejs-dropdownlist>
         </div>
     </div>
 
