@@ -60,6 +60,16 @@ a {
     padding-right:20px;
 }
 
+#list-view button
+{
+    border-radius: 3px;
+}
+
+#list-view .search-button
+{
+    max-width: 120px;
+}
+
 #list-view .list-header-add {
     display: inline-block;
     padding-left: 20px;
@@ -141,7 +151,8 @@ a {
 #edit-view .edit-footer button
 {
     max-width:100px;
-    height:40px;
+    height:36px;
+    border-radius: 3px;
 }
 #edit-view .edit-footer .save-button {
     max-width: 150px;
