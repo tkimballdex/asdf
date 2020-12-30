@@ -21,4 +21,16 @@ export class SiteRepository {
     public list(filter: any) {
         return this.http.post(`/site/list`, filter);
     }
+
+    public statelist(filter: any) {
+        return this.http.post(`/site/list`, filter);
+    }
+
+    public samplefrequency(filter: any) {
+        return this.http.post(`/site/list`, filter);
+    }
+
+    public customerlist(filter: any) {
+        return this.http.post(`/site/list`, filter);
+    }
 }

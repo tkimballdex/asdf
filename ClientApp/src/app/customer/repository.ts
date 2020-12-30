@@ -21,4 +21,8 @@ export class CustomerRepository {
     public list(filter: any) {
         return this.http.post(`/customer/list`, filter);
     }
+
+    public statelist(filter: any) {
+        return this.http.post(`/site/list`, filter);
+    }
 }

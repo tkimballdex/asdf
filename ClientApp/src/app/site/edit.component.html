@@ -1,7 +1,7 @@
 <div *ngIf="record" id="edit-view"  class="container-fluid">
     <div class="row d-flex align-items-end edit-header">
         <div class="col-9 d-flex">
-            <span class="edit-header-icon"><i class="fas fa-users-crown"></i></span>
+            <span class="edit-header-icon"><i class="fas fa-building"></i></span>
             <span class="edit-header-title">Sites</span>
         </div>
         <div class="col-3 d-flex">
@@ -9,17 +9,28 @@
         </div>
     </div>
 
-    <div class="row d-flex pad-t20">
-        <div class="col-md-12 d-flex">
+    <div class="row pad-t20">
+        <div class="col-md-12">
             <ejs-textbox [(value)]="record.name" placeholder="Name" floatLabelType="Always" contenteditable="false"></ejs-textbox>
         </div>
     </div>
 
-    <div class="row d-flex pad-t20">
-        <div class="col-md-6 d-flex">
+    <div class="row pad-t20">
+        <div class="col-md-6">
+            <ejs-dropdownlist [(value)]="record.customer" placeholder="Customer" floatLabelType="Always"></ejs-dropdownlist>
+        </div>
+        <div class="col-md-6">
+            <ejs-dropdownlist [(value)]="record.frequencyID" placeholder="Sample Frequency" floatLabelType="Always"></ejs-dropdownlist>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
             <ejs-datepicker [(value)]="record.serviceStartDate" placeholder="Service Start Date" floatLabelType="Always"></ejs-datepicker>
         </div>
-        <div class="col-md-6 d-flex">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-3">
             <ejs-datepicker [(value)]="record.serviceEndDate" placeholder="Service End Date" floatLabelType="Always"></ejs-datepicker>
         </div>
     </div>
@@ -64,30 +75,26 @@
         </div>
     </div>
 
-    <div class="row d-flex">
-        <div class="col-md-6 d-flex">
-            <ejs-textbox [(value)]="record.contactPhoneNo" placeholder="Phone Number" floatLabelType="Always"></ejs-textbox>
-        </div>
-        <div class="col-md-6 d-flex">
+    <div class="row">
+        <div class="col-md-6">
             <ejs-textbox [(value)]="record.contactEmail" placeholder="Email" floatLabelType="Always"></ejs-textbox>
         </div>
+        <div class="col-md-3">
+            <ejs-textbox [(value)]="record.contactPhoneNo" placeholder="Phone Number" floatLabelType="Always"></ejs-textbox>
+        </div>
+        
     </div>
 
     <div class="row d-flex pad-t20">
         <div class="col-md-12 d-flex">
-            <ejs-textbox [(value)]="record.notificationEmail" placeholder="Notification Email" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox [(value)]="record.notificationEmail" placeholder="Notification Email(s)" floatLabelType="Always"></ejs-textbox>
         </div>
     </div>
 
-    <div class="row d-flex pad-t20">
-        <div class="multiline" class="col-md-12 d-flex">
-            <ejs-textbox [multiline]='true' [(value)]="record.notes" floatLabelType='Never' placeholder='Notes' ></ejs-textbox>
-        </div>
-    </div>
-
-    <div class="row d-flex pad-t20 pad-b20">
-        <div class="col-md-12 d-flex">
-            <ejs-dropdownlist [(value)]="record.frequencyID" placeholder="Frequency Id" floatLabelType="Always"></ejs-dropdownlist>
+    <div class="row pad-t20 pad-b20">
+        <div class="col-md-12"><label for="notes" class="edit-label">Notes</label></div>
+        <div class="col-md-12">
+            <ejs-textbox id="notes" [multiline]='true' style="height: 50px;" [(value)]="record.notes"></ejs-textbox>
         </div>
     </div>
 
