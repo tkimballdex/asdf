@@ -11,7 +11,7 @@
             <ejs-textbox [(value)]="rolename" placeholder="Role Name" floatLabelType="Always"></ejs-textbox>
         </div>
         <div class="col-3">
-            <button ejs-button cssClass="e-primary" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>
+            <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>
         </div>
         <div class="col-12 pad-t20">
             <ejs-grid [dataSource]='list' [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="true" *ngIf="list">
