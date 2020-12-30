@@ -9,23 +9,9 @@
         </div>
     </div>
 
-    <div class="row d-flex">
-        <div class="col-md-6 d-flex">
+    <div class="row d-flex pad-t20">
+        <div class="col-md-12 d-flex">
             <ejs-textbox [(value)]="record.name" placeholder="Name" floatLabelType="Always"></ejs-textbox>
-        </div>
-    </div>
-    <div class="row d-flex pad-t20">
-        <div class="col-md-6 d-flex">
-            <ejs-textbox [(value)]="record.sampler" placeholder="Sampler" floatLabelType="Always"></ejs-textbox>
-        </div>
-    </div>
-
-    <div class="row d-flex pad-t20">
-        <div class="col-md-6 d-flex">
-            <ejs-textbox [(value)]="record.latitude" placeholder="Latitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
-        </div>
-        <div class="col-md-6 d-flex">
-            <ejs-textbox [(value)]="record.longitude" placeholder="Longitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
         </div>
     </div>
 
@@ -40,10 +26,24 @@
 
     <div class="row d-flex pad-t20">
         <div class="col-md-12 d-flex">
-            <ejs-textbox [(value)]="record.active" placeholder="Active" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox [(value)]="record.sampler" placeholder="Sampler" floatLabelType="Always"></ejs-textbox>
         </div>
     </div>
 
+    <div class="row d-flex pad-t20">
+        <div class="col-md-6 d-flex">
+            <ejs-textbox [(value)]="record.latitude" placeholder="Latitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
+        </div>
+        <div class="col-md-6 d-flex">
+            <ejs-textbox [(value)]="record.longitude" placeholder="Longitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
+        </div>
+    </div>
+    
+    <div class="row d-flex pad-t20">
+        <div class="col-md-12 d-flex">
+            <ejs-textbox [(value)]="record.active" placeholder="Active" floatLabelType="Always"></ejs-textbox>
+        </div>
+    </div>
 
     <div class="row d-flex pad-t20 pad-b20">
         <div class="col-12 d-flex">
