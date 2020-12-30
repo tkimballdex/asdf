@@ -140,9 +140,18 @@ a {
 #edit-view label {
     top: 70%;
 }
-
+ejs-grid.edit-grid .e-headercelldiv {
+    font-weight: 600;
+}
+#edit-view ejs-grid label {
+    top: 0%;
+}
 #edit-view .date-picker {
     max-width: 250px;
+}
+#edit-view .edit-label {
+    font-size:12px;
+    color:#333333;
 }
 #edit-view .edit-footer {
     border-top: 1px solid #e6ecf5;
