@@ -5,95 +5,126 @@
             <span class="edit-header-title">Customer</span>
         </div>
         <div class="col-3 d-flex">
-            active
+            <ejs-switch id="checked" [(value)]="record.active" onLabel="Active" offLabel="Not Active" style="width:100px;height:30px;font-size:1.5em;">Active</ejs-switch>
         </div>
     </div>
 
     <div class="row d-flex pad-t20">
         <div class="col-md-12 d-flex">
             <ejs-textbox [(value)]="record.name" placeholder="Name" floatLabelType="Always"></ejs-textbox>
+
+            some text
         </div>
     </div>
 
     <div class="row d-flex pad-t20">
-        <div class="col-md-3 d-flex">
-            <ejs-datepicker [(value)]="record.serviceStartDate" placeholder="Service Start Date" floatLabelType="Always"></ejs-datepicker>
-        </div>
-
-        <div class="col-md-3 d-flex">            
-            
-        </div>
-
-        <div class="col-md-3 d-flex">
-            <ejs-datepicker [(value)]="record.serviceEndDate" placeholder="Service End Date" floatLabelType="Always"></ejs-datepicker>
+        <div class="col-md-12 d-flex">
+            <ejs-tab id="element">
+                <e-tabitems>
+                    <e-tabitem>
+                        <ng-template #headerText>            
+                            <div>Information</div>          
+                        </ng-template>
+                        <ng-template #content>            
+                            <div class="row d-flex pad-t20">
+                                <div class="col-md-3 d-flex">
+                                    <ejs-datepicker [(value)]="record.serviceStartDate" placeholder="Service Start Date" floatLabelType="Always"></ejs-datepicker>
+                                </div>
+                        
+                                <div class="col-md-3 d-flex">            
+                                    
+                                </div>
+                        
+                                <div class="col-md-3 d-flex">
+                                    <ejs-datepicker [(value)]="record.serviceEndDate" placeholder="Service End Date" floatLabelType="Always"></ejs-datepicker>
+                                </div>
+                            </div>
+                        
+                            <div class="row d-flex pad-t20">
+                                <div class="col-12 d-flex">
+                                    <ejs-textbox [(value)]="record.address" placeholder="Address" floatLabelType="Always"></ejs-textbox>
+                                </div>
+                            </div>   
+                            
+                            <div class="row d-flex">
+                                <div class="col-12 d-flex">
+                                    <ejs-textbox [(value)]="record.address2" placeholder="Address 2" floatLabelType="Always"></ejs-textbox>
+                                </div>
+                            </div>
+                        
+                            <div class="row d-flex">
+                                <div class="col-12 d-flex">
+                                    <ejs-textbox [(value)]="record.city" placeholder="City" floatLabelType="Always"></ejs-textbox>
+                                </div>
+                            </div>
+                        
+                            <div class="row d-flex">
+                                <div class="col-md-6 d-flex">
+                                    <ejs-dropdownlist [fields]="{ text: 'name', id: 'id' }" [(value)]="state" placeholder="State" floatLabelType="Always"></ejs-dropdownlist>
+                                </div>
+                                <div class="col-md-3 d-flex">
+                                    <ejs-textbox [(value)]="record.postalCode" placeholder="Postal Code" floatLabelType="Always"></ejs-textbox>
+                                </div>
+                            </div>
+                        
+                            <div class="row d-flex pad-t20">
+                                <div class="col-md-6 d-flex">
+                                    <ejs-textbox [(value)]="record.latitude" placeholder="Latitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
+                                </div>
+                                <div class="col-md-6 d-flex">
+                                    <ejs-textbox [(value)]="record.Longitude" placeholder="Longitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
+                                </div>
+                            </div>
+                        
+                            <div class="row d-flex pad-t20">
+                                <div class="col-md-6 d-flex">
+                                    <ejs-textbox [(value)]="record.phoneNo" placeholder="Main Phone No" floatLabelType="Always"></ejs-textbox>
+                                </div>
+                                <div class="col-md-6 d-flex">
+                                    <ejs-textbox [(value)]="record.website" placeholder="Website" floatLabelType="Always"></ejs-textbox>
+                                </div>
+                            </div>
+                        
+                            <div class="row d-flex pad-t20">
+                                <div class="col-12 d-flex">
+                                    <ejs-textbox [(value)]="record.contactName" placeholder="Contact Name" floatLabelType="Always"></ejs-textbox>
+                                </div>
+                            </div>
+                        
+                            <div class="row d-flex">
+                                <div class="col-md-6 d-flex">
+                                    <ejs-textbox [(value)]="record.contactPhoneNo" placeholder="Contact Phone No" floatLabelType="Always"></ejs-textbox>
+                                </div>
+                                <div class="col-md-6 d-flex">
+                                    <ejs-textbox [(value)]="record.contactEmail" placeholder="Contact Email" floatLabelType="Always"></ejs-textbox>
+                                </div>
+                            </div>
+                        
+                            <div class="row d-flex pad-t20 pad-b20">
+                                <div class="col-12 d-flex">
+                                    <ejs-textbox [(value)]="record.notificationEmail" placeholder="Notification Email(s)" floatLabelType="Always"></ejs-textbox>
+                                </div>
+                            </div>    
+                        </ng-template>            
+                    </e-tabitem>
+                    <e-tabitem>
+                        <ng-template #headerText>            
+                            <div>Sites</div>            
+                        </ng-template>
+                        <ng-template #content>            
+                           tab 2 content            
+                        </ng-template>
+                    </e-tabitem>                    
+                </e-tabitems>
+            </ejs-tab>
         </div>
     </div>
 
-    <div class="row d-flex pad-t20">
-        <div class="col-12 d-flex">
-            <ejs-textbox [(value)]="record.address" placeholder="Address" floatLabelType="Always"></ejs-textbox>
-        </div>
-    </div>
+    
 
-    <div class="row d-flex">
-        <div class="col-12 d-flex">
-            <ejs-textbox [(value)]="record.address2" placeholder="Address 2" floatLabelType="Always"></ejs-textbox>
-        </div>
-    </div>
+   
 
-    <div class="row d-flex">
-        <div class="col-12 d-flex">
-            <ejs-textbox [(value)]="record.city" placeholder="City" floatLabelType="Always"></ejs-textbox>
-        </div>
-    </div>
-
-    <div class="row d-flex">
-        <div class="col-md-6 d-flex">
-            <ejs-dropdownlist [fields]="{ text: 'name', id: 'id' }" [(value)]="state" placeholder="State" floatLabelType="Always"></ejs-dropdownlist>
-        </div>
-        <div class="col-md-3 d-flex">
-            <ejs-textbox [(value)]="record.postalCode" placeholder="Postal Code" floatLabelType="Always"></ejs-textbox>
-        </div>
-    </div>
-
-    <div class="row d-flex pad-t20">
-        <div class="col-md-6 d-flex">
-            <ejs-textbox [(value)]="record.latitude" placeholder="Latitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
-        </div>
-        <div class="col-md-6 d-flex">
-            <ejs-textbox [(value)]="record.Longitude" placeholder="Longitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
-        </div>
-    </div>
-
-    <div class="row d-flex pad-t20">
-        <div class="col-md-6 d-flex">
-            <ejs-textbox [(value)]="record.phoneNo" placeholder="Main Phone No" floatLabelType="Always"></ejs-textbox>
-        </div>
-        <div class="col-md-6 d-flex">
-            <ejs-textbox [(value)]="record.website" placeholder="Website" floatLabelType="Always"></ejs-textbox>
-        </div>
-    </div>
-
-    <div class="row d-flex pad-t20">
-        <div class="col-12 d-flex">
-            <ejs-textbox [(value)]="record.contactName" placeholder="Contact Name" floatLabelType="Always"></ejs-textbox>
-        </div>
-    </div>
-
-    <div class="row d-flex">
-        <div class="col-md-6 d-flex">
-            <ejs-textbox [(value)]="record.contactPhoneNo" placeholder="Contact Phone No" floatLabelType="Always"></ejs-textbox>
-        </div>
-        <div class="col-md-6 d-flex">
-            <ejs-textbox [(value)]="record.contactEmail" placeholder="Contact Email" floatLabelType="Always"></ejs-textbox>
-        </div>
-    </div>
-
-    <div class="row d-flex pad-t20 pad-b20">
-        <div class="col-12 d-flex">
-            <ejs-textbox [(value)]="record.notificationEmail" placeholder="Notification Email(s)" floatLabelType="Always"></ejs-textbox>
-        </div>
-    </div>    
+    
 
     <div class="row d-flex edit-footer">
         <div class="col-md-6 d-flex justify-content-start">

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { DialogUtility, Dialog } from '@syncfusion/ej2-popups';
+import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 import { AppRepository } from "../shared/app.repository";
 import { PageComponent } from '../shared/page.component';
 import { CustomerRepository } from './repository';
@@ -19,6 +20,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
     public record: any;
     public deleteDialog: Dialog;
     @ViewChild('grid', null) public grid: GridComponent;
+    public headerText: Object = [{ 'text': 'Twitter', 'iconCss': 'e-twitter' }, { 'text': 'Facebook', 'iconCss': 'e-facebook' },{ 'text': 'WhatsApp', 'iconCss': 'e-whatsapp' }];
 
     async ngOnInit() {
         var id = this.route.snapshot.paramMap.get('id');

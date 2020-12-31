@@ -10,6 +10,8 @@ import { GridModule, SortService, PageService, EditService, ToolbarService, Comm
 import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
+import { TabModule } from '@syncfusion/ej2-angular-navigations';
+import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 
 @NgModule({
     declarations: [
@@ -17,7 +19,7 @@ import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
         UserEditComponent
     ],
     imports: [
-        GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule,
+        GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule, TabModule, SwitchModule,
         CommonModule,
         RouterModule.forChild([
             { path: 'user/list', component: UserListComponent, canActivate: [MsalGuard] },

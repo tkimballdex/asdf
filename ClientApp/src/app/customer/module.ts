@@ -11,6 +11,8 @@ import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { TabModule } from '@syncfusion/ej2-angular-navigations';
+import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 
 @NgModule({
     declarations: [
@@ -18,8 +20,8 @@ import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
         CustomerEditComponent
     ],
     imports: [
-        GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule, DatePickerModule,
-        CommonModule,
+        GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule, 
+        TabModule, DatePickerModule, SwitchModule, CommonModule,
         RouterModule.forChild([
             { path: 'customer/list', component: CustomerListComponent, canActivate: [MsalGuard] },
             { path: 'customer/add', component: CustomerEditComponent, canActivate: [MsalGuard] },
