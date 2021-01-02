@@ -19,8 +19,8 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
         UserEditComponent
     ],
     imports: [
-        GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule, TabModule, SwitchModule,
-        CommonModule,
+        GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule,
+        DropDownListModule, TabModule, SwitchModule, CommonModule,
         RouterModule.forChild([
             { path: 'user/list', component: UserListComponent, canActivate: [MsalGuard] },
             { path: 'user/add', component: UserEditComponent, canActivate: [MsalGuard] },

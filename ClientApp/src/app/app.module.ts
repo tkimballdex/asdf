@@ -27,6 +27,7 @@ import { ListViewAllModule } from '@syncfusion/ej2-angular-lists';
 import { DropDownListModule, ComboBoxModule } from '@syncfusion/ej2-angular-dropdowns';
 import { SidebarModule, MenuAllModule, TreeViewAllModule, MenuModule } from '@syncfusion/ej2-angular-navigations';
 import { DropDownButtonModule, SplitButtonModule, ProgressButtonModule } from '@syncfusion/ej2-angular-splitbuttons';
+import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHome, faHomeAlt } from '@fortawesome/pro-solid-svg-icons';
@@ -68,7 +69,7 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
       ]),
         MsalModule,
         SidebarModule, MenuAllModule, DropDownListModule, TreeViewAllModule, ListViewAllModule, MenuModule, 
-        DropDownButtonModule, GridModule, ComboBoxModule, FontAwesomeModule
+        DropDownButtonModule, GridModule, ComboBoxModule, SwitchModule, FontAwesomeModule
     ],
     providers: [
         {

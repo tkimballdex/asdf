@@ -19,22 +19,16 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 
     public record: any;
     public deleteDialog: Dialog;
+    public statesList: any;
     @ViewChild('grid', null) public grid: GridComponent;
-    public headerText: Object = [{ 'text': 'Twitter', 'iconCss': 'e-twitter' }, { 'text': 'Facebook', 'iconCss': 'e-facebook' },{ 'text': 'WhatsApp', 'iconCss': 'e-whatsapp' }];
 
     async ngOnInit() {
         var id = this.route.snapshot.paramMap.get('id');
+
         this.showSpinner();
+        this.statesList = await this.repository.stateslist();
         this.record = await this.repository.get(id);
-        this.hideSpinner();
-
-        this.record.roles.forEach(function (x, i) {
-            x.index = i;
-        });
-
-        this.record.tenants.forEach(function (x, i) {
-            x.index = i;
-        });
+        this.hideSpinner();        
     }
 
     async save() {
@@ -55,15 +49,15 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
             }
 
             if (success && add) {
-                setTimeout(() => this.router.navigate(['/user/edit', returnValue.id]), 1000);
+                setTimeout(() => this.router.navigate(['/customer/edit', returnValue.id]), 1000);
             }
         }
     }
 
     delete() {
         this.deleteDialog = DialogUtility.confirm({
-            title: 'Delete User',
-            content: `Are you sure you want to delete the user <b>${this.record.userName}</b>?`,
+            title: 'Delete Customer',
+            content: `Are you sure you want to delete this Customer <b>${this.record.name}</b>?`,
             okButton: { click: this.deleteOK.bind(this) }
         });
     }
@@ -76,7 +70,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
         this.showDeleteMessage(success);
 
         if (success) {
-            setTimeout(() => this.router.navigate(['/user/list']), 1000);
+            setTimeout(() => this.router.navigate(['/customer/list']), 1000);
         }
     }
 }
