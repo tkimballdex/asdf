@@ -174,7 +174,7 @@ ejs-grid.edit-grid .e-headercelldiv {
     border-bottom: 1px solid inherit;
     box-sizing:border-box;
 }
-#edit-view .e-tab .e-content {
+#edit-view ejs-tab.e-tab .e-content .e-item {
     padding: 10px;
     border-left: 1px solid #e6ecf5;
     border-right: 1px solid #e6ecf5;
@@ -182,6 +182,30 @@ ejs-grid.edit-grid .e-headercelldiv {
     margin-bottom: 20px;
 }
 
+#edit-view .subitem-list-header {
+    padding-top:10px;
+}
+#edit-view .subitem-list-icon {
+    display: inline-block;
+    font-size: 1.4em;
+    color: #0080ff;
+    padding-right: 10px;
+}
+#edit-view .subitem-list-title {
+    display: inline-block;
+    font-size: 1.4em;
+    font-weight: 400;
+    padding-right: 20px;
+}
+#edit-view .subitem-list-add {
+    display: inline-block;
+    padding-left: 20px;
+    border-left: 1px dotted #0366d6;
+}
+#edit-view .subitem-list-header button {
+    height: 30px;
+    border-radius: 3px;
+}
 
 /* End - Edit View styles*/
 .pad-20 {

@@ -25,4 +25,8 @@ export class CustomerRepository {
     public stateslist() {
         return this.http.post(`/customer/getStatesList`);
     }
+
+    public getSiteList(filter: any) {
+        return this.http.post(`/customer/getSiteList`, filter);
+    }
 }

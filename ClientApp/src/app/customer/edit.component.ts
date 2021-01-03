@@ -20,6 +20,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
     public record: any;
     public deleteDialog: Dialog;
     public statesList: any;
+    public siteList: any;
     @ViewChild('grid', null) public grid: GridComponent;
 
     async ngOnInit() {
@@ -28,6 +29,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
         this.showSpinner();
         this.statesList = await this.repository.stateslist();
         this.record = await this.repository.get(id);
+        this.siteList = await this.repository.getSiteList({ tenant: this.record.tenant, customerId: this.record.id });
         this.hideSpinner();        
     }
 
