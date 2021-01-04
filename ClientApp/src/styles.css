@@ -93,7 +93,7 @@ a {
 }
 
 #list-view label{
-    top:70%;
+    top:75%;
 }
 
 .e-search:before {
@@ -151,6 +151,16 @@ ejs-grid.edit-grid .e-headercelldiv {
     margin:0px;
     padding:0px;
 }
+#edit-view .edit-grid .edit-icon {
+    padding-left: 15px;
+    padding-right: 15px;
+    color: #fd7e14;
+}
+#edit-view .edit-grid .e-pager {
+    padding-top: 8px;
+    padding-bottom: 3px;
+    background-color: #f1f5f9;
+}
 
 #edit-view .edit-footer {
     border-top: 1px solid #e6ecf5;
@@ -170,9 +180,15 @@ ejs-grid.edit-grid .e-headercelldiv {
 }
 
 /* customize the tab */
+#edit-view .e-tab .e-tab-header .e-toolbar-item:not(.e-separator) {
+    border: 1px solid #0078d6;
+}
+#edit-view .e-tab .e-tab-header .e-toolbar-items {
+    border-top: 1px solid #0078d6;
+}
 #edit-view .e-tab .e-tab-header {
-    border-bottom: 1px solid inherit;
-    box-sizing:border-box;
+    border-bottom: 1px solid #0078d6;
+    box-sizing: border-box;
 }
 #edit-view ejs-tab.e-tab .e-content .e-item {
     padding: 10px;
@@ -180,6 +196,9 @@ ejs-grid.edit-grid .e-headercelldiv {
     border-right: 1px solid #e6ecf5;
     border-bottom: 1px solid #e6ecf5;
     margin-bottom: 20px;
+}
+#edit-view .e-tab .e-tab-header .e-toolbar-item .e-tab-text {
+    padding-right: 20px;
 }
 
 #edit-view .subitem-list-header {
