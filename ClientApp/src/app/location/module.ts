@@ -11,6 +11,7 @@ import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 
 @NgModule({
     declarations: [
@@ -19,7 +20,7 @@ import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
     ],
     imports: [
         GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule,
-        CommonModule, DatePickerModule,
+        CommonModule, DatePickerModule, SwitchModule,
         RouterModule.forChild([
             { path: 'location/list', component: LocationListComponent, canActivate: [MsalGuard] },
             { path: 'location/add', component: LocationEditComponent, canActivate: [MsalGuard] },

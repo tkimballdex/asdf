@@ -1,22 +1,17 @@
 <div id="edit-view" *ngIf="record" class="container-fluid">
     <div class="row d-flex align-items-center edit-header">
-        <div class="col-md-8 d-flex">
+        <div class="col-md-6 d-flex">
             <span class="edit-header-icon"><i class="fas fa-users-crown"></i></span>
             <span class="edit-header-title">Customer</span>
         </div>
-        <div class="col-md-1 d-flex justify-content-end"><label for="edit-tenant" class="edit-label">Tenant</label></div>
-        <div class="col-md-3 d-flex">
-            <ejs-textbox id="edit-tenant" [(value)]="record.tenant" disabled [enableRtl]="true"></ejs-textbox>
-        </div>
+        <div class="col-md-6 d-flex justify-content-end">
+            <ejs-switch [(checked)]="record.active" onLabel="Active" offLabel="Not Active" style="width:100px;height:32px;"></ejs-switch>
+        </div>        
     </div>
 
-    <div class="row d-flex pad-t10 align-items-end">
-        <div class="col-md-9 d-flex">
+    <div class="row pad-t10">
+        <div class="col-md-12">
             <ejs-textbox [(value)]="record.name" required placeholder="Name *" floatLabelType="Always" enableRtl></ejs-textbox>
-        </div>
-
-        <div class="col-md-3 d-flex">
-            <ejs-switch [(checked)]="record.active" onLabel="Active" offLabel="Not Active" style="width:100px;height:32px;"></ejs-switch>
         </div>
     </div>
 
@@ -29,6 +24,13 @@
                             <div>Information</div>
                         </ng-template>
                         <ng-template #content>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ejs-textbox id="edit-tenant" [(value)]="record.tenant" disabled placeholder="Tenant" floatLabelType="Always"></ejs-textbox>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-md-3">
                                     <ejs-datepicker [(value)]="record.serviceStartDate" placeholder="Service Start Date" floatLabelType="Always"></ejs-datepicker>

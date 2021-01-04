@@ -1,22 +1,17 @@
 <div id="edit-view" *ngIf="record" class="container-fluid">
     <div class="row d-flex align-items-center edit-header">
-        <div class="col-md-8 d-flex">
+        <div class="col-md-6 d-flex">
             <span class="edit-header-icon"><i class="fas fa-chart-network"></i></span>
             <span class="edit-header-title">Site</span>
         </div>
-        <div class="col-md-1 d-flex justify-content-end"><label for="edit-customer" class="edit-label">Customer</label></div>
-        <div class="col-md-3 d-flex">
-            <ejs-textbox id="edit-customer" [(value)]="record.customer" disabled [enableRtl]="true"></ejs-textbox>
+        <div class="col-md-6 d-flex justify-content-end">
+            <ejs-switch [(checked)]="record.active" onLabel="Active" offLabel="Not Active" style="width:100px;height:32px;"></ejs-switch>
         </div>
     </div>
 
-    <div class="row d-flex pad-t10 align-items-end">
-        <div class="col-md-6 d-flex">
+    <div class="row pad-t10">
+        <div class="col-md-12">
             <ejs-textbox [(value)]="record.name" required placeholder="Name *" floatLabelType="Always" enableRtl></ejs-textbox>
-        </div>
-
-        <div class="col-md-6 d-flex">
-            <ejs-switch [(checked)]="record.active" onLabel="Active" offLabel="Not Active" style="width:100px;height:32px;"></ejs-switch>
         </div>
     </div>
 
@@ -31,6 +26,15 @@
                         <ng-template #content>
 
                             <div class="row">
+                                <div class="col-md-6">
+                                    <ejs-textbox id="edit-customer" [(value)]="record.customer" disabled placeholder="Customer" floatLabelType="Always"></ejs-textbox>
+                                </div>
+                                <div class="col-md-3">
+                                    <ejs-dropdownlist [dataSource]="frequencyList" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.frequencyId" placeholder="Testing Frequency *" floatLabelType="Always"></ejs-dropdownlist>
+                                </div>
+                            </div>
+
+                            <div class="row">
                                 <div class="col-md-3">
                                     <ejs-datepicker [(value)]="record.serviceStartDate" placeholder="Service Start Date" floatLabelType="Always"></ejs-datepicker>
                                 </div>
@@ -40,17 +44,11 @@
                                     <ejs-datepicker [(value)]="record.serviceEndDate" placeholder="Service End Date" floatLabelType="Always"></ejs-datepicker>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <ejs-dropdownlist [dataSource]="frequencyList" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.frequencyId" placeholder="Testing Frequency *" floatLabelType="Always"></ejs-dropdownlist>
-                                </div>
-                                <div class="col-md-3">
-                                </div>
-                            </div>
+
 
                             <div class="row pad-t20">
                                 <div class="col-md-12">
-                                    <ejs-textbox [(value)]="record.address" placeholder="Address" floatLabelType="Always" contenteditable="false"></ejs-textbox>
+                                    <ejs-textbox [(value)]="record.address" placeholder="Address *" floatLabelType="Always" contenteditable="false"></ejs-textbox>
                                 </div>
                                 <div class="col-md-12">
                                     <ejs-textbox [(value)]="record.address2" placeholder="Address2" floatLabelType="Always"></ejs-textbox>
@@ -59,7 +57,7 @@
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <ejs-textbox [(value)]="record.city" placeholder="City" floatLabelType="Always"></ejs-textbox>
+                                    <ejs-textbox [(value)]="record.city" placeholder="City *" floatLabelType="Always"></ejs-textbox>
                                 </div>
                             </div>
 
@@ -68,7 +66,7 @@
                                     <ejs-dropdownlist [dataSource]="statesList" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.stateId" placeholder="State *" floatLabelType="Always"></ejs-dropdownlist>
                                 </div>
                                 <div class="col-md-3">
-                                    <ejs-textbox [(value)]="record.postalCode" placeholder="Postal Code" floatLabelType="Always"></ejs-textbox>
+                                    <ejs-textbox [(value)]="record.postalCode" placeholder="Postal Code *" floatLabelType="Always"></ejs-textbox>
                                 </div>
                             </div>
 
@@ -83,16 +81,16 @@
 
                             <div class="row pad-t20">
                                 <div class="col-md-12">
-                                    <ejs-textbox [(value)]="record.contactName" placeholder="Contact Name" floatLabelType="Always"></ejs-textbox>
+                                    <ejs-textbox [(value)]="record.contactName" placeholder="Contact Name *" floatLabelType="Always"></ejs-textbox>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <ejs-textbox [(value)]="record.contactEmail" placeholder="Email" floatLabelType="Always"></ejs-textbox>
+                                    <ejs-textbox [(value)]="record.contactEmail" placeholder="Email *" floatLabelType="Always"></ejs-textbox>
                                 </div>
                                 <div class="col-md-3">
-                                    <ejs-textbox [(value)]="record.contactPhoneNo" placeholder="Phone Number" floatLabelType="Always"></ejs-textbox>
+                                    <ejs-textbox [(value)]="record.contactPhoneNo" placeholder="Phone Number *" floatLabelType="Always"></ejs-textbox>
                                 </div>
 
                             </div>
@@ -145,7 +143,7 @@
     </div>
     <div class="row d-flex edit-footer">
         <div class="col-md-6 d-flex justify-content-start">
-            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading">Save</button>  
+            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading">Save</button>
         </div>
 
         <div class="col-md-6 d-flex justify-content-end">
