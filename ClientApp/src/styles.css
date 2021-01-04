@@ -134,8 +134,8 @@ a {
 #edit-view .e-control {
     width: 100%;
 }
-#edit-view label {
-    top: 70%;
+#edit-view label.e-float-text {
+    top: 75%;
 }
 ejs-grid.edit-grid .e-headercelldiv {
     font-weight: 600;
