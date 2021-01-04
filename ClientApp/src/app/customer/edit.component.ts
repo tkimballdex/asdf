@@ -20,16 +20,15 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
     public record: any;
     public deleteDialog: Dialog;
     public statesList: any;
-    public siteList: any;
-    @ViewChild('grid', null) public grid: GridComponent;
+    public sitesList: any;
 
     async ngOnInit() {
         var id = this.route.snapshot.paramMap.get('id');
 
         this.showSpinner();
-        this.statesList = await this.repository.stateslist();
+        this.statesList = await this.repository.statesList();
         this.record = await this.repository.get(id);
-        this.siteList = await this.repository.getSiteList({ tenant: this.record.tenant, customerId: this.record.id });
+        this.sitesList = await this.repository.sitesList({ tenant: this.record.tenant, customerId: this.record.id });
         this.hideSpinner();        
     }
 

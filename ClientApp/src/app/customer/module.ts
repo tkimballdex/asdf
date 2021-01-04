@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { CustomerListComponent } from './list.component'
-import { CustomerEditComponent } from './edit.component'
+import { CustomerListComponent } from './list.component';
+import { CustomerEditComponent } from './edit.component';
 import { MsalGuard } from '@azure/msal-angular';
 
 import { RadioButtonModule, ButtonModule, CheckBoxModule } from '@syncfusion/ej2-angular-buttons';

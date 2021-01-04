@@ -22,15 +22,15 @@ export class SiteRepository {
         return this.http.post(`/site/list`, filter);
     }
 
-    public statelist(filter: any) {
-        return this.http.post(`/site/list`, filter);
+    public statesList() {
+        return this.http.post(`/site/getStatesList`);
     }
 
-    public samplefrequency(filter: any) {
-        return this.http.post(`/site/list`, filter);
+    public frequencyList() {
+        return this.http.post(`/site/getFrequencyList`);
     }
 
-    public customerlist(filter: any) {
-        return this.http.post(`/site/list`, filter);
+    public locationsList(filter: any) {
+        return this.http.post(`/site/getLocationsList`, filter);
     }
 }

@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <div class="row d-flex pad-t20 align-items-end">
+    <div class="row d-flex pad-t10 align-items-end">
         <div class="col-md-9 d-flex">
             <ejs-textbox [(value)]="record.name" required placeholder="Name *" floatLabelType="Always" enableRtl></ejs-textbox>
         </div>
@@ -28,7 +28,7 @@
                         <ng-template #headerText>
                             <div>Information</div>
                         </ng-template>
-                        <ng-template #content">
+                        <ng-template #content>
                             <div class="row">
                                 <div class="col-md-3">
                                     <ejs-datepicker [(value)]="record.serviceStartDate" placeholder="Service Start Date" floatLabelType="Always"></ejs-datepicker>
@@ -70,7 +70,7 @@
                                 </div>
                             </div>
 
-                            <div class="row pad-t20">
+                            <div class="row">
                                 <div class="col-md-6">
                                     <ejs-textbox [(value)]="record.latitude" readonly placeholder="Latitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
                                 </div>
@@ -125,7 +125,7 @@
                             </div>
                             <div class="row">                                
                                 <div class="col-12 pad-t20">
-                                    <ejs-grid [dataSource]='siteList' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="true" *ngIf="siteList">
+                                    <ejs-grid [dataSource]='sitesList' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="true" *ngIf="sitesList">
                                         <e-columns>
                                             <e-column width="70">
                                                 <ng-template #template let-data>
