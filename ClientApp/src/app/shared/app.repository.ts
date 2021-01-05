@@ -40,6 +40,10 @@ export class AppRepository {
         var account = this.authService.getAccount();
         return account ? account.name : null;
     }
+
+    public tenantList() {
+        return this.http.post(`/user/getTenantList`);
+    }
 }
 
 export interface PrivilegeSet {

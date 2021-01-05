@@ -20,7 +20,10 @@
                   <div id="header" class="col-lg-12 col-sm-12 col-md-12 header-section">                  
                       <ul class="header-list">
                           <li id="hamburger" class="far fa-bars icon list" (click)="openClick()"> </li>
-                          <li class="tenant-name list">{{tenantname}}</li>
+                          <li class="tenant-name list">
+                              {{tenantname}}
+                              <ejs-dropdownlist [dataSource]="tenantList" [fields]="{ text: 'name', id: 'id' }" [(value)]="tenant" (change)="changeTenant()" placeholder="Choose Tenant"></ejs-dropdownlist>
+                          </li>
                           <li class="right-header list">
                               <div class="horizontal-menu">
                                   <!-- Menu element declaration -->

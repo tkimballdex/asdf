@@ -21,8 +21,4 @@ export class UserRepository {
     public list(filter: any) {
         return this.http.post(`/user/list`, filter);
     }
-
-    public tenantList() {
-        return this.http.post(`/user/getTenantList`);
-    }
 }

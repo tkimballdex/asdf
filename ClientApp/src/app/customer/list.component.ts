@@ -18,9 +18,7 @@ export class CustomerListComponent extends PageComponent implements OnInit {
     public name: any;
 
     async ngOnInit() {
-        this.showSpinner();
         this.tenant = this.app.tenant;
-        this.hideSpinner();
 
         if (this.tenant) {
             this.search();

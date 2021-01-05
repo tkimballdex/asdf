@@ -9,17 +9,15 @@ import { UserRepository } from '../user/repository';
   templateUrl: './home.component.html',
 })
 export class HomeComponent extends PageComponent implements OnInit {
-    constructor(private http: MsalHttpClient, private repository: UserRepository, private app: AppRepository) {
+    constructor(private http: MsalHttpClient, private app: AppRepository) {
         super();
     }
 
-    public tenantList: any;
     public tenant: string;
     public username: string;
 
     async ngOnInit() {
         this.http.postWithErrorCheck('/home/getdata2', null, (data) => console.dir(data));
-        this.tenantList = await this.repository.tenantList();
         this.tenant = localStorage.getItem('tenant');
         this.username = this.app.userName;
     }

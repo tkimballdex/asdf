@@ -22,8 +22,9 @@ export class AppComponent implements OnInit {
     public target: string = '.main-content';
     public dockSize: string = '70px';
     public enableDock: boolean = true;
-    public tenantname: string;
     public username: string;
+    public tenantList: any;
+    public tenant: any;
 
     constructor(private authService: MsalService, private router: Router, private http: MsalHttpClient, private app: AppRepository) {
         console.dir(this.authService.getAccount());
@@ -44,7 +45,8 @@ export class AppComponent implements OnInit {
     }
 
     async ngOnInit() {
-        this.tenantname = this.app.tenant;
+        this.tenantList = await this.app.tenantList();
+        this.tenant = this.app.tenant;
     }
 
     public selectMainMenu(args: MenuEventArgs): void {
@@ -109,5 +111,9 @@ export class AppComponent implements OnInit {
 
     openClick() {
         this.sidebarMenuInstance.toggle();
+    }
+
+    public changeTenant() {
+        this.app.tenant = this.tenant;
     }
 };
