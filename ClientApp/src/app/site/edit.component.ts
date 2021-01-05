@@ -30,7 +30,11 @@ export class SiteEditComponent extends PageComponent implements OnInit {
         this.frequencyList = await this.repository.frequencyList();
         this.record = await this.repository.get(id);
         this.locationsList = await this.repository.locationsList({ tenant: this.record.tenant, siteId: this.record.id });
-        this.hideSpinner();       
+        this.hideSpinner();
+
+        if (id == null) {
+            this.record.customerId = this.route.snapshot.paramMap.get('customerId');
+        }
     }
 
     async save() {

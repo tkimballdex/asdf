@@ -122,7 +122,7 @@
                                 <div class="col d-flex align-items-end subitem-list-header">
                                     <span class="subitem-list-icon"><i class="fas fa-chart-network"></i></span>
                                     <span class="subitem-list-title">Sites</span>
-                                    <span class="subitem-list-add"><button ejs-button cssClass="e-outline" [routerLink]="['/site/add']">+ Add</button></span>
+                                    <span class="subitem-list-add"><button ejs-button cssClass="e-outline" [routerLink]="['/site/add', record.id]">+ Add</button></span>
                                 </div>
                             </div>
                             <div class="row">                                
@@ -153,11 +153,11 @@
 
     <div class="row d-flex edit-footer">
         <div class="col-md-6 d-flex justify-content-start">
-            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading">Save</button>
+            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
         </div>
 
         <div class="col-md-6 d-flex justify-content-end">
-            <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id">Delete</button>
+            <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
             <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/customer/list']">Close</button>
         </div>
     </div>

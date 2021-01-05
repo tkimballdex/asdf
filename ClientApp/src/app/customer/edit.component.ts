@@ -23,6 +23,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
     public sitesList: any;
 
     async ngOnInit() {
+        this.privileges = (await this.appRepository.getPrivileges()).customers;
         var id = this.route.snapshot.paramMap.get('id');
 
         this.showSpinner();

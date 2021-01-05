@@ -24,7 +24,7 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
         DropDownListModule, DatePickerModule, TabModule, SwitchModule, CommonModule,
         RouterModule.forChild([
             { path: 'site/list', component: SiteListComponent, canActivate: [MsalGuard] },
-            { path: 'site/add', component: SiteEditComponent, canActivate: [MsalGuard] },
+            { path: 'site/add/:customerId', component: SiteEditComponent, canActivate: [MsalGuard] },
            { path: 'site/edit/:id', component: SiteEditComponent, canActivate: [MsalGuard] },
         ])
     ],
