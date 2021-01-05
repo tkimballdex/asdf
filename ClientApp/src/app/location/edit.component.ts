@@ -25,10 +25,15 @@ export class LocationEditComponent extends PageComponent implements OnInit {
         this.showSpinner();
         this.record = await this.repository.get(id);
         this.hideSpinner();
+
+        if (id == null) {
+            this.record.siteId = this.route.snapshot.paramMap.get('siteId');
+        }
     }
 
     async save() {
         var add = !this.record.id;
+        this.record.tenant = this.appRepository.tenant;
         this.showSpinner();
         var returnValue = await this.repository.save(this.record);
         this.hideSpinner();
@@ -61,11 +66,14 @@ export class LocationEditComponent extends PageComponent implements OnInit {
     async deleteOK() {
         this.showSpinner();
         this.deleteDialog.close();
-        var success = await this.repository.delete(this.record.id);
+        var result = await this.repository.delete(this.record.id);
         this.hideSpinner();
-        this.showDeleteMessage(success);
 
-        if (success) {
+        if (result.error) {
+            this.showErrorMessage(result.description);
+        }
+        else {
+            this.showDeleteMessage(true);
             setTimeout(() => this.router.navigate(['/location/list']), 1000);
         }
     }

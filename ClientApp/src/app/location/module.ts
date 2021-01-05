@@ -23,7 +23,7 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
         CommonModule, DatePickerModule, SwitchModule,
         RouterModule.forChild([
             { path: 'location/list', component: LocationListComponent, canActivate: [MsalGuard] },
-            { path: 'location/add', component: LocationEditComponent, canActivate: [MsalGuard] },
+            { path: 'location/add/:siteId', component: LocationEditComponent, canActivate: [MsalGuard] },
            { path: 'location/edit/:id', component: LocationEditComponent, canActivate: [MsalGuard] },
         ])
     ],

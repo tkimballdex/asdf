@@ -11,7 +11,7 @@ export class SiteRepository {
     }
 
     public delete(id: string) {
-        return this.http.post<boolean>(`/site/delete/${id}`);
+        return this.http.post<any>(`/site/delete/${id}`);
     }
 
     public get(id: string) {

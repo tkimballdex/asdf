@@ -11,7 +11,7 @@ export class LocationRepository {
     }
 
     public delete(id: string) {
-        return this.http.post<boolean>(`/location/delete/${id}`);
+        return this.http.post<any>(`/location/delete/${id}`);
     }
 
     public get(id: string) {

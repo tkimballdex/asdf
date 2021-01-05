@@ -35,6 +35,10 @@ export class UserEditComponent extends PageComponent implements OnInit {
         this.record.tenants.forEach(function (x, i) {
             x.index = i;
         });
+
+        if (id == null) {
+            this.record.siteId = this.route.snapshot.paramMap.get('siteId');
+        }
     }
 
     async save() {
