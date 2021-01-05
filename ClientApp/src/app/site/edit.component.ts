@@ -24,6 +24,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
     public frequencyList: any;
 
     async ngOnInit() {
+        this.privileges = (await this.appRepository.getPrivileges()).sites;
         var id = this.route.snapshot.paramMap.get('id');
         this.showSpinner();
         this.statesList = await this.repository.statesList();

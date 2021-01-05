@@ -21,6 +21,7 @@ export class LocationEditComponent extends PageComponent implements OnInit {
     @ViewChild('grid', null) public grid: GridComponent;
 
     async ngOnInit() {
+        this.privileges = (await this.appRepository.getPrivileges()).locations;
         var id = this.route.snapshot.paramMap.get('id');
         this.showSpinner();
         this.record = await this.repository.get(id);

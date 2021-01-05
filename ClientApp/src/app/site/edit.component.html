@@ -143,11 +143,11 @@
     </div>
     <div class="row d-flex edit-footer">
         <div class="col-md-6 d-flex justify-content-start">
-            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading">Save</button>
+            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
         </div>
 
         <div class="col-md-6 d-flex justify-content-end">
-            <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id">Delete</button>
+            <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
             <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/customer/edit', record.customerId]">Close</button>
         </div>
     </div>
