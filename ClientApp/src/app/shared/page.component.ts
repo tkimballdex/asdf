@@ -71,12 +71,12 @@ export class PageComponent {
 
     public showSpinner() {
         createSpinner({ target: document.getElementById('wrapper') });
-        showSpinner(document.getElementById('wrapper'));
+        //showSpinner(document.getElementById('wrapper'));
         this.loadStart();
     }
 
     public hideSpinner() {
-        hideSpinner(document.getElementById('wrapper'));
+        //hideSpinner(document.getElementById('wrapper'));
         this.loadEnd();
     }
 }

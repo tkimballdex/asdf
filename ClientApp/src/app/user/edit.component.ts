@@ -21,7 +21,9 @@ export class UserEditComponent extends PageComponent implements OnInit {
     @ViewChild('grid', null) public grid: GridComponent;
 
     async ngOnInit() {
-        var id = this.route.snapshot.paramMap.get('id');
+        this.privileges = (await this.appRepository.getPrivileges()).manageUsers;
+
+       var id = this.route.snapshot.paramMap.get('id');
         this.showSpinner();
         this.record = await this.repository.get(id);
         this.hideSpinner();

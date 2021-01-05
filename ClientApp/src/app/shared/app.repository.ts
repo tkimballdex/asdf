@@ -11,13 +11,7 @@ export class AppRepository {
 
 	public getData() {
 		if (this.appData == null) {
-			try {
-                this.appData = this.http.post('/application/getData', null);
-			}
-			catch (ex) {
-				if (ex && ex.status == 401) {
-				}
-			}
+            this.appData = this.http.post('/app/getData', null);
 		}
 
 		return this.appData;
@@ -47,21 +41,21 @@ export class AppRepository {
 }
 
 export interface PrivilegeSet {
-	Create: boolean;
-	Read: boolean;
-	Update: boolean;
-	Delete: boolean;
-	Approve: boolean;
+	create: boolean;
+	read: boolean;
+	update: boolean;
+	delete: boolean;
+	approve: boolean;
 }
 
 export interface Privileges {
-	ManagePrivileges: PrivilegeSet;
-	ManageUsers: PrivilegeSet;
-	ManageRoles: PrivilegeSet;
-	Customers: PrivilegeSet;
-    Sites: PrivilegeSet;
-    Locations: PrivilegeSet;
-    Vendors: PrivilegeSet;
+	managePrivileges: PrivilegeSet;
+	manageUsers: PrivilegeSet;
+	manageRoles: PrivilegeSet;
+	customers: PrivilegeSet;
+    sites: PrivilegeSet;
+    locations: PrivilegeSet;
+    vendors: PrivilegeSet;
 }
 
 export interface MenuItem {
