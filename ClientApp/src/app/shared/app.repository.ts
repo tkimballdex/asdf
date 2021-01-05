@@ -58,8 +58,10 @@ export interface Privileges {
 	ManagePrivileges: PrivilegeSet;
 	ManageUsers: PrivilegeSet;
 	ManageRoles: PrivilegeSet;
-	ImportWarrantyData: PrivilegeSet;
-	WorkOrders: PrivilegeSet;
+	Customers: PrivilegeSet;
+    Sites: PrivilegeSet;
+    Locations: PrivilegeSet;
+    Vendors: PrivilegeSet;
 }
 
 export interface MenuItem {

@@ -22,7 +22,11 @@ export class CustomerRepository {
         return this.http.post(`/customer/list`, filter);
     }
 
-    public stateslist() {
+    public statesList() {
         return this.http.post(`/customer/getStatesList`);
+    }
+
+    public sitesList(filter: any) {
+        return this.http.post(`/customer/getSitesList`, filter);
     }
 }

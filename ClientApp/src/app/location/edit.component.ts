@@ -25,14 +25,6 @@ export class LocationEditComponent extends PageComponent implements OnInit {
         this.showSpinner();
         this.record = await this.repository.get(id);
         this.hideSpinner();
-
-        this.record.roles.forEach(function (x, i) {
-            x.index = i;
-        });
-
-        this.record.tenants.forEach(function (x, i) {
-            x.index = i;
-        });
     }
 
     async save() {
@@ -61,7 +53,7 @@ export class LocationEditComponent extends PageComponent implements OnInit {
     delete() {
         this.deleteDialog = DialogUtility.confirm({
             title: 'Delete Location',
-            content: `Are you sure you want to delete this Location <b>${this.record.userName}</b>?`,
+            content: `Are you sure you want to delete the location <b>${this.record.name}</b>?`,
             okButton: { click: this.deleteOK.bind(this) }
         });
     }

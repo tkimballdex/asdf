@@ -1,113 +1,156 @@
-<div *ngIf="record" id="edit-view"  class="container-fluid">
-    <div class="row d-flex align-items-end edit-header">
-        <div class="col-9 d-flex">
-            <span class="edit-header-icon"><i class="fas fa-building"></i></span>
-            <span class="edit-header-title">Sites</span>
-        </div>
-        <div class="col-3 d-flex">
-            active
-        </div>
-    </div>
-
-    <div class="row pad-t20">
-        <div class="col-md-12">
-            <ejs-textbox [(value)]="record.name" placeholder="Name" floatLabelType="Always" contenteditable="false"></ejs-textbox>
-        </div>
-    </div>
-
-    <div class="row pad-t20">
-        <div class="col-md-6">
-            <ejs-dropdownlist [(value)]="record.customer" placeholder="Customer" floatLabelType="Always"></ejs-dropdownlist>
-        </div>
-        <div class="col-md-6">
-            <ejs-dropdownlist [(value)]="record.frequencyID" placeholder="Sample Frequency" floatLabelType="Always"></ejs-dropdownlist>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-3">
-            <ejs-datepicker [(value)]="record.serviceStartDate" placeholder="Service Start Date" floatLabelType="Always"></ejs-datepicker>
-        </div>
-        <div class="col-md-3">
-        </div>
-        <div class="col-md-3">
-            <ejs-datepicker [(value)]="record.serviceEndDate" placeholder="Service End Date" floatLabelType="Always"></ejs-datepicker>
-        </div>
-    </div>
-
-    <div class="row d-flex pad-t20">
-        <div class="col-md-12 d-flex">
-            <ejs-textbox [(value)]="record.address" placeholder="Address" floatLabelType="Always" contenteditable="false"></ejs-textbox>
-        </div>
-        <div class="col-md-12 d-flex">
-            <ejs-textbox [(value)]="record.address2" placeholder="Address2" floatLabelType="Always"></ejs-textbox>
-        </div>
-       
-    </div>
-
-    <div class="row d-flex pad-t20">
-        <div class="col-md-12 d-flex">
-            <ejs-textbox [(value)]="record.city" placeholder="City" floatLabelType="Always"></ejs-textbox>
-        </div>
-    </div>
-
-    <div class="row d-flex">
-            <div class="col-md-6 d-flex">
-                <ejs-dropdownlist [fields]="{ text: 'name', id: 'id' }" [(value)]="state" placeholder="State" floatLabelType="Always"></ejs-dropdownlist>
-            </div>
-        <div class="col-md-3 d-flex">
-            <ejs-textbox [(value)]="record.postalCode" placeholder="Postal Code" floatLabelType="Always"></ejs-textbox>
-        </div>
-    </div>
-
-    <div class="row d-flex pad-t20">
+<div id="edit-view" *ngIf="record" class="container-fluid">
+    <div class="row d-flex align-items-center edit-header">
         <div class="col-md-6 d-flex">
-            <ejs-textbox [(value)]="record.latitude" placeholder="Latitude" floatLabelType="Always"></ejs-textbox>
+            <span class="edit-header-icon"><i class="fas fa-chart-network"></i></span>
+            <span class="edit-header-title">Site</span>
         </div>
-        <div class="col-md-6 d-flex">
-            <ejs-textbox [(value)]="record.longitude" placeholder="Longitude" floatLabelType="Always"></ejs-textbox>
-        </div>
-    </div>
-
-    <div class="row d-flex pad-t20">
-        <div class="col-md-12 d-flex">
-            <ejs-textbox [(value)]="record.contactName" placeholder="Contact Name" floatLabelType="Always"></ejs-textbox>
+        <div class="col-md-6 d-flex justify-content-end">
+            <ejs-switch [(checked)]="record.active" onLabel="Active" offLabel="Not Active" style="width:100px;height:32px;"></ejs-switch>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <ejs-textbox [(value)]="record.contactEmail" placeholder="Email" floatLabelType="Always"></ejs-textbox>
-        </div>
-        <div class="col-md-3">
-            <ejs-textbox [(value)]="record.contactPhoneNo" placeholder="Phone Number" floatLabelType="Always"></ejs-textbox>
-        </div>
-        
-    </div>
-
-    <div class="row d-flex pad-t20">
-        <div class="col-md-12 d-flex">
-            <ejs-textbox [(value)]="record.notificationEmail" placeholder="Notification Email(s)" floatLabelType="Always"></ejs-textbox>
-        </div>
-    </div>
-
-    <div class="row pad-t20 pad-b20">
-        <div class="col-md-12"><label for="notes" class="edit-label">Notes</label></div>
+    <div class="row pad-t10">
         <div class="col-md-12">
-            <ejs-textbox id="notes" [multiline]='true' style="height: 50px;" [(value)]="record.notes"></ejs-textbox>
+            <ejs-textbox [(value)]="record.name" required placeholder="Name *" floatLabelType="Always" enableRtl></ejs-textbox>
         </div>
     </div>
 
+    <div class="row d-flex pad-t20">
+        <div class="col-md-12 d-flex">
+            <ejs-tab id="edit-tab" class="e-fill">
+                <e-tabitems>
+                    <e-tabitem>
+                        <ng-template #headerText>
+                            <div>Information</div>
+                        </ng-template>
+                        <ng-template #content>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <ejs-textbox id="edit-customer" [(value)]="record.customer" disabled placeholder="Customer" floatLabelType="Always"></ejs-textbox>
+                                </div>
+                                <div class="col-md-3">
+                                    <ejs-dropdownlist [dataSource]="frequencyList" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.frequencyId" placeholder="Testing Frequency *" floatLabelType="Always"></ejs-dropdownlist>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <ejs-datepicker [(value)]="record.serviceStartDate" placeholder="Service Start Date" floatLabelType="Always"></ejs-datepicker>
+                                </div>
+                                <div class="col-md-3">
+                                </div>
+                                <div class="col-md-3">
+                                    <ejs-datepicker [(value)]="record.serviceEndDate" placeholder="Service End Date" floatLabelType="Always"></ejs-datepicker>
+                                </div>
+                            </div>
+
+
+                            <div class="row pad-t20">
+                                <div class="col-md-12">
+                                    <ejs-textbox [(value)]="record.address" placeholder="Address *" floatLabelType="Always" contenteditable="false"></ejs-textbox>
+                                </div>
+                                <div class="col-md-12">
+                                    <ejs-textbox [(value)]="record.address2" placeholder="Address2" floatLabelType="Always"></ejs-textbox>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ejs-textbox [(value)]="record.city" placeholder="City *" floatLabelType="Always"></ejs-textbox>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <ejs-dropdownlist [dataSource]="statesList" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.stateId" placeholder="State *" floatLabelType="Always"></ejs-dropdownlist>
+                                </div>
+                                <div class="col-md-3">
+                                    <ejs-textbox [(value)]="record.postalCode" placeholder="Postal Code *" floatLabelType="Always"></ejs-textbox>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <ejs-textbox [(value)]="record.latitude" placeholder="Latitude" floatLabelType="Always"></ejs-textbox>
+                                </div>
+                                <div class="col-md-6">
+                                    <ejs-textbox [(value)]="record.longitude" placeholder="Longitude" floatLabelType="Always"></ejs-textbox>
+                                </div>
+                            </div>
+
+                            <div class="row pad-t20">
+                                <div class="col-md-12">
+                                    <ejs-textbox [(value)]="record.contactName" placeholder="Contact Name *" floatLabelType="Always"></ejs-textbox>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <ejs-textbox [(value)]="record.contactEmail" placeholder="Email *" floatLabelType="Always"></ejs-textbox>
+                                </div>
+                                <div class="col-md-3">
+                                    <ejs-textbox [(value)]="record.contactPhoneNo" placeholder="Phone Number *" floatLabelType="Always"></ejs-textbox>
+                                </div>
+
+                            </div>
+
+                            <div class="row pad-t20">
+                                <div class="col-md-12">
+                                    <ejs-textbox [(value)]="record.notificationEmail" placeholder="Notification Email(s)" floatLabelType="Always"></ejs-textbox>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12"><label for="notes" class="edit-label">Notes</label></div>
+                                <div class="col-md-12">
+                                    <ejs-textbox id="notes" [multiline]='true' #default rows="3" [(value)]="record.notes"></ejs-textbox>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </e-tabitem>
+                    <e-tabitem>
+                        <ng-template #headerText>
+                            <div>Locations</div>
+                        </ng-template>
+                        <ng-template #content>
+                            <div class="row d-flex align-items-end">
+                                <div class="col d-flex align-items-end subitem-list-header">
+                                    <span class="subitem-list-icon"><i class="fas fa-location"></i></span>
+                                    <span class="subitem-list-title">Locations</span>
+                                    <span class="subitem-list-add"><button ejs-button cssClass="e-outline" [routerLink]="['/location/add']">+ Add</button></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 pad-t20">
+                                    <ejs-grid [dataSource]='locationsList' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="true" *ngIf="locationsList">
+                                        <e-columns>
+                                            <e-column width="70">
+                                                <ng-template #template let-data>
+                                                    <a [routerLink]="['/location/edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
+                                                </ng-template>
+                                            </e-column>
+                                            <e-column field='name' headerText='Name'></e-column>
+                                        </e-columns>
+                                    </ejs-grid>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </e-tabitem>
+                </e-tabitems>
+            </ejs-tab>
+        </div>
+    </div>
     <div class="row d-flex edit-footer">
         <div class="col-md-6 d-flex justify-content-start">
             <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading">Save</button>
-            <ejs-toast #toast></ejs-toast>
         </div>
 
         <div class="col-md-6 d-flex justify-content-end">
             <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id">Delete</button>
-            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/location/list']">Close</button>            
-        </div>        
+            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/site/list']">Close</button>
+        </div>
     </div>
+    <ejs-toast #toast></ejs-toast>
 </div>
 

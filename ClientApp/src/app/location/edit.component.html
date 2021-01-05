@@ -1,66 +1,68 @@
-<div id="edit-view"  class="container-fluid">
-    <div class="row d-flex align-items-end edit-header">
-        <div class="col-9 d-flex">
-            <span class="edit-header-icon"><i class="fas fa-users-crown"></i></span>
+<div id="edit-view" *ngIf="record" class="container-fluid">
+    <div class="row d-flex align-items-center edit-header">
+        <div class="col-md-6 d-flex">
+            <span class="edit-header-icon"><i class="fas fa-location"></i></span>
             <span class="edit-header-title">Location</span>
         </div>
-        <div class="col-3 d-flex">
-            active
+        <div class="col-md-6 d-flex justify-content-end">
+            <ejs-switch [(checked)]="record.active" onLabel="Active" offLabel="Not Active" style="width:100px;height:32px;"></ejs-switch>
         </div>
     </div>
 
-    <div class="row d-flex pad-t20">
-        <div class="col-md-12 d-flex">
-            <ejs-textbox [(value)]="record.name" placeholder="Name" floatLabelType="Always"></ejs-textbox>
+    <div class="row pad-t10">
+        <div class="col-md-12">
+            <ejs-textbox [(value)]="record.name" required placeholder="Name *" floatLabelType="Always" enableRtl></ejs-textbox>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ejs-textbox id="edit-site" [(value)]="record.site" disabled placeholder="Site" floatLabelType="Always"></ejs-textbox>
         </div>
     </div>
 
-    <div class="row d-flex pad-t20">
-        <div class="col-md-6 d-flex">
-            <ejs-textbox [(value)]="record.serviceStartDate" placeholder="Service Start Date" floatLabelType="Always"></ejs-textbox>
+    <div class="row pad-t20">
+        <div class="col-md-3">
+            <ejs-datepicker [(value)]="record.serviceStartDate" placeholder="Service Start Date" floatLabelType="Always"></ejs-datepicker>
         </div>
-        <div class="col-md-6 d-flex">
-            <ejs-textbox [(value)]="record.serviceEndDate" placeholder="Service End Date" floatLabelType="Always"></ejs-textbox>
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-3">
+            <ejs-datepicker [(value)]="record.serviceEndDate" placeholder="Service End Date" floatLabelType="Always"></ejs-datepicker>
         </div>
     </div>
 
-    <div class="row d-flex pad-t20">
-        <div class="col-md-12 d-flex">
+    <div class="row">
+        <div class="col-md-12">
             <ejs-textbox [(value)]="record.sampler" placeholder="Sampler" floatLabelType="Always"></ejs-textbox>
         </div>
     </div>
 
-    <div class="row d-flex pad-t20">
-        <div class="col-md-6 d-flex">
-            <ejs-textbox [(value)]="record.latitude" placeholder="Latitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
+    <div class="row">
+        <div class="col-md-6">
+            <ejs-textbox [(value)]="record.latitude" disabled placeholder="Latitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
         </div>
-        <div class="col-md-6 d-flex">
-            <ejs-textbox [(value)]="record.longitude" placeholder="Longitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
-        </div>
-    </div>
-    
-    <div class="row d-flex pad-t20">
-        <div class="col-md-12 d-flex">
-            <ejs-textbox [(value)]="record.active" placeholder="Active" floatLabelType="Always"></ejs-textbox>
+        <div class="col-md-6">
+            <ejs-textbox [(value)]="record.longitude" disabled placeholder="Longitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
         </div>
     </div>
 
-    <div class="row d-flex pad-t20 pad-b20">
-        <div class="col-12 d-flex">
-            <ejs-textbox [(value)]="record.notes" placeholder="Notes" floatLabelType="Always"></ejs-textbox>
+    <div class="row pad-b20">
+        <div class="col-md-12"><label for="notes" class="edit-label">Notes</label></div>
+        <div class="col-md-12">
+            <ejs-textbox id="notes" [multiline]='true' #default rows="3" [(value)]="record.notes"></ejs-textbox>
         </div>
     </div>
 
     <div class="row d-flex edit-footer">
         <div class="col-md-6 d-flex justify-content-start">
             <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading">Save</button>
-            <ejs-toast #toast></ejs-toast>
         </div>
 
         <div class="col-md-6 d-flex justify-content-end">
             <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id">Delete</button>
-            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/location/list']">Close</button>            
-        </div>        
+            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/location/list']">Close</button>
+        </div>
     </div>
+    <ejs-toast #toast></ejs-toast>
 </div>
 

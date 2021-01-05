@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { DialogUtility, Dialog } from '@syncfusion/ej2-popups';
+import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 import { AppRepository } from "../shared/app.repository";
 import { PageComponent } from '../shared/page.component';
 import { SiteRepository } from './repository';
@@ -18,26 +19,24 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 
     public record: any;
     public deleteDialog: Dialog;
-    @ViewChild('grid', null) public grid: GridComponent;
+    public statesList: any;
+    public locationsList: any;
+    public frequencyList: any;
 
     async ngOnInit() {
         var id = this.route.snapshot.paramMap.get('id');
         this.showSpinner();
+        this.statesList = await this.repository.statesList();
+        this.frequencyList = await this.repository.frequencyList();
         this.record = await this.repository.get(id);
-        this.hideSpinner();
-
-        this.record.roles.forEach(function (x, i) {
-            x.index = i;
-        });
-
-        this.record.tenants.forEach(function (x, i) {
-            x.index = i;
-        });
+        this.locationsList = await this.repository.locationsList({ tenant: this.record.tenant, siteId: this.record.id });
+        this.hideSpinner();       
     }
 
     async save() {
         var add = !this.record.id;
         this.showSpinner();
+        this.record.tenant = this.appRepository.tenant;
         var returnValue = await this.repository.save(this.record);
         this.hideSpinner();
 

@@ -40,31 +40,31 @@ export class PageComponent {
     public showSaveMessage(success: boolean) {
         if (success) {
             this.toast.show({
-                content: 'Saved successfully!', timeOut: 1000, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-success'
+                content: 'Saved successfully!', timeOut: 2000, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-success'
             });
         }
         else {
             this.toast.show({
-                content: 'Error occurred!', timeOut: 1000, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-danger'
+                content: 'Error occurred!', timeOut: 2000, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-danger'
             });
         }
     }
 
     public showErrorMessage(message: string) {
         this.toast.show({
-            content: message, timeOut: 1000, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-danger'
+            content: message, timeOut: 2000, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-danger'
         });
     }
 
     public showDeleteMessage(success: boolean) {
         if (success) {
             this.toast.show({
-                content: 'Deleted successfully!', timeOut: 1000, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-success'
+                content: 'Deleted successfully!', timeOut: 2000, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-success'
             });
         }
         else {
             this.toast.show({
-                content: 'Error occurred while deleting!', timeOut: 1000, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-danger'
+                content: 'Error occurred while deleting!', timeOut: 2000, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-danger'
             });
         }
     }

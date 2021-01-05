@@ -4,6 +4,7 @@
 @import '../node_modules/@syncfusion/ej2-buttons/styles/fabric.css';
 @import '../node_modules/@syncfusion/ej2-inputs/styles/fabric.css';
 @import '../node_modules/@syncfusion/ej2-popups/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-angular-notifications/styles/material.css';
 @import '../node_modules/@syncfusion/ej2-lists/styles/fabric.css';
 @import '../node_modules/@syncfusion/ej2-splitbuttons/styles/fabric.css';
 @import '../node_modules/@syncfusion/ej2-calendars/styles/fabric.css';
@@ -16,7 +17,7 @@
 body {
     margin: 0;
     overflow-y: hidden;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
     -webkit-tap-highlight-color: transparent;
     background-color: #f1f5f9;
 }
@@ -29,10 +30,6 @@ a {
 #wrapper .e-control {
     width: 100%;
 }
-
-
-
-
 
 /* Start - List View styles*/
 #list-view {
@@ -96,7 +93,7 @@ a {
 }
 
 #list-view label{
-    top:70%;
+    top:75%;
 }
 
 .e-search:before {
@@ -108,16 +105,16 @@ a {
 /* End - List View styles*/
 /* Start - Edit View styles*/
 #edit-view {
-    padding: 15px;
+    padding: 10px 15px 15px 15px;
     border-radius: 10px 0px 0px 0px;
-    border: 1px solid #e6ecf5;
+    border: 1px solid #d8dee6;
     background-color: #ffffff;
     width:100%;
 }
 
 #edit-view .edit-header {
     border-bottom: 1px solid #e6ecf5;
-    padding-bottom:15px;
+    padding-bottom:10px;
 }
 
 #edit-view .edit-header-icon {
@@ -137,22 +134,34 @@ a {
 #edit-view .e-control {
     width: 100%;
 }
-#edit-view label {
-    top: 70%;
+#edit-view label.e-float-text {
+    top: 75%;
 }
 ejs-grid.edit-grid .e-headercelldiv {
     font-weight: 600;
 }
-#edit-view ejs-grid label {
-    top: 0%;
-}
+
 #edit-view .date-picker {
     max-width: 250px;
 }
+
 #edit-view .edit-label {
-    font-size:12px;
-    color:#333333;
+    font-size: 12px;
+    color: #333333;
+    margin:0px;
+    padding:0px;
 }
+#edit-view .edit-grid .edit-icon {
+    padding-left: 15px;
+    padding-right: 15px;
+    color: #fd7e14;
+}
+#edit-view .edit-grid .e-pager {
+    padding-top: 8px;
+    padding-bottom: 3px;
+    background-color: #f1f5f9;
+}
+
 #edit-view .edit-footer {
     border-top: 1px solid #e6ecf5;
     padding-top: 15px;
@@ -169,18 +178,119 @@ ejs-grid.edit-grid .e-headercelldiv {
 #edit-view .edit-footer .close-button {
     margin-left:30px;
 }
+
+/* customize the tab */
+#edit-view .e-tab .e-tab-header .e-toolbar-item:not(.e-separator) {
+    border: 1px solid #0078d6;
+}
+#edit-view .e-tab .e-tab-header .e-toolbar-items {
+    border-top: 1px solid #0078d6;
+}
+#edit-view .e-tab .e-tab-header {
+    border-bottom: 1px solid #0078d6;
+    box-sizing: border-box;
+}
+#edit-view ejs-tab.e-tab .e-content .e-item {
+    padding: 10px;
+    border-left: 1px solid #e6ecf5;
+    border-right: 1px solid #e6ecf5;
+    border-bottom: 1px solid #e6ecf5;
+    margin-bottom: 20px;
+}
+#edit-view .e-tab .e-tab-header .e-toolbar-item .e-tab-text {
+    padding-right: 20px;
+}
+
+#edit-view .subitem-list-header {
+    padding-top:10px;
+}
+#edit-view .subitem-list-icon {
+    display: inline-block;
+    font-size: 1.4em;
+    color: #0080ff;
+    padding-right: 10px;
+}
+#edit-view .subitem-list-title {
+    display: inline-block;
+    font-size: 1.4em;
+    font-weight: 400;
+    padding-right: 20px;
+}
+#edit-view .subitem-list-add {
+    display: inline-block;
+    padding-left: 20px;
+    border-left: 1px dotted #0366d6;
+}
+#edit-view .subitem-list-header button {
+    height: 30px;
+    border-radius: 3px;
+}
+
 /* End - Edit View styles*/
-
-
-.pad-b20 {
-    padding-bottom: 20px;
+.pad-20 {
+    padding: 20px;
 }
 .pad-t20 {
     padding-top: 20px;
 }
+.pad-r20 {
+    padding-right: 20px;
+}
+.pad-b20 {
+    padding-bottom: 20px;
+}
+.pad-l20 {
+    padding-left: 20px;
+}
+
+.pad-15 {
+    padding: 15px;
+}
+.pad-t15 {
+    padding-top: 15px;
+}
+.pad-r15 {
+    padding-right: 15px;
+}
+.pad-b15 {
+    padding-bottom: 15px;
+}
+.pad-l15 {
+    padding-left: 15px;
+}
+
+.pad-10 {
+    padding: 10px;
+}
+.pad-t10 {
+    padding-top: 10px;
+}
 .pad-r10 {
     padding-right: 10px;
 }
+.pad-b10 {
+    padding-bottom: 10px;
+}
+.pad-l10 {
+    padding-left: 10px;
+}
+
+.pad-5 {
+    padding: 5px;
+}
+.pad-t5 {
+    padding-top: 5px;
+}
+.pad-r5 {
+    padding-right: 5px;
+}
+.pad-b5 {
+    padding-bottom: 5px;
+}
+.pad-l5 {
+    padding-left: 5px;
+}
+
 .mar-t20 {
     margin-top: 20px;
 }
