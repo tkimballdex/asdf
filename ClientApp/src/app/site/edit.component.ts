@@ -29,7 +29,6 @@ export class SiteEditComponent extends PageComponent implements OnInit {
         this.statesList = await this.repository.statesList();
         this.frequencyList = await this.repository.frequencyList();
         this.record = await this.repository.get(id);
-        this.locationsList = await this.repository.locationsList({ tenant: this.record.tenant, siteId: this.record.id });
         this.hideSpinner();
 
         if (id == null) {
@@ -80,7 +79,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
         }
         else {
             this.showDeleteMessage(true);
-            setTimeout(() => this.router.navigate(['/site/list']), 1000);
+            setTimeout(() => this.router.navigate(['/customer/edit', this.record.customerId]), 1000);
         }
     }
 }

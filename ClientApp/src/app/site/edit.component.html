@@ -123,7 +123,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12 pad-t20">
-                                    <ejs-grid [dataSource]='locationsList' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="true" *ngIf="locationsList">
+                                    <ejs-grid [dataSource]='record.locations' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="true" *ngIf="record">
                                         <e-columns>
                                             <e-column width="70">
                                                 <ng-template #template let-data>
@@ -148,7 +148,7 @@
 
         <div class="col-md-6 d-flex justify-content-end">
             <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id">Delete</button>
-            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/site/list']">Close</button>
+            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/customer/edit', record.customerId]">Close</button>
         </div>
     </div>
     <ejs-toast #toast></ejs-toast>

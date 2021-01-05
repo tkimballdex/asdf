@@ -74,7 +74,7 @@ export class LocationEditComponent extends PageComponent implements OnInit {
         }
         else {
             this.showDeleteMessage(true);
-            setTimeout(() => this.router.navigate(['/location/list']), 1000);
+            setTimeout(() => this.router.navigate(['/site/edit', this.record.siteId]), 1000);
         }
     }
 }

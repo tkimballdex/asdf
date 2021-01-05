@@ -29,8 +29,4 @@ export class SiteRepository {
     public frequencyList() {
         return this.http.post(`/site/getFrequencyList`);
     }
-
-    public locationsList(filter: any) {
-        return this.http.post(`/site/getLocationsList`, filter);
-    }
 }
