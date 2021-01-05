@@ -21,7 +21,6 @@
                       <ul class="header-list">
                           <li id="hamburger" class="far fa-bars icon list" (click)="openClick()"> </li>
                           <li class="tenant-name list">
-                              {{tenantname}}
                               <ejs-dropdownlist [dataSource]="tenantList" [fields]="{ text: 'name', id: 'id' }" [(value)]="tenant" (change)="changeTenant()" placeholder="Choose Tenant"></ejs-dropdownlist>
                           </li>
                           <li class="right-header list">
