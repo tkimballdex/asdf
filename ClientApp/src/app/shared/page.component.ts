@@ -1,7 +1,8 @@
 import { Component, ViewChild } from "@angular/core";
 import { PrivilegeSet } from "./app.repository";
 import { ToastComponent } from '@syncfusion/ej2-angular-notifications';
-import { createSpinner, showSpinner, hideSpinner } from '@syncfusion/ej2-angular-popups';
+import { createSpinner } from '@syncfusion/ej2-angular-popups';
+import { showSpinner, hideSpinner } from '@syncfusion/ej2-popups';
 
 @Component({
 	selector: 'component-page',
@@ -77,12 +78,12 @@ export class PageComponent {
 
     public showSpinner() {
         createSpinner({ target: document.getElementById('wrapper') });
-        //showSpinner(document.getElementById('wrapper'));
+        showSpinner(document.getElementById('wrapper'));
         this.loadStart();
     }
 
     public hideSpinner() {
-        //hideSpinner(document.getElementById('wrapper'));
+        hideSpinner(document.getElementById('wrapper'));
         this.loadEnd();
     }
 }
