@@ -68,11 +68,14 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
     async deleteOK() {
         this.showSpinner();
         this.deleteDialog.close();
-        var success = await this.repository.delete(this.record.id);
+        var result = await this.repository.delete(this.record.id);
         this.hideSpinner();
-        this.showDeleteMessage(success);
 
-        if (success) {
+        if (result.error) {
+            this.showErrorMessage(result.description);
+        }
+        else {
+            this.showDeleteMessage(true);
             setTimeout(() => this.router.navigate(['/customer/list']), 1000);
         }
     }

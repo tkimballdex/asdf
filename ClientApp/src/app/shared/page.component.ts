@@ -50,6 +50,12 @@ export class PageComponent {
         }
     }
 
+    public showSuccessMessage(message: string) {
+        this.toast.show({
+            content: message, timeOut: 2000, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-success'
+        });
+    }
+
     public showErrorMessage(message: string) {
         this.toast.show({
             content: message, timeOut: 2000, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-danger'

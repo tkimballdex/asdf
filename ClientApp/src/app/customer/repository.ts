@@ -11,7 +11,7 @@ export class CustomerRepository {
     }
 
     public delete(id: string) {
-        return this.http.post<boolean>(`/customer/delete/${id}`);
+        return this.http.post<any>(`/customer/delete/${id}`);
     }
 
     public get(id: string) {
