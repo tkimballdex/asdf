@@ -3,7 +3,7 @@
         <div class="col d-flex align-items-end list-header">
             <span class="list-header-icon"><i class="fas fa-users-crown"></i></span>
             <span class="list-header-title">Customers</span>
-            <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['/customer/add']">+ Add</button></span>
+            <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['/customer/add']" [disabled]="!privileges.create">+ Add</button></span>
         </div>
     </div>
     <div class="row d-flex align-items-end list-content">   
