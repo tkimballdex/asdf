@@ -37,6 +37,7 @@ import { UserModule } from './user/module'
 import { CustomerModule } from './customer/module'
 import { SiteModule } from './site/module'
 import { LocationModule } from './location/module'
+import { VendorsModule } from './vendors/module'
 
 export function MSALConfigFactory(): Configuration {
   return msalConfig;
@@ -62,6 +63,7 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
         CustomerModule,
         SiteModule,
         LocationModule,
+        VendorsModule,
         RouterModule.forRoot([
             { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [MsalGuard] },
             { path: 'account/tenant', component: ChooseTenantComponent, canActivate: [MsalGuard] },
