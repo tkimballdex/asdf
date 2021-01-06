@@ -27,9 +27,7 @@ export class VendorsEditComponent extends PageComponent implements OnInit {
         var id = this.route.snapshot.paramMap.get('id');
 
         this.showSpinner();
-        this.statesList = await this.repository.statesList();
         this.record = await this.repository.get(id);
-        this.sitesList = await this.repository.sitesList({ tenant: this.record.tenant, vendorId: this.record.id });
         this.hideSpinner();        
     }
 

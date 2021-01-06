@@ -22,11 +22,4 @@ export class VendorsRepository {
         return this.http.post(`/vendor/list`, filter);
     }
 
-    public statesList() {
-        return this.http.post(`/vendor/getStatesList`);
-    }
-
-    public sitesList(filter: any) {
-        return this.http.post(`/vendor/getSitesList`, filter);
-    }
 }
