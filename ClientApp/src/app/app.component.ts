@@ -94,7 +94,7 @@ export class AppComponent implements OnInit {
                 { id: '/site/list', text: 'Sites' },
                 { id: '/location/list', text: 'Locations' },
                 { id: '/role/list', text: 'Labs' },
-                { id: '/vendors/list', text: 'Vendors' }
+                { id: '/vendor/list', text: 'Vendors' }
             ]
         },
         {

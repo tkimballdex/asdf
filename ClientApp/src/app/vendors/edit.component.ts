@@ -8,7 +8,7 @@ import { PageComponent } from '../shared/page.component';
 import { VendorsRepository } from './repository';
 
 @Component({
-    selector: 'customer-edit',
+    selector: 'vendors-edit',
     templateUrl: './edit.component.html',
     styleUrls: ['./edit.component.scss']
 })
@@ -23,13 +23,13 @@ export class VendorsEditComponent extends PageComponent implements OnInit {
     public sitesList: any;
 
     async ngOnInit() {
-        this.privileges = (await this.appRepository.getPrivileges()).customers;
+        this.privileges = (await this.appRepository.getPrivileges()).vendors;
         var id = this.route.snapshot.paramMap.get('id');
 
         this.showSpinner();
         this.statesList = await this.repository.statesList();
         this.record = await this.repository.get(id);
-        this.sitesList = await this.repository.sitesList({ tenant: this.record.tenant, customerId: this.record.id });
+        this.sitesList = await this.repository.sitesList({ tenant: this.record.tenant, vendorId: this.record.id });
         this.hideSpinner();        
     }
 
@@ -52,15 +52,15 @@ export class VendorsEditComponent extends PageComponent implements OnInit {
             }
 
             if (success && add) {
-                setTimeout(() => this.router.navigate(['/customer/edit', returnValue.id]), 1000);
+                setTimeout(() => this.router.navigate(['/vendor/edit', returnValue.id]), 1000);
             }
         }
     }
 
     delete() {
         this.deleteDialog = DialogUtility.confirm({
-            title: 'Delete Customer',
-            content: `Are you sure you want to delete the customer <b>${this.record.name}</b>?`,
+            title: 'Delete Vendor',
+            content: `Are you sure you want to delete the vendor <b>${this.record.name}</b>?`,
             okButton: { click: this.deleteOK.bind(this) }
         });
     }
@@ -76,7 +76,7 @@ export class VendorsEditComponent extends PageComponent implements OnInit {
         }
         else {
             this.showDeleteMessage(true);
-            setTimeout(() => this.router.navigate(['/customer/list']), 1000);
+            setTimeout(() => this.router.navigate(['/vendor/list']), 1000);
         }
     }
 }

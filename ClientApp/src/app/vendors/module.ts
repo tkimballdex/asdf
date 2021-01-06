@@ -23,9 +23,9 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
         GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule, 
         TabModule, DatePickerModule, SwitchModule, CommonModule,
         RouterModule.forChild([
-            { path: 'vendors/list', component: VendorsListComponent, canActivate: [MsalGuard] },
-            { path: 'vendors/add', component: VendorsEditComponent, canActivate: [MsalGuard] },
-           { path: 'vendors/edit/:id', component: VendorsEditComponent, canActivate: [MsalGuard] },
+            { path: 'vendor/list', component: VendorsListComponent, canActivate: [MsalGuard] },
+            { path: 'vendor/add', component: VendorsEditComponent, canActivate: [MsalGuard] },
+           { path: 'vendor/edit/:id', component: VendorsEditComponent, canActivate: [MsalGuard] },
         ])
     ],
     providers: [

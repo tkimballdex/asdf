@@ -3,7 +3,7 @@
         <div class="col d-flex align-items-end list-header">
             <span class="list-header-icon"><i class="fas fa-users-crown"></i></span>
             <span class="list-header-title">Vendors</span>
-            <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['/vendors/add']">+ Add</button></span>
+            <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['/vendor/add']">+ Add</button></span>
         </div>
     </div>
     <div class="row d-flex align-items-end list-content">   
@@ -18,7 +18,7 @@
                 <e-columns>
                     <e-column width="70">
                         <ng-template #template let-data>
-                            <a [routerLink]="['/vendors/edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
+                            <a [routerLink]="['/vendor/edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
                         </ng-template>
                     </e-column>
                     <e-column field='name' headerText='Name'></e-column>

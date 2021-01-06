@@ -7,26 +7,26 @@ export class VendorsRepository {
     }
 
     public save(record: any) {
-        return this.http.post<any>(`/vendors/save`, record);
+        return this.http.post<any>(`/vendor/save`, record);
     }
 
     public delete(id: string) {
-        return this.http.post<any>(`/vendors/delete/${id}`);
+        return this.http.post<any>(`/vendor/delete/${id}`);
     }
 
     public get(id: string) {
-        return this.http.post(`/customers/get/${id}`);
+        return this.http.post(`/vendor/get/${id}`);
     }
 
     public list(filter: any) {
-        return this.http.post(`/vendors/list`, filter);
+        return this.http.post(`/vendor/list`, filter);
     }
 
     public statesList() {
-        return this.http.post(`/vendors/getStatesList`);
+        return this.http.post(`/vendor/getStatesList`);
     }
 
     public sitesList(filter: any) {
-        return this.http.post(`/vendors/getSitesList`, filter);
+        return this.http.post(`/vendor/getSitesList`, filter);
     }
 }
