@@ -9,16 +9,18 @@ import { AppRepository } from '../shared/app.repository';
     templateUrl: './list.component.html',
 })
 export class CustomerListComponent extends PageComponent implements OnInit {
-    constructor(private repository: CustomerRepository, private router: Router, private app: AppRepository) {
+    constructor(private repository: CustomerRepository, private router: Router, private appRepository: AppRepository) {
         super();
     }
 
     public list: any;
     public tenant: any;
     public name: any;
+    public privileges: any;
 
     async ngOnInit() {
-        this.tenant = this.app.tenant;
+        this.tenant = this.appRepository.tenant;
+        this.privileges = (await this.appRepository.getPrivileges()).customers;
 
         if (this.tenant) {
             this.search();
@@ -27,7 +29,7 @@ export class CustomerListComponent extends PageComponent implements OnInit {
 
     async search() {
         this.showSpinner();
-        this.list = await this.repository.list({ tenant: this.app.tenant, name: this.name });
+        this.list = await this.repository.list({ tenant: this.appRepository.tenant, name: this.name });
         this.hideSpinner();
     }
 }
