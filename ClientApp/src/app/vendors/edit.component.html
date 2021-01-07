@@ -1,8 +1,8 @@
 <div id="edit-view" *ngIf="record" class="container-fluid">
     <div class="row d-flex align-items-center edit-header">
         <div class="col-md-6 d-flex">
-            <span class="edit-header-icon"><i class="fas fa-users-crown"></i></span>
-            <span class="edit-header-title">Vendors</span>
+            <span class="edit-header-icon"><i class="fas fa-handshake-alt"></i></span>
+            <span class="edit-header-title">Vendor</span>
         </div>
         <div class="col-md-6 d-flex justify-content-end">
             <ejs-switch [(checked)]="record.active" onLabel="Active" offLabel="Not Active" style="width:100px;height:32px;"></ejs-switch>
@@ -104,13 +104,13 @@
                     </e-tabitem>
                     <e-tabitem>
                         <ng-template #headerText>
-                            <div>Sites</div>
+                            <div>Assignments</div>
                         </ng-template>
                         <ng-template #content>                            
                             <div class="row d-flex align-items-end">
                                 <div class="col d-flex align-items-end subitem-list-header">
                                     <span class="subitem-list-icon"><i class="fas fa-chart-network"></i></span>
-                                    <span class="subitem-list-title">Sites</span>
+                                    <span class="subitem-list-title">Servicing Sites</span>
                                     <span class="subitem-list-add"><button ejs-button cssClass="e-outline" [routerLink]="['/site/add', record.id]">+ Add</button></span>
                                 </div>
                             </div>
