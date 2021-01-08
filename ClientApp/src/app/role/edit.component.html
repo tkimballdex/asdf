@@ -15,7 +15,7 @@
     <div class="row pad-t20 pad-b20">
         <div class="col-md-12"><label for="privileges-grid" class="edit-label">Privileges</label></div>
         <div class="col-md-12">
-            <ejs-grid id="privileges-grid" #grid [dataSource]='record.featureRoles' [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="true">
+            <ejs-grid id="privileges-grid" #grid [dataSource]='record.featureRoles' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="false">
                 <e-columns>
                     <e-column field='name' headerText='Name'></e-column>
         

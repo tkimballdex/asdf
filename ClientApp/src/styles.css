@@ -36,14 +36,16 @@ a {
 
 /* Start - List View styles*/
 #list-view {
-    border:0px solid red;
+    border-radius: 7px 0px 0px 0px;   
+    border: 1px solid #d8dee6;
+    background-color: #ffffff;
+    box-sizing:border-box;
+    padding:15px;
 }
 
 #list-view .list-header {
-    padding: 15px;
-    border-radius: 10px 0px 0px 0px;
-    border: 1px solid #e6ecf5;
-    background-color:#ffffff;
+    padding: 0px 15px 15px 15px;
+    border-bottom: 1px solid #d8dee6;
 }
 
 #list-view .list-header-icon {
@@ -73,15 +75,16 @@ a {
 #list-view .list-header-add {
     display: inline-block;
     padding-left: 20px;
-    border-left: 1px dotted #0366d6;
+    border-left: 1px dotted #d8dee6;
+}
+#list-view .list-actions
+{
+    display:inline-flex;
+    float:right;
 }
 
 #list-view .list-content {
-    background-color: #ffffff!important;
-    border-radius: 0px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    border: 1px solid #e6ecf5;
+    padding: 0px;
 }
 
 #list-view ejs-grid .e-headercelldiv {
