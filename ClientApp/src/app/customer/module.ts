@@ -6,7 +6,7 @@ import { CustomerEditComponent } from './edit.component';
 import { MsalGuard } from '@azure/msal-angular';
 
 import { RadioButtonModule, ButtonModule, CheckBoxModule } from '@syncfusion/ej2-angular-buttons';
-import { GridModule, SortService, PageService, EditService, ToolbarService, CommandColumnService } from '@syncfusion/ej2-angular-grids';
+import { GridModule, SortService, PageService, EditService, ToolbarService, CommandColumnService, ExcelExportService } from '@syncfusion/ej2-angular-grids';
 import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
@@ -29,7 +29,7 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
         ])
     ],
     providers: [
-        PageService, SortService, EditService, ToolbarService, CommandColumnService
+        PageService, SortService, EditService, ToolbarService, CommandColumnService, ExcelExportService
     ]
 })
 export class CustomerModule { }

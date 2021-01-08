@@ -127,7 +127,7 @@
                             </div>
                             <div class="row">                                
                                 <div class="col-12 pad-t20">
-                                    <ejs-grid [dataSource]='sitesList' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="true" *ngIf="sitesList">
+                                    <ejs-grid [dataSource]='sitesList' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="false" *ngIf="sitesList">
                                         <e-columns>
                                             <e-column width="70">
                                                 <ng-template #template let-data>
