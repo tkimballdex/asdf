@@ -84,9 +84,19 @@ a {
     border: 1px solid #e6ecf5;
 }
 
-#list-view .list-content .e-pager {
-    padding-top:10px;
-    padding-bottom:3px;
+#list-view ejs-grid .e-headercelldiv {
+    font-weight: 600;
+}
+
+#list-view ejs-grid .e-pager {
+    padding-top: 6px;
+    padding-bottom: 3px;
+    background-color: #f1f5f9;
+}
+
+#list-view .e-grid .e-rowcell
+{
+    padding:10px 8px;
 }
 
 #list-view .edit-icon {
@@ -140,7 +150,7 @@ a {
 #edit-view label.e-float-text {
     top: 75%;
 }
-ejs-grid.edit-grid .e-headercelldiv {
+#edit-view ejs-grid.edit-grid .e-headercelldiv {
     font-weight: 600;
 }
 
@@ -160,7 +170,7 @@ ejs-grid.edit-grid .e-headercelldiv {
     color: #fd7e14;
 }
 #edit-view .edit-grid .e-pager {
-    padding-top: 8px;
+    padding-top: 6px;
     padding-bottom: 3px;
     background-color: #f1f5f9;
 }
