@@ -10,6 +10,21 @@ import { data } from './datasource';
 })
 export class DashboardComponent implements OnInit {
 
+  public data1: Object = [
+    { text: 'Emily', id: '01' },
+    { text: 'Emma', id: '02' },
+    { text: 'Sophia', id: '03' },
+    { text: 'Sofia', id: '04' },
+    { text: 'Victoria', id: '05' },
+    { text: 'Zoe', id: '06' },
+    { text: 'Laura Callahan', id: '06' },
+    { text: 'Sophia', id: '06' },
+    { text: 'Abigail', id: '06' },
+    { text: 'Natalie', id: '06' },
+    { text: 'Lily', id: '06' }];
+
+    
+    public fields: Object = { text: 'text', id:'id' };
 
   public data: object[];
   public pageSettings: PageSettingsModel;

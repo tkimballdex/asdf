@@ -59,6 +59,11 @@
         </div>
   </div>
 
+
+
+
+  
+
 <div class="row">
     <div class="col-8">
         <ejs-chart id="chart-container" [primaryXAxis]='primaryXAxis'[primaryYAxis]='primaryYAxis' [title]='title'>
@@ -71,10 +76,109 @@
 <div class="col-4">
 
 
-
-     
+    <ejs-listview id='sample-list' [dataSource]='data1' [fields]='fields' [showCheckBox]='true' headerTitle='Tenants' showHeader='true'></ejs-listview>
 
 
 
     </div>
   </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="control-section">
+    <ejs-dashboardlayout [allowDragging]='false' id='defaultLayout' [columns]="5" #defaultLayout [cellSpacing]='cellSpacing'>
+        <div id="one" class="e-panel" data-row="0" data-col="0" data-sizeX="1" data-sizeY="1">
+            <div>
+                <div class="text-align">
+
+
+                    <div tabindex="0" class="e-card">
+                        <div class="e-card-header">
+                            <div class="e-card-header-image football"></div>
+                            <div class="e-card-header-caption">
+                                <div class="e-card-header-title"> Laura Callahan</div>
+                                <div class="e-card-sub-title">Sales Coordinator and Representative</div>
+                                <i class="fa fa-area-chart"></i>
+                            </div>
+                        </div>
+                        <div class="e-card-content">
+                            Laura received a BA in psychology from the University of Washington. She has also completed a course in business French. She reads and writes French.
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+        <div id="two" class="e-panel" data-row="1" data-col="0" data-sizeX="1" data-sizeY="2">
+            <span id="close" class="e-template-icon e-clear-icon"></span>
+            <div class="e-panel-container">
+                <div class="text-align">1</div>
+            </div>
+        </div>
+        <div id="four" class="e-panel" data-row="2" data-col="1" data-sizeX="1" data-sizeY="1">
+            <span id="close" class="e-template-icon e-clear-icon"></span>
+            <div class="e-panel-container">
+                <div class="text-align">3</div>
+            </div>
+        </div>
+        <div id="five" class="e-panel" data-row="2" data-col="2" data-sizeX="2" data-sizeY="1">
+            <span id="close" class="e-template-icon e-clear-icon"></span>
+            <div class="e-panel-container">
+                <div class="text-align">4</div>
+            </div>
+        </div>
+        <div id="six" class="e-panel" data-row="0" data-col="3" data-sizeX="1" data-sizeY="1">
+            <span id="close" class="e-template-icon e-clear-icon"></span>
+            <div class="e-panel-container">
+                <div class="text-align">5</div>
+            </div>
+        </div>
+        <div id="seven" class="e-panel" data-row="1" data-col="3" data-sizeX="1" data-sizeY="1">
+            <span id="close" class="e-template-icon e-clear-icon"></span>
+            <div class="e-panel-container">
+                <div class="text-align">6</div>
+            </div>
+        </div>
+    </ejs-dashboardlayout>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
