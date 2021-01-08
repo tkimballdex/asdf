@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
+
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LogoutComponent } from './home/logout.component';
@@ -38,7 +40,8 @@ import { UserModule } from './user/module'
 import { CustomerModule } from './customer/module'
 import { SiteModule } from './site/module'
 import { LocationModule } from './location/module'
-import { VendorsModule } from './vendors/module'
+import { VendorsModule } from './vendors/module';
+import { DashboardModule } from './dashboard/module';
 
 export function MSALConfigFactory(): Configuration {
   return msalConfig;
@@ -64,6 +67,7 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
         CustomerModule,
         SiteModule,
         LocationModule,
+        DashboardModule,
         VendorsModule,
         RouterModule.forRoot([
             { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [MsalGuard] },

@@ -79,7 +79,7 @@ export class AppComponent implements OnInit {
         {
             text: 'Dashboard',
             iconCss: 'fal fa-tachometer-alt',
-            id: '/'
+            id: '/dashboard'
         },
         {
             text: 'Samples',
