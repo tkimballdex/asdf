@@ -17,7 +17,6 @@ export class CustomerListComponent extends PageComponent implements OnInit {
     public list: any;
     public tenant: any;
     public name: any;
-    public privileges: any;
     @ViewChild('grid', null) public grid: GridComponent;
     //------------------------------------------------------------------------------------------------------------------------
     async ngOnInit() {

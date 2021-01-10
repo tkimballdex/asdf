@@ -17,7 +17,7 @@ import { AppRepository } from './shared/app.repository';
 export class AppComponent implements OnInit {
     @ViewChild('sidebarMenuInstance', null)
     public sidebarMenuInstance: SidebarComponent;
-    public width: string = '220px';
+    public sidebarwidth: string = '180px';
     public mediaQuery: string = ('(min-width: 600px)');
     public target: string = '.main-content';
     public dockSize: string = '70px';
@@ -25,14 +25,23 @@ export class AppComponent implements OnInit {
     public username: string;
     public tenantList: any;
     public tenant: any;
-
+    public appnamewidth: string = '180px';
+    public AccountMenuItem: ItemModel[];
+    //-------------------------------------------------------------------------------------
     constructor(private authService: MsalService, private router: Router, private http: MsalHttpClient, private app: AppRepository) {
         console.dir(this.authService.getAccount());
 
         this.AccountMenuItem = [
             {
+                id: 'account',
+                text: 'My Account'
+            },
+            {
                 id: 'tenant',
                 text: 'Switch Tenant'                 
+            },
+            {
+                separator: true
             }
         ];       
 
@@ -43,18 +52,18 @@ export class AppComponent implements OnInit {
             this.AccountMenuItem.push({ id: 'login', text: 'Log In' });
         };
     }
-
+    //-------------------------------------------------------------------------------------
     async ngOnInit() {
         this.tenantList = await this.app.tenantList();
         this.tenant = this.app.tenant;
     }
-
+    //-------------------------------------------------------------------------------------
     public selectMainMenu(args: MenuEventArgs): void {
         if (args.item.id) {
             this.router.navigate([args.item.id]);
         }
     }
-
+    //-------------------------------------------------------------------------------------
     public selectAccountMenu(args: MenuEventArgs): void {
         if (args.item.id == 'logout') {
             this.authService.logout();
@@ -69,7 +78,7 @@ export class AppComponent implements OnInit {
             this.router.navigate(['/account/tenant']);
         }
     }
-
+    //-------------------------------------------------------------------------------------
     public menuItems: MenuItemModel[] = [
         {
             text: 'Home',
@@ -105,15 +114,21 @@ export class AppComponent implements OnInit {
                 { id: '/role/list', text: 'Tenants' }                
             ]
         }        
-    ];
-
-    public AccountMenuItem: ItemModel[];
-
+    ];    
+    //-------------------------------------------------------------------------------------
     openClick() {
         this.sidebarMenuInstance.toggle();
-    }
 
+        if (this.sidebarMenuInstance.isOpen) {
+            this.appnamewidth = this.sidebarwidth;
+        }
+        else {
+            this.appnamewidth = this.dockSize;
+        }
+    }
+    //-------------------------------------------------------------------------------------
     public changeTenant() {
         this.app.tenant = this.tenant;
     }
+    //-------------------------------------------------------------------------------------
 };

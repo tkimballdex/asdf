@@ -1,43 +1,37 @@
 <div class="control-section">
-  <div id="wrapper">
-      <div class="col-lg-12 col-sm-12 col-md-12" id="sidebar-section">
-          <!--end of header-section  declaration -->
-          <!-- sidebar element declaration -->
-              <ejs-sidebar id="sidebar-menu" class="dock-menu" #sidebarMenuInstance [enableDock]='enableDock' [width]='width' [dockSize]='dockSize' [mediaQuery]='mediaQuery' [target]='target'>
-                  <div class="app-name">SWAP</div>
-                  <div class="main-menu">
-                      <!-- Menu element declaration -->
-                      <ejs-menu [items]='menuItems' orientation='Vertical' cssClass='dock-menu' (select)='selectMainMenu($event)'></ejs-menu>
-                  </div>
-              </ejs-sidebar>
-              
-          <!-- end of sidebar element -->
-            <!--header-section  declaration -->
-         
-          <!-- main-content declaration -->
-          <div id="maintext" class="col-lg-12 col-sm-12 col-md-12 main-content">             
-              <div class="sidebar-menu-content">
-                  <div id="header" class="col-lg-12 col-sm-12 col-md-12 header-section">                  
-                      <ul class="header-list">
-                          <li id="hamburger" class="far fa-bars icon list" (click)="openClick()"> </li>
-                          <li class="tenant-name list">
-                              <ejs-dropdownlist [dataSource]="tenantList" [fields]="{ text: 'name', id: 'id' }" [(value)]="tenant" (change)="changeTenant()" placeholder="Choose Tenant"></ejs-dropdownlist>
-                          </li>
-                          <li class="right-header list">
-                              <div class="horizontal-menu">
-                                  <!-- Menu element declaration -->
-                                  <!--<ejs-menu id="AccountMenu" [items]='AccountMenuItem' class="account-menu" (select)='selectAccountMenu($event)' enableRtl="true"></ejs-menu>-->
-                                  <button ejs-dropdownbutton id="accountMenu" [items]='AccountMenuItem' content="My Account" (select)='selectAccountMenu($event)' iconCss="fal fa-user"></button>
-                              </div>
-                          </li>
-                  </ul>
-              </div>
-                  <div class="col-lg-12 col-sm-12 col-md-12 content-section">
-                      <router-outlet></router-outlet>
-                  </div>                  
-              </div>
-          </div>
-          <!-- end of main-content -->
-      </div>
-  </div>
+    <div id="wrapper">
+        <!--header-section  declaration -->
+        <div id="header" class="col-lg-12 col-sm-12 col-md-12 header-section">
+            <div id="#appname" class="app-name" [ngStyle]="{'width': appnamewidth}">SWAP</div>
+            <div class="hamburger"><a id="hamburger" (click)="openClick()"><i class="far fa-bars"></i></a></div>
+            <div class="tenant-name">
+                <ejs-dropdownlist id="tenantList" [dataSource]="tenantList" [fields]="{ text: 'name', id: 'id' }" [(value)]="tenant" (change)="changeTenant()" placeholder="Choose Tenant"></ejs-dropdownlist>
+            </div>
+            <div class="account-menu">
+                <button ejs-dropdownbutton id="accountMenu" [items]='AccountMenuItem' content="My Account" (select)='selectAccountMenu($event)' iconCss="fas fa-user"></button>
+            </div>
+        </div>
+        <!--end of header-section  declaration -->
+
+        <div class="col-lg-12 col-sm-12 col-md-12" id="sidebar-section">
+            <!-- sidebar element declaration -->
+            <ejs-sidebar id="sidebar-menu" class="dock-menu" #sidebarMenuInstance [enableDock]='enableDock' [width]='width' [dockSize]='dockSize' [mediaQuery]='mediaQuery' [target]='target'>
+                <div class="main-menu-topspace">&#160;</div>
+                <div class="main-menu">
+                    <!-- Menu element declaration -->
+                    <ejs-menu [items]='menuItems' orientation='Vertical' cssClass='dock-menu' (select)='selectMainMenu($event)'></ejs-menu>
+                </div>
+            </ejs-sidebar>
+            <!-- end of sidebar element -->
+            <!-- main-content declaration -->
+            <div id="maintext" class="col-lg-12 col-sm-12 col-md-12 main-content">
+                <div class="sidebar-menu-content">
+                    <div class="col-lg-12 col-sm-12 col-md-12 content-section">
+                        <router-outlet></router-outlet>
+                    </div>
+                </div>
+            </div>
+            <!-- end of main-content -->
+        </div>
+    </div>
 </div>
