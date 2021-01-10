@@ -9,7 +9,7 @@ import { UserRepository } from '../user/repository';
   templateUrl: './tenant.component.html',
 })
 export class ChooseTenantComponent extends PageComponent implements OnInit {
-    constructor(private http: MsalHttpClient, private repository: UserRepository, private app: AppRepository) {
+    constructor(private http: MsalHttpClient, private repository: UserRepository, private appRepository: AppRepository) {
         super();
     }
 
@@ -17,11 +17,11 @@ export class ChooseTenantComponent extends PageComponent implements OnInit {
     public tenant: any;
 
     async ngOnInit() {
-        this.tenantList = await this.app.tenantList();
-        this.tenant = this.app.tenant;
+        this.tenantList = await this.appRepository.tenantList();
+        this.tenant = this.appRepository.tenant;
     }
 
     public changeTenant() {
-        this.app.tenant = this.tenant;
+        this.appRepository.tenant = this.tenant;
     }
 }
