@@ -9,7 +9,7 @@ import { UserRepository } from '../user/repository';
   templateUrl: './home.component.html',
 })
 export class HomeComponent extends PageComponent implements OnInit {
-    constructor(private http: MsalHttpClient, private app: AppRepository) {
+    constructor(private http: MsalHttpClient, private appRepository: AppRepository) {
         super();
     }
 
@@ -19,6 +19,6 @@ export class HomeComponent extends PageComponent implements OnInit {
     async ngOnInit() {
         this.http.postWithErrorCheck('/home/getdata2', null, (data) => console.dir(data));
         this.tenant = localStorage.getItem('tenant');
-        this.username = this.app.userName;
+        this.username = this.appRepository.userName;
     }
 }

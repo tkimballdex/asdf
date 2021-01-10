@@ -11,7 +11,7 @@ import { AppRepository } from '../shared/app.repository';
 })
 export class VendorsListComponent extends PageComponent implements OnInit {
 
-    constructor(private repository: VendorsRepository, private router: Router, private app: AppRepository) {
+    constructor(private repository: VendorsRepository, private router: Router, private appRepository: AppRepository) {
         super();
     }
     //------------------------------------------------------------------------------------------------------------------------
@@ -21,7 +21,7 @@ export class VendorsListComponent extends PageComponent implements OnInit {
     @ViewChild('grid', null) public grid: GridComponent;
     //------------------------------------------------------------------------------------------------------------------------
     async ngOnInit() {
-        this.tenant = this.app.tenant;
+        this.tenant = this.appRepository.tenant;
 
         if (this.tenant) {
             this.search();
@@ -29,13 +29,13 @@ export class VendorsListComponent extends PageComponent implements OnInit {
     }
     //------------------------------------------------------------------------------------------------------------------------
     async search() {
-        //this.showSpinner();
-        this.list = await this.repository.list({ tenant: this.app.tenant, name: this.name });
-        //this.hideSpinner();
+        this.showSpinner();
+        this.list = await this.repository.list({ tenant: this.appRepository.tenant, name: this.name });
+        this.hideSpinner();
     }
     //------------------------------------------------------------------------------------------------------------------------
     async export() {
-        //this.showSpinner();
+        this.showSpinner();
 
         (this.grid.columns[0] as Column).visible = false;
         const excelExportProperties: ExcelExportProperties = {
@@ -44,7 +44,7 @@ export class VendorsListComponent extends PageComponent implements OnInit {
         };
         this.grid.excelExport(excelExportProperties);
 
-        //this.hideSpinner();
+        this.hideSpinner();
     }
     //------------------------------------------------------------------------------------------------------------------------
     excelExportComplete(): void {

@@ -29,13 +29,13 @@ export class CustomerListComponent extends PageComponent implements OnInit {
     }
     //------------------------------------------------------------------------------------------------------------------------
     async search() {
-        //this.showSpinner();
+        this.showSpinner();
         this.list = await this.repository.list({ tenant: this.appRepository.tenant, name: this.name });
-        //this.hideSpinner();
+        this.hideSpinner();
     }
     //------------------------------------------------------------------------------------------------------------------------
     async export() {
-        //this.showSpinner();
+        this.showSpinner();
 
         (this.grid.columns[0] as Column).visible = false;
         const excelExportProperties: ExcelExportProperties = {
@@ -44,7 +44,7 @@ export class CustomerListComponent extends PageComponent implements OnInit {
         };
         this.grid.excelExport(excelExportProperties);
 
-        //this.hideSpinner();
+        this.hideSpinner();
     }
     //------------------------------------------------------------------------------------------------------------------------
     excelExportComplete(): void {

@@ -7,7 +7,7 @@ export class AppRepository {
     constructor(private http: MsalHttpClient, private authService: MsalService) {
 	}
 
-	appData: Promise<Object>;
+	appData: Promise<AppData>;
 
 	public getData() {
 		if (this.appData == null) {
@@ -65,7 +65,19 @@ export interface MenuItem {
 	path: string;
 }
 
+export interface State {
+    id: number;
+    name: string;
+}
+
+export interface Frequency {
+    id: number;
+    name: string;
+}
+
 export interface AppData {
-	privileges: Privileges;
+    privileges: Privileges;
+    states: State[];
+    frequencies: Frequency[];
 	menuItems: MenuItem[];
 }

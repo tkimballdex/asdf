@@ -21,12 +21,4 @@ export class SiteRepository {
     public list(filter: any) {
         return this.http.post(`/site/list`, filter);
     }
-
-    public statesList() {
-        return this.http.post(`/site/getStatesList`);
-    }
-
-    public frequencyList() {
-        return this.http.post(`/site/getFrequencyList`);
-    }
 }

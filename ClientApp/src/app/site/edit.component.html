@@ -30,7 +30,7 @@
                                     <ejs-textbox id="edit-customer" [(value)]="record.customer" disabled placeholder="Customer" floatLabelType="Always"></ejs-textbox>
                                 </div>
                                 <div class="col-md-3">
-                                    <ejs-dropdownlist [dataSource]="frequencyList" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.frequencyId" placeholder="Testing Frequency *" floatLabelType="Always"></ejs-dropdownlist>
+                                    <ejs-dropdownlist [dataSource]="app.frequencies" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.frequencyId" placeholder="Testing Frequency *" floatLabelType="Always"></ejs-dropdownlist>
                                 </div>
                             </div>
 
@@ -63,7 +63,7 @@
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <ejs-dropdownlist [dataSource]="statesList" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.stateId" placeholder="State *" floatLabelType="Always"></ejs-dropdownlist>
+                                    <ejs-dropdownlist [dataSource]="app.states" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.stateId" placeholder="State *" floatLabelType="Always"></ejs-dropdownlist>
                                 </div>
                                 <div class="col-md-3">
                                     <ejs-textbox [(value)]="record.postalCode" placeholder="Postal Code *" floatLabelType="Always"></ejs-textbox>

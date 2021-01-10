@@ -9,7 +9,7 @@ import { AppRepository } from '../shared/app.repository';
     templateUrl: './list.component.html',
 })
 export class UserListComponent extends PageComponent implements OnInit {
-    constructor(private repository: UserRepository, private router: Router, private app: AppRepository) {
+    constructor(private repository: UserRepository, private router: Router, private appRepository: AppRepository) {
         super();
     }
 
@@ -20,8 +20,8 @@ export class UserListComponent extends PageComponent implements OnInit {
 
     async ngOnInit() {
         this.showSpinner();
-        this.tenantList = await this.app.tenantList();
-        this.tenant = this.app.tenant;
+        this.tenantList = await this.appRepository.tenantList();
+        this.tenant = this.appRepository.tenant;
         this.hideSpinner();
 
         if (this.tenant) {
