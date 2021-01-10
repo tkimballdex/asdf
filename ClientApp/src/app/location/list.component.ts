@@ -18,9 +18,9 @@ export class LocationListComponent extends PageComponent implements OnInit {
     public name: any;
 
     async ngOnInit() {
-        this.showSpinner();
+        //this.showSpinner();
         this.tenant = this.app.tenant;
-        this.hideSpinner();
+        //this.hideSpinner();
 
         if (this.tenant) {
             this.search();
@@ -28,8 +28,8 @@ export class LocationListComponent extends PageComponent implements OnInit {
     }
 
     async search() {
-        this.showSpinner();
+        //this.showSpinner();
         this.list = await this.repository.list({ tenant: this.app.tenant, name: this.name });
-        this.hideSpinner();
+        //this.hideSpinner();
     }
 }

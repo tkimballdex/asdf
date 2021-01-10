@@ -1,44 +1,105 @@
 :root {
-    --headerbgclr: transparent;
-    --headertxtclr: #333333;
-    --menubgclr: #1d2127;
-    --menubgclrhlt: #303948;
+    --headerbgclr: #2378ff;
+    --headertxtclr: #ffffff;
+    --menubgclr: #101b33;
+    --menubgclrhlt: #2378ff;
     --menutxtclr: #ffffff;
     --menutxtclrhlt: #ffffff;
     --menuiconclr: #ffffff;
 }
+/*--menubgclr: #1d2127;*/
+/*--menubgclrhlt: #303948;*/
 /* usage:  var(--menuiconclr) */
 /* menubgclr: #333333; --menuiconclr: #3d9eff; */
 /* menubgclr: #101b33; --menuiconclr: #3d9eff; */
 /* menubgclr: #313644; --menuiconclr: #0f9aee; */
 /* menubgclr:  #2d323e; --menuiconclr:  rgb(4, 144, 244); */
+/*****************************************************************************************************************************/
+/* header-section styles */
+#header.header-section {
+    height: 60px;
+    background-color: var(--headerbgclr);
+    color: var(--headertxtclr);
+    padding-top: 10px;
+    display: block;
+    padding-top: 15px;
+}
+
+#header.header-section div {
+    display: inline-block;
+}
+
+#header div.app-name {
+    font-size: 20px;
+    padding-left: 0px;
+    width: 70px;
+}
+
+#header div.hamburger {
+    font-size: 20px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+#header div.tenant-name {
+    font-size: 20px;
+    padding-left: 20px;
+}
+
+#header #tenantList .e-input-group {
+    color: #ffffff;
+    border-width: 0px;
+    background-color: transparent;
+}
+
+#header div.account-menu {
+    float: right;
+}
+
+#header div.account-menu button {
+    color: #ffffff;
+    border-width: 0px;
+    background-color: transparent;
+}
+
+#header div.account-menu button span.e-icon-left {
+    font-size: 0.8em;
+    padding-right: 5px;
+}
+
+#header div.account-menu button span.e-icon-right {
+    padding-left: 10px;
+}
+/* end header-section styles */
+
 
 #sidebar-section {
     padding: 0px;
 }
 
 #sidebar-menu {
-    margin-top: 0px;
+    margin-top: 60px;
     margin-left:0px;
-    border-radius: 0px 10px 0px 0px;
+    border-radius: 0px 7px 0px 0px;
     box-sizing: border-box;
     overflow: hidden;
     background-color: var(--menubgclr);
+    border-width:0px;
+    position:fixed;
 }
 
 #sidebar-menu .app-name {
     color: #ffffff;
-    opacity: 0.5;
     text-align: center;
     padding: 15px 5px 15px 5px;
-    background-color: #000000;
-    border-bottom: 1px solid #303948;
-    height:65px;
-    box-sizing:border-box;
+    background-color: #4680ff;
+    border-bottom: 1px solid #4680ff;
+    height: 40px;
+    box-sizing: border-box;
 }
 
 #sidebar-menu .e-menu-wrapper ul {
-    width: 220px;
+    width: 180px;
     background-color: var(--menubgclr);
 }
 
@@ -79,7 +140,7 @@
 .e-menu-container.e-menu-popup {
     border-radius: 0px 10px 0px 0px;
     background-color: var(--menubgclr);
-    margin-left: -1px;
+    margin-left: 0px;
 }
 .e-menu-popup .e-menu-item {
     background-color: var(--menubgclr);
@@ -142,31 +203,24 @@
 /*****************************************************************************************************************************/
 /* Main Content */
 #maintext.main-content {
-    height: 100vh;
+    /*height: 90vh;*/
     z-index: 1000;
     padding: 0px 0px 20px 0px;
     box-sizing: border-box;
 }
 #maintext .sidebar-menu-content {
-    margin-top: 0px;
+    margin-top: 20px;
     margin-left: 0px;
+    box-sizing: border-box;
 }
 #maintext .content-section {
     padding-top: 0px;
     margin-top: 0px;
-    display:block;
-    position:relative;
+    display: block;
+    position: relative;
+    box-sizing: border-box;
 }
 
-
-#accountMenu-popup ul {
-    margin-right:15px;
-}
-
-#accountMenu
-{
-    background-color:transparent;
-}
 
 
 
@@ -183,78 +237,8 @@
 
 /*****************************************************************************************************************************/
 /*****************************************************************************************************************************/
-/*****************************************************************************************************************************/
 
-/* header-section styles */
-#header.header-section {
-    height: 65px;
-    background-color: var(--headerbgclr);
-    color: var(--headertxtclr);
-    padding-top: 10px;
-    display:block;
-}
-#header #hamburger.icon {
-    font-size: 20px;
-    float: left;
-    padding-left:0px;
-    margin-left:0px;
-}
 
-#header .tenant-name {
-    font-size: 20px;
-    float: left;
-    padding-left:20px;
-}
-
-#header .right-header {
-    padding: 0px;
-    float: right;
-}
-
-#header .list {
-    list-style: none;
-    cursor: pointer;
-    font-size: 16px;
-    line-height: 35px;
-}
-
-#header .header-list {
-    padding-left: 0px;
-    margin: 0;
-}
-
-@media(max-width:500px) {
-	 #header .right-header.list.support,
-     #header .right-header.list.tour {
-         display: none;
-     }
- }
-
-.account-menu.e-menu-popup li
-{
-    background-color:white!important;
-}
-
-#header .e-menu-wrapper,
-#header .e-menu-wrapper ul li.e-focused,
-#header .e-menu-wrapper ul li.e-selected {
-    background-color: transparent;
-}
-
-#header .e-menu-wrapper ul .e-menu-item {
-}
-#header .e-menu-item.e-focused:hover {
-    background-color: #1784c7;
-}
-#header .header-list .horizontal-menu .e-menu-item {
-    height: 35px;
-    vertical-align: middle;
-    font-size: 16px;
-    line-height: 35px;
-}
-#header .e-menu-item .e-caret {
-    opacity:0.5;
-}
 /* end of text input styles */
 /* end of header-section styles */
 
