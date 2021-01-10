@@ -17,12 +17,15 @@
 /*****************************************************************************************************************************/
 /* header-section styles */
 #header.header-section {
-    height: 60px;
+    height: 120px;
     background-color: var(--headerbgclr);
     color: var(--headertxtclr);
-    padding-top: 10px;
     display: block;
     padding-top: 15px;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    overflow: hidden;
 }
 
 #header.header-section div {
@@ -197,13 +200,11 @@
 
 
 
-
-
-
 /*****************************************************************************************************************************/
 /* Main Content */
 #maintext.main-content {
-    /*height: 90vh;*/
+    /*height: 100vh;*/
+    margin-top: 60px;
     z-index: 1000;
     padding: 0px 0px 20px 0px;
     box-sizing: border-box;
@@ -220,17 +221,6 @@
     position: relative;
     box-sizing: border-box;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

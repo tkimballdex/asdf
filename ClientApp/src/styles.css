@@ -20,13 +20,14 @@
 
 body {
     margin: 0;
-    overflow-y: hidden;
+
     font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
     -webkit-tap-highlight-color: transparent;
     background-color: #f1f5f9;
-    background-image: linear-gradient( #2378ff, #2378ff 120px, #f1f5f9 120px );
+   /* background-image: linear-gradient( #2378ff, #2378ff 120px, #f1f5f9 120px );
     background-size: 100%;
     background-repeat: no-repeat;
+    background-position-y:top;*/
 }
 
 /* Provide sufficient contrast against white background */

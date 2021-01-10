@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
     public username: string;
     public tenantList: any;
     public tenant: any;
-    public appnamewidth: string = '180px';
+    public appnamewidth: string = '70px';
     public AccountMenuItem: ItemModel[];
     //-------------------------------------------------------------------------------------
     constructor(private authService: MsalService, private router: Router, private http: MsalHttpClient, private app: AppRepository) {
@@ -56,6 +56,7 @@ export class AppComponent implements OnInit {
     async ngOnInit() {
         this.tenantList = await this.app.tenantList();
         this.tenant = this.app.tenant;
+        this.sidebarMenuInstance.isOpen = false;
     }
     //-------------------------------------------------------------------------------------
     public selectMainMenu(args: MenuEventArgs): void {
