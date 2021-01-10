@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { DialogUtility, Dialog } from '@syncfusion/ej2-popups';
-import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 import { AppRepository } from "../shared/app.repository";
 import { PageComponent } from '../shared/page.component';
 import { SiteRepository } from './repository';
@@ -19,16 +17,13 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 
     public record: any;
     public deleteDialog: Dialog;
-    public statesList: any;
-    public locationsList: any;
-    public frequencyList: any;
 
     async ngOnInit() {
-        this.privileges = (await this.appRepository.getPrivileges()).sites;
-        var id = this.route.snapshot.paramMap.get('id');
         this.showSpinner();
-        this.statesList = await this.repository.statesList();
-        this.frequencyList = await this.repository.frequencyList();
+        this.app = await this.appRepository.getData();
+        this.privileges = this.app.privileges.sites;
+
+        var id = this.route.snapshot.paramMap.get('id');
         this.record = await this.repository.get(id);
         this.hideSpinner();
 

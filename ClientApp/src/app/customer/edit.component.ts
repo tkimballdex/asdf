@@ -19,18 +19,15 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 
     public record: any;
     public deleteDialog: Dialog;
-    public statesList: any;
-    public sitesList: any;
 
     async ngOnInit() {
-        this.privileges = (await this.appRepository.getPrivileges()).customers;
         var id = this.route.snapshot.paramMap.get('id');
 
         this.showSpinner();
-        this.statesList = await this.repository.statesList();
+        this.app = await this.appRepository.getData();
+        this.privileges = this.app.privileges.customers;
         this.record = await this.repository.get(id);
-        this.sitesList = await this.repository.sitesList({ tenant: this.record.tenant, customerId: this.record.id });
-        this.hideSpinner();        
+        this.hideSpinner();
     }
 
     async save() {

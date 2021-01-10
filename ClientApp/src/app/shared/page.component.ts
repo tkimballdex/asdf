@@ -1,5 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import { PrivilegeSet } from "./app.repository";
+import { AppData, PrivilegeSet } from "./app.repository";
 import { ToastComponent } from '@syncfusion/ej2-angular-notifications';
 import { createSpinner } from '@syncfusion/ej2-angular-popups';
 import { showSpinner, hideSpinner } from '@syncfusion/ej2-popups';
@@ -13,6 +13,7 @@ export class PageComponent {
 	public deleting: boolean;
 	public privileges: PrivilegeSet;
     public notify: Notify;
+    public app: AppData;
 
     @ViewChild('toast', null) public toast: ToastComponent;
 
