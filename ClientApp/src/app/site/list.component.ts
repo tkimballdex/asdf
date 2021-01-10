@@ -9,7 +9,7 @@ import { AppRepository } from '../shared/app.repository';
     templateUrl: './list.component.html',
 })
 export class SiteListComponent extends PageComponent implements OnInit {
-    constructor(private repository: SiteRepository, private router: Router, private app: AppRepository) {
+    constructor(private repository: SiteRepository, private router: Router, private appRepository: AppRepository) {
         super();
     }
 
@@ -19,7 +19,7 @@ export class SiteListComponent extends PageComponent implements OnInit {
 
     async ngOnInit() {
         //this.showSpinner();
-        this.tenant = this.app.tenant;
+        this.tenant = this.appRepository.tenant;
         //this.hideSpinner();
 
         if (this.tenant) {
@@ -29,7 +29,7 @@ export class SiteListComponent extends PageComponent implements OnInit {
 
     async search() {
         //this.showSpinner();
-        this.list = await this.repository.list({ tenant: this.app.tenant, name: this.name });
+        this.list = await this.repository.list({ tenant: this.appRepository.tenant, name: this.name });
         //this.hideSpinner();
     }
 }
