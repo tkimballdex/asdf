@@ -18,17 +18,16 @@ export class AppComponent implements OnInit {
     @ViewChild('sidebarMenuInstance', null)
     public sidebarMenuInstance: SidebarComponent;
     public sidebarwidth: string = '180px';
-    public mediaQuery: string = ('(min-width: 600px)');
+    public mediaQuery: string = ('(min-width: 3200px)');
     public target: string = '.main-content';
     public dockSize: string = '70px';
     public enableDock: boolean = true;
     public username: string;
-    public tenantList: any;
     public tenant: any;
-    public appnamewidth: string = '70px';
+    public sidebardisplaysize = '180px';
     public AccountMenuItem: ItemModel[];
     //-------------------------------------------------------------------------------------
-    constructor(private authService: MsalService, private router: Router, private http: MsalHttpClient, private app: AppRepository) {
+    constructor(private authService: MsalService, private router: Router, private http: MsalHttpClient, private appRepository: AppRepository) {
         console.dir(this.authService.getAccount());
 
         this.AccountMenuItem = [
@@ -54,9 +53,9 @@ export class AppComponent implements OnInit {
     }
     //-------------------------------------------------------------------------------------
     async ngOnInit() {
-        this.tenantList = await this.app.tenantList();
-        this.tenant = this.app.tenant;
-        this.sidebarMenuInstance.isOpen = false;
+        this.tenant = this.appRepository.tenant;
+        this.username = this.appRepository.userName;
+        this.sidebardisplaysize = this.sidebarMenuInstance.isOpen ? this.sidebarwidth : this.dockSize;
     }
     //-------------------------------------------------------------------------------------
     public selectMainMenu(args: MenuEventArgs): void {
@@ -120,16 +119,11 @@ export class AppComponent implements OnInit {
     openClick() {
         this.sidebarMenuInstance.toggle();
 
-        if (this.sidebarMenuInstance.isOpen) {
-            this.appnamewidth = this.sidebarwidth;
-        }
-        else {
-            this.appnamewidth = this.dockSize;
-        }
-    }
+        this.sidebardisplaysize = this.sidebarMenuInstance.isOpen ? this.sidebarwidth : this.dockSize;
+    }    
     //-------------------------------------------------------------------------------------
-    public changeTenant() {
-        this.app.tenant = this.tenant;
+    created() {
+        this.sidebarMenuInstance.toggle();
     }
     //-------------------------------------------------------------------------------------
 };
