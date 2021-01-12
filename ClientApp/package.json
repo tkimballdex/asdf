@@ -30,6 +30,7 @@
     "@fortawesome/pro-regular-svg-icons": "^5.15.1",
     "@fortawesome/pro-solid-svg-icons": "^5.15.1",
     "@nguniversal/module-map-ngfactory-loader": "8.1.1",
+    "@syncfusion/ej2-angular-base": "^18.4.30",
     "@syncfusion/ej2-angular-buttons": "^18.4.33",
     "@syncfusion/ej2-angular-calendars": "^18.4.31",
     "@syncfusion/ej2-angular-charts": "^18.4.30",
