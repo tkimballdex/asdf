@@ -35,12 +35,12 @@ import { DialogModule } from '@syncfusion/ej2-angular-popups';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHome, faHomeAlt } from '@fortawesome/pro-solid-svg-icons';
 
-import { RoleModule } from './role/module'
-import { UserModule } from './user/module'
-import { CustomerModule } from './customer/module'
-import { SiteModule } from './site/module'
-import { LocationModule } from './location/module'
-import { VendorsModule } from './vendors/module';
+import { RoleModule } from './role/module';
+import { UserModule } from './user/module';
+import { CustomerModule } from './customer/module';
+import { SiteModule } from './site/module';
+import { LocationModule } from './location/module';
+import { VendorModule } from './vendor/module';
 import { DashboardModule } from './dashboard/module';
 
 export function MSALConfigFactory(): Configuration {
@@ -68,7 +68,7 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
         SiteModule,
         LocationModule,
         DashboardModule,
-        VendorsModule,
+        VendorModule,
         RouterModule.forRoot([
             { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [MsalGuard] },
             { path: 'account/tenant', component: ChooseTenantComponent, canActivate: [MsalGuard] },

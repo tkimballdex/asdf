@@ -5,32 +5,32 @@ import { DialogUtility, Dialog } from '@syncfusion/ej2-popups';
 import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 import { AppRepository } from "../shared/app.repository";
 import { PageComponent } from '../shared/page.component';
-import { VendorsRepository } from './repository';
+import { VendorRepository } from './repository';
 
 @Component({
-    selector: 'vendors-edit',
+    selector: 'vendor-edit',
     templateUrl: './edit.component.html',
     styleUrls: ['./edit.component.scss']
 })
-export class VendorsEditComponent extends PageComponent implements OnInit {
-    constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private repository: VendorsRepository) {
+export class VendorEditComponent extends PageComponent implements OnInit {
+    constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private repository: VendorRepository) {
         super();
     }
 
     public record: any;
     public deleteDialog: Dialog;
-    public statesList: any;
-    public sitesList: any;
 
-    async ngOnInit() {
-        this.privileges = (await this.appRepository.getPrivileges()).vendors;
-        var id = this.route.snapshot.paramMap.get('id');
-
+    //-----------------------------------------------------------------------------------------
+    async ngOnInit() {       
         this.showSpinner();
+        this.app = await this.appRepository.getData();
+        this.privileges = this.app.privileges.vendors;
+
+        var id = this.route.snapshot.paramMap.get('id');
         this.record = await this.repository.get(id);
         this.hideSpinner();        
     }
-
+    //-----------------------------------------------------------------------------------------
     async save() {
         var add = !this.record.id;
         this.showSpinner();
@@ -54,7 +54,7 @@ export class VendorsEditComponent extends PageComponent implements OnInit {
             }
         }
     }
-
+    //-----------------------------------------------------------------------------------------
     delete() {
         this.deleteDialog = DialogUtility.confirm({
             title: 'Delete Vendor',
@@ -62,7 +62,7 @@ export class VendorsEditComponent extends PageComponent implements OnInit {
             okButton: { click: this.deleteOK.bind(this) }
         });
     }
-
+    //-----------------------------------------------------------------------------------------
     async deleteOK() {
         this.showSpinner();
         this.deleteDialog.close();
@@ -77,4 +77,5 @@ export class VendorsEditComponent extends PageComponent implements OnInit {
             setTimeout(() => this.router.navigate(['/vendor/list']), 1000);
         }
     }
+    //-----------------------------------------------------------------------------------------
 }
