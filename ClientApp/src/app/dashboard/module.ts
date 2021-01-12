@@ -8,6 +8,7 @@ import { GridModule } from '@syncfusion/ej2-angular-grids';
 import { ListViewModule } from '@syncfusion/ej2-angular-lists';
 import { ButtonModule  } from '@syncfusion/ej2-angular-buttons';
 import { DashboardLayoutModule } from '@syncfusion/ej2-angular-layouts';
+import { ChartAllModule, AccumulationChartAllModule } from '@syncfusion/ej2-angular-charts';
 
 import { AccumulationLegendService, AccumulationTooltipService, AccumulationAnnotationService} from '@syncfusion/ej2-angular-charts';
 import { PageService, SortService, FilterService, GroupService } from '@syncfusion/ej2-angular-grids';
@@ -29,6 +30,7 @@ import { PieSeriesService, AccumulationDataLabelService } from '@syncfusion/ej2-
     ButtonModule,
     DashboardLayoutModule,
     AccumulationChartModule,
+    ChartAllModule,
     RouterModule.forChild([
       { path: 'dashboard', component: DashboardComponent, canActivate: [MsalGuard] },
   ])
