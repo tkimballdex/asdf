@@ -4,6 +4,7 @@ import { GridComponent, ExcelExportProperties, ExcelExportService, Column } from
 import { CustomerRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
 import { AppRepository } from '../shared/app.repository';
+import { SidebarComponent } from '@syncfusion/ej2-angular-navigations';
 
 @Component({
     selector: 'customer-list',

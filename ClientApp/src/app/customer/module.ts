@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CustomerListComponent } from './list.component';
 import { CustomerEditComponent } from './edit.component';
 import { MsalGuard } from '@azure/msal-angular';
+import { SidebarModule } from '@syncfusion/ej2-angular-navigations';
 
 import { RadioButtonModule, ButtonModule, CheckBoxModule } from '@syncfusion/ej2-angular-buttons';
 import { GridModule, SortService, PageService, EditService, ToolbarService, CommandColumnService, ExcelExportService } from '@syncfusion/ej2-angular-grids';
@@ -20,6 +21,7 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
         CustomerEditComponent
     ],
     imports: [
+        SidebarModule,
         GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule, 
         TabModule, DatePickerModule, SwitchModule, CommonModule,
         RouterModule.forChild([
