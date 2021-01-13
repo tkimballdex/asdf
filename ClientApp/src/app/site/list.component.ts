@@ -14,22 +14,17 @@ export class SiteListComponent extends PageComponent implements OnInit {
     }
 
     public list: any;
-    public tenant: any;
     public name: any;
 
     async ngOnInit() {
-        //this.showSpinner();
-        this.tenant = this.appRepository.tenant;
-        //this.hideSpinner();
-
-        if (this.tenant) {
+        if (this.appRepository.tenantId) {
             this.search();
         }
     }
 
     async search() {
-        //this.showSpinner();
-        this.list = await this.repository.list({ tenant: this.appRepository.tenant, name: this.name });
-        //this.hideSpinner();
+        this.showSpinner();
+        this.list = await this.repository.list({ tenantId: this.appRepository.tenantId, name: this.name });
+        this.hideSpinner();
     }
 }

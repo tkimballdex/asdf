@@ -6,7 +6,7 @@
                 <div id="header" class="align-items-center header-section ">
                     <div class="hamburger" [ngStyle]="{'padding-left': sidebardisplaysize }"><a id="hamburger" (click)="openClick()"><i class="far fa-bars"></i></a></div>
                     <div class="tenant-name">
-                        {{appRepository.tenant}}
+                        {{appRepository.tenantName}}
                     </div>
                     <div class="account-menu">
                         <button ejs-dropdownbutton id="accountMenu" [items]='AccountMenuItem' [content]='username' (select)='selectAccountMenu($event)' iconCss="fas fa-user"></button>

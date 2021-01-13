@@ -22,12 +22,20 @@ export class AppRepository {
 		return (<AppData>data).privileges;
     }
 
-    public get tenant() {
+    public get tenantName() {
         return sessionStorage.getItem('tenant');
     }
 
-    public set tenant(value: string) {
+    public set tenantName(value: string) {
         sessionStorage.setItem('tenant', value);
+    }
+
+    public get tenantId() {
+        return sessionStorage.getItem('tenantId');
+    }
+
+    public set tenantId(value: string) {
+        sessionStorage.setItem('tenantId', value);
     }
 
     public get userName() {

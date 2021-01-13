@@ -14,14 +14,13 @@ export class ChooseTenantComponent extends PageComponent implements OnInit {
     }
 
     public tenantList: any;
-    public tenant: any;
 
     async ngOnInit() {
         this.tenantList = await this.appRepository.tenantList();
-        this.tenant = this.appRepository.tenant;
     }
 
     public changeTenant() {
-        this.appRepository.tenant = this.tenant;
+        var t = this.tenantList.find(x => x.id == this.appRepository.tenantId);
+        this.appRepository.tenantName = t.name;
     }
 }

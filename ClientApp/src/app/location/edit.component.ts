@@ -34,7 +34,7 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 
     async save() {
         var add = !this.record.id;
-        this.record.tenant = this.appRepository.tenant;
+        this.record.tenantId = this.appRepository.tenantId;
         this.showSpinner();
         var returnValue = await this.repository.save(this.record);
         this.hideSpinner();
