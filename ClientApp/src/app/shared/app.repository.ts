@@ -75,9 +75,15 @@ export interface Frequency {
     name: string;
 }
 
+export interface VendorType {
+    id: number;
+    name: string;
+}
+
 export interface AppData {
     privileges: Privileges;
     states: State[];
     frequencies: Frequency[];
+    vendortypes: VendorType[];
 	menuItems: MenuItem[];
 }

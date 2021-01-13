@@ -26,8 +26,11 @@
                         <ng-template #content>
 
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <ejs-textbox id="edit-tenant" [(value)]="record.tenant" disabled placeholder="Tenant" floatLabelType="Always"></ejs-textbox>
+                                </div>
+                                <div class="col-md-3">
+                                    <ejs-dropdownlist [dataSource]="app.vendortypes" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.vendorTypeId" placeholder="Vendor Type *" floatLabelType="Always"></ejs-dropdownlist>
                                 </div>
                             </div>
 
@@ -51,7 +54,7 @@
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <ejs-dropdownlist [dataSource]="statesList" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.stateId" placeholder="State *" floatLabelType="Always"></ejs-dropdownlist>
+                                    <ejs-dropdownlist [dataSource]="app.states" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.stateId" placeholder="State *" floatLabelType="Always"></ejs-dropdownlist>
                                 </div>
                                 <div class="col-md-3">
                                     <ejs-textbox [(value)]="record.postalCode" placeholder="Postal Code *" floatLabelType="Always"></ejs-textbox>

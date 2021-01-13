@@ -1,11 +1,12 @@
 :root {
-    --headerbgclr: #2378ff;
+    --headerbgclr: #2277dd;
     --headertxtclr: #ffffff;
     --menubgclr: #2f3344;
-    --menubgclrhlt: #2378ff;
+    --menubgclrhlt: #2277dd;
     --menutxtclr: #ffffff;
     --menutxtclrhlt: #ffffff;
     --menuiconclr: #ffffff;
+    --appnamebgclr: #1b1d27;
 }
 /*--menubgclr: #2b303b*/
 /*--menubgclrhlt: #303948;*/
@@ -92,8 +93,7 @@
     color: #ffffff;
     text-align: center;
     padding: 15px 5px 15px 5px;
-    background-color: var(--menubgclr);
-    border-bottom: 1px solid #4e5572;
+    background-color: var(--appnamebgclr);
     height: 50px;
     box-sizing: border-box;
 }

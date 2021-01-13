@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { VendorsListComponent } from './list.component';
-import { VendorsEditComponent } from './edit.component';
+import { VendorListComponent } from './list.component';
+import { VendorEditComponent } from './edit.component';
 import { MsalGuard } from '@azure/msal-angular';
 
 import { RadioButtonModule, ButtonModule, CheckBoxModule } from '@syncfusion/ej2-angular-buttons';
@@ -16,20 +16,20 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 
 @NgModule({
     declarations: [
-        VendorsListComponent,
-        VendorsEditComponent
+        VendorListComponent,
+        VendorEditComponent
     ],
     imports: [
         GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule, 
         TabModule, DatePickerModule, SwitchModule, CommonModule,
         RouterModule.forChild([
-            { path: 'vendor/list', component: VendorsListComponent, canActivate: [MsalGuard] },
-            { path: 'vendor/add', component: VendorsEditComponent, canActivate: [MsalGuard] },
-           { path: 'vendor/edit/:id', component: VendorsEditComponent, canActivate: [MsalGuard] },
+            { path: 'vendor/list', component: VendorListComponent, canActivate: [MsalGuard] },
+            { path: 'vendor/add', component: VendorEditComponent, canActivate: [MsalGuard] },
+           { path: 'vendor/edit/:id', component: VendorEditComponent, canActivate: [MsalGuard] },
         ])
     ],
     providers: [
         PageService, SortService, EditService, ToolbarService, CommandColumnService, ExcelExportService
     ]
 })
-export class VendorsModule { }
+export class VendorModule { }

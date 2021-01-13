@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { GridComponent, ExcelExportProperties, ExcelExportService, Column } from '@syncfusion/ej2-angular-grids';
-import { VendorsRepository } from './repository';
+import { VendorRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
 import { AppRepository } from '../shared/app.repository';
 
@@ -9,9 +9,9 @@ import { AppRepository } from '../shared/app.repository';
     selector: 'vendors-list',
     templateUrl: './list.component.html',
 })
-export class VendorsListComponent extends PageComponent implements OnInit {
+export class VendorListComponent extends PageComponent implements OnInit {
 
-    constructor(private repository: VendorsRepository, private router: Router, private appRepository: AppRepository) {
+    constructor(private repository: VendorRepository, private router: Router, private appRepository: AppRepository) {
         super();
     }
     //------------------------------------------------------------------------------------------------------------------------
