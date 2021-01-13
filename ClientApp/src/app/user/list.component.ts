@@ -15,23 +15,23 @@ export class UserListComponent extends PageComponent implements OnInit {
 
     public list: any;
     public tenantList: any;
-    public tenant: any;
+    public tenantId: any;
     public username: any;
 
     async ngOnInit() {
         this.showSpinner();
         this.tenantList = await this.appRepository.tenantList();
-        this.tenant = this.appRepository.tenant;
+        this.tenantId = this.appRepository.tenantId;
         this.hideSpinner();
 
-        if (this.tenant) {
+        if (this.tenantId) {
             this.search();
         }
     }
 
     async search() {
         this.showSpinner();
-        this.list = await this.repository.list({ tenant: this.tenant, username: this.username });
+        this.list = await this.repository.list({ tenantId: this.tenantId, username: this.username });
         this.hideSpinner();
     }
 

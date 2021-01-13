@@ -23,7 +23,6 @@ export class AppComponent implements OnInit {
     public dockSize: string = '70px';
     public enableDock: boolean = true;
     public username: string;
-    public tenant: any;
     public sidebardisplaysize = '180px';
     public AccountMenuItem: ItemModel[];
     //-------------------------------------------------------------------------------------
@@ -53,7 +52,6 @@ export class AppComponent implements OnInit {
     }
     //-------------------------------------------------------------------------------------
     async ngOnInit() {
-        this.tenant = this.appRepository.tenant;
         this.username = this.appRepository.userName;
         this.sidebardisplaysize = this.sidebarMenuInstance.isOpen ? this.sidebarwidth : this.dockSize;
     }

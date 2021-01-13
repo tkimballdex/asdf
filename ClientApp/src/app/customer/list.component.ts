@@ -17,22 +17,20 @@ export class CustomerListComponent extends PageComponent implements OnInit {
     }
     //------------------------------------------------------------------------------------------------------------------------
     public list: any;
-    public tenant: any;
     public name: any;
     @ViewChild('grid', null) public grid: GridComponent;
     //------------------------------------------------------------------------------------------------------------------------
     async ngOnInit() {
-        this.tenant = this.appRepository.tenant;
         this.privileges = (await this.appRepository.getPrivileges()).customers;
 
-        if (this.tenant) {
+        if (this.appRepository.tenantId) {
             this.search();
         }
     }
     //------------------------------------------------------------------------------------------------------------------------
     async search() {
         this.showSpinner();
-        this.list = await this.repository.list({ tenant: this.appRepository.tenant, name: this.name });
+        this.list = await this.repository.list({ tenantId: this.appRepository.tenantId, name: this.name });
         this.hideSpinner();
     }
     //------------------------------------------------------------------------------------------------------------------------

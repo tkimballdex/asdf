@@ -8,7 +8,7 @@
     </div>
     <div class="row d-flex align-items-end list-content">        
         <div class="col-md-3">
-            <ejs-dropdownlist [dataSource]="tenantList" [fields]="{ text: 'name', id: 'id' }" [(value)]="tenant" (change)="changeTenant()" placeholder="Tenant" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="tenantList" [fields]="{ text: 'name', value: 'id' }" [(value)]="tenantId" placeholder="Tenant" floatLabelType="Always"></ejs-dropdownlist>
         </div>
         <div class="col-3">
             <ejs-textbox [(value)]="username" placeholder="Username" floatLabelType="Always"></ejs-textbox>

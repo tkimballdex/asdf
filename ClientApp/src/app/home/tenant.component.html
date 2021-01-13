@@ -8,7 +8,7 @@
 
     <div class="row pad-t20">
         <div class="col-md-6">
-            <ejs-dropdownlist [dataSource]="tenantList" [fields]="{ text: 'name', id: 'id' }" [(value)]="tenant" (change)="changeTenant()" placeholder="Choose Tenant"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="tenantList" [fields]="{ text: 'name', value: 'id' }" [(value)]="appRepository.tenantId" (change)="changeTenant()" placeholder="Choose Tenant"></ejs-dropdownlist>
         </div>
     </div>    
 </div>

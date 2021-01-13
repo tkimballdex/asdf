@@ -33,7 +33,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
     async save() {
         var add = !this.record.id;
         this.showSpinner();
-        this.record.tenant = this.appRepository.tenant;
+        this.record.tenantId = this.appRepository.tenantId;
         var returnValue = await this.repository.save(this.record);
         this.hideSpinner();
 
