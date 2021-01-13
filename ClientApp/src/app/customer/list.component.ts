@@ -8,6 +8,7 @@ import { AppRepository } from '../shared/app.repository';
 @Component({
     selector: 'customer-list',
     templateUrl: './list.component.html',
+    styleUrls: ['./list.component.scss']
 })
 export class CustomerListComponent extends PageComponent implements OnInit {
     constructor(private repository: CustomerRepository, private router: Router, private appRepository: AppRepository) {
@@ -51,4 +52,12 @@ export class CustomerListComponent extends PageComponent implements OnInit {
         (this.grid.columns[0] as Column).visible = true;
     }
     //------------------------------------------------------------------------------------------------------------------------
+
+    mail():void {
+        console.log('miau');
+    }
+
+
+
+
 }
