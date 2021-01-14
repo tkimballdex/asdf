@@ -20,7 +20,10 @@ export class CustomerListComponent extends PageComponent implements OnInit {
     public list: any;
     public name: any;
     @ViewChild('sidebarEmail', null) public sidebarEmailInstance: SidebarComponent;
-    @ViewChild('grid', null) public grid: GridComponent;
+    @ViewChild('grid', null) public grid: GridComponent;    
+    public messageEnableDock: boolean = true;
+    public messageWidth: string = '400px';
+    public messageDockSize: string = '0px';
     //------------------------------------------------------------------------------------------------------------------------
     async ngOnInit() {
         this.privileges = (await this.appRepository.getPrivileges()).customers;
@@ -53,9 +56,13 @@ export class CustomerListComponent extends PageComponent implements OnInit {
         (this.grid.columns[0] as Column).visible = true;
     }
     //------------------------------------------------------------------------------------------------------------------------
-    mail():void {
-        console.log('miau');
+    toggleMessage(): void  {
         this.sidebarEmailInstance.toggle();
+
+        if(!this.sidebarEmailInstance.isOpen) 
+        {
+            this.sidebarEmailInstance.element.style.visibility = 'hidden';
+        };
     }
     //------------------------------------------------------------------------------------------------------------------------
 
