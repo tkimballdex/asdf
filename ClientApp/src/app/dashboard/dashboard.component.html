@@ -1,20 +1,17 @@
 <div class="control-section">
-    <ejs-dashboardlayout [allowDragging]='allowDragging' [columns]="6" #editLayout [cellSpacing]='cellSpacing'>
+    <ejs-dashboardlayout [allowDragging]='allowDragging' [columns]="4" #editLayout [cellSpacing]='cellSpacing' [cellAspectRatio]='cellAspectRatio'>
         <e-panels>
             <e-panel [sizeX]="1" [sizeY]="0" [row]="0" [col]="0">
                 <ng-template #content>
                     <div id="column">
-                     
-
-                        <div tabindex="0" class="e-card">
-                            <div class="e-card-header">
-                                <div class="e-card-header-image football"></div>
-                                <div class="e-card-header-caption">
-                                    <div class="e-card-header-title"> Laura Callahan</div>
-                                    <div class="e-card-sub-title">Sales Coordinator and Representative</div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div id="header1">Laura Callahan</div>
+                                    <div id="sub-header1">Sales Coordinator and Representative</div>
                                 </div>
                             </div>
-                            <div class="e-card-content">
+                            <div id="content1">
                                 Laura received a BA in psychology from the University of Washington. She has also completed a course in business French. She reads and writes French.
                             </div>
                         </div>
@@ -24,15 +21,14 @@
             <e-panel [sizeX]="1" [sizeY]="0" [row]="0" [col]="1">
                 <ng-template #content>
                     <div id="column">
-                        <div tabindex="0" class="e-card">
-                            <div class="e-card-header">
-                                <div class="e-card-header-image football"></div>
-                                <div class="e-card-header-caption">
-                                    <div class="e-card-header-title"> Laura Callahan</div>
-                                    <div class="e-card-sub-title">Sales Coordinator and Representative</div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div id="header1"> Laura Callahan</div>
+                                    <div id="sub-header1">Sales Coordinator and Representative</div>
                                 </div>
                             </div>
-                            <div class="e-card-content">
+                            <div id="content1">
                                 Laura received a BA in psychology from the University of Washington. She has also completed a course in business French. She reads and writes French.
                             </div>
                         </div>
@@ -42,15 +38,14 @@
             <e-panel [sizeX]="1" [sizeY]="1" [row]="0" [col]="2">
                 <ng-template #content>
                     <div id="column">
-                        <div tabindex="0" class="e-card">
-                            <div class="e-card-header">
-                                <div class="e-card-header-image football"></div>
-                                <div class="e-card-header-caption">
-                                    <div class="e-card-header-title"> Laura Callahan</div>
-                                    <div class="e-card-sub-title">Sales Coordinator and Representative</div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div id="header1"> Laura Callahan</div>
+                                    <div id="sub-header1">Sales Coordinator and Representative</div>
                                 </div>
                             </div>
-                            <div class="e-card-content">
+                            <div id="content1">
                                 Laura received a BA in psychology from the University of Washington. She has also completed a course in business French. She reads and writes French.
                             </div>
                         </div>
@@ -60,27 +55,20 @@
             <e-panel [sizeX]="1" [sizeY]="1" [row]="1" [col]="0">
                 <ng-template #content>
                     <div id="column">
-                        <div tabindex="0" class="e-card">
-                            <div class="e-card-header">
-                                <div class="e-card-header-image football"></div>
-                                <div class="e-card-header-caption">
-                                    <div class="e-card-header-title"> Laura Callahan</div>
-                                    <div class="e-card-sub-title">Sales Coordinator and Representative</div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div id="header1"> Laura Callahan</div>
+                                    <div id="sub-header1">Sales Coordinator and Representative</div>
                                 </div>
                             </div>
-                            <div class="e-card-content">
+                            <div id="content1">
                                 Laura received a BA in psychology from the University of Washington. She has also completed a course in business French. She reads and writes French.
                             </div>
                         </div>
                     </div>
                 </ng-template>
             </e-panel>
-
-
-
-
-
-           
             <e-panel [sizeX]="1" [sizeY]="2" [row]="2" [col]="3">
                 <ng-template #header>
                     <div>Sales increase percentage 2</div>
@@ -98,8 +86,6 @@
                     </div>
                 </ng-template>
             </e-panel>
-
-
             <e-panel [sizeX]="3" [sizeY]="2" [row]="1" [col]="0">
                 <ng-template #header>
                     <div>Last year Sales Comparison</div>
@@ -115,9 +101,6 @@
                     </div>
                 </ng-template>
             </e-panel>
-
-
-
         </e-panels>
     </ejs-dashboardlayout>
 </div>

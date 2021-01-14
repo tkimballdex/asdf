@@ -10,7 +10,7 @@ import { data } from './datasource';
 })
 export class DashboardComponent {
     public cellSpacing: number[] = [10, 10];
-  
+    public cellAspectRatio: number = 70/25;
     public allowDragging: boolean = false;
     public chartData: Object[] = [
       { month: 'Jan', sales: 35 }, { month: 'Feb', sales: 28 },
