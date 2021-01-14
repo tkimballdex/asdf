@@ -5,6 +5,7 @@ import { SidebarComponent } from '@syncfusion/ej2-angular-navigations';
 import { CustomerRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
 import { AppRepository } from '../shared/app.repository';
+import { SidebarComponent } from '@syncfusion/ej2-angular-navigations';
 
 @Component({
     selector: 'customer-list',
