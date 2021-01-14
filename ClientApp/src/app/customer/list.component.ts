@@ -58,11 +58,6 @@ export class CustomerListComponent extends PageComponent implements OnInit {
     //------------------------------------------------------------------------------------------------------------------------
     toggleMessage(): void  {
         this.sidebarEmailInstance.toggle();
-
-        if(!this.sidebarEmailInstance.isOpen) 
-        {
-            this.sidebarEmailInstance.element.style.visibility = 'hidden';
-        };
     }
     //------------------------------------------------------------------------------------------------------------------------
 
