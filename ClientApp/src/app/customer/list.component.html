@@ -38,4 +38,34 @@
         </div>
     </div>
 </div>
+<ejs-sidebar id="sidebar-email" #sidebarEmail enableDock='true' width='50%' type="Push" position='Right' style="border:1px solid #f1f4f9;"
+             dockSize='0px' target='#list-view'>
+    <div class="pad-20">
+        <div class="row d-flex align-items-end">
+            <div class="col-md-6 d-flex align-items-end list-header">
+                <span class="list-header-icon"><i class="fas fa-envelope"></i></span>
+                <span class="list-header-title">Email</span>
+            </div>
+            <div class="col-md-6 d-flex align-items-end justify-content-end list-header">
+                <span class="list-actions" id="close"><button ejs-button cssClass="e-outline" iconCss="fas fa-times" (click)="mail()"></button></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <ejs-textbox placeholder="From" floatLabelType="Always"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <ejs-textbox placeholder="To" floatLabelType="Always"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <ejs-textbox placeholder="Subject" floatLabelType="Always"></ejs-textbox>
+            </div>
+        </div>
+    </div>
+</ejs-sidebar>
 

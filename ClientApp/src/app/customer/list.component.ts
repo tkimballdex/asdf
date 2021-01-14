@@ -1,22 +1,26 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
 import { Router } from '@angular/router';
 import { GridComponent, ExcelExportProperties, ExcelExportService, Column } from '@syncfusion/ej2-angular-grids';
+import { SidebarComponent } from '@syncfusion/ej2-angular-navigations';
 import { CustomerRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
 import { AppRepository } from '../shared/app.repository';
+import { SidebarComponent } from '@syncfusion/ej2-angular-navigations';
 
 @Component({
     selector: 'customer-list',
     templateUrl: './list.component.html',
     styleUrls: ['./list.component.scss']
 })
-export class CustomerListComponent extends PageComponent implements OnInit {
+export class CustomerListComponent extends PageComponent implements OnInit {   
+      
     constructor(private repository: CustomerRepository, private router: Router, private appRepository: AppRepository) {
         super();
     }
     //------------------------------------------------------------------------------------------------------------------------
     public list: any;
     public name: any;
+    @ViewChild('sidebarEmail', null) public sidebarEmailInstance: SidebarComponent;
     @ViewChild('grid', null) public grid: GridComponent;
     //------------------------------------------------------------------------------------------------------------------------
     async ngOnInit() {
@@ -50,10 +54,11 @@ export class CustomerListComponent extends PageComponent implements OnInit {
         (this.grid.columns[0] as Column).visible = true;
     }
     //------------------------------------------------------------------------------------------------------------------------
-
     mail():void {
         console.log('miau');
+        this.sidebarEmailInstance.toggle();
     }
+    //------------------------------------------------------------------------------------------------------------------------
 
 
 
