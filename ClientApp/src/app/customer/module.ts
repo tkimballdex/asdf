@@ -14,7 +14,6 @@ import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { TabModule } from '@syncfusion/ej2-angular-navigations';
 import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
-import { SidebarModule } from '@syncfusion/ej2-angular-navigations';
 
 @NgModule({
     declarations: [
