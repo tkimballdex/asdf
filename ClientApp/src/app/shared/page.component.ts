@@ -15,7 +15,7 @@ export class PageComponent {
     public notify: Notify;
     public app: AppData;
 
-    @ViewChild('toast', null) public toast: ToastComponent;
+    @ViewChild('toast') public toast: ToastComponent;
 
     constructor() {
         this.notify = new Notify();

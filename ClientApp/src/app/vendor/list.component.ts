@@ -17,7 +17,7 @@ export class VendorListComponent extends PageComponent implements OnInit {
     //------------------------------------------------------------------------------------------------------------------------
     public list: any;
     public name: any;
-    @ViewChild('grid', null) public grid: GridComponent;
+    @ViewChild('grid') public grid: GridComponent;
     //------------------------------------------------------------------------------------------------------------------------
     async ngOnInit() {
         if (this.appRepository.tenantId) {

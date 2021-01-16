@@ -19,8 +19,8 @@ export class CustomerListComponent extends PageComponent implements OnInit {
     //------------------------------------------------------------------------------------------------------------------------
     public list: any;
     public name: any;
-    @ViewChild('sidebarEmail', null) public sidebarEmailInstance: SidebarComponent;
-    @ViewChild('grid', null) public grid: GridComponent;    
+    @ViewChild('sidebarEmail') public sidebarEmailInstance: SidebarComponent;
+    @ViewChild('grid') public grid: GridComponent;    
     public messageEnableDock: boolean = true;
     public messageWidth: string = '400px';
     public messageDockSize: string = '0px';

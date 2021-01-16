@@ -70,10 +70,10 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
         DashboardModule,
         VendorModule,
         RouterModule.forRoot([
-            { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [MsalGuard] },
-            { path: 'account/tenant', component: ChooseTenantComponent, canActivate: [MsalGuard] },
-            { path: 'account/logout', component: LogoutComponent }
-      ]),
+    { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [MsalGuard] },
+    { path: 'account/tenant', component: ChooseTenantComponent, canActivate: [MsalGuard] },
+    { path: 'account/logout', component: LogoutComponent }
+], { relativeLinkResolution: 'legacy' }),
         MsalModule,
         SidebarModule, MenuAllModule, DropDownListModule, TreeViewAllModule, ListViewAllModule, MenuModule, 
         DropDownButtonModule, GridModule, ComboBoxModule, SwitchModule, DialogModule, FontAwesomeModule

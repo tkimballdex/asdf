@@ -17,7 +17,7 @@ export class RoleEditComponent extends PageComponent implements OnInit {
 
     public record: any;
     public deleteDialog: Dialog;
-    @ViewChild('grid', null) public grid: GridComponent;
+    @ViewChild('grid') public grid: GridComponent;
 
     async ngOnInit() {
         var id = this.route.snapshot.paramMap.get('id');

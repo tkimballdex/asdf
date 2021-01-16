@@ -15,8 +15,7 @@ import { AppRepository } from './shared/app.repository';
     encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
-    @ViewChild('sidebarMenuInstance', null)
-    public sidebarMenuInstance: SidebarComponent;
+    @ViewChild('sidebarMenuInstance') public sidebarMenuInstance: SidebarComponent;
     public sidebarwidth: string = '180px';
     public mediaQuery: string = ('(min-width: 3200px)');
     public target: string = '.main-content';
@@ -26,7 +25,7 @@ export class AppComponent implements OnInit {
     public sidebardisplaysize = '180px';
     public AccountMenuItem: ItemModel[];
     //-------------------------------------------------------------------------------------
-    constructor(private authService: MsalService, private router: Router, private http: MsalHttpClient, private appRepository: AppRepository) {
+    constructor(private authService: MsalService, private router: Router, private http: MsalHttpClient, public appRepository: AppRepository) {
         console.dir(this.authService.getAccount());
 
         this.AccountMenuItem = [

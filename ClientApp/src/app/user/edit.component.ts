@@ -18,7 +18,7 @@ export class UserEditComponent extends PageComponent implements OnInit {
 
     public record: any;
     public deleteDialog: Dialog;
-    @ViewChild('grid', null) public grid: GridComponent;
+    @ViewChild('grid') public grid: GridComponent;
 
     async ngOnInit() {
         this.privileges = (await this.appRepository.getPrivileges()).manageUsers;

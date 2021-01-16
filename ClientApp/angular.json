@@ -14,7 +14,6 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "progress": true,
-            "extractCss": true,
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -24,47 +23,56 @@
               "src/assets"
             ],
             "styles": [
-                "node_modules/bootstrap/dist/css/bootstrap.min.css",
-                "node_modules/@fortawesome/fontawesome-pro/css/all.min.css",
-                "src/styles.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/@fortawesome/fontawesome-pro/css/all.min.css",
+              "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "aot": true
           },
             "configurations": {
                 "production": {
-                    "fileReplacements": [
-                        {
-                            "replace": "src/environments/environment.ts",
-                            "with": "src/environments/environment.prod.ts"
-                        }
-                    ],
-                    "optimization": true,
-                    "outputHashing": "all",
-                    "sourceMap": false,
-                    "extractCss": true,
-                    "namedChunks": false,
-                    "aot": true,
-                    "extractLicenses": true,
-                    "vendorChunk": false,
-                    "buildOptimizer": true
-                },
-                "staging": {
-                    "fileReplacements": [
-                        {
-                            "replace": "src/environments/environment.ts",
-                            "with": "src/environments/environment.staging.ts"
-                        }
-                    ],
-                    "optimization": true,
-                    "outputHashing": "all",
-                    "sourceMap": false,
-                    "extractCss": true,
-                    "namedChunks": false,
-                    "aot": true,
-                    "extractLicenses": true,
-                    "vendorChunk": false,
-                    "buildOptimizer": true
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
                 }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ]
+            },
+                "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ]
+            }
             }
         },
         "serve": {
@@ -125,16 +133,14 @@
               "outputHashing": "all",
               "sourceMap": false,
               "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": true
+              "extractLicenses": true
             },
             "production": {
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
               "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false
+              "extractLicenses": true
             }
           }
         }
