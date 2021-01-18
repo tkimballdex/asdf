@@ -1,81 +1,94 @@
-<div id="list-view" class="container-fluid" *ngIf="privileges">
-    <div class="row d-flex align-items-end">
-        <div class="col-md-6 d-flex align-items-end list-header">
-            <span class="list-header-icon"><i class="fas fa-users-crown"></i></span>
-            <span class="list-header-title">Customers</span>
-            <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['/customer/add']" [disabled]="!privileges.create">+ Add</button></span>
-        </div>
-        <div class="col-md-6 d-flex align-items-end justify-content-end list-header">
-            <span class="list-actions" id="mail"><button ejs-button cssClass="e-outline" iconCss="fas fa-envelope" (click)="toggleMessage()"></button></span>
-            <span class="list-actions"><button ejs-button cssClass="e-outline" iconCss="fad fa-download" (click)="export()"></button></span>
-        </div>
-    </div>
-    <div class="row d-flex align-items-end list-content">   
-        <div class="col-3">
-            <ejs-textbox [(value)]="name" placeholder="Name" floatLabelType="Always"></ejs-textbox>
-        </div>
-        <div class="col-3">
-            <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>
-        </div>
-        <div class="col-12 pad-t20">
-            <ejs-grid #grid [dataSource]='list' *ngIf="list" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }'
-                      [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' [allowSorting]="true" [allowFiltering]="false">
-                <e-columns>
-                    <e-column width="70" [visible]='true'>
-                        <ng-template #template let-data>
-                            <a [routerLink]="['/customer/edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
-                        </ng-template>
-                    </e-column>
-                    <e-column field='name' headerText='Name'></e-column>
-                    <e-column field='address' headerText='Address'></e-column>
-                    <e-column field='city' headerText='City'></e-column>
-                    <e-column field='state' headerText='State'></e-column>
-                    <e-column field='postalCode' headerText='Postal Code'></e-column>
-                    <e-column field='phoneNo' headerText='Phone No'></e-column>
-                    <e-column field='contactName' headerText='Contact Name' [visible]='false'></e-column>
-                </e-columns>
-            </ejs-grid>
-        </div>
-    </div>
-</div>
-<ejs-sidebar id="sidebar-email" #sidebarEmail [enableDock]='messageEnableDock' [width]='messageWidth' [dockSize]='messageDockSize' 
-        type="Push" position='Right' style="position:fixed;padding: 0px;" target='.main-content'closeOnDocumentClick='true'>
-    <div class="pad-20">
-        <div class="row d-flex align-items-end">
-            <div class="col-md-6 d-flex align-items-end list-header">
-                <span class="list-header-icon"><i class="fas fa-envelope"></i></span>
-                <span class="list-header-title">Email</span>
+<mat-drawer-container class="example-container" autosize hasBackdrop="false">
+    <mat-drawer #sidebarEmail mode="over" closed position="end">
+        <div class="pad-20">
+            <div class="row d-flex align-items-end">
+                <div class="col-md-6 d-flex align-items-end list-header">
+                    <span class="list-header-icon"><i class="fas fa-envelope"></i></span>
+                    <span class="list-header-title">Email</span>
+                </div>
+                <div class="col-md-6 d-flex align-items-end justify-content-end list-header">
+                    <span class="list-actions" id="close"><button ejs-button cssClass="e-outline" iconCss="fas fa-times" (click)="sidebarEmail.toggle()"></button></span>
+                </div>
             </div>
-            <div class="col-md-6 d-flex align-items-end justify-content-end list-header">
-                <span class="list-actions" id="close"><button ejs-button cssClass="e-outline" iconCss="fas fa-times" (click)="toggleMessage()"></button></span>
-            </div>
-        </div>
 
-        <div class="row pad-t20">
-            <div class="col-md-12">
-                <ejs-textbox placeholder="From" floatLabelType="Always" disabled></ejs-textbox>
+            <div class="row pad-t20">
+                <div class="col-md-12">
+                    <ejs-textbox placeholder="From" floatLabelType="Always" disabled></ejs-textbox>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 pad-t10">
+                    <ejs-textbox placeholder="To" floatLabelType="Always" multiline='true'></ejs-textbox>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 pad-t10">
+                    <ejs-textbox placeholder="Subject" floatLabelType="Always" multiline='true'></ejs-textbox>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 pad-t10">
+                    <ejs-textbox placeholder="Body" floatLabelType="Always" multiline='true' rows="8"></ejs-textbox>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 pad-t10">
+                    <button ejs-button cssClass="e-primary" iconCss="fal fa-paper-plane" style='width:130px;'>Send Email</button>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 pad-t10">
-                <ejs-textbox placeholder="To" floatLabelType="Always" multiline='true'></ejs-textbox>
+    </mat-drawer>
+
+    <mat-drawer-content>
+        <div id="list-view" class="container-fluid" *ngIf="privileges">
+            <div class="row d-flex align-items-end">
+                <div class="col-md-6 d-flex align-items-end list-header">
+                    <span class="list-header-icon"><i class="fas fa-users-crown"></i></span>
+                    <span class="list-header-title">Customers</span>
+                    <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['/customer/add']" [disabled]="!privileges.create">+ Add</button></span>
+                </div>
+                <div class="col-md-6 d-flex align-items-end justify-content-end list-header">
+                    <span class="list-actions" id="mail"><button ejs-button cssClass="e-outline" iconCss="fas fa-envelope" (click)="sidebarEmail.toggle()"></button></span>
+                    <span class="list-actions"><button ejs-button cssClass="e-outline" iconCss="fad fa-download" (click)="export()"></button></span>
+                </div>
+            </div>
+            <div class="row d-flex align-items-end list-content">   
+                <div class="col-3">
+                    <ejs-textbox [(value)]="name" placeholder="Name" floatLabelType="Always"></ejs-textbox>
+                </div>
+                <div class="col-3">
+                    <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>
+                </div>
+                <div class="col-12 pad-t20">
+                    <ejs-grid #grid [dataSource]='list' *ngIf="list" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }'
+                            [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' [allowSorting]="true" [allowFiltering]="false">
+                        <e-columns>
+                            <e-column width="70" [visible]='true'>
+                                <ng-template #template let-data>
+                                    <a [routerLink]="['/customer/edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
+                                </ng-template>
+                            </e-column>
+                            <e-column field='name' headerText='Name'></e-column>
+                            <e-column field='address' headerText='Address'></e-column>
+                            <e-column field='city' headerText='City'></e-column>
+                            <e-column field='state' headerText='State'></e-column>
+                            <e-column field='postalCode' headerText='Postal Code'></e-column>
+                            <e-column field='phoneNo' headerText='Phone No'></e-column>
+                            <e-column field='contactName' headerText='Contact Name' [visible]='false'></e-column>
+                        </e-columns>
+                    </ejs-grid>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 pad-t10">
-                <ejs-textbox placeholder="Subject" floatLabelType="Always" multiline='true'></ejs-textbox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 pad-t10">
-                <ejs-textbox placeholder="Body" floatLabelType="Always" multiline='true' rows="8"></ejs-textbox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 pad-t10">
-                <button ejs-button cssClass="e-primary" iconCss="fal fa-paper-plane" style='width:130px;'>Send Email</button>
-            </div>
-        </div>
-    </div>
-</ejs-sidebar>
+    </mat-drawer-content>
+</mat-drawer-container>
+
+
+
+
+
+<!-- <ejs-sidebar id="sidebar-email" #sidebarEmail [enableDock]='messageEnableDock' [width]='messageWidth' [dockSize]='messageDockSize' 
+        type="Push" position='Right' style="position:fixed;padding: 0px;height: 100%;" target='#list-view'closeOnDocumentClick='true'>
+    
+</ejs-sidebar> -->
 

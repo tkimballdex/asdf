@@ -15,6 +15,7 @@
 @import '../node_modules/@syncfusion/ej2-angular-dropdowns/styles/fabric.css';  
 @import '../node_modules/@syncfusion/ej2-layouts/styles/fabric.css';  
 @import "../node_modules/@syncfusion/ej2-angular-layouts/styles/fabric.css";
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 html, body {
     height: 100%;
@@ -317,3 +318,6 @@ a {
 
 
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -42,6 +42,7 @@ import { SiteModule } from './site/module';
 import { LocationModule } from './location/module';
 import { VendorModule } from './vendor/module';
 import { DashboardModule } from './dashboard/module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export function MSALConfigFactory(): Configuration {
   return msalConfig;
@@ -76,7 +77,7 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
 ], { relativeLinkResolution: 'legacy' }),
         MsalModule,
         SidebarModule, MenuAllModule, DropDownListModule, TreeViewAllModule, ListViewAllModule, MenuModule, 
-        DropDownButtonModule, GridModule, ComboBoxModule, SwitchModule, DialogModule, FontAwesomeModule
+        DropDownButtonModule, GridModule, ComboBoxModule, SwitchModule, DialogModule, FontAwesomeModule, BrowserAnimationsModule
     ],
     providers: [
         {

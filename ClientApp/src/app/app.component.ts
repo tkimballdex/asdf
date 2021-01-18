@@ -121,6 +121,7 @@ export class AppComponent implements OnInit {
     //-------------------------------------------------------------------------------------
     created() {
         this.sidebarMenuInstance.toggle();
+        this.sidebardisplaysize = this.dockSize;
     }
     //-------------------------------------------------------------------------------------
 };
