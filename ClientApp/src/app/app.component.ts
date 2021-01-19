@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
     public target: string = '.main-content';
     public dockSize: string = '70px';
     public enableDock: boolean = true;
+    public isOpen: boolean = false;
     public username: string;
     public sidebardisplaysize = '180px';
     public AccountMenuItem: ItemModel[];
