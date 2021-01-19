@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -42,7 +42,9 @@ import { SiteModule } from './site/module';
 import { LocationModule } from './location/module';
 import { VendorModule } from './vendor/module';
 import { DashboardModule } from './dashboard/module';
+import { EmailModule } from './email/module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 export function MSALConfigFactory(): Configuration {
   return msalConfig;
@@ -57,7 +59,7 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
         AppComponent,
         HomeComponent,
         LogoutComponent,
-        ChooseTenantComponent
+        ChooseTenantComponent,
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -69,6 +71,7 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
         SiteModule,
         LocationModule,
         DashboardModule,
+        EmailModule,
         VendorModule,
         RouterModule.forRoot([
     { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [MsalGuard] },
@@ -79,6 +82,7 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
         SidebarModule, MenuAllModule, DropDownListModule, TreeViewAllModule, ListViewAllModule, MenuModule, 
         DropDownButtonModule, GridModule, ComboBoxModule, SwitchModule, DialogModule, FontAwesomeModule, BrowserAnimationsModule
     ],
+    schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,
