@@ -4,10 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
+import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
+
 
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { EmailComponent } from './email/email.component'; 
 import { LogoutComponent } from './home/logout.component';
 import { ChooseTenantComponent } from './home/tenant.component';
 import { MsalGuard } from '@azure/msal-angular';
@@ -42,7 +45,6 @@ import { SiteModule } from './site/module';
 import { LocationModule } from './location/module';
 import { VendorModule } from './vendor/module';
 import { DashboardModule } from './dashboard/module';
-import { EmailModule } from './email/module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -60,6 +62,7 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
         HomeComponent,
         LogoutComponent,
         ChooseTenantComponent,
+        EmailComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -71,7 +74,7 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
         SiteModule,
         LocationModule,
         DashboardModule,
-        EmailModule,
+        TextBoxModule,
         VendorModule,
         RouterModule.forRoot([
     { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [MsalGuard] },

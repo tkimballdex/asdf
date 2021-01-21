@@ -21,8 +21,8 @@
                         <ejs-menu [items]='menuItems' orientation='Vertical' cssClass='dock-menu' (select)='selectMainMenu($event)'></ejs-menu>
                     </div>
                 </ejs-sidebar>
-                <ejs-sidebar id="sidebar-option" #sidebarOption width='300px' dockSize='0px' [mediaQuery]='mediaQuery' [target]='target' position="Right">
-                                    <h1>some component</h1>
+                <ejs-sidebar id="sidebar-option" #sidebarOption width='300px' dockSize='0px' [isOpen]='isOpen' [mediaQuery]='mediaQuery' [target]='target' position="Right">
+                                   <app-email></app-email>
                 </ejs-sidebar>
                 <!-- end of sidebar element -->
                 <!-- main-content declaration -->
