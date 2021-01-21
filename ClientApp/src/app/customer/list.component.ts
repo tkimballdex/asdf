@@ -1,19 +1,23 @@
-import { Component, OnInit, ViewChild  } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter  } from '@angular/core';
 import { Router } from '@angular/router';
 import { GridComponent, ExcelExportProperties, ExcelExportService, Column } from '@syncfusion/ej2-angular-grids';
 import { SidebarComponent } from '@syncfusion/ej2-angular-navigations';
 import { CustomerRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
 import { AppRepository } from '../shared/app.repository';
+import { ServiceService } from '../service.service';
 
 @Component({
     selector: 'customer-list',
     templateUrl: './list.component.html',
     styleUrls: ['./list.component.scss']
 })
-export class CustomerListComponent extends PageComponent implements OnInit {   
+export class CustomerListComponent extends PageComponent implements OnInit {  
+    
+    
+    @Output() myevent = new EventEmitter();
       
-    constructor(private repository: CustomerRepository, private router: Router, private appRepository: AppRepository) {
+    constructor(private service: ServiceService,  private repository: CustomerRepository, private router: Router, private appRepository: AppRepository) {
         super();
     }
     //------------------------------------------------------------------------------------------------------------------------
@@ -56,11 +60,13 @@ export class CustomerListComponent extends PageComponent implements OnInit {
         (this.grid.columns[0] as Column).visible = true;
     }
     //------------------------------------------------------------------------------------------------------------------------
-    toggleMessage(): void  {
-        this.sidebarEmailInstance.toggle();
+    open(): void  {
+       this.service.openSidebar();
     }
     //------------------------------------------------------------------------------------------------------------------------
-
+    method(): void{
+        this.myevent.emit();
+    }
 
 
 
