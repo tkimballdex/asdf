@@ -64,6 +64,9 @@ export interface Privileges {
     sites: PrivilegeSet;
     locations: PrivilegeSet;
     vendors: PrivilegeSet;
+    testTypes: PrivilegeSet;
+    samples: PrivilegeSet;
+    tests: PrivilegeSet;
 }
 
 export interface MenuItem {
