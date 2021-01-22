@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
     //-------------------------------------------------------------------------------------
     async ngOnInit() {
         this.username = this.appRepository.userName;
-        this.sidebardisplaysize = this.sidebarMenuInstance.isOpen ? this.sidebarwidth : this.dockSize;
+        // this.sidebardisplaysize = this.sidebarMenuInstance.isOpen ? this.sidebarwidth : this.dockSize;
     }
     //-------------------------------------------------------------------------------------
     public selectMainMenu(args: MenuEventArgs): void {
@@ -100,7 +100,8 @@ export class AppComponent implements OnInit {
                 { id: '/customer/list', text: 'Customers' },
                 { id: '/site/list', text: 'Sites' },
                 { id: '/location/list', text: 'Locations' },
-                { id: '/vendor/list', text: 'Vendors' }
+                { id: '/vendor/list', text: 'Vendors' },
+                { id: '/test/list', text: 'Test Types' }
             ]
         },
         {

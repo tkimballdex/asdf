@@ -46,6 +46,7 @@ import { LocationModule } from './location/module';
 import { VendorModule } from './vendor/module';
 import { DashboardModule } from './dashboard/module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TestModule } from './test/test.module';
 
 
 export function MSALConfigFactory(): Configuration {
@@ -72,6 +73,7 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
         UserModule,
         CustomerModule,
         SiteModule,
+        TestModule,
         LocationModule,
         DashboardModule,
         TextBoxModule,
