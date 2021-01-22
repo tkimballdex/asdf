@@ -7,18 +7,18 @@ export class SiteRepository {
     }
 
     public save(record: any) {
-        return this.http.post<any>(`/test/save`, record);
+        return this.http.post<any>(`/testType/save`, record);
     }
 
     public delete(id: string) {
-        return this.http.post<any>(`/location/delete/${id}`);
+        return this.http.post<any>(`/testType/delete/${id}`);
     }
 
     public get(id: string) {
-        return this.http.post(`/location/get/${id}`);
+        return this.http.post(`/testType/get/${id}`);
     }
 
     public list(filter: any) {
-        return this.http.post(`/location/list`, filter);
+        return this.http.post(`/testType/list`, filter);
     }
 }

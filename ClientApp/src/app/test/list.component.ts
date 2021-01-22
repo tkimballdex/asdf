@@ -5,11 +5,11 @@ import { PageComponent } from '../shared/page.component';
 import { AppRepository } from "../shared/app.repository";
 
 @Component({
-  selector: 'app-testlist',
-  templateUrl: './testlist.component.html',
-  styleUrls: ['./testlist.component.css']
+  selector: 'app-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.css']
 })
-export class TestListComponent extends PageComponent implements OnInit {
+export class ListComponent extends PageComponent implements OnInit {
   constructor(private repository: SiteRepository, private router: Router, private appRepository: AppRepository) {
     super();
 }

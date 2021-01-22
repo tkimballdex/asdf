@@ -46,7 +46,7 @@ import { LocationModule } from './location/module';
 import { VendorModule } from './vendor/module';
 import { DashboardModule } from './dashboard/module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TestModule } from './test/test.module';
+import { TestModule } from './test/module';
 
 
 export function MSALConfigFactory(): Configuration {

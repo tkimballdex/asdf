@@ -6,11 +6,11 @@ import { PageComponent } from '../shared/page.component';
 import { SiteRepository } from './repository';
 
 @Component({
-  selector: 'app-testedit',
-  templateUrl: './testedit.component.html',
-  styleUrls: ['./testedit.component.css']
+  selector: 'app-edit',
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.css']
 })
-export class TestEditComponent extends PageComponent implements OnInit {
+export class EditComponent extends PageComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private repository: SiteRepository) {
     super();
 }

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TestListComponent } from './testlist.component';
-import { TestEditComponent } from './testedit.component';
+import { ListComponent } from './list.component';
+import { EditComponent } from './edit.component';
 import { RouterModule } from '@angular/router';
 import { MsalGuard } from '@azure/msal-angular';
 
@@ -14,15 +14,15 @@ import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 
 @NgModule({
-  declarations: [TestListComponent, TestEditComponent],
+  declarations: [ListComponent, EditComponent],
   imports: [GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule,
     CommonModule, DatePickerModule, SwitchModule,
     TextBoxModule,
     CommonModule,
     RouterModule.forRoot([
-        {path: 'test/list', component: TestListComponent, canActivate:[MsalGuard]},
-        {path: 'test/edit/:id', component: TestEditComponent, canActivate:[MsalGuard]},
-        {path: 'test/add', component: TestEditComponent, canActivate:[MsalGuard]}
+        {path: 'test/list', component: ListComponent, canActivate:[MsalGuard]},
+        {path: 'test/edit/:id', component: EditComponent, canActivate:[MsalGuard]},
+        {path: 'test/add', component: EditComponent, canActivate:[MsalGuard]}
     ])
   ]
 })
