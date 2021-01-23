@@ -44,6 +44,7 @@ import { CustomerModule } from './customer/module';
 import { SiteModule } from './site/module';
 import { LocationModule } from './location/module';
 import { VendorModule } from './vendor/module';
+import { SampleModule } from './sample/module';
 import { DashboardModule } from './dashboard/module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TestModule } from './test/module';
@@ -78,6 +79,7 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
         DashboardModule,
         TextBoxModule,
         VendorModule,
+        SampleModule,
         RouterModule.forRoot([
     { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [MsalGuard] },
     { path: 'account/tenant', component: ChooseTenantComponent, canActivate: [MsalGuard] },
