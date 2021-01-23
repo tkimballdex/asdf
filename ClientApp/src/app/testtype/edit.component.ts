@@ -3,15 +3,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DialogUtility, Dialog } from '@syncfusion/ej2-popups';
 import { AppRepository } from "../shared/app.repository";
 import { PageComponent } from '../shared/page.component';
-import { SiteRepository } from './repository';
+import { TestTypeRepository } from './repository';
 
 @Component({
-  selector: 'app-edit',
+  selector: 'testtype-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css']
 })
-export class EditComponent extends PageComponent implements OnInit {
-  constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private repository: SiteRepository) {
+export class TestTypeEditComponent extends PageComponent implements OnInit {
+    constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private repository: TestTypeRepository) {
     super();
 }
 
@@ -21,15 +21,11 @@ public deleteDialog: Dialog;
 async ngOnInit() {
     this.showSpinner();
     this.app = await this.appRepository.getData();
-    this.privileges = this.app.privileges.sites;
+    this.privileges = this.app.privileges.testTypes;
 
     var id = this.route.snapshot.paramMap.get('id');
     this.record = await this.repository.get(id);
-    this.hideSpinner();
-
-    if (id == null) {
-        this.record.customerId = this.route.snapshot.paramMap.get('customerId');
-    }
+    this.hideSpinner();    
 }
 
 async save() {
@@ -51,15 +47,15 @@ async save() {
         }
 
         if (success && add) {
-            setTimeout(() => this.router.navigate(['/site/edit', returnValue.id]), 1000);
+            setTimeout(() => this.router.navigate(['/testtype/edit', returnValue.id]), 1000);
         }
     }
 }
 
 delete() {
     this.deleteDialog = DialogUtility.confirm({
-        title: 'Delete Site',
-        content: `Are you sure you want to delete this Site <b>${this.record.userName}</b>?`,
+        title: 'Delete Test Type',
+        content: `Are you sure you want to delete the Test Type <b>${this.record.name}</b>?`,
         okButton: { click: this.deleteOK.bind(this) }
     });
 }
@@ -75,7 +71,7 @@ async deleteOK() {
     }
     else {
         this.showDeleteMessage(true);
-        setTimeout(() => this.router.navigate(['/customer/edit', this.record.customerId]), 1000);
+        setTimeout(() => this.router.navigate(['/testtype/list']), 1000);
     }
 }
 }

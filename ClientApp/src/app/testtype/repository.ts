@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { MsalHttpClient } from '../shared/msal-http';
 
 @Injectable({ providedIn: 'root' })
-export class SiteRepository {
+export class TestTypeRepository {
     constructor(private http: MsalHttpClient) {
     }
 

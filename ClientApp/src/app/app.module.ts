@@ -3,10 +3,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
 import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
-
-
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -47,7 +44,7 @@ import { VendorModule } from './vendor/module';
 import { SampleModule } from './sample/module';
 import { DashboardModule } from './dashboard/module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TestModule } from './test/module';
+import { TestTypeModule } from './testtype/module';
 
 
 export function MSALConfigFactory(): Configuration {
@@ -74,7 +71,7 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
         UserModule,
         CustomerModule,
         SiteModule,
-        TestModule,
+        TestTypeModule,
         LocationModule,
         DashboardModule,
         TextBoxModule,

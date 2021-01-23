@@ -91,7 +91,7 @@ export class AppComponent implements OnInit {
         {
             text: 'Samples',
             iconCss: 'fal fa-vials',
-            id: '/'
+            id: '/sample/list'
         },
         {
             text: 'Manage',
@@ -101,8 +101,7 @@ export class AppComponent implements OnInit {
                 { id: '/site/list', text: 'Sites' },
                 { id: '/location/list', text: 'Locations' },
                 { id: '/vendor/list', text: 'Vendors' },
-                { id: '/test/list', text: 'Test Types' },
-                { id: '/sample/list', text: 'Samples' }
+                { id: '/testtype/list', text: 'Test Types' }
             ]
         },
         {
