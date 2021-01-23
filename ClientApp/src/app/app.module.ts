@@ -44,10 +44,10 @@ import { CustomerModule } from './customer/module';
 import { SiteModule } from './site/module';
 import { LocationModule } from './location/module';
 import { VendorModule } from './vendor/module';
+import { TestModule } from './test/module';
 import { SampleModule } from './sample/module';
 import { DashboardModule } from './dashboard/module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TestModule } from './test/module';
 
 
 export function MSALConfigFactory(): Configuration {
@@ -74,11 +74,11 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
         UserModule,
         CustomerModule,
         SiteModule,
-        TestModule,
         LocationModule,
         DashboardModule,
         TextBoxModule,
         VendorModule,
+        TestModule,
         SampleModule,
         RouterModule.forRoot([
     { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [MsalGuard] },

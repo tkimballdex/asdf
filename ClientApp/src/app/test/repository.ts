@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { MsalHttpClient } from '../shared/msal-http';
 
 @Injectable({ providedIn: 'root' })
-export class SiteRepository {
+export class TestTypeRepository {
     constructor(private http: MsalHttpClient) {
     }
 
@@ -15,10 +15,11 @@ export class SiteRepository {
     }
 
     public get(id: string) {
-        return this.http.post(`/testType/get/${id}`);
+        return this.http.post(`/vendor/get/${id}`);
     }
 
     public list(filter: any) {
-        return this.http.post(`/testType/list`, filter);
+        return this.http.post(`/vendor/list`, filter);
     }
+
 }
