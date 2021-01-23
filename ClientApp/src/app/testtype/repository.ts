@@ -21,4 +21,5 @@ export class TestTypeRepository {
     public list(filter: any) {
         return this.http.post(`/testType/list`, filter);
     }
+
 }

@@ -1,7 +1,7 @@
 <div id="edit-view" *ngIf="record" class="container-fluid">
     <div class="row d-flex align-items-center edit-header">
         <div class="col-md-6 d-flex">
-            <span class="edit-header-icon"><i class="fas fa-handshake-alt"></i></span>
+            <span class="edit-header-icon"><i class="fas fa-vial"></i></span>
             <span class="edit-header-title">Sample</span>
         </div>
         <div class="col-md-6 d-flex justify-content-end">
@@ -40,13 +40,13 @@
                                     <ejs-datepicker [(value)]="record.scheduledDate" placeholder="Scheduled Date" floatLabelType="Always"></ejs-datepicker>
                                 </div>
                                 <div class="col-md-6">
-                                    <ejs-datepicker [(value)]="record.collectedDate" placeholder="Collected Date*" floatLabelType="Always"></ejs-datepicker>
+                                    <ejs-textbox [(value)]="record.collectedBy" placeholder="Collected By*" floatLabelType="Always"></ejs-textbox>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <ejs-textbox [(value)]="record.collectedBy" placeholder="Collected By*" floatLabelType="Always"></ejs-textbox>
+                                    <ejs-datepicker [(value)]="record.collectedDate" placeholder="Collected Date*" floatLabelType="Always"></ejs-datepicker>
                                 </div>
                                 <div class="col-md-3">
                                     <ejs-textbox [(value)]="record.volume" type="number" placeholder="Volume*" floatLabelType="Always"></ejs-textbox>
@@ -108,7 +108,7 @@
                                 <div class="col d-flex align-items-end subitem-list-header">
                                     <span class="subitem-list-icon"><i class="fas fa-chart-network"></i></span>
                                     <span class="subitem-list-title">Servicing Sites</span>
-                                    <span class="subitem-list-add"><button ejs-button cssClass="e-outline" [routerLink]="['/site/add', record.id]">+ Add</button></span>
+                                    <span class="subitem-list-add"><button ejs-button cssClass="e-outline" [routerLink]="['/sample/add', record.id]">+ Add</button></span>
                                 </div>
                             </div>
                             <div class="row">                                
@@ -144,7 +144,7 @@
 
         <div class="col-md-6 d-flex justify-content-end">
             <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
-            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/customer/list']">Close</button>
+            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/sample/list']">Close</button>
         </div>
     </div>
     <ejs-toast #toast></ejs-toast>
