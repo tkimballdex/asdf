@@ -40,13 +40,13 @@
                                     <ejs-datepicker [(value)]="record.scheduledDate" placeholder="Scheduled Date" floatLabelType="Always"></ejs-datepicker>
                                 </div>
                                 <div class="col-md-6">
-                                    <ejs-datepicker [(value)]="record.collectedDate" placeholder="Collected Date*" floatLabelType="Always"></ejs-datepicker>
+                                    <ejs-textbox [(value)]="record.collectedBy" placeholder="Collected By*" floatLabelType="Always"></ejs-textbox>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <ejs-textbox [(value)]="record.collectedBy" placeholder="Collected By*" floatLabelType="Always"></ejs-textbox>
+                                    <ejs-datepicker [(value)]="record.collectedDate" placeholder="Collected Date*" floatLabelType="Always"></ejs-datepicker>
                                 </div>
                                 <div class="col-md-3">
                                     <ejs-textbox [(value)]="record.volume" type="number" placeholder="Volume*" floatLabelType="Always"></ejs-textbox>
