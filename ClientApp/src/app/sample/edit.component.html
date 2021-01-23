@@ -108,7 +108,7 @@
                                 <div class="col d-flex align-items-end subitem-list-header">
                                     <span class="subitem-list-icon"><i class="fas fa-chart-network"></i></span>
                                     <span class="subitem-list-title">Servicing Sites</span>
-                                    <span class="subitem-list-add"><button ejs-button cssClass="e-outline" [routerLink]="['/site/add', record.id]">+ Add</button></span>
+                                    <span class="subitem-list-add"><button ejs-button cssClass="e-outline" [routerLink]="['/sample/add', record.id]">+ Add</button></span>
                                 </div>
                             </div>
                             <div class="row">                                
@@ -144,7 +144,7 @@
 
         <div class="col-md-6 d-flex justify-content-end">
             <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
-            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/customer/list']">Close</button>
+            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/sample/list']">Close</button>
         </div>
     </div>
     <ejs-toast #toast></ejs-toast>
