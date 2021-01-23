@@ -4,7 +4,6 @@ import { ItemModel } from '@syncfusion/ej2-angular-splitbuttons';
 import { Menu, MenuItemModel } from '@syncfusion/ej2-navigations';
 import { MsalService } from '@azure/msal-angular';
 import { Router } from "@angular/router";
-import { MsalHttpClient } from './shared/msal-http';
 import { AppRepository } from './shared/app.repository';
 
 
@@ -26,7 +25,7 @@ export class AppComponent implements OnInit {
     public sidebardisplaysize = '180px';
     public AccountMenuItem: ItemModel[];
     //-------------------------------------------------------------------------------------
-    constructor(private authService: MsalService, private router: Router, private http: MsalHttpClient, public appRepository: AppRepository) {
+    constructor(private authService: MsalService, private router: Router, public appRepository: AppRepository) {
         console.dir(this.authService.getAccount());
 
         this.AccountMenuItem = [
