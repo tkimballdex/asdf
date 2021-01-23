@@ -7,19 +7,19 @@ export class SampleRepository {
     }
 
     public save(record: any) {
-        return this.http.post<any>(`/vendor/save`, record);
+        return this.http.post<any>(`/sample/save`, record);
     }
 
     public delete(id: string) {
-        return this.http.post<any>(`/vendor/delete/${id}`);
+        return this.http.post<any>(`/sample/delete/${id}`);
     }
 
     public get(id: string) {
-        return this.http.post(`/vendor/get/${id}`);
+        return this.http.post(`/sample/get/${id}`);
     }
 
     public list(filter: any) {
-        return this.http.post(`/vendor/list`, filter);
+        return this.http.post(`/sample/list`, filter);
     }
 
 }

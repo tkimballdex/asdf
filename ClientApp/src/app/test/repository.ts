@@ -15,11 +15,11 @@ export class TestTypeRepository {
     }
 
     public get(id: string) {
-        return this.http.post(`/vendor/get/${id}`);
+        return this.http.post(`/testType/get/${id}`);
     }
 
     public list(filter: any) {
-        return this.http.post(`/vendor/list`, filter);
+        return this.http.post(`/testType/list`, filter);
     }
 
 }
