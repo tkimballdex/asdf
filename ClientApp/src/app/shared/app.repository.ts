@@ -1,6 +1,33 @@
 import { Injectable } from "@angular/core";
 import { MsalHttpClient } from './msal-http';
 import { MsalService } from '@azure/msal-angular';
+import { Subject, Observable } from 'rxjs';
+import { filter } from 'rxjs/operators'
+
+export enum AppEventType {
+    SendEmail = 'SendEmail'
+}
+
+export class AppEvent<T> {
+    constructor(
+        public type: AppEventType,
+        public payload: T,
+    ) { }
+}
+
+@Injectable({ providedIn: 'root' })
+export class EventQueueService {
+
+    private eventBrocker = new Subject<AppEvent<any>>();
+
+    on(eventType: AppEventType): Observable<AppEvent<any>> {
+        return this.eventBrocker.pipe(filter(event => event.type === eventType));
+    }
+
+    dispatch<T>(event: AppEvent<T>): void {
+        this.eventBrocker.next(event);
+    }
+}
 
 @Injectable({ providedIn : 'root'})
 export class AppRepository {
@@ -92,6 +119,7 @@ export interface VendorType {
 }
 
 export interface AppData {
+    email: string;
     privileges: Privileges;
     states: State[];
     frequencies: Frequency[];

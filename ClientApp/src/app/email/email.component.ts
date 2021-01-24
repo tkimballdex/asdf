@@ -1,16 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { SidebarComponent, MenuEventArgs } from '@syncfusion/ej2-angular-navigations';
+import { EmailRepository } from './repository';
+import { AppRepository, AppData } from '../shared/app.repository';
 
 @Component({
-  selector: 'app-email',
-  templateUrl: './email.component.html',
-  styleUrls: ['./email.component.css']
+    selector: 'app-email',
+    templateUrl: './email.component.html',
+    styleUrls: ['./email.component.css']
 })
 export class EmailComponent implements OnInit {
+    constructor(private appRepository: AppRepository, private repository: EmailRepository) { }
 
-  constructor() { }
+    public app: AppData;
+    public list: [];
+    public subject: string;
+    public body: string;
 
-  ngOnInit(): void {
-  }
+    async ngOnInit() {
+        this.app = await this.appRepository.getData();
+    }
 
+    sendEmail() {
+        var email = {
+            subject: this.subject,
+            body: this.body,
+            contacts: this.list
+        };
+
+        this.repository.sendEmail(email);
+    }
 }
