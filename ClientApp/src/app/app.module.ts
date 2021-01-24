@@ -3,10 +3,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
 import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
-
-
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -44,10 +41,10 @@ import { CustomerModule } from './customer/module';
 import { SiteModule } from './site/module';
 import { LocationModule } from './location/module';
 import { VendorModule } from './vendor/module';
-import { TestModule } from './test/module';
 import { SampleModule } from './sample/module';
 import { DashboardModule } from './dashboard/module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TestTypeModule } from './testtype/module';
 
 
 export function MSALConfigFactory(): Configuration {
@@ -74,11 +71,11 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
         UserModule,
         CustomerModule,
         SiteModule,
+        TestTypeModule,
         LocationModule,
         DashboardModule,
         TextBoxModule,
         VendorModule,
-        TestModule,
         SampleModule,
         RouterModule.forRoot([
     { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [MsalGuard] },

@@ -5,139 +5,91 @@
             <span class="edit-header-title">Sample</span>
         </div>
         <div class="col-md-6 d-flex justify-content-end">
-            <ejs-switch [(checked)]="record.active" onLabel="Active" offLabel="Not Active" style="width:100px;height:32px;"></ejs-switch>
+            
         </div>        
     </div>
 
-    <div class="row d-flex pad-t20">
-        <div class="col-md-12 d-flex">
-            <ejs-tab id="edit-tab" class="e-fill">
-                    <e-tabitems>
-                        <e-tabitem>
-                        <ng-template #headerText>
-                            <div>Information</div>
-                        </ng-template>
-                        <ng-template #content>
-                            <div class="row pad-t20">
-                                <div class="col-md-12">
-                                    <ejs-dropdownlist [dataSource]="app.location" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.location" placeholder="Location*" floatLabelType="Always"></ejs-dropdownlist>
-                                </div>
-                            </div>
+    <div class="row pad-t10">
+        <div class="col-md-6">
+            <ejs-textbox [(value)]="record.referencerNo" placeholder="ReferenceNo" floatLabelType="Always"></ejs-textbox>
+        </div>
+        <div class="col-md-6">
+            <ejs-datepicker [(value)]="record.scheduledDate" placeholder="Scheduled Date" floatLabelType="Always"></ejs-datepicker>
+        </div>
+    </div>
+    
+    <div class="row pad-t20">
+        <div class="col-md-6">
+            <ejs-textbox [(value)]="record.site" disabled placeholder="Site" floatLabelType="Always"></ejs-textbox>
+        </div>
+        <div class="col-md-6">
+            <ejs-textbox [(value)]="record.location" disabled placeholder="Location" floatLabelType="Always"></ejs-textbox>
+        </div>
+    </div>    
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <ejs-textbox id="edit-logisticVendor" [(value)]="record.logisticVendor" disabled placeholder="LogisticVendor" floatLabelType="Always"></ejs-textbox>
-                                </div>
-                            </div>
+    <div class="row pad-t20">
+        <div class="col-md-12">
+            <ejs-textbox [(value)]="record.logisticVendor" disabled placeholder="Logistics Vendor" floatLabelType="Always"></ejs-textbox>
+        </div>
+    </div>
+                         
+    <div class="row">
+        <div class="col-md-6">
+            <ejs-textbox [(value)]="record.collectedBy" placeholder="Collected By" floatLabelType="Always"></ejs-textbox>
+        </div>
+        <div class="col-md-6">
+            <ejs-datepicker [(value)]="record.collectedDate" placeholder="Collected Date" floatLabelType="Always"></ejs-datepicker>
+        </div>
+    </div>   
 
-                            <div class="row pad-t20">
-                                <div class="col-12">
-                                    <ejs-textbox [(value)]="record.referencerNo" placeholder="ReferenceNo *" floatLabelType="Always"></ejs-textbox>
-                                </div>
-                            </div>                     
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <ejs-datepicker [(value)]="record.scheduledDate" placeholder="Scheduled Date" floatLabelType="Always"></ejs-datepicker>
-                                </div>
-                                <div class="col-md-6">
-                                    <ejs-textbox [(value)]="record.collectedBy" placeholder="Collected By*" floatLabelType="Always"></ejs-textbox>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <ejs-datepicker [(value)]="record.collectedDate" placeholder="Collected Date*" floatLabelType="Always"></ejs-datepicker>
-                                </div>
-                                <div class="col-md-3">
-                                    <ejs-textbox [(value)]="record.volume" type="number" placeholder="Volume*" floatLabelType="Always"></ejs-textbox>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <ejs-textbox [(value)]="record.temperature" placeholder="Temperature*" floatLabelType="Always"></ejs-textbox>
-                                </div>
-                                <div class="col-md-6">
-                                    <ejs-textbox [(value)]="record.humidity" type="number" placeholder="Humidity*" floatLabelType="Always"></ejs-textbox>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <ejs-textbox [(value)]="record.acidity" placeholder="Acidity*" floatLabelType="Always"></ejs-textbox>
-                                </div>
-                                <div class="col-md-6">
-                                    <ejs-datepicker [(value)]="record.shippedDate" type="number" placeholder="ShippedDate*" floatLabelType="Always"></ejs-datepicker>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <ejs-textbox [(value)]="record.trackingNo" placeholder="TrackingNo*" floatLabelType="Always"></ejs-textbox>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <ejs-textbox id="edit-logisticVendor" [(value)]="record.labVendor" disabled placeholder="Lab Vendor" floatLabelType="Always"></ejs-textbox>
-                                </div>
-                                <div class="col-md-6">
-                                    <ejs-datepicker [(value)]="record.receivedDate" type="number" placeholder="Received Date*" floatLabelType="Always"></ejs-datepicker>
-                                </div>
-                            </div>
-
-                            <div class="row pad-t20">
-                                <div class="col-6">
-                                    <ejs-checkbox label="Qc Pass"  [(value)]="record.qCPass" placeholder="QC Pass" floatLabelType="Always"></ejs-checkbox>
-                                </div>
-                            </div>
-
-                            <div class="row pad-t20">
-                                <div class="col-md-12">
-                                    <ejs-dropdownlist [dataSource]="app.qCFailureReason" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.qCFailureReason" placeholder="QC Failure Reason*" floatLabelType="Always"></ejs-dropdownlist>
-                                </div>
-                            </div>
-                        </ng-template>
-                    </e-tabitem>
-                    <e-tabitem>
-                        <ng-template #headerText>
-                            <div>Assignments</div>
-                        </ng-template>
-                        <ng-template #content>                            
-                            <div class="row d-flex align-items-end">
-                                <div class="col d-flex align-items-end subitem-list-header">
-                                    <span class="subitem-list-icon"><i class="fas fa-chart-network"></i></span>
-                                    <span class="subitem-list-title">Servicing Sites</span>
-                                    <span class="subitem-list-add"><button ejs-button cssClass="e-outline" [routerLink]="['/sample/add', record.id]">+ Add</button></span>
-                                </div>
-                            </div>
-                            <div class="row">                                
-                                <div class="col-12 pad-t20">
-                                    <ejs-grid [dataSource]='sitesList' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="true" *ngIf="sitesList">
-                                        <e-columns>
-                                            <e-column width="70">
-                                                <ng-template #template let-data>
-                                                    <a [routerLink]="['/site/edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
-                                                </ng-template>
-                                            </e-column>
-                                            <e-column field='name' headerText='Name'></e-column>
-                                            <e-column field='address' headerText='Address'></e-column>
-                                            <e-column field='city' headerText='City'></e-column>
-                                            <e-column field='state' headerText='State'></e-column>
-                                            <e-column field='postalCode' headerText='Postal Code'></e-column>
-                                            <e-column field='phoneNo' headerText='Phone No'></e-column>
-                                        </e-columns>
-                                    </ejs-grid>
-                                </div>
-                            </div>                           
-                        </ng-template>
-                    </e-tabitem>
-                </e-tabitems>
-            </ejs-tab>
+    <div class="row pad-t20">
+        <div class="col-md-6">        
+            <ejs-numerictextbox [(value)]="record.volume" format='N1' min='0' max='500' step='1' placeholder="Volume" floatLabelType="Always"></ejs-numerictextbox>
+        </div>
+        <div class="col-md-6">
+            <ejs-numerictextbox [(value)]="record.temperature" format='N1' min='-100' max='150' step='0.1' placeholder="Temperature" floatLabelType="Always"></ejs-numerictextbox>
         </div>
     </div>
 
-    <div class="row d-flex edit-footer">
+    <div class="row">
+        <div class="col-md-6">
+            <ejs-numerictextbox [(value)]="record.acidity" format='N1' min='0' max='14' step='0.1' placeholder="Acidity" floatLabelType="Always"></ejs-numerictextbox>
+        </div>
+        <div class="col-md-6">
+            <ejs-numerictextbox [(value)]="record.humidity" format='N1' min='0' max='100' step='0.1' placeholder="Humidity" floatLabelType="Always"></ejs-numerictextbox>
+        </div>
+    </div>
+
+    <div class="row pad-t20">
+        <div class="col-md-12">
+            <ejs-textbox [(value)]="record.labVendor" disabled placeholder="Ship To Lab" floatLabelType="Always"></ejs-textbox>
+        </div>
+    </div>
+
+    <div class="row">        
+        <div class="col-md-6">
+            <ejs-datepicker [(value)]="record.shippedDate" type="number" placeholder="Shipped Date" floatLabelType="Always"></ejs-datepicker>
+        </div>
+        <div class="col-md-6">
+            <ejs-textbox [(value)]="record.trackingNo" placeholder="Tracking No*" floatLabelType="Always"></ejs-textbox>
+        </div>
+    </div>  
+
+    <div class="row pad-t20">
+        <div class="col-md-6">
+            <ejs-datepicker [(value)]="record.receivedDate" type="number" placeholder="Received Date" floatLabelType="Always"></ejs-datepicker>
+        </div>
+    </div>
+
+    <div class="row pad-t20 pad-b20">
+        <div class="col-md-6">
+            <ejs-checkbox label="QC Pass" [(value)]="record.qCPass" placeholder="QC Pass" floatLabelType="Always"></ejs-checkbox>
+         <ejs-dropdownlist [dataSource]="record.qcFailureReasons" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.qcfailureReasonId" placeholder="QC Failure Reason" floatLabelType="Always"></ejs-dropdownlist>
+        
+        </div>
+    </div>
+    
+    <div class="row d-flex align-items-center edit-footer">
         <div class="col-md-6 d-flex justify-content-start">
             <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
         </div>

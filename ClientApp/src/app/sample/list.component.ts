@@ -17,9 +17,12 @@ export class SampleListComponent extends PageComponent implements OnInit {
     //------------------------------------------------------------------------------------------------------------------------
     public list: any;
     public name: any;
+    public dateFormat: any;
     @ViewChild('grid') public grid: GridComponent;
     //------------------------------------------------------------------------------------------------------------------------
     async ngOnInit() {
+        this.dateFormat = {type:'date', format:'MM/dd/yyyy'};
+
         if (this.appRepository.tenantId) {
             this.search();
         }
