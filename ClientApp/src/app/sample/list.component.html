@@ -27,12 +27,13 @@
                             <a [routerLink]="['/sample/edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
                         </ng-template>
                     </e-column>
-                    <e-column field='scheduledDate' headerText='Scheduled Date'></e-column>
+                    <e-column field='scheduledDate' type='date' [format]='dateFormat' headerText='Scheduled For' width='150'></e-column>
                     <e-column field='site' headerText='Site'></e-column>
                     <e-column field='location' headerText='Location'></e-column>
                     <e-column field='city' headerText='City'></e-column>
                     <e-column field='logisticVendor' headerText='Logistic Vendor'></e-column>
                     <e-column field='labVendor' headerText='Ship To Lab'></e-column>
+                    <e-column field='collectedDate' type='date' [format]='dateFormat' headerText='Collected On' width='150'></e-column>
                 </e-columns>
             </ejs-grid>
         </div>

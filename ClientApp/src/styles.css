@@ -134,7 +134,7 @@ a {
 }
 
 #edit-view .edit-header {
-    border-bottom: 1px solid #e6ecf5;
+    border-bottom: 2px solid #e6ecf5;
     padding-bottom:10px;
 }
 
@@ -142,19 +142,30 @@ a {
     display: inline-block;
     font-size: 1.5em;
     color: #0080ff;
-    padding-right: 10px;
+    padding: 10px 10px 10px 0px;
 }
 
 #edit-view .edit-header-title {
     display: inline-block;
     font-size: 1.5em;
     font-weight: 400;
-    padding-right: 20px;
+    padding: 10px 20px 10px 0px;
 }
 
 #edit-view .e-control {
     width: 100%;
 }
+
+#edit-view .e-control .e-date-wrapper {
+    max-width: 180px;
+    min-width: 180px;
+}
+
+#edit-view .e-numeric {
+    max-width: 180px;
+    min-width: 180px;
+}
+
 #edit-view label.e-float-text {
     top: 75%;
 }
@@ -184,7 +195,7 @@ a {
 }
 
 #edit-view .edit-footer {
-    border-top: 1px solid #e6ecf5;
+    border-top: 2px solid #e6ecf5;
     padding-top: 15px;
 }
 #edit-view .edit-footer button
