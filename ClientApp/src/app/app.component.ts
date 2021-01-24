@@ -59,9 +59,8 @@ export class AppComponent implements OnInit {
     }
     //-------------------------------------------------------------------------------------
     public openEmailSidebar(data) {
-        console.dir(data.payload);
-        this.emailComponent.list = data.payload;
-        this.emailSidebar.toggle();
+        this.emailComponent.setList(data.payload);
+        this.emailSidebar.show();
     }
     //-------------------------------------------------------------------------------------
     public selectMainMenu(args: MenuEventArgs): void {
