@@ -7,7 +7,10 @@ import { DialogModule } from '@syncfusion/ej2-angular-popups';
 		PageComponent
 	],
 	exports: [
-		PageComponent, DialogModule
-	]
+		PageComponent
+    ],
+    imports: [
+        DialogModule
+    ]
 })
 export class SharedModule { }

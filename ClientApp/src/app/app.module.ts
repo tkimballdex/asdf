@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
+import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -78,15 +79,15 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
         VendorModule,
         SampleModule,
         RouterModule.forRoot([
-    { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [MsalGuard] },
-    { path: 'account/tenant', component: ChooseTenantComponent, canActivate: [MsalGuard] },
-    { path: 'account/logout', component: LogoutComponent }
-], { relativeLinkResolution: 'legacy' }),
+            { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [MsalGuard] },
+            { path: 'account/tenant', component: ChooseTenantComponent, canActivate: [MsalGuard] },
+            { path: 'account/logout', component: LogoutComponent }
+        ], { relativeLinkResolution: 'legacy' }),
         MsalModule,
-        SidebarModule, MenuAllModule, DropDownListModule, TreeViewAllModule, ListViewAllModule, MenuModule, 
-        DropDownButtonModule, GridModule, ComboBoxModule, SwitchModule, DialogModule, FontAwesomeModule, BrowserAnimationsModule
+        SidebarModule, MenuAllModule, DropDownListModule, TreeViewAllModule, ListViewAllModule, MenuModule,
+        DropDownButtonModule, GridModule, ComboBoxModule, SwitchModule, DialogModule, FontAwesomeModule, BrowserAnimationsModule, ToastAllModule
     ],
-    schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,
