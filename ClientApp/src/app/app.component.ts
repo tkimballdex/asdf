@@ -98,7 +98,11 @@ export class AppComponent implements OnInit {
         {
             text: 'Samples',
             iconCss: 'fal fa-vials',
-            id: '/sample/list'
+            items: [   
+            { id: '/sample/list', text: 'Samples' },
+            { id: '/sampletest/list', text: 'Sample Test' },
+            { id: '/customer/list', text: 'Other' }
+            ],
         },
         {
             text: 'Manage',
