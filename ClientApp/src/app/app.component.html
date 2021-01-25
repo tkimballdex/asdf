@@ -12,6 +12,7 @@
                         <button ejs-dropdownbutton id="accountMenu" [items]='AccountMenuItem' [content]='username' (select)='selectAccountMenu($event)' iconCss="fas fa-user"></button>
                     </div>
                 </div>
+
                 <!--end of header-section  declaration -->
                 <!-- sidebar element declaration -->
                 <ejs-sidebar id="sidebar-menu" class="dock-menu" #sidebarMenuInstance [enableDock]='enableDock' [width]='sidebarwidth' [dockSize]='dockSize' [mediaQuery]='mediaQuery' [target]='target' (created)="created()">
@@ -21,9 +22,11 @@
                         <ejs-menu [items]='menuItems' orientation='Vertical' cssClass='dock-menu' (select)='selectMainMenu($event)'></ejs-menu>
                     </div>
                 </ejs-sidebar>
-                <!-- <ejs-sidebar id="sidebar-option" #sidebarOption width='300px' dockSize='0px' [isOpen]='isOpen' [mediaQuery]='mediaQuery' [target]='target' position="Right">
-                                   <app-email></app-email>
-                </ejs-sidebar> -->
+
+                <ejs-sidebar id="sidebar-option" #emailSidebar width='300px' dockSize='0px' [mediaQuery]='mediaQuery' [target]='target' position="Right" (created)="createdEmailSidebar()">
+                    <app-email #emailComponent></app-email>
+                </ejs-sidebar>
+
                 <!-- end of sidebar element -->
                 <!-- main-content declaration -->
                 <div class="main-content" id="maintext">

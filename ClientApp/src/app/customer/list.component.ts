@@ -4,7 +4,7 @@ import { GridComponent, ExcelExportProperties, ExcelExportService, Column } from
 import { SidebarComponent } from '@syncfusion/ej2-angular-navigations';
 import { CustomerRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
-import { AppRepository } from '../shared/app.repository';
+import { AppRepository, EventQueueService, AppEvent, AppEventType } from '../shared/app.repository';
 import { ServiceService } from '../service.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class CustomerListComponent extends PageComponent implements OnInit {
     
     @Output() myevent = new EventEmitter();
       
-    constructor(private service: ServiceService,  private repository: CustomerRepository, private router: Router, private appRepository: AppRepository) {
+    constructor(private service: ServiceService,  private repository: CustomerRepository, private router: Router, private appRepository: AppRepository, private eventQueue: EventQueueService) {
         super();
     }
     //------------------------------------------------------------------------------------------------------------------------
@@ -68,6 +68,13 @@ export class CustomerListComponent extends PageComponent implements OnInit {
         this.myevent.emit();
     }
 
+    validateEmail(email) {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
 
-
+    sendEmail(): void {
+        var email = this.list.map(x => { return this.validateEmail(x.contactEmail) ? { name: x.contactName, email: x.contactEmail } : null; }).filter(x => x != null);
+        this.eventQueue.dispatch(new AppEvent(AppEventType.SendEmail, email));
+    }
 }

@@ -1,4 +1,4 @@
-<div class="pad-20">
+<div class="pad-20" *ngIf="list">
     <div class="row d-flex align-items-end">
         <div class="col-md-6 d-flex align-items-end list-header">
             <span class="list-header-icon"><i class="fas fa-envelope"></i></span>
@@ -11,27 +11,29 @@
 
     <div class="row pad-t20">
         <div class="col-md-12">
-            <ejs-textbox placeholder="From" floatLabelType="Always" disabled></ejs-textbox>
+            <ejs-textbox placeholder="From" floatLabelType="Always" [value]="app.email" [readonly]="true"></ejs-textbox>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12 pad-t10">
-            <ejs-textbox placeholder="To" floatLabelType="Always" multiline='true'></ejs-textbox>
+            <ejs-textbox placeholder="To" floatLabelType="Always" multiline='true' [value]="list.length + ' recipients'" [readonly]="true"></ejs-textbox>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12 pad-t10">
-            <ejs-textbox placeholder="Subject" floatLabelType="Always" multiline='true'></ejs-textbox>
+            <ejs-textbox placeholder="Subject" floatLabelType="Always" multiline='true' [(value)]="subject"></ejs-textbox>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12 pad-t10">
-            <ejs-textbox placeholder="Body" floatLabelType="Always" multiline='true' rows="8"></ejs-textbox>
+            <ejs-textbox placeholder="Body" floatLabelType="Always" multiline='true' rows="8" [(value)]="body"></ejs-textbox>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6 pad-t10">
-            <button ejs-button cssClass="e-primary" iconCss="fal fa-paper-plane" style='width:130px;'>Send Email</button>
+            <button ejs-button cssClass="e-primary" iconCss="fal fa-paper-plane" style='width:130px;' (click)="sendEmail()">Send Email</button>
         </div>
     </div>
 </div>
+
+<ejs-toast #toast></ejs-toast>
