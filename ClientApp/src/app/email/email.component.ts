@@ -13,7 +13,7 @@ export class EmailComponent extends PageComponent implements OnInit {
         super();
     }
 
-    private list: [];
+    public list: [];
     public subject: string;
     public body: string;
 
