@@ -19,7 +19,7 @@ export class SampleRepository {
     }
 
     public list(filter: any) {
-        return this.http.post(`/sample/list`, filter);
+        return this.http.post(`/sampleTest/list`, filter);
     }
 
 }
