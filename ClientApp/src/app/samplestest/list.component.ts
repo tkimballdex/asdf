@@ -1,17 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { GridComponent, ExcelExportProperties, ExcelExportService, Column } from '@syncfusion/ej2-angular-grids';
-import { SampleRepository } from './repository';
+import { SampleTestRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
 import { AppRepository } from '../shared/app.repository';
 
 @Component({
-    selector: 'sample-list',
+    selector: 'sampletest-list',
     templateUrl: './list.component.html',
 })
 export class SampleTestListComponent extends PageComponent implements OnInit {
 
-    constructor(private repository: SampleRepository, private router: Router, private appRepository: AppRepository) {
+    constructor(private repository: SampleTestRepository, private router: Router, private appRepository: AppRepository) {
         super();
     }
     //------------------------------------------------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ export class SampleTestListComponent extends PageComponent implements OnInit {
         (this.grid.columns[0] as Column).visible = false;
         const excelExportProperties: ExcelExportProperties = {
             includeHiddenColumn: true,
-            fileName: 'vendors.xlsx'
+            fileName: 'sample-tests.xlsx'
         };
         this.grid.excelExport(excelExportProperties);
 

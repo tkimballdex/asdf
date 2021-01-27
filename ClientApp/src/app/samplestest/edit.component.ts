@@ -5,15 +5,15 @@ import { DialogUtility, Dialog } from '@syncfusion/ej2-popups';
 import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 import { AppRepository } from "../shared/app.repository";
 import { PageComponent } from '../shared/page.component';
-import { SampleRepository } from './repository';
+import { SampleTestRepository } from './repository';
 
 @Component({
-    selector: 'sample-edit',
+    selector: 'sampletest-edit',
     templateUrl: './edit.component.html',
     styleUrls: ['./edit.component.scss']
 })
 export class SampleTestEditComponent extends PageComponent implements OnInit {
-    constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private repository: SampleRepository) {
+    constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private repository: SampleTestRepository) {
         super();
     }
 
@@ -24,7 +24,7 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
     async ngOnInit() {       
         this.showSpinner();
         this.app = await this.appRepository.getData();
-        this.privileges = this.app.privileges.samples;
+        this.privileges = this.app.privileges.tests;
 
         var id = this.route.snapshot.paramMap.get('id');
         this.record = await this.repository.get(id);
@@ -50,15 +50,15 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
             }
 
             if (success && add) {
-                setTimeout(() => this.router.navigate(['/sample/edit', returnValue.id]), 1000);
+                setTimeout(() => this.router.navigate(['/sampletest/edit', returnValue.id]), 1000);
             }
         }
     }
     //-----------------------------------------------------------------------------------------
     delete() {
         this.deleteDialog = DialogUtility.confirm({
-            title: 'Delete Vendor',
-            content: `Are you sure you want to delete the vendor <b>${this.record.name}</b>?`,
+            title: 'Delete Test',
+            content: `Are you sure you want to delete the test <b>${this.record.referenceNo}</b>?`,
             okButton: { click: this.deleteOK.bind(this) }
         });
     }
@@ -74,7 +74,7 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
         }
         else {
             this.showDeleteMessage(true);
-            setTimeout(() => this.router.navigate(['/sample/list']), 1000);
+            setTimeout(() => this.router.navigate(['/sampletest/list']), 1000);
         }
     }
     //-----------------------------------------------------------------------------------------

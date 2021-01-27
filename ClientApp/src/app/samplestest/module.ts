@@ -14,6 +14,7 @@ import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { TabModule } from '@syncfusion/ej2-angular-navigations';
 import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,7 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
     ],
     imports: [
         GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule, 
-        TabModule, DatePickerModule, SwitchModule, NumericTextBoxModule, CommonModule,
+        TabModule, DatePickerModule, SwitchModule, NumericTextBoxModule, MatButtonToggleModule, CommonModule,
         RouterModule.forChild([
             { path: 'sampletest/list', component: SampleTestListComponent, canActivate: [MsalGuard] },
             { path: 'sampletest/add', component: SampleTestEditComponent, canActivate: [MsalGuard] },

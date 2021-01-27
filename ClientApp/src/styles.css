@@ -60,6 +60,7 @@ a {
 }
 
 #list-view .list-header-title {
+    font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
     display: inline-block;
     font-size: 1.5em;
     font-weight: 400;
@@ -146,6 +147,7 @@ a {
 }
 
 #edit-view .edit-header-title {
+    font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
     display: inline-block;
     font-size: 1.5em;
     font-weight: 400;
@@ -168,7 +170,7 @@ a {
 
 #edit-view .threeStateToggleBtn .mat-button-toggle .mat-button-toggle-label-content {
     line-height: 32px;
-    width: 60px;
+    min-width: 80px;
 }
 
 /* #edit-view .e-control .e-date-wrapper {

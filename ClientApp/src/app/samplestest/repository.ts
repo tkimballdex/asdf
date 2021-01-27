@@ -2,24 +2,24 @@ import { Injectable } from "@angular/core";
 import { MsalHttpClient } from '../shared/msal-http';
 
 @Injectable({ providedIn: 'root' })
-export class SampleRepository {
+export class SampleTestRepository {
     constructor(private http: MsalHttpClient) {
     }
 
     public save(record: any) {
-        return this.http.post<any>(`/sample/save`, record);
+        return this.http.post<any>(`/sampletest/save`, record);
     }
 
     public delete(id: string) {
-        return this.http.post<any>(`/sample/delete/${id}`);
+        return this.http.post<any>(`/sampletest/delete/${id}`);
     }
 
     public get(id: string) {
-        return this.http.post(`/sample/get/${id}`);
+        return this.http.post(`/sampletest/get/${id}`);
     }
 
     public list(filter: any) {
-        return this.http.post(`/sampleTest/list`, filter);
+        return this.http.post(`/sampletest/list`, filter);
     }
 
 }
