@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { CustomerListComponent } from './list.component';
 import { CustomerEditComponent } from './edit.component';
 import { MsalGuard } from '@azure/msal-angular';
-import { SidebarModule } from '@syncfusion/ej2-angular-navigations';
 
 import { RadioButtonModule, ButtonModule, CheckBoxModule } from '@syncfusion/ej2-angular-buttons';
 import { GridModule, SortService, PageService, EditService, ToolbarService, CommandColumnService, ExcelExportService } from '@syncfusion/ej2-angular-grids';
@@ -14,18 +13,15 @@ import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { TabModule } from '@syncfusion/ej2-angular-navigations';
 import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
-import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
     declarations: [
         CustomerListComponent,
         CustomerEditComponent
     ],
-    exports: [ MatSidenavModule ],
     imports: [
-        SidebarModule,
         GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule, 
-        TabModule, DatePickerModule, SwitchModule, SidebarModule, CommonModule, MatSidenavModule,
+        TabModule, DatePickerModule, SwitchModule, CommonModule,
         RouterModule.forChild([
             { path: 'customer/list', component: CustomerListComponent, canActivate: [MsalGuard] },
             { path: 'customer/add', component: CustomerEditComponent, canActivate: [MsalGuard] },
