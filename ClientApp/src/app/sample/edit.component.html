@@ -11,37 +11,63 @@
 
     <div class="row pad-t10">
         <div class="col-md-3">
-            <ejs-textbox [(value)]="record.referencerNo" placeholder="ReferenceNo" floatLabelType="Always"></ejs-textbox>
+              <mat-form-field floatLabel="always" appearance="outline">
+                  <mat-label>ReferenceNo</mat-label>
+                <input [(value)]="record.referencerNo" matInput>
+              </mat-form-field>
         </div>
-        <div class="col-md-3">
-            <ejs-datepicker [(value)]="record.scheduledDate" placeholder="Scheduled Date" floatLabelType="Always"></ejs-datepicker>
+        <div class="col-md-3">     
+            <mat-form-field floatLabel="always" appearance="outline">
+                <mat-label>Scheduled Date</mat-label>
+                <input [(value)]="record.scheduledDate" matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
         </div>
     </div>
     
     <div class="row">
         <div class="col-md-6">
-            <ejs-textbox [(value)]="record.site" disabled placeholder="Site" floatLabelType="Always"></ejs-textbox>
+            <mat-form-field floatLabel="always" appearance="outline">
+                <mat-label>Site</mat-label>
+                <input [(value)]="record.site" matInput disabled>
+            </mat-form-field>
         </div>
     </div>
-                         
+    
     <div class="row">
         <div class="col-md-6">
-            <ejs-textbox [(value)]="record.location" disabled placeholder="Location" floatLabelType="Always"></ejs-textbox>
+            <mat-form-field floatLabel="always" appearance="outline">
+                <mat-label>Location</mat-label>
+                <input [(value)]="record.location" matInput disabled>
+            </mat-form-field>
         </div>
-    </div>    
+    </div>
 
     <div class="row pad-t20">
         <div class="col-md-12">
-            <ejs-textbox [(value)]="record.logisticVendor" disabled placeholder="Logistics Vendor" floatLabelType="Always"></ejs-textbox>
+            <mat-form-field floatLabel="always" appearance="outline">
+                <mat-label>Logistics Vendor</mat-label>
+                <input [(value)]="record.logisticVendor" matInput disabled>
+            </mat-form-field>
         </div>
     </div>
                          
     <div class="row">
         <div class="col-md-3">
-            <ejs-textbox [(value)]="record.collectedBy" placeholder="Collected By" floatLabelType="Always"></ejs-textbox>
+            <mat-form-field floatLabel="always" appearance="outline">
+                <mat-label>Collected By</mat-label>
+              <input [(value)]="record.collectedBy" matInput>
+            </mat-form-field>
         </div>
+
         <div class="col-md-3">
-            <ejs-datepicker [(value)]="record.collectedDate" placeholder="Collected Date" floatLabelType="Always"></ejs-datepicker>
+            <mat-form-field floatLabel="always" appearance="outline">
+                <mat-label>Collected Date</mat-label>
+                <input [(value)]="record.collectedDate" matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
         </div>
     </div>   
 
@@ -65,25 +91,47 @@
 
     <div class="row pad-t20">
         <div class="col-md-12">
-            <ejs-textbox [(value)]="record.labVendor" disabled placeholder="Ship To Lab" floatLabelType="Always"></ejs-textbox>
+            <mat-form-field floatLabel="always" appearance="outline">
+                <mat-label>Ship To Lab</mat-label>
+                <input [(value)]="record.labVendor" matInput disabled>
+            </mat-form-field>
         </div>
     </div>
 
+
+
+
     <div class="row">        
         <div class="col-md-3">
-            <ejs-datepicker [(value)]="record.shippedDate" placeholder="Shipped Date" floatLabelType="Always"></ejs-datepicker>
+            <mat-form-field floatLabel="always" appearance="outline">
+                <mat-label>Shipped Date</mat-label>
+                <input [(value)]="record.shippedDate" matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
         </div>
         <div class="col-md-3">
-            <ejs-textbox [(value)]="record.trackingNo" placeholder="Tracking No" floatLabelType="Always"></ejs-textbox>
+            <mat-form-field floatLabel="always" appearance="outline">
+                <mat-label>Tracking No</mat-label>
+              <input [(value)]="record.trackingNo" matInput>
+            </mat-form-field>
         </div>
     </div>  
 
     <div class="row pad-t20">
         <div class="col-md-3">
-            <ejs-datepicker [(value)]="record.receivedDate" placeholder="Received Date" floatLabelType="Always"></ejs-datepicker>
+            <mat-form-field floatLabel="always" appearance="outline">
+                <mat-label>Received Date</mat-label>
+                <input [(value)]="record.receivedDate" matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
         </div>
         <div class="col-md-3">
-            <ejs-textbox [(value)]="record.receivedBy" placeholder="Received By" floatLabelType="Always"></ejs-textbox>
+            <mat-form-field floatLabel="always" appearance="outline">
+                <mat-label>Received By</mat-label>
+              <input [(value)]="record.receivedBy" matInput>
+            </mat-form-field>
         </div>
     </div>  
 
