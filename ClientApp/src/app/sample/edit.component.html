@@ -163,7 +163,16 @@
             </div>   
         </div>
         <div class="col-md-3">
-            <ejs-dropdownlist [dataSource]="record.qcFailureReasons" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.qcfailureReasonId" placeholder="QC Failure Reason" floatLabelType="Always"></ejs-dropdownlist>
+
+
+            <mat-form-field floatLabel="always" appearance="outline">
+                <mat-label>Select an option</mat-label>
+                <mat-select [(value)]="record">
+                  <mat-option *ngIf='record'>{{record.qcFailureReasons[0].name}}</mat-option>
+                  <mat-option *ngIf='record'>{{record.qcFailureReasons[1].name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!-- <ejs-dropdownlist [dataSource]="record.qcFailureReasons" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.qcfailureReasonId"></ejs-dropdownlist> -->
         </div>
     </div>
     
