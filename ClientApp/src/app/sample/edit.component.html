@@ -11,13 +11,13 @@
 
     <div class="row pad-t20">
         <div class="col-md-3">
-              <mat-form-field floatLabel="always" appearance="outline">
+              <mat-form-field floatLabel="always">
                   <mat-label>ReferenceNo</mat-label>
-                <input [(value)]="record.referencerNo" matInput>
+                <input [(value)]="record.referenceNo" type='text' matInput>
               </mat-form-field>
         </div>
         <div class="col-md-3">     
-            <mat-form-field floatLabel="always" appearance="outline">
+            <mat-form-field floatLabel="always">
                 <mat-label>Scheduled Date</mat-label>
                 <input [(value)]="record.scheduledDate" matInput [matDatepicker]="picker1">
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
@@ -28,7 +28,7 @@
     
     <div class="row">
         <div class="col-md-6">
-            <mat-form-field floatLabel="always" appearance="outline">
+            <mat-form-field floatLabel="always">
                 <mat-label>Site</mat-label>
                 <input [(value)]="record.site" matInput disabled>
             </mat-form-field>
@@ -37,7 +37,7 @@
     
     <div class="row">
         <div class="col-md-6">
-            <mat-form-field floatLabel="always" appearance="outline">
+            <mat-form-field floatLabel="always">
                 <mat-label>Location</mat-label>
                 <input [(value)]="record.location" matInput disabled>
             </mat-form-field>
@@ -46,7 +46,7 @@
 
     <div class="row pad-t20">
         <div class="col-md-12">
-            <mat-form-field floatLabel="always" appearance="outline">
+            <mat-form-field floatLabel="always">
                 <mat-label>Logistics Vendor</mat-label>
                 <input [(value)]="record.logisticVendor" matInput disabled>
             </mat-form-field>
@@ -55,14 +55,14 @@
                          
     <div class="row">
         <div class="col-md-3">
-            <mat-form-field floatLabel="always" appearance="outline">
+            <mat-form-field floatLabel="always">
                 <mat-label>Collected By</mat-label>
               <input [(value)]="record.collectedBy" matInput>
             </mat-form-field>
         </div>
 
         <div class="col-md-3">
-            <mat-form-field floatLabel="always" appearance="outline">
+            <mat-form-field floatLabel="always">
                 <mat-label>Collected Date</mat-label>
                 <input [(value)]="record.collectedDate" matInput [matDatepicker]="picker2">
                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
@@ -73,37 +73,37 @@
 
     <div class="row">
         <div class="col-md-3">
-            <mat-form-field floatLabel="always" class="example-user-input" appearance="outline">
+            <mat-form-field floatLabel="always" class="example-user-input">
                 <mat-label>Volume</mat-label>
-                    <input [(value)]="record.volume" matInput type="number">
+                    <input [(value)]="record.volume" matInput type="number" min='0' max='500' step='1'>
               </mat-form-field>
         </div>
         <div class="col-md-3">
-            <mat-form-field floatLabel="always" class="example-user-input" appearance="outline">
+            <mat-form-field floatLabel="always" class="example-user-input">
                 <mat-label>Temperature</mat-label>
-                    <input [(value)]="record.temperature" matInput type="number">
+                    <input [(value)]="record.temperature" matInput type="number" min='-50' max='150' step='0.1'>
               </mat-form-field>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-3">
-            <mat-form-field floatLabel="always" class="example-user-input" appearance="outline">
+            <mat-form-field floatLabel="always" class="example-user-input">
                 <mat-label>Acidity</mat-label>
-                    <input [(value)]="record.acidity" matInput type="number">
+                    <input [(value)]="record.acidity" matInput type="number" min='0' max='14' step='0.1'>
               </mat-form-field>
         </div>
         <div class="col-md-3">
-            <mat-form-field floatLabel="always" class="example-user-input" appearance="outline">
+            <mat-form-field floatLabel="always" class="example-user-input">
                 <mat-label>Humidity</mat-label>
-                    <input [(value)]="record.humidity" matInput type="number">
+                    <input [(value)]="record.humidity" matInput type="number" min='0' max='100' step='0.1'>
               </mat-form-field>
         </div>
     </div>
 
     <div class="row pad-t20">
         <div class="col-md-12">
-            <mat-form-field floatLabel="always" appearance="outline">
+            <mat-form-field floatLabel="always">
                 <mat-label>Ship To Lab</mat-label>
                 <input [(value)]="record.labVendor" matInput disabled>
             </mat-form-field>
@@ -115,7 +115,7 @@
 
     <div class="row">        
         <div class="col-md-3">
-            <mat-form-field floatLabel="always" appearance="outline">
+            <mat-form-field floatLabel="always">
                 <mat-label>Shipped Date</mat-label>
                 <input [(value)]="record.shippedDate" matInput [matDatepicker]="picker3">
                 <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
@@ -123,7 +123,7 @@
             </mat-form-field>
         </div>
         <div class="col-md-3">
-            <mat-form-field floatLabel="always" appearance="outline">
+            <mat-form-field floatLabel="always">
                 <mat-label>Tracking No</mat-label>
               <input [(value)]="record.trackingNo" matInput>
             </mat-form-field>
@@ -132,7 +132,7 @@
 
     <div class="row pad-t20">
         <div class="col-md-3">
-            <mat-form-field floatLabel="always" appearance="outline">
+            <mat-form-field floatLabel="always">
                 <mat-label>Received Date</mat-label>
                 <input [(value)]="record.receivedDate" matInput [matDatepicker]="picker4">
                 <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
@@ -140,7 +140,7 @@
             </mat-form-field>
         </div>
         <div class="col-md-3">
-            <mat-form-field floatLabel="always" appearance="outline">
+            <mat-form-field floatLabel="always">
                 <mat-label>Received By</mat-label>
               <input [(value)]="record.receivedBy" matInput>
             </mat-form-field>
@@ -148,7 +148,7 @@
     </div>  
 
     <div class="row pad-b20">
-        <div class="col-md-3 d-flex align-items-end">   
+        <div class="col-md-6 col-lg-5 col-xl-3 d-flex align-items-end">   
             <div class="row">
                 <div class="col-md-12">
                     <label for="sampleQc" class="edit-label">Sample QC Result</label>
@@ -162,29 +162,26 @@
                 </div>
             </div>   
         </div>
-        <div class="col-md-3">
-
-
-            <mat-form-field floatLabel="always" appearance="outline">
+        <div class="col-md-6 col-lg-5 col-xl-3">
+            <mat-form-field floatLabel="always">
                 <mat-label>Select an option</mat-label>
-                <mat-select [(value)]="record">
-                  <mat-option *ngIf='record'>{{record.qcFailureReasons[0].name}}</mat-option>
-                  <mat-option *ngIf='record'>{{record.qcFailureReasons[1].name}}</mat-option>
+                <mat-select [(value)]="record.qcfailureReasonId">
+                    <mat-option *ngFor="let f of record.qcFailureReasons" [value]="f.id">{{f.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
-            <!-- <ejs-dropdownlist [dataSource]="record.qcFailureReasons" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.qcfailureReasonId"></ejs-dropdownlist> -->
         </div>
     </div>
     
     <div class="row d-flex align-items-center edit-footer">
         <div class="col-md-6 d-flex justify-content-start">
-            <button id="save" mat-raised-button color="primary" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
+            <button id="save" mat-flat-button color="primary" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
         </div>
 
         <div class="col-md-6 d-flex justify-content-end">
-            <button id="delete" mat-raised-button color="warn" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
-            <button id="close" mat-raised-button [routerLink]="['/sample/list']">Close</button>
+            <button id="delete" mat-flat-button color="accent" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
+            <button id="close" mat-flat-button [routerLink]="['/sample/list']">Close</button>
         </div>
     </div>
     <ejs-toast #toast></ejs-toast>
 </div>
+
