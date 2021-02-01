@@ -24,14 +24,24 @@ html, body {
 }
 
 body {
-    font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Segoe UI", "Helvetica Neue", Helvetica,  sans-serif;
     -webkit-tap-highlight-color: transparent;
     background-color: #f1f5f9;
 }
+/* body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
 
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
+}
+
+mat-form-field.mat-form-field {
+    width: 100%;
+}
+
+#edit-view .mat-form-field-label
+{
+    font-size: 1.15em;  
 }
 
 #wrapper .e-control {
@@ -141,17 +151,24 @@ a {
 
 #edit-view .edit-header-icon {
     display: inline-block;
-    font-size: 1.5em;
-    color: #2a89ff;
-    padding: 10px 10px 10px 0px;
+    font-size: 1.8em;
+    background-color: #1e88e5;
+    padding: 20px 5px 5px 5px;
+    color:white;
+    margin-top:-20px;
+    border-radius: 3px;
+    width:60px;
+    height: 60px;
+    text-align: center;
 }
 
 #edit-view .edit-header-title {
     font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
     display: inline-block;
-    font-size: 1.5em;
-    font-weight: 400;
-    padding: 10px 20px 10px 0px;
+    font-size: 1.6em;
+    font-weight: 300;
+    padding: 5px 20px 10px 15px;
+    color:#3c4858;
 }
 
 #edit-view .e-control {
@@ -159,12 +176,12 @@ a {
 }
 
 #edit-view .success-green {
-    background-color:#009900;
+    background-color:#388e3c;
     color:#ffffff;
 }
 
 #edit-view .failure-red {
-    background-color:#990000;
+    background-color:#d32f2f;
     color:#ffffff;
 }
 
@@ -184,7 +201,7 @@ a {
 } */
 
 #edit-view label.e-float-text {
-    top: 75%;
+    font-size: 12px;
 }
 #edit-view ejs-grid.edit-grid .e-headercelldiv {
     font-weight: 600;
@@ -218,15 +235,17 @@ a {
 }
 #edit-view .edit-footer button
 {
-    max-width:100px;
+    width: 100px;
     height:36px;
     border-radius: 3px;
 }
-#edit-view .edit-footer .save-button {
-    max-width: 150px;
+#edit-view .edit-footer .save-button,
+#edit-view .edit-footer #save-button {
+    width: 130px;
 }
-#edit-view .edit-footer .close-button {
-    margin-left:30px;
+#edit-view .edit-footer .close-button,
+#edit-view .edit-footer #close-button {
+    margin-left:15px;
 }
 
 /* customize the tab */
@@ -344,9 +363,3 @@ a {
 .mar-t20 {
     margin-top: 20px;
 }
-
-
-
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

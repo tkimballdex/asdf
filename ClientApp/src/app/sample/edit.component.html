@@ -1,7 +1,7 @@
 <div id="edit-view" *ngIf="record" class="container-fluid">
     <div class="row d-flex align-items-center edit-header">
         <div class="col-md-6 d-flex">
-            <span class="edit-header-icon"><i class="fas fa-vial"></i></span>
+            <span class="edit-header-icon"><i class="fal fa-vial"></i></span>
             <span class="edit-header-title">Sample</span>
         </div>
         <div class="col-md-6 d-flex justify-content-end">
@@ -10,13 +10,13 @@
     </div>
 
     <div class="row pad-t20">
-        <div class="col-md-3">
+        <div class="col-md-6 col-lg-5 col-xl-4">
               <mat-form-field floatLabel="always">
-                  <mat-label>ReferenceNo</mat-label>
+                  <mat-label>Reference No</mat-label>
                 <input [(value)]="record.referenceNo" type='text' matInput>
               </mat-form-field>
         </div>
-        <div class="col-md-3">     
+        <div class="col-md-6 col-lg-5 col-xl-4">     
             <mat-form-field floatLabel="always">
                 <mat-label>Scheduled Date</mat-label>
                 <input [(value)]="record.scheduledDate" matInput [matDatepicker]="picker1">
@@ -27,7 +27,7 @@
     </div>
     
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12 col-lg-10 col-xl-8">
             <mat-form-field floatLabel="always">
                 <mat-label>Site</mat-label>
                 <input [(value)]="record.site" matInput disabled>
@@ -36,7 +36,7 @@
     </div>
     
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12 col-lg-10 col-xl-8">
             <mat-form-field floatLabel="always">
                 <mat-label>Location</mat-label>
                 <input [(value)]="record.location" matInput disabled>
@@ -54,14 +54,14 @@
     </div>
                          
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-6 col-lg-5 col-xl-4">
             <mat-form-field floatLabel="always">
                 <mat-label>Collected By</mat-label>
               <input [(value)]="record.collectedBy" matInput>
             </mat-form-field>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-6 col-lg-5 col-xl-4">
             <mat-form-field floatLabel="always">
                 <mat-label>Collected Date</mat-label>
                 <input [(value)]="record.collectedDate" matInput [matDatepicker]="picker2">
@@ -72,13 +72,13 @@
     </div>   
 
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-6 col-lg-5 col-xl-4">
             <mat-form-field floatLabel="always" class="example-user-input">
                 <mat-label>Volume</mat-label>
                     <input [(value)]="record.volume" matInput type="number" min='0' max='500' step='1'>
               </mat-form-field>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-6 col-lg-5 col-xl-4">
             <mat-form-field floatLabel="always" class="example-user-input">
                 <mat-label>Temperature</mat-label>
                     <input [(value)]="record.temperature" matInput type="number" min='-50' max='150' step='0.1'>
@@ -87,13 +87,13 @@
     </div>
 
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-6 col-lg-5 col-xl-4">
             <mat-form-field floatLabel="always" class="example-user-input">
                 <mat-label>Acidity</mat-label>
                     <input [(value)]="record.acidity" matInput type="number" min='0' max='14' step='0.1'>
               </mat-form-field>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-6 col-lg-5 col-xl-4">
             <mat-form-field floatLabel="always" class="example-user-input">
                 <mat-label>Humidity</mat-label>
                     <input [(value)]="record.humidity" matInput type="number" min='0' max='100' step='0.1'>
@@ -110,11 +110,8 @@
         </div>
     </div>
 
-
-
-
     <div class="row">        
-        <div class="col-md-3">
+        <div class="col-md-6 col-lg-5 col-xl-4">
             <mat-form-field floatLabel="always">
                 <mat-label>Shipped Date</mat-label>
                 <input [(value)]="record.shippedDate" matInput [matDatepicker]="picker3">
@@ -122,7 +119,7 @@
                 <mat-datepicker #picker3></mat-datepicker>
             </mat-form-field>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-6 col-lg-5 col-xl-4">
             <mat-form-field floatLabel="always">
                 <mat-label>Tracking No</mat-label>
               <input [(value)]="record.trackingNo" matInput>
@@ -131,7 +128,7 @@
     </div>  
 
     <div class="row pad-t20">
-        <div class="col-md-3">
+        <div class="col-md-6 col-lg-5 col-xl-4">
             <mat-form-field floatLabel="always">
                 <mat-label>Received Date</mat-label>
                 <input [(value)]="record.receivedDate" matInput [matDatepicker]="picker4">
@@ -139,7 +136,7 @@
                 <mat-datepicker #picker4></mat-datepicker>
             </mat-form-field>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-6 col-lg-5 col-xl-4">
             <mat-form-field floatLabel="always">
                 <mat-label>Received By</mat-label>
               <input [(value)]="record.receivedBy" matInput>
@@ -148,7 +145,7 @@
     </div>  
 
     <div class="row pad-b20">
-        <div class="col-md-6 col-lg-5 col-xl-3 d-flex align-items-end">   
+        <div class="col-md-6 col-lg-5 col-xl-4 d-flex align-items-end">   
             <div class="row">
                 <div class="col-md-12">
                     <label for="sampleQc" class="edit-label">Sample QC Result</label>
@@ -162,7 +159,7 @@
                 </div>
             </div>   
         </div>
-        <div class="col-md-6 col-lg-5 col-xl-3">
+        <div class="col-md-6 col-lg-5 col-xl-4 d-flex align-items-end">
             <mat-form-field floatLabel="always">
                 <mat-label>Select an option</mat-label>
                 <mat-select [(value)]="record.qcfailureReasonId">
@@ -173,13 +170,13 @@
     </div>
     
     <div class="row d-flex align-items-center edit-footer">
-        <div class="col-md-6 d-flex justify-content-start">
-            <button id="save" mat-flat-button color="primary" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
+        <div class="col-sm-6 d-flex justify-content-start">
+            <button id="save-button" mat-flat-button color="primary" cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
         </div>
 
-        <div class="col-md-6 d-flex justify-content-end">
-            <button id="delete" mat-flat-button color="accent" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
-            <button id="close" mat-flat-button [routerLink]="['/sample/list']">Close</button>
+        <div class="col-sm-6 d-flex justify-content-end">
+            <button mat-flat-button color="warn" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
+            <button id="close-button" mat-stroked-button color="basic" cssClass="close-button" [routerLink]="['/sample/list']">Close</button>
         </div>
     </div>
     <ejs-toast #toast></ejs-toast>
