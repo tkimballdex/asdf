@@ -5,6 +5,15 @@ import { SampleTestListComponent } from './list.component';
 import { SampleTestEditComponent } from './edit.component';
 import { MsalGuard } from '@azure/msal-angular';
 
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import {MatSelectModule} from '@angular/material/select';
+
 import { RadioButtonModule, ButtonModule, CheckBoxModule } from '@syncfusion/ej2-angular-buttons';
 import { GridModule, SortService, PageService, EditService, ToolbarService, CommandColumnService, ExcelExportService } from '@syncfusion/ej2-angular-grids';
 import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
@@ -14,14 +23,13 @@ import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { TabModule } from '@syncfusion/ej2-angular-navigations';
 import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
     declarations: [
         SampleTestListComponent,
         SampleTestEditComponent
     ],
-    imports: [
+    imports: [MatFormFieldModule, MatInputModule, MatIconModule, MatDatepickerModule, MatNativeDateModule, MatButtonModule, MatButtonToggleModule, MatSelectModule,
         GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule, 
         TabModule, DatePickerModule, SwitchModule, NumericTextBoxModule, MatButtonToggleModule, CommonModule,
         RouterModule.forChild([
