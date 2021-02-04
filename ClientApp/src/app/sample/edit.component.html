@@ -174,11 +174,8 @@
                                 </mat-form-field>
                             </div>
                         </div>
-                
-                
                 </mat-tab>
                 <mat-tab label="Tests">
-
                     <div id="list-view" class="container-fluid">
                         <div class="row d-flex align-items-end">
                             <div class="col-md-6 d-flex align-items-center list-header">
@@ -196,10 +193,7 @@
                                             <ng-template #template let-data>
                                                 <a [routerLink]="['/sampletest/edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
                                             </ng-template>
-                                        </e-column>                    
-                                        <e-column field='sample' headerText='Sample'></e-column>
-                                        <e-column field='site' headerText='Site'></e-column>                    
-                                        <e-column field='referenceNo' headerText='Reference No'></e-column>
+                                        </e-column>
                                         <e-column field='testType' headerText='Test Type'></e-column>
                                         <e-column field='result' headerText='Result'></e-column>
                                         <e-column field='rejected' headerText='Rejected'></e-column>
@@ -209,19 +203,14 @@
                             </div>
                         </div>
                     </div>
-                    
-
                 </mat-tab>
               </mat-tab-group>
         </div>
     </div>
-
-    
     <div class="row d-flex align-items-center edit-footer">
         <div class="col-sm-6 d-flex justify-content-start">
             <button id="save-button" mat-flat-button color="primary" cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
         </div>
-
         <div class="col-sm-6 d-flex justify-content-end">
             <button mat-flat-button color="warn" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
             <button id="close-button" mat-stroked-button color="basic" cssClass="close-button" [routerLink]="['/sample/list']">Close</button>

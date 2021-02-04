@@ -55,6 +55,7 @@ mat-form-field.mat-form-field {
     background-color: #ffffff;
     box-sizing:border-box;
     padding:15px;
+    margin-bottom: 20px;
 }
 
 #list-view .list-header {
