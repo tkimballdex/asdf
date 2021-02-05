@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
+import { NgModule, AfterViewInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CustomerListComponent } from './list.component';
 import { CustomerEditComponent } from './edit.component';
 import { MsalGuard } from '@azure/msal-angular';
-
+import { MapComponent } from './map/map.component'
 import { RadioButtonModule, ButtonModule, CheckBoxModule } from '@syncfusion/ej2-angular-buttons';
 import { GridModule, SortService, PageService, EditService, ToolbarService, CommandColumnService, ExcelExportService } from '@syncfusion/ej2-angular-grids';
 import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
@@ -17,15 +17,16 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 @NgModule({
     declarations: [
         CustomerListComponent,
-        CustomerEditComponent
+        CustomerEditComponent,
+        MapComponent
     ],
     imports: [
         GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule, 
-        TabModule, DatePickerModule, SwitchModule, CommonModule,
+        TabModule, DatePickerModule, SwitchModule, CommonModule, 
         RouterModule.forChild([
             { path: 'customer/list', component: CustomerListComponent, canActivate: [MsalGuard] },
             { path: 'customer/add', component: CustomerEditComponent, canActivate: [MsalGuard] },
-           { path: 'customer/edit/:id', component: CustomerEditComponent, canActivate: [MsalGuard] },
+            { path: 'customer/edit/:id', component: CustomerEditComponent, canActivate: [MsalGuard] },
         ])
     ],
     providers: [

@@ -16,6 +16,7 @@
 @import '../node_modules/@syncfusion/ej2-layouts/styles/fabric.css';  
 @import "../node_modules/@syncfusion/ej2-angular-layouts/styles/fabric.css";
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import "~leaflet/dist/leaflet.css";
 
 html, body {
     height: 100%;
