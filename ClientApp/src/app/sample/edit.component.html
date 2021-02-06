@@ -19,7 +19,7 @@
         <div class="col-md-6 col-lg-5 col-xl-4">     
             <mat-form-field floatLabel="always">
                 <mat-label>Scheduled Date</mat-label>
-                <input [formControl]="refno" [(value)]="record.scheduledDate" matInput [matDatepicker]="picker1" required>
+                <input [formControl]="date1" [(value)]="record.scheduledDate" matInput [matDatepicker]="picker1" required>
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
                 <mat-error *ngIf="date1.invalid">{{getErrorMessage1()}}</mat-error>
