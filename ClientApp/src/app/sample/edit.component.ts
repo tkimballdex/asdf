@@ -24,11 +24,19 @@ export class SampleEditComponent extends PageComponent implements OnInit {
     //----------------------------Reference No validations----------------------------//
 
     refno = new FormControl('', [Validators.required]);
+    date1 = new FormControl('', [Validators.required]);
 
 
     getErrorMessage() {
         if (this.refno.hasError('required')) {
           return 'You must enter a reference number';
+        }
+          return '';
+      }
+
+      getErrorMessage1() {
+        if (this.date1.hasError('required')) {
+          return 'You must pick a date';
         }
           return '';
       }
