@@ -6,6 +6,7 @@ import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 import { AppRepository } from "../shared/app.repository";
 import { PageComponent } from '../shared/page.component';
 import { SampleRepository } from './repository';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
     selector: 'sample-edit',
@@ -20,6 +21,17 @@ export class SampleEditComponent extends PageComponent implements OnInit {
     public record: any;
     public deleteDialog: Dialog;
 
+    //----------------------------Reference No validations----------------------------//
+
+    refno = new FormControl('', [Validators.required]);
+
+
+    getErrorMessage() {
+        if (this.refno.hasError('required')) {
+          return 'You must enter a reference number';
+        }
+          return '';
+      }
     //-----------------------------------------------------------------------------------------
     async ngOnInit() {       
         this.showSpinner();

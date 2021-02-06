@@ -8,14 +8,28 @@
             
         </div>        
     </div>
-
     <div class="row pad-t20">
-        <div class="col-md-6 col-lg-5 col-xl-4">
+
+
+
+
+
+
+
+        <div class="col-md-6 col-lg-5 col-xl-4 pad-b20">
               <mat-form-field floatLabel="always">
                   <mat-label>Reference No</mat-label>
-                <input [(value)]="record.referenceNo" type='text' matInput>
+                <input matInput [(value)]="record.referenceNo" type='text' [formControl]="refno" required>
+                <mat-error *ngIf="refno.invalid">{{getErrorMessage()}}</mat-error>
               </mat-form-field>
         </div>
+
+
+
+
+
+
+
         <div class="col-md-6 col-lg-5 col-xl-4">     
             <mat-form-field floatLabel="always">
                 <mat-label>Scheduled Date</mat-label>
