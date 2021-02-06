@@ -7,6 +7,8 @@ import { AppRepository } from "../shared/app.repository";
 import { PageComponent } from '../shared/page.component';
 import { SampleRepository } from './repository';
 import { FormControl, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { DataComponent } from './data.component';
 
 @Component({
     selector: 'sample-edit',
@@ -14,7 +16,7 @@ import { FormControl, Validators } from '@angular/forms';
     styleUrls: ['./edit.component.scss']
 })
 export class SampleEditComponent extends PageComponent implements OnInit {
-    constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private repository: SampleRepository) {
+    constructor(private dialog: MatDialog, private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private repository: SampleRepository) {
         super();
     }
 
@@ -45,7 +47,6 @@ export class SampleEditComponent extends PageComponent implements OnInit {
         this.showSpinner();
         this.app = await this.appRepository.getData();
         this.privileges = this.app.privileges.samples;
-
         var id = this.route.snapshot.paramMap.get('id');
         this.record = await this.repository.get(id);
         this.hideSpinner();        
@@ -54,10 +55,14 @@ export class SampleEditComponent extends PageComponent implements OnInit {
     async save() {
         var add = !this.record.id;
         this.showSpinner();
+            if (this.refno.hasError('required') || this.date1.hasError('required'))
+            {
+                this.dialog.open(DataComponent);
+                this.hideSpinner();
+            }else {
         this.record.tenantId = this.appRepository.tenantId;
         var returnValue = await this.repository.save(this.record);
         this.hideSpinner();
-
         if (returnValue && returnValue.error) {
             this.showErrorMessage(returnValue.description);
         }
@@ -73,6 +78,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
                 setTimeout(() => this.router.navigate(['/sample/edit', returnValue.id]), 1000);
             }
         }
+    }
     }
     //-----------------------------------------------------------------------------------------
     delete() {
@@ -99,3 +105,4 @@ export class SampleEditComponent extends PageComponent implements OnInit {
     }
     //-----------------------------------------------------------------------------------------
 }
+
