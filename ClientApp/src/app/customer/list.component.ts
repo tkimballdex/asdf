@@ -14,6 +14,7 @@ export class CustomerListComponent extends PageComponent implements OnInit {
        
     constructor(private repository: CustomerRepository, private router: Router, private appRepository: AppRepository, private eventQueue: EventQueueService) {
         super();
+        console.dir('CustomerListComponent');
     }
     //------------------------------------------------------------------------------------------------------------------------
     public list: any;

@@ -12,6 +12,7 @@ import { EmailComponent } from './email/email.component';
 import { LogoutComponent } from './home/logout.component';
 import { ChooseTenantComponent } from './home/tenant.component';
 import { MsalGuard } from '@azure/msal-angular';
+import { MasterPageComponent } from './shared/master.component';
 
 import { Configuration } from 'msal';
 import {
@@ -82,6 +83,7 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
         SampleTestModule,
         RouterModule.forRoot([
             { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [MsalGuard] },
+            { path: 'auth', component: MasterPageComponent },
             { path: 'account/tenant', component: ChooseTenantComponent, canActivate: [MsalGuard] },
             { path: 'account/logout', component: LogoutComponent }
         ], { relativeLinkResolution: 'legacy' }),

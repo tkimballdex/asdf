@@ -1,6 +1,7 @@
 import { NgModule, AfterViewInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { CustomerHomeComponent } from './home.component';
 import { CustomerListComponent } from './list.component';
 import { CustomerEditComponent } from './edit.component';
 import { MsalGuard } from '@azure/msal-angular';
@@ -16,17 +17,25 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 
 @NgModule({
     declarations: [
+        CustomerHomeComponent,
         CustomerListComponent,
         CustomerEditComponent,
         MapComponent
     ],
     imports: [
-        GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule, 
-        TabModule, DatePickerModule, SwitchModule, CommonModule, 
+        GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule,
+        TabModule, DatePickerModule, SwitchModule, CommonModule,
         RouterModule.forChild([
-            { path: 'customer/list', component: CustomerListComponent, canActivate: [MsalGuard] },
-            { path: 'customer/add', component: CustomerEditComponent, canActivate: [MsalGuard] },
-            { path: 'customer/edit/:id', component: CustomerEditComponent, canActivate: [MsalGuard] },
+            {
+                path: 'customer',
+                component: CustomerHomeComponent,
+                canActivate: [MsalGuard],
+                children: [
+                    { path: 'list', component: CustomerListComponent },
+                    { path: 'add', component: CustomerEditComponent },
+                    { path: 'edit/:id', component: CustomerEditComponent }
+                ]
+            }
         ])
     ],
     providers: [
