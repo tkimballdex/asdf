@@ -75,7 +75,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
             }
 
             if (success && add) {
-                setTimeout(() => this.router.navigate(['/sample/edit', returnValue.id]), 1000);
+                setTimeout(() => this.router.navigate(['/auth/sample/edit', returnValue.id]), 1000);
             }
         }
     }
@@ -100,7 +100,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
         }
         else {
             this.showDeleteMessage(true);
-            setTimeout(() => this.router.navigate(['/sample/list']), 1000);
+            setTimeout(() => this.router.navigate(['/auth/sample/list']), 1000);
         }
     }
     //-----------------------------------------------------------------------------------------

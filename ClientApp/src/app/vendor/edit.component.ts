@@ -50,7 +50,7 @@ export class VendorEditComponent extends PageComponent implements OnInit {
             }
 
             if (success && add) {
-                setTimeout(() => this.router.navigate(['/vendor/edit', returnValue.id]), 1000);
+                setTimeout(() => this.router.navigate(['/auth/vendor/edit', returnValue.id]), 1000);
             }
         }
     }

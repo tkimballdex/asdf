@@ -51,7 +51,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
             }
 
             if (success && add) {
-                setTimeout(() => this.router.navigate(['/site/edit', returnValue.id]), 1000);
+                setTimeout(() => this.router.navigate(['/auth/site/edit', returnValue.id]), 1000);
             }
         }
     }
@@ -75,7 +75,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
         }
         else {
             this.showDeleteMessage(true);
-            setTimeout(() => this.router.navigate(['/customer/edit', this.record.customerId]), 1000);
+            setTimeout(() => this.router.navigate(['/auth/customer/edit', this.record.customerId]), 1000);
         }
     }
 }

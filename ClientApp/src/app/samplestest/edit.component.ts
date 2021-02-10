@@ -50,7 +50,7 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
             }
 
             if (success && add) {
-                setTimeout(() => this.router.navigate(['/sampletest/edit', returnValue.id]), 1000);
+                setTimeout(() => this.router.navigate(['/auth/sampletest/edit', returnValue.id]), 1000);
             }
         }
     }
@@ -74,7 +74,7 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
         }
         else {
             this.showDeleteMessage(true);
-            setTimeout(() => this.router.navigate(['/sampletest/list']), 1000);
+            setTimeout(() => this.router.navigate(['/auth/sampletest/list']), 1000);
         }
     }
     //-----------------------------------------------------------------------------------------

@@ -47,7 +47,7 @@ async save() {
         }
 
         if (success && add) {
-            setTimeout(() => this.router.navigate(['/testtype/edit', returnValue.id]), 1000);
+            setTimeout(() => this.router.navigate(['/auth/testtype/edit', returnValue.id]), 1000);
         }
     }
 }
@@ -71,7 +71,7 @@ async deleteOK() {
     }
     else {
         this.showDeleteMessage(true);
-        setTimeout(() => this.router.navigate(['/testtype/list']), 1000);
+        setTimeout(() => this.router.navigate(['/auth/testtype/list']), 1000);
     }
 }
 }
