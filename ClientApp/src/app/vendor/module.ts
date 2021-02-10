@@ -3,7 +3,6 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { VendorListComponent } from './list.component';
 import { VendorEditComponent } from './edit.component';
-import { MsalGuard } from '@azure/msal-angular';
 
 import { RadioButtonModule, ButtonModule, CheckBoxModule } from '@syncfusion/ej2-angular-buttons';
 import { GridModule, SortService, PageService, EditService, ToolbarService, CommandColumnService, ExcelExportService } from '@syncfusion/ej2-angular-grids';
@@ -23,9 +22,9 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
         GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule, 
         TabModule, DatePickerModule, SwitchModule, CommonModule,
         RouterModule.forChild([
-            { path: 'vendor/list', component: VendorListComponent, canActivate: [MsalGuard] },
-            { path: 'vendor/add', component: VendorEditComponent, canActivate: [MsalGuard] },
-           { path: 'vendor/edit/:id', component: VendorEditComponent, canActivate: [MsalGuard] },
+            { path: 'list', component: VendorListComponent },
+            { path: 'add', component: VendorEditComponent },
+            { path: 'edit/:id', component: VendorEditComponent },
         ])
     ],
     providers: [

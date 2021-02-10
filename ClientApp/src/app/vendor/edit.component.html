@@ -150,7 +150,7 @@
 
         <div class="col-md-6 d-flex justify-content-end">
             <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
-            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/vendor/list']">Close</button>
+            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/vendor/list']">Close</button>
         </div>
     </div>
     <ejs-toast #toast></ejs-toast>

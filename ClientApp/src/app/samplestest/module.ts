@@ -33,9 +33,9 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
         GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule, 
         TabModule, DatePickerModule, SwitchModule, NumericTextBoxModule, MatButtonToggleModule, CommonModule,
         RouterModule.forChild([
-            { path: 'sampletest/list', component: SampleTestListComponent, canActivate: [MsalGuard] },
-            { path: 'sampletest/add', component: SampleTestEditComponent, canActivate: [MsalGuard] },
-           { path: 'sampletest/edit/:id', component: SampleTestEditComponent, canActivate: [MsalGuard] },
+            { path: 'list', component: SampleTestListComponent, canActivate: [MsalGuard] },
+            { path: 'add', component: SampleTestEditComponent, canActivate: [MsalGuard] },
+           { path: 'edit/:id', component: SampleTestEditComponent, canActivate: [MsalGuard] },
         ])
     ],
     providers: [

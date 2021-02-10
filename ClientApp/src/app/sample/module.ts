@@ -40,9 +40,9 @@ import { DataComponent } from './data.component';
         GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule, 
         TabModule, DatePickerModule, SwitchModule, NumericTextBoxModule, MatButtonToggleModule, CommonModule, 
         RouterModule.forChild([
-            { path: 'sample/list', component: SampleListComponent, canActivate: [MsalGuard] },
-            { path: 'sample/add', component: SampleEditComponent, canActivate: [MsalGuard] },
-           { path: 'sample/edit/:id', component: SampleEditComponent, canActivate: [MsalGuard] },
+            { path: 'list', component: SampleListComponent, canActivate: [MsalGuard] },
+            { path: 'add', component: SampleEditComponent, canActivate: [MsalGuard] },
+           { path: 'edit/:id', component: SampleEditComponent, canActivate: [MsalGuard] },
         ])
     ],
     providers: [

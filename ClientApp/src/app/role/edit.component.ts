@@ -38,7 +38,7 @@ export class RoleEditComponent extends PageComponent implements OnInit {
         var success = this.record && this.record.updated;
         this.showSaveMessage(success);
         if (success && add) {
-            setTimeout(() => this.router.navigate(['/role/edit', this.record.id]), 1000);
+            setTimeout(() => this.router.navigate(['/auth/role/edit', this.record.id]), 1000);
         }
     }
 
@@ -58,7 +58,7 @@ export class RoleEditComponent extends PageComponent implements OnInit {
         this.showDeleteMessage(success);
 
         if (success) {
-            setTimeout(() => this.router.navigate(['/role/list']), 1000);
+            setTimeout(() => this.router.navigate(['/auth/role/list']), 1000);
         }
     }
 }

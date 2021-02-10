@@ -49,7 +49,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
             }
 
             if (success && add) {
-                setTimeout(() => this.router.navigate(['/customer/edit', returnValue.id]), 1000);
+                setTimeout(() => this.router.navigate(['/auth/customer/edit', returnValue.id]), 1000);
             }
         }
     }
@@ -73,7 +73,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
         }
         else {
             this.showDeleteMessage(true);
-            setTimeout(() => this.router.navigate(['/customer/list']), 1000);
+            setTimeout(() => this.router.navigate(['/auth/customer/list']), 1000);
         }
     }
 }

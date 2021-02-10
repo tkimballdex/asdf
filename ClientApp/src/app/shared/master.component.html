@@ -1,2 +1,41 @@
- MASTER PAGE
-<router-outlet></router-outlet>
+<div class="control-section">
+    <div id="wrapper">
+        <div class="col-lg-12 col-sm-12 col-md-12" id="sidebar-section">
+            <div class="col-lg-12 col-sm-12 col-md-12 no-padding no-margins">
+                <!--header-section  declaration -->
+                <div id="header" class="align-items-center header-section ">
+                    <div class="hamburger" [ngStyle]="{'padding-left': sidebardisplaysize }"><a id="hamburger" (click)="openClick()"><i class="far fa-bars"></i></a></div>
+                    <div class="tenant-name">
+                        {{appRepository.tenantName}}
+                    </div>
+                    <div class="account-menu">
+                        <button ejs-dropdownbutton id="accountMenu" [items]='AccountMenuItem' [content]='username' (select)='selectAccountMenu($event)' iconCss="fas fa-user"></button>
+                    </div>
+                </div>
+
+                <!--end of header-section  declaration -->
+                <!-- sidebar element declaration -->
+                <ejs-sidebar id="sidebar-menu" class="dock-menu" #sidebarMenuInstance [enableDock]='enableDock' [width]='sidebarwidth' [dockSize]='dockSize' [mediaQuery]='mediaQuery' [target]='target' (created)="created()">
+                    <div class="app-name">SWAP</div>
+                    <div class="main-menu">
+                        <!-- Menu element declaration -->
+                        <ejs-menu [items]='menuItems' orientation='Vertical' cssClass='dock-menu' (select)='selectMainMenu($event)'></ejs-menu>
+                    </div>
+                </ejs-sidebar>
+
+                <ejs-sidebar id="sidebar-option" #emailSidebar width='300px' dockSize='0px' [mediaQuery]='mediaQuery' [target]='target' position="Right" (created)="createdEmailSidebar()">
+                    <app-email #emailComponent></app-email>
+                </ejs-sidebar>
+
+                <!-- end of sidebar element -->
+                <!-- main-content declaration -->
+                <div class="main-content" id="maintext">
+                    <div class="sidebar-menu-content">
+                        <router-outlet></router-outlet>
+                    </div>
+                </div>
+                <!-- end of main-content -->
+            </div>
+        </div>
+    </div>
+</div>

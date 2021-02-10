@@ -23,7 +23,7 @@
                 <e-columns>
                     <e-column width="70" [visible]='true'>
                         <ng-template #template let-data>
-                            <a [routerLink]="['/customer/edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
+                            <a [routerLink]="['../edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
                         </ng-template>
                     </e-column>
                     <e-column field='name' headerText='Name'></e-column>
@@ -39,18 +39,3 @@
     </div>
     
 </div>
-
-   <div style="margin-bottom: 30px;">
-    <app-map ></app-map>
-   </div> 
-
-
-
-
-
-
-<!-- <ejs-sidebar id="sidebar-email" #sidebarEmail [enableDock]='messageEnableDock' [width]='messageWidth' [dockSize]='messageDockSize' 
-        type="Push" position='Right' style="position:fixed;padding: 0px;height: 100%;" target='#list-view'closeOnDocumentClick='true'>
-    
-</ejs-sidebar> -->
-

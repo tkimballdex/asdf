@@ -35,7 +35,7 @@ import { PieSeriesService, AccumulationDataLabelService } from '@syncfusion/ej2-
     // EmailModule,
     ChartAllModule,
     RouterModule.forChild([
-      { path: 'dashboard', component: DashboardComponent, canActivate: [MsalGuard] },
+      { path: '', component: DashboardComponent },
   ])
   ],
   providers: [ ColumnSeriesService, AreaSeriesService, PageService, SortService, FilterService, GroupService,

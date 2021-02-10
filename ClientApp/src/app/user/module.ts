@@ -20,9 +20,9 @@ import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
         GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule,
         DropDownListModule, CommonModule,
         RouterModule.forChild([
-            { path: 'user/list', component: UserListComponent, canActivate: [MsalGuard] },
-            { path: 'user/add', component: UserEditComponent, canActivate: [MsalGuard] },
-           { path: 'user/edit/:id', component: UserEditComponent, canActivate: [MsalGuard] },
+            { path: 'list', component: UserListComponent, canActivate: [MsalGuard] },
+            { path: 'add', component: UserEditComponent, canActivate: [MsalGuard] },
+           { path: 'edit/:id', component: UserEditComponent, canActivate: [MsalGuard] },
         ])
     ],
     providers: [

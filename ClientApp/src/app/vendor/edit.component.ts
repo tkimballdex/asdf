@@ -74,7 +74,7 @@ export class VendorEditComponent extends PageComponent implements OnInit {
         }
         else {
             this.showDeleteMessage(true);
-            setTimeout(() => this.router.navigate(['/vendor/list']), 1000);
+            setTimeout(() => this.router.navigate(['/auth/vendor/list']), 1000);
         }
     }
     //-----------------------------------------------------------------------------------------

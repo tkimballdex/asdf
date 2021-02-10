@@ -59,7 +59,7 @@ export class UserEditComponent extends PageComponent implements OnInit {
             }
 
             if (success && add) {
-                setTimeout(() => this.router.navigate(['/user/edit', returnValue.id]), 1000);
+                setTimeout(() => this.router.navigate(['/auth/user/edit', returnValue.id]), 1000);
             }
         }
     }
@@ -80,7 +80,7 @@ export class UserEditComponent extends PageComponent implements OnInit {
         this.showDeleteMessage(success);
 
         if (success) {
-            setTimeout(() => this.router.navigate(['/user/list']), 1000);
+            setTimeout(() => this.router.navigate(['/auth/user/list']), 1000);
         }
     }
 }

@@ -23,6 +23,6 @@ export class ChooseTenantComponent extends PageComponent implements OnInit {
     public changeTenant() {
         var t = this.tenantList.find(x => x.id == this.appRepository.tenantId);
         this.appRepository.tenantName = t.name;
-        setTimeout(() => this.router.navigate(['/']), 1000);
+        setTimeout(() => this.router.navigate(['/auth']), 1000);
     }
 }

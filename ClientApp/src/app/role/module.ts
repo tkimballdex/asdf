@@ -19,9 +19,9 @@ import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
         GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule,
         CommonModule,
         RouterModule.forChild([
-            { path: 'role/list', component: RoleListComponent, canActivate: [MsalGuard] },
-            { path: 'role/add', component: RoleEditComponent, canActivate: [MsalGuard] },
-            { path: 'role/edit/:id', component: RoleEditComponent, canActivate: [MsalGuard] },
+            { path: 'list', component: RoleListComponent, canActivate: [MsalGuard] },
+            { path: 'add', component: RoleEditComponent, canActivate: [MsalGuard] },
+            { path: 'edit/:id', component: RoleEditComponent, canActivate: [MsalGuard] },
         ])
     ],
     providers: [

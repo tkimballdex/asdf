@@ -20,9 +20,9 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
     TextBoxModule,
     CommonModule,
     RouterModule.forRoot([
-        {path: 'testtype/list', component: TestTypeListComponent, canActivate:[MsalGuard]},        
-        { path: 'testtype/add', component: TestTypeEditComponent, canActivate: [MsalGuard] },
-        { path: 'testtype/edit/:id', component: TestTypeEditComponent, canActivate: [MsalGuard] }
+        {path: 'list', component: TestTypeListComponent, canActivate:[MsalGuard]},        
+        { path: 'add', component: TestTypeEditComponent, canActivate: [MsalGuard] },
+        { path: 'edit/:id', component: TestTypeEditComponent, canActivate: [MsalGuard] }
     ])
   ]
 })
