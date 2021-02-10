@@ -41,7 +41,6 @@ import { faHome, faHomeAlt } from '@fortawesome/pro-solid-svg-icons';
 import { SampleModule } from './sample/module';
 import { SampleTestModule } from './samplestest/module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DashboardModule } from './dashboard/module';
 
 
 export function MSALConfigFactory(): Configuration {
@@ -66,7 +65,6 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
         HttpClientModule,
         FormsModule,
         TextBoxModule,
-        DashboardModule,
         SampleModule,
         SampleTestModule,
         RouterModule.forRoot([

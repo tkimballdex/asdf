@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
 import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { RouterModule } from '@angular/router';
-import { MsalGuard } from '@azure/msal-angular';
 import { ChartModule } from '@syncfusion/ej2-angular-charts';
 import { GridModule } from '@syncfusion/ej2-angular-grids';
 import { ListViewModule } from '@syncfusion/ej2-angular-lists';
@@ -32,7 +31,6 @@ import { PieSeriesService, AccumulationDataLabelService } from '@syncfusion/ej2-
     TextBoxModule,
     DashboardLayoutModule,
     AccumulationChartModule,
-    // EmailModule,
     ChartAllModule,
     RouterModule.forChild([
       { path: '', component: DashboardComponent },
