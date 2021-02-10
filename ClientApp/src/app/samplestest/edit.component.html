@@ -129,7 +129,7 @@
 
         <div class="col-md-6 d-flex justify-content-end">
             <button mat-flat-button color="warn" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
-            <button id="close-button" mat-stroked-button color="basic" [routerLink]="['/sampletest/list']">Close</button>
+            <button id="close-button" mat-stroked-button color="basic" [routerLink]="['/auth/sampletest/list']">Close</button>
         </div>
     </div>
     <ejs-toast #toast></ejs-toast>

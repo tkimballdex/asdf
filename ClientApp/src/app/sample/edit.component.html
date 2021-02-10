@@ -182,7 +182,7 @@
                             <div class="col-md-6 d-flex align-items-center list-header">
                                 <span class="list-header-icon"><i class="fas fa-vials"></i></span>
                                 <span class="list-header-title">Tests</span>
-                                <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['/sampletest/add']">+ Add</button></span>
+                                <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['/auth/sampletest/add']">+ Add</button></span>
                             </div>
                         </div>
                         <div class="row">
@@ -214,7 +214,7 @@
         </div>
         <div class="col-sm-6 d-flex justify-content-end">
             <button mat-flat-button color="warn" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
-            <button id="close-button" mat-stroked-button color="basic" cssClass="close-button" [routerLink]="['/sample/list']">Close</button>
+            <button id="close-button" mat-stroked-button color="basic" cssClass="close-button" [routerLink]="['/auth/sample/list']">Close</button>
         </div>
     </div>
     <ejs-toast #toast></ejs-toast>
