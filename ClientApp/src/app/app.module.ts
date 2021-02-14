@@ -58,11 +58,12 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
         LogoutComponent,
         ChooseTenantComponent,
         EmailComponent,
-        MasterPageComponent
+		MasterPageComponent,
+		SplashComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-        HttpClientModule,
+		HttpClientModule,
         FormsModule,
         TextBoxModule,
         SampleModule,
