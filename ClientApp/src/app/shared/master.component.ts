@@ -51,9 +51,97 @@ export class MasterPageComponent implements OnInit {
         };
     }
     //-------------------------------------------------------------------------------------
-    async ngOnInit() {
-        this.username = this.appRepository.userName;
-        this.eventQueue.on(AppEventType.SendEmail).subscribe((event) => this.openEmailSidebar(event));
+	async ngOnInit() {
+		this.username = this.appRepository.userName;
+		this.eventQueue.on(AppEventType.SendEmail).subscribe((event) => this.openEmailSidebar(event));
+		await this.setupMenu();
+	}
+
+	private async setupMenu() {
+		var privileges = await this.appRepository.getPrivileges();
+
+		this.menuItems = [
+			{
+				text: 'Home',
+				iconCss: 'fal fa-home-alt',
+				id: '/auth'
+			},
+			{
+				text: 'Dashboard',
+				iconCss: 'fal fa-tachometer-alt',
+				id: '/auth/dashboard'
+			}
+		];
+
+
+		var sampleMenu: MenuItemModel[] = [];
+
+		if (privileges.samples.read) {
+			sampleMenu.push({ id: '/auth/sample/list', text: 'Samples' });
+			sampleMenu.push({ id: '/auth/sampletest/list', text: 'Sample Test' });
+		}
+
+		if (sampleMenu.length > 0) {
+			this.menuItems.push({
+				text: 'Samples',
+				iconCss: 'fal fa-vials',
+				items: sampleMenu
+			});
+		}
+
+
+		var manageMenu: MenuItemModel[] = [];
+
+		if (privileges.customers.read) {
+			manageMenu.push({ id: '/auth/customer/list', text: 'Customers' });
+		}
+
+		if (privileges.sites.read) {
+			manageMenu.push({ id: '/auth/site/list', text: 'Sites' });
+		}
+
+		if (privileges.locations.read) {
+			manageMenu.push({ id: '/auth/location/list', text: 'Locations' });
+		}
+
+		if (privileges.vendors.read) {
+			manageMenu.push({ id: '/auth/vendor/list', text: 'Vendors' });
+		}
+
+		if (privileges.testTypes.read) {
+			manageMenu.push({ id: '/auth/testtype/list', text: 'Test Types' });
+		}
+
+		if (manageMenu.length > 0) {
+			this.menuItems.push({
+				text: 'Manage',
+				iconCss: 'fal fa-cubes',
+				items: manageMenu
+			});
+		}
+
+
+		var settingsMenu: MenuItemModel[] = [];
+
+		if (privileges.manageUsers.read) {
+			settingsMenu.push({ id: '/auth/user/list', text: 'Users' });
+		}
+
+		if (privileges.manageRoles.read) {
+			settingsMenu.push({ id: '/auth/role/list', text: 'Roles' });
+		}
+
+		if (privileges.manageRoles.read) {
+			settingsMenu.push({ id: '/auth/tenant/list', text: 'Tenants' });
+		}
+
+		if (settingsMenu.length > 0) {
+			this.menuItems.push({
+				text: 'Settings',
+				iconCss: 'fal fa-cog',
+				items: settingsMenu
+			});
+		}
     }
     //-------------------------------------------------------------------------------------
     public openEmailSidebar(data) {
@@ -68,7 +156,8 @@ export class MasterPageComponent implements OnInit {
     }
     //-------------------------------------------------------------------------------------
     public selectAccountMenu(args: MenuEventArgs): void {
-        if (args.item.id == 'logout') {
+		if (args.item.id == 'logout') {
+			sessionStorage.clear();
             this.authService.logout();
         }
         else if (args.item.id == 'login') {
@@ -82,47 +171,7 @@ export class MasterPageComponent implements OnInit {
         }
     }
     //-------------------------------------------------------------------------------------
-    public menuItems: MenuItemModel[] = [
-        {
-            text: 'Home',
-            iconCss: 'fal fa-home-alt',
-            id: '/auth'
-        },
-        {
-            text: 'Dashboard',
-            iconCss: 'fal fa-tachometer-alt',
-            id: '/auth/dashboard'
-        },
-        {
-            text: 'Samples',
-            iconCss: 'fal fa-vials',
-            items: [
-                { id: '/auth/sample/list', text: 'Samples' },
-                { id: '/auth/sampletest/list', text: 'Sample Test' },
-                { id: '/auth/customer/list', text: 'Other' }
-            ],
-        },
-        {
-            text: 'Manage',
-            iconCss: 'fal fa-cubes',
-            items: [
-                { id: '/auth/customer/list', text: 'Customers' },
-                { id: '/auth/site/list', text: 'Sites' },
-                { id: '/auth/location/list', text: 'Locations' },
-                { id: '/auth/vendor/list', text: 'Vendors' },
-                { id: '/auth/testtype/list', text: 'Test Types' }
-            ]
-        },
-        {
-            text: 'Settings',
-            iconCss: 'fal fa-cog',
-            items: [
-                { id: '/auth/user/list', text: 'Users' },
-                { id: '/auth/role/list', text: 'Roles' },
-                { id: '/auth/role/list', text: 'Tenants' }
-            ]
-        }
-    ];
+	public menuItems: MenuItemModel[];
     //-------------------------------------------------------------------------------------
     openClick() {
         this.sidebarMenuInstance.toggle();

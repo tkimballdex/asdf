@@ -89,6 +89,7 @@ export interface Privileges {
 	managePrivileges: PrivilegeSet;
 	manageUsers: PrivilegeSet;
 	manageRoles: PrivilegeSet;
+	manageTenants: PrivilegeSet;
 	customers: PrivilegeSet;
     sites: PrivilegeSet;
     locations: PrivilegeSet;
