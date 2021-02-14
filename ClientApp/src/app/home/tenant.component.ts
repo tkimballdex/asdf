@@ -18,7 +18,7 @@ export class ChooseTenantComponent extends PageComponent implements OnInit {
 	public tenantId: string;
 
     async ngOnInit() {
-		this.tenantList = await this.appRepository.tenantList();
+		this.tenantList = await this.appRepository.getTenants();
 		this.tenantId = this.appRepository.tenantId;
     }
 

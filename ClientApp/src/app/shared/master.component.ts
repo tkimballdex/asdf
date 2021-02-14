@@ -157,7 +157,6 @@ export class MasterPageComponent implements OnInit {
     //-------------------------------------------------------------------------------------
     public selectAccountMenu(args: MenuEventArgs): void {
 		if (args.item.id == 'logout') {
-			sessionStorage.clear();
             this.authService.logout();
         }
         else if (args.item.id == 'login') {

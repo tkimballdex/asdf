@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Router } from '@angular/router';
 import { MsalHttpClient } from './msal-http';
 import { MsalService } from '@azure/msal-angular';
 import { Subject, Observable } from 'rxjs';
@@ -31,7 +32,7 @@ export class EventQueueService {
 
 @Injectable({ providedIn : 'root'})
 export class AppRepository {
-    constructor(private http: MsalHttpClient, private authService: MsalService) {
+	constructor(private http: MsalHttpClient, private authService: MsalService, private router: Router) {
 	}
 
 	appData: Promise<AppData>;
@@ -46,20 +47,49 @@ export class AppRepository {
 
 	public async getPrivileges() {
 		var data = await this.getData();
-		return (<AppData>data).privileges;
+		return data.privileges;
     }
 
     public get tenantName() {
-        return sessionStorage.getItem('tenant');
+        return localStorage.getItem('tenant');
     }
 
     public get tenantId() {
-        return sessionStorage.getItem('tenantId');
+		return localStorage.getItem('tenantId');
     }
 
 	public setTenant(t: Tenant) {
-		sessionStorage.setItem('tenantId', t.id);
-		sessionStorage.setItem('tenant', t.name);
+		localStorage.setItem('tenantId', t.id);
+		localStorage.setItem('tenant', t.name);
+	}
+
+	public clearTenant() {
+		localStorage.removeItem('tenantId');
+		localStorage.removeItem('tenant');
+	}
+
+	public async getTenants() {
+		var data = await this.getData();
+		return data.tenants;
+	}
+
+	public async validateTenant() {
+		var tenants = await this.getTenants();
+
+		if (!tenants || !tenants.length) {
+			this.clearTenant();
+		}
+		else if (tenants.length == 1) {
+			this.setTenant(tenants[0]);
+		}
+		else if (this.tenantId && !tenants.some(x => x.id == this.tenantId)) {
+			this.clearTenant();
+		}
+
+		if (!this.tenantId) {
+			console.dir('Tenant is not set, redirecting to choose tenant page');
+			this.router.navigate(['/auth/account/tenant']);
+		}
 	}
 
     public get userName() {
@@ -71,10 +101,6 @@ export class AppRepository {
 		var account = this.authService.getAccount();
 		return account && account.name;
 	}
-
-    public tenantList() {
-        return this.http.post<Tenant[]>(`/user/getTenantList`);
-    }
 }
 
 export interface PrivilegeSet {
@@ -133,4 +159,5 @@ export interface AppData {
     frequencies: Frequency[];
     vendortypes: VendorType[];
 	menuItems: MenuItem[];
+	tenants: Tenant[];
 }

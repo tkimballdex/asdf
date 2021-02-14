@@ -20,7 +20,7 @@ export class UserListComponent extends PageComponent implements OnInit {
 
     async ngOnInit() {
         this.showSpinner();
-        this.tenantList = await this.appRepository.tenantList();
+		this.tenantList = await this.appRepository.getTenants();
         this.tenantId = this.appRepository.tenantId;
         this.hideSpinner();
 
