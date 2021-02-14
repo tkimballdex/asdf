@@ -68,7 +68,12 @@ export class AppRepository {
     public get userName() {
         var account = this.authService.getAccount();
         return account ? account.name : null;
-    }
+	}
+
+	public get isLoggedIn() {
+		var account = this.authService.getAccount();
+		return account && account.name;
+	}
 
     public tenantList() {
         return this.http.post(`/user/getTenantList`);
