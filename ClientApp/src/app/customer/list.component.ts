@@ -4,6 +4,7 @@ import { GridComponent, ExcelExportProperties, ExcelExportService, Column } from
 import { CustomerRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
 import { AppRepository, EventQueueService, AppEvent, AppEventType } from '../shared/app.repository';
+import { TenantService } from '../shared/tenant.service';
 
 @Component({
     selector: 'customer-list',
@@ -12,7 +13,7 @@ import { AppRepository, EventQueueService, AppEvent, AppEventType } from '../sha
 })
 export class CustomerListComponent extends PageComponent implements OnInit {  
        
-    constructor(private repository: CustomerRepository, private router: Router, private appRepository: AppRepository, private eventQueue: EventQueueService) {
+	constructor(private repository: CustomerRepository, private router: Router, private appRepository: AppRepository, private tenant: TenantService, private eventQueue: EventQueueService) {
         super();
         console.dir('CustomerListComponent');
     }
@@ -24,14 +25,14 @@ export class CustomerListComponent extends PageComponent implements OnInit {
     async ngOnInit() {
         this.privileges = (await this.appRepository.getPrivileges()).customers;
 
-        if (this.appRepository.tenantId) {
+        if (this.tenant.id) {
             this.search();
         }
     }
     //------------------------------------------------------------------------------------------------------------------------
     async search() {
         this.showSpinner();
-        this.list = await this.repository.list({ tenantId: this.appRepository.tenantId, name: this.name });
+        this.list = await this.repository.list({ tenantId: this.tenant.id, name: this.name });
         this.hideSpinner();
     }
     //------------------------------------------------------------------------------------------------------------------------

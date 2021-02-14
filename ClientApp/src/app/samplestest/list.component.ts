@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { GridComponent, ExcelExportProperties, ExcelExportService, Column } from '@syncfusion/ej2-angular-grids';
 import { SampleTestRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
-import { AppRepository } from '../shared/app.repository';
+import { TenantService } from '../shared/tenant.service';
 
 @Component({
     selector: 'sampletest-list',
@@ -11,7 +10,7 @@ import { AppRepository } from '../shared/app.repository';
 })
 export class SampleTestListComponent extends PageComponent implements OnInit {
 
-    constructor(private repository: SampleTestRepository, private router: Router, private appRepository: AppRepository) {
+	constructor(private repository: SampleTestRepository, private tenant: TenantService) {
         super();
     }
     //------------------------------------------------------------------------------------------------------------------------
@@ -23,14 +22,14 @@ export class SampleTestListComponent extends PageComponent implements OnInit {
     async ngOnInit() {
         this.dateFormat = {type:'date', format:'MM/dd/yyyy'};
 
-        if (this.appRepository.tenantId) {
+        if (this.tenant.id) {
             this.search();
         }
     }
     //------------------------------------------------------------------------------------------------------------------------
     async search() {
         this.showSpinner();
-        this.list = await this.repository.list({ tenantId: this.appRepository.tenantId, name: this.name });
+        this.list = await this.repository.list({ tenantId: this.tenant.id, name: this.name });
         this.hideSpinner();
     }
     //------------------------------------------------------------------------------------------------------------------------

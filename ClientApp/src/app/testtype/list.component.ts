@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { PageComponent } from '../shared/page.component';
 import { AppRepository } from "../shared/app.repository";
 import { TestTypeRepository } from './repository';
+import { TenantService } from '../shared/tenant.service';
 
 @Component({
   selector: 'testtype-list',
@@ -10,7 +10,7 @@ import { TestTypeRepository } from './repository';
   styleUrls: ['./list.component.css']
 })
 export class TestTypeListComponent extends PageComponent implements OnInit {
-    constructor(private repository: TestTypeRepository, private router: Router, private appRepository: AppRepository) {
+	constructor(private repository: TestTypeRepository, private appRepository: AppRepository, private tenant: TenantService) {
         super();
     }
     //--------------------------------------------------------------------------------------------------------------------
@@ -21,14 +21,14 @@ export class TestTypeListComponent extends PageComponent implements OnInit {
         this.app = await this.appRepository.getData();
         this.privileges = this.app.privileges.testTypes;
 
-        if (this.appRepository.tenantId) {
+        if (this.tenant.id) {
             this.search();
         }
     }
     //--------------------------------------------------------------------------------------------------------------------
     async search() {
         this.showSpinner();
-        this.list = await this.repository.list({ tenantId: this.appRepository.tenantId, name: this.name });
+        this.list = await this.repository.list({ tenantId: this.tenant.id, name: this.name });
         this.hideSpinner();
     }
     //--------------------------------------------------------------------------------------------------------------------

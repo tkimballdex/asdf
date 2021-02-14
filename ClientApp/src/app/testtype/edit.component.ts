@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DialogUtility, Dialog } from '@syncfusion/ej2-popups';
 import { AppRepository } from "../shared/app.repository";
 import { PageComponent } from '../shared/page.component';
+import { TenantService } from '../shared/tenant.service';
 import { TestTypeRepository } from './repository';
 
 @Component({
@@ -11,7 +12,7 @@ import { TestTypeRepository } from './repository';
   styleUrls: ['./edit.component.css']
 })
 export class TestTypeEditComponent extends PageComponent implements OnInit {
-    constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private repository: TestTypeRepository) {
+	constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private tenant: TenantService, private repository: TestTypeRepository) {
     super();
 }
 
@@ -31,7 +32,7 @@ async ngOnInit() {
 async save() {
     var add = !this.record.id;
     this.showSpinner();
-    this.record.tenantId = this.appRepository.tenantId;
+    this.record.tenantId = this.tenant.id;
     var returnValue = await this.repository.save(this.record);
     this.hideSpinner();
 

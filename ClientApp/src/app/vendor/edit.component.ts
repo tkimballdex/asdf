@@ -6,6 +6,7 @@ import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 import { AppRepository } from "../shared/app.repository";
 import { PageComponent } from '../shared/page.component';
 import { VendorRepository } from './repository';
+import { TenantService } from '../shared/tenant.service';
 
 @Component({
     selector: 'vendor-edit',
@@ -13,7 +14,7 @@ import { VendorRepository } from './repository';
     styleUrls: ['./edit.component.scss']
 })
 export class VendorEditComponent extends PageComponent implements OnInit {
-    constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private repository: VendorRepository) {
+	constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private tenant: TenantService, private repository: VendorRepository) {
         super();
     }
 
@@ -34,7 +35,7 @@ export class VendorEditComponent extends PageComponent implements OnInit {
     async save() {
         var add = !this.record.id;
         this.showSpinner();
-        this.record.tenantId = this.appRepository.tenantId;
+        this.record.tenantId = this.tenant.id;
         var returnValue = await this.repository.save(this.record);
         this.hideSpinner();
 

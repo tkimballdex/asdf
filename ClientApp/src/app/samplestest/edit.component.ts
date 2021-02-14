@@ -6,6 +6,7 @@ import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 import { AppRepository } from "../shared/app.repository";
 import { PageComponent } from '../shared/page.component';
 import { SampleTestRepository } from './repository';
+import { TenantService } from '../shared/tenant.service';
 
 @Component({
     selector: 'sampletest-edit',
@@ -13,7 +14,7 @@ import { SampleTestRepository } from './repository';
     styleUrls: ['./edit.component.scss']
 })
 export class SampleTestEditComponent extends PageComponent implements OnInit {
-    constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private repository: SampleTestRepository) {
+	constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private tenant: TenantService, private repository: SampleTestRepository) {
         super();
     }
 
@@ -34,7 +35,7 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
     async save() {
         var add = !this.record.id;
         this.showSpinner();
-        this.record.tenantId = this.appRepository.tenantId;
+		this.record.tenantId = this.tenant.id;
         var returnValue = await this.repository.save(this.record);
         this.hideSpinner();
 

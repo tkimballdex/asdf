@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { UserRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
-import { AppRepository } from '../shared/app.repository';
+import { TenantService } from '../shared/tenant.service';
 
 @Component({
     selector: 'user-list',
     templateUrl: './list.component.html',
 })
 export class UserListComponent extends PageComponent implements OnInit {
-    constructor(private repository: UserRepository, private router: Router, private appRepository: AppRepository) {
+	constructor(private repository: UserRepository, private tenant: TenantService) {
         super();
     }
 
@@ -20,8 +19,8 @@ export class UserListComponent extends PageComponent implements OnInit {
 
     async ngOnInit() {
         this.showSpinner();
-		this.tenantList = await this.appRepository.getTenants();
-        this.tenantId = this.appRepository.tenantId;
+		this.tenantList = await this.tenant.getList();
+        this.tenantId = this.tenant.id;
         this.hideSpinner();
 
         if (this.tenantId) {
@@ -33,9 +32,5 @@ export class UserListComponent extends PageComponent implements OnInit {
         this.showSpinner();
         this.list = await this.repository.list({ tenantId: this.tenantId, username: this.username });
         this.hideSpinner();
-    }
-
-    changeTenant() {
-
     }
 }

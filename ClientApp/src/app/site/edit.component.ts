@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DialogUtility, Dialog } from '@syncfusion/ej2-popups';
 import { AppRepository } from "../shared/app.repository";
 import { PageComponent } from '../shared/page.component';
+import { TenantService } from '../shared/tenant.service';
 import { SiteRepository } from './repository';
 
 @Component({
@@ -11,7 +12,7 @@ import { SiteRepository } from './repository';
     styleUrls: ['./edit.component.scss']
 })
 export class SiteEditComponent extends PageComponent implements OnInit {
-    constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private repository: SiteRepository) {
+	constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private tenant: TenantService, private repository: SiteRepository) {
         super();
     }
 
@@ -35,7 +36,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
     async save() {
         var add = !this.record.id;
         this.showSpinner();
-        this.record.tenantId = this.appRepository.tenantId;
+        this.record.tenantId = this.tenant.id;
         var returnValue = await this.repository.save(this.record);
         this.hideSpinner();
 

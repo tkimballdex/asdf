@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { LocationRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
-import { AppRepository } from '../shared/app.repository';
+import { TenantService } from '../shared/tenant.service';
 
 @Component({
     selector: 'location-list',
     templateUrl: './list.component.html',
 })
 export class LocationListComponent extends PageComponent implements OnInit {
-    constructor(private repository: LocationRepository, private router: Router, private appRepository: AppRepository) {
+	constructor(private repository: LocationRepository, private tenant: TenantService) {
         super();
     }
 
@@ -17,14 +16,14 @@ export class LocationListComponent extends PageComponent implements OnInit {
     public name: any;
 
     async ngOnInit() {
-        if (this.appRepository.tenantId) {
+        if (this.tenant.id) {
             this.search();
         }
     }
 
     async search() {
         this.showSpinner();
-        this.list = await this.repository.list({ tenantId: this.appRepository.tenantId, name: this.name });
+        this.list = await this.repository.list({ tenantId: this.tenant.id, name: this.name });
         this.hideSpinner();
     }
 }

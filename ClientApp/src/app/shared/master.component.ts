@@ -6,6 +6,7 @@ import { MsalService } from '@azure/msal-angular';
 import { Router } from "@angular/router";
 import { AppRepository, EventQueueService, AppEvent, AppEventType } from './../shared/app.repository';
 import { EmailComponent } from './../email/email.component';
+import { TenantService } from './tenant.service';
 
 @Component({
     selector: 'master-page',
@@ -26,7 +27,7 @@ export class MasterPageComponent implements OnInit {
     public sidebardisplaysize = '180px';
     public AccountMenuItem: ItemModel[];
     //-------------------------------------------------------------------------------------
-    constructor(private authService: MsalService, private router: Router, public appRepository: AppRepository, private eventQueue: EventQueueService) {
+    constructor(private authService: MsalService, private router: Router, public appRepository: AppRepository, private tenant: TenantService, private eventQueue: EventQueueService) {
         console.dir(this.authService.getAccount());
 
         this.AccountMenuItem = [

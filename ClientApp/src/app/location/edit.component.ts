@@ -4,6 +4,7 @@ import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { DialogUtility, Dialog } from '@syncfusion/ej2-popups';
 import { AppRepository } from "../shared/app.repository";
 import { PageComponent } from '../shared/page.component';
+import { TenantService } from '../shared/tenant.service';
 import { LocationRepository } from './repository';
 
 @Component({
@@ -12,7 +13,7 @@ import { LocationRepository } from './repository';
     styleUrls: ['./edit.component.scss']
 })
 export class LocationEditComponent extends PageComponent implements OnInit {
-    constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private repository: LocationRepository) {
+	constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private repository: LocationRepository, private tenant: TenantService) {
         super();
     }
 
@@ -34,7 +35,7 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 
     async save() {
         var add = !this.record.id;
-        this.record.tenantId = this.appRepository.tenantId;
+		this.record.tenantId = this.tenant.id;
         this.showSpinner();
         var returnValue = await this.repository.save(this.record);
         this.hideSpinner();
