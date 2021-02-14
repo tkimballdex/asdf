@@ -14,15 +14,17 @@ export class ChooseTenantComponent extends PageComponent implements OnInit {
         super();
     }
 
-    public tenantList: any;
+	public tenantList: any;
+	public tenantId: string;
 
     async ngOnInit() {
-        this.tenantList = await this.appRepository.tenantList();
+		this.tenantList = await this.appRepository.tenantList();
+		this.tenantId = this.appRepository.tenantId;
     }
 
-    public changeTenant() {
-        var t = this.tenantList.find(x => x.id == this.appRepository.tenantId);
-        this.appRepository.tenantName = t.name;
+	public changeTenant() {
+        var t = this.tenantList.find(x => x.id == this.tenantId);
+		this.appRepository.setTenant(t);
         setTimeout(() => this.router.navigate(['/auth']), 1000);
     }
 }

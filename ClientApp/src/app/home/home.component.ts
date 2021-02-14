@@ -18,8 +18,15 @@ export class HomeComponent extends PageComponent implements OnInit {
 		this.username = this.appRepository.userName;
 
 		if (!this.appRepository.tenantId) {
-			console.dir('Tenant is not set, redirecting to choose tenant page');
-			this.router.navigate(['/auth/account/tenant']);
+			var tenantList = await this.appRepository.tenantList();
+
+			if (tenantList && tenantList.length == 1) {
+				this.appRepository.setTenant(tenantList[0]);
+			}
+			else {
+				console.dir('Tenant is not set, redirecting to choose tenant page');
+				this.router.navigate(['/auth/account/tenant']);
+			}
 		}
 	}
 }

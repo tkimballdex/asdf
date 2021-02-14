@@ -53,17 +53,14 @@ export class AppRepository {
         return sessionStorage.getItem('tenant');
     }
 
-    public set tenantName(value: string) {
-        sessionStorage.setItem('tenant', value);
-    }
-
     public get tenantId() {
         return sessionStorage.getItem('tenantId');
     }
 
-    public set tenantId(value: string) {
-        sessionStorage.setItem('tenantId', value);
-    }
+	public setTenant(t: Tenant) {
+		sessionStorage.setItem('tenantId', t.id);
+		sessionStorage.setItem('tenant', t.name);
+	}
 
     public get userName() {
         var account = this.authService.getAccount();
@@ -76,7 +73,7 @@ export class AppRepository {
 	}
 
     public tenantList() {
-        return this.http.post(`/user/getTenantList`);
+        return this.http.post<Tenant[]>(`/user/getTenantList`);
     }
 }
 
@@ -121,6 +118,11 @@ export interface Frequency {
 export interface VendorType {
     id: number;
     name: string;
+}
+
+export interface Tenant {
+	id: string;
+	name: string;
 }
 
 export interface AppData {
