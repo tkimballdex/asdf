@@ -4,7 +4,7 @@ import { ItemModel } from '@syncfusion/ej2-angular-splitbuttons';
 import { Menu, MenuItemModel } from '@syncfusion/ej2-navigations';
 import { MsalService } from '@azure/msal-angular';
 import { Router } from "@angular/router";
-import { AppRepository, EventQueueService, AppEvent, AppEventType } from './../shared/app.repository';
+import { AppService, EventQueueService, AppEvent, AppEventType } from './../shared/app.service';
 import { EmailComponent } from './../email/email.component';
 import { TenantService } from './tenant.service';
 
@@ -27,7 +27,7 @@ export class MasterPageComponent implements OnInit {
     public sidebardisplaysize = '180px';
     public AccountMenuItem: ItemModel[];
     //-------------------------------------------------------------------------------------
-    constructor(private authService: MsalService, private router: Router, public appRepository: AppRepository, private tenant: TenantService, private eventQueue: EventQueueService) {
+    constructor(private authService: MsalService, private router: Router, public appService: AppService, private tenant: TenantService, private eventQueue: EventQueueService) {
         console.dir(this.authService.getAccount());
 
         this.AccountMenuItem = [
@@ -53,13 +53,13 @@ export class MasterPageComponent implements OnInit {
     }
     //-------------------------------------------------------------------------------------
 	async ngOnInit() {
-		this.username = this.appRepository.userName;
+		this.username = this.appService.userName;
 		this.eventQueue.on(AppEventType.SendEmail).subscribe((event) => this.openEmailSidebar(event));
 		await this.setupMenu();
 	}
 
 	private async setupMenu() {
-		var privileges = await this.appRepository.getPrivileges();
+		var privileges = await this.appService.getPrivileges();
 
 		this.menuItems = [
 			{

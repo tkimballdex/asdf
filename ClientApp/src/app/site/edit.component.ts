@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogUtility, Dialog } from '@syncfusion/ej2-popups';
-import { AppRepository } from "../shared/app.repository";
+import { AppService } from "../shared/app.service";
 import { PageComponent } from '../shared/page.component';
 import { TenantService } from '../shared/tenant.service';
 import { SiteRepository } from './repository';
@@ -12,7 +12,7 @@ import { SiteRepository } from './repository';
     styleUrls: ['./edit.component.scss']
 })
 export class SiteEditComponent extends PageComponent implements OnInit {
-	constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private tenant: TenantService, private repository: SiteRepository) {
+	constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private tenant: TenantService, private repository: SiteRepository) {
         super();
     }
 
@@ -21,7 +21,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 
     async ngOnInit() {
         this.showSpinner();
-        this.app = await this.appRepository.getData();
+        this.app = await this.appService.getData();
         this.privileges = this.app.privileges.sites;
 
         var id = this.route.snapshot.paramMap.get('id');

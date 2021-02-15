@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmailRepository } from './repository';
-import { AppRepository, AppData } from '../shared/app.repository';
+import { AppService, AppData } from '../shared/app.service';
 import { PageComponent } from '../shared/page.component';
 
 @Component({
@@ -9,7 +9,7 @@ import { PageComponent } from '../shared/page.component';
     styleUrls: ['./email.component.css']
 })
 export class EmailComponent extends PageComponent implements OnInit {
-    constructor(private appRepository: AppRepository, private repository: EmailRepository) {
+    constructor(private appService: AppService, private repository: EmailRepository) {
         super();
     }
 
@@ -18,7 +18,7 @@ export class EmailComponent extends PageComponent implements OnInit {
     public body: string;
 
     async ngOnInit() {
-        this.app = await this.appRepository.getData();
+        this.app = await this.appService.getData();
     }
 
     setList(list: []) {

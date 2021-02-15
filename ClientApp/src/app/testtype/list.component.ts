@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PageComponent } from '../shared/page.component';
-import { AppRepository } from "../shared/app.repository";
+import { AppService } from "../shared/app.service";
 import { TestTypeRepository } from './repository';
 import { TenantService } from '../shared/tenant.service';
 
@@ -10,7 +10,7 @@ import { TenantService } from '../shared/tenant.service';
   styleUrls: ['./list.component.css']
 })
 export class TestTypeListComponent extends PageComponent implements OnInit {
-	constructor(private repository: TestTypeRepository, private appRepository: AppRepository, private tenant: TenantService) {
+	constructor(private repository: TestTypeRepository, private appService: AppService, private tenant: TenantService) {
         super();
     }
     //--------------------------------------------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ export class TestTypeListComponent extends PageComponent implements OnInit {
     public name: any;
     //--------------------------------------------------------------------------------------------------------------------
     async ngOnInit() {
-        this.app = await this.appRepository.getData();
+        this.app = await this.appService.getData();
         this.privileges = this.app.privileges.testTypes;
 
         if (this.tenant.id) {

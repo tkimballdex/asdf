@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { Router } from '@angular/router';
-import { AppDataRepository } from './app.repository';
+import { AppRepository } from './app.service';
 
 @Injectable({ providedIn : 'root'})
 export class TenantService {
-	constructor(private dataRepository: AppDataRepository, private router: Router) {
+	constructor(private dataRepository: AppRepository, private router: Router) {
 	}
 
     public get name() {

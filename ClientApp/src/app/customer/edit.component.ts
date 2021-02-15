@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { DialogUtility, Dialog } from '@syncfusion/ej2-popups';
 import { TabComponent } from '@syncfusion/ej2-angular-navigations';
-import { AppRepository } from "../shared/app.repository";
+import { AppService } from "../shared/app.service";
 import { PageComponent } from '../shared/page.component';
 import { CustomerRepository } from './repository';
 import { TenantService } from '../shared/tenant.service';
@@ -14,7 +14,7 @@ import { TenantService } from '../shared/tenant.service';
     styleUrls: ['./edit.component.scss']
 })
 export class CustomerEditComponent extends PageComponent implements OnInit {
-    constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private repository: CustomerRepository) {
+    constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private repository: CustomerRepository) {
         super();
     }
 
@@ -25,7 +25,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
         var id = this.route.snapshot.paramMap.get('id');
 
         this.showSpinner();
-        this.app = await this.appRepository.getData();
+        this.app = await this.appService.getData();
         this.privileges = this.app.privileges.customers;
         this.record = await this.repository.get(id);
         this.hideSpinner();
@@ -34,7 +34,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
     async save() {
         var add = !this.record.id;
         this.showSpinner();
-		this.record.tenantId = this.appRepository.tenantId;
+		this.record.tenantId = this.appService.tenantId;
         var returnValue = await this.repository.save(this.record);
         this.hideSpinner();
 

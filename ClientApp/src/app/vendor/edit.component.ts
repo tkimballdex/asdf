@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { DialogUtility, Dialog } from '@syncfusion/ej2-popups';
 import { TabComponent } from '@syncfusion/ej2-angular-navigations';
-import { AppRepository } from "../shared/app.repository";
+import { AppService } from "../shared/app.service";
 import { PageComponent } from '../shared/page.component';
 import { VendorRepository } from './repository';
 import { TenantService } from '../shared/tenant.service';
@@ -14,7 +14,7 @@ import { TenantService } from '../shared/tenant.service';
     styleUrls: ['./edit.component.scss']
 })
 export class VendorEditComponent extends PageComponent implements OnInit {
-	constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private tenant: TenantService, private repository: VendorRepository) {
+	constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private tenant: TenantService, private repository: VendorRepository) {
         super();
     }
 
@@ -24,7 +24,7 @@ export class VendorEditComponent extends PageComponent implements OnInit {
     //-----------------------------------------------------------------------------------------
     async ngOnInit() {       
         this.showSpinner();
-        this.app = await this.appRepository.getData();
+        this.app = await this.appService.getData();
         this.privileges = this.app.privileges.vendors;
 
         var id = this.route.snapshot.paramMap.get('id');

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { DialogUtility, Dialog } from '@syncfusion/ej2-popups';
-import { AppRepository } from "../shared/app.repository";
+import { AppService } from "../shared/app.service";
 import { PageComponent } from '../shared/page.component';
 import { UserRepository } from './repository';
 
@@ -12,7 +12,7 @@ import { UserRepository } from './repository';
     styleUrls: ['./edit.component.scss']
 })
 export class UserEditComponent extends PageComponent implements OnInit {
-    constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private repository: UserRepository) {
+    constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private repository: UserRepository) {
         super();
     }
 
@@ -21,7 +21,7 @@ export class UserEditComponent extends PageComponent implements OnInit {
     @ViewChild('grid') public grid: GridComponent;
 
     async ngOnInit() {
-        this.privileges = (await this.appRepository.getPrivileges()).manageUsers;
+        this.privileges = (await this.appService.getPrivileges()).manageUsers;
 
        var id = this.route.snapshot.paramMap.get('id');
         this.showSpinner();

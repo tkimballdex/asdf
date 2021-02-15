@@ -1,5 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import { AppData, PrivilegeSet } from "./app.repository";
+import { AppData, PrivilegeSet } from "./app.service";
 import { ToastComponent } from '@syncfusion/ej2-angular-notifications';
 import { createSpinner } from '@syncfusion/ej2-angular-popups';
 import { showSpinner, hideSpinner } from '@syncfusion/ej2-popups';

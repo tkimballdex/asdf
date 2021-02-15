@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { DialogUtility, Dialog } from '@syncfusion/ej2-popups';
-import { AppRepository } from "../shared/app.repository";
+import { AppService } from "../shared/app.service";
 import { PageComponent } from '../shared/page.component';
 import { TenantService } from '../shared/tenant.service';
 import { LocationRepository } from './repository';
@@ -13,7 +13,7 @@ import { LocationRepository } from './repository';
     styleUrls: ['./edit.component.scss']
 })
 export class LocationEditComponent extends PageComponent implements OnInit {
-	constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private repository: LocationRepository, private tenant: TenantService) {
+	constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private repository: LocationRepository, private tenant: TenantService) {
         super();
     }
 
@@ -22,7 +22,7 @@ export class LocationEditComponent extends PageComponent implements OnInit {
     @ViewChild('grid') public grid: GridComponent;
 
     async ngOnInit() {
-        this.privileges = (await this.appRepository.getPrivileges()).locations;
+        this.privileges = (await this.appService.getPrivileges()).locations;
         var id = this.route.snapshot.paramMap.get('id');
         this.showSpinner();
         this.record = await this.repository.get(id);

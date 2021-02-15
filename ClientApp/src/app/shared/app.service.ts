@@ -32,7 +32,7 @@ export class EventQueueService {
 
 
 @Injectable({ providedIn: 'root' })
-export class AppDataRepository {
+export class AppRepository {
 	constructor(private http: MsalHttpClient) {
 	}
 
@@ -49,8 +49,8 @@ export class AppDataRepository {
 
 
 @Injectable({ providedIn : 'root'})
-export class AppRepository {
-	constructor(private authService: MsalService, private dataRepository: AppDataRepository, private tenant: TenantService) {
+export class AppService {
+	constructor(private authService: MsalService, private dataRepository: AppRepository, private tenant: TenantService) {
 	}
 
 	public getData() {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PageComponent } from '../shared/page.component';
-import { AppRepository } from '../shared/app.repository';
+import { AppService } from '../shared/app.service';
 import { TenantService } from '../shared/tenant.service';
 
 @Component({
@@ -8,14 +8,14 @@ import { TenantService } from '../shared/tenant.service';
 	templateUrl: './home.component.html',
 })
 export class HomeComponent extends PageComponent implements OnInit {
-	constructor(private appRepository: AppRepository, private tenant: TenantService) {
+	constructor(private appService: AppService, private tenant: TenantService) {
 		super();
 	}
 
 	public username: string;
 
 	async ngOnInit() {
-		this.username = this.appRepository.userName;
+		this.username = this.appService.userName;
 		await this.tenant.validate();
 	}
 }
