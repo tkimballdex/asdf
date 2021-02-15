@@ -27,7 +27,7 @@ export class MasterPageComponent implements OnInit {
     public sidebardisplaysize = '180px';
     public AccountMenuItem: ItemModel[];
     //-------------------------------------------------------------------------------------
-    constructor(private authService: MsalService, private router: Router, public appService: AppService, private tenant: TenantService, private eventQueue: EventQueueService) {
+    constructor(private authService: MsalService, private router: Router, public appService: AppService, public tenant: TenantService, private eventQueue: EventQueueService) {
         console.dir(this.authService.getAccount());
 
         this.AccountMenuItem = [
