@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
-import { Router } from '@angular/router';
 import { GridComponent, ExcelExportProperties, ExcelExportService, Column } from '@syncfusion/ej2-angular-grids';
 import { CustomerRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
@@ -13,9 +12,8 @@ import { TenantService } from '../shared/tenant.service';
 })
 export class CustomerListComponent extends PageComponent implements OnInit {  
        
-	constructor(private repository: CustomerRepository, private router: Router, private appRepository: AppRepository, private tenant: TenantService, private eventQueue: EventQueueService) {
+	constructor(private repository: CustomerRepository, private appRepository: AppRepository, private tenant: TenantService, private eventQueue: EventQueueService) {
         super();
-        console.dir('CustomerListComponent');
     }
     //------------------------------------------------------------------------------------------------------------------------
     public list: any;
@@ -23,7 +21,8 @@ export class CustomerListComponent extends PageComponent implements OnInit {
     @ViewChild('grid') public grid: GridComponent;    
     //------------------------------------------------------------------------------------------------------------------------
     async ngOnInit() {
-        this.privileges = (await this.appRepository.getPrivileges()).customers;
+		this.privileges = (await this.appRepository.getPrivileges()).customers;
+		await this.tenant.validate();
 
         if (this.tenant.id) {
             this.search();

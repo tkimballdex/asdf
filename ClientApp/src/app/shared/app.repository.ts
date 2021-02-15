@@ -3,7 +3,7 @@ import { MsalHttpClient } from './msal-http';
 import { MsalService } from '@azure/msal-angular';
 import { Subject, Observable } from 'rxjs';
 import { filter } from 'rxjs/operators'
-import { Tenant } from './tenant.service';
+import { Tenant, TenantService } from './tenant.service';
 
 export enum AppEventType {
     SendEmail = 'SendEmail'
@@ -30,19 +30,31 @@ export class EventQueueService {
     }
 }
 
-@Injectable({ providedIn : 'root'})
-export class AppRepository {
-	constructor(private http: MsalHttpClient, private authService: MsalService) {
+
+@Injectable({ providedIn: 'root' })
+export class AppDataRepository {
+	constructor(private http: MsalHttpClient) {
 	}
 
 	appData: Promise<AppData>;
 
 	public getData() {
 		if (this.appData == null) {
-            this.appData = this.http.post('/app/getData', null);
+			this.appData = this.http.post('/app/getData', null);
 		}
 
 		return this.appData;
+	}
+}
+
+
+@Injectable({ providedIn : 'root'})
+export class AppRepository {
+	constructor(private authService: MsalService, private dataRepository: AppDataRepository, private tenant: TenantService) {
+	}
+
+	public getData() {
+		return this.dataRepository.getData();
 	}
 
 	public async getPrivileges() {
@@ -58,6 +70,10 @@ export class AppRepository {
 	public get isLoggedIn() {
 		var account = this.authService.getAccount();
 		return account && account.name;
+	}
+
+	public get tenantId() {
+		return this.tenant.id;
 	}
 }
 

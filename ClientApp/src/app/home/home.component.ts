@@ -16,6 +16,6 @@ export class HomeComponent extends PageComponent implements OnInit {
 
 	async ngOnInit() {
 		this.username = this.appRepository.userName;
-		this.tenant.validate();
+		await this.tenant.validate();
 	}
 }

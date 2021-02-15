@@ -14,7 +14,7 @@ import { TenantService } from '../shared/tenant.service';
     styleUrls: ['./edit.component.scss']
 })
 export class CustomerEditComponent extends PageComponent implements OnInit {
-    constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private tenant: TenantService, private repository: CustomerRepository) {
+    constructor(private route: ActivatedRoute, private router: Router, private appRepository: AppRepository, private repository: CustomerRepository) {
         super();
     }
 
@@ -34,7 +34,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
     async save() {
         var add = !this.record.id;
         this.showSpinner();
-		this.record.tenantId = this.tenant.id;
+		this.record.tenantId = this.appRepository.tenantId;
         var returnValue = await this.repository.save(this.record);
         this.hideSpinner();
 

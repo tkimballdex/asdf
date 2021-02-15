@@ -18,11 +18,10 @@ export class VendorListComponent extends PageComponent implements OnInit {
     public name: any;
     @ViewChild('grid') public grid: GridComponent;
     //------------------------------------------------------------------------------------------------------------------------
-    async ngOnInit() {
-        if (this.tenant.id) {
-            this.search();
-        }
-    }
+	async ngOnInit() {
+		await this.tenant.validate();
+		this.search();
+	}
     //------------------------------------------------------------------------------------------------------------------------
     async search() {
         this.showSpinner();
