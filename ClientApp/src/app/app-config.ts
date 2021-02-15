@@ -100,7 +100,7 @@ export const protectedResourceMap: [string, string[]][] = [
  * visit https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-angular#config-options-for-msal-initialization
 */
 export const msalAngularConfig: MsalAngularConfiguration = {
-    popUp: true,
+    popUp: false,
     consentScopes: [
         ...loginRequest.scopes,
         ...tokenRequest.scopes,
