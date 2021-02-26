@@ -365,3 +365,7 @@ mat-form-field.mat-form-field {
 .mar-t20 {
     margin-top: 20px;
 }
+
+#edit-view .invalid-control {
+	background-color: indianred;
+}
