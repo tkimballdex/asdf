@@ -21,6 +21,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 	public form: FormGroup;
 
 	get name() { return this.form.get('name'); }
+	get address() { return this.form.get('address'); }
 	get stateId() { return this.form.get('stateId'); }
 
     async ngOnInit() {
@@ -34,6 +35,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 
 		this.form = new FormGroup({
 			name: new FormControl(this.record.name, [Validators.required]),
+			address: new FormControl(this.record.address, [Validators.required]),
 			stateId: new FormControl(this.record.stateId, [Validators.required])
 		});
     }
