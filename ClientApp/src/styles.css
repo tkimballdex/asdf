@@ -366,6 +366,6 @@ mat-form-field.mat-form-field {
     margin-top: 20px;
 }
 
-#edit-view .invalid-control {
+#edit-view .ng-touched.ng-invalid input[type=text] {
 	background-color: indianred;
 }
