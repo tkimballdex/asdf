@@ -21,7 +21,6 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 	public form: FormGroup;
 
 	get name() { return this.form.get('name'); }
-	get address() { return this.form.get('address'); }
 	get stateId() { return this.form.get('stateId'); }
 
     async ngOnInit() {
