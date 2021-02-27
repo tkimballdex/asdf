@@ -20,9 +20,6 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
     public deleteDialog: Dialog;
 	public form: FormGroup;
 
-	get name() { return this.form.get('name'); }
-	get stateId() { return this.form.get('stateId'); }
-
     async ngOnInit() {
         var id = this.route.snapshot.paramMap.get('id');
 
@@ -30,14 +27,23 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
         this.app = await this.appService.getData();
         this.privileges = this.app.privileges.customers;
 		this.record = await this.repository.get(id);
-		this.record.serviceStartDate = this.record.serviceStartDate ? new Date(this.record.serviceStartDate) : null;
-		this.record.serviceEndDate = this.record.serviceEndDate ? new Date(this.record.serviceEndDate) : null;
 		this.hideSpinner();
 
 		this.form = new FormGroup({
 			name: new FormControl(this.record.name, [Validators.required]),
+			serviceStartDate: new FormControl(this.record.serviceStartDate ? new Date(this.record.serviceStartDate) : null),
+			serviceEndDate: new FormControl(this.record.serviceEndDate ? new Date(this.record.serviceEndDate) : null),
 			address: new FormControl(this.record.address, [Validators.required]),
-			stateId: new FormControl(this.record.stateId, [Validators.required])
+			address2: new FormControl(this.record.address2, []),
+			city: new FormControl(this.record.city, [Validators.required]),
+			stateId: new FormControl(this.record.stateId, [Validators.required]),
+			postalCode: new FormControl(this.record.postalCode, [Validators.required]),
+			website: new FormControl(this.record.website, []),
+			phoneNo: new FormControl(this.record.phoneNo, []),
+			contactName: new FormControl(this.record.contactName, []),
+			contactEmail: new FormControl(this.record.contactEmail, [Validators.required, Validators.email]),
+			contactPhoneNo: new FormControl(this.record.contactPhoneNo, [Validators.required]),
+			notificationEmail: new FormControl(this.record.notificationEmail, []),
 		});
     }
 
@@ -48,6 +54,8 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 			this.showErrorMessage("Please complete all required fields!")
 		}
 		else {
+			Object.assign(this.record, this.form.value);
+
 			var add = !this.record.id;
 			this.showSpinner();
 			this.record.tenantId = this.appService.tenantId;
