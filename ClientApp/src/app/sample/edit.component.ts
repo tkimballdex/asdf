@@ -26,8 +26,8 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 
 	//----------------------------Reference No validations----------------------------//
 
-	refno = new FormControl('', [Validators.required]);
-	date1 = new FormControl('', [Validators.required]);
+	public refno: FormControl;
+	public date1: FormControl;
 
 
 	getErrorMessage() {
@@ -51,6 +51,9 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		var id = this.route.snapshot.paramMap.get('id');
 		this.record = await this.repository.get(id);
 		this.hideSpinner();
+
+		this.refno = new FormControl(this.record.referenceNo, [Validators.required]);
+		this.date1 = new FormControl(this.record.scheduledDate, [Validators.required]);
 	}
 	//-----------------------------------------------------------------------------------------
 	async save() {
@@ -60,7 +63,10 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 			this.dialog.open(DataComponent);
 			this.hideSpinner();
 		} else {
+			this.record.referenceNo = this.refno.value;
+			this.record.scheduledDate = this.date1.value;
 			this.record.tenantId = this.tenant.id;
+
 			var returnValue = await this.repository.save(this.record);
 			this.hideSpinner();
 			if (returnValue && returnValue.error) {
