@@ -29,7 +29,9 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
         this.showSpinner();
         this.app = await this.appService.getData();
         this.privileges = this.app.privileges.customers;
-        this.record = await this.repository.get(id);
+		this.record = await this.repository.get(id);
+		this.record.serviceStartDate = this.record.serviceStartDate ? new Date(this.record.serviceStartDate) : null;
+		this.record.serviceEndDate = this.record.serviceEndDate ? new Date(this.record.serviceEndDate) : null;
 		this.hideSpinner();
 
 		this.form = new FormGroup({
