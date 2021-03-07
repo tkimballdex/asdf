@@ -82,11 +82,14 @@
           "options": {
             "browserTarget": "InteromePhWebApp:build"
           },
-          "configurations": {
-            "production": {
-              "browserTarget": "InteromePhWebApp:build:production"
-            }
-          }
+			"configurations": {
+				"production": {
+					"browserTarget": "InteromePhWebApp:build:production"
+				},
+				"staging": {
+					"browserTarget": "InteromePhWebApp:build:staging"
+				}
+			}
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
