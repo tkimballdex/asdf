@@ -6,6 +6,7 @@ import { MsalService } from '@azure/msal-angular';
 import { Router } from "@angular/router";
 import { AppService, EventQueueService, AppEvent, AppEventType } from './../shared/app.service';
 import { EmailComponent } from './../email/email.component';
+import { SmsComponent } from './../sms/sms.component';
 import { TenantService } from './tenant.service';
 
 @Component({
@@ -16,6 +17,8 @@ export class MasterPageComponent implements OnInit {
     @ViewChild('sidebarMenuInstance') public sidebarMenuInstance: SidebarComponent;
     @ViewChild('emailSidebar') public emailSidebar: SidebarComponent;
     @ViewChild('emailComponent') public emailComponent: EmailComponent;
+	@ViewChild('smsSidebar') public smsSidebar: SidebarComponent;
+	@ViewChild('smsComponent') public smsComponent: SmsComponent;
 
     public sidebarwidth: string = '180px';
     public mediaQuery: string = ('(min-width: 3200px)');
@@ -55,6 +58,7 @@ export class MasterPageComponent implements OnInit {
 	async ngOnInit() {
 		this.username = this.appService.userName;
 		this.eventQueue.on(AppEventType.SendEmail).subscribe((event) => this.openEmailSidebar(event));
+		this.eventQueue.on(AppEventType.SendSms).subscribe((event) => this.openSmsSidebar(event));
 		await this.setupMenu();
 	}
 
@@ -149,7 +153,12 @@ export class MasterPageComponent implements OnInit {
         this.emailComponent.setList(data.payload);
         this.emailSidebar.show();
     }
-    //-------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------
+	public openSmsSidebar(data) {
+		this.smsComponent.setList(data.payload);
+		this.smsSidebar.show();
+	}
+   //-------------------------------------------------------------------------------------
     public selectMainMenu(args: MenuEventArgs): void {
         if (args.item.id) {
             this.router.navigate([args.item.id]);
@@ -187,5 +196,9 @@ export class MasterPageComponent implements OnInit {
     createdEmailSidebar() {
         this.emailSidebar.toggle();
     }
+
+	createdSmsSidebar() {
+		this.smsSidebar.toggle();
+	}
     //-------------------------------------------------------------------------------------
 }

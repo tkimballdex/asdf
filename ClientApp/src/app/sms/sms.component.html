@@ -1,0 +1,28 @@
+<div class="pad-20" *ngIf="list">
+    <div class="row d-flex align-items-end">
+        <div class="col-md-6 d-flex align-items-end list-header">
+            <span class="list-header-icon"><i class="fas fa-envelope"></i></span>
+            <span class="list-header-title">SMS Message</span>
+        </div>
+        <div class="col-md-6 d-flex align-items-end justify-content-end list-header">
+            <span class="list-actions" id="close"><button ejs-button cssClass="e-outline" iconCss="fas fa-times"></button></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 pad-t10">
+            <ejs-textbox placeholder="To" floatLabelType="Always" multiline='true' [value]="list.length + ' recipients'" [readonly]="true"></ejs-textbox>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 pad-t10">
+            <ejs-textbox placeholder="Message" floatLabelType="Always" multiline='true' rows="8" [(value)]="message"></ejs-textbox>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 pad-t10">
+            <button ejs-button cssClass="e-primary" iconCss="fal fa-paper-plane" style='width:130px;' (click)="send()">Send Message</button>
+        </div>
+    </div>
+</div>
+
+<ejs-toast #toast></ejs-toast>

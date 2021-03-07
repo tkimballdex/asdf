@@ -9,6 +9,7 @@ import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { EmailComponent } from './email/email.component'; 
+import { SmsComponent } from './sms/sms.component'; 
 import { ChooseTenantComponent } from './home/tenant.component';
 import { MsalGuard } from '@azure/msal-angular';
 import { MasterPageComponent } from './shared/master.component';
@@ -55,7 +56,8 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
         AppComponent,
         HomeComponent,
         ChooseTenantComponent,
-        EmailComponent,
+		EmailComponent,
+		SmsComponent,
 		MasterPageComponent,
 		SplashComponent
     ],

@@ -62,4 +62,9 @@ export class CustomerListComponent extends PageComponent implements OnInit {
         this.eventQueue.dispatch(new AppEvent(AppEventType.SendEmail, email));
     }
     //------------------------------------------------------------------------------------------------------------------------
+	sendSms(): void {
+		var email = this.list.map(x => { return this.validateEmail(x.contactEmail) ? { name: x.contactName, email: x.contactEmail } : null; }).filter(x => x != null);
+		this.eventQueue.dispatch(new AppEvent(AppEventType.SendSms, email));
+	}
+    //------------------------------------------------------------------------------------------------------------------------
 }

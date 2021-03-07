@@ -6,7 +6,8 @@ import { filter } from 'rxjs/operators'
 import { Tenant, TenantService } from './tenant.service';
 
 export enum AppEventType {
-    SendEmail = 'SendEmail'
+    SendEmail = 'SendEmail',
+	SendSms = 'SendSms'
 }
 
 export class AppEvent<T> {

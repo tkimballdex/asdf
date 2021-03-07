@@ -27,6 +27,10 @@
                     <app-email #emailComponent></app-email>
                 </ejs-sidebar>
 
+                <ejs-sidebar id="sidebar-option" #smsSidebar width='300px' dockSize='0px' [mediaQuery]='mediaQuery' [target]='target' position="Right" (created)="createdSmsSidebar()">
+                    <app-sms #smsComponent></app-sms>
+                </ejs-sidebar>
+
                 <!-- end of sidebar element -->
                 <!-- main-content declaration -->
                 <div class="main-content" id="maintext">
