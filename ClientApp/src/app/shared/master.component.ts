@@ -17,7 +17,6 @@ export class MasterPageComponent implements OnInit {
     @ViewChild('sidebarMenuInstance') public sidebarMenuInstance: SidebarComponent;
     @ViewChild('emailSidebar') public emailSidebar: SidebarComponent;
     @ViewChild('emailComponent') public emailComponent: EmailComponent;
-	@ViewChild('smsSidebar') public smsSidebar: SidebarComponent;
 	@ViewChild('smsComponent') public smsComponent: SmsComponent;
 
     public sidebarwidth: string = '180px';
@@ -28,7 +27,8 @@ export class MasterPageComponent implements OnInit {
     public isOpen: boolean = false;
     public username: string;
     public sidebardisplaysize = '180px';
-    public AccountMenuItem: ItemModel[];
+	public AccountMenuItem: ItemModel[];
+	public contactBar: string;
     //-------------------------------------------------------------------------------------
     constructor(private authService: MsalService, private router: Router, public appService: AppService, public tenant: TenantService, private eventQueue: EventQueueService) {
         console.dir(this.authService.getAccount());
@@ -151,12 +151,14 @@ export class MasterPageComponent implements OnInit {
     //-------------------------------------------------------------------------------------
     public openEmailSidebar(data) {
         this.emailComponent.setList(data.payload);
-        this.emailSidebar.show();
+		this.emailSidebar.show();
+		this.contactBar = 'email';
     }
 	//-------------------------------------------------------------------------------------
 	public openSmsSidebar(data) {
 		this.smsComponent.setList(data.payload);
-		this.smsSidebar.show();
+		this.emailSidebar.show();
+		this.contactBar = 'sms';
 	}
    //-------------------------------------------------------------------------------------
     public selectMainMenu(args: MenuEventArgs): void {
@@ -196,9 +198,5 @@ export class MasterPageComponent implements OnInit {
     createdEmailSidebar() {
         this.emailSidebar.toggle();
     }
-
-	createdSmsSidebar() {
-		this.smsSidebar.toggle();
-	}
     //-------------------------------------------------------------------------------------
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SmsRepository } from './repository';
 import { AppService } from '../shared/app.service';
 import { PageComponent } from '../shared/page.component';
@@ -13,27 +14,40 @@ export class SmsComponent extends PageComponent implements OnInit {
     }
 
     public list: [];
-	public message: string;
+	public form: FormGroup;
 
     async ngOnInit() {
         this.app = await this.appService.getData();
-    }
+
+		this.form = new FormGroup({
+			message: new FormControl('', [Validators.required])
+		});
+   }
 
     setList(list: []) {
         this.list = list;
     }
 
     async send() {
-        if (!this.list || !this.list.length) {
-            this.showErrorMessage('No recipients were selected!');
+		this.form.markAllAsTouched();
+
+		if (this.form.invalid) {
+			this.showErrorMessage("Please complete all required fields!");
+			return;
+		}
+
+		if (!this.list || !this.list.length) {
+			this.showErrorMessage('No recipients were selected!');
+			return;
         }
 
         var msg = {
-			message: this.message,
+			message: this.form.get('message').value,
             contacts: this.list
         };
 
         var messageCount = await this.repository.sendEmail(msg);
-		this.showSuccessMessage(`Sent ${messageCount} text messages!`);
+		this.showSuccessMessage(`Sent ${messageCount} text messages!`); this.form.get('message')
+		this.form.get('message').setValue('');
     }
 }

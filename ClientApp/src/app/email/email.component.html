@@ -1,4 +1,4 @@
-<div class="pad-20" *ngIf="list">
+<div class="pad-20" *ngIf="list" [formGroup]="form">
     <div class="row d-flex align-items-end">
         <div class="col-md-6 d-flex align-items-end list-header">
             <span class="list-header-icon"><i class="fas fa-envelope"></i></span>
@@ -21,12 +21,12 @@
     </div>
     <div class="row">
         <div class="col-md-12 pad-t10">
-            <ejs-textbox placeholder="Subject" floatLabelType="Always" multiline='true' [(value)]="subject"></ejs-textbox>
+            <ejs-textbox placeholder="Subject" floatLabelType="Always" multiline='true' formControlName="subject"></ejs-textbox>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12 pad-t10">
-            <ejs-textbox placeholder="Body" floatLabelType="Always" multiline='true' rows="8" [(value)]="body"></ejs-textbox>
+            <ejs-textbox placeholder="Body" floatLabelType="Always" multiline='true' rows="8" formControlName="body"></ejs-textbox>
         </div>
     </div>
     <div class="row">
