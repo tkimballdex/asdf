@@ -23,9 +23,9 @@
                     </div>
                 </ejs-sidebar>
 
-                <ejs-sidebar id="sidebar-option" #emailSidebar width='300px' dockSize='0px' [mediaQuery]='mediaQuery' [target]='target' position="Right" (created)="createdEmailSidebar()">
-                    <app-email #emailComponent ng-show="contactBar == 'email'"></app-email>
-                    <app-sms #smsComponent ng-show="contactBar == 'sms'"></app-sms>
+                <ejs-sidebar id="sidebar-option" #contactSidebar width='300px' dockSize='0px' [mediaQuery]='mediaQuery' [target]='target' position="Right" (created)="createdContactSidebar()">
+                    <app-email #emailComponent [hidden]="contactSidebarName != 'email'"></app-email>
+                    <app-sms #smsComponent [hidden]="contactSidebarName != 'sms'"></app-sms>
                 </ejs-sidebar>
 
                 <!-- end of sidebar element -->

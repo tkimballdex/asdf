@@ -15,7 +15,7 @@ import { TenantService } from './tenant.service';
 })
 export class MasterPageComponent implements OnInit {  
     @ViewChild('sidebarMenuInstance') public sidebarMenuInstance: SidebarComponent;
-    @ViewChild('emailSidebar') public emailSidebar: SidebarComponent;
+	@ViewChild('contactSidebar') public contactSidebar: SidebarComponent;
     @ViewChild('emailComponent') public emailComponent: EmailComponent;
 	@ViewChild('smsComponent') public smsComponent: SmsComponent;
 
@@ -28,7 +28,7 @@ export class MasterPageComponent implements OnInit {
     public username: string;
     public sidebardisplaysize = '180px';
 	public AccountMenuItem: ItemModel[];
-	public contactBar: string;
+	public contactSidebarName: string;
     //-------------------------------------------------------------------------------------
     constructor(private authService: MsalService, private router: Router, public appService: AppService, public tenant: TenantService, private eventQueue: EventQueueService) {
         console.dir(this.authService.getAccount());
@@ -151,14 +151,14 @@ export class MasterPageComponent implements OnInit {
     //-------------------------------------------------------------------------------------
     public openEmailSidebar(data) {
         this.emailComponent.setList(data.payload);
-		this.emailSidebar.show();
-		this.contactBar = 'email';
+		this.contactSidebar.show();
+		this.contactSidebarName = 'email';
     }
 	//-------------------------------------------------------------------------------------
 	public openSmsSidebar(data) {
 		this.smsComponent.setList(data.payload);
-		this.emailSidebar.show();
-		this.contactBar = 'sms';
+		this.contactSidebar.show();
+		this.contactSidebarName = 'sms';
 	}
    //-------------------------------------------------------------------------------------
     public selectMainMenu(args: MenuEventArgs): void {
@@ -195,8 +195,8 @@ export class MasterPageComponent implements OnInit {
         this.sidebardisplaysize = this.dockSize;
     }
 
-    createdEmailSidebar() {
-        this.emailSidebar.toggle();
+	createdContactSidebar() {
+		this.contactSidebar.toggle();
     }
     //-------------------------------------------------------------------------------------
 }
