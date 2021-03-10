@@ -6,6 +6,7 @@ import { AppService } from "../shared/app.service";
 import { PageComponent } from '../shared/page.component';
 import { TenantService } from '../shared/tenant.service';
 import { LocationRepository } from './repository';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'location-edit',
@@ -13,12 +14,13 @@ import { LocationRepository } from './repository';
     styleUrls: ['./edit.component.scss']
 })
 export class LocationEditComponent extends PageComponent implements OnInit {
-	constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private repository: LocationRepository, private tenant: TenantService) {
+	constructor(private fb:FormBuilder, private route: ActivatedRoute, private router: Router, private appService: AppService, private repository: LocationRepository, private tenant: TenantService) {
         super();
     }
 
     public record: any;
     public deleteDialog: Dialog;
+    public form: FormGroup;
     @ViewChild('grid') public grid: GridComponent;
 
     async ngOnInit() {
@@ -31,6 +33,10 @@ export class LocationEditComponent extends PageComponent implements OnInit {
         if (id == null) {
             this.record.siteId = this.route.snapshot.paramMap.get('siteId');
         }
+
+        this.form = this.fb.group({
+            name: [this.record.name, [Validators.required]]
+        })
     }
 
     async save() {

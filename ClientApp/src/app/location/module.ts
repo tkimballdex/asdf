@@ -12,6 +12,7 @@ import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -20,7 +21,7 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
     ],
     imports: [
         GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule,
-        CommonModule, DatePickerModule, SwitchModule,
+        CommonModule, DatePickerModule, SwitchModule,FormsModule, ReactiveFormsModule,
         RouterModule.forChild([
             { path: 'list', component: LocationListComponent, canActivate: [MsalGuard] },
             { path: 'add/:siteId', component: LocationEditComponent, canActivate: [MsalGuard] },

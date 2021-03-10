@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DialogUtility, Dialog } from '@syncfusion/ej2-popups';
 import { AppService } from "../shared/app.service";
 import { PageComponent } from '../shared/page.component';
@@ -12,12 +13,13 @@ import { SiteRepository } from './repository';
     styleUrls: ['./edit.component.scss']
 })
 export class SiteEditComponent extends PageComponent implements OnInit {
-	constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private tenant: TenantService, private repository: SiteRepository) {
+	constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private tenant: TenantService, private repository: SiteRepository, private fb:FormBuilder) {
         super();
     }
 
     public record: any;
     public deleteDialog: Dialog;
+    public form: FormGroup;
 
     async ngOnInit() {
         this.showSpinner();
@@ -31,6 +33,16 @@ export class SiteEditComponent extends PageComponent implements OnInit {
         if (id == null) {
             this.record.customerId = this.route.snapshot.paramMap.get('customerId');
         }
+
+        this.form = this.fb.group({
+			name: [this.record.name, [Validators.required]],
+            address: [this.record.address, [Validators.required]],
+            city: [this.record.city, [Validators.required]],
+            postalCode: [this.record.postalCode, [Validators.required]],
+            contactName: [this.record.contactName, [Validators.required]],
+            contactEmail: [this.record.contactEmail, [Validators.required, Validators.email]],
+            contactPhoneNo: [this.record.contactPhoneNo, [Validators.required, Validators.maxLength(10)]]
+        })
     }
 
     async save() {
