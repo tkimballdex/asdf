@@ -7,6 +7,7 @@ import { AppService } from "../shared/app.service";
 import { PageComponent } from '../shared/page.component';
 import { VendorRepository } from './repository';
 import { TenantService } from '../shared/tenant.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
     selector: 'vendor-edit',
@@ -14,12 +15,13 @@ import { TenantService } from '../shared/tenant.service';
     styleUrls: ['./edit.component.scss']
 })
 export class VendorEditComponent extends PageComponent implements OnInit {
-	constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private tenant: TenantService, private repository: VendorRepository) {
+	constructor(private fb:FormBuilder, private route: ActivatedRoute, private router: Router, private appService: AppService, private tenant: TenantService, private repository: VendorRepository) {
         super();
     }
 
     public record: any;
     public deleteDialog: Dialog;
+    public form: FormGroup;
 
     //-----------------------------------------------------------------------------------------
     async ngOnInit() {       
@@ -29,7 +31,18 @@ export class VendorEditComponent extends PageComponent implements OnInit {
 
         var id = this.route.snapshot.paramMap.get('id');
         this.record = await this.repository.get(id);
-        this.hideSpinner();        
+        this.hideSpinner();     
+        
+        this.form = this.fb.group({
+            name: [this.record.name, [Validators.required]],
+            address: [this.record.address, [Validators.required]],
+            city: [this.record.city, [Validators.required]],
+            postalCode: [this.record.postalCode, [Validators.required]],
+            contactName: [this.record.contactName, [Validators.required]],
+            contactEmail: [this.record.contactEmail, [Validators.required]],
+            contactPhoneNo: [this.record.contactPhoneNo, [Validators.required]]
+        })
+        
     }
     //-----------------------------------------------------------------------------------------
     async save() {

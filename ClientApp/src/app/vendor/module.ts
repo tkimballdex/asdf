@@ -12,6 +12,7 @@ import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { TabModule } from '@syncfusion/ej2-angular-navigations';
 import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -20,7 +21,7 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
     ],
     imports: [
         GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule, 
-        TabModule, DatePickerModule, SwitchModule, CommonModule,
+        TabModule, DatePickerModule, SwitchModule, CommonModule, FormsModule, ReactiveFormsModule,
         RouterModule.forChild([
             { path: 'list', component: VendorListComponent },
             { path: 'add', component: VendorEditComponent },
