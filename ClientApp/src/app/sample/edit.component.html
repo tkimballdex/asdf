@@ -35,8 +35,13 @@
 
     <div class="row pad-t20">
         <div class="col-md-12">
-            <mat-tab-group>
-                <mat-tab label="Information">
+            <ejs-tab id="edit-tab" class="e-fill">
+                <e-tabitems>
+                      <e-tabitem>
+                        <ng-template #headerText>
+                            <div>Information</div>
+                        </ng-template>
+                        <ng-template #content>
 
                         <div class="row pad-t20">
                             <div class="col-md-12">
@@ -115,8 +120,13 @@
                                 <ejs-dropdownlist [dataSource]="record.qcFailureReasons" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.qcfailureReasonId" placeholder="QC Failure Reason" floatLabelType="Always"></ejs-dropdownlist>
                             </div>
                         </div>
-                </mat-tab>
-                <mat-tab label="Tests">
+                    </ng-template>
+                </e-tabitem>
+                <e-tabitem>
+                    <ng-template #headerText>
+                        <div>Tests</div>
+                    </ng-template>
+                    <ng-template #content>
                     <div id="list-view" class="container-fluid">
                         <div class="row d-flex align-items-end">
                             <div class="col-md-6 d-flex align-items-center list-header">
@@ -144,10 +154,12 @@
                             </div>
                         </div>
                     </div>
-                </mat-tab>
-              </mat-tab-group>
+                    </ng-template>
+                </e-tabitem>
+                </e-tabitems>
+            </ejs-tab>
         </div>
-    </div>
+    </div>    
     <div class="row d-flex align-items-center edit-footer">
           <div class="col-md-6 d-flex justify-content-start">
             <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
