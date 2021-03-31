@@ -13,44 +13,23 @@
 
             <ejs-textbox [formControl]="refno" [(value)]="record.referencerNo" placeholder="ReferenceNo" floatLabelType="Always" required></ejs-textbox>
             <mat-error *ngIf="refno.invalid">{{getErrorMessage()}}</mat-error>
-
-            <!-- <mat-form-field floatLabel="always">
-                <mat-label>Reference No</mat-label>
-                <input matInput type='text' [formControl]="refno" required>
-                <mat-error *ngIf="refno.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field> -->
         </div>
         <div class="col-md-6 col-lg-5 col-xl-4">    
             
             <ejs-datepicker [formControl]="date1" [(value)]="record.scheduledDate" placeholder="Scheduled Date" floatLabelType="Always" required></ejs-datepicker>
             <mat-error *ngIf="date1.invalid">{{getErrorMessage1()}}</mat-error>
-            <!-- <mat-form-field floatLabel="always">
-                <mat-label>Scheduled Date</mat-label>
-                <input [formControl]="date1" matInput [matDatepicker]="picker1" required>
-                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                <mat-datepicker #picker1></mat-datepicker>
-                <mat-error *ngIf="date1.invalid">{{getErrorMessage1()}}</mat-error>
-            </mat-form-field> -->
         </div>
     </div>
     
     <div class="row">
         <div class="col-md-12 col-lg-10 col-xl-8">
             <ejs-textbox [(value)]="record.site" disabled placeholder="Site" floatLabelType="Always"></ejs-textbox>
-            <!-- <mat-form-field floatLabel="always">
-                <mat-label>Site</mat-label>
-                <input [(value)]="record.site" matInput disabled>
-            </mat-form-field> -->
         </div>
     </div>
     
     <div class="row">
         <div class="col-md-12 col-lg-10 col-xl-8">
             <ejs-textbox [(value)]="record.location" disabled placeholder="Location" floatLabelType="Always"></ejs-textbox>
-            <!-- <mat-form-field floatLabel="always">
-                <mat-label>Location</mat-label>
-                <input [(value)]="record.location" matInput disabled>
-            </mat-form-field> -->
         </div>
     </div>
 
@@ -58,35 +37,20 @@
         <div class="col-md-12">
             <mat-tab-group>
                 <mat-tab label="Information">
-                    
-                
+
                         <div class="row pad-t20">
                             <div class="col-md-12">
                                 <ejs-textbox [(value)]="record.logisticVendor" disabled placeholder="Logistics Vendor" floatLabelType="Always"></ejs-textbox>
-                                <!-- <mat-form-field floatLabel="always">
-                                    <mat-label>Logistics Vendor</mat-label>
-                                    <input [(value)]="record.logisticVendor" matInput disabled>
-                                </mat-form-field> -->
                             </div>
                         </div>
                                             
                         <div class="row">
                             <div class="col-md-6 col-lg-5 col-xl-4">
                                 <ejs-textbox [(value)]="record.collectedBy" placeholder="Collected By" floatLabelType="Always"></ejs-textbox>
-                                <!-- <mat-form-field floatLabel="always">
-                                    <mat-label>Collected By</mat-label>
-                                <input [(value)]="record.collectedBy" matInput>
-                                </mat-form-field> -->
                             </div>
 
                             <div class="col-md-6 col-lg-5 col-xl-4">
                                 <ejs-datepicker [(value)]="record.collectedDate" placeholder="Collected Date" floatLabelType="Always"></ejs-datepicker>
-                                <!-- <mat-form-field floatLabel="always">
-                                    <mat-label>Collected Date</mat-label>
-                                    <input [(value)]="record.collectedDate" matInput [matDatepicker]="picker2">
-                                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker2></mat-datepicker>
-                                </mat-form-field> -->
                             </div>
                         </div>   
 
@@ -111,48 +75,24 @@
                         <div class="row pad-t20">
                             <div class="col-md-12">
                                 <ejs-textbox [(value)]="record.labVendor" disabled placeholder="Ship To Lab" floatLabelType="Always"></ejs-textbox>
-                                <!-- <mat-form-field floatLabel="always">
-                                    <mat-label>Ship To Lab</mat-label>
-                                    <input [(value)]="record.labVendor" matInput disabled>
-                                </mat-form-field> -->
                             </div>
                         </div>
 
                         <div class="row">        
                             <div class="col-md-6 col-lg-5 col-xl-4">
                                 <ejs-datepicker [(value)]="record.shippedDate" placeholder="Shipped Date" floatLabelType="Always"></ejs-datepicker>
-                                <!-- <mat-form-field floatLabel="always">
-                                    <mat-label>Shipped Date</mat-label>
-                                    <input [(value)]="record.shippedDate" matInput [matDatepicker]="picker3">
-                                    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker3></mat-datepicker>
-                                </mat-form-field> -->
                             </div>
                             <div class="col-md-6 col-lg-5 col-xl-4">
                                 <ejs-textbox [(value)]="record.trackingNo" placeholder="Tracking No" floatLabelType="Always"></ejs-textbox>
-                                <!-- <mat-form-field floatLabel="always">
-                                    <mat-label>Tracking No</mat-label>
-                                <input [(value)]="record.trackingNo" matInput>
-                                </mat-form-field> -->
                             </div>
                         </div>  
 
                         <div class="row pad-t20">
                             <div class="col-md-6 col-lg-5 col-xl-4">
                                 <ejs-datepicker [(value)]="record.receivedDate" placeholder="Received Date" floatLabelType="Always"></ejs-datepicker>
-                                <!-- <mat-form-field floatLabel="always">
-                                    <mat-label>Received Date</mat-label>
-                                    <input [(value)]="record.receivedDate" matInput [matDatepicker]="picker4">
-                                    <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker4></mat-datepicker>
-                                </mat-form-field> -->
                             </div>
                             <div class="col-md-6 col-lg-5 col-xl-4">
                                 <ejs-textbox [(value)]="record.receivedBy" placeholder="Received By" floatLabelType="Always"></ejs-textbox>
-                                <!-- <mat-form-field floatLabel="always">
-                                    <mat-label>Received By</mat-label>
-                                <input [(value)]="record.receivedBy" matInput>
-                                </mat-form-field> -->
                             </div>
                         </div>  
 
