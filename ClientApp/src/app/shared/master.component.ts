@@ -31,7 +31,7 @@ export class MasterPageComponent implements OnInit {
 	public contactSidebarName: string;
     //-------------------------------------------------------------------------------------
     constructor(private authService: MsalService, private router: Router, public appService: AppService, public tenant: TenantService, private eventQueue: EventQueueService) {
-        console.dir(this.authService.getAccount());
+		console.dir(this.authService.instance.getActiveAccount());
 
         this.AccountMenuItem = [
             {
@@ -47,7 +47,7 @@ export class MasterPageComponent implements OnInit {
             }
         ];
 
-        if (this.authService.getAccount() != null) {
+		if (this.authService.instance.getActiveAccount() != null) {
             this.AccountMenuItem.push({ id: 'logout', text: 'Sign out' });
         }
         else {
@@ -169,10 +169,10 @@ export class MasterPageComponent implements OnInit {
     //-------------------------------------------------------------------------------------
     public selectAccountMenu(args: MenuEventArgs): void {
 		if (args.item.id == 'logout') {
-            this.authService.logout();
-        }
+			this.authService.logout({ postLogoutRedirectUri: window.location.origin });
+		}
         else if (args.item.id == 'login') {
-            this.authService.loginPopup().then(() => {
+            this.authService.loginPopup().toPromise().then(() => {
                 this.router.navigate(['/auth']);
                 setTimeout(() => window.location.reload(), 500);
             });

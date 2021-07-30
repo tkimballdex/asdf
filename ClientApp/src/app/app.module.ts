@@ -11,21 +11,11 @@ import { HomeComponent } from './home/home.component';
 import { EmailComponent } from './email/email.component'; 
 import { SmsComponent } from './sms/sms.component'; 
 import { ChooseTenantComponent } from './home/tenant.component';
-import { MsalGuard } from '@azure/msal-angular';
 import { MasterPageComponent } from './shared/master.component';
 import { SplashComponent } from './home/splash.component';
 
-import { Configuration } from 'msal';
-import {
-  MsalModule,
-  MsalInterceptor,
-  MSAL_CONFIG,
-  MSAL_CONFIG_ANGULAR,
-  MsalService,
-  MsalAngularConfiguration
-} from '@azure/msal-angular';
-
-import { msalConfig, msalAngularConfig } from './app-config';
+import { MsalModule, MsalGuard, MsalInterceptor } from '@azure/msal-angular';
+import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 
 import { GridModule } from '@syncfusion/ej2-angular-grids';
 import { ListViewAllModule } from '@syncfusion/ej2-angular-lists';
@@ -41,15 +31,9 @@ import { faHome, faHomeAlt } from '@fortawesome/pro-solid-svg-icons';
 import { SampleModule } from './sample/module';
 import { SampleTestModule } from './samplestest/module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from '../environments/environment';
 
-
-export function MSALConfigFactory(): Configuration {
-  return msalConfig;
-}
-
-export function MSALAngularConfigFactory(): MsalAngularConfiguration {
-  return msalAngularConfig;
-}
+const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
 @NgModule({
     declarations: [
@@ -69,7 +53,29 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
         TextBoxModule,
         SampleModule,
         SampleTestModule,
-        RouterModule.forRoot([
+		MsalModule.forRoot(new PublicClientApplication({
+			auth: {
+				clientId: 'f490d12b-d438-4910-b4bb-3feda316339b',
+				authority: 'https://interomeb2c.b2clogin.com/interomeb2c.onmicrosoft.com/B2C_1_CustomerPortalLogin',
+				redirectUri: window.location.origin,
+				knownAuthorities: ['interomeb2c.b2clogin.com']
+			},
+			cache: {
+				cacheLocation: 'localStorage',
+				storeAuthStateInCookie: isIE,
+			}
+		}), {
+			interactionType: InteractionType.Popup,
+			authRequest: {
+				scopes: [environment.scope]
+			}
+		}, {
+			interactionType: InteractionType.Popup, // MSAL Interceptor Configuration
+			protectedResourceMap: new Map([
+				[environment.webApi, [environment.scope]]
+			])
+		}),
+       RouterModule.forRoot([
             { path: '', component: SplashComponent, pathMatch: 'full' },
             {
                 path: 'auth',
@@ -101,16 +107,7 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
             provide: HTTP_INTERCEPTORS,
             useClass: MsalInterceptor,
             multi: true
-        },
-        {
-            provide: MSAL_CONFIG,
-            useFactory: MSALConfigFactory
-        },
-        {
-            provide: MSAL_CONFIG_ANGULAR,
-            useFactory: MSALAngularConfigFactory
-        },
-        MsalService
+        }
     ],
     bootstrap: [AppComponent]
 })

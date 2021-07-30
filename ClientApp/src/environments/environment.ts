@@ -4,7 +4,8 @@
 
 export const environment = {
     production: false,
-	webApi: 'https://interomeph-be.azurewebsites.net'
+	webApi: 'https://interomeph-be.azurewebsites.net',
+	scope: 'https://interomeb2c.onmicrosoft.com/interomephbe/data'
 };
 
 /*

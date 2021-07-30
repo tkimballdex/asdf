@@ -64,12 +64,12 @@ export class AppService {
     }
 
     public get userName() {
-        var account = this.authService.getAccount();
-        return account ? account.name : null;
+		var account = this.authService.instance.getActiveAccount();
+		return account ? account.name : null;
 	}
 
 	public get isLoggedIn() {
-		var account = this.authService.getAccount();
+		var account = this.authService.instance.getActiveAccount();
 		return account && account.name;
 	}
 
