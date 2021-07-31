@@ -36,28 +36,28 @@ import { environment } from '../environments/environment';
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HomeComponent,
-        ChooseTenantComponent,
+	declarations: [
+		AppComponent,
+		HomeComponent,
+		ChooseTenantComponent,
 		EmailComponent,
 		SmsComponent,
 		MasterPageComponent,
 		SplashComponent
-    ],
-    imports: [
-        BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+	],
+	imports: [
+		BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
 		HttpClientModule,
 		FormsModule,
 		ReactiveFormsModule,
-        TextBoxModule,
-        SampleModule,
-        SampleTestModule,
+		TextBoxModule,
+		SampleModule,
+		SampleTestModule,
 		MsalModule.forRoot(new PublicClientApplication({
 			auth: {
 				clientId: 'f490d12b-d438-4910-b4bb-3feda316339b',
 				authority: 'https://interomeb2c.b2clogin.com/interomeb2c.onmicrosoft.com/B2C_1_CustomerPortalLogin',
-				redirectUri: window.location.origin,
+				redirectUri: window.location.origin + '/auth',
 				knownAuthorities: ['interomeb2c.b2clogin.com']
 			},
 			cache: {
@@ -65,51 +65,51 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
 				storeAuthStateInCookie: isIE,
 			}
 		}), {
-			interactionType: InteractionType.Popup,
+			interactionType: InteractionType.Redirect,
 			authRequest: {
 				scopes: [environment.scope]
 			}
 		}, {
-			interactionType: InteractionType.Popup, // MSAL Interceptor Configuration
+			interactionType: InteractionType.Redirect,
 			protectedResourceMap: new Map([
 				[environment.webApi, [environment.scope]]
 			])
 		}),
-       RouterModule.forRoot([
-            { path: '', component: SplashComponent, pathMatch: 'full' },
-            {
-                path: 'auth',
-                component: MasterPageComponent,
-                canActivate: [MsalGuard],
-                children: [
-                    { path: '', component: HomeComponent },
-                    { path: 'account/tenant', component: ChooseTenantComponent },
-                    { path: 'customer', loadChildren: () => import('./customer/module').then(m => m.CustomerModule) },
-                    { path: 'site', loadChildren: () => import('./site/module').then(m => m.SiteModule) },
-                    { path: 'location', loadChildren: () => import('./location/module').then(m => m.LocationModule) },
-                    { path: 'vendor', loadChildren: () => import('./vendor/module').then(m => m.VendorModule) },
-                    { path: 'testtype', loadChildren: () => import('./testtype/module').then(m => m.TestTypeModule) },
-                    { path: 'sample', loadChildren: () => import('./sample/module').then(m => m.SampleModule) },
-                    { path: 'sampletest', loadChildren: () => import('./samplestest/module').then(m => m.SampleTestModule) },
-                    { path: 'dashboard', loadChildren: () => import('./dashboard/module').then(m => m.DashboardModule) },
-                    { path: 'role', loadChildren: () => import('./role/module').then(m => m.RoleModule) },
-                    { path: 'user', loadChildren: () => import('./user/module').then(m => m.UserModule) }
-                ]
-            }
-        ], { relativeLinkResolution: 'legacy' }),
-        MsalModule,
-        SidebarModule, MenuAllModule, DropDownListModule, TreeViewAllModule, ListViewAllModule, MenuModule,
-        DropDownButtonModule, GridModule, ComboBoxModule, SwitchModule, DialogModule, FontAwesomeModule, BrowserAnimationsModule, ToastAllModule
-    ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    providers: [
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: MsalInterceptor,
-            multi: true
-        }
-    ],
-    bootstrap: [AppComponent]
+		RouterModule.forRoot([
+			{ path: '', component: SplashComponent, pathMatch: 'full' },
+			{
+				path: 'auth',
+				component: MasterPageComponent,
+				canActivate: [MsalGuard],
+				children: [
+					{ path: '', component: HomeComponent },
+					{ path: 'account/tenant', component: ChooseTenantComponent },
+					{ path: 'customer', loadChildren: () => import('./customer/module').then(m => m.CustomerModule) },
+					{ path: 'site', loadChildren: () => import('./site/module').then(m => m.SiteModule) },
+					{ path: 'location', loadChildren: () => import('./location/module').then(m => m.LocationModule) },
+					{ path: 'vendor', loadChildren: () => import('./vendor/module').then(m => m.VendorModule) },
+					{ path: 'testtype', loadChildren: () => import('./testtype/module').then(m => m.TestTypeModule) },
+					{ path: 'sample', loadChildren: () => import('./sample/module').then(m => m.SampleModule) },
+					{ path: 'sampletest', loadChildren: () => import('./samplestest/module').then(m => m.SampleTestModule) },
+					{ path: 'dashboard', loadChildren: () => import('./dashboard/module').then(m => m.DashboardModule) },
+					{ path: 'role', loadChildren: () => import('./role/module').then(m => m.RoleModule) },
+					{ path: 'user', loadChildren: () => import('./user/module').then(m => m.UserModule) }
+				]
+			}
+		], { relativeLinkResolution: 'legacy' }),
+		MsalModule,
+		SidebarModule, MenuAllModule, DropDownListModule, TreeViewAllModule, ListViewAllModule, MenuModule,
+		DropDownButtonModule, GridModule, ComboBoxModule, SwitchModule, DialogModule, FontAwesomeModule, BrowserAnimationsModule, ToastAllModule
+	],
+	schemas: [CUSTOM_ELEMENTS_SCHEMA],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: MsalInterceptor,
+			multi: true
+		}
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule {
     constructor(library: FaIconLibrary) {
