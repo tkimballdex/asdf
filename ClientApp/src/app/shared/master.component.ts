@@ -65,6 +65,11 @@ export class MasterPageComponent implements OnInit {
 	private async setupMenu() {
 		var privileges = await this.appService.getPrivileges();
 
+		if (privileges == null) {
+			console.dir('ERROR: Unable to read privileges');
+			return;
+		}
+
 		this.menuItems = [
 			{
 				text: 'Home',

@@ -59,9 +59,13 @@ export class AppService {
 	}
 
 	public async getPrivileges() {
-		var data = await this.getData();
-		return data.privileges;
-    }
+		try {
+			var data = await this.getData();
+		}
+		catch { }
+
+		return data ? data.privileges : null;
+	}
 
     public get userName() {
 		var account = this.authService.instance.getActiveAccount();
