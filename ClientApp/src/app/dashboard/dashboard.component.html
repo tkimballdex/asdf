@@ -1,91 +1,26 @@
-<div class="control-section">
+<div id="list-view" class="container-fluid" *ngIf="customers">
+    <div class="row">
+        <div class="col-md-3">
+            <ejs-dropdownlist [dataSource]="app.analytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="analyteId" placeholder="Analyte" floatLabelType="Always"></ejs-dropdownlist>
+        </div>
+
+        <div class="col-md-3">
+            <ejs-dropdownlist [dataSource]="customers" [fields]="{ text: 'name', value: 'id' }" [(value)]="customerId" placeholder="Customer" floatLabelType="Always" (change)="customerChange()"></ejs-dropdownlist>
+        </div>
+
+        <div class="col-md-3" *ngIf="sites">
+            <ejs-dropdownlist [dataSource]="sites" [fields]="{ text: 'name', value: 'id' }" [(value)]="siteId" placeholder="Site" floatLabelType="Always" (change)="siteChange()"></ejs-dropdownlist>
+        </div>
+
+        <div class="col-md-3" *ngIf="locations">
+            <ejs-dropdownlist [dataSource]="locations" [fields]="{ text: 'name', value: 'id' }" [(value)]="locationId" placeholder="Location" floatLabelType="Always"></ejs-dropdownlist>
+        </div>
+    </div>
+</div>
+
+<div class="control-section" *ngIf="locationId && analyteId">
     <ejs-dashboardlayout [allowDragging]='allowDragging' [columns]="4" #editLayout [cellSpacing]='cellSpacing' [cellAspectRatio]='cellAspectRatio'>
         <e-panels>
-            <e-panel [sizeX]="1" [sizeY]="0" [row]="0" [col]="0">
-                <ng-template #content>
-                    <div id="column">
-                        <div>
-                            <div>
-                                <div>
-                                    <div id="header1">Laura Callahan</div>
-                                    <div id="sub-header1">Sales Coordinator and Representative</div>
-                                </div>
-                            </div>
-                            <div id="content1">
-                                Laura received a BA in psychology from the University of Washington. She has also completed a course in business French. She reads and writes French.
-                            </div>
-                        </div>
-                    </div>
-                </ng-template>
-            </e-panel>
-            <e-panel [sizeX]="1" [sizeY]="0" [row]="0" [col]="1">
-                <ng-template #content>
-                    <div id="column">
-                        <div>
-                            <div>
-                                <div>
-                                    <div id="header1"> Laura Callahan</div>
-                                    <div id="sub-header1">Sales Coordinator and Representative</div>
-                                </div>
-                            </div>
-                            <div id="content1">
-                                Laura received a BA in psychology from the University of Washington. She has also completed a course in business French. She reads and writes French.
-                            </div>
-                        </div>
-                    </div>
-                </ng-template>
-            </e-panel>
-            <e-panel [sizeX]="1" [sizeY]="1" [row]="0" [col]="2">
-                <ng-template #content>
-                    <div id="column">
-                        <div>
-                            <div>
-                                <div>
-                                    <div id="header1"> Laura Callahan</div>
-                                    <div id="sub-header1">Sales Coordinator and Representative</div>
-                                </div>
-                            </div>
-                            <div id="content1">
-                                Laura received a BA in psychology from the University of Washington. She has also completed a course in business French. She reads and writes French.
-                            </div>
-                        </div>
-                    </div>
-                </ng-template>
-            </e-panel>
-            <e-panel [sizeX]="1" [sizeY]="1" [row]="1" [col]="0">
-                <ng-template #content>
-                    <div id="column">
-                        <div>
-                            <div>
-                                <div>
-                                    <div id="header1"> Laura Callahan</div>
-                                    <div id="sub-header1">Sales Coordinator and Representative</div>
-                                </div>
-                            </div>
-                            <div id="content1">
-                                Laura received a BA in psychology from the University of Washington. She has also completed a course in business French. She reads and writes French.
-                            </div>
-                        </div>
-                    </div>
-                </ng-template>
-            </e-panel>
-            <e-panel [sizeX]="1" [sizeY]="2" [row]="2" [col]="3">
-                <ng-template #header>
-                    <div>Sales increase percentage 2</div>
-                </ng-template>
-                <ng-template #content>
-                    <div id="pie1">
-                        <ejs-accumulationchart id="pieChart1" [enableAnimation]="false" height="162px"
-                            [tooltip]='tooltip' [legendSettings]='legendSettings'>
-                            <e-accumulation-series-collection>
-                                <e-accumulation-series [dataSource]="piechart1" xName="x" yName="y" radius="70%"
-                                    name="Browser" [dataLabel]='datalabel'>
-                                </e-accumulation-series>
-                            </e-accumulation-series-collection>
-                        </ejs-accumulationchart>
-                    </div>
-                </ng-template>
-            </e-panel>
             <e-panel [sizeX]="3" [sizeY]="2" [row]="1" [col]="0">
                 <ng-template #header>
                     <div>Last year Sales Comparison</div>
@@ -104,6 +39,3 @@
         </e-panels>
     </ejs-dashboardlayout>
 </div>
-
-
-

@@ -9,6 +9,7 @@ import { ListViewModule } from '@syncfusion/ej2-angular-lists';
 import { ButtonModule  } from '@syncfusion/ej2-angular-buttons';
 import { DashboardLayoutModule } from '@syncfusion/ej2-angular-layouts';
 import { ChartAllModule } from '@syncfusion/ej2-angular-charts';
+import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 
 import { AccumulationLegendService, AccumulationTooltipService, AccumulationAnnotationService} from '@syncfusion/ej2-angular-charts';
 import { PageService, SortService, FilterService, GroupService } from '@syncfusion/ej2-angular-grids';
@@ -19,24 +20,26 @@ import { PieSeriesService, AccumulationDataLabelService } from '@syncfusion/ej2-
 
 
 @NgModule({
-  declarations: [
-    DashboardComponent,
-  ],
-  imports: [
-    CommonModule,
-    ChartModule,
-    GridModule,
-    ListViewModule,
-    ButtonModule,
-    TextBoxModule,
-    DashboardLayoutModule,
-    AccumulationChartModule,
-    ChartAllModule,
-    RouterModule.forChild([
-      { path: '', component: DashboardComponent },
-  ])
-  ],
-  providers: [ ColumnSeriesService, AreaSeriesService, PageService, SortService, FilterService, GroupService,
-    PieSeriesService, AccumulationDataLabelService, AccumulationLegendService, AccumulationTooltipService, AccumulationAnnotationService]
+	declarations: [
+		DashboardComponent,
+	],
+	imports: [
+		CommonModule,
+		ChartModule,
+		GridModule,
+		ChartAllModule,
+		ListViewModule,
+		DropDownListModule,
+		ButtonModule,
+		TextBoxModule,
+		DashboardLayoutModule,
+		AccumulationChartModule,
+		ChartAllModule,
+		RouterModule.forChild([
+			{ path: '', component: DashboardComponent },
+		])
+	],
+	providers: [ColumnSeriesService, AreaSeriesService, PageService, SortService, FilterService, GroupService,
+		PieSeriesService, AccumulationDataLabelService, AccumulationLegendService, AccumulationTooltipService, AccumulationAnnotationService]
 })
 export class DashboardModule { }

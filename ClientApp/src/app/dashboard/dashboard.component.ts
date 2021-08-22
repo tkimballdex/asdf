@@ -1,6 +1,9 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { PageSettingsModel } from '@syncfusion/ej2-angular-grids';
+import { AppService } from '../shared/app.service';
+import { PageComponent } from '../shared/page.component';
 import { data } from './datasource';
+import { DashboardRepository } from './repository';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +11,23 @@ import { data } from './datasource';
   styleUrls: ['./dashboard.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class DashboardComponent {
+export class DashboardComponent extends PageComponent implements OnInit {
+	constructor(private repository: DashboardRepository, private appService: AppService) {
+		super();
+	}
+
+	async ngOnInit() {
+		this.app = await this.appService.getData();
+		this.customers = await this.repository.listCustomers();
+	}
+
+	public customers: any;
+	public customerId: string;
+	public sites: any;
+	public siteId: string;
+	public locations: any;
+	public locationId: string;
+	public analyteId: string;
     public cellSpacing: number[] = [10, 10];
     public cellAspectRatio: number = 70/25;
     public allowDragging: boolean = false;
@@ -38,5 +57,22 @@ export class DashboardComponent {
      ];
      public legendSettings: Object = {
         visible: false
-    };
+	};
+
+	async customerChange() {
+		this.sites = null;
+		this.siteId = null;
+		this.locations = null;
+		this.locationId = null;
+		this.sites = await this.repository.listSites(this.customerId);
+	}
+
+	async siteChange() {
+		this.locations = null;
+		this.locationId = null;
+		this.locations = await this.repository.listLocations(this.siteId);
+	}
+
+	async locationChange() {
+	}
 }

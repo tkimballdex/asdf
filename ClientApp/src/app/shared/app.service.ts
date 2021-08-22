@@ -126,6 +126,11 @@ export interface VendorType {
     name: string;
 }
 
+export interface IdName {
+	id: string;
+	name: string;
+}
+
 export interface AppData {
     email: string;
     privileges: Privileges;
@@ -134,4 +139,5 @@ export interface AppData {
     vendortypes: VendorType[];
 	menuItems: MenuItem[];
 	tenants: Tenant[];
+	analytes: IdName[]; 
 }
