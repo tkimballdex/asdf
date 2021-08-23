@@ -1,7 +1,7 @@
 <div id="list-view" class="container-fluid" *ngIf="customers">
     <div class="row">
         <div class="col-md-3">
-            <ejs-dropdownlist [dataSource]="app.analytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="analyteId" placeholder="Analyte" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="app.analytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="analyteId" placeholder="Analyte" floatLabelType="Always" (change)="getData()"></ejs-dropdownlist>
         </div>
 
         <div class="col-md-3">
@@ -13,12 +13,12 @@
         </div>
 
         <div class="col-md-3" *ngIf="locations">
-            <ejs-dropdownlist [dataSource]="locations" [fields]="{ text: 'name', value: 'id' }" [(value)]="locationId" placeholder="Location" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="locations" [fields]="{ text: 'name', value: 'id' }" [(value)]="locationId" placeholder="Location" floatLabelType="Always" (change)="getData()"></ejs-dropdownlist>
         </div>
     </div>
 </div>
 
-<div class="control-section" *ngIf="locationId && analyteId">
+<div class="control-section">
     <ejs-dashboardlayout [allowDragging]='allowDragging' [columns]="4" #editLayout [cellSpacing]='cellSpacing' [cellAspectRatio]='cellAspectRatio'>
         <e-panels>
             <e-panel [sizeX]="3" [sizeY]="2" [row]="1" [col]="0">
@@ -27,10 +27,8 @@
                 </ng-template>
                 <ng-template #content>
                     <div>
-                        <ejs-chart id="lineChart" height="162px" [primaryXAxis]='primaryXAxis'>
+                        <ejs-chart id="lineChart" height="250px" [primaryXAxis]='primaryXAxis' #chart>
                             <e-series-collection>
-                                <e-series [dataSource]="lineData" xName='x' yName='y' type="Line">
-                                </e-series>
                             </e-series-collection>
                         </ejs-chart>
                     </div>

@@ -1,5 +1,5 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
-import { PageSettingsModel } from '@syncfusion/ej2-angular-grids';
+import { Component, ViewEncapsulation, OnInit, ViewChild } from '@angular/core';
+import { ChartComponent } from '@syncfusion/ej2-angular-charts';
 import { AppService } from '../shared/app.service';
 import { PageComponent } from '../shared/page.component';
 import { data } from './datasource';
@@ -21,6 +21,9 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.customers = await this.repository.listCustomers();
 	}
 
+	@ViewChild('chart')
+	public chart: ChartComponent;
+
 	public customers: any;
 	public customerId: string;
 	public sites: any;
@@ -28,6 +31,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	public locations: any;
 	public locationId: string;
 	public analyteId: string;
+	public graphData: any;
     public cellSpacing: number[] = [10, 10];
     public cellAspectRatio: number = 70/25;
     public allowDragging: boolean = false;
@@ -46,7 +50,9 @@ export class DashboardComponent extends PageComponent implements OnInit {
      { x: 2013, y: 28 }, { x: 2014, y: 25 },{ x: 2015, y: 26 }, { x: 2016, y: 27 },
     { x: 2017, y: 32 }, { x: 2018, y: 35 }
     ];
-    public piechart: any[] = [{ x: 'TypeScript', y: 13, text: 'TS 13%' }, { x: 'React', y: 12.5, text: 'Reat 12.5%' },{ x: 'MVC', y: 12, text: 'MVC 12%' },{ x: 'Core', y: 12.5, text: 'Core 12.5%' },{ x: 'Vue', y: 10, text: 'Vue 10%' },{ x: 'Angular', y: 40, text: 'Angular 40%' }];
+	public lineData2: any[] = [{ x: 2013, y: 38 }, { x: 2014, y: 35 }, { x: 2015, y: 36 }];
+
+   public piechart: any[] = [{ x: 'TypeScript', y: 13, text: 'TS 13%' }, { x: 'React', y: 12.5, text: 'Reat 12.5%' },{ x: 'MVC', y: 12, text: 'MVC 12%' },{ x: 'Core', y: 12.5, text: 'Core 12.5%' },{ x: 'Vue', y: 10, text: 'Vue 10%' },{ x: 'Angular', y: 40, text: 'Angular 40%' }];
     public piechart1: any[] = [
      { 'x': 'Chrome', y: 37, text: '37%' },
      { 'x': 'UC Browser', y: 17, text: '17%' },
@@ -73,6 +79,18 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.locations = await this.repository.listLocations(this.siteId);
 	}
 
-	async locationChange() {
+	async getData() {
+		if (this.locationId && this.analyteId) {
+			var graphData = await this.repository.locationVariants({
+				locationId: this.locationId,
+				analyteId: this.analyteId
+			});
+
+			graphData.forEach(x => { x.type = 'Line'; x.xName = 'x'; x.yName = 'y'; });
+			console.dir(graphData);
+			
+			this.chart.clearSeries();
+			this.chart.addSeries(graphData);
+		}
 	}
 }

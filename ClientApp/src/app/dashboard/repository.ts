@@ -26,4 +26,8 @@ export class DashboardRepository {
 			siteId: siteId
 		});
 	}
+
+	public locationVariants(filter: any) {
+		return this.http.post<any[]>(`/dashboard/locationVariants`, filter);
+	}
 }
