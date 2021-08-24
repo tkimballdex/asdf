@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, ViewChild, Injectable } from '@angular/core';
 import { ChartComponent } from '@syncfusion/ej2-angular-charts';
 import { AppService } from '../shared/app.service';
 import { PageComponent } from '../shared/page.component';
@@ -11,7 +11,7 @@ import { DashboardRepository } from './repository';
   encapsulation: ViewEncapsulation.None
 })
 export class DashboardComponent extends PageComponent implements OnInit {
-	constructor(private repository: DashboardRepository, private appService: AppService) {
+	constructor(private repository: DashboardRepository, private appService: AppService, public variant: VariantVars) {
 		super();
 	}
 
@@ -44,6 +44,9 @@ export class DashboardComponent extends PageComponent implements OnInit {
         valueType: 'Category'
     }
 
+	@ViewChild('chartByLocation')
+	public chartByLocation: ChartComponent;
+
 	async customerChange() {
 		this.sites = null;
 		this.siteId = null;
@@ -70,9 +73,47 @@ export class DashboardComponent extends PageComponent implements OnInit {
 			});
 
 			graphData.forEach(x => { x.type = 'Line'; x.xName = 'x'; x.yName = 'y'; });
-			console.dir(graphData);
-			
 			this.chart.addSeries(graphData);
 		}
+	}
+
+	async getDataByLocation() {
+		this.chartByLocation.clearSeries();
+
+		if (this.variant.customerId && this.variant.id) {
+			var graphData = await this.repository.variantLocations({
+				customerId: this.variant.customerId,
+				variantId: this.variant.id,
+				startDate: this.variant.startDate,
+				endDate: this.variant.endDate
+			});
+
+			graphData.forEach(x => { x.type = 'Line'; x.xName = 'x'; x.yName = 'y'; });
+			this.chartByLocation.addSeries(graphData);
+		}
+	}
+}
+
+@Injectable({ providedIn: 'root' })
+class VariantVars {
+	locations: any;
+	list: any;
+	id: string;
+	customerId: string;
+	analyteId: string;
+	startDate: Date;
+	endDate: Date;
+
+	constructor(private repository: DashboardRepository) {
+	}
+
+	async setLocations() {
+		this.locations = null;
+		this.locations = await this.repository.listCustomerLocations(this.customerId);
+	}
+
+	async setVariantList() {
+		this.list = null;
+		this.list = await this.repository.listVariants(this.analyteId);
 	}
 }

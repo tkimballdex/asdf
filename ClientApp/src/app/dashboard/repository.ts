@@ -27,7 +27,25 @@ export class DashboardRepository {
 		});
 	}
 
+	public listCustomerLocations(customerId: string) {
+		return this.http.post(`/location/list`, {
+			tenantId: this.tenant.id,
+			customerId: customerId
+		});
+	}
+
+	public listVariants(analyteId: string) {
+		return this.http.post(`/variant/list`, {
+			tenantId: this.tenant.id,
+			analyteId: analyteId
+		});
+	}
+
 	public locationVariants(filter: any) {
 		return this.http.post<any[]>(`/dashboard/locationVariants`, filter);
+	}
+
+	public variantLocations(filter: any) {
+		return this.http.post<any[]>(`/dashboard/variantLocations`, filter);
 	}
 }
