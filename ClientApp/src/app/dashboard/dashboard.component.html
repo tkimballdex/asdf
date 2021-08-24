@@ -16,6 +16,15 @@
             <ejs-dropdownlist [dataSource]="locations" [fields]="{ text: 'name', value: 'id' }" [(value)]="locationId" placeholder="Location" floatLabelType="Always" (change)="getData()"></ejs-dropdownlist>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <ejs-datepicker [(value)]="startDate" placeholder="Start Date" floatLabelType="Always" (change)="getData()"></ejs-datepicker>
+        </div>
+        <div class="col-md-3">
+            <ejs-datepicker [(value)]="endDate" placeholder="End Date" floatLabelType="Always" (change)="getData()"></ejs-datepicker>
+        </div>
+    </div>
 </div>
 
 <div class="control-section">

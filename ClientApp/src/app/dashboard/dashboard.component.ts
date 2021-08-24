@@ -32,6 +32,8 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	public locationId: string;
 	public analyteId: string;
 	public graphData: any;
+	public startDate: string;
+	public endDate: string;
     public cellSpacing: number[] = [10, 10];
     public cellAspectRatio: number = 70/25;
     public allowDragging: boolean = false;
@@ -80,16 +82,19 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	}
 
 	async getData() {
+		this.chart.clearSeries();
+
 		if (this.locationId && this.analyteId) {
 			var graphData = await this.repository.locationVariants({
 				locationId: this.locationId,
-				analyteId: this.analyteId
+				analyteId: this.analyteId,
+				startDate: this.startDate,
+				endDate: this.endDate
 			});
 
 			graphData.forEach(x => { x.type = 'Line'; x.xName = 'x'; x.yName = 'y'; });
 			console.dir(graphData);
 			
-			this.chart.clearSeries();
 			this.chart.addSeries(graphData);
 		}
 	}
