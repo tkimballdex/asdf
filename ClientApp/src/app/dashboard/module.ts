@@ -11,6 +11,7 @@ import { DashboardLayoutModule } from '@syncfusion/ej2-angular-layouts';
 import { ChartAllModule } from '@syncfusion/ej2-angular-charts';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { TabModule } from '@syncfusion/ej2-angular-navigations';
 
 import { AccumulationLegendService, AccumulationTooltipService, AccumulationAnnotationService} from '@syncfusion/ej2-angular-charts';
 import { PageService, SortService, FilterService, GroupService } from '@syncfusion/ej2-angular-grids';
@@ -35,6 +36,7 @@ import { PieSeriesService, AccumulationDataLabelService } from '@syncfusion/ej2-
 		ButtonModule,
 		TextBoxModule,
 		DashboardLayoutModule,
+		TabModule,
 		AccumulationChartModule,
 		ChartAllModule,
 		RouterModule.forChild([
