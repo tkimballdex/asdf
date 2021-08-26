@@ -4,19 +4,19 @@
             <ejs-dropdownlist [dataSource]="customers" [fields]="{ text: 'name', value: 'id' }" [(value)]="customerId" placeholder="Customer" floatLabelType="Always" (change)="customerChange()"></ejs-dropdownlist>
         </div>
         <div class="col-md-2">
-            <ejs-dropdownlist [dataSource]="app.analytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="analyteId" placeholder="Analyte" floatLabelType="Always" (change)="getData()"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="app.analytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="analyteId" placeholder="Analyte" floatLabelType="Always" (change)="analyteChange()"></ejs-dropdownlist>
         </div>
         <div class="col-md-2">
-            <ejs-datepicker [(value)]="startDate" placeholder="Start Date" floatLabelType="Always" (change)="getData()"></ejs-datepicker>
+            <ejs-datepicker [(value)]="startDate" placeholder="Start Date" floatLabelType="Always" (change)="setGraphData()"></ejs-datepicker>
         </div>
         <div class="col-md-2">
-            <ejs-datepicker [(value)]="endDate" placeholder="End Date" floatLabelType="Always" (change)="getData()"></ejs-datepicker>
+            <ejs-datepicker [(value)]="endDate" placeholder="End Date" floatLabelType="Always" (change)="setGraphData()"></ejs-datepicker>
         </div> 
     </div>
 
     <div class="row d-flex pad-t20">
         <div class="col-md-12 d-flex">
-            <ejs-tab id="edit-tab" class="e-fill">
+            <ejs-tab id="edit-tab" class="e-fill" (selected)="setGraphData()" #tab>
                 <e-tabitems>
                     <e-tabitem>
                         <ng-template #headerText>
@@ -24,15 +24,15 @@
                         </ng-template>
                         <ng-template #content>
                             <div class="row">
-                                <div class="col-md-3" *ngIf="sites">
+                                <div class="col-md-3">
                                     <ejs-dropdownlist [dataSource]="sites" [fields]="{ text: 'name', value: 'id' }" [(value)]="siteId" placeholder="Site" floatLabelType="Always" (change)="siteChange()"></ejs-dropdownlist>
                                 </div>
                         
                                 <div class="col-md-3" *ngIf="locations">
-                                    <ejs-dropdownlist [dataSource]="locations" [fields]="{ text: 'name', value: 'id' }" [(value)]="locationId" placeholder="Location" floatLabelType="Always" (change)="getData()"></ejs-dropdownlist>
+                                    <ejs-dropdownlist [dataSource]="locations" [fields]="{ text: 'name', value: 'id' }" [(value)]="locationId" placeholder="Location" floatLabelType="Always" (change)="setGraphDataByLocation()"></ejs-dropdownlist>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row pad-t20">
                                 <ejs-dashboardlayout [allowDragging]='allowDragging' [columns]="2" #editLayout [cellSpacing]='cellSpacing' [cellAspectRatio]='cellAspectRatio'>
                                     <e-panels>
                                         <e-panel [sizeX]="2" [sizeY]="2" [row]="1" [col]="0">
@@ -41,7 +41,7 @@
                                             </ng-template>
                                             <ng-template #content>
                                                 <div>
-                                                    <ejs-chart id="lineChart" height="400px" [primaryXAxis]='primaryXAxis' #chart>
+                                                    <ejs-chart id="chartByLocation" height="400px" [primaryXAxis]='primaryXAxis' #chartByLocation>
                                                     </ejs-chart>
                                                 </div>
                                             </ng-template>
@@ -51,37 +51,20 @@
                             </div>
                         </ng-template>
                     </e-tabitem>
+
                     <e-tabitem>
                         <ng-template #headerText>
                             <div>Locations by Variant</div>
                         </ng-template>
                         <ng-template #content>
-                            <div id="list-view" class="container-fluid pad-t20" *ngIf="customers && variant">
+                            <div id="list-view" class="container-fluid pad-t20">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <ejs-dropdownlist [dataSource]="app.analytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="variant.analyteId" placeholder="Analyte" floatLabelType="Always" (change)="variant.setVariantList()"></ejs-dropdownlist>
-                                    </div>
-                            
-                                    <div class="col-md-3" *ngIf="variant.list">
-                                        <ejs-dropdownlist [dataSource]="variant.list" [fields]="{ text: 'name', value: 'id' }" [(value)]="variant.id" placeholder="Variant" floatLabelType="Always" (change)="getDataByLocation()"></ejs-dropdownlist>
-                                    </div>
-                            
-                                    <div class="col-md-3">
-                                        <ejs-dropdownlist [dataSource]="customers" [fields]="{ text: 'name', value: 'id' }" [(value)]="variant.customerId" placeholder="Customer" floatLabelType="Always" (change)="getDataByLocation()"></ejs-dropdownlist>
-                                    </div>
-                                </div>
-                            
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <ejs-datepicker [(value)]="variant.startDate" placeholder="Start Date" floatLabelType="Always" (change)="getDataByLocation()"></ejs-datepicker>
-                                    </div>
-                            
-                                    <div class="col-md-3">
-                                        <ejs-datepicker [(value)]="variant.endDate" placeholder="End Date" floatLabelType="Always" (change)="getDataByLocation()"></ejs-datepicker>
+                                        <ejs-dropdownlist [dataSource]="variants" [fields]="{ text: 'name', value: 'id' }" [(value)]="variantId" placeholder="Variant" floatLabelType="Always" (change)="setGraphData()"></ejs-dropdownlist>
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row pad-t20">
                                     <ejs-dashboardlayout [allowDragging]='allowDragging' [columns]="2" #editLayout [cellSpacing]='cellSpacing' [cellAspectRatio]='cellAspectRatio'>
                                         <e-panels>
                                             <e-panel [sizeX]="2" [sizeY]="2" [row]="1" [col]="0">
@@ -90,7 +73,7 @@
                                                 </ng-template>
                                                 <ng-template #content>
                                                     <div>
-                                                        <ejs-chart id="lineChart2" height="400px" [primaryXAxis]='primaryXAxis' #chartByLocation>
+                                                        <ejs-chart id="chartByVariant" height="400px" [primaryXAxis]='primaryXAxis' #chartByVariant>
                                                         </ejs-chart>
                                                     </div>
                                                 </ng-template>

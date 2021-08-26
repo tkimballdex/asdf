@@ -3,32 +3,43 @@ import { ChartComponent } from '@syncfusion/ej2-angular-charts';
 import { AppService } from '../shared/app.service';
 import { PageComponent } from '../shared/page.component';
 import { DashboardRepository } from './repository';
+import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
-  encapsulation: ViewEncapsulation.None
+	selector: 'app-dashboard',
+	templateUrl: './dashboard.component.html',
+	styleUrls: ['./dashboard.component.scss'],
+	encapsulation: ViewEncapsulation.None
 })
 export class DashboardComponent extends PageComponent implements OnInit {
-	constructor(private repository: DashboardRepository, private appService: AppService, public variant: VariantVars) {
+	constructor(private repository: DashboardRepository, private appService: AppService) {
 		super();
 	}
 
 	async ngOnInit() {
 		this.app = await this.appService.getData();
 		this.customers = await this.repository.listCustomers();
+		this.variants = [];
+		this.sites = [];
 
 		var startDate = new Date();
 		startDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() - 14);
 		this.startDate = startDate;
 	}
 
-	@ViewChild('chart')
-	public chart: ChartComponent;
+	@ViewChild('chartByLocation')
+	public chartByLocation: ChartComponent;
+
+	@ViewChild('chartByVariant')
+	public chartByVariant: ChartComponent;
+
+	@ViewChild('tab')
+	public tab: TabComponent;
 
 	public customers: any;
 	public customerId: string;
+	public variantId: string;
+	public variants: any;
 	public sites: any;
 	public siteId: string;
 	public locations: any;
@@ -37,83 +48,76 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	public graphData: any;
 	public startDate: Date;
 	public endDate: Date;
-    public cellSpacing: number[] = [10, 10];
-    public cellAspectRatio: number = 70/25;
-    public allowDragging: boolean = false;
-    public primaryXAxis: Object = {
-        valueType: 'Category'
-    }
-
-	@ViewChild('chartByLocation')
-	public chartByLocation: ChartComponent;
+	public cellSpacing: number[] = [10, 10];
+	public cellAspectRatio: number = 70 / 25;
+	public allowDragging: boolean = false;
+	public primaryXAxis: Object = {
+		valueType: 'Category'
+	}
 
 	async customerChange() {
-		this.sites = null;
+		this.sites = [];
 		this.siteId = null;
 		this.locations = null;
 		this.locationId = null;
 		this.sites = await this.repository.listSites(this.customerId);
+		this.setGraphData();
+	}
+
+	async analyteChange() {
+		this.variants = [];
+		this.variants = await this.repository.listVariants(this.analyteId);
+		this.setGraphData();
 	}
 
 	async siteChange() {
 		this.locations = null;
 		this.locationId = null;
 		this.locations = await this.repository.listLocations(this.siteId);
+		this.setGraphData();
 	}
 
-	async getData() {
-		this.chart.clearSeries();
+	async setGraphDataByLocation() {
+		if (!this.chartByLocation) return;
 
-		if (this.locationId && this.analyteId) {
-			var graphData = await this.repository.locationVariants({
-				locationId: this.locationId,
-				analyteId: this.analyteId,
-				startDate: this.startDate,
-				endDate: this.endDate
-			});
-
-			graphData.forEach(x => { x.type = 'Line'; x.xName = 'x'; x.yName = 'y'; });
-			this.chart.addSeries(graphData);
-		}
-	}
-
-	async getDataByLocation() {
 		this.chartByLocation.clearSeries();
+		if (!this.locationId || !this.analyteId) return;
 
-		if (this.variant.customerId && this.variant.id) {
-			var graphData = await this.repository.variantLocations({
-				customerId: this.variant.customerId,
-				variantId: this.variant.id,
-				startDate: this.variant.startDate,
-				endDate: this.variant.endDate
-			});
+		let graphData = await this.repository.locationVariants({
+			locationId: this.locationId,
+			analyteId: this.analyteId,
+			startDate: this.startDate,
+			endDate: this.endDate
+		});
 
-			graphData.forEach(x => { x.type = 'Line'; x.xName = 'x'; x.yName = 'y'; });
-			this.chartByLocation.addSeries(graphData);
+		graphData.forEach(x => { x.type = 'Line'; x.xName = 'x'; x.yName = 'y'; });
+		this.chartByLocation.addSeries(graphData);
+	}
+
+	async setGraphDataByVariant() {
+		if (!this.chartByVariant) return;
+
+		this.chartByVariant.clearSeries();
+		if (!this.customerId || !this.variantId) return;
+
+		let graphData = await this.repository.variantLocations({
+			customerId: this.customerId,
+			variantId: this.variantId,
+			startDate: this.startDate,
+			endDate: this.endDate
+		});
+
+		graphData.forEach(x => { x.type = 'Line'; x.xName = 'x'; x.yName = 'y'; });
+		this.chartByVariant.addSeries(graphData);
+	}
+
+	async setGraphData() {
+		if (this.tab.selectedItem == 0) {
+			await this.setGraphDataByLocation();
+		}
+		else {
+			await this.setGraphDataByVariant();
 		}
 	}
 }
 
-@Injectable({ providedIn: 'root' })
-class VariantVars {
-	locations: any;
-	list: any;
-	id: string;
-	customerId: string;
-	analyteId: string;
-	startDate: Date;
-	endDate: Date;
-
-	constructor(private repository: DashboardRepository) {
-	}
-
-	async setLocations() {
-		this.locations = null;
-		this.locations = await this.repository.listCustomerLocations(this.customerId);
-	}
-
-	async setVariantList() {
-		this.list = null;
-		this.list = await this.repository.listVariants(this.analyteId);
-	}
-}
