@@ -48,4 +48,8 @@ export class DashboardRepository {
 	public variantLocations(filter: any) {
 		return this.http.post<any[]>(`/dashboard/variantLocations`, filter);
 	}
+
+	public positiveCases(filter: any) {
+		return this.http.post<any>(`/dashboard/positiveCases`, filter);
+	}
 }

@@ -27,7 +27,7 @@
                                 <div class="col-md-3">
                                     <ejs-dropdownlist [dataSource]="sites" [fields]="{ text: 'name', value: 'id' }" [(value)]="siteId" placeholder="Site" floatLabelType="Always" (change)="siteChange()"></ejs-dropdownlist>
                                 </div>
-                        
+
                                 <div class="col-md-3" *ngIf="locations">
                                     <ejs-dropdownlist [dataSource]="locations" [fields]="{ text: 'name', value: 'id' }" [(value)]="locationId" placeholder="Location" floatLabelType="Always" (change)="setGraphDataByLocation()"></ejs-dropdownlist>
                                 </div>
@@ -74,6 +74,39 @@
                                                 <ng-template #content>
                                                     <div>
                                                         <ejs-chart id="chartByVariant" height="400px" [primaryXAxis]='primaryXAxis' #chartByVariant>
+                                                        </ejs-chart>
+                                                    </div>
+                                                </ng-template>
+                                            </e-panel>
+                                        </e-panels>
+                                    </ejs-dashboardlayout>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </e-tabitem>
+
+                    <e-tabitem>
+                        <ng-template #headerText>
+                            <div>Positive Cases</div>
+                        </ng-template>
+                        <ng-template #content>
+                            <div id="list-view" class="container-fluid pad-t20">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <ejs-dropdownlist [dataSource]="variants" [fields]="{ text: 'name', value: 'id' }" [(value)]="variantId" placeholder="Variant" floatLabelType="Always" (change)="setGraphData()"></ejs-dropdownlist>
+                                    </div>
+                                </div>
+
+                                <div class="row pad-t20">
+                                    <ejs-dashboardlayout [allowDragging]='allowDragging' [columns]="2" #editLayout [cellSpacing]='cellSpacing' [cellAspectRatio]='cellAspectRatio'>
+                                        <e-panels>
+                                            <e-panel [sizeX]="2" [sizeY]="2" [row]="1" [col]="0">
+                                                <ng-template #header>
+                                                    <div>Positive - Daily Results</div>
+                                                </ng-template>
+                                                <ng-template #content>
+                                                    <div>
+                                                        <ejs-chart id="chartPositiveCases" height="400px" [primaryXAxis]='primaryXAxis' #chartPositiveCases>
                                                         </ejs-chart>
                                                     </div>
                                                 </ng-template>

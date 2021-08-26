@@ -33,6 +33,9 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	@ViewChild('chartByVariant')
 	public chartByVariant: ChartComponent;
 
+	@ViewChild('chartPositiveCases')
+	public chartPositiveCases: ChartComponent;
+
 	@ViewChild('tab')
 	public tab: TabComponent;
 
@@ -111,12 +114,32 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.chartByVariant.addSeries(graphData);
 	}
 
+	async setGraphDataByPositiveCases() {
+		if (!this.chartPositiveCases) return;
+
+		this.chartPositiveCases.clearSeries();
+		if (!this.customerId || !this.analyteId) return;
+
+		let graphData = await this.repository.positiveCases({
+			customerId: this.customerId,
+			analyteId: this.analyteId,
+			startDate: this.startDate,
+			endDate: this.endDate
+		});
+
+		graphData = [{ type: 'Line', xName: 'x', yName: 'y', dataSource: graphData }];
+		this.chartPositiveCases.addSeries(graphData);
+	}
+
 	async setGraphData() {
 		if (this.tab.selectedItem == 0) {
 			await this.setGraphDataByLocation();
 		}
-		else {
+		else if (this.tab.selectedItem == 1) {
 			await this.setGraphDataByVariant();
+		}
+		else if (this.tab.selectedItem == 2) {
+			await this.setGraphDataByPositiveCases();
 		}
 	}
 }
