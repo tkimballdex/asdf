@@ -131,16 +131,19 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.chartPositiveCases.addSeries(graphData);
 	}
 
-	async setGraphData() {
-		if (this.tab.selectedItem == 0) {
-			await this.setGraphDataByLocation();
-		}
-		else if (this.tab.selectedItem == 1) {
-			await this.setGraphDataByVariant();
-		}
-		else if (this.tab.selectedItem == 2) {
-			await this.setGraphDataByPositiveCases();
-		}
+	setGraphData() {
+		var $this = this;
+		setTimeout(function () {
+			if ($this.tab.selectedItem == 0) {
+				$this.setGraphDataByLocation();
+			}
+			else if ($this.tab.selectedItem == 1) {
+				$this.setGraphDataByVariant();
+			}
+			else if ($this.tab.selectedItem == 2) {
+				$this.setGraphDataByPositiveCases();
+			}
+		}, 10);
 	}
 }
 

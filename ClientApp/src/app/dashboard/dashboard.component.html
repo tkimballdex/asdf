@@ -91,18 +91,12 @@
                         </ng-template>
                         <ng-template #content>
                             <div id="list-view" class="container-fluid pad-t20">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <ejs-dropdownlist [dataSource]="variants" [fields]="{ text: 'name', value: 'id' }" [(value)]="variantId" placeholder="Variant" floatLabelType="Always" (change)="setGraphData()"></ejs-dropdownlist>
-                                    </div>
-                                </div>
-
                                 <div class="row pad-t20">
                                     <ejs-dashboardlayout [allowDragging]='allowDragging' [columns]="2" #editLayout [cellSpacing]='cellSpacing' [cellAspectRatio]='cellAspectRatio'>
                                         <e-panels>
                                             <e-panel [sizeX]="2" [sizeY]="2" [row]="1" [col]="0">
                                                 <ng-template #header>
-                                                    <div>Positive - Daily Results</div>
+                                                    <div>Positive Cases - Daily Counts</div>
                                                 </ng-template>
                                                 <ng-template #content>
                                                     <div>
