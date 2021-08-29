@@ -44,7 +44,14 @@ export class SampleTestListComponent extends PageComponent implements OnInit {
         this.grid.excelExport(excelExportProperties);
 
         this.hideSpinner();
-    }
+	}
+
+	async sendNotifications() {
+		this.loadStart();
+		var notifications = await this.repository.sendNotifications();
+		this.loadEnd();
+		this.showSuccessMessage(`${notifications} notifications have been sent!`);
+	}
     //------------------------------------------------------------------------------------------------------------------------
     excelExportComplete(): void {
         (this.grid.columns[0] as Column).visible = true;
