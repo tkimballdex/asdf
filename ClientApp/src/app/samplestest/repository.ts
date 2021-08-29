@@ -24,6 +24,6 @@ export class SampleTestRepository {
     }
 
     public sendNotifications() {
-        return this.http.post<number>(`/notification/siteResults/${this.tenant.id}`);
+        return this.http.post<any>(`/notification/siteResults/${this.tenant.id}`);
     }
 }
