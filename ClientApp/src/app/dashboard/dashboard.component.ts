@@ -54,9 +54,20 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	public cellSpacing: number[] = [10, 10];
 	public cellAspectRatio: number = 70 / 25;
 	public allowDragging: boolean = false;
+
 	public primaryXAxis: Object = {
 		valueType: 'Category'
 	}
+
+	public marker: Object = {
+        visible: true,
+        height: 10,
+        width: 10
+    };
+    public tooltip: Object = {
+        enable: true,
+        header: 'Profit'
+    };
 
 	async customerChange() {
 		this.sites = [];
@@ -93,7 +104,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 			endDate: this.endDate
 		});
 
-		graphData.forEach(x => { x.type = 'Line'; x.xName = 'x'; x.yName = 'y'; });
+		graphData.forEach(x => { x.type = 'Spline'; x.xName = 'x'; x.yName = 'y'; x.marker = this.marker; x.tooltip = this.tooltip });
 		this.chartByLocation.addSeries(graphData);
 	}
 
@@ -110,7 +121,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 			endDate: this.endDate
 		});
 
-		graphData.forEach(x => { x.type = 'Line'; x.xName = 'x'; x.yName = 'y'; });
+		graphData.forEach(x => { x.type = 'Spline'; x.xName = 'x'; x.yName = 'y'; });
 		this.chartByVariant.addSeries(graphData);
 	}
 
@@ -127,7 +138,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 			endDate: this.endDate
 		});
 
-		graphData = [{ type: 'Line', xName: 'x', yName: 'y', dataSource: graphData }];
+		graphData = [{ type: 'Column', xName: 'x', yName: 'y', dataSource: graphData }];
 		this.chartPositiveCases.addSeries(graphData);
 	}
 
