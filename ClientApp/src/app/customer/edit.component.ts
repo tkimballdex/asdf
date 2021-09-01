@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Dialog, DialogUtility } from '@syncfusion/ej2-popups';
 import { AppService } from "../shared/app.service";
 import { PageComponent } from '../shared/page.component';
 import { CustomerRepository } from './repository';
+import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 
 @Component({
     selector: 'customer-edit',
@@ -19,6 +20,9 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
     public record: any;
     public deleteDialog: Dialog;
 	public form: FormGroup;
+
+	@ViewChild('editTab')
+	public editTab: TabComponent;
 
     async ngOnInit() {
         var id = this.route.snapshot.paramMap.get('id');
@@ -45,7 +49,13 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 			contactPhoneNo: new FormControl(this.record.contactPhoneNo, [Validators.required]),
 			notificationEmail: new FormControl(this.record.notificationEmail, []),
 		});
-    }
+	}
+
+	editTabCreated() {
+		if (history.state.sites) {
+			this.editTab.selectedItem = 1;
+		}
+	}
 
 	async save() {
 		this.form.markAllAsTouched();

@@ -120,6 +120,12 @@
                                 </div>
                             </div>
 
+                            <div class="row pad-t20">
+                                <div class="col-md-12">
+                                    <ejs-textbox [(value)]="record.alerts" placeholder="Alert Phone Number(s)" floatLabelType="Always"></ejs-textbox>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-md-12"><label for="notes" class="edit-label">Notes</label></div>
                                 <div class="col-md-12">
@@ -167,7 +173,7 @@
 
         <div class="col-md-6 d-flex justify-content-end">
             <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
-            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/customer/edit', record.customerId]">Close</button>
+            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/customer/edit', record.customerId]" [state]='{ sites: true }'>Close</button>
         </div>
     </div>
     <ejs-toast #toast></ejs-toast>
