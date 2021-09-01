@@ -6,7 +6,8 @@
             <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['../add']">+ Add</button></span>
         </div>
         <div class="col-md-6 d-flex align-items-end justify-content-end list-header">
-            <span class="list-actions"><button ejs-button cssClass="e-outline" iconCss="fad fa-download" (click)="export()"></button></span>
+            <span class="list-actions"><button ejs-button cssClass="e-outline" iconCss="fad fa-download" (click)="export()" title="Export"></button></span>
+            <span class="list-actions"><button ejs-button cssClass="e-outline" iconCss="fad fa-bells" (click)="sendNotifications()" title="Send Notifications" [disabled]="loading"></button></span>
         </div>
     </div>
     <div class="row d-flex align-items-end">
@@ -26,9 +27,9 @@
                         <ng-template #template let-data>
                             <a [routerLink]="['../edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
                         </ng-template>
-                    </e-column>                    
+                    </e-column>
                     <e-column field='sample' headerText='Sample'></e-column>
-                    <e-column field='site' headerText='Site'></e-column>                    
+                    <e-column field='site' headerText='Site'></e-column>
                     <e-column field='referenceNo' headerText='Reference No'></e-column>
                     <e-column field='testType' headerText='Test Type'></e-column>
                     <e-column field='result' headerText='Result'></e-column>
@@ -38,6 +39,7 @@
             </ejs-grid>
         </div>
     </div>
+    <ejs-toast #toast></ejs-toast>
 </div>
 
 
