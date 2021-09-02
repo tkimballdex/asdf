@@ -23,7 +23,7 @@ export class SampleTestRepository {
         return this.http.post(`/sampletest/list`, filter);
     }
 
-    public sendNotifications() {
-        return this.http.post<any>(`/notification/siteResults/${this.tenant.id}`);
+    public sendAlertsAndNotifications() {
+		return this.http.post<any>(`/notification/sendAlertsAndNotifications/${this.tenant.id}`);
     }
 }

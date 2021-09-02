@@ -48,9 +48,9 @@ export class SampleTestListComponent extends PageComponent implements OnInit {
 
 	async sendNotifications() {
 		this.loadStart();
-		var result = await this.repository.sendNotifications();
+		var result = await this.repository.sendAlertsAndNotifications();
 		this.loadEnd();
-		this.showSuccessMessage(`${result.notifications} notifications and ${result.alerts} alerts have been sent!`);
+		this.showSuccessMessage(`${result.siteNotifications} site notifications, ${result.siteAlerts} site alerts, ${result.customerNotifications} customer notifications, and ${result.customerAlerts} customer alerts have been sent!`);
 	}
     //------------------------------------------------------------------------------------------------------------------------
     excelExportComplete(): void {
