@@ -39,6 +39,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	@ViewChild('tab')
 	public tab: TabComponent;
 
+	public selectedSites: any;
 	public customers: any;
 	public customerId: string;
 	public variantId: string;
@@ -75,6 +76,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.locations = null;
 		this.locationId = null;
 		this.sites = await this.repository.listSites(this.customerId);
+		this.selectedSites = this.sites.map(x => x.id);
 		this.setGraphData();
 	}
 
@@ -135,7 +137,8 @@ export class DashboardComponent extends PageComponent implements OnInit {
 			customerId: this.customerId,
 			analyteId: this.analyteId,
 			startDate: this.startDate,
-			endDate: this.endDate
+			endDate: this.endDate,
+			sites: this.selectedSites
 		});
 
 		graphData = [{ type: 'Column', xName: 'x', yName: 'y', dataSource: graphData }];
