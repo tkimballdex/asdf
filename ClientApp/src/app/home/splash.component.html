@@ -1,5 +1,130 @@
-<h1>SPLASH PAGE!</h1>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Centrix</title>
+        <base href="/" />
 
-<h1 *ngIf="!appService.isLoggedIn"><a routerLink="/auth">LOG IN</a></h1>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/x-icon" href="favicon.ico" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
 
-<h1 *ngIf="appService.isLoggedIn"><a routerLink="/auth">HOME PAGE</a></h1>
+    <body>
+
+    <div id="splash-view">
+        <div>
+            <h1>CENTRIX</h1>
+        </div>
+        
+        <div>        
+            <ejs-dashboardlayout id="login-features" [allowDragging]='true' [allowResizing]='false' [columns]="5" [rows]="2">
+                <e-panels>
+                    <e-panel [row]="0" [col]="0" cssClass="feature-panel">
+                        <ng-template #content>
+                            <div class="panel-icon">
+                                <i class="fal fa-coins"></i>                              
+                            </div>
+                            <div class="panel-header">
+                                Accounting                               
+                            </div>
+                            <div class="panel-content">
+                                Full accounting system
+                            </div>           
+                        </ng-template>
+                    </e-panel>
+                    <e-panel [row]="0" [col]="1">
+                        <ng-template #content>
+                            <div class="panel-icon">
+                                <i class="far fa-user-hard-hat"></i>                             
+                            </div>
+                            <div class="panel-header">
+                                Vendors                               
+                            </div>
+                            <div class="panel-content">
+                                Manage Vendors & Jobs
+                            </div>   
+                        </ng-template>
+                    </e-panel>
+                    <e-panel [row]="0" [col]="2">
+                        <ng-template #content>
+                            <div class="panel-icon">
+                                <i class="fal fa-paper-plane"></i>                              
+                            </div>
+                            <div class="panel-header">
+                                Communicate                               
+                            </div>
+                            <div class="panel-content">
+                                Communicate with board members and owners
+                            </div>   
+                        </ng-template>
+                    </e-panel>
+                    <e-panel [row]="0" [col]="3" [sizeX]="2" [sizeY]="2" >
+                        <ng-template #content>                        
+                            <div class="panel-icon">
+                                <i class="fal fa-sign-in-alt"></i>                            
+                            </div>
+                            <div class="panel-header">
+                                Login                              
+                            </div>
+                            <div class="panel-content">
+                                <span *ngIf="!appService.isLoggedIn">
+                                    <button ejs-button id="login-button" cssClass="e-primary" [routerLink]="['/auth']">Log In</button> 
+                                </span>
+
+                                <span *ngIf="appService.isLoggedIn">
+                                    <button ejs-button id="login-button" cssClass="e-primary" [routerLink]="['/auth']">Home Page</button>                                     
+                                </span>
+                            </div>                              
+                        </ng-template>
+                    </e-panel>
+                    <e-panel [row]="1" [col]="0">
+                        <ng-template #content>
+                            <div class="panel-icon">
+                                <i class="fal fa-phone"></i>                             
+                            </div>
+                            <div class="panel-header">
+                                Inquiries                              
+                            </div>
+                            <div class="panel-content">
+                                Manage owner inquiries
+                            </div>   
+                        </ng-template>
+                    </e-panel>
+                    <e-panel [row]="1" [col]="1">
+                        <ng-template #content>
+                            <div class="panel-icon">
+                                <i class="fal fa-eye-slash"></i>                              
+                            </div>
+                            <div class="panel-header">
+                                Violations                               
+                            </div>
+                            <div class="panel-content">
+                                Manage property violations
+                            </div>   
+                        </ng-template>
+                    </e-panel>
+                    <e-panel [row]="1" [col]="2">
+                        <ng-template #content>
+                            <div class="panel-icon">
+                                <i class="fal fa-folder-open"></i>                             
+                            </div>
+                            <div class="panel-header">
+                                Documents                               
+                            </div>
+                            <div class="panel-content">
+                                Generate & store documents
+                            </div>   
+                        </ng-template>
+                    </e-panel>
+                </e-panels>
+            </ejs-dashboardlayout>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
