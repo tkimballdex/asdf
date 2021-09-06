@@ -35,7 +35,7 @@
 
     <div class="row pad-t20">
         <div class="col-md-12">
-            <ejs-tab id="edit-tab" class="e-fill">
+            <ejs-tab id="edit-tab" class="e-fill" #editTab>
                 <e-tabitems>
                       <e-tabitem>
                         <ng-template #headerText>
@@ -132,12 +132,12 @@
                             <div class="col-md-6 d-flex align-items-center list-header">
                                 <span class="list-header-icon"><i class="fas fa-vials"></i></span>
                                 <span class="list-header-title">Tests</span>
-                                <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['/auth/sampletest/add']">+ Add</button></span>
+                                <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['/auth/sampletest/add', record.id]">+ Add</button></span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 pad-t20">
-                                <ejs-grid #grid [dataSource]='list' [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }'
+                                <ejs-grid #grid [dataSource]='tests' [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }'
                                           [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' [allowSorting]="true" [allowFiltering]="false">
                                     <e-columns>
                                         <e-column width="70" [visible]='true'>
@@ -148,7 +148,7 @@
                                         <e-column field='testType' headerText='Test Type'></e-column>
                                         <e-column field='result' headerText='Result'></e-column>
                                         <e-column field='rejected' headerText='Rejected'></e-column>
-                                        <e-column field='completedDate' type='date' [format]='dateFormat' headerText='Completed On' width='150'></e-column>
+                                        <e-column field='completedDate' type='date' format='MM/dd/yyyy' headerText='Completed On' width='150'></e-column>
                                     </e-columns>
                                 </ejs-grid>
                             </div>
@@ -164,10 +164,10 @@
           <div class="col-md-6 d-flex justify-content-start">
             <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
         </div>
-        <div class="col-sm-6 d-flex justify-content-end">
-            <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
-            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/sample/list']">Close</button>
-        </div>
+          <div class="col-sm-6 d-flex justify-content-end">
+              <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
+              <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/sample/list']">Close</button>
+          </div>
     </div>
     <ejs-toast #toast></ejs-toast>
 </div>

@@ -19,8 +19,8 @@
         </div>
     </div>
 
-     <div class="row pad-t10">
-       <div class="col-md-4">
+    <div class="row pad-t10">
+        <div class="col-md-4">
             <ejs-textbox [(value)]="record.referenceNo" placeholder="Reference No" floatLabelType="Always"></ejs-textbox>
         </div>
 
@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <div class="row pad-t10" *ngIf="!record.id">
+    <div class="row pad-t10" *ngIf="!record.sample">
         <div class="col-md-4">
             <ejs-dropdownlist [dataSource]="customers" [disabled]="record.id" [fields]="{ text: 'name', value: 'id' }" [(value)]="customerId" placeholder="Customer" floatLabelType="Always" (change)="customerChange()"></ejs-dropdownlist>
         </div>
@@ -41,13 +41,13 @@
         </div>
     </div>
 
-    <div class="row pad-t10" *ngIf="!record.id">
+    <div class="row pad-t10" *ngIf="!record.sample">
         <div class="col-md-4">
             <ejs-dropdownlist [dataSource]="samples" [disabled]="record.sampleId" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.sampleId" placeholder="Sample" floatLabelType="Always"></ejs-dropdownlist>
         </div>
     </div>
 
-    <div class="row pad-t10" *ngIf="record.id">
+    <div class="row pad-t10" *ngIf="record.sample">
         <div class="col-md-4">
             <ejs-textbox [(value)]="record.customer" readonly placeholder="Customer" floatLabelType="Always"></ejs-textbox>
         </div>
@@ -59,9 +59,9 @@
         </div>
     </div>
 
-    <div class="row pad-t20">
+    <div class="row pad-t10" *ngIf="record.sample">
         <div class="col-md-4">
-            <ejs-textbox [(value)]="record.sampleNo" readonly placeholder="Sample" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox [(value)]="record.sample" readonly placeholder="Sample" floatLabelType="Always"></ejs-textbox>
         </div>
     </div>
 
@@ -122,7 +122,7 @@
 
                     <e-column field='resultValue' headerText='Result' textAlign='Center' width="120">
                         <ng-template #template let-data>
-                            <ejs-numerictextbox [(value)]="record.variants[data.index].resultValue" format='N1' min='-100' max='1000' step='0.1' placeholder="ResultValue" floatLabelType="Always"></ejs-numerictextbox>
+                            <ejs-numerictextbox [(value)]="record.variants[data.index].resultValue" format='N1' min='-100' max='1000' step='0.1' floatLabelType="Always"></ejs-numerictextbox>
                         </ng-template>
                     </e-column>
                 </e-columns>
@@ -137,7 +137,7 @@
 
         <div class="col-md-6 d-flex justify-content-end">
             <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
-            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/sampletest/list']">Close</button>
+            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/sample/edit', record.sampleId]" [state]='{ tests: true }'>Close</button>
         </div>
     </div>
 

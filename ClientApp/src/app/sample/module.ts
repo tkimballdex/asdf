@@ -30,23 +30,23 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 import { DataComponent } from './data.component';
 
 @NgModule({
-    declarations: [
-        SampleListComponent,
-        SampleEditComponent,
-        DataComponent
-    ],
-    imports: [
-        MatFormFieldModule, MatInputModule, MatIconModule, MatDatepickerModule, MatNativeDateModule, MatButtonModule, MatButtonToggleModule, MatSelectModule, MatTabsModule, MatDialogModule, FormsModule, ReactiveFormsModule,
-        GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule, 
-        TabModule, DatePickerModule, SwitchModule, NumericTextBoxModule, MatButtonToggleModule, CommonModule, 
-        RouterModule.forChild([
-            { path: 'list', component: SampleListComponent, canActivate: [MsalGuard] },
-            { path: 'add', component: SampleEditComponent, canActivate: [MsalGuard] },
-           { path: 'edit/:id', component: SampleEditComponent, canActivate: [MsalGuard] },
-        ])
-    ],
-    providers: [
-        PageService, SortService, EditService, ToolbarService, CommandColumnService, ExcelExportService
-    ]
+	declarations: [
+		SampleListComponent,
+		SampleEditComponent,
+		DataComponent
+	],
+	imports: [
+		MatFormFieldModule, MatInputModule, MatIconModule, MatDatepickerModule, MatNativeDateModule, MatButtonModule, MatButtonToggleModule, MatSelectModule, MatTabsModule, MatDialogModule, FormsModule, ReactiveFormsModule,
+		GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule,
+		TabModule, DatePickerModule, SwitchModule, NumericTextBoxModule, MatButtonToggleModule, CommonModule,
+		RouterModule.forChild([
+			{ path: 'list', component: SampleListComponent, canActivate: [MsalGuard] },
+			{ path: 'add', component: SampleEditComponent, canActivate: [MsalGuard] },
+			{ path: 'edit/:id', component: SampleEditComponent, canActivate: [MsalGuard] },
+		])
+	],
+	providers: [
+		PageService, SortService, EditService, ToolbarService, CommandColumnService, ExcelExportService
+	]
 })
 export class SampleModule { }

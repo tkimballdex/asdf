@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { DialogUtility, Dialog } from '@syncfusion/ej2-popups';
-import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 import { AppService } from "../shared/app.service";
 import { PageComponent } from '../shared/page.component';
 import { SampleTestRepository } from './repository';
@@ -38,11 +36,22 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
         this.privileges = this.app.privileges.tests;
 
 		var id = this.route.snapshot.paramMap.get('id');
+		var sampleId = this.route.snapshot.paramMap.get('sampleId');
 
 		if (id) {
 			this.data = await this.repository.get(id);
 			this.record = this.data.record;
 			this.record.variants = this.data.variants;
+		}
+		else if (sampleId) {
+			var sample = await this.repository.getSample(sampleId);
+			this.record = {
+				sampleId: sampleId,
+				customer: sample.customer,
+				location: sample.location,
+				site: sample.site,
+				sample: sample.name
+			}
 		}
 		else {
 			this.record = {};

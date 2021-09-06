@@ -23,12 +23,16 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 
 	public record: any;
 	public deleteDialog: Dialog;
+	public tests: any;
 
 	//----------------------------Reference No validations----------------------------//
 
 	public refno: FormControl;
 	public date1: FormControl;
 
+
+	@ViewChild('editTab')
+	public editTab: TabComponent;
 
 	getErrorMessage() {
 		if (this.refno.hasError('required')) {
@@ -50,10 +54,17 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.privileges = this.app.privileges.samples;
 		var id = this.route.snapshot.paramMap.get('id');
 		this.record = await this.repository.get(id);
+		this.tests = await this.repository.getTests(id);
 		this.hideSpinner();
 
 		this.refno = new FormControl(this.record.referenceNo, [Validators.required]);
 		this.date1 = new FormControl(this.record.scheduledDate, [Validators.required]);
+	}
+
+	editTabCreated() {
+		if (history.state.tests) {
+			this.editTab.selectedItem = 1;
+		}
 	}
 	//-----------------------------------------------------------------------------------------
 	async save() {

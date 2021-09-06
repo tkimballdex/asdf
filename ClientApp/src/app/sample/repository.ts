@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
 import { MsalHttpClient } from '../shared/msal-http';
+import { TenantService } from '../shared/tenant.service';
 
 @Injectable({ providedIn: 'root' })
 export class SampleRepository {
-    constructor(private http: MsalHttpClient) {
+    constructor(private http: MsalHttpClient, private tenant: TenantService) {
     }
 
     public save(record: any) {
@@ -22,4 +23,10 @@ export class SampleRepository {
         return this.http.post(`/sample/list`, filter);
     }
 
+	public getTests(sampleId: string) {
+		return this.http.post(`/sampletest/list`, {
+			sampleId: sampleId,
+			tenantId: this.tenant.id
+		});
+	}
 }

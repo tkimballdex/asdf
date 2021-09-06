@@ -57,4 +57,8 @@ export class SampleTestRepository {
     public sendAlertsAndNotifications() {
 		return this.http.post<any>(`/notification/sendAlertsAndNotifications/${this.tenant.id}`);
     }
+
+	public getSample(id: string) {
+		return this.http.post<any>(`/sample/get/${id}`);
+	}
 }
