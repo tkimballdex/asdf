@@ -106,7 +106,7 @@
                                         <label for="sampleQc" class="edit-label">Sample QC Result</label>
                                     </div>
                                     <div class="col-md-12">
-                                        <mat-button-toggle-group id="sampleQc" class="threeStateToggleBtn" [(ngModel)]="record.qcpass">
+                                        <mat-button-toggle-group id="sampleQc" class="threeStateToggleBtn" [(value)]="record.qcpass">
                                             <mat-button-toggle [value]="null">None</mat-button-toggle>
                                             <mat-button-toggle [value]="true" [ngClass]="{ 'success-green': record.qcpass == true }">Pass</mat-button-toggle>
                                             <mat-button-toggle [value]="false" [ngClass]="{ 'failure-red': record.qcpass == false }">Fail</mat-button-toggle>

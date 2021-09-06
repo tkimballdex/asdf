@@ -38,6 +38,10 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.tests = await this.repository.getTests(id);
 		this.hideSpinner();
 
+		this.record.collectedDate = this.record.completedDate ? new Date(this.record.collectedDate) : null;
+		this.record.shippedDate = this.record.shippedDate ? new Date(this.record.shippedDate) : null;
+		this.record.receivedDate = this.record.receivedDate ? new Date(this.record.receivedDate) : null;
+
 		this.form = new FormGroup({
 			referenceNo: new FormControl(this.record.referenceNo, [Validators.required]),
 			scheduledDate: new FormControl(this.record.scheduledDate ? new Date(this.record.scheduledDate) : null)
