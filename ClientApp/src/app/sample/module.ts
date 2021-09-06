@@ -27,13 +27,11 @@ import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { TabModule } from '@syncfusion/ej2-angular-navigations';
 import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
-import { DataComponent } from './data.component';
 
 @NgModule({
 	declarations: [
 		SampleListComponent,
-		SampleEditComponent,
-		DataComponent
+		SampleEditComponent
 	],
 	imports: [
 		MatFormFieldModule, MatInputModule, MatIconModule, MatDatepickerModule, MatNativeDateModule, MatButtonModule, MatButtonToggleModule, MatSelectModule, MatTabsModule, MatDialogModule, FormsModule, ReactiveFormsModule,
