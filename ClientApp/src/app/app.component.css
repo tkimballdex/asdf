@@ -43,11 +43,6 @@
     cursor: pointer;
 }
 
-#header div.tenant-name {
-    font-size: 1.1em;
-    padding-left: 20px;
-}
-
 #header div.account-menu {
     float: right;
 }
@@ -147,6 +142,7 @@
     background-color: var(--menubgclr);
     color: var(--menutxtclr);
     padding-left:20px!important;
+    padding-right:20px!important;
 }
 
 .e-menu-popup .e-menu-item:hover {

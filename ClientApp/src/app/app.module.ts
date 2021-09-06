@@ -24,6 +24,7 @@ import { SidebarModule, MenuAllModule, TreeViewAllModule, MenuModule } from '@sy
 import { DropDownButtonModule, SplitButtonModule, ProgressButtonModule } from '@syncfusion/ej2-angular-splitbuttons';
 import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 import { DialogModule } from '@syncfusion/ej2-angular-popups';
+import { DashboardLayoutModule } from '@syncfusion/ej2-angular-layouts';
 
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHome, faHomeAlt } from '@fortawesome/pro-solid-svg-icons';
@@ -98,7 +99,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
 			}
 		], { relativeLinkResolution: 'legacy' }),
 		MsalModule,
-		SidebarModule, MenuAllModule, DropDownListModule, TreeViewAllModule, ListViewAllModule, MenuModule,
+		SidebarModule, MenuAllModule, DropDownListModule, TreeViewAllModule, ListViewAllModule, MenuModule, DashboardLayoutModule,
 		DropDownButtonModule, GridModule, ComboBoxModule, SwitchModule, DialogModule, FontAwesomeModule, BrowserAnimationsModule, ToastAllModule
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
