@@ -47,6 +47,8 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 			scheduledDate: new FormControl(this.record.scheduledDate ? new Date(this.record.scheduledDate) : null),
 			qcpass: new FormControl(this.record.qcpass)
 		});
+
+		console.dir(this.record)
 	}
 
 	editTabCreated() {
