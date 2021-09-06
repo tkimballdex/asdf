@@ -1,5 +1,131 @@
-<h1>SPLASH PAGE!</h1>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Centrix</title>
+        <base href="/" />
 
-<h1 *ngIf="!appService.isLoggedIn"><a routerLink="/auth">LOG IN</a></h1>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/x-icon" href="favicon.ico" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
 
-<h1 *ngIf="appService.isLoggedIn"><a routerLink="/auth">HOME PAGE</a></h1>
+    <body>
+
+    <div id="splash-view">
+        <div style="text-align: center;">
+            <h1><b>SWAPP</b></h1>
+            <h4>Surveillance of Wastewater & Prevention Platform</h4>
+        </div>
+        
+        <div>        
+            <ejs-dashboardlayout id="login-features" [allowDragging]='true' [allowResizing]='false' [columns]="5" [rows]="2">
+                <e-panels>
+                    <e-panel [row]="0" [col]="0" cssClass="feature-panel">
+                        <ng-template #content>
+                            <div class="panel-icon">
+                                <i class="fal fa-vial"></i>                              
+                            </div>
+                            <div class="panel-header">
+                                Collect                               
+                            </div>
+                            <div class="panel-content">
+                                Manage sample scheduling, collection, & shipments
+                            </div>           
+                        </ng-template>
+                    </e-panel>
+                    <e-panel [row]="0" [col]="1">
+                        <ng-template #content>
+                            <div class="panel-icon">
+                                <i class="fal fa-chart-network"></i>                            
+                            </div>
+                            <div class="panel-header">
+                                Collaborate                               
+                            </div>
+                            <div class="panel-content">
+                                Integrate with testing labs or testing sites
+                            </div>   
+                        </ng-template>
+                    </e-panel>
+                    <e-panel [row]="0" [col]="2">
+                        <ng-template #content>
+                            <div class="panel-icon">
+                                <i class="fal fa-tachometer-alt"></i>                             
+                            </div>
+                            <div class="panel-header">
+                                Monitor                               
+                            </div>
+                            <div class="panel-content">
+                                Monitor & track status through real-time dashboards
+                            </div>   
+                        </ng-template>
+                    </e-panel>
+                    <e-panel [row]="0" [col]="3" [sizeX]="2" [sizeY]="2" >
+                        <ng-template #content>                        
+                            <div class="panel-icon">
+                                <i class="fal fa-sign-in-alt"></i>                            
+                            </div>
+                            <div class="panel-header">
+                                Login                              
+                            </div>
+                            <div class="panel-content">
+                                <span *ngIf="!appService.isLoggedIn">
+                                    <button ejs-button id="login-button" cssClass="e-primary" [routerLink]="['/auth']">Log In</button> 
+                                </span>
+
+                                <span *ngIf="appService.isLoggedIn">
+                                    <button ejs-button id="login-button" cssClass="e-primary" [routerLink]="['/auth']">Home Page</button>                                     
+                                </span>
+                            </div>                              
+                        </ng-template>
+                    </e-panel>
+                    <e-panel [row]="1" [col]="0">
+                        <ng-template #content>
+                            <div class="panel-icon">
+                                <i class="fal fa-bells"></i>                              
+                            </div>
+                            <div class="panel-header">
+                                Communicate                              
+                            </div>
+                            <div class="panel-content">
+                                Send automated alerts & notifications based on key data points
+                            </div>   
+                        </ng-template>
+                    </e-panel>
+                    <e-panel [row]="1" [col]="1">
+                        <ng-template #content>
+                            <div class="panel-icon">
+                                <i class="fal fa-bells"></i>                            
+                            </div>
+                            <div class="panel-header">
+                                Aggreagate                              
+                            </div>
+                            <div class="panel-content">
+                                Auto-send notifications based on criteria
+                            </div>   
+                        </ng-template>
+                    </e-panel>
+                    <e-panel [row]="1" [col]="2">
+                        <ng-template #content>
+                            <div class="panel-icon">
+                                <i class="fal fa-analytics"></i>                            
+                            </div>
+                            <div class="panel-header">
+                                Analyze                              
+                            </div>
+                            <div class="panel-content">
+                                Run advanced analytics via multi-omic, explanatory, or predictive modeling
+                            </div>   
+                        </ng-template>
+                    </e-panel>
+                </e-panels>
+            </ejs-dashboardlayout>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+

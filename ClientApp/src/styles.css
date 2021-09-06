@@ -15,6 +15,7 @@
 @import '../node_modules/@syncfusion/ej2-angular-dropdowns/styles/fabric.css';  
 @import '../node_modules/@syncfusion/ej2-layouts/styles/fabric.css';  
 @import "../node_modules/@syncfusion/ej2-angular-layouts/styles/fabric.css";
+@import '../node_modules/@syncfusion/ej2-richtexteditor/styles/fabric.css';  
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import "~leaflet/dist/leaflet.css";
 
@@ -27,13 +28,52 @@ html, body {
 body {
     font-family: "Segoe UI", "Helvetica Neue", Helvetica,  sans-serif;
     -webkit-tap-highlight-color: transparent;
-    background-color: #f1f5f9;
+    background-color: #f1f5f9;    
 }
 /* body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
 
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
+}
+
+#login-features.e-dashboardlayout.e-control .e-panel {
+    background: rgba(0, 110, 255, 0.90);    
+    padding: 10px;
+    text-align: center;
+    border-width:0px;
+    box-shadow: none;
+}
+
+#login-features.e-dashboardlayout.e-control .e-panel .panel-icon {
+    font-size: 1.5em;
+    font-weight: 500;
+    color:#daddf0;
+}
+
+#login-features.e-dashboardlayout.e-control .e-panel .panel-header {
+    font-size: 1.1em;
+    font-weight: 500;
+    color:#ffffff;
+}
+
+#login-features.e-dashboardlayout.e-control .e-panel .panel-content {
+    font-size: 0.9em;
+    font-weight: 400;
+    padding-top: 10px;
+    color:#daddf0;
+}
+
+#login-button
+{
+    margin-top:50px;
+    width:90%;
+    height:50px;
+    border: 1px solid #daddf0;
+    background: rgb(0, 99, 228); 
+    border-radius: 3px;
+    color:#ffffff;
+    font-weight: 500;
 }
 
 mat-form-field.mat-form-field {
@@ -66,7 +106,7 @@ mat-form-field.mat-form-field {
 
 #list-view .list-header-icon {
     display: inline-block;
-    font-size: 1.5em;
+    font-size: 1.6em;
     color: #2a89ff;
     padding-right: 10px;
 }
@@ -74,9 +114,10 @@ mat-form-field.mat-form-field {
 #list-view .list-header-title {
     font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
     display: inline-block;
-    font-size: 1.5em;
+    font-size: 1.8em;
     font-weight: 400;
     padding-right:20px;
+    color:#666666;
 }
 
 #list-view button
@@ -153,9 +194,9 @@ mat-form-field.mat-form-field {
 
 #edit-view .edit-header-icon {
     display: inline-block;
-    font-size: 1.8em;
+    font-size: 1.6em;
     background-color: #1e88e5;
-    padding: 20px 5px 5px 5px;
+    padding: 25px 5px 5px 5px;
     color:white;
     margin-top:-20px;
     border-radius: 3px;
@@ -167,7 +208,7 @@ mat-form-field.mat-form-field {
 #edit-view .edit-header-title {
     font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
     display: inline-block;
-    font-size: 1.6em;
+    font-size: 1.8em;
     font-weight: 300;
     padding: 5px 20px 10px 15px;
     color:#3c4858;
@@ -203,7 +244,7 @@ mat-form-field.mat-form-field {
 } */
 
 #edit-view label.e-float-text {
-    font-size: 12px;
+    padding-top:8px;
 }
 #edit-view ejs-grid.edit-grid .e-headercelldiv {
     font-weight: 600;
@@ -364,6 +405,10 @@ mat-form-field.mat-form-field {
 
 .mar-t20 {
     margin-top: 20px;
+}
+
+#edit-view .e-upload .e-icons.e-file-delete-btn {
+	display: none;
 }
 
 #edit-view ejs-textbox input[readonly] {
