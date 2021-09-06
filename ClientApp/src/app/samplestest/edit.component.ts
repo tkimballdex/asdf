@@ -16,10 +16,20 @@ import { TenantService } from '../shared/tenant.service';
 export class SampleTestEditComponent extends PageComponent implements OnInit {
 	constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private tenant: TenantService, private repository: SampleTestRepository) {
         super();
-    }
+	}
+
+	public customers: any;
+	public customerId: string;
+	public sites: any;
+	public siteId: string;
+	public locations: any;
+	public locationId: any;
+	public samples: any;
 
     public record: any;
-    public deleteDialog: Dialog;
+	public deleteDialog: Dialog;
+	public variants: any;
+	public data: any;
 
     //-----------------------------------------------------------------------------------------
     async ngOnInit() {       
@@ -27,9 +37,19 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
         this.app = await this.appService.getData();
         this.privileges = this.app.privileges.tests;
 
-        var id = this.route.snapshot.paramMap.get('id');
-        this.record = await this.repository.get(id);
-        this.hideSpinner();        
+		var id = this.route.snapshot.paramMap.get('id');
+
+		if (id) {
+			this.data = await this.repository.get(id);
+			this.record = this.data.record;
+			this.record.variants = this.data.variants;
+		}
+		else {
+			this.record = {};
+			this.customers = await this.repository.listCustomers();
+		}
+
+		this.hideSpinner();        
     }
     //-----------------------------------------------------------------------------------------
     async save() {
@@ -43,12 +63,8 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
             this.showErrorMessage(returnValue.description);
         }
         else {
-            var success = returnValue && returnValue.updated;
+            var success = returnValue && returnValue.updated === true;
             this.showSaveMessage(success);
-
-            if (success) {
-                this.record = returnValue;
-            }
 
             if (success && add) {
                 setTimeout(() => this.router.navigate(['/auth/sampletest/edit', returnValue.id]), 1000);
@@ -77,6 +93,30 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
             this.showDeleteMessage(true);
             setTimeout(() => this.router.navigate(['/auth/sampletest/list']), 1000);
         }
-    }
+	}
+
+	async customerChange() {
+		this.sites = [];
+		this.siteId = null;
+		this.locations = null;
+		this.locationId = null;
+		this.samples = null;
+		this.record.sampleId = null;
+		this.sites = await this.repository.listSites(this.customerId);
+	}
+
+	async siteChange() {
+		this.locations = null;
+		this.locationId = null;
+		this.samples = null;
+		this.record.sampleId = null;
+		this.locations = await this.repository.listLocations(this.siteId);
+	}
+
+	async locationChange() {
+		this.samples = null;
+		this.record.sampleId = null;
+		this.samples = await this.repository.listSamples(this.locationId);
+	}
     //-----------------------------------------------------------------------------------------
 }
