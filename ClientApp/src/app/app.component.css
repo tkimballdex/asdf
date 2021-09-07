@@ -43,6 +43,11 @@
     cursor: pointer;
 }
 
+#header div.tenant-name {
+    font-size: 1.1em;
+    padding-left: 10px;
+}
+
 #header div.account-menu {
     float: right;
 }
