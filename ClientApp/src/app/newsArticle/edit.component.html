@@ -1,0 +1,100 @@
+<div id="edit-view" *ngIf="record && form" class="container-fluid" [formGroup]="form">
+    <div class="row d-flex align-items-end edit-header">
+        <div class="col-9 d-flex">
+            <span class="edit-header-icon"><i class="fas fa-calendar-alt"></i></span>
+            <span class="edit-header-title">News Article</span>
+        </div>
+        <div class="col-3 text-right">
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <ejs-dropdownlist [dataSource]="associations" [fields]="{ text: 'name', value: 'id' }" placeholder="Association" floatLabelType="Always" formControlName="associationID" allowFiltering="true"></ejs-dropdownlist>
+        </div>
+    </div>
+
+    <div class="row pad-t10">
+        <div class="col-md-8">
+            <ejs-textbox placeholder="Title *" floatLabelType="Always" formControlName="title"></ejs-textbox>
+        </div>
+    </div>
+
+    <div class="row pad-t10">
+        <div class="col-md-8">
+            <ejs-textbox placeholder="Description *" floatLabelType="Always" formControlName="description"></ejs-textbox>
+        </div>
+    </div>
+
+    <div class="row pad-t20">
+        <div class="col-md-8">
+            <ejs-richtexteditor placeholder="Body *" floatLabelType="Always" formControlName="body">
+            </ejs-richtexteditor>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12" id="toastdiv">
+            <ejs-toast #toast target="#toastdiv" width="100%"></ejs-toast>
+        </div>
+    </div>
+
+    <div class="row d-flex pad-t20" *ngIf="record.documents">
+        <div class="col-md-12 d-flex">
+            <ejs-tab id="edit-tab" class="e-fill">
+                <e-tabitems>
+                    <e-tabitem>
+                        <ng-template #headerText>
+                            <div>Documents</div>
+                        </ng-template>
+                        <ng-template #content>
+                            <div class="row pad-t10 pad-b10">
+                                <div class="col-md-8">
+                                    Upload documents
+                                    <ejs-uploader [autoUpload]='true' [asyncSettings]="uploadSettings" (uploading)="onUpload($event)" (success)="onUploadSuccess($event)"></ejs-uploader>
+                                </div>
+                            </div>
+
+                            <div class="row pad-b20">
+                                <div class="col-8 pad-t20">
+                                    <ejs-grid [dataSource]="record.documents" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="false">
+                                        <e-columns>
+                                            <e-column width="110" textAlign="center" headerText="Download">
+                                                <ng-template #template let-data>
+                                                    <a [routerLink]="" (click)="downloadDocument(data)" title="Download document"><i class="fas fa-file-download edit-icon"></i></a>
+                                                </ng-template>
+                                            </e-column>
+                                            <e-column field='createdDate' type='date' format='MM/dd/yyyy' headerText='Created On' width="120" VerticalAlignment="Top"></e-column>
+                                            <e-column field='name' headerText='Document'></e-column>
+                                            <e-column field='size' headerText='File Size' width="100"></e-column>
+                                            <e-column field='createdByName' headerText='Created By' width="150"></e-column>
+                                            <e-column width="90" headerTextAlign="center" textAlign="center" headerText="Delete">
+                                                <ng-template #template let-data>
+                                                    <a [routerLink]="" (click)="deleteDocument(data)" title="Delete document"><i class="fas fa-trash-alt"></i></a>
+                                                </ng-template>
+                                            </e-column>
+                                        </e-columns>
+                                    </ejs-grid>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </e-tabitem>
+                </e-tabitems>
+            </ejs-tab>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="row d-flex edit-footer">
+        <div class="col-md-6 d-flex justify-content-start">
+            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end">
+            <button ejs-button cssClass="e-danger" (click)="delete()" *ngIf="record.id" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
+            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/newsArticle/list']" [state]='{ formState: true }'>Close</button>
+        </div>
+    </div>
+</div>
+

@@ -87,6 +87,19 @@ export class PageComponent {
         hideSpinner(document.getElementById('wrapper'));
         this.loadEnd();
     }
+
+	public downloadFile(blob: any, filename: string) {
+		var url = URL.createObjectURL(blob);
+
+		var a = document.createElement("a");
+		document.body.appendChild(a);
+
+		a.href = url;
+		a.download = filename;
+		a.target = '_blank';
+		a.style.display = "none";
+		a.click();
+	}
 }
 
 class Notify {
