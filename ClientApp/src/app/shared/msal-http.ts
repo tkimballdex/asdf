@@ -11,4 +11,9 @@ export class MsalHttpClient {
         url = environment.webApi + url;
         return this.http.post<T>(url, data).toPromise();
     }
+
+	public postBlob(url: string, data?: any) {
+		url = environment.webApi + url;
+		return this.http.post(url, data, { responseType: 'blob' }).toPromise();
+	}
 }

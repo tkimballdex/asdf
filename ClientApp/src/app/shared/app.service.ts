@@ -4,6 +4,7 @@ import { MsalService } from '@azure/msal-angular';
 import { Subject, Observable } from 'rxjs';
 import { filter } from 'rxjs/operators'
 import { Tenant, TenantService } from './tenant.service';
+import { environment } from '../../environments/environment';
 
 export enum AppEventType {
     SendEmail = 'SendEmail',
@@ -51,6 +52,9 @@ export class AppRepository {
 
 @Injectable({ providedIn : 'root'})
 export class AppService {
+	public componentState = {};
+	public readonly GuidEmpty = "00000000-0000-0000-0000-000000000000";
+
 	constructor(private authService: MsalService, private dataRepository: AppRepository, private tenant: TenantService) {
 	}
 
@@ -80,6 +84,24 @@ export class AppService {
 	public get tenantId() {
 		return this.tenant.id;
 	}
+
+	public saveFormState(page: any) {
+		this.componentState[page.constructor.name] = page.form;
+	}
+
+	public getFormState(page: any) {
+		return this.componentState[page.constructor.name];
+	}
+
+	public async getAccessToken() {
+		return (await (this.authService.acquireTokenSilent({
+			scopes: [environment.scope]
+		}).toPromise())).accessToken;
+	}
+
+	public getFullUrl(path: string) {
+		return environment.webApi + path;
+	}
 }
 
 export interface PrivilegeSet {
@@ -91,17 +113,17 @@ export interface PrivilegeSet {
 }
 
 export interface Privileges {
-	managePrivileges: PrivilegeSet;
-	manageUsers: PrivilegeSet;
-	manageRoles: PrivilegeSet;
-	manageTenants: PrivilegeSet;
 	customers: PrivilegeSet;
-    sites: PrivilegeSet;
-    locations: PrivilegeSet;
-    vendors: PrivilegeSet;
-    testTypes: PrivilegeSet;
-    samples: PrivilegeSet;
-    tests: PrivilegeSet;
+	locations: PrivilegeSet;
+	managePrivileges: PrivilegeSet;
+	manageRoles: PrivilegeSet;
+	manageUsers: PrivilegeSet;
+	newsArticles: PrivilegeSet;
+	samples: PrivilegeSet;
+	sites: PrivilegeSet;
+	testTypes: PrivilegeSet;
+	tests: PrivilegeSet;
+	vendors: PrivilegeSet;
 }
 
 export interface MenuItem {

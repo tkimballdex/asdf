@@ -88,6 +88,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
 					{ path: 'customer', loadChildren: () => import('./customer/module').then(m => m.CustomerModule) },
 					{ path: 'site', loadChildren: () => import('./site/module').then(m => m.SiteModule) },
 					{ path: 'location', loadChildren: () => import('./location/module').then(m => m.LocationModule) },
+					{ path: 'newsArticle', loadChildren: () => import('./newsArticle/module').then(m => m.NewsArticleModule) },
 					{ path: 'vendor', loadChildren: () => import('./vendor/module').then(m => m.VendorModule) },
 					{ path: 'testtype', loadChildren: () => import('./testtype/module').then(m => m.TestTypeModule) },
 					{ path: 'sample', loadChildren: () => import('./sample/module').then(m => m.SampleModule) },

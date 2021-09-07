@@ -1,4 +1,4 @@
-<div id="edit-view" *ngIf="record" class="container-fluid">
+<div id="edit-view" *ngIf="record && form" class="container-fluid" [formGroup]="form">
     <div class="row d-flex align-items-center edit-header">
         <div class="col-md-6 d-flex">
             <span class="edit-header-icon"><i class="fal fa-vial"></i></span>
@@ -8,16 +8,14 @@
             
         </div>        
     </div>
+
     <div class="row pad-t20">
         <div class="col-md-6 col-lg-5 col-xl-4 pad-b20">
-
-            <ejs-textbox [formControl]="refno" [(value)]="record.referencerNo" placeholder="ReferenceNo" floatLabelType="Always" required></ejs-textbox>
-            <mat-error *ngIf="refno.invalid">{{getErrorMessage()}}</mat-error>
+            <ejs-textbox formControlName="referenceNo" placeholder="ReferenceNo" floatLabelType="Always" required></ejs-textbox>
         </div>
+
         <div class="col-md-6 col-lg-5 col-xl-4">    
-            
-            <ejs-datepicker [formControl]="date1" [(value)]="record.scheduledDate" placeholder="Scheduled Date" floatLabelType="Always" required></ejs-datepicker>
-            <mat-error *ngIf="date1.invalid">{{getErrorMessage1()}}</mat-error>
+            <ejs-datepicker formControlName="scheduledDate" placeholder="Scheduled Date" floatLabelType="Always" required></ejs-datepicker>
         </div>
     </div>
     
@@ -35,7 +33,7 @@
 
     <div class="row pad-t20">
         <div class="col-md-12">
-            <ejs-tab id="edit-tab" class="e-fill">
+            <ejs-tab id="edit-tab" class="e-fill" #editTab (created)="editTabCreated()">
                 <e-tabitems>
                       <e-tabitem>
                         <ng-template #headerText>
@@ -108,10 +106,10 @@
                                         <label for="sampleQc" class="edit-label">Sample QC Result</label>
                                     </div>
                                     <div class="col-md-12">
-                                        <mat-button-toggle-group id="sampleQc" class="threeStateToggleBtn" [(ngModel)]="record.qcpass">
+                                        <mat-button-toggle-group id="sampleQc" class="threeStateToggleBtn" formControlName="qcpass">
                                             <mat-button-toggle [value]="null">None</mat-button-toggle>
-                                            <mat-button-toggle [value]="true" [ngClass]="{ 'success-green': record.qcpass == true }">Pass</mat-button-toggle>
-                                            <mat-button-toggle [value]="false" [ngClass]="{ 'failure-red': record.qcpass == false }">Fail</mat-button-toggle>
+                                            <mat-button-toggle [value]="true" [ngClass]="{ 'success-green': this.form.get('qcpass').value === true }">Pass</mat-button-toggle>
+                                            <mat-button-toggle [value]="false" [ngClass]="{ 'failure-red': this.form.get('qcpass').value === false }">Fail</mat-button-toggle>
                                         </mat-button-toggle-group>
                                     </div>
                                 </div>   
@@ -132,12 +130,12 @@
                             <div class="col-md-6 d-flex align-items-center list-header">
                                 <span class="list-header-icon"><i class="fas fa-vials"></i></span>
                                 <span class="list-header-title">Tests</span>
-                                <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['/auth/sampletest/add']">+ Add</button></span>
+                                <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['/auth/sampletest/add', record.id]">+ Add</button></span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 pad-t20">
-                                <ejs-grid #grid [dataSource]='list' [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }'
+                                <ejs-grid #grid [dataSource]='tests' [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }'
                                           [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' [allowSorting]="true" [allowFiltering]="false">
                                     <e-columns>
                                         <e-column width="70" [visible]='true'>
@@ -148,7 +146,7 @@
                                         <e-column field='testType' headerText='Test Type'></e-column>
                                         <e-column field='result' headerText='Result'></e-column>
                                         <e-column field='rejected' headerText='Rejected'></e-column>
-                                        <e-column field='completedDate' type='date' [format]='dateFormat' headerText='Completed On' width='150'></e-column>
+                                        <e-column field='completedDate' type='date' format='MM/dd/yyyy' headerText='Completed On' width='150'></e-column>
                                     </e-columns>
                                 </ejs-grid>
                             </div>
@@ -164,10 +162,10 @@
           <div class="col-md-6 d-flex justify-content-start">
             <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
         </div>
-        <div class="col-sm-6 d-flex justify-content-end">
-            <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
-            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/sample/list']">Close</button>
-        </div>
+          <div class="col-sm-6 d-flex justify-content-end">
+              <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
+              <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/sample/list']">Close</button>
+          </div>
     </div>
     <ejs-toast #toast></ejs-toast>
 </div>

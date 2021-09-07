@@ -6,9 +6,8 @@ import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 import { AppService } from "../shared/app.service";
 import { PageComponent } from '../shared/page.component';
 import { SampleRepository } from './repository';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { DataComponent } from './data.component';
 import { TenantService } from '../shared/tenant.service';
 
 @Component({
@@ -21,28 +20,14 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		super();
 	}
 
+	public form: FormGroup;
 	public record: any;
 	public deleteDialog: Dialog;
+	public tests: any;
 
-	//----------------------------Reference No validations----------------------------//
+	@ViewChild('editTab')
+	public editTab: TabComponent;
 
-	public refno: FormControl;
-	public date1: FormControl;
-
-
-	getErrorMessage() {
-		if (this.refno.hasError('required')) {
-			return 'You must enter a reference number';
-		}
-		return '';
-	}
-
-	getErrorMessage1() {
-		if (this.date1.hasError('required')) {
-			return 'You must pick a date';
-		}
-		return '';
-	}
 	//-----------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.showSpinner();
@@ -50,35 +35,50 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.privileges = this.app.privileges.samples;
 		var id = this.route.snapshot.paramMap.get('id');
 		this.record = await this.repository.get(id);
+		this.tests = await this.repository.getTests(id);
 		this.hideSpinner();
 
-		this.refno = new FormControl(this.record.referenceNo, [Validators.required]);
-		this.date1 = new FormControl(this.record.scheduledDate, [Validators.required]);
+		this.record.collectedDate = this.record.completedDate ? new Date(this.record.collectedDate) : null;
+		this.record.shippedDate = this.record.shippedDate ? new Date(this.record.shippedDate) : null;
+		this.record.receivedDate = this.record.receivedDate ? new Date(this.record.receivedDate) : null;
+
+		this.form = new FormGroup({
+			referenceNo: new FormControl(this.record.referenceNo, [Validators.required]),
+			scheduledDate: new FormControl(this.record.scheduledDate ? new Date(this.record.scheduledDate) : null),
+			qcpass: new FormControl(this.record.qcpass)
+		});
+
+		console.dir(this.record)
+	}
+
+	editTabCreated() {
+		if (history.state.tests) {
+			this.editTab.selectedItem = 1;
+		}
 	}
 	//-----------------------------------------------------------------------------------------
 	async save() {
-		var add = !this.record.id;
-		this.showSpinner();
-		if (this.refno.hasError('required') || this.date1.hasError('required')) {
-			this.dialog.open(DataComponent);
-			this.hideSpinner();
-		} else {
-			this.record.referenceNo = this.refno.value;
-			this.record.scheduledDate = this.date1.value;
+		this.form.markAllAsTouched();
+
+		if (this.form.invalid) {
+			this.showErrorMessage("Please complete all required fields!")
+		}
+		else {
+			Object.assign(this.record, this.form.value);
+
+			var add = !this.record.id;
 			this.record.tenantId = this.tenant.id;
 
+			this.showSpinner();
 			var returnValue = await this.repository.save(this.record);
 			this.hideSpinner();
+
 			if (returnValue && returnValue.error) {
 				this.showErrorMessage(returnValue.description);
 			}
 			else {
 				var success = returnValue && returnValue.updated;
 				this.showSaveMessage(success);
-
-				if (success) {
-					this.record = returnValue;
-				}
 
 				if (success && add) {
 					setTimeout(() => this.router.navigate(['/auth/sample/edit', returnValue.id]), 1000);

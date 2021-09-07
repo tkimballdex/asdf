@@ -25,21 +25,21 @@ import { TabModule } from '@syncfusion/ej2-angular-navigations';
 import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 
 @NgModule({
-    declarations: [
-        SampleTestListComponent,
-        SampleTestEditComponent
-    ],
-    imports: [MatFormFieldModule, MatInputModule, MatIconModule, MatDatepickerModule, MatNativeDateModule, MatButtonModule, MatButtonToggleModule, MatSelectModule,
-        GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule, 
-        TabModule, DatePickerModule, SwitchModule, NumericTextBoxModule, MatButtonToggleModule, CommonModule,
-        RouterModule.forChild([
-            { path: 'list', component: SampleTestListComponent, canActivate: [MsalGuard] },
-            { path: 'add', component: SampleTestEditComponent, canActivate: [MsalGuard] },
-           { path: 'edit/:id', component: SampleTestEditComponent, canActivate: [MsalGuard] },
-        ])
-    ],
-    providers: [
-        PageService, SortService, EditService, ToolbarService, CommandColumnService, ExcelExportService
-    ]
+	declarations: [
+		SampleTestListComponent,
+		SampleTestEditComponent
+	],
+	imports: [MatFormFieldModule, MatInputModule, MatIconModule, MatDatepickerModule, MatNativeDateModule, MatButtonModule, MatButtonToggleModule, MatSelectModule,
+		GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule,
+		TabModule, DatePickerModule, SwitchModule, NumericTextBoxModule, MatButtonToggleModule, CommonModule,
+		RouterModule.forChild([
+			{ path: 'list', component: SampleTestListComponent, canActivate: [MsalGuard] },
+			{ path: 'add/:sampleId', component: SampleTestEditComponent, canActivate: [MsalGuard] },
+			{ path: 'edit/:id', component: SampleTestEditComponent, canActivate: [MsalGuard] },
+		])
+	],
+	providers: [
+		PageService, SortService, EditService, ToolbarService, CommandColumnService, ExcelExportService
+	]
 })
 export class SampleTestModule { }

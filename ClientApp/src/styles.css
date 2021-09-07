@@ -411,6 +411,10 @@ mat-form-field.mat-form-field {
 	display: none;
 }
 
+#edit-view ejs-textbox input[readonly] {
+	background-color: #eee;
+}
+
 #edit-view .ng-touched.ng-invalid input[type=text] {
 	background-color: indianred;
 }
