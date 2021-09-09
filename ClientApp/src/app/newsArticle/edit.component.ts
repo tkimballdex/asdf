@@ -48,6 +48,7 @@ export class NewsArticleEditComponent extends PageComponent implements OnInit {
 
 		this.form = this.fb.group({
 			title: [this.record.title, [Validators.required]],
+			description: [this.record.description, [Validators.required]],
 			body: [this.record.body, [Validators.required]]
 		});
 	}

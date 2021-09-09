@@ -29,10 +29,9 @@
                             <a [routerLink]="['../edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
                         </ng-template>
                     </e-column>
-                    <e-column field='tenant' headerText='Tenant'></e-column>
                     <e-column field='title' headerText='Title'></e-column>
-                    <e-column field='startDate' headerText='Start Date' type='date' format='MM/dd/yyyy' width="120"></e-column>
-                    <e-column field='endDate' headerText='End Date' type='date' format='MM/dd/yyyy' width="120"></e-column>
+                    <e-column field='publishedDate' headerText='Published On' type='date' format='MM/dd/yyyy' width="150"></e-column>
+                    <e-column field='createdDate' headerText='Created On' type='date' format='MM/dd/yyyy' width="120"></e-column>
                 </e-columns>
             </ejs-grid>
         </div>

@@ -9,12 +9,6 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-4">
-            <ejs-dropdownlist [dataSource]="associations" [fields]="{ text: 'name', value: 'id' }" placeholder="Association" floatLabelType="Always" formControlName="associationID" allowFiltering="true"></ejs-dropdownlist>
-        </div>
-    </div>
-
     <div class="row pad-t10">
         <div class="col-md-8">
             <ejs-textbox placeholder="Title *" floatLabelType="Always" formControlName="title"></ejs-textbox>
@@ -24,6 +18,12 @@
     <div class="row pad-t10">
         <div class="col-md-8">
             <ejs-textbox placeholder="Description *" floatLabelType="Always" formControlName="description"></ejs-textbox>
+        </div>
+    </div>
+
+    <div class="row pad-t10">
+        <div class="col-md-8">
+            <ejs-textbox placeholder="Link" floatLabelType="Always" [(value)]="record.link"></ejs-textbox>
         </div>
     </div>
 
