@@ -36,4 +36,10 @@ export class NewsArticleRepository {
 	public deleteDocument(id: string) {
 		return this.http.post<boolean>(`/newsArticleDocument/delete/${id}`);
 	}
+
+	public listCustomers() {
+		return this.http.post(`/customer/list`, {
+			tenantId: this.tenant.id
+		});
+	}
 }

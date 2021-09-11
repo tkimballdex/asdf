@@ -9,10 +9,11 @@ import { RadioButtonModule, ButtonModule, CheckBoxModule } from '@syncfusion/ej2
 import { GridModule, SortService, PageService, EditService, ToolbarService, CommandColumnService } from '@syncfusion/ej2-angular-grids';
 import { TextBoxModule, UploaderModule } from '@syncfusion/ej2-angular-inputs';
 import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
-import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
+import { DropDownListModule, ListBoxAllModule, CheckBoxSelectionService } from '@syncfusion/ej2-angular-dropdowns';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { TabModule } from '@syncfusion/ej2-angular-navigations';
 import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
+import { ListViewModule } from '@syncfusion/ej2-angular-lists';
 
 @NgModule({
 	declarations: [
@@ -21,7 +22,7 @@ import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
 	],
 	imports: [
 		FormsModule, ReactiveFormsModule, GridModule, RadioButtonModule, ButtonModule, TextBoxModule, UploaderModule, 
-		CheckBoxModule, ToastAllModule, DropDownListModule, DatePickerModule, CommonModule, TabModule, RichTextEditorModule,
+		CheckBoxModule, ToastAllModule, DropDownListModule, ListViewModule, ListBoxAllModule, DatePickerModule, CommonModule, TabModule, RichTextEditorModule,
 		RouterModule.forChild([
 			{ path: 'list', component: NewsArticleListComponent },
 			{ path: 'add', component: NewsArticleEditComponent },
@@ -29,7 +30,7 @@ import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
 		])
 	],
 	providers: [
-		PageService, SortService, EditService, ToolbarService, CommandColumnService
+		PageService, SortService, EditService, ToolbarService, CommandColumnService, CheckBoxSelectionService
 	]
 })
 export class NewsArticleModule { }

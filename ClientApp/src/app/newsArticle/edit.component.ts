@@ -26,6 +26,7 @@ export class NewsArticleEditComponent extends PageComponent implements OnInit {
 	public tenants: any;
 	public accessToken: string;
 	public documentUrl: string;
+	public customers: any;
 	@ViewChild('grid') public grid: GridComponent;
 	//-------------------------------------------------------------------------------------------
 	public uploadSettings = {
@@ -36,6 +37,7 @@ export class NewsArticleEditComponent extends PageComponent implements OnInit {
 		this.app = await this.appService.getData();
 		this.privileges = (await this.appService.getPrivileges()).newsArticles;
 		this.accessToken = await this.appService.getAccessToken();
+		this.customers = await this.repository.listCustomers();
 
 		var id = this.route.snapshot.paramMap.get('id');
 
