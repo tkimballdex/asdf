@@ -25,6 +25,7 @@ export class NewsArticleEditComponent extends PageComponent implements OnInit {
 	public propertyAccounts: any;
 	public tenants: any;
 	public accessToken: string;
+	public documentUrl: string;
 	@ViewChild('grid') public grid: GridComponent;
 	//-------------------------------------------------------------------------------------------
 	public uploadSettings = {
@@ -40,14 +41,18 @@ export class NewsArticleEditComponent extends PageComponent implements OnInit {
 
 		if (id) {
 			this.record = await this.repository.get(id);
-			this.setDocuments();
+			this.setDocument();
 		}
 		else {
-			this.record = {};
+			var today = new Date();
+			this.record = {
+				publishedDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+			};
 		}
 
 		this.form = this.fb.group({
 			title: [this.record.title, [Validators.required]],
+			publishedDate: [this.record.publishedDate, [Validators.required]],
 			description: [this.record.description, [Validators.required]],
 			body: [this.record.body, [Validators.required]]
 		});
@@ -101,17 +106,21 @@ export class NewsArticleEditComponent extends PageComponent implements OnInit {
 		}
 	}
 	//-------------------------------------------------------------------------------------------
-	async setDocuments() {
-		this.record.documents = await this.repository.listDocuments(this.record.id);
+	async setDocument() {
+		if (this.record.documentId) {
+			this.record.documentUrl = this.appService.getFullUrl(`/newsArticleDocument/get/${this.record.documentId}`);
+		}
 	}
 	//-------------------------------------------------------------------------------------------
 	onUpload(args: any) {
+		this.record.documentUrl = null;
 		args.currentRequest.setRequestHeader('Authorization', `Bearer ${this.accessToken}`);
 		args.customFormData = [{ 'id': this.record.id }, { 'name': args.fileData.name }];
 	}
 	//-------------------------------------------------------------------------------------------
 	async onUploadSuccess(e) {
-		this.setDocuments();
+		this.record = await this.repository.get(this.record.id);
+		this.setDocument();
 	}
 	//-------------------------------------------------------------------------------------------
 	async downloadDocument(file: any) {
@@ -122,7 +131,7 @@ export class NewsArticleEditComponent extends PageComponent implements OnInit {
 	async deleteDocument(file: any) {
 		var result = await this.repository.deleteDocument(file.id);
 		if (result === true) {
-			this.setDocuments();
+			this.setDocument();
 		}
 		else {
 			this.showErrorMessage("Unable to delete document");
