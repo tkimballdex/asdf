@@ -113,6 +113,9 @@ export class NewsArticleEditComponent extends PageComponent implements OnInit {
 		if (this.record.documentId) {
 			this.record.documentUrl = this.appService.getFullUrl(`/newsArticleDocument/get/${this.record.documentId}`);
 		}
+		else {
+			this.record.documentUrl = null;
+		}
 	}
 	//-------------------------------------------------------------------------------------------
 	onUpload(args: any) {
@@ -132,8 +135,9 @@ export class NewsArticleEditComponent extends PageComponent implements OnInit {
 	}
 	//-------------------------------------------------------------------------------------------
 	async deleteDocument() {
-		var result = await this.repository.deleteDocument(this.record.id);
+		var result = await this.repository.deleteDocument(this.record.documentId);
 		if (result === true) {
+			this.record.documentId = null;
 			this.setDocument();
 		}
 		else {
