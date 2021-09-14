@@ -83,7 +83,8 @@ export class NewsArticleEditComponent extends PageComponent implements OnInit {
 			this.showSaveMessage(success);
 
 			if (success && add) {
-				setTimeout(() => this.router.navigate(['/auth/newsArticle/edit', returnValue.id]), 1000);
+				this.record.id = returnValue.id;
+				history.pushState('', '', `/auth/newsArticle/edit/${returnValue.id}`);
 			}
 		}
 	}
@@ -130,8 +131,8 @@ export class NewsArticleEditComponent extends PageComponent implements OnInit {
 		this.downloadFile(blob, file.name);
 	}
 	//-------------------------------------------------------------------------------------------
-	async deleteDocument(file: any) {
-		var result = await this.repository.deleteDocument(file.id);
+	async deleteDocument() {
+		var result = await this.repository.deleteDocument(this.record.id);
 		if (result === true) {
 			this.setDocument();
 		}
