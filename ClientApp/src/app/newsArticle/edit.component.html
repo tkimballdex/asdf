@@ -46,12 +46,6 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-12" id="toastdiv">
-            <ejs-toast #toast target="#toastdiv" width="100%"></ejs-toast>
-        </div>
-    </div>
-
     <div class="row pad-t20" *ngIf="record.id">
         <div class="col-md-8">
             Upload document
@@ -79,5 +73,7 @@
             <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/newsArticle/list']" [state]='{ formState: true }'>Close</button>
         </div>
     </div>
+
+    <ejs-toast #toast></ejs-toast>
 </div>
 

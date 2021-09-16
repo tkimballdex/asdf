@@ -18,7 +18,8 @@ export class LocationEditComponent extends PageComponent implements OnInit {
         super();
     }
 
-    public record: any;
+	public record: any;
+	public data: any;
     public deleteDialog: Dialog;
     public form: FormGroup;
     @ViewChild('grid') public grid: GridComponent;
@@ -27,41 +28,57 @@ export class LocationEditComponent extends PageComponent implements OnInit {
         this.privileges = (await this.appService.getPrivileges()).locations;
         var id = this.route.snapshot.paramMap.get('id');
         this.showSpinner();
-        this.record = await this.repository.get(id);
-        this.hideSpinner();
 
-        if (id == null) {
-            this.record.siteId = this.route.snapshot.paramMap.get('siteId');
-        }
+		if (id == null) {
+			this.record = { siteId: this.route.snapshot.paramMap.get('siteId') };
+		}
+		else {
+			this.record = await this.repository.get(id);
+		}
+
+		this.record.serviceStartDate = this.appService.getNullableDate(this.record.serviceStartDate);
+		this.record.serviceEndDate = this.appService.getNullableDate(this.record.serviceEndDate);
+		this.data = await this.repository.getData(this.record.siteId);
+		this.hideSpinner();
 
         this.form = this.fb.group({
             name: [this.record.name, [Validators.required]]
         })
     }
 
-    async save() {
-        var add = !this.record.id;
+	async save() {
+		this.form.markAllAsTouched();
+
+		if (this.form.invalid) {
+			this.showErrorMessage("Please complete all required fields!");
+			return;
+		}
+
+		Object.assign(this.record, this.form.value);
+
+		var add = !this.record.id;
 		this.record.tenantId = this.tenant.id;
-        this.showSpinner();
-        var returnValue = await this.repository.save(this.record);
-        this.hideSpinner();
+		this.showSpinner();
+		var returnValue = await this.repository.save(this.record);
+		this.hideSpinner();
 
-        if (returnValue && returnValue.error) {
-            this.showErrorMessage(returnValue.description);
-        }
-        else {
-            var success = returnValue && returnValue.updated;
-            this.showSaveMessage(success);
+		if (returnValue && returnValue.error) {
+			this.showErrorMessage(returnValue.description);
+		}
+		else {
+			var success = returnValue && returnValue.updated;
+			this.showSaveMessage(success);
 
-            if (success) {
-                this.record = returnValue;
-            }
+			if (success) {
+				this.record = returnValue;
+			}
 
-            if (success && add) {
-                setTimeout(() => this.router.navigate(['/auth/location/edit', returnValue.id]), 1000);
-            }
-        }
-    }
+			if (success && add) {
+				this.record.id = returnValue.id;
+				history.pushState('', '', `/auth/location/edit/${returnValue.id}`);
+			}
+		}
+	}
 
     delete() {
         this.deleteDialog = DialogUtility.confirm({

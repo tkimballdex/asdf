@@ -102,6 +102,10 @@ export class AppService {
 	public getFullUrl(path: string) {
 		return environment.webApi + path;
 	}
+
+	public getNullableDate(date: any) {
+		return date ? new Date(date) : null;
+	}
 }
 
 export interface PrivilegeSet {

@@ -11,14 +11,13 @@
 
     <div class="row pad-t10">
         <div class="col-md-12">
-            <div *ngIf="this.form.get('name').touched && this.form.get('name').invalid">Name is required</div>
             <ejs-textbox formControlName="name" required placeholder="Name *" floatLabelType="Always" enableRtl></ejs-textbox>
         </div>
     </div>
 
     <div class="row d-flex pad-t20">
         <div class="col-md-12 d-flex">
-            <ejs-tab id="edit-tab" class="e-fill">
+            <ejs-tab id="edit-tab" class="e-fill" (created)="editTabCreated()" #editTab>
                 <e-tabitems>
                     <e-tabitem>
                         <ng-template #headerText>

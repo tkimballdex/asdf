@@ -6,6 +6,7 @@ import { AppService } from "../shared/app.service";
 import { PageComponent } from '../shared/page.component';
 import { TenantService } from '../shared/tenant.service';
 import { SiteRepository } from './repository';
+import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 
 @Component({
     selector: 'site-edit',
@@ -20,6 +21,16 @@ export class SiteEditComponent extends PageComponent implements OnInit {
     public record: any;
     public deleteDialog: Dialog;
     public form: FormGroup;
+
+	@ViewChild('editTab')
+	public editTab: TabComponent;
+
+	editTabCreated() {
+		console.dir(history.state);
+		if (history.state.locations) {
+			this.editTab.selectedItem = 1;
+		}
+	}
 
     async ngOnInit() {
         this.showSpinner();

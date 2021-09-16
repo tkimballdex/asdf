@@ -21,4 +21,8 @@ export class LocationRepository {
     public list(filter: any) {
         return this.http.post(`/location/list`, filter);
     }
+
+	public getData(siteId: any) {
+		return this.http.post(`/location/getData/${siteId}`);
+	}
 }
