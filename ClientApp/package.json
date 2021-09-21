@@ -7,6 +7,7 @@
 		"build": "ng build",
 		"build:ssr": "ng run InteromePhWebApp:server:dev",
 		"build-staging": "ng build --configuration=staging",
+		"build-prod": "ng build --configuration=production",
 		"test": "ng test",
 		"lint": "ng lint",
 		"e2e": "ng e2e"

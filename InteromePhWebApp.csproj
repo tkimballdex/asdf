@@ -41,7 +41,8 @@
 
 	<Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
 		<!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
-		<Exec WorkingDirectory="$(SpaRoot)" Command="ng build --configuration production" />
+		<Exec WorkingDirectory="$(SpaRoot)" Command="npm run build-prod" Condition="'$(Configuration)' == 'Release'" />
+		<Exec WorkingDirectory="$(SpaRoot)" Command="npm run build-staging" Condition="'$(Configuration)' == 'Staging'" />
 
 		<!-- Include the newly-built files in the publish output -->
 		<ItemGroup>
