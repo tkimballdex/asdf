@@ -25,12 +25,17 @@ export class NewsArticleEditComponent extends PageComponent implements OnInit {
 	public propertyAccounts: any;
 	public tenants: any;
 	public accessToken: string;
-	public documentUrl: string;
+	public documents: any;
 	public customers: any;
 	@ViewChild('grid') public grid: GridComponent;
 	//-------------------------------------------------------------------------------------------
 	public uploadSettings = {
 		saveUrl: this.appService.getFullUrl('/newsArticleDocument/upload')
+	};
+
+	public insertImageSettings = {
+		saveUrl: this.appService.getFullUrl('/newsArticleDocument/upload'),
+		path: this.appService.getFullUrl('/newsArticleDocument/image') + '/'
 	};
 	//-------------------------------------------------------------------------------------------
 	async ngOnInit() {
@@ -43,7 +48,7 @@ export class NewsArticleEditComponent extends PageComponent implements OnInit {
 
 		if (id) {
 			this.record = await this.repository.get(id);
-			this.setDocument();
+			this.setDocuments();
 		}
 		else {
 			var today = new Date();
@@ -109,24 +114,17 @@ export class NewsArticleEditComponent extends PageComponent implements OnInit {
 		}
 	}
 	//-------------------------------------------------------------------------------------------
-	async setDocument() {
-		if (this.record.documentId) {
-			this.record.documentUrl = this.appService.getFullUrl(`/newsArticleDocument/get/${this.record.documentId}`);
-		}
-		else {
-			this.record.documentUrl = null;
-		}
+	async setDocuments() {
+		this.documents = await this.repository.listDocuments(this.record.id);
 	}
 	//-------------------------------------------------------------------------------------------
 	onUpload(args: any) {
-		this.record.documentUrl = null;
 		args.currentRequest.setRequestHeader('Authorization', `Bearer ${this.accessToken}`);
 		args.customFormData = [{ 'id': this.record.id }, { 'name': args.fileData.name }];
 	}
 	//-------------------------------------------------------------------------------------------
 	async onUploadSuccess(e) {
-		this.record = await this.repository.get(this.record.id);
-		this.setDocument();
+		await this.setDocuments();
 	}
 	//-------------------------------------------------------------------------------------------
 	async downloadDocument(file: any) {
@@ -134,15 +132,23 @@ export class NewsArticleEditComponent extends PageComponent implements OnInit {
 		this.downloadFile(blob, file.name);
 	}
 	//-------------------------------------------------------------------------------------------
-	async deleteDocument() {
-		var result = await this.repository.deleteDocument(this.record.documentId);
+	async deleteDocument(file: any) {
+		var result = await this.repository.deleteDocument(file.id);
 		if (result === true) {
-			this.record.documentId = null;
-			this.setDocument();
+			await this.setDocuments();
 		}
 		else {
 			this.showErrorMessage("Unable to delete document");
 		}
 	}	
+	//-------------------------------------------------------------------------------------------
+	onImageUpload(args: any) {
+		args.currentRequest.setRequestHeader('Authorization', `Bearer ${this.accessToken}`);
+		args.customFormData = [{ 'id': this.record.id }, { 'name': args.fileData.name }, { 'imageUpload': 1 }];
+	}
+	//-------------------------------------------------------------------------------------------
+	onImageUploadSuccess(args: any) {
+		args.file.name = args.file.id = JSON.parse(args.e.currentTarget.response);
+	}
 	//-------------------------------------------------------------------------------------------
 }
