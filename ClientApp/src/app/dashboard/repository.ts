@@ -52,4 +52,8 @@ export class DashboardRepository {
 	public positiveCases(filter: any) {
 		return this.http.post<any>(`/dashboard/positiveCases`, filter);
 	}
+
+	public positiveNegativeCases(filter: any) {
+		return this.http.post<any>(`/dashboard/positiveNegativeCases`, filter);
+	}
 }

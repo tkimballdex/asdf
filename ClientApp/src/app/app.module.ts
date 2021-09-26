@@ -3,8 +3,6 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
-import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -17,11 +15,13 @@ import { SplashComponent } from './home/splash.component';
 import { MsalModule, MsalGuard, MsalInterceptor } from '@azure/msal-angular';
 import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 
+import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
+import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
 import { GridModule } from '@syncfusion/ej2-angular-grids';
 import { ListViewAllModule } from '@syncfusion/ej2-angular-lists';
 import { DropDownListModule, ComboBoxModule } from '@syncfusion/ej2-angular-dropdowns';
 import { SidebarModule, MenuAllModule, TreeViewAllModule, MenuModule } from '@syncfusion/ej2-angular-navigations';
-import { DropDownButtonModule, SplitButtonModule, ProgressButtonModule } from '@syncfusion/ej2-angular-splitbuttons';
+import { DropDownButtonModule } from '@syncfusion/ej2-angular-splitbuttons';
 import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 import { DialogModule } from '@syncfusion/ej2-angular-popups';
 import { DashboardLayoutModule } from '@syncfusion/ej2-angular-layouts';

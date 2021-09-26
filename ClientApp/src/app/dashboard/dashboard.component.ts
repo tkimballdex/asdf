@@ -21,6 +21,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.customers = await this.repository.listCustomers();
 		this.variants = [];
 		this.sites = [];
+		this.analyteId = this.app.analytes[0].id;
 
 		var startDate = new Date();
 		startDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() - 14);
@@ -36,10 +37,14 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	@ViewChild('chartPositiveCases')
 	public chartPositiveCases: ChartComponent;
 
+	@ViewChild('chartPositiveNegativeCases')
+	public chartPositiveNegativeCases: ChartComponent;
+
 	@ViewChild('tab')
 	public tab: TabComponent;
 
 	public selectedSites: any;
+	public selectedSitesPositiveNegative: any;
 	public customers: any;
 	public customerId: string;
 	public variantId: string;
@@ -77,6 +82,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.locationId = null;
 		this.sites = await this.repository.listSites(this.customerId);
 		this.selectedSites = this.sites.map(x => x.id);
+		this.selectedSitesPositiveNegative = this.sites.map(x => x.id);
 		this.setGraphData();
 	}
 
@@ -145,6 +151,27 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.chartPositiveCases.addSeries(graphData);
 	}
 
+	async setGraphDataByPositiveNegativeCases() {
+		if (!this.chartPositiveNegativeCases) return;
+
+		this.chartPositiveNegativeCases.clearSeries();
+		if (!this.customerId || !this.analyteId) return;
+
+		let graphData = await this.repository.positiveNegativeCases({
+			customerId: this.customerId,
+			analyteId: this.analyteId,
+			startDate: this.startDate,
+			endDate: this.endDate,
+			sites: this.selectedSitesPositiveNegative
+		});
+
+		graphData = [
+			{ type: 'StackingColumn', xName: 'x', yName: 'positive', dataSource: graphData, name: 'Positive Cases' },
+			{ type: 'StackingColumn', xName: 'x', yName: 'negative', dataSource: graphData, name: 'Negative Cases' }
+		];
+		this.chartPositiveNegativeCases.addSeries(graphData);
+	}
+
 	setGraphData() {
 		var $this = this;
 		setTimeout(function () {
@@ -156,6 +183,9 @@ export class DashboardComponent extends PageComponent implements OnInit {
 			}
 			else if ($this.tab.selectedItem == 2) {
 				$this.setGraphDataByPositiveCases();
+			}
+			else if ($this.tab.selectedItem == 3) {
+				$this.setGraphDataByPositiveNegativeCases();
 			}
 		}, 10);
 	}
