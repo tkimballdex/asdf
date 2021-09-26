@@ -40,11 +40,15 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	@ViewChild('chartPositiveNegativeCases')
 	public chartPositiveNegativeCases: ChartComponent;
 
+	@ViewChild('chartPositiveSites')
+	public chartPositiveSites: ChartComponent;
+
 	@ViewChild('tab')
 	public tab: TabComponent;
 
 	public selectedSites: any;
 	public selectedSitesPositiveNegative: any;
+	public selectedSitesPositive: any;
 	public customers: any;
 	public customerId: string;
 	public variantId: string;
@@ -83,6 +87,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.sites = await this.repository.listSites(this.customerId);
 		this.selectedSites = this.sites.map(x => x.id);
 		this.selectedSitesPositiveNegative = this.sites.map(x => x.id);
+		this.selectedSitesPositive = this.sites.map(x => x.id);
 		this.setGraphData();
 	}
 
@@ -172,6 +177,24 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.chartPositiveNegativeCases.addSeries(graphData);
 	}
 
+	async setGraphDataPositiveSites() {
+		if (!this.chartPositiveSites) return;
+
+		this.chartPositiveSites.clearSeries();
+		if (!this.customerId || !this.analyteId) return;
+
+		let data = await this.repository.positiveSiteStack({
+			customerId: this.customerId,
+			analyteId: this.analyteId,
+			startDate: this.startDate,
+			endDate: this.endDate,
+			sites: this.selectedSitesPositive
+		});
+
+		let graphData: any = data.map(x => { return { type: 'StackingColumn', xName: 'x', yName: 'y', name: x.siteName, dataSource: x.results } });
+		this.chartPositiveSites.addSeries(graphData);
+	}
+
 	setGraphData() {
 		var $this = this;
 		setTimeout(function () {
@@ -186,6 +209,9 @@ export class DashboardComponent extends PageComponent implements OnInit {
 			}
 			else if ($this.tab.selectedItem == 3) {
 				$this.setGraphDataByPositiveNegativeCases();
+			}
+			else if ($this.tab.selectedItem == 4) {
+				$this.setGraphDataPositiveSites();
 			}
 		}, 10);
 	}
