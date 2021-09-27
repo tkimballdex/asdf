@@ -4,19 +4,23 @@ import { AppService } from '../shared/app.service';
 import { PageComponent } from '../shared/page.component';
 import { DashboardRepository } from './repository';
 import { TabComponent } from '@syncfusion/ej2-angular-navigations';
+import { CheckBoxSelectionService } from '@syncfusion/ej2-angular-dropdowns';
 
 @Component({
 	selector: 'app-dashboard',
 	templateUrl: './dashboard.component.html',
 	styleUrls: ['./dashboard.component.scss'],
-	encapsulation: ViewEncapsulation.None
+	encapsulation: ViewEncapsulation.None,
+	providers: [CheckBoxSelectionService]
 })
 export class DashboardComponent extends PageComponent implements OnInit {
+	public mode: string;
 	constructor(private repository: DashboardRepository, private appService: AppService) {
 		super();
 	}
 
 	async ngOnInit() {
+		this.mode = 'CheckBox';
 		this.app = await this.appService.getData();
 		this.customers = await this.repository.listCustomers();
 		this.variants = [];
@@ -64,6 +68,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	public cellSpacing: number[] = [10, 10];
 	public cellAspectRatio: number = 70 / 25;
 	public allowDragging: boolean = false;
+	public placeholder: string = 'Site';
 
 	public primaryXAxis: Object = {
 		valueType: 'Category'
@@ -171,8 +176,9 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		});
 
 		graphData = [
-			{ type: 'StackingColumn', xName: 'x', yName: 'positive', dataSource: graphData, name: 'Positive Cases' },
-			{ type: 'StackingColumn', xName: 'x', yName: 'negative', dataSource: graphData, name: 'Negative Cases' }
+			{ type: 'StackingColumn', xName: 'x', yName: 'negative', dataSource: graphData, name: 'Negative Cases' },
+			{ type: 'StackingColumn', xName: 'x', yName: 'positive', dataSource: graphData, name: 'Positive Cases' }
+			
 		];
 		this.chartPositiveNegativeCases.addSeries(graphData);
 	}
