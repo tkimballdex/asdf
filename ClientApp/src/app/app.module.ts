@@ -101,7 +101,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
 			}
 		], { relativeLinkResolution: 'legacy' }),
 		MsalModule,
-		SidebarModule, MenuAllModule, DropDownListModule, MultiSelectAllModule, TreeViewAllModule, ListViewAllModule, MenuModule, 
+		SidebarModule, MenuAllModule, DropDownListModule, MultiSelectModule, TreeViewAllModule, ListViewAllModule, MenuModule, 
 		DashboardLayoutModule, DropDownButtonModule, GridModule, ComboBoxModule, SwitchModule, CheckBoxModule, ButtonModule, 
 		DialogModule, FontAwesomeModule, BrowserAnimationsModule, ToastAllModule
 	],
