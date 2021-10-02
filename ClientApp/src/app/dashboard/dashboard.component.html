@@ -97,7 +97,7 @@
                             <div id="list-view" class="container-fluid pad-t20">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <ejs-listbox [dataSource]="sites" [fields]="{ text: 'name', value: 'id' }" [(value)]="selectedSites" placeholder="Site" floatLabelType="Always" (change)="setGraphData()" [selectionSettings]="{ showSelectAll: true, showCheckbox: true }"></ejs-listbox>
+                                        <ejs-multiselect [dataSource]='sites' [fields]="{ text: 'name', value: 'id' }" [(value)]="selectedSites" [mode]='mode' [placeholder]='placeholder' floatLabelType="Always" showClearButton='false' showSelectAll='true' showDropDownIcon='true' (change)="setGraphData()"></ejs-multiselect>
                                     </div>
                                 </div>
                                 <div class="row pad-t20">
@@ -131,7 +131,7 @@
                             <div id="list-view" class="container-fluid pad-t20">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <ejs-listbox [dataSource]="sites" [fields]="{ text: 'name', value: 'id' }" [(value)]="selectedSitesPositiveNegative" placeholder="Site" floatLabelType="Always" (change)="setGraphData()" [selectionSettings]="{ showSelectAll: true, showCheckbox: true }"></ejs-listbox>
+                                        <ejs-multiselect [dataSource]='sites' [fields]="{ text: 'name', value: 'id' }" [(value)]="selectedSitesPositiveNegative" [mode]='mode' [placeholder]='placeholder' floatLabelType="Always" showClearButton='false' showSelectAll='true' showDropDownIcon='true' (change)="setGraphData()"></ejs-multiselect>
                                     </div>
                                 </div>
                                 <div class="row pad-t20">
@@ -165,7 +165,7 @@
                             <div id="list-view" class="container-fluid pad-t20">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <ejs-listbox [dataSource]="sites" [fields]="{ text: 'name', value: 'id' }" [(value)]="selectedSitesPositive" placeholder="Site" floatLabelType="Always" (change)="setGraphData()" [selectionSettings]="{ showSelectAll: true, showCheckbox: true }"></ejs-listbox>
+                                        <ejs-multiselect [dataSource]='sites' [fields]="{ text: 'name', value: 'id' }" [(value)]="selectedSitesPositive" [mode]='mode' [placeholder]='placeholder' floatLabelType="Always" showClearButton='false' showSelectAll='true' showDropDownIcon='true' (change)="setGraphData()"></ejs-multiselect>
                                     </div>
                                 </div>
                                 <div class="row pad-t20">

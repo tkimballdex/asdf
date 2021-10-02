@@ -19,10 +19,10 @@ import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
 import { GridModule } from '@syncfusion/ej2-angular-grids';
 import { ListViewAllModule } from '@syncfusion/ej2-angular-lists';
-import { DropDownListModule, ComboBoxModule } from '@syncfusion/ej2-angular-dropdowns';
+import { DropDownListModule, ComboBoxModule, MultiSelectModule } from '@syncfusion/ej2-angular-dropdowns';
 import { SidebarModule, MenuAllModule, TreeViewAllModule, MenuModule } from '@syncfusion/ej2-angular-navigations';
 import { DropDownButtonModule } from '@syncfusion/ej2-angular-splitbuttons';
-import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
+import { SwitchModule, CheckBoxModule, ButtonModule } from '@syncfusion/ej2-angular-buttons';
 import { DialogModule } from '@syncfusion/ej2-angular-popups';
 import { DashboardLayoutModule } from '@syncfusion/ej2-angular-layouts';
 
@@ -101,8 +101,9 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
 			}
 		], { relativeLinkResolution: 'legacy' }),
 		MsalModule,
-		SidebarModule, MenuAllModule, DropDownListModule, TreeViewAllModule, ListViewAllModule, MenuModule, DashboardLayoutModule,
-		DropDownButtonModule, GridModule, ComboBoxModule, SwitchModule, DialogModule, FontAwesomeModule, BrowserAnimationsModule, ToastAllModule
+		SidebarModule, MenuAllModule, DropDownListModule, MultiSelectModule, TreeViewAllModule, ListViewAllModule, MenuModule, 
+		DashboardLayoutModule, DropDownButtonModule, GridModule, ComboBoxModule, SwitchModule, CheckBoxModule, ButtonModule, 
+		DialogModule, FontAwesomeModule, BrowserAnimationsModule, ToastAllModule
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 	providers: [
