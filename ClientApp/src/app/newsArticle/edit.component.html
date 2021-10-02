@@ -11,6 +11,12 @@
 
     <div class="row pad-t10">
         <div class="col-md-8">
+            <ejs-dropdownlist [dataSource]="app.analytes" [fields]="{ text: 'name', value: 'id' }" formControlName="analyteId" placeholder="Analyte" floatLabelType="Always"></ejs-dropdownlist>
+        </div>
+    </div>
+
+    <div class="row pad-t10">
+        <div class="col-md-8">
             <ejs-textbox placeholder="Title *" floatLabelType="Always" formControlName="title"></ejs-textbox>
         </div>
     </div>
