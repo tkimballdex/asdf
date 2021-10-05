@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation, OnInit, ViewChild, Injectable } from '@angular/core';
+import { GoogleMap } from '@angular/google-maps';
 import { ChartComponent } from '@syncfusion/ej2-angular-charts';
 import { AppService } from '../shared/app.service';
 import { PageComponent } from '../shared/page.component';
@@ -221,5 +222,63 @@ export class DashboardComponent extends PageComponent implements OnInit {
 			}
 		}, 10);
 	}
+
+	async siteMapChange() {
+		var site = await this.repository.getSite(this.siteId);
+
+		var googleMap = this.map.googleMap;
+		var markers = [];
+
+		markers.push(new google.maps.Marker({
+			position: { lat: site.latitude, lng: site.longitude },
+			map: googleMap,
+			title: site.name,
+			label: site.name
+		}));
+
+		site.locations.forEach(function (x) {
+			if (x.latitude && x.longitude) {
+				markers.push(new google.maps.Marker({
+					position: { lat: x.latitude, lng: x.longitude },
+					map: googleMap,
+					title: x.name,
+					label: x.name
+				}));
+			}
+		});
+
+		if (site.boundaries) {
+			new google.maps.Polygon({
+				map: googleMap,
+				paths: site.boundaries,
+				strokeColor: "#FF0000",
+				strokeOpacity: 0.8,
+				strokeWeight: 2,
+				fillColor: "#FF0000",
+				fillOpacity: 0.35
+			});
+		}
+
+		googleMap.fitBounds(this.getBounds(markers));
+	}
+
+	getBounds(markers) {
+		let north;
+		let south;
+		let east;
+		let west;
+
+		for (const marker of markers) {
+			north = north !== undefined ? Math.max(north, marker.position.lat()) : marker.position.lat();
+			south = south !== undefined ? Math.min(south, marker.position.lat()) : marker.position.lat();
+			east = east !== undefined ? Math.max(east, marker.position.lng()) : marker.position.lng();
+			west = west !== undefined ? Math.min(west, marker.position.lng()) : marker.position.lng();
+		};
+
+		return { north, south, east, west };
+	}
+
+	mapOptions: google.maps.MapOptions;
+	@ViewChild(GoogleMap) map!: GoogleMap;
 }
 

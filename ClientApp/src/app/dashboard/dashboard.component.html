@@ -11,7 +11,7 @@
         </div>
         <div class="col-md-2">
             <ejs-datepicker [(value)]="endDate" placeholder="End Date" floatLabelType="Always" (change)="setGraphData()"></ejs-datepicker>
-        </div> 
+        </div>
     </div>
 
     <div class="row d-flex pad-t20">
@@ -190,18 +190,27 @@
                             </div>
                         </ng-template>
                     </e-tabitem>
+
+                    <e-tabitem>
+                        <ng-template #headerText>
+                            <div>Site Map</div>
+                        </ng-template>
+                        <ng-template #content>
+                            <div id="list-view" class="container-fluid pad-t20">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <ejs-dropdownlist [dataSource]="sites" [fields]="{ text: 'name', value: 'id' }" [(value)]="siteId" placeholder="Site" floatLabelType="Always" (change)="siteMapChange()"></ejs-dropdownlist>
+                                    </div>
+                                </div>
+                                <div class="row pad-t20">
+                                    <google-map height="600px" width="1000px" [options]="mapOptions">
+                                    </google-map>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </e-tabitem>
                 </e-tabitems>
             </ejs-tab>
         </div>
     </div>
-
-</div>
-
-<div class="control-section">
-    
-</div>
-
-
-<div class="control-section">
-    
 </div>

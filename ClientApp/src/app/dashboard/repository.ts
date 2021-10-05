@@ -20,6 +20,10 @@ export class DashboardRepository {
 		});
 	}
 
+	public getSite(id: string) {
+		return this.http.post<any>(`/site/getCoordinates/${id}`);
+	}
+
 	public listLocations(siteId: string) {
 		return this.http.post(`/location/list`, {
 			tenantId: this.tenant.id,

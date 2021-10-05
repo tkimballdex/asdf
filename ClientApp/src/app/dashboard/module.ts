@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { GoogleMapsModule } from '@angular/google-maps';
 import { DashboardComponent } from './dashboard.component';
 import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { RouterModule } from '@angular/router';
@@ -27,6 +28,7 @@ import { PieSeriesService, AccumulationDataLabelService } from '@syncfusion/ej2-
 	],
 	imports: [
 		CommonModule,
+		GoogleMapsModule,
 		ChartModule,
 		GridModule,
 		ChartAllModule,
