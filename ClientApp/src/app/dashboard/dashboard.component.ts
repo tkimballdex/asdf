@@ -224,26 +224,32 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	}
 
 	async siteMapChange() {
-		var site = await this.repository.getSite(this.siteId);
+		var site = await this.repository.getSite({ siteId: this.siteId, analyteId: this.analyteId, startDate: this.startDate, endDate: this.endDate });
 
 		var googleMap = this.map.googleMap;
 		var markers = [];
 
-		markers.push(new google.maps.Marker({
-			position: { lat: site.latitude, lng: site.longitude },
-			map: googleMap,
-			title: site.name,
-			label: site.name
-		}));
+		const infoWindow = new google.maps.InfoWindow({
+			content: 'WASHINGTON — President Biden and Democratic leaders in Congress in recent days have slashed their ambitions for a major expansion of America’s social safety net to a package worth $2.3 trillion or less, which will force hard choices about how to scale back a proposal that the president hopes will be transformational.'
+		});
 
 		site.locations.forEach(function (x) {
 			if (x.latitude && x.longitude) {
-				markers.push(new google.maps.Marker({
+				const marker = new google.maps.Marker({
 					position: { lat: x.latitude, lng: x.longitude },
 					map: googleMap,
 					title: x.name,
-					label: x.name
-				}));
+					label: x.name,
+					icon: {
+						url: `http://maps.google.com/mapfiles/ms/icons/${x.positive ? 'red' : 'blue'}-dot.png`
+					}
+				});
+
+				markers.push(marker);
+
+				marker.addListener('click', () => {
+					infoWindow.open(googleMap, marker);
+				});
 			}
 		});
 

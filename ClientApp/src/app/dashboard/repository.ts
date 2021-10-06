@@ -20,8 +20,8 @@ export class DashboardRepository {
 		});
 	}
 
-	public getSite(id: string) {
-		return this.http.post<any>(`/site/getCoordinates/${id}`);
+	public getSite(filter: any) {
+		return this.http.post<any>(`/dashboard/siteMap`, filter);
 	}
 
 	public listLocations(siteId: string) {
