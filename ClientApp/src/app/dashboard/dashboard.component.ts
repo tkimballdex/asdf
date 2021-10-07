@@ -220,18 +220,37 @@ export class DashboardComponent extends PageComponent implements OnInit {
 			else if ($this.tab.selectedItem == 4) {
 				$this.setGraphDataPositiveSites();
 			}
+			else if ($this.tab.selectedItem == 5) {
+				$this.siteMapChange();
+			}
 		}, 10);
 	}
 
+	markers: google.maps.Marker[] = [];
+	polygons: google.maps.Polygon[] = [];
+
 	async siteMapChange() {
-		var site = await this.repository.getSite({ siteId: this.siteId, analyteId: this.analyteId, startDate: this.startDate, endDate: this.endDate });
+		if (!this.siteId) return;
+
+		var site = await this.repository.getSite({ siteId: this.siteId, analyteId: this.analyteId, date: this.startDate });
 
 		var googleMap = this.map.googleMap;
-		var markers = [];
 
 		const infoWindow = new google.maps.InfoWindow({
 			content: 'WASHINGTON — President Biden and Democratic leaders in Congress in recent days have slashed their ambitions for a major expansion of America’s social safety net to a package worth $2.3 trillion or less, which will force hard choices about how to scale back a proposal that the president hopes will be transformational.'
 		});
+
+		this.markers.forEach(function (x) {
+			x.setMap(null);
+		});
+
+		this.polygons.forEach(function (x) {
+			x.setMap(null);
+		});
+
+		this.markers = [];
+		this.polygons = [];
+		var $this = this;
 
 		site.locations.forEach(function (x) {
 			if (x.latitude && x.longitude) {
@@ -241,11 +260,11 @@ export class DashboardComponent extends PageComponent implements OnInit {
 					title: x.name,
 					label: x.name,
 					icon: {
-						url: `http://maps.google.com/mapfiles/ms/icons/${x.positive ? 'red' : 'blue'}-dot.png`
+						url: `http://maps.google.com/mapfiles/ms/icons/${x.positive ? 'red' : x.negative ? 'blue' : 'yellow'}-dot.png`
 					}
 				});
 
-				markers.push(marker);
+				$this.markers.push(marker);
 
 				marker.addListener('click', () => {
 					infoWindow.open(googleMap, marker);
@@ -254,7 +273,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		});
 
 		if (site.boundaries) {
-			new google.maps.Polygon({
+			this.polygons.push(new google.maps.Polygon({
 				map: googleMap,
 				paths: site.boundaries,
 				strokeColor: "#FF0000",
@@ -262,10 +281,12 @@ export class DashboardComponent extends PageComponent implements OnInit {
 				strokeWeight: 2,
 				fillColor: "#FF0000",
 				fillOpacity: 0.35
-			});
+			}));
 		}
 
-		googleMap.fitBounds(this.getBounds(markers));
+		if (this.markers.length) {
+			googleMap.fitBounds(this.getBounds(this.markers));
+		}
 	}
 
 	getBounds(markers) {
