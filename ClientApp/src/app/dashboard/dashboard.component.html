@@ -7,7 +7,7 @@
             <ejs-dropdownlist [dataSource]="app.analytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="analyteId" placeholder="Analyte" floatLabelType="Always" (change)="analyteChange()"></ejs-dropdownlist>
         </div>
         <div class="col-md-4">
-            <ejs-daterangepicker placeholder='Select a range' floatLabelType="Always" [(startDate)]='startDate' [(endDate)]='endDate' (change)="setGraphData()"></ejs-daterangepicker>
+            <ejs-daterangepicker placeholder='Select a range' floatLabelType="Always" [(startDate)]='startDate' [(endDate)]='endDate' (change)="dateRangeChange()"></ejs-daterangepicker>
         </div>
     </div>
 
@@ -197,6 +197,17 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <ejs-dropdownlist [dataSource]="sites" [fields]="{ text: 'name', value: 'id' }" [(value)]="siteId" placeholder="Site" floatLabelType="Always" (change)="siteMapChange()"></ejs-dropdownlist>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <br/>
+                                        <button ejs-button (click)="previousSiteMapDate()">Previous</button>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <ejs-datepicker [(value)]="siteMapDate" placeholder="Date" floatLabelType="Always" (change)="siteMapChange()"></ejs-datepicker>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <br/>
+                                        <button ejs-button (click)="nextSiteMapDate()">Next</button>
                                     </div>
                                 </div>
                                 <div class="row pad-t20">

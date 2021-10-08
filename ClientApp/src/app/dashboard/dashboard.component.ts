@@ -28,9 +28,10 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.sites = [];
 		this.analyteId = this.app.analytes[0].id;
 
-		var startDate = new Date();
-		startDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() - 14);
-		this.startDate = startDate;
+		var today = new Date();
+		this.endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+		this.startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 14);
+		this.siteMapDate = this.startDate;
 	}
 
 	@ViewChild('chartByLocation')
@@ -66,6 +67,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	public graphData: any;
 	public startDate: Date;
 	public endDate: Date;
+	public siteMapDate: Date;
 	public cellSpacing: number[] = [10, 10];
 	public cellAspectRatio: number = 70 / 25;
 	public allowDragging: boolean = false;
@@ -230,9 +232,9 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	polygons: google.maps.Polygon[] = [];
 
 	async siteMapChange() {
-		if (!this.siteId) return;
+		if (!this.siteId || !this.siteMapDate) return;
 
-		var site = await this.repository.getSite({ siteId: this.siteId, analyteId: this.analyteId, date: this.startDate });
+		var site = await this.repository.getSite({ siteId: this.siteId, analyteId: this.analyteId, date: this.siteMapDate });
 
 		var googleMap = this.map.googleMap;
 
@@ -274,7 +276,6 @@ export class DashboardComponent extends PageComponent implements OnInit {
 
 		if (site.boundaries) {
 			site.boundaries.forEach(function (boundaries) {
-				console.dir(boundaries);
 				$this.polygons.push(new google.maps.Polygon({
 					map: googleMap,
 					paths: boundaries,
@@ -310,5 +311,19 @@ export class DashboardComponent extends PageComponent implements OnInit {
 
 	mapOptions: google.maps.MapOptions;
 	@ViewChild(GoogleMap) map!: GoogleMap;
+
+	dateRangeChange() {
+		this.siteMapDate = new Date(this.startDate);
+	}
+
+	previousSiteMapDate() {
+		this.siteMapDate.setDate(this.siteMapDate.getDate() - 1);
+		this.siteMapDate = new Date(this.siteMapDate < this.startDate ? this.endDate : this.siteMapDate);
+	}
+
+	nextSiteMapDate() {
+		this.siteMapDate.setDate(this.siteMapDate.getDate() + 1);
+		this.siteMapDate = new Date(this.siteMapDate > this.endDate ? this.startDate : this.siteMapDate);
+	}
 }
 
