@@ -273,15 +273,18 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		});
 
 		if (site.boundaries) {
-			this.polygons.push(new google.maps.Polygon({
-				map: googleMap,
-				paths: site.boundaries,
-				strokeColor: "#FF0000",
-				strokeOpacity: 0.8,
-				strokeWeight: 2,
-				fillColor: "#FF0000",
-				fillOpacity: 0.35
-			}));
+			site.boundaries.forEach(function (boundaries) {
+				console.dir(boundaries);
+				$this.polygons.push(new google.maps.Polygon({
+					map: googleMap,
+					paths: boundaries,
+					strokeColor: "#FF0000",
+					strokeOpacity: 0.8,
+					strokeWeight: 2,
+					fillColor: "#FF0000",
+					fillOpacity: 0.35
+				}));
+			});
 		}
 
 		if (this.markers.length) {
