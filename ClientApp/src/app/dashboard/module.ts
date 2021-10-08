@@ -11,7 +11,7 @@ import { ButtonModule  } from '@syncfusion/ej2-angular-buttons';
 import { DashboardLayoutModule } from '@syncfusion/ej2-angular-layouts';
 import { ChartAllModule } from '@syncfusion/ej2-angular-charts';
 import { DropDownListModule, ListBoxAllModule, CheckBoxSelectionService, ComboBoxModule, MultiSelectModule } from '@syncfusion/ej2-angular-dropdowns';
-import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { DatePickerModule, DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { TabModule } from '@syncfusion/ej2-angular-navigations';
 
 import { AccumulationLegendService, AccumulationTooltipService, AccumulationAnnotationService} from '@syncfusion/ej2-angular-charts';
@@ -38,6 +38,7 @@ import { PieSeriesService, AccumulationDataLabelService } from '@syncfusion/ej2-
 		MultiSelectModule,
 		ListBoxAllModule,
 		DatePickerModule,
+		DateRangePickerModule,
 		ButtonModule,
 		TextBoxModule,
 		DashboardLayoutModule,

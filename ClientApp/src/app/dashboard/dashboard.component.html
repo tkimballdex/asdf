@@ -6,11 +6,8 @@
         <div class="col-md-2">
             <ejs-dropdownlist [dataSource]="app.analytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="analyteId" placeholder="Analyte" floatLabelType="Always" (change)="analyteChange()"></ejs-dropdownlist>
         </div>
-        <div class="col-md-2">
-            <ejs-datepicker [(value)]="startDate" placeholder="Start Date" floatLabelType="Always" (change)="setGraphData()"></ejs-datepicker>
-        </div>
-        <div class="col-md-2">
-            <ejs-datepicker [(value)]="endDate" placeholder="End Date" floatLabelType="Always" (change)="setGraphData()"></ejs-datepicker>
+        <div class="col-md-4">
+            <ejs-daterangepicker placeholder='Select a range' floatLabelType="Always" [(startDate)]='startDate' [(endDate)]='endDate' (change)="setGraphData()"></ejs-daterangepicker>
         </div>
     </div>
 
