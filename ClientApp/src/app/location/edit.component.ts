@@ -24,7 +24,7 @@ export class LocationEditComponent extends PageComponent implements OnInit {
     public deleteDialog: Dialog;
     public form: FormGroup;
     @ViewChild('grid') public grid: GridComponent;
-	@ViewChild(GoogleMap) map!: GoogleMap;
+	@ViewChild('map') map!: GoogleMap;
 	private siteMarker: google.maps.Marker;
 	public mapOptions: google.maps.MapOptions;
 
@@ -77,7 +77,7 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 					label: $this.record.name
 				});
 			});
-		}, 1000);
+		}, 0);
 	}
 
 	async save() {
