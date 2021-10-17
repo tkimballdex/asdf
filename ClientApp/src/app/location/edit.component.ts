@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GoogleMap } from '@angular/google-maps';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { DialogUtility, Dialog } from '@syncfusion/ej2-popups';
 import { AppService } from "../shared/app.service";
@@ -23,6 +24,8 @@ export class LocationEditComponent extends PageComponent implements OnInit {
     public deleteDialog: Dialog;
     public form: FormGroup;
     @ViewChild('grid') public grid: GridComponent;
+	@ViewChild(GoogleMap) map!: GoogleMap;
+	private siteMarker: google.maps.Marker;
 
     async ngOnInit() {
         this.privileges = (await this.appService.getPrivileges()).locations;
@@ -41,10 +44,40 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 		this.data = await this.repository.getData(this.record.siteId);
 		this.hideSpinner();
 
-        this.form = this.fb.group({
-            name: [this.record.name, [Validators.required]]
-        })
-    }
+		this.form = this.fb.group({
+			name: [this.record.name, [Validators.required]]
+		});
+
+		var $this = this;
+
+		setTimeout(function (event) {
+			if ($this.record.latitude && $this.record.longitude) {
+				const position = { lat: $this.record.latitude, lng: $this.record.longitude };
+				$this.map.googleMap.setCenter(position);
+
+				$this.siteMarker = new google.maps.Marker({
+					position: position,
+					map: $this.map.googleMap,
+					label: $this.record.name
+				});
+			}
+
+			$this.map.googleMap.addListener('click', function (event) {
+				$this.record.latitude = event.latLng.lat();
+				$this.record.longitude = event.latLng.lng();
+
+				if ($this.siteMarker) {
+					$this.siteMarker.setMap(null);
+				}
+
+				$this.siteMarker = new google.maps.Marker({
+					position: { lat: event.latLng.lat(), lng: event.latLng.lng() },
+					map: $this.map.googleMap,
+					label: $this.record.name
+				});
+			});
+		}, 1000);
+	}
 
 	async save() {
 		this.form.markAllAsTouched();

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { GoogleMapsModule } from '@angular/google-maps';
 import { LocationListComponent } from './list.component'
 import { LocationEditComponent } from './edit.component'
 import { MsalGuard } from '@azure/msal-angular';
@@ -21,7 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ],
     imports: [
         GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule,
-        CommonModule, DatePickerModule, SwitchModule,FormsModule, ReactiveFormsModule,
+		CommonModule, DatePickerModule, SwitchModule, FormsModule, ReactiveFormsModule, GoogleMapsModule,
         RouterModule.forChild([
             { path: 'list', component: LocationListComponent, canActivate: [MsalGuard] },
             { path: 'add/:siteId', component: LocationEditComponent, canActivate: [MsalGuard] },

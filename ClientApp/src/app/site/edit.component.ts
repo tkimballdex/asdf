@@ -56,29 +56,39 @@ export class SiteEditComponent extends PageComponent implements OnInit {
         })
     }
 
-    async save() {
-        var add = !this.record.id;
-        this.showSpinner();
-        this.record.tenantId = this.tenant.id;
-        var returnValue = await this.repository.save(this.record);
-        this.hideSpinner();
+	async save() {
+		this.form.markAllAsTouched();
 
-        if (returnValue && returnValue.error) {
-            this.showErrorMessage(returnValue.description);
-        }
-        else {
-            var success = returnValue && returnValue.updated;
-            this.showSaveMessage(success);
+		if (this.form.invalid) {
+			this.showErrorMessage("Please complete all required fields!");
+			return;
+		}
 
-            if (success) {
-                this.record = returnValue;
-            }
+		Object.assign(this.record, this.form.value);
 
-            if (success && add) {
-                setTimeout(() => this.router.navigate(['/auth/site/edit', returnValue.id]), 1000);
-            }
-        }
-    }
+		var add = !this.record.id;
+		this.showSpinner();
+		this.record.tenantId = this.tenant.id;
+		var returnValue = await this.repository.save(this.record);
+		this.hideSpinner();
+
+		if (returnValue && returnValue.error) {
+			this.showErrorMessage(returnValue.description);
+			return;
+
+		}
+
+		var success = returnValue && returnValue.updated;
+		this.showSaveMessage(success);
+
+		if (success) {
+			this.record = returnValue;
+		}
+
+		if (success && add) {
+			setTimeout(() => this.router.navigate(['/auth/site/edit', returnValue.id]), 1000);
+		}
+	}
 
     delete() {
         this.deleteDialog = DialogUtility.confirm({

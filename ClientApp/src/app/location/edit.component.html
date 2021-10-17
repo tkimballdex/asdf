@@ -36,10 +36,10 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-3">
             <ejs-textbox [(value)]="record.latitude" disabled placeholder="Latitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
             <ejs-textbox [(value)]="record.longitude" disabled placeholder="Longitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
         </div>
     </div>
@@ -48,6 +48,12 @@
         <div class="col-md-12"><label for="notes" class="edit-label">Notes</label></div>
         <div class="col-md-12">
             <ejs-textbox id="notes" [multiline]='true' #default rows="3" [(value)]="record.notes"></ejs-textbox>
+        </div>
+    </div>
+
+    <div class="row pad-b20">
+        <div class="col-md-12">
+            <google-map height="600px" width="1000px"></google-map>
         </div>
     </div>
 

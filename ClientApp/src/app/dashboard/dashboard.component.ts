@@ -309,7 +309,6 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		return { north, south, east, west };
 	}
 
-	mapOptions: google.maps.MapOptions;
 	@ViewChild(GoogleMap) map!: GoogleMap;
 
 	dateRangeChange() {
