@@ -26,6 +26,7 @@ export class LocationEditComponent extends PageComponent implements OnInit {
     @ViewChild('grid') public grid: GridComponent;
 	@ViewChild(GoogleMap) map!: GoogleMap;
 	private siteMarker: google.maps.Marker;
+	public mapOptions: google.maps.MapOptions;
 
     async ngOnInit() {
         this.privileges = (await this.appService.getPrivileges()).locations;
@@ -49,12 +50,12 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 		});
 
 		var $this = this;
+		const hasPosition = $this.record.latitude && $this.record.longitude;
+		const position = hasPosition ? { lat: $this.record.latitude, lng: $this.record.longitude } : { lat: $this.data.latitude, lng: $this.data.longitude };
+		$this.mapOptions = { center: position };
 
-		setTimeout(function (event) {
-			if ($this.record.latitude && $this.record.longitude) {
-				const position = { lat: $this.record.latitude, lng: $this.record.longitude };
-				$this.map.googleMap.setCenter(position);
-
+		setTimeout(function () {
+			if (hasPosition) {
 				$this.siteMarker = new google.maps.Marker({
 					position: position,
 					map: $this.map.googleMap,
