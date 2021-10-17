@@ -145,7 +145,7 @@
                                     <span class="subitem-list-add"><button ejs-button cssClass="e-outline" [routerLink]="['/auth/location/add', record.id]">+ Add</button></span>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row pad-b20">
                                 <div class="col-12 pad-t20">
                                     <ejs-grid [dataSource]='record.locations' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="false" *ngIf="record">
                                         <e-columns>
@@ -157,6 +157,12 @@
                                             <e-column field='name' headerText='Name'></e-column>
                                         </e-columns>
                                     </ejs-grid>
+                                </div>
+                            </div>
+
+                            <div class="row pad-b20">
+                                <div class="col-md-12">
+                                    <google-map height="600px" width="1000px" [options]="mapOptions" #map></google-map>
                                 </div>
                             </div>
                         </ng-template>

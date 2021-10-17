@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { GoogleMap } from '@angular/google-maps';
 import { DialogUtility, Dialog } from '@syncfusion/ej2-popups';
 import { AppService } from "../shared/app.service";
 import { PageComponent } from '../shared/page.component';
@@ -9,52 +10,62 @@ import { SiteRepository } from './repository';
 import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 
 @Component({
-    selector: 'site-edit',
-    templateUrl: './edit.component.html',
-    styleUrls: ['./edit.component.scss']
+	selector: 'site-edit',
+	templateUrl: './edit.component.html',
+	styleUrls: ['./edit.component.scss']
 })
 export class SiteEditComponent extends PageComponent implements OnInit {
-	constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private tenant: TenantService, private repository: SiteRepository, private fb:FormBuilder) {
-        super();
-    }
+	constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private tenant: TenantService, private repository: SiteRepository, private fb: FormBuilder) {
+		super();
+	}
 
-    public record: any;
-    public deleteDialog: Dialog;
-    public form: FormGroup;
+	public record: any;
+	public deleteDialog: Dialog;
+	public form: FormGroup;
 
 	@ViewChild('editTab')
 	public editTab: TabComponent;
 
+	@ViewChild('map') map!: GoogleMap;
+	private siteMarker: google.maps.Marker;
+	public mapOptions: google.maps.MapOptions;
+
 	editTabCreated() {
-		console.dir(history.state);
 		if (history.state.locations) {
 			this.editTab.selectedItem = 1;
 		}
 	}
 
-    async ngOnInit() {
-        this.showSpinner();
-        this.app = await this.appService.getData();
-        this.privileges = this.app.privileges.sites;
+	async ngOnInit() {
+		this.showSpinner();
+		this.app = await this.appService.getData();
+		this.privileges = this.app.privileges.sites;
 
-        var id = this.route.snapshot.paramMap.get('id');
-        this.record = await this.repository.get(id);
-        this.hideSpinner();
+		var id = this.route.snapshot.paramMap.get('id');
+		this.record = await this.repository.get(id);
+		this.hideSpinner();
 
-        if (id == null) {
-            this.record.customerId = this.route.snapshot.paramMap.get('customerId');
-        }
+		if (id == null) {
+			this.record.customerId = this.route.snapshot.paramMap.get('customerId');
+		}
 
-        this.form = this.fb.group({
+		this.form = this.fb.group({
 			name: [this.record.name, [Validators.required]],
-            address: [this.record.address, [Validators.required]],
-            city: [this.record.city, [Validators.required]],
-            postalCode: [this.record.postalCode, [Validators.required]],
-            contactName: [this.record.contactName, [Validators.required]],
-            contactEmail: [this.record.contactEmail, [Validators.required, Validators.email]],
-            contactPhoneNo: [this.record.contactPhoneNo, [Validators.required, Validators.maxLength(10)]]
-        })
-    }
+			address: [this.record.address, [Validators.required]],
+			city: [this.record.city, [Validators.required]],
+			postalCode: [this.record.postalCode, [Validators.required]],
+			contactName: [this.record.contactName, [Validators.required]],
+			contactEmail: [this.record.contactEmail, [Validators.required, Validators.email]],
+			contactPhoneNo: [this.record.contactPhoneNo, [Validators.required, Validators.maxLength(10)]]
+		})
+
+		var $this = this;
+
+		if ($this.record.latitude && $this.record.longitude) {
+			$this.mapOptions = { center: { lat: $this.record.latitude, lng: $this.record.longitude } };
+		}
+	}
+
 
 	async save() {
 		this.form.markAllAsTouched();

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { GoogleMapsModule } from '@angular/google-maps';
 import { SiteListComponent } from './list.component';
 import { SiteEditComponent } from './edit.component';
 import { MsalGuard } from '@azure/msal-angular';
@@ -21,7 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         SiteEditComponent
     ],
     imports: [
-        GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule,
+		GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, GoogleMapsModule,
         DropDownListModule, DatePickerModule, TabModule, SwitchModule, CommonModule,FormsModule, ReactiveFormsModule,
         RouterModule.forChild([
             { path: 'list', component: SiteListComponent },
