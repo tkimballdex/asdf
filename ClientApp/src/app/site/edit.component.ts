@@ -29,6 +29,8 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	@ViewChild('map') map!: GoogleMap;
 	private siteMarker: google.maps.Marker;
 	public mapOptions: google.maps.MapOptions;
+	markers: google.maps.Marker[] = [];
+	polygons: google.maps.Polygon[] = [];
 
 	editTabCreated() {
 		if (history.state.locations) {
@@ -57,13 +59,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			contactName: [this.record.contactName, [Validators.required]],
 			contactEmail: [this.record.contactEmail, [Validators.required, Validators.email]],
 			contactPhoneNo: [this.record.contactPhoneNo, [Validators.required, Validators.maxLength(10)]]
-		})
-
-		var $this = this;
-
-		if ($this.record.latitude && $this.record.longitude) {
-			$this.mapOptions = { center: { lat: $this.record.latitude, lng: $this.record.longitude } };
-		}
+		});
 	}
 
 
@@ -122,5 +118,87 @@ export class SiteEditComponent extends PageComponent implements OnInit {
             this.showDeleteMessage(true);
             setTimeout(() => this.router.navigate(['/auth/customer/edit', this.record.customerId]), 1000);
         }
-    }
+	}
+
+	selectTab(e) {
+		if (this.editTab.selectedItem == 1) {
+			this.mapSetup();
+		}
+	}
+
+	mapSetup() {
+		var $this = this;
+
+		if ($this.record.latitude && $this.record.longitude) {
+			$this.mapOptions = { center: { lat: $this.record.latitude, lng: $this.record.longitude } };
+		}
+
+		$this.markers.forEach(function (x) {
+			x.setMap(null);
+		});
+
+		$this.polygons.forEach(function (x) {
+			x.setMap(null);
+		});
+
+		$this.markers = [];
+		$this.polygons = [];
+
+		setTimeout(function () {
+			console.dir($this.map);
+			var googleMap = $this.map.googleMap;
+
+			$this.record.locations.forEach(function (x) {
+				if (x.latitude && x.longitude) {
+					$this.markers.push(new google.maps.Marker({
+						position: { lat: x.latitude, lng: x.longitude },
+						map: googleMap,
+						label: x.name
+					}));
+				}
+			});
+
+			if ($this.record.boundaries) {
+				var boundaries = JSON.parse($this.record.boundaries);
+
+				boundaries = boundaries.map(function (x) {
+					return x.map(function (y) {
+						return { lat: y[1], lng: y[0] };
+					});
+				});
+
+				boundaries.forEach(function (boundaries) {
+					$this.polygons.push(new google.maps.Polygon({
+						map: googleMap,
+						paths: boundaries,
+						strokeColor: "#FF0000",
+						strokeOpacity: 0.8,
+						strokeWeight: 2,
+						fillColor: "#FF0000",
+						fillOpacity: 0.35
+					}));
+				});
+
+				googleMap.fitBounds($this.getBounds(boundaries));
+			}
+		}, 0);
+	}
+
+	getBounds(boundaries) {
+		let north;
+		let south;
+		let east;
+		let west;
+
+		for (const polygon of boundaries) {
+			for (const point of polygon) {
+				north = north !== undefined ? Math.max(north, point.lat) : point.lat;
+				south = south !== undefined ? Math.min(south, point.lat) : point.lat;
+				east = east !== undefined ? Math.max(east, point.lng) : point.lng;
+				west = west !== undefined ? Math.min(west, point.lng) : point.lng;
+			};
+		};
+
+		return { north, south, east, west };
+	}
 }

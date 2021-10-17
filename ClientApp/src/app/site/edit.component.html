@@ -17,7 +17,7 @@
 
     <div class="row d-flex pad-t20">
         <div class="col-md-12 d-flex">
-            <ejs-tab id="edit-tab" class="e-fill" (created)="editTabCreated()" #editTab>
+            <ejs-tab id="edit-tab" class="e-fill" (created)="editTabCreated()" (selected)="selectTab(event)" #editTab>
                 <e-tabitems>
                     <e-tabitem>
                         <ng-template #headerText>

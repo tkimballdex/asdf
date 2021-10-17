@@ -28,10 +28,10 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 	private siteMarker: google.maps.Marker;
 	public mapOptions: google.maps.MapOptions;
 
-    async ngOnInit() {
-        this.privileges = (await this.appService.getPrivileges()).locations;
-        var id = this.route.snapshot.paramMap.get('id');
-        this.showSpinner();
+	async ngOnInit() {
+		this.privileges = (await this.appService.getPrivileges()).locations;
+		var id = this.route.snapshot.paramMap.get('id');
+		this.showSpinner();
 
 		if (id == null) {
 			this.record = { siteId: this.route.snapshot.paramMap.get('siteId') };
@@ -51,19 +51,20 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 
 		var $this = this;
 		const hasPosition = $this.record.latitude && $this.record.longitude;
-		const position = hasPosition ? { lat: $this.record.latitude, lng: $this.record.longitude } : { lat: $this.data.latitude, lng: $this.data.longitude };
-		$this.mapOptions = { center: position };
+		$this.mapOptions = { center: { lat: $this.data.latitude, lng: $this.data.longitude } };
 
 		setTimeout(function () {
+			const googleMap = $this.map.googleMap;
+
 			if (hasPosition) {
 				$this.siteMarker = new google.maps.Marker({
-					position: position,
+					position: { lat: $this.record.latitude, lng: $this.record.longitude },
 					map: $this.map.googleMap,
 					label: $this.record.name
 				});
 			}
 
-			$this.map.googleMap.addListener('click', function (event) {
+			googleMap.addListener('click', function (event) {
 				$this.record.latitude = event.latLng.lat();
 				$this.record.longitude = event.latLng.lng();
 
@@ -73,11 +74,53 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 
 				$this.siteMarker = new google.maps.Marker({
 					position: { lat: event.latLng.lat(), lng: event.latLng.lng() },
-					map: $this.map.googleMap,
+					map: googleMap,
 					label: $this.record.name
 				});
 			});
+
+			if ($this.data.boundaries) {
+				var boundaries = JSON.parse($this.data.boundaries);
+
+				boundaries = boundaries.map(function (x) {
+					return x.map(function (y) {
+						return { lat: y[1], lng: y[0] };
+					});
+				});
+
+				boundaries.forEach(function (boundaries) {
+					new google.maps.Polygon({
+						map: googleMap,
+						paths: boundaries,
+						strokeColor: "#FF0000",
+						strokeOpacity: 0.8,
+						strokeWeight: 2,
+						fillColor: "#FF0000",
+						fillOpacity: 0.35
+					});
+				});
+
+				googleMap.fitBounds($this.getBounds(boundaries));
+			}
 		}, 0);
+	}
+
+	getBounds(boundaries) {
+		let north;
+		let south;
+		let east;
+		let west;
+
+		for (const polygon of boundaries) {
+			for (const point of polygon) {
+				north = north !== undefined ? Math.max(north, point.lat) : point.lat;
+				south = south !== undefined ? Math.min(south, point.lat) : point.lat;
+				east = east !== undefined ? Math.max(east, point.lng) : point.lng;
+				west = west !== undefined ? Math.min(west, point.lng) : point.lng;
+			};
+		};
+
+		return { north, south, east, west };
 	}
 
 	async save() {
