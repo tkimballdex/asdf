@@ -26,7 +26,9 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.customers = await this.repository.listCustomers();
 		this.variants = [];
 		this.sites = [];
+
 		this.analyteId = this.app.analytes[0].id;
+		await this.analyteChange();
 
 		var today = new Date();
 		this.endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
@@ -77,16 +79,6 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		valueType: 'Category'
 	}
 
-	public marker: Object = {
-        visible: true,
-        height: 10,
-        width: 10
-    };
-    public tooltip: Object = {
-        enable: true,
-        header: 'Profit'
-    };
-
 	async customerChange() {
 		this.sites = [];
 		this.siteId = null;
@@ -125,7 +117,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 			endDate: this.endDate
 		});
 
-		graphData.forEach(x => { x.type = 'Spline'; x.xName = 'x'; x.yName = 'y'; x.marker = this.marker; x.tooltip = this.tooltip });
+		graphData.forEach(x => { x.type = 'Spline'; x.xName = 'x'; x.yName = 'y'; });
 		this.chartByLocation.addSeries(graphData);
 	}
 
@@ -313,6 +305,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 
 	dateRangeChange() {
 		this.siteMapDate = new Date(this.startDate);
+		this.setGraphData();
 	}
 
 	previousSiteMapDate() {
