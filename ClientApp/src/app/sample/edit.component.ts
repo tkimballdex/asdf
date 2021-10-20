@@ -25,6 +25,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 	public deleteDialog: Dialog;
 	public tests: any;
 
+	public vendors: any;
 	public customers: any;
 	public customerId: string;
 	public sites: any;
@@ -42,6 +43,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.privileges = this.app.privileges.samples;
 		var id = this.route.snapshot.paramMap.get('id');
 		this.record = await this.repository.get(id);
+		this.vendors = await this.repository.listVendors();
 
 		if (id) {
 			this.tests = await this.repository.getTests(id);

@@ -54,8 +54,8 @@
                         <ng-template #content>
 
                             <div class="row pad-t20">
-                                <div class="col-md-12">
-                                    <ejs-textbox [(value)]="record.logisticVendor" disabled placeholder="Logistics Vendor" floatLabelType="Always"></ejs-textbox>
+                                <div class="col-md-8">
+                                    <ejs-dropdownlist [dataSource]="vendors" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.logisticVendorId" placeholder="Logistics Vendor" floatLabelType="Always"></ejs-dropdownlist>
                                 </div>
                             </div>
 

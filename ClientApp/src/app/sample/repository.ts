@@ -49,4 +49,8 @@ export class SampleRepository {
 			siteId: siteId
 		});
 	}
+
+	public listVendors() {
+		return this.http.post(`/vendor/list`, { tenantId: this.tenant.id });
+	}
 }
