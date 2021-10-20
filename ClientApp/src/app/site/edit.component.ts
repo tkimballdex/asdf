@@ -145,7 +145,6 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		$this.polygons = [];
 
 		setTimeout(function () {
-			console.dir($this.map);
 			var googleMap = $this.map.googleMap;
 
 			$this.record.locations.forEach(function (x) {

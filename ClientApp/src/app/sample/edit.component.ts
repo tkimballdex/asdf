@@ -25,6 +25,13 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 	public deleteDialog: Dialog;
 	public tests: any;
 
+	public customers: any;
+	public customerId: string;
+	public sites: any;
+	public siteId: string;
+	public locations: any;
+	public locationId: any;
+
 	@ViewChild('editTab')
 	public editTab: TabComponent;
 
@@ -35,7 +42,14 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.privileges = this.app.privileges.samples;
 		var id = this.route.snapshot.paramMap.get('id');
 		this.record = await this.repository.get(id);
-		this.tests = await this.repository.getTests(id);
+
+		if (id) {
+			this.tests = await this.repository.getTests(id);
+		}
+		else {
+			this.customers = await this.repository.listCustomers();
+		}
+
 		this.hideSpinner();
 
 		this.record.collectedDate = this.record.completedDate ? new Date(this.record.collectedDate) : null;
@@ -106,6 +120,20 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 			this.showDeleteMessage(true);
 			setTimeout(() => this.router.navigate(['/auth/sample/list']), 1000);
 		}
+	}
+
+	async customerChange() {
+		this.sites = [];
+		this.siteId = null;
+		this.locations = null;
+		this.locationId = null;
+		this.sites = await this.repository.listSites(this.customerId);
+	}
+
+	async siteChange() {
+		this.locations = null;
+		this.locationId = null;
+		this.locations = await this.repository.listLocations(this.siteId);
 	}
 	//-----------------------------------------------------------------------------------------
 }
