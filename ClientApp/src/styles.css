@@ -415,6 +415,6 @@ mat-form-field.mat-form-field {
 	background-color: #eee;
 }
 
-#edit-view .ng-touched.ng-invalid input[type=text] {
+#edit-view .ng-touched.ng-invalid input {
 	background-color: indianred;
 }

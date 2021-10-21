@@ -31,7 +31,6 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 	public sites: any;
 	public siteId: string;
 	public locations: any;
-	public locationId: any;
 
 	@ViewChild('editTab')
 	public editTab: TabComponent;
@@ -61,8 +60,15 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.form = new FormGroup({
 			referenceNo: new FormControl(this.record.referenceNo, [Validators.required]),
 			scheduledDate: new FormControl(this.record.scheduledDate ? new Date(this.record.scheduledDate) : null),
-			qcpass: new FormControl(this.record.qcpass)
+			qcpass: new FormControl(this.record.qcpass),
+			logisticVendorId: new FormControl(this.record.logisticVendorId, [Validators.required])
 		});
+
+		if (!id) {
+			this.form.addControl('customerId', new FormControl(this.customerId, [Validators.required]));
+			this.form.addControl('siteId', new FormControl(this.siteId, [Validators.required]));
+			this.form.addControl('locationId', new FormControl(this.record.locationId, [Validators.required]));
+		}
 	}
 
 	editTabCreated() {
@@ -128,13 +134,13 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.sites = [];
 		this.siteId = null;
 		this.locations = null;
-		this.locationId = null;
+		this.record.locationId = null;
 		this.sites = await this.repository.listSites(this.customerId);
 	}
 
 	async siteChange() {
 		this.locations = null;
-		this.locationId = null;
+		this.record.locationId = null;
 		this.locations = await this.repository.listLocations(this.siteId);
 	}
 	//-----------------------------------------------------------------------------------------

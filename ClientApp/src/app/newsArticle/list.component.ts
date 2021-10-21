@@ -2,25 +2,25 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { GridComponent, PageSettingsModel } from '@syncfusion/ej2-angular-grids';
 import { NewsArticleRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
-import { AppService, IdName } from '../shared/app.service';
+import { AppService } from '../shared/app.service';
 
 @Component({
 	selector: 'NewsArticle-list',
-    templateUrl: './list.component.html',
+	templateUrl: './list.component.html',
 })
 export class NewsArticleListComponent extends PageComponent implements OnInit {
 	constructor(private appService: AppService, private repository: NewsArticleRepository) {
-        super();
-    }
-    //----------------------------------------------------------------------------
-    public form: FormParams;
+		super();
+	}
+	//----------------------------------------------------------------------------
+	public form: FormParams;
 	public list: any;
-    @ViewChild('grid') public grid: GridComponent;
-    //----------------------------------------------------------------------------
-    async ngOnInit() {
-        this.app = await this.appService.getData(); 
+	@ViewChild('grid') public grid: GridComponent;
+	//----------------------------------------------------------------------------
+	async ngOnInit() {
+		this.app = await this.appService.getData();
 		this.privileges = (await this.appService.getPrivileges()).newsArticles;
-       this.form = this.appService.getFormState(this);
+		this.form = this.appService.getFormState(this);
 
 		if (this.form && history.state.formState) {
 			this.search();
@@ -28,15 +28,15 @@ export class NewsArticleListComponent extends PageComponent implements OnInit {
 		else {
 			this.form = new FormParams();
 		}
-    }
-    //----------------------------------------------------------------------------
-    async search() {
-        this.appService.saveFormState(this);
-        this.showSpinner();
-        this.list = await this.repository.list({ title: this.form.title, startDate: this.form.startDate, endDate: this.form.endDate });
-        this.hideSpinner();
-    }
-    //----------------------------------------------------------------------------
+	}
+	//----------------------------------------------------------------------------
+	async search() {
+		this.appService.saveFormState(this);
+		this.showSpinner();
+		this.list = await this.repository.list({ title: this.form.title, startDate: this.form.startDate, endDate: this.form.endDate });
+		this.hideSpinner();
+	}
+	//----------------------------------------------------------------------------
 	clickGrid() {
 		this.form.pageSettings.currentPage = this.grid.pagerModule.pagerObj.currentPage;
 		this.appService.saveFormState(this);
