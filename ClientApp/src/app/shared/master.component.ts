@@ -83,16 +83,11 @@ export class MasterPageComponent implements OnInit {
 			}
 		];
 
-
-		var sampleMenu: MenuItemModel[] = [];
-
-		if (privileges.customers.read) {
-			sampleMenu.push({ id: '/auth/sampler/list', text: 'Samplers' });
-		}
+		var sampleMenu: MenuItemModel[] = [];		
 
 		if (privileges.samples.read) {
 			sampleMenu.push({ id: '/auth/sample/list', text: 'Samples' });
-			sampleMenu.push({ id: '/auth/sampletest/list', text: 'Sample Test' });
+			sampleMenu.push({ id: '/auth/sampletest/list', text: 'Tests' });
 		}
 
 		if (sampleMenu.length > 0) {
@@ -103,12 +98,11 @@ export class MasterPageComponent implements OnInit {
 			});
 		}
 
-
 		var manageMenu: MenuItemModel[] = [];
 
 		if (privileges.customers.read) {
 			manageMenu.push({ id: '/auth/customer/list', text: 'Customers' });
-		}
+		}		
 
 		if (privileges.sites.read) {
 			manageMenu.push({ id: '/auth/site/list', text: 'Sites' });
@@ -116,6 +110,10 @@ export class MasterPageComponent implements OnInit {
 
 		if (privileges.locations.read) {
 			manageMenu.push({ id: '/auth/location/list', text: 'Locations' });
+		}
+
+		if (privileges.customers.read) {
+			manageMenu.push({ id: '/auth/sampler/list', text: 'Samplers' });
 		}
 
 		if (privileges.vendors.read) {
@@ -137,7 +135,6 @@ export class MasterPageComponent implements OnInit {
 				items: manageMenu
 			});
 		}
-
 
 		var settingsMenu: MenuItemModel[] = [];
 
