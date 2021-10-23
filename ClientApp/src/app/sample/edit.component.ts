@@ -25,6 +25,13 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 	public deleteDialog: Dialog;
 	public tests: any;
 
+	public vendors: any;
+	public customers: any;
+	public customerId: string;
+	public sites: any;
+	public siteId: string;
+	public locations: any;
+
 	@ViewChild('editTab')
 	public editTab: TabComponent;
 
@@ -35,7 +42,15 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.privileges = this.app.privileges.samples;
 		var id = this.route.snapshot.paramMap.get('id');
 		this.record = await this.repository.get(id);
-		this.tests = await this.repository.getTests(id);
+		this.vendors = await this.repository.listVendors();
+
+		if (id) {
+			this.tests = await this.repository.getTests(id);
+		}
+		else {
+			this.customers = await this.repository.listCustomers();
+		}
+
 		this.hideSpinner();
 
 		this.record.collectedDate = this.record.completedDate ? new Date(this.record.collectedDate) : null;
@@ -45,8 +60,15 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.form = new FormGroup({
 			referenceNo: new FormControl(this.record.referenceNo, [Validators.required]),
 			scheduledDate: new FormControl(this.record.scheduledDate ? new Date(this.record.scheduledDate) : null),
-			qcpass: new FormControl(this.record.qcpass)
+			qcpass: new FormControl(this.record.qcpass),
+			logisticVendorId: new FormControl(this.record.logisticVendorId, [Validators.required])
 		});
+
+		if (!id) {
+			this.form.addControl('customerId', new FormControl(this.customerId, [Validators.required]));
+			this.form.addControl('siteId', new FormControl(this.siteId, [Validators.required]));
+			this.form.addControl('locationId', new FormControl(this.record.locationId, [Validators.required]));
+		}
 	}
 
 	editTabCreated() {
@@ -106,6 +128,20 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 			this.showDeleteMessage(true);
 			setTimeout(() => this.router.navigate(['/auth/sample/list']), 1000);
 		}
+	}
+
+	async customerChange() {
+		this.sites = [];
+		this.siteId = null;
+		this.locations = null;
+		this.record.locationId = null;
+		this.sites = await this.repository.listSites(this.customerId);
+	}
+
+	async siteChange() {
+		this.locations = null;
+		this.record.locationId = null;
+		this.locations = await this.repository.listLocations(this.siteId);
 	}
 	//-----------------------------------------------------------------------------------------
 }

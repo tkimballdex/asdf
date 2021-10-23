@@ -35,6 +35,7 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 		RouterModule.forChild([
 			{ path: 'list', component: SampleTestListComponent, canActivate: [MsalGuard] },
 			{ path: 'add/:sampleId', component: SampleTestEditComponent, canActivate: [MsalGuard] },
+			{ path: 'add', component: SampleTestEditComponent, canActivate: [MsalGuard] },
 			{ path: 'edit/:id', component: SampleTestEditComponent, canActivate: [MsalGuard] },
 		])
 	],
