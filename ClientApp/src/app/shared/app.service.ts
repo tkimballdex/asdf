@@ -168,7 +168,8 @@ export interface IdName {
 }
 
 export interface AppData {
-    email: string;
+	email: string;
+	userId: string;
     privileges: Privileges;
     states: State[];
     frequencies: Frequency[];

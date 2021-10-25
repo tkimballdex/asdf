@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SampleTestListComponent } from './list.component';
 import { SampleTestEditComponent } from './edit.component';
+import { SampleTestImportComponent } from './import.component';
 import { MsalGuard } from '@azure/msal-angular';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,7 +17,7 @@ import {MatSelectModule} from '@angular/material/select';
 
 import { RadioButtonModule, ButtonModule, CheckBoxModule } from '@syncfusion/ej2-angular-buttons';
 import { GridModule, SortService, PageService, EditService, ToolbarService, CommandColumnService, ExcelExportService } from '@syncfusion/ej2-angular-grids';
-import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
+import { TextBoxModule, UploaderModule } from '@syncfusion/ej2-angular-inputs';
 import { NumericTextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
@@ -27,16 +28,18 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 @NgModule({
 	declarations: [
 		SampleTestListComponent,
-		SampleTestEditComponent
+		SampleTestEditComponent,
+		SampleTestImportComponent
 	],
 	imports: [MatFormFieldModule, MatInputModule, MatIconModule, MatDatepickerModule, MatNativeDateModule, MatButtonModule, MatButtonToggleModule, MatSelectModule,
-		GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule,
+		GridModule, RadioButtonModule, ButtonModule, TextBoxModule, UploaderModule, CheckBoxModule, ToastAllModule, DropDownListModule,
 		TabModule, DatePickerModule, SwitchModule, NumericTextBoxModule, MatButtonToggleModule, CommonModule,
 		RouterModule.forChild([
 			{ path: 'list', component: SampleTestListComponent, canActivate: [MsalGuard] },
 			{ path: 'add/:sampleId', component: SampleTestEditComponent, canActivate: [MsalGuard] },
 			{ path: 'add', component: SampleTestEditComponent, canActivate: [MsalGuard] },
 			{ path: 'edit/:id', component: SampleTestEditComponent, canActivate: [MsalGuard] },
+			{ path: 'import', component: SampleTestImportComponent, canActivate: [MsalGuard] },
 		])
 	],
 	providers: [
