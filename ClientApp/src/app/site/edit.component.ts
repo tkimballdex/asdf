@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GoogleMap } from '@angular/google-maps';
 import { DialogUtility, Dialog } from '@syncfusion/ej2-popups';
 import { AppService } from "../shared/app.service";
@@ -15,7 +15,7 @@ import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 	styleUrls: ['./edit.component.scss']
 })
 export class SiteEditComponent extends PageComponent implements OnInit {
-	constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private tenant: TenantService, private repository: SiteRepository, private fb: FormBuilder) {
+	constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private tenant: TenantService, private repository: SiteRepository) {
 		super();
 	}
 
@@ -44,21 +44,32 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		this.privileges = this.app.privileges.sites;
 
 		var id = this.route.snapshot.paramMap.get('id');
+		var customerId = this.route.snapshot.paramMap.get('customerId');
+
 		this.record = await this.repository.get(id);
 		this.hideSpinner();
 
 		if (id == null) {
-			this.record.customerId = this.route.snapshot.paramMap.get('customerId');
+			if(customerId)
+			{
+				var customer = await this.repository.getCustomer(customerId);
+				this.record = {
+					customerId: customerId,
+					customer: customer.name
+				}
+			}
 		}
 
-		this.form = this.fb.group({
-			name: [this.record.name, [Validators.required]],
-			address: [this.record.address, [Validators.required]],
-			city: [this.record.city, [Validators.required]],
-			postalCode: [this.record.postalCode, [Validators.required]],
-			contactName: [this.record.contactName, [Validators.required]],
-			contactEmail: [this.record.contactEmail, [Validators.required, Validators.email]],
-			contactPhoneNo: [this.record.contactPhoneNo, [Validators.required, Validators.maxLength(10)]]
+		this.form = new FormGroup({
+			name: new FormControl(this.record.name, [Validators.required]),
+			frequency: new FormControl(this.record.frequency, [Validators.required]),
+			address: new FormControl(this.record.address, [Validators.required]),
+			city: new FormControl(this.record.city, [Validators.required]),
+			state: new FormControl(this.record.state, [Validators.required]),
+			postalCode: new FormControl(this.record.postalCode, [Validators.required]),
+			contactName: new FormControl(this.record.contactName, [Validators.required]),
+			contactEmail: new FormControl(this.record.contactEmail, [Validators.required, Validators.email]),
+			contactPhoneNo: new FormControl(this.record.contactPhoneNo, [Validators.required, Validators.maxLength(10)])
 		});
 	}
 

@@ -71,6 +71,11 @@ export class AppService {
 		return data ? data.privileges : null;
 	}
 
+	public getAllYesNoList() {
+		const data: IdName[] = [{ id: 0, name: 'All' }, { id: 1, name: 'Yes' }, { id: 2, name: 'No' }];
+		return data;
+	}
+
     public get userName() {
 		var account = this.authService.instance.getActiveAccount();
 		return account ? account.name : null;
@@ -152,8 +157,13 @@ export interface VendorType {
     name: string;
 }
 
-export interface IdName {
+export interface UidName {
 	id: string;
+	name: string;
+}
+
+export interface IdName {
+	id: number;
 	name: string;
 }
 
@@ -165,5 +175,5 @@ export interface AppData {
     vendortypes: VendorType[];
 	menuItems: MenuItem[];
 	tenants: Tenant[];
-	analytes: IdName[]; 
+	analytes: UidName[]; 
 }

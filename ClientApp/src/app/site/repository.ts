@@ -21,4 +21,8 @@ export class SiteRepository {
     public list(filter: any) {
         return this.http.post(`/site/list`, filter);
     }
+
+    public getCustomer(id: string) {
+		return this.http.post<any>(`/customer/get/${id}`);
+	}
 }

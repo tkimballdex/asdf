@@ -10,8 +10,14 @@
     </div>
 
     <div class="row pad-t10">
-        <div class="col-md-12">
-            <ejs-textbox formControlName="name" required placeholder="Name *" floatLabelType="Always" enableRtl></ejs-textbox>
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-textbox formControlName="name" [(value)]="record.name" required placeholder="Site Name *" floatLabelType="Always"></ejs-textbox>
+            <div *ngIf="this.form.get('name').touched && this.form.get('name').invalid" class="e-error">
+                Site Name is required!
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-textbox id="edit-customer" [(value)]="record.customer" disabled placeholder="Customer" floatLabelType="Always"></ejs-textbox>
         </div>
     </div>
 
@@ -24,110 +30,110 @@
                             <div>Information</div>
                         </ng-template>
                         <ng-template #content>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <ejs-textbox id="edit-customer" [(value)]="record.customer" disabled placeholder="Customer" floatLabelType="Always"></ejs-textbox>
+                            <div class="row">                                
+                                <div class="col-md-6 col-lg-5 col-xl-4">
+                                    <ejs-dropdownlist formControlName="frequency" [dataSource]="app.frequencies" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.frequencyId" placeholder="Testing Frequency *" floatLabelType="Always"></ejs-dropdownlist>
+                                    <div *ngIf="this.form.get('frequency').touched && this.form.get('frequency').invalid" class="e-error">                          
+                                        Testing Frequency is required!
+                                    </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <ejs-dropdownlist [dataSource]="app.frequencies" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.frequencyId" placeholder="Testing Frequency *" floatLabelType="Always"></ejs-dropdownlist>
+                                <div class="col-md-6 col-lg-5 col-xl-4">
+                                    <ejs-textbox [(value)]="record.numberOfPeople" placeholder="Number Of People" floatLabelType="Always"></ejs-textbox>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-6 col-lg-5 col-xl-4">
                                     <ejs-datepicker [(value)]="record.serviceStartDate" placeholder="Service Start Date" floatLabelType="Always"></ejs-datepicker>
                                 </div>
-                                <div class="col-md-3">
-                                </div>
-                                <div class="col-md-3">
+                                <div class="col-md-6 col-lg-5 col-xl-4">
                                     <ejs-datepicker [(value)]="record.serviceEndDate" placeholder="Service End Date" floatLabelType="Always"></ejs-datepicker>
                                 </div>
                             </div>
 
-
                             <div class="row pad-t20">
-                                <div class="col-md-12">
-                                    <div *ngIf="this.form.get('address').touched && this.form.get('address').invalid">
-                                        address is required!
-                                    </div>
+                                <div class="col-md-12 col-lg-10 col-xl-8">                                    
                                     <ejs-textbox formControlName="address" placeholder="Address *" floatLabelType="Always" contenteditable="false"></ejs-textbox>
-                                </div>
-                                <div class="col-md-12">
-                                    <ejs-textbox [(value)]="record.address2" placeholder="Address2" floatLabelType="Always"></ejs-textbox>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12 pad-t20">
-                                    <div *ngIf="this.form.get('city').touched && this.form.get('city').invalid">
-                                        City is required!
+                                    <div *ngIf="this.form.get('address').touched && this.form.get('address').invalid" class="e-error">
+                                        Address is required!
                                     </div>
-                                    <ejs-textbox formControlName="city" placeholder="City *" floatLabelType="Always"></ejs-textbox>
+                                </div>
+                                <div class="col-md-12 col-lg-10 col-xl-8">
+                                    <ejs-textbox [(value)]="record.address2" placeholder="Address 2" floatLabelType="Always"></ejs-textbox>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6">
-                                    <ejs-dropdownlist [dataSource]="app.states" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.stateId" placeholder="State *" floatLabelType="Always"></ejs-dropdownlist>
+                                <div class="col-md-12 col-lg-10 col-xl-8">                                    
+                                    <ejs-textbox formControlName="city" placeholder="City *" floatLabelType="Always"></ejs-textbox>
+                                    <div *ngIf="this.form.get('city').touched && this.form.get('city').invalid" class="e-error">City is required!</div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div *ngIf="this.form.get('postalCode').touched && this.form.get('postalCode').invalid">
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-lg-5 col-xl-4">                                    
+                                    <ejs-dropdownlist formControlName="state" [dataSource]="app.states" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.stateId" placeholder="State *" floatLabelType="Always"></ejs-dropdownlist>
+                                    <div *ngIf="this.form.get('state').touched && this.form.get('state').invalid" class="e-error">                          
+                                        State is required!
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-5 col-xl-4">                                    
+                                    <ejs-textbox formControlName="postalCode" placeholder="Postal Code *" floatLabelType="Always"></ejs-textbox>
+                                    <div *ngIf="this.form.get('postalCode').touched && this.form.get('postalCode').invalid" class="e-error">
                                         Postal code is required!
                                     </div>
-                                    <ejs-textbox formControlName="postalCode" placeholder="Postal Code *" floatLabelType="Always"></ejs-textbox>
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-6">
+                            <div class="row pad-t20">
+                                <div class="col-md-6 col-lg-5 col-xl-4">
                                     <ejs-textbox readonly="true" [(value)]="record.latitude" placeholder="Latitude" floatLabelType="Always"></ejs-textbox>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 col-lg-5 col-xl-4">
                                     <ejs-textbox readonly="true" [(value)]="record.longitude" placeholder="Longitude" floatLabelType="Always"></ejs-textbox>
                                 </div>
                             </div>
 
                             <div class="row pad-t20">
-                                <div class="col-md-12">
-                                    <div *ngIf="this.form.get('contactName').touched && this.form.get('contactName').invalid">
+                                <div class="col-md-12 col-lg-10 col-xl-8">                                   
+                                    <ejs-textbox formControlName="contactName" [(value)]="record.contactName" placeholder="Contact Name *" floatLabelType="Always"></ejs-textbox>
+                                    <div *ngIf="this.form.get('contactName').touched && this.form.get('contactName').invalid" class="e-error">
                                         Contact name is required!
                                     </div>
-                                    <ejs-textbox formControlName="contactName" [(value)]="record.contactName" placeholder="Contact Name *" floatLabelType="Always"></ejs-textbox>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6 pad-t20">
-                                    <div *ngIf="this.form.get('contactEmail').touched && this.form.get('contactEmail').invalid">
+                                <div class="col-md-6 col-lg-5 col-xl-4">                                    
+                                    <ejs-textbox formControlName="contactEmail" placeholder="Email *" floatLabelType="Always"></ejs-textbox>
+                                    <div *ngIf="this.form.get('contactEmail').touched && this.form.get('contactEmail').invalid" class="e-error">
                                         Email is required!
                                     </div>
-                                    <ejs-textbox formControlName="contactEmail" placeholder="Email *" floatLabelType="Always"></ejs-textbox>
                                 </div>
-                                <div class="col-md-3 pad-t20">
-                                    <div *ngIf="this.form.get('contactPhoneNo').touched && this.form.get('contactPhoneNo').invalid">
+                                <div class="col-md-6 col-lg-5 col-xl-4">                                   
+                                    <ejs-textbox formControlName="contactPhoneNo" placeholder="Phone Number *" floatLabelType="Always"></ejs-textbox>
+                                    <div *ngIf="this.form.get('contactPhoneNo').touched && this.form.get('contactPhoneNo').invalid" class="e-error">
                                         Phone number is required!
                                     </div>
-                                    <ejs-textbox formControlName="contactPhoneNo" placeholder="Phone Number *" floatLabelType="Always"></ejs-textbox>
                                 </div>
 
                             </div>
 
                             <div class="row pad-t20">
-                                <div class="col-md-12">
+                                <div class="col-md-12 col-lg-10 col-xl-8">
                                     <ejs-textbox [(value)]="record.notificationEmail" placeholder="Notification Email(s)" floatLabelType="Always"></ejs-textbox>
                                 </div>
                             </div>
 
-                            <div class="row pad-t20">
-                                <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-10 col-xl-8">
                                     <ejs-textbox [(value)]="record.alerts" placeholder="Alert Phone Number(s)" floatLabelType="Always"></ejs-textbox>
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-12"><label for="notes" class="edit-label">Notes</label></div>
-                                <div class="col-md-12">
+                            <div class="row pad-t20">
+                                <div class="col-md-12 col-lg-10 col-xl-8"><label for="notes" class="edit-label">Notes</label></div>
+                                <div class="col-md-12 col-lg-10 col-xl-8">
                                     <ejs-textbox id="notes" [multiline]='true' #default rows="3" [(value)]="record.notes"></ejs-textbox>
                                 </div>
                             </div>
@@ -139,30 +145,28 @@
                         </ng-template>
                         <ng-template #content>
                             <div class="row d-flex align-items-end">
-                                <div class="col d-flex align-items-end subitem-list-header">
+                                <div class="col d-flex align-items-center subitem-list-header">
                                     <span class="subitem-list-icon"><i class="fas fa-location"></i></span>
                                     <span class="subitem-list-title">Locations</span>
                                     <span class="subitem-list-add"><button ejs-button cssClass="e-outline" [routerLink]="['/auth/location/add', record.id]">+ Add</button></span>
                                 </div>
                             </div>
                             <div class="row pad-b20">
-                                <div class="col-12 pad-t20">
-                                    <ejs-grid [dataSource]='record.locations' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="false" *ngIf="record">
+                                <div class="col-md-12 col-lg-4 col-xl-3 pad-t20">
+                                    <ejs-grid [dataSource]='record.locations' class="edit-grid" [allowPaging]="false" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="false" *ngIf="record">
                                         <e-columns>
                                             <e-column width="70">
                                                 <ng-template #template let-data>
                                                     <a [routerLink]="['/auth/location/edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
                                                 </ng-template>
                                             </e-column>
-                                            <e-column field='name' headerText='Name'></e-column>
+                                            <e-column field='name' headerText='Location Name'></e-column>
+                                            <e-column field='active' headerText='Active' width="90"></e-column>
                                         </e-columns>
                                     </ejs-grid>
                                 </div>
-                            </div>
-
-                            <div class="row pad-b20">
-                                <div class="col-md-12">
-                                    <google-map height="600px" width="1000px" [options]="mapOptions" #map></google-map>
+                                <div class="col-md-12 col-lg-8 col-xl-5 pad-t20">
+                                    <google-map height="500px" width="100%" [options]="mapOptions" #map style="border-width:1px; box-sizing: border-box;"></google-map>
                                 </div>
                             </div>
                         </ng-template>
