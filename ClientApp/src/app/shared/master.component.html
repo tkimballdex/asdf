@@ -24,8 +24,8 @@
                 </ejs-sidebar>
 
                 <ejs-sidebar id="sidebar-option" #contactSidebar width='300px' dockSize='0px' [mediaQuery]='mediaQuery' [target]='target' position="Right" (created)="createdContactSidebar()">
-                    <app-email #emailComponent [hidden]="contactSidebarName != 'email'"></app-email>
-                    <app-sms #smsComponent [hidden]="contactSidebarName != 'sms'"></app-sms>
+                    <app-email #emailComponent [hidden]="contactSidebarName != 'email'" (onClose)="closeContactSidebar()"></app-email>
+                    <app-sms #smsComponent [hidden]="contactSidebarName != 'sms'" (onClose)="closeContactSidebar()"></app-sms>
                 </ejs-sidebar>
 
                 <!-- end of sidebar element -->

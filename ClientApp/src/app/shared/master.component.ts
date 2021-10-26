@@ -87,6 +87,7 @@ export class MasterPageComponent implements OnInit {
 
 		if (privileges.samples.read) {
 			sampleMenu.push({ id: '/auth/sample/list', text: 'Samples' });
+			sampleMenu.push({ id: '/auth/sampletest/import', text: 'Import Tests' });
 			sampleMenu.push({ id: '/auth/sampletest/list', text: 'Tests' });
 		}
 
@@ -171,6 +172,10 @@ export class MasterPageComponent implements OnInit {
 		this.contactSidebarName = 'sms';
 	}
    //-------------------------------------------------------------------------------------
+	public closeContactSidebar() {
+		this.contactSidebar.hide();
+	}
+   //-------------------------------------------------------------------------------------
     public selectMainMenu(args: MenuEventArgs): void {
         if (args.item.id) {
             this.router.navigate([args.item.id]);
@@ -196,7 +201,6 @@ export class MasterPageComponent implements OnInit {
     //-------------------------------------------------------------------------------------
     openClick() {
         this.sidebarMenuInstance.toggle();
-
         this.sidebardisplaysize = this.sidebarMenuInstance.isOpen ? this.sidebarwidth : this.dockSize;
     }
     //-------------------------------------------------------------------------------------

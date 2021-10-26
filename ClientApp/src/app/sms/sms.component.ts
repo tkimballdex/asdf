@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SmsRepository } from './repository';
 import { AppService } from '../shared/app.service';
@@ -15,6 +15,7 @@ export class SmsComponent extends PageComponent implements OnInit {
 
     public list: [];
 	public form: FormGroup;
+	@Output() onClose = new EventEmitter<boolean>();
 
     async ngOnInit() {
         this.app = await this.appService.getData();
@@ -26,7 +27,11 @@ export class SmsComponent extends PageComponent implements OnInit {
 
     setList(list: []) {
         this.list = list;
-    }
+	}
+
+	close() {
+		this.onClose.emit(true);
+	}
 
     async send() {
 		this.form.markAllAsTouched();
