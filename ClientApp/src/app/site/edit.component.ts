@@ -62,10 +62,10 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 
 		this.form = new FormGroup({
 			name: new FormControl(this.record.name, [Validators.required]),
-			frequency: new FormControl(this.record.frequency, [Validators.required]),
+			frequencyId: new FormControl(this.record.frequencyId, [Validators.required]),
 			address: new FormControl(this.record.address, [Validators.required]),
 			city: new FormControl(this.record.city, [Validators.required]),
-			state: new FormControl(this.record.state, [Validators.required]),
+			stateId: new FormControl(this.record.stateId, [Validators.required]),
 			postalCode: new FormControl(this.record.postalCode, [Validators.required]),
 			contactName: new FormControl(this.record.contactName, [Validators.required]),
 			contactEmail: new FormControl(this.record.contactEmail, [Validators.required, Validators.email]),
@@ -139,6 +139,10 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 
 	mapSetup() {
 		var $this = this;
+
+		if (!$this.record.id) {
+			return;
+		}
 
 		if ($this.record.latitude && $this.record.longitude) {
 			$this.mapOptions = { center: { lat: $this.record.latitude, lng: $this.record.longitude } };

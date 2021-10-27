@@ -1,4 +1,4 @@
-<div id="edit-view" *ngIf="record" class="container-fluid" [formGroup]="form">
+<div id="edit-view" *ngIf="record && form" class="container-fluid" [formGroup]="form">
     <div class="row d-flex align-items-center edit-header">
         <div class="col-md-6 d-flex">
             <span class="edit-header-icon"><i class="fas fa-chart-network"></i></span>
@@ -11,7 +11,7 @@
 
     <div class="row pad-t10">
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="name" [(value)]="record.name" required placeholder="Site Name *" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox formControlName="name" required placeholder="Site Name *" floatLabelType="Always"></ejs-textbox>
             <div *ngIf="this.form.get('name').touched && this.form.get('name').invalid" class="e-error">
                 Site Name is required!
             </div>
@@ -32,8 +32,8 @@
                         <ng-template #content>
                             <div class="row">                                
                                 <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-dropdownlist formControlName="frequency" [dataSource]="app.frequencies" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.frequencyId" placeholder="Testing Frequency *" floatLabelType="Always"></ejs-dropdownlist>
-                                    <div *ngIf="this.form.get('frequency').touched && this.form.get('frequency').invalid" class="e-error">                          
+                                    <ejs-dropdownlist formControlName="frequencyId" [dataSource]="app.frequencies" [fields]="{ text: 'name', value: 'id' }" placeholder="Testing Frequency *" floatLabelType="Always"></ejs-dropdownlist>
+                                    <div *ngIf="this.form.get('frequencyId').touched && this.form.get('frequencyId').invalid" class="e-error">                          
                                         Testing Frequency is required!
                                     </div>
                                 </div>
@@ -72,8 +72,8 @@
 
                             <div class="row">
                                 <div class="col-md-6 col-lg-5 col-xl-4">                                    
-                                    <ejs-dropdownlist formControlName="state" [dataSource]="app.states" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.stateId" placeholder="State *" floatLabelType="Always"></ejs-dropdownlist>
-                                    <div *ngIf="this.form.get('state').touched && this.form.get('state').invalid" class="e-error">                          
+                                    <ejs-dropdownlist formControlName="stateId" [dataSource]="app.states" [fields]="{ text: 'name', value: 'id' }" placeholder="State *" floatLabelType="Always"></ejs-dropdownlist>
+                                    <div *ngIf="this.form.get('stateId').touched && this.form.get('stateId').invalid" class="e-error">                          
                                         State is required!
                                     </div>
                                 </div>
@@ -96,7 +96,7 @@
 
                             <div class="row pad-t20">
                                 <div class="col-md-12 col-lg-10 col-xl-8">                                   
-                                    <ejs-textbox formControlName="contactName" [(value)]="record.contactName" placeholder="Contact Name *" floatLabelType="Always"></ejs-textbox>
+                                    <ejs-textbox formControlName="contactName" placeholder="Contact Name *" floatLabelType="Always"></ejs-textbox>
                                     <div *ngIf="this.form.get('contactName').touched && this.form.get('contactName').invalid" class="e-error">
                                         Contact name is required!
                                     </div>
