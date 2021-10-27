@@ -6,7 +6,8 @@ import { PageComponent } from '../shared/page.component';
 
 @Component({
     selector: 'app-sms',
-    templateUrl: './sms.component.html'
+    templateUrl: './sms.component.html',
+	styleUrls: ['./sms.component.css']
 })
 export class SmsComponent extends PageComponent implements OnInit {
 	constructor(private appService: AppService, private repository: SmsRepository) {

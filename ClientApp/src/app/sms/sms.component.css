@@ -1,18 +1,18 @@
-.email-header
+.sms-header
 {
 	font-size: 1.2em;
 }
-.email-header-icon
+.sms-header-icon
 {
 	color: #333333;
 }
-.email-header-title
+.sms-header-title
 {
 	color: #333333;
 	padding-left: 10px;
 	font-weight: 400;	
 }
-.email-close-button
+.sms-close-button
 {
 	background-color: transparent;
 	border-width: 0px;

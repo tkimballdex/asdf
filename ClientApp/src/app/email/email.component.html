@@ -1,11 +1,11 @@
 <div class="pad-20" *ngIf="list" [formGroup]="form">
-    <div class="row d-flex align-items-end">
-        <div class="col-md-6 d-flex align-items-end list-header">
-            <span class="list-header-icon"><i class="fas fa-envelope"></i></span>
-            <span class="list-header-title">Email</span>
+    <div class="row d-flex align-items-center email-header">
+        <div class="col-md-9 d-flex align-items-center">
+            <span class="email-header-icon"><i class="fas fa-envelope"></i></span>
+            <span class="email-header-title">Email</span>
         </div>
-        <div class="col-md-6 d-flex align-items-end justify-content-end list-header">
-            <span class="list-actions" id="close"><button ejs-button cssClass="e-outline" iconCss="fas fa-times" (click)="close()"></button></span>
+        <div class="col-md-3 d-flex align-items-center justify-content-end">
+            <span class="list-actions" id="close"><button ejs-button cssClass="e-flat email-close-button" iconCss="fas fa-times" (click)="close()"></button></span>
         </div>
     </div>
 
@@ -30,8 +30,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6 pad-t10">
-            <button ejs-button cssClass="e-primary" iconCss="fal fa-paper-plane" style='width:130px;' (click)="sendEmail()">Send Email</button>
+        <div class="col-md-12 pad-t10">
+            <button ejs-button cssClass="e-primary" iconCss="fal fa-paper-plane" style='width:150px;' (click)="sendEmail()">Send Email</button>
         </div>
     </div>
 </div>
