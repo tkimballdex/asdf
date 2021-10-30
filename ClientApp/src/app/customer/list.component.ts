@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
-import { GridComponent, ExcelExportProperties, ExcelExportService, Column } from '@syncfusion/ej2-angular-grids';
+import { GridComponent, ExcelExportProperties, ExcelExportService, Column, extend } from '@syncfusion/ej2-angular-grids';
 import { CustomerRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
 import { AppService, EventQueueService, AppEvent, AppEventType } from '../shared/app.service';
@@ -17,14 +17,14 @@ export class CustomerListComponent extends PageComponent implements OnInit {
 		super();
 	}
 	//------------------------------------------------------------------------------------------------------------------------
-	public form: GridFormParams;
+	public form: FormParams;
 	public list: any;
 	@ViewChild('grid') public grid: GridComponent;
 	//------------------------------------------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.privileges = (await this.appService.getPrivileges()).customers;
 		await this.tenant.validate();
-		this.formState.setup(this);
+		this.formState.setup(this, new FormParams());
 		this.search();
 	}
 	//------------------------------------------------------------------------------------------------------------------------
@@ -36,7 +36,11 @@ export class CustomerListComponent extends PageComponent implements OnInit {
 	async search() {
 		this.formState.save(this);
 		this.showSpinner();
-		this.list = await this.repository.list({ tenantId: this.tenant.id, name: this.form['name'] });
+		this.list = await this.repository.list({
+			tenantId: this.tenant.id,
+			name: this.form.name,
+			active: this.form.active
+		});
 		this.hideSpinner();
 	}
 	//----------------------------------------------------------------------------
@@ -77,4 +81,9 @@ export class CustomerListComponent extends PageComponent implements OnInit {
 		this.eventQueue.dispatch(new AppEvent(AppEventType.SendSms, email));
 	}
 	//------------------------------------------------------------------------------------------------------------------------
+}
+
+class FormParams extends GridFormParams {
+	name: string;
+	active: number = 1;
 }

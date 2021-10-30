@@ -54,6 +54,7 @@ export class AppRepository {
 export class AppService {
 	public componentState = {};
 	public readonly GuidEmpty = "00000000-0000-0000-0000-000000000000";
+	public readonly activeStates: IdName[] = [{ id: 0, name: 'All' }, { id: 1, name: 'Active' }, { id: 2, name: 'Inactive' }];
 
 	constructor(private authService: MsalService, private dataRepository: AppRepository, private tenant: TenantService) {
 	}

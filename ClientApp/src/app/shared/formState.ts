@@ -49,11 +49,11 @@ export class FormState {
 		return form;
 	}
 
-	public setup(page: any) {
+	public setup(page: any, form?: GridFormParams) {
 		page.form = this.get(page);
 
 		if (!page.form || !history.state.formState) {
-			page.form = new GridFormParams();
+			page.form = form || new GridFormParams();
 		}
 	}
 }

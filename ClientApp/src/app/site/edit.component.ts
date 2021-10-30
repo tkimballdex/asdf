@@ -63,6 +63,8 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		this.form = new FormGroup({
 			name: new FormControl(this.record.name, [Validators.required]),
 			frequencyId: new FormControl(this.record.frequencyId, [Validators.required]),
+			serviceStartDate: new FormControl(this.record.serviceStartDate ? new Date(this.record.serviceStartDate) : null),
+			serviceEndDate: new FormControl(this.record.serviceEndDate ? new Date(this.record.serviceEndDate) : null),
 			address: new FormControl(this.record.address, [Validators.required]),
 			city: new FormControl(this.record.city, [Validators.required]),
 			stateId: new FormControl(this.record.stateId, [Validators.required]),
@@ -87,8 +89,14 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		var add = !this.record.id;
 		this.showSpinner();
 		this.record.tenantId = this.tenant.id;
-		var returnValue = await this.repository.save(this.record);
-		this.hideSpinner();
+		this.record.numberOfPeople = parseInt(this.record.numberOfPeople, 10);
+
+		try {
+			var returnValue = await this.repository.save(this.record);
+		}
+		finally {
+			this.hideSpinner();
+		}
 
 		if (returnValue && returnValue.error) {
 			this.showErrorMessage(returnValue.description);
@@ -214,5 +222,14 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		};
 
 		return { north, south, east, west };
+	}
+
+	close() {
+		if (history.state.from == 'sites') {
+			this.router.navigate(['/auth/site/list'], { state: { formState: true } });
+		}
+		else {
+			this.router.navigate(['/auth/customer/edit', this.record.customerId], { state: { sites: true } });
+		}
 	}
 }

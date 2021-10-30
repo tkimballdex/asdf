@@ -44,10 +44,10 @@
 
                             <div class="row">
                                 <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-datepicker [(value)]="record.serviceStartDate" placeholder="Service Start Date" floatLabelType="Always"></ejs-datepicker>
+                                    <ejs-datepicker formControlName="serviceStartDate" placeholder="Service Start Date" floatLabelType="Always"></ejs-datepicker>
                                 </div>
                                 <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-datepicker [(value)]="record.serviceEndDate" placeholder="Service End Date" floatLabelType="Always"></ejs-datepicker>
+                                    <ejs-datepicker formControlName="serviceEndDate" placeholder="Service End Date" floatLabelType="Always"></ejs-datepicker>
                                 </div>
                             </div>
 
@@ -183,7 +183,7 @@
 
         <div class="col-md-6 d-flex justify-content-end">
             <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
-            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/customer/edit', record.customerId]" [state]='{ sites: true }'>Close</button>
+            <button ejs-button cssClass="e-outline e-flat close-button" (click)="close()" [state]='{ sites: true }'>Close</button>
         </div>
     </div>
     <ejs-toast #toast></ejs-toast>

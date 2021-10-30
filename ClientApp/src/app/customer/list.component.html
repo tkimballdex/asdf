@@ -1,4 +1,4 @@
-<div id="list-view" class="container-fluid" *ngIf="privileges">
+<div id="list-view" class="container-fluid" *ngIf="form">
     <div class="row d-flex align-items-center">
         <div class="col-md-6 d-flex align-items-center list-header">
             <span class="list-header-icon"><i class="fas fa-users-crown"></i></span>
@@ -11,16 +11,20 @@
             <span class="list-actions"><button ejs-button cssClass="e-outline" iconCss="fad fa-download" (click)="export()"></button></span>
         </div>
     </div>
-    <div class="row d-flex align-items-end list-content">   
+
+    <div class="row d-flex align-items-end list-content">
         <div class="col-3">
             <ejs-textbox [(value)]="form.name" placeholder="Name" floatLabelType="Always"></ejs-textbox>
+        </div>
+        <div class="col-1">
+            <ejs-dropdownlist [dataSource]="appService.activeStates" [(value)]="form.active" [fields]="{ text: 'name', value: 'id' }" placeholder="Active" floatLabelType="Always" (change)="searchClick()"></ejs-dropdownlist>
         </div>
         <div class="col-3">
             <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="searchClick()">Search</button>
         </div>
         <div class="col-12 pad-t20">
             <ejs-grid #grid [dataSource]='list' *ngIf="list" [allowPaging]="true" [pageSettings]='form.pageSettings' [sortSettings]='form.sortSettings'
-                    [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' [allowSorting]="true" [allowFiltering]="false" (actionComplete)='gridActionHandler($event)'>
+                      [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' [allowSorting]="true" [allowFiltering]="false" (actionComplete)='gridActionHandler($event)'>
                 <e-columns>
                     <e-column width="70" [visible]='true'>
                         <ng-template #template let-data>
@@ -38,5 +42,4 @@
             </ejs-grid>
         </div>
     </div>
-    
 </div>
