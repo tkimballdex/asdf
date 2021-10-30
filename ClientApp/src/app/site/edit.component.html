@@ -38,7 +38,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-textbox [(value)]="record.numberOfPeople" placeholder="Number Of People" floatLabelType="Always"></ejs-textbox>
+                                    <ejs-numerictextbox [(value)]="record.numberOfPeople" [validateDecimalOnType]='true' [decimals]="0" format="n" placeholder="Number Of People" floatLabelType="Always"></ejs-numerictextbox>
                                 </div>
                             </div>
 
@@ -139,7 +139,7 @@
                             </div>
                         </ng-template>
                     </e-tabitem>
-                    <e-tabitem>
+                    <e-tabitem *ngIf="record.id">
                         <ng-template #headerText>
                             <div>Locations</div>
                         </ng-template>

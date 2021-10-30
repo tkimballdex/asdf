@@ -89,7 +89,6 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		var add = !this.record.id;
 		this.showSpinner();
 		this.record.tenantId = this.tenant.id;
-		this.record.numberOfPeople = parseInt(this.record.numberOfPeople, 10);
 
 		try {
 			var returnValue = await this.repository.save(this.record);
