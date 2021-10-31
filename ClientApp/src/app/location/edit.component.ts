@@ -34,7 +34,10 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 		this.showSpinner();
 
 		if (id == null) {
-			this.record = { siteId: this.route.snapshot.paramMap.get('siteId') };
+			this.record = {
+				siteId: this.route.snapshot.paramMap.get('siteId'),
+				active: true
+			};
 		}
 		else {
 			this.record = await this.repository.get(id);

@@ -23,6 +23,11 @@ export class PageComponent {
         this.loadEnd = this.loadEnd.bind(this);
     }
 
+	invalidControl(controlName) {
+		var c = this['form'].get(controlName);
+		return c.touched && c.invalid;
+	}
+
 	public loadStart() {
 		this.loading = true;
 	}

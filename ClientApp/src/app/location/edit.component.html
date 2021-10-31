@@ -12,6 +12,9 @@
     <div class="row pad-t10">
         <div class="col-md-12">
             <ejs-textbox formControlName="name" required placeholder="Name *" floatLabelType="Always" enableRtl></ejs-textbox>
+            <div *ngIf="this.invalidControl('name')" class="e-error">
+                Name is required!
+            </div>
         </div>
     </div>
 

@@ -44,7 +44,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 			postalCode: new FormControl(this.record.postalCode, [Validators.required]),
 			website: new FormControl(this.record.website, []),
 			phoneNo: new FormControl(this.record.phoneNo, []),
-			contactName: new FormControl(this.record.contactName, []),
+			contactName: new FormControl(this.record.contactName, [Validators.required]),
 			contactEmail: new FormControl(this.record.contactEmail, [Validators.required, Validators.email]),
 			contactPhoneNo: new FormControl(this.record.contactPhoneNo, [Validators.required]),
 			notificationEmail: new FormControl(this.record.notificationEmail, []),
@@ -84,7 +84,8 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 				}
 
 				if (success && add) {
-					setTimeout(() => this.router.navigate(['/auth/customer/edit', returnValue.id]), 1000);
+					this.record.id = returnValue.id;
+					history.pushState('', '', `/auth/customer/edit/${returnValue.id}`);
 				}
 			}
 		}

@@ -46,19 +46,19 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		var id = this.route.snapshot.paramMap.get('id');
 		var customerId = this.route.snapshot.paramMap.get('customerId');
 
-		this.record = await this.repository.get(id);
-		this.hideSpinner();
-
 		if (id == null) {
-			if(customerId)
-			{
-				var customer = await this.repository.getCustomer(customerId);
-				this.record = {
-					customerId: customerId,
-					customer: customer.name
-				}
+			var customer = await this.repository.getCustomer(customerId);
+			this.record = {
+				customerId: customerId,
+				customer: customer.name,
+				active: true
 			}
 		}
+		else {
+			this.record = await this.repository.get(id);
+		}
+
+		this.hideSpinner();
 
 		this.form = new FormGroup({
 			name: new FormControl(this.record.name, [Validators.required]),
@@ -111,7 +111,8 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		}
 
 		if (success && add) {
-			setTimeout(() => this.router.navigate(['/auth/site/edit', returnValue.id]), 1000);
+			this.record.id = returnValue.id;
+			history.pushState('', '', `/auth/site/edit/${returnValue.id}`);
 		}
 	}
 
