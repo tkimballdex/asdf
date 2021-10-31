@@ -53,59 +53,62 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 		});
 
 		var $this = this;
-		const hasPosition = $this.record.latitude && $this.record.longitude;
-		$this.mapOptions = { center: { lat: $this.data.latitude, lng: $this.data.longitude } };
 
-		setTimeout(function () {
-			const googleMap = $this.map.googleMap;
+		if ($this.data.latitude && $this.data.longitude) {
+			const hasPosition = $this.record.latitude && $this.record.longitude;
+			$this.mapOptions = { center: { lat: $this.data.latitude, lng: $this.data.longitude } };
 
-			if (hasPosition) {
-				$this.siteMarker = new google.maps.Marker({
-					position: { lat: $this.record.latitude, lng: $this.record.longitude },
-					map: $this.map.googleMap,
-					label: $this.record.name
-				});
-			}
+			setTimeout(function () {
+				const googleMap = $this.map.googleMap;
 
-			googleMap.addListener('click', function (event) {
-				$this.record.latitude = event.latLng.lat();
-				$this.record.longitude = event.latLng.lng();
-
-				if ($this.siteMarker) {
-					$this.siteMarker.setMap(null);
+				if (hasPosition) {
+					$this.siteMarker = new google.maps.Marker({
+						position: { lat: $this.record.latitude, lng: $this.record.longitude },
+						map: $this.map.googleMap,
+						label: $this.record.name
+					});
 				}
 
-				$this.siteMarker = new google.maps.Marker({
-					position: { lat: event.latLng.lat(), lng: event.latLng.lng() },
-					map: googleMap,
-					label: $this.record.name
-				});
-			});
+				googleMap.addListener('click', function (event) {
+					$this.record.latitude = event.latLng.lat();
+					$this.record.longitude = event.latLng.lng();
 
-			if ($this.data.boundaries) {
-				var boundaries = JSON.parse($this.data.boundaries);
+					if ($this.siteMarker) {
+						$this.siteMarker.setMap(null);
+					}
 
-				boundaries = boundaries.map(function (x) {
-					return x.map(function (y) {
-						return { lat: y[1], lng: y[0] };
-					});
-				});
-
-				boundaries.forEach(function (boundaries) {
-					new google.maps.Polygon({
+					$this.siteMarker = new google.maps.Marker({
+						position: { lat: event.latLng.lat(), lng: event.latLng.lng() },
 						map: googleMap,
-						paths: boundaries,
-						strokeColor: "#FF0000",
-						strokeOpacity: 0.8,
-						strokeWeight: 2,
-						fillColor: "#FF0000",
-						fillOpacity: 0.35
+						label: $this.record.name
 					});
 				});
 
-				googleMap.fitBounds($this.getBounds(boundaries));
-			}
-		}, 0);
+				if ($this.data.boundaries) {
+					var boundaries = JSON.parse($this.data.boundaries);
+
+					boundaries = boundaries.map(function (x) {
+						return x.map(function (y) {
+							return { lat: y[1], lng: y[0] };
+						});
+					});
+
+					boundaries.forEach(function (boundaries) {
+						new google.maps.Polygon({
+							map: googleMap,
+							paths: boundaries,
+							strokeColor: "#FF0000",
+							strokeOpacity: 0.8,
+							strokeWeight: 2,
+							fillColor: "#FF0000",
+							fillOpacity: 0.35
+						});
+					});
+
+					googleMap.fitBounds($this.getBounds(boundaries));
+				}
+			}, 0);
+		}
 	}
 
 	getBounds(boundaries) {
@@ -182,4 +185,13 @@ export class LocationEditComponent extends PageComponent implements OnInit {
             setTimeout(() => this.router.navigate(['/auth/site/edit', this.record.siteId]), 1000);
         }
     }
+
+	close() {
+		if (history.state.from == 'locations') {
+			this.router.navigate(['/auth/location/list'], { state: { formState: true } });
+		}
+		else {
+			this.router.navigate(['/auth/site/edit', this.record.siteId], { state: { locations: true } });
+		}
+	}
 }

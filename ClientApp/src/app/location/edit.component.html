@@ -20,7 +20,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <ejs-textbox id="edit-site" [(value)]="data.siteName" readonly placeholder="Site" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox id="edit-site" [value]="record.siteName" readonly placeholder="Site" floatLabelType="Always"></ejs-textbox>
         </div>
     </div>
 
@@ -54,7 +54,7 @@
         </div>
     </div>
 
-    <div class="row pad-b20">
+    <div class="row pad-b20" *ngIf="mapOptions">
         <div class="col-md-12">
             <google-map height="600px" width="1000px" [options]="mapOptions" #map></google-map>
         </div>
@@ -67,7 +67,7 @@
 
         <div class="col-md-6 d-flex justify-content-end">
             <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
-            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/site/edit', record.siteId]" [state]="{ locations: true }">Close</button>
+            <button ejs-button cssClass="e-outline e-flat close-button" (click)="close()">Close</button>
         </div>
     </div>
     <ejs-toast #toast></ejs-toast>
