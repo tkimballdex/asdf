@@ -136,7 +136,7 @@
                             </div>
                         </ng-template>
                     </e-tabitem>
-                    <e-tabitem *ngIf="record.id">
+                    <e-tabitem *ngIf="record.id && app.privileges.sites.read">
                         <ng-template #headerText>
                             <div>Sites</div>
                         </ng-template>
@@ -145,7 +145,7 @@
                                 <div class="col-md-12 col-lg-10 col-xl-8 d-flex align-items-center subitem-list-header">
                                     <span class="subitem-list-icon"><i class="fas fa-chart-network"></i></span>
                                     <span class="subitem-list-title">Sites</span>
-                                    <span class="subitem-list-add"><button ejs-button cssClass="e-outline" [routerLink]="['/auth/site/add', record.id]">+ Add</button></span>
+                                    <span class="subitem-list-add"><button ejs-button cssClass="e-outline" [routerLink]="['/auth/site/add', record.id]" [disabled]="!app.privileges.sites.create">+ Add</button></span>
                                 </div>
                             </div>
                             <div class="row">
