@@ -57,7 +57,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
 		MsalModule.forRoot(new PublicClientApplication({
 			auth: {
 				clientId: 'f490d12b-d438-4910-b4bb-3feda316339b',
-				authority: 'https://interomeb2c.b2clogin.com/interomeb2c.onmicrosoft.com/B2C_1_CustomerPortalLogin',
+				authority: 'https://interomeb2c.b2clogin.com/interomeb2c.onmicrosoft.com/B2C_1_CustomerPortalSignIn',
 				redirectUri: window.location.origin + '/auth',
 				knownAuthorities: ['interomeb2c.b2clogin.com']
 			},
