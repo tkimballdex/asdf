@@ -23,9 +23,9 @@
                             <a [routerLink]="['../edit', data.id]" [state]="{ from: 'locations' }"><i class="fas fa-pencil-alt edit-icon"></i></a>
                         </ng-template>
                     </e-column>
-                    <e-column field='customerName' headerText='Customer'></e-column>
-                    <e-column field='siteName' headerText='Site'></e-column>
                     <e-column field='name' headerText='Location'></e-column>
+                    <e-column field='customerName' headerText='Customer Name'></e-column>
+                    <e-column field='siteName' headerText='Site Name'></e-column>
                     <e-column field='sampler' headerText='Sampler'></e-column>
                     <e-column field='serviceStartDate' headerText='Start Date' type='date' format='MM/dd/yyyy' width="120"></e-column>
                 </e-columns>
