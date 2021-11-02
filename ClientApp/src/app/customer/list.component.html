@@ -6,9 +6,9 @@
             <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['../add']" [disabled]="!privileges.create">+ Add</button></span>
         </div>
         <div class="col-md-6 d-flex align-items-center justify-content-end list-header">
-            <span class="list-actions" id="mail"><button ejs-button cssClass="e-outline" iconCss="fas fa-envelope" (click)="sendEmail()"></button></span>
-            <span class="list-actions" id="mail"><button ejs-button cssClass="e-outline" iconCss="fas fa-sms" (click)="sendSms()"></button></span>
-            <span class="list-actions"><button ejs-button cssClass="e-outline" iconCss="fad fa-download" (click)="export()"></button></span>
+            <span class="list-actions" id="mail"><button ejs-button cssClass="e-outline" [disabled]="!privileges.update" iconCss="fas fa-envelope" (click)="sendEmail()"></button></span>
+            <span class="list-actions" id="mail"><button ejs-button cssClass="e-outline" [disabled]="!privileges.update" iconCss="fas fa-sms" (click)="sendSms()"></button></span>
+            <span class="list-actions"><button ejs-button cssClass="e-outline" [disabled]="!privileges.download" iconCss="fad fa-download" (click)="export()"></button></span>
         </div>
     </div>
 
@@ -34,10 +34,12 @@
                     <e-column field='name' headerText='Name'></e-column>
                     <e-column field='address' headerText='Address'></e-column>
                     <e-column field='city' headerText='City'></e-column>
-                    <e-column field='state' headerText='State'></e-column>
-                    <e-column field='postalCode' headerText='Postal Code'></e-column>
-                    <e-column field='phoneNo' headerText='Phone No'></e-column>
+                    <e-column field='state' headerText='State' width="90"></e-column>
+                    <e-column field='postalCode' headerText='Postal Code' textAlign='Center' width="130"></e-column>
+                    <e-column field='phoneNo' headerText='Phone No' width="120"></e-column>
                     <e-column field='contactName' headerText='Contact Name' [visible]='false'></e-column>
+                    <e-column field='sites' headerText='Sites' textAlign='Center' width="90"></e-column>
+                    <e-column field='locations' headerText='Locations' textAlign='Center' width="120"></e-column>
                 </e-columns>
             </ejs-grid>
         </div>
