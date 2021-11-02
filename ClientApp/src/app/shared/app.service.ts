@@ -120,6 +120,7 @@ export interface PrivilegeSet {
 	update: boolean;
 	delete: boolean;
 	approve: boolean;
+	download: boolean;
 }
 
 export interface Privileges {
