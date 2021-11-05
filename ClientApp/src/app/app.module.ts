@@ -98,7 +98,9 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
 					{ path: 'dashboard', loadChildren: () => import('./dashboard/module').then(m => m.DashboardModule) },
 					{ path: 'role', loadChildren: () => import('./role/module').then(m => m.RoleModule) },
 					{ path: 'user', loadChildren: () => import('./user/module').then(m => m.UserModule) },
-					{ path: 'state', loadChildren: () => import('./state/module').then(m => m.StateModule) }
+					{ path: 'state', loadChildren: () => import('./state/module').then(m => m.StateModule) },
+					{ path: 'county', loadChildren: () => import('./county/module').then(m => m.CountyModule) }
+
 				]
 			}
 		], { relativeLinkResolution: 'legacy' }),

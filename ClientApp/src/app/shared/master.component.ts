@@ -128,7 +128,10 @@ export class MasterPageComponent implements OnInit {
 		if (privileges.vendors.read) {
 			manageMenu.push({ id: '/auth/state/list', text: 'State' });
 		}
-	
+
+		if (privileges.vendors.read) {
+			manageMenu.push({ id: '/auth/county/list', text: 'County' });
+		}
 
 		if (privileges.testTypes.read) {
 			manageMenu.push({ id: '/auth/testtype/list', text: 'Test Types' });

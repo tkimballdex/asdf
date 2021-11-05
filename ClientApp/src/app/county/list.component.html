@@ -1,0 +1,39 @@
+<div id="list-view" class="container-fluid" *ngIf="form">
+    <div class="row d-flex align-items-end">
+        <div class="col d-flex align-items-end list-header">
+            <span class="list-header-icon"><i class="fas fa-map-marked"></i></span>
+            <span class="list-header-title">County</span>
+        </div>
+    </div>
+    <div class="row d-flex align-items-end list-content">
+        <div class="col-3">
+            <ejs-textbox [(value)]="form.name" placeholder="Name" floatLabelType="Always"></ejs-textbox>
+        </div>
+        <div class="col-2">
+            <ejs-dropdownlist [dataSource]="app.states" [(value)]="form.stateId" [fields]="{ text: 'name', value: 'id' }" placeholder="State" floatLabelType="Always" (change)="searchClick()"></ejs-dropdownlist>
+        </div>
+        <div class="col-3">
+            <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>
+        </div>
+        <div class="col-12 pad-t20">
+            <ejs-grid [dataSource]='list' [allowPaging]="true" [pageSettings]='form.pageSettings' [sortSettings]='form.sortSettings' [allowSorting]="true" [allowFiltering]="false" *ngIf="list" (actionComplete)='gridActionHandler($event)' #grid>
+                <e-columns>
+                    <e-column width="70">
+                        <ng-template #template let-data>
+                            <a [routerLink]="['../edit', data.id]" [state]="{ from: 'States' }"><i class="fas fa-pencil-alt edit-icon"></i></a>
+                        </ng-template>
+                    </e-column>                    
+                    <e-column field='name' headerText='Name'></e-column>
+                    <e-column field='code' headerText='Code'></e-column>
+                    <e-column field='fipsCode' headerText='Fips code'></e-column>
+                    <e-column field='country' headerText='Country'></e-column>
+                    <e-column field='population' headerText='Population'></e-column>
+                    <e-column field='landArea' headerText='Land Area'></e-column>
+                    <e-column field='waterArea' headerText='Water Area'></e-column>
+
+                </e-columns>
+            </ejs-grid>
+        </div>
+    </div>
+</div>
+

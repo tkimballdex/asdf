@@ -137,6 +137,7 @@ export interface Privileges {
 	vendors: PrivilegeSet;
 	postalcode : PrivilegeSet;
 	state : PrivilegeSet;
+	county:PrivilegeSet
 }
 
 export interface MenuItem {
