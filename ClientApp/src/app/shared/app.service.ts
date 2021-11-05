@@ -135,6 +135,8 @@ export interface Privileges {
 	testTypes: PrivilegeSet;
 	tests: PrivilegeSet;
 	vendors: PrivilegeSet;
+	postalcode : PrivilegeSet;
+	state : PrivilegeSet;
 }
 
 export interface MenuItem {
@@ -144,6 +146,10 @@ export interface MenuItem {
 	path: string;
 }
 
+export interface Country {
+    id: number;
+    name: string;
+}
 export interface State {
     id: number;
     name: string;
@@ -173,7 +179,8 @@ export interface AppData {
 	email: string;
 	userId: string;
     privileges: Privileges;
-    states: State[];
+    countries: Country[];
+	states: State[];
     frequencies: Frequency[];
     vendortypes: VendorType[];
 	menuItems: MenuItem[];

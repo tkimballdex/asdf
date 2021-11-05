@@ -1,0 +1,77 @@
+<div id="edit-view" *ngIf="record && form" [formGroup]="form" class="container-fluid">
+    <div class="row d-flex align-items-center edit-header">
+        <div class="col-md-6 d-flex">
+            <span class="edit-header-icon"><i class="fas fa-postalcode"></i></span>
+            <span class="edit-header-title">Postal Code</span>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end">
+            <ejs-switch [(checked)]="record.active" onLabel="Active" offLabel="Not Active" style="width:100px;height:32px;"></ejs-switch>
+        </div>
+    </div>
+
+    <div class="row pad-t10">
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-textbox formControlName="name" required placeholder="Name *" floatLabelType="Always" enableRtl></ejs-textbox>
+            <div *ngIf="this.invalidControl('name')" class="e-error">
+                Name is required!
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-dropdownlist [(value)]="record.samplerId" [dataSource]="data.samplers" [fields]="{ text: 'name', value: 'id' }" placeholder="Sampler" floatLabelType="Always"></ejs-dropdownlist>
+        </div>
+    </div>
+
+    <div class="row">  
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-textbox id="edit-customer" [value]="record.customerName" readonly placeholder="Customer" floatLabelType="Always"></ejs-textbox>
+        </div>
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-textbox id="edit-site" [value]="record.siteName" readonly placeholder="Site" floatLabelType="Always"></ejs-textbox>
+        </div>        
+    </div>
+
+    <div class="row">  
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-datepicker [(value)]="record.serviceStartDate" placeholder="Service Start Date" floatLabelType="Always"></ejs-datepicker>
+        </div>
+
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-datepicker [(value)]="record.serviceEndDate" placeholder="Service End Date" floatLabelType="Always"></ejs-datepicker>
+        </div>
+    </div>  
+
+    <div class="row pad-t20">
+        <div class="col-md-12 col-lg-10 col-xl-8"><label for="notes" class="edit-label">Notes</label></div>
+        <div class="col-md-12 col-lg-10 col-xl-8">
+            <ejs-textbox id="notes" [multiline]='true' #default rows="3" [(value)]="record.notes"></ejs-textbox>
+        </div>
+    </div>
+
+    <div class="row pad-t10">
+      <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-textbox [(value)]="record.latitude" disabled placeholder="Latitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
+        </div>
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-textbox [(value)]="record.longitude" disabled placeholder="Longitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
+        </div>  
+    </div>
+
+    <div class="row pad-t10 pad-b20" *ngIf="mapOptions">
+        <div class="col-md-12">
+            <google-map height="600px" width="1000px" [options]="mapOptions" #map></google-map>
+        </div>
+    </div>
+
+    <div class="row d-flex edit-footer">
+        <div class="col-md-6 d-flex justify-content-start">
+            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
+        </div>
+
+        <div class="col-md-6 d-flex justify-content-end">
+            <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
+            <button ejs-button cssClass="e-outline e-flat close-button" (click)="close()">Close</button>
+        </div>
+    </div>
+    <ejs-toast #toast></ejs-toast>
+</div>
+
