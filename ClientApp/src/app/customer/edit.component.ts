@@ -43,7 +43,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 			stateId: new FormControl(this.record.stateId, [Validators.required]),
 			postalCode: new FormControl(this.record.postalCode, [Validators.required]),
 			website: new FormControl(this.record.website, []),
-			phoneNo: new FormControl(this.record.phoneNo, []),
+			phoneNo: new FormControl(this.record.phoneNo, [Validators.required]),
 			contactName: new FormControl(this.record.contactName, [Validators.required]),
 			contactEmail: new FormControl(this.record.contactEmail, [Validators.required, Validators.email]),
 			contactPhoneNo: new FormControl(this.record.contactPhoneNo, [Validators.required]),

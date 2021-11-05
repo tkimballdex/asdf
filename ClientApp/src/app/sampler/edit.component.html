@@ -11,55 +11,46 @@
 
     <div class="row pad-t20">
         <div class="col-md-4 col-lg-5 col-xl-4">
+            <ejs-textbox formControlName="samplerName" placeholder="Name" floatLabelType="Always" required></ejs-textbox>
+        </div>
+        <div class="col-md-4 col-lg-5 col-xl-4">
             <ejs-dropdownlist formControlName="customerId" [dataSource]="data.customers" [fields]="{ text: 'name', value: 'id' }" placeholder="Customer *" floatLabelType="Always"></ejs-dropdownlist>
         </div>
-
-        <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-dropdownlist formControlName="samplingTypeId" [dataSource]="data.samplingTypes" [fields]="{ text: 'name', value: 'id' }" placeholder="Sampling Type *" floatLabelType="Always"></ejs-dropdownlist>
-        </div>
-
     </div>
 
-    <div class="row pad-t20">
-        
+    <div class="row pad-t20">        
         <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-datepicker [(value)]="record.purchaseDate" placeholder="Purchase Date" floatLabelType="Always"></ejs-datepicker>
-        </div>
-        <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="brand" placeholder="Brand" floatLabelType="Always" required></ejs-textbox>
-        </div>
-    </div>
-
-
-    <div class="row pad-t20">
-        
-        <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-numerictextbox [(value)]="record.samplingVolume" format='N1' min='0' max='500' step='1' placeholder="Volume" floatLabelType="Always"></ejs-numerictextbox>
+            <ejs-textbox formControlName="modelNo" placeholder="Model No" floatLabelType="Always" required></ejs-textbox>
         </div>
         <div class="col-md-4 col-lg-5 col-xl-4">
             <ejs-textbox formControlName="serialNo" placeholder="Serial No" floatLabelType="Always" required></ejs-textbox>
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-md-4 col-lg-5 col-xl-4">
+            <ejs-textbox formControlName="brand" placeholder="Brand" floatLabelType="Always" required></ejs-textbox>
+        </div>
+        <div class="col-md-4 col-lg-5 col-xl-4">
+            <ejs-datepicker [(value)]="record.purchaseDate" placeholder="Purchase Date" floatLabelType="Always"></ejs-datepicker>
+        </div>        
+    </div>
 
     <div class="row pad-t20">
         <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="modelNo" placeholder="Model No" floatLabelType="Always" required></ejs-textbox>
+            <ejs-dropdownlist formControlName="samplingTypeId" [dataSource]="data.samplingTypes" [fields]="{ text: 'name', value: 'id' }" placeholder="Sampling Type *" floatLabelType="Always"></ejs-dropdownlist>
         </div>
-
         <div class="col-md-4 col-lg-5 col-xl-4">
             <ejs-dropdownlist [(value)]="record.samplingFrequency" [dataSource]="app.frequencies" [fields]="{ text: 'name', value: 'id' }" placeholder="Sampling Frequency *" floatLabelType="Always"></ejs-dropdownlist>
         </div>
     </div>
 
-    <div class="row pad-t20 pad-b10">
+    <div class="row pad-b20">
         <div class="col-md-4 col-lg-5 col-xl-4">
             <ejs-numerictextbox [(value)]="record.samplingDuration" format='N1' min='0' max='500' step='1' placeholder="Sampling Duration" floatLabelType="Always"></ejs-numerictextbox>
-        </div>
-
+        </div>    
         <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-dropdownlist [(value)]="record.samplingFrequency" [dataSource]="app.frequencies" [fields]="{ text: 'name', value: 'id' }" placeholder="Sampling Frequency *" floatLabelType="Always"></ejs-dropdownlist>
-        </div>
+            <ejs-numerictextbox [(value)]="record.samplingVolume" format='N1' min='0' max='500' step='1' placeholder="Volume" floatLabelType="Always"></ejs-numerictextbox>
+        </div>   
     </div>
 
     <div class="row d-flex align-items-center edit-footer">
