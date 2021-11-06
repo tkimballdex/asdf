@@ -14,12 +14,11 @@ export class CountyListComponent extends PageComponent implements OnInit {
 	constructor(private repository: CountyRepository, private appService: AppService, private tenant: TenantService, private formState: FormState) {
         super();
     }
-
+	//----------------------------------------------------------------------------
     public list: any;
 	public form: FormParams;
-
 	@ViewChild('grid') public grid: GridComponent;
-
+	//----------------------------------------------------------------------------
     async ngOnInit() {
 		this.app = await this.appService.getData();
 		
@@ -27,12 +26,12 @@ export class CountyListComponent extends PageComponent implements OnInit {
 		this.formState.setup(this, new FormParams());
 		this.search();
     }
-	//------------------------------------------------------------------------------------------------------------------------
+	//----------------------------------------------------------------------------
 	async searchClick() {
 		this.form.resetGrid(this.grid);
 		this.search();
 	}
-	//------------------------------------------------------------------------------------------------------------------------
+	//----------------------------------------------------------------------------
 	async search() {
 		this.formState.save(this);
 		this.showSpinner();
@@ -48,9 +47,11 @@ export class CountyListComponent extends PageComponent implements OnInit {
 		this.form.gridAction(this.grid, e);
 		this.formState.save(this);
 	}
+	//----------------------------------------------------------------------------
 }
-
+//////////////////////////////////////////////////////////////////////////////////
 class FormParams extends GridFormParams {
 	name: string;
-	stateId: number = 1;
+	stateId: number;
 }
+//////////////////////////////////////////////////////////////////////////////////
