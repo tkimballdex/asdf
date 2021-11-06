@@ -86,15 +86,15 @@ export class MasterPageComponent implements OnInit {
 		var sampleMenu: MenuItemModel[] = [];		
 
 		if (privileges.samples.read) {
-			sampleMenu.push({ id: '/auth/sample/list', text: 'Samples' });
-			sampleMenu.push({ id: '/auth/sampletest/import', text: 'Import Tests' });
+			sampleMenu.push({ id: '/auth/sample/list', text: 'Samples' });			
 			sampleMenu.push({ id: '/auth/sampletest/list', text: 'Tests' });
+			sampleMenu.push({ id: '/auth/sampletest/import', text: 'Import Tests' });
 		}
 
 		if (sampleMenu.length > 0) {
 			this.menuItems.push({
 				text: 'Samples',
-				iconCss: 'fal fa-vials',
+				iconCss: 'fal fa-vial',
 				items: sampleMenu
 			});
 		}
@@ -113,24 +113,12 @@ export class MasterPageComponent implements OnInit {
 			manageMenu.push({ id: '/auth/location/list', text: 'Locations' });
 		}
 
-		if (privileges.customers.read) {
+		if (privileges.locations.read) {
 			manageMenu.push({ id: '/auth/sampler/list', text: 'Samplers' });
 		}
 
 		if (privileges.vendors.read) {
 			manageMenu.push({ id: '/auth/vendor/list', text: 'Vendors' });
-		}
-
-		//if (privileges.postalcode.read) {
-		//	manageMenu.push({ id: '/auth/postalcode/list', text: 'PostalCode' });
-		//}
-
-		if (privileges.vendors.read) {
-			manageMenu.push({ id: '/auth/state/list', text: 'State' });
-		}
-
-		if (privileges.vendors.read) {
-			manageMenu.push({ id: '/auth/county/list', text: 'County' });
 		}
 
 		if (privileges.testTypes.read) {
@@ -146,6 +134,28 @@ export class MasterPageComponent implements OnInit {
 				text: 'Manage',
 				iconCss: 'fal fa-cubes',
 				items: manageMenu
+			});
+		}
+
+		var dataMenu: MenuItemModel[] = [];
+
+		if (privileges.states.read) {
+			dataMenu.push({ id: '/auth/state/list', text: 'States' });
+		}
+
+		if (privileges.counties.read) {
+			dataMenu.push({ id: '/auth/county/list', text: 'Counties' });
+		}
+
+		if (privileges.postalCodes.read) {
+			dataMenu.push({ id: '/auth/postalCode/list', text: 'Postal Codes' });
+		}
+
+		if (dataMenu.length > 0) {
+			this.menuItems.push({
+				text: 'Data',
+				iconCss: 'fal fa-database',
+				items: dataMenu
 			});
 		}
 
@@ -169,7 +179,7 @@ export class MasterPageComponent implements OnInit {
 				iconCss: 'fal fa-cog',
 				items: settingsMenu
 			});
-		}
+		}		
     }
     //-------------------------------------------------------------------------------------
     public openEmailSidebar(data) {

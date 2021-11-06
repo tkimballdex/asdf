@@ -32,7 +32,6 @@ export class EventQueueService {
     }
 }
 
-
 @Injectable({ providedIn: 'root' })
 export class AppRepository {
 	constructor(private http: MsalHttpClient) {
@@ -48,7 +47,6 @@ export class AppRepository {
 		return this.appData;
 	}
 }
-
 
 @Injectable({ providedIn : 'root'})
 export class AppService {
@@ -124,20 +122,21 @@ export interface PrivilegeSet {
 }
 
 export interface Privileges {
-	customers: PrivilegeSet;
-	locations: PrivilegeSet;
+	
 	managePrivileges: PrivilegeSet;
 	manageRoles: PrivilegeSet;
 	manageUsers: PrivilegeSet;
-	newsArticles: PrivilegeSet;
-	samples: PrivilegeSet;
+	newsArticles: PrivilegeSet;	
+	customers: PrivilegeSet;
 	sites: PrivilegeSet;
-	testTypes: PrivilegeSet;
+	locations: PrivilegeSet;	
+	testTypes: PrivilegeSet;	
+	vendors: PrivilegeSet;	
+	samples: PrivilegeSet;
 	tests: PrivilegeSet;
-	vendors: PrivilegeSet;
-	postalcode : PrivilegeSet;
-	state : PrivilegeSet;
-	county:PrivilegeSet
+	states: PrivilegeSet;
+	counties: PrivilegeSet;
+	postalCodes: PrivilegeSet;
 }
 
 export interface MenuItem {

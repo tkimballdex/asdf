@@ -27,7 +27,7 @@ export class CountyEditComponent extends PageComponent implements OnInit {
 		var id = parseInt(this.route.snapshot.paramMap.get('id'));
 
 		this.showSpinner();		
-		this.privileges = (await this.appService.getPrivileges()).county;
+		this.privileges = (await this.appService.getPrivileges()).counties;
 		this.app = await this.appService.getData();
 		this.record = await this.repository.get(id);
 		this.countries = this.app.countries;
