@@ -85,7 +85,6 @@ export class UserEditComponent extends PageComponent implements OnInit {
     }
 
 	async sendPasswordResetLink() {
-		console.dir(this.record);
 		this.showSpinner();
 		var success = await this.repository.sendPasswordResetLink(this.record.id);
 
