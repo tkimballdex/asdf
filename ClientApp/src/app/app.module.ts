@@ -88,6 +88,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
 					{ path: 'customer', loadChildren: () => import('./customer/module').then(m => m.CustomerModule) },
 					{ path: 'site', loadChildren: () => import('./site/module').then(m => m.SiteModule) },
 					{ path: 'location', loadChildren: () => import('./location/module').then(m => m.LocationModule) },
+					{ path: 'postalcode', loadChildren: () => import('./postalcode/module').then(m => m.PostalcodeModule) },
 					{ path: 'newsArticle', loadChildren: () => import('./newsArticle/module').then(m => m.NewsArticleModule) },
 					{ path: 'vendor', loadChildren: () => import('./vendor/module').then(m => m.VendorModule) },
 					{ path: 'testtype', loadChildren: () => import('./testtype/module').then(m => m.TestTypeModule) },
@@ -96,7 +97,10 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
 					{ path: 'sampletest', loadChildren: () => import('./samplestest/module').then(m => m.SampleTestModule) },
 					{ path: 'dashboard', loadChildren: () => import('./dashboard/module').then(m => m.DashboardModule) },
 					{ path: 'role', loadChildren: () => import('./role/module').then(m => m.RoleModule) },
-					{ path: 'user', loadChildren: () => import('./user/module').then(m => m.UserModule) }
+					{ path: 'user', loadChildren: () => import('./user/module').then(m => m.UserModule) },
+					{ path: 'state', loadChildren: () => import('./state/module').then(m => m.StateModule) },
+					{ path: 'county', loadChildren: () => import('./county/module').then(m => m.CountyModule) }
+
 				]
 			}
 		], { relativeLinkResolution: 'legacy' }),

@@ -2,7 +2,7 @@
     <div class="row d-flex align-items-end">
         <div class="col d-flex align-items-end list-header">
             <span class="list-header-icon"><i class="fas fa-location"></i></span>
-            <span class="list-header-title">Locations</span>
+            <span class="list-header-title">Postalcode</span>
         </div>
     </div>
     <div class="row d-flex align-items-end list-content">
@@ -20,10 +20,10 @@
                 <e-columns>
                     <e-column width="70">
                         <ng-template #template let-data>
-                            <a [routerLink]="['../edit', data.id]" [state]="{ from: 'locations' }"><i class="fas fa-pencil-alt edit-icon"></i></a>
+                            <a [routerLink]="['../edit', data.id]" [state]="{ from: 'Postalcode' }"><i class="fas fa-pencil-alt edit-icon"></i></a>
                         </ng-template>
                     </e-column>
-                    <e-column field='name' headerText='Location'></e-column>
+                    <e-column field='name' headerText='Postal Code'></e-column>
                     <e-column field='customerName' headerText='Customer Name'></e-column>
                     <e-column field='siteName' headerText='Site Name'></e-column>
                     <e-column field='sampler' headerText='Sampler'></e-column>

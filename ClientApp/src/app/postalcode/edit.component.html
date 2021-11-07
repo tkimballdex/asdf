@@ -1,8 +1,8 @@
 <div id="edit-view" *ngIf="record && form" [formGroup]="form" class="container-fluid">
     <div class="row d-flex align-items-center edit-header">
         <div class="col-md-6 d-flex">
-            <span class="edit-header-icon"><i class="fas fa-location"></i></span>
-            <span class="edit-header-title">Location</span>
+            <span class="edit-header-icon"><i class="fas fa-postalcode"></i></span>
+            <span class="edit-header-title">Postal Code</span>
         </div>
         <div class="col-md-6 d-flex justify-content-end">
             <ejs-switch [(checked)]="record.active" onLabel="Active" offLabel="Not Active" style="width:100px;height:32px;"></ejs-switch>
@@ -48,12 +48,12 @@
     </div>
 
     <div class="row pad-t10">
-        <div class="col-md-6 col-lg-5 col-xl-4">
+      <div class="col-md-6 col-lg-5 col-xl-4">
             <ejs-textbox [(value)]="record.latitude" disabled placeholder="Latitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
         </div>
         <div class="col-md-6 col-lg-5 col-xl-4">
             <ejs-textbox [(value)]="record.longitude" disabled placeholder="Longitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
-        </div>
+        </div>  
     </div>
 
     <div class="row pad-t10 pad-b20" *ngIf="mapOptions">

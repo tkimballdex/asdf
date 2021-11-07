@@ -1,17 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { GridComponent } from '@syncfusion/ej2-angular-grids';
+import { GridComponent, ExcelExportProperties, ExcelExportService, Column, extend } from '@syncfusion/ej2-angular-grids';
 import { SiteRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
 import { TenantService } from '../shared/tenant.service';
 import { GridFormParams, FormState } from '../shared/formState';
-import { AppService } from '../shared/app.service';
+import { AppService, EventQueueService, AppEvent, AppEventType } from '../shared/app.service';
 
 @Component({
     selector: 'site-list',
     templateUrl: './list.component.html',
+	styleUrls: ['./list.component.scss']
 })
 export class SiteListComponent extends PageComponent implements OnInit {
-	constructor(private repository: SiteRepository, private tenant: TenantService, public appService: AppService, private formState: FormState) {
+	constructor(private repository: SiteRepository, public appService: AppService, private tenant: TenantService, private eventQueue: EventQueueService, private formState: FormState) {
         super();
     }
 
@@ -20,6 +21,7 @@ export class SiteListComponent extends PageComponent implements OnInit {
 	@ViewChild('grid') public grid: GridComponent;
 
     async ngOnInit() {
+		this.privileges = (await this.appService.getPrivileges()).customers;
 		await this.tenant.validate();
 		this.formState.setup(this, new FormParams());
 		this.search();
@@ -45,6 +47,39 @@ export class SiteListComponent extends PageComponent implements OnInit {
 		this.form.gridAction(this.grid, e);
 		this.formState.save(this);
 	}
+	//------------------------------------------------------------------------------------------------------------------------
+	async export() {
+		this.showSpinner();
+
+		(this.grid.columns[0] as Column).visible = false;
+		const excelExportProperties: ExcelExportProperties = {
+			includeHiddenColumn: true,
+			fileName: 'sites.xlsx'
+		};
+		this.grid.excelExport(excelExportProperties);
+
+		this.hideSpinner();
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	excelExportComplete(): void {
+		(this.grid.columns[0] as Column).visible = true;
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	validateEmail(email) {
+		var re = /\S+@\S+\.\S+/;
+		return re.test(email);
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	sendEmail(): void {
+		var emailList = this.list.map(x => { return this.validateEmail(x.contactEmail) ? { name: x.contactName, email: x.contactEmail } : null; }).filter(x => x != null);
+		this.eventQueue.dispatch(new AppEvent(AppEventType.SendEmail, emailList));
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	sendSms(): void {
+		var smsList = this.list.map(x => { return x.phoneNo ? { name: x.contactName, phoneNo: x.contactPhoneNo } : null; }).filter(x => x != null);
+		this.eventQueue.dispatch(new AppEvent(AppEventType.SendSms, smsList));
+	}
+	//------------------------------------------------------------------------------------------------------------------------
 }
 
 class FormParams extends GridFormParams {

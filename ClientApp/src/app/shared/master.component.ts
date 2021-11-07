@@ -86,15 +86,15 @@ export class MasterPageComponent implements OnInit {
 		var sampleMenu: MenuItemModel[] = [];		
 
 		if (privileges.samples.read) {
-			sampleMenu.push({ id: '/auth/sample/list', text: 'Samples' });
-			sampleMenu.push({ id: '/auth/sampletest/import', text: 'Import Tests' });
+			sampleMenu.push({ id: '/auth/sample/list', text: 'Samples' });			
 			sampleMenu.push({ id: '/auth/sampletest/list', text: 'Tests' });
+			sampleMenu.push({ id: '/auth/sampletest/import', text: 'Import Tests' });
 		}
 
 		if (sampleMenu.length > 0) {
 			this.menuItems.push({
 				text: 'Samples',
-				iconCss: 'fal fa-vials',
+				iconCss: 'fal fa-vial',
 				items: sampleMenu
 			});
 		}
@@ -113,7 +113,7 @@ export class MasterPageComponent implements OnInit {
 			manageMenu.push({ id: '/auth/location/list', text: 'Locations' });
 		}
 
-		if (privileges.customers.read) {
+		if (privileges.locations.read) {
 			manageMenu.push({ id: '/auth/sampler/list', text: 'Samplers' });
 		}
 
@@ -137,6 +137,28 @@ export class MasterPageComponent implements OnInit {
 			});
 		}
 
+		var dataMenu: MenuItemModel[] = [];
+
+		if (privileges.states.read) {
+			dataMenu.push({ id: '/auth/state/list', text: 'States' });
+		}
+
+		if (privileges.counties.read) {
+			dataMenu.push({ id: '/auth/county/list', text: 'Counties' });
+		}
+
+		if (privileges.postalCodes.read) {
+			dataMenu.push({ id: '/auth/postalCode/list', text: 'Postal Codes' });
+		}
+
+		if (dataMenu.length > 0) {
+			this.menuItems.push({
+				text: 'Data',
+				iconCss: 'fal fa-database',
+				items: dataMenu
+			});
+		}
+
 		var settingsMenu: MenuItemModel[] = [];
 
 		if (privileges.manageUsers.read) {
@@ -157,7 +179,7 @@ export class MasterPageComponent implements OnInit {
 				iconCss: 'fal fa-cog',
 				items: settingsMenu
 			});
-		}
+		}		
     }
     //-------------------------------------------------------------------------------------
     public openEmailSidebar(data) {

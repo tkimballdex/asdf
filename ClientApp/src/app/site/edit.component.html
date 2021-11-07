@@ -21,6 +21,15 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-datepicker formControlName="serviceStartDate" placeholder="Service Start Date" floatLabelType="Always"></ejs-datepicker>
+        </div>
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-datepicker formControlName="serviceEndDate" placeholder="Service End Date" floatLabelType="Always"></ejs-datepicker>
+        </div>
+    </div>
+
     <div class="row d-flex pad-t20">
         <div class="col-md-12 d-flex">
             <ejs-tab id="edit-tab" class="e-fill" (created)="editTabCreated()" (selected)="selectTab(event)" #editTab>
@@ -41,16 +50,6 @@
                                     <ejs-numerictextbox [(value)]="record.numberOfPeople" [validateDecimalOnType]='true' [decimals]="0" format="n" placeholder="Number Of People" floatLabelType="Always"></ejs-numerictextbox>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-datepicker formControlName="serviceStartDate" placeholder="Service Start Date" floatLabelType="Always"></ejs-datepicker>
-                                </div>
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-datepicker formControlName="serviceEndDate" placeholder="Service End Date" floatLabelType="Always"></ejs-datepicker>
-                                </div>
-                            </div>
-
                             <div class="row pad-t20">
                                 <div class="col-md-12 col-lg-10 col-xl-8">
                                     <ejs-textbox formControlName="address" placeholder="Address *" floatLabelType="Always" contenteditable="false"></ejs-textbox>
@@ -113,7 +112,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-textbox formControlName="contactPhoneNo" placeholder="Phone Number *" floatLabelType="Always"></ejs-textbox>
+                                    <ejs-textbox formControlName="contactPhoneNo" placeholder="Phone Number *" floatLabelType="Always" type="Number" pattern="^[0-9]{10}$"></ejs-textbox>
                                     <div *ngIf="this.invalidControl('contactPhoneNo')" class="e-error">
                                         Phone number is invalid!
                                     </div>

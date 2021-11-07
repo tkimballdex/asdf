@@ -1,0 +1,78 @@
+<div id="edit-view" *ngIf="record && form" [formGroup]="form" class="container-fluid">
+    <div class="row d-flex align-items-center edit-header">
+        <div class="col-md-6 d-flex">
+            <span class="edit-header-icon"><i class="fas fa-map-marked"></i></span>
+            <span class="edit-header-title">County</span>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end">
+            
+        </div>
+    </div>
+
+    <div class="row pad-t10">  
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-textbox id="edit-state" [value]="record.name" formControlName="name"  placeholder="Name" floatLabelType="Always"></ejs-textbox>
+            <div *ngIf="this.invalidControl('name')" class="e-error">
+                Name is required!
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-textbox id="edit-state" [value]="record.code" formControlName="code" placeholder="State Code" floatLabelType="Always"></ejs-textbox>
+            <div *ngIf="this.invalidControl('code')" class="e-error">
+                State Code is required!
+            </div>    
+        </div>        
+    </div>
+
+    <div class="row">  
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-textbox id="edit-state" [value]="record.fipsCode"  formControlName="fipsCode" placeholder="Fips Code" floatLabelType="Always"></ejs-textbox>
+            <div *ngIf="this.invalidControl('fipsCode')" class="e-error">
+                Fips Code is required!
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-dropdownlist [dataSource]="app.countries" formControlName="countryId" [fields]="{ text: 'name', value: 'id' }" placeholder="Country *" floatLabelType="Always"></ejs-dropdownlist>
+            <div *ngIf="this.invalidControl('countryId')" class="e-error">
+                Country is required!
+            </div>
+        </div>       
+    </div>
+
+    <div class="row pad-t20">  
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-numerictextbox [(value)]="record.population" format='N'  step='1' placeholder="Population" floatLabelType="Always"></ejs-numerictextbox>
+        </div>
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-textbox id="edit-state" [value]="record.landarea"  placeholder="Landarea" floatLabelType="Always"></ejs-textbox>
+        </div>        
+    </div>
+
+    <div class="row pad-b20">  
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-textbox id="edit-state" [value]="record.waterArea"  placeholder="Waterarea" floatLabelType="Always"></ejs-textbox>
+        </div>   
+    </div>
+
+
+    <div class="row d-flex edit-footer">
+        <div class="col-md-6 d-flex justify-content-start">
+            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]=false >Save</button>
+        </div>
+
+        <div class="col-md-6 d-flex justify-content-end">
+            <!--<button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>-->
+            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/state/list']" [state]='{ formState: true }'>Close</button>
+        </div>
+    </div>
+
+
+    
+
+
+
+
+    
+    <ejs-toast #toast></ejs-toast>
+</div>
+

@@ -72,13 +72,13 @@ export class CustomerListComponent extends PageComponent implements OnInit {
 	}
 	//------------------------------------------------------------------------------------------------------------------------
 	sendEmail(): void {
-		var email = this.list.map(x => { return this.validateEmail(x.contactEmail) ? { name: x.contactName, email: x.contactEmail } : null; }).filter(x => x != null);
-		this.eventQueue.dispatch(new AppEvent(AppEventType.SendEmail, email));
+		var emailList = this.list.map(x => { return this.validateEmail(x.contactEmail) ? { name: x.contactName, email: x.contactEmail } : null; }).filter(x => x != null);
+		this.eventQueue.dispatch(new AppEvent(AppEventType.SendEmail, emailList));
 	}
 	//------------------------------------------------------------------------------------------------------------------------
 	sendSms(): void {
-		var email = this.list.map(x => { return x.phoneNo ? { name: x.contactName, phoneNo: x.phoneNo } : null; }).filter(x => x != null);
-		this.eventQueue.dispatch(new AppEvent(AppEventType.SendSms, email));
+		var smsList = this.list.map(x => { return x.phoneNo ? { name: x.contactName, phoneNo: x.contactPhoneNo } : null; }).filter(x => x != null);
+		this.eventQueue.dispatch(new AppEvent(AppEventType.SendSms, smsList));
 	}
 	//------------------------------------------------------------------------------------------------------------------------
 }
