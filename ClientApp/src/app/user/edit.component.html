@@ -27,6 +27,12 @@
         </div>
     </div>
 
+    <div class="row d-flex edit-footer" *ngIf="record.id">
+        <div class="col-md-6 d-flex justify-content-start">
+            <button ejs-button cssClass="e-outline e-flat" (click)="sendPasswordResetLink()" [disabled]="loading || !privileges.update" style="width: 300px;">Send Password Reset Link</button>
+        </div>
+    </div>
+
     <div class="row pad-t20">
         <div class="col-md-12"><label for="roles-grid" class="edit-label">User Roles</label></div>
         <div class="col-md-12">
@@ -58,7 +64,7 @@
                     </e-column>
                 </e-columns>
             </ejs-grid>
-        </div>    
+        </div>
     </div>
 
     <div class="row d-flex edit-footer">
@@ -66,6 +72,7 @@
             <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
             <ejs-toast #toast></ejs-toast>
         </div>
+
         <div class="col-md-6 d-flex justify-content-end">
             <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
             <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/user/list']">Close</button>

@@ -21,4 +21,8 @@ export class UserRepository {
     public list(filter: any) {
         return this.http.post(`/user/list`, filter);
     }
+
+	public sendPasswordResetLink(id: string) {
+		return this.http.post<boolean>(`/user/sendPasswordResetLink/${id}`);
+	}
 }

@@ -83,4 +83,19 @@ export class UserEditComponent extends PageComponent implements OnInit {
             setTimeout(() => this.router.navigate(['/auth/user/list']), 1000);
         }
     }
+
+	async sendPasswordResetLink() {
+		console.dir(this.record);
+		this.showSpinner();
+		var success = await this.repository.sendPasswordResetLink(this.record.id);
+
+		if (success) {
+			this.showSuccessMessage(`Sent password reset link to ${this.record.email}!`);
+		}
+		else {
+			this.showErrorMessage('Error!');
+		}
+
+		this.hideSpinner();
+	}
 }
