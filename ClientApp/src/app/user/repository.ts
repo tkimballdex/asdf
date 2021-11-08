@@ -25,4 +25,8 @@ export class UserRepository {
 	public sendPasswordResetLink(id: string) {
 		return this.http.post<boolean>(`/user/sendPasswordResetLink/${id}`);
 	}
+
+	public listCustomers() {
+		return this.http.post(`/customer/list`, {});
+	}
 }

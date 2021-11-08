@@ -28,6 +28,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.sites = [];
 
 		this.analyteId = this.app.analytes[0].id;
+		this.customerId = this.customers[0].id;
 		await this.analyteChange();
 
 		var today = new Date();
