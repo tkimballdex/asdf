@@ -26,7 +26,8 @@ import { NumericTextBoxModule } from '@syncfusion/ej2-angular-inputs';
 		CommonModule, DatePickerModule, SwitchModule, FormsModule, ReactiveFormsModule, GoogleMapsModule, NumericTextBoxModule, 
         RouterModule.forChild([
             { path: 'list', component: CountyListComponent, canActivate: [MsalGuard] },
-           { path: 'edit/:id', component: CountyEditComponent, canActivate: [MsalGuard] },
+            { path: 'add', component: CountyEditComponent, canActivate: [MsalGuard] },
+            { path: 'edit/:id', component: CountyEditComponent, canActivate: [MsalGuard] },
         ])
     ],
     providers: [

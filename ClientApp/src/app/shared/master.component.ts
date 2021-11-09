@@ -148,7 +148,7 @@ export class MasterPageComponent implements OnInit {
 		}
 
 		if (privileges.postalCodes.read) {
-			dataMenu.push({ id: '/auth/postalCode/list', text: 'Postal Codes' });
+			dataMenu.push({ id: '/auth/postalcode/list', text: 'Postal Codes' });
 		}
 
 		if (dataMenu.length > 0) {

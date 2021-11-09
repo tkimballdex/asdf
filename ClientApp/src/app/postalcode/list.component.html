@@ -23,11 +23,11 @@
                             <a [routerLink]="['../edit', data.id]" [state]="{ from: 'Postalcode' }"><i class="fas fa-pencil-alt edit-icon"></i></a>
                         </ng-template>
                     </e-column>
-                    <e-column field='name' headerText='Postal Code'></e-column>
-                    <e-column field='customerName' headerText='Customer Name'></e-column>
-                    <e-column field='siteName' headerText='Site Name'></e-column>
-                    <e-column field='sampler' headerText='Sampler'></e-column>
-                    <e-column field='serviceStartDate' headerText='Start Date' type='date' format='MM/dd/yyyy' width="120"></e-column>
+                    <e-column field='code' headerText='Code'></e-column>
+                    <e-column field='state' headerText='State'></e-column>
+                    <e-column field='landArea' headerText='LandArea'></e-column>
+                    <e-column field='waterArea' headerText='WaterArea'></e-column>
+                    <e-column field='population' headerText='Population'></e-column>
                 </e-columns>
             </ejs-grid>
         </div>

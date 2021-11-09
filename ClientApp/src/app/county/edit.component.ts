@@ -35,9 +35,7 @@ export class CountyEditComponent extends PageComponent implements OnInit {
 
 		this.form = new FormGroup({
 			name: new FormControl(this.record.name, [Validators.required]),
-			fipsCode: new FormControl(this.record.fipsCode, [Validators.required]),
-			countryId: new FormControl(this.record.countryId, [Validators.required]),
-			code: new FormControl(this.record.code, [Validators.required])
+			stateId: new FormControl(this.record.stateId, [Validators.required]),
 		});
 
 		var $this = this;

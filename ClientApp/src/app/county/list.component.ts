@@ -5,6 +5,7 @@ import { PageComponent } from '../shared/page.component';
 import { AppService } from '../shared/app.service';
 import { TenantService } from '../shared/tenant.service';
 import { GridFormParams, FormState } from '../shared/formState';
+import { StateListComponent } from '../state/list.component';
 
 @Component({
     selector: 'county-list',
@@ -16,11 +17,13 @@ export class CountyListComponent extends PageComponent implements OnInit {
     }
 	//----------------------------------------------------------------------------
     public list: any;
+	public states: any;
 	public form: FormParams;
 	@ViewChild('grid') public grid: GridComponent;
 	//----------------------------------------------------------------------------
     async ngOnInit() {
 		this.app = await this.appService.getData();
+		this.privileges = (await this.appService.getPrivileges()).customers;
 		
 		await this.tenant.validate();
 		this.formState.setup(this, new FormParams());

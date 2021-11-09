@@ -1,8 +1,9 @@
 <div id="list-view" class="container-fluid" *ngIf="form">
-    <div class="row d-flex align-items-end">
-        <div class="col d-flex align-items-end list-header">
+    <div class="row d-flex align-items-center">
+        <div class="col d-flex align-items-center list-header">
             <span class="list-header-icon"><i class="fas fa-map-marked"></i></span>
             <span class="list-header-title">States</span>
+            <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['../add']" [disabled]="!privileges.create">+ Add</button></span>
         </div>
     </div>
     <div class="row d-flex align-items-end list-content">
@@ -24,13 +25,13 @@
                         </ng-template>
                     </e-column>                    
                     <e-column field='name' headerText='Name'></e-column>
-                    <e-column field='code' headerText='Code'></e-column>
-                    <e-column field='fipsCode' headerText='Fips code'></e-column>
-                    <e-column field='country' headerText='Country'></e-column>
-                    <e-column field='population' headerText='Population'></e-column>
-                    <e-column field='landArea' headerText='Land Area'></e-column>
-                    <e-column field='waterArea' headerText='Water Area'></e-column>
-
+                    <e-column field='code' headerText='Code' textAlign='Center'></e-column>
+                    <e-column field='fipsCode' headerText='Fips Code' textAlign='Center'></e-column> 
+                    <e-column field='country' headerText='Country' textAlign='Center'></e-column>                     
+                    <e-column field='landArea' headerText='Land Area' textAlign='Right'></e-column>
+                    <e-column field='waterArea' headerText='Water Area' textAlign='Right'></e-column>
+                    <e-column field='population' headerText='Population' textAlign='Right'></e-column>
+                    <e-column field='density' headerText='Pop. Density' textAlign='Right'></e-column>                                      
                 </e-columns>
             </ejs-grid>
         </div>

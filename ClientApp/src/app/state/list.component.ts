@@ -22,6 +22,7 @@ export class StateListComponent extends PageComponent implements OnInit {
 
     async ngOnInit() {
 		this.app = await this.appService.getData();
+		this.privileges = (await this.appService.getPrivileges()).states;
 		
 		await this.tenant.validate();
 		this.formState.setup(this, new FormParams());
