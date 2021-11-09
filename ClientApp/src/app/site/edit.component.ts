@@ -62,7 +62,6 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 
 		this.form = new FormGroup({
 			name: new FormControl(this.record.name, [Validators.required]),
-			frequencyId: new FormControl(this.record.frequencyId, [Validators.required]),
 			serviceStartDate: new FormControl(this.record.serviceStartDate ? new Date(this.record.serviceStartDate) : null),
 			serviceEndDate: new FormControl(this.record.serviceEndDate ? new Date(this.record.serviceEndDate) : null),
 			address: new FormControl(this.record.address, [Validators.required]),

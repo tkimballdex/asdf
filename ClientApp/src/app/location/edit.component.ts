@@ -7,7 +7,7 @@ import { AppService } from "../shared/app.service";
 import { PageComponent } from '../shared/page.component';
 import { TenantService } from '../shared/tenant.service';
 import { LocationRepository } from './repository';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'location-edit',
@@ -31,7 +31,9 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 	async ngOnInit() {
 		this.privileges = (await this.appService.getPrivileges()).locations;
 		var id = this.route.snapshot.paramMap.get('id');
+		
 		this.showSpinner();
+		this.app = await this.appService.getData();
 
 		if (id == null) {
 			this.record = {
@@ -48,8 +50,9 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 		this.data = await this.repository.getData(this.record.siteId);
 		this.hideSpinner();
 
-		this.form = this.fb.group({
-			name: [this.record.name, [Validators.required]]
+		this.form = new FormGroup({
+			name: new FormControl(this.record.name, [Validators.required]),
+			frequencyId: new FormControl(this.record.frequencyId, [Validators.required])
 		});
 
 		var $this = this;

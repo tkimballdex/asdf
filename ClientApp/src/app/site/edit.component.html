@@ -40,12 +40,7 @@
                         </ng-template>
                         <ng-template #content>
                             <div class="row">                                
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-dropdownlist formControlName="frequencyId" [dataSource]="app.frequencies" [fields]="{ text: 'name', value: 'id' }" placeholder="Testing Frequency *" floatLabelType="Always"></ejs-dropdownlist>
-                                    <div *ngIf="this.invalidControl('frequencyId')" class="e-error">
-                                        Testing Frequency is required!
-                                    </div>
-                                </div>
+                                
                                 <div class="col-md-6 col-lg-5 col-xl-4">
                                     <ejs-numerictextbox [(value)]="record.numberOfPeople" [validateDecimalOnType]='true' [decimals]="0" format="n" placeholder="Number Of People" floatLabelType="Always"></ejs-numerictextbox>
                                 </div>
@@ -56,10 +51,7 @@
                                     <div *ngIf="this.invalidControl('address')" class="e-error">
                                         Address is required!
                                     </div>
-                                </div>
-                                <div class="col-md-12 col-lg-10 col-xl-8">
-                                    <ejs-textbox [(value)]="record.address2" placeholder="Address 2" floatLabelType="Always"></ejs-textbox>
-                                </div>
+                                </div>                                
                             </div>
 
                             <div class="row">
