@@ -3,10 +3,13 @@
         <div class="col-md-3">
             <ejs-dropdownlist [dataSource]="customers" [fields]="{ text: 'name', value: 'id' }" [(value)]="customerId" placeholder="Customer" floatLabelType="Always" (change)="customerChange()"></ejs-dropdownlist>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
+            <ejs-multiselect [dataSource]='sites' [fields]="{ text: 'name', value: 'id' }" [(value)]="selectedSites" [mode]='mode' [placeholder]='placeholder' floatLabelType="Always" showClearButton='false' showSelectAll='true' showDropDownIcon='true' (change)="setGraphData()"></ejs-multiselect>
+        </div>
+        <div class="col-md-3">
             <ejs-dropdownlist [dataSource]="app.analytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="analyteId" placeholder="Analyte" floatLabelType="Always" (change)="analyteChange()"></ejs-dropdownlist>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <ejs-daterangepicker placeholder='Select a range' floatLabelType="Always" [(startDate)]='startDate' [(endDate)]='endDate' (change)="dateRangeChange()"></ejs-daterangepicker>
         </div>
     </div>
@@ -15,42 +18,6 @@
         <div class="col-md-12 d-flex">
             <ejs-tab id="edit-tab" class="e-fill" (selected)="setGraphData()" #tab>
                 <e-tabitems>
-                    <e-tabitem>
-                        <ng-template #headerText>
-                            <div>Variants by Location</div>
-                        </ng-template>
-                        <ng-template #content>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <ejs-dropdownlist [dataSource]="sites" [fields]="{ text: 'name', value: 'id' }" [(value)]="siteId" placeholder="Site" floatLabelType="Always" (change)="siteChange()"></ejs-dropdownlist>
-                                </div>
-
-                                <div class="col-md-3" *ngIf="locations">
-                                    <ejs-dropdownlist [dataSource]="locations" [fields]="{ text: 'name', value: 'id' }" [(value)]="locationId" placeholder="Location" floatLabelType="Always" (change)="setGraphDataByLocation()"></ejs-dropdownlist>
-                                </div>
-                            </div>
-                            <div class="row pad-t20">
-                                <div class="col-md-12">
-                                    <ejs-dashboardlayout [allowDragging]='allowDragging' [columns]="2" #editLayout [cellSpacing]='cellSpacing' [cellAspectRatio]='cellAspectRatio'>
-                                        <e-panels>
-                                            <e-panel [sizeX]="2" [sizeY]="2" [row]="1" [col]="0">
-                                                <ng-template #header>
-                                                    <div>Test Variants - Daily Results</div>
-                                                </ng-template>
-                                                <ng-template #content>
-                                                    <div>
-                                                        <ejs-chart id="chartByLocation" height="400px" [primaryXAxis]='primaryXAxis' #chartByLocation>
-                                                        </ejs-chart>
-                                                    </div>
-                                                </ng-template>
-                                            </e-panel>
-                                        </e-panels>
-                                    </ejs-dashboardlayout>
-                                </div>
-                            </div>
-                        </ng-template>
-                    </e-tabitem>
-
                     <e-tabitem>
                         <ng-template #headerText>
                             <div>Locations by Variant</div>
@@ -92,11 +59,6 @@
                         </ng-template>
                         <ng-template #content>
                             <div id="list-view" class="container-fluid pad-t20">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <ejs-multiselect [dataSource]='sites' [fields]="{ text: 'name', value: 'id' }" [(value)]="selectedSites" [mode]='mode' [placeholder]='placeholder' floatLabelType="Always" showClearButton='false' showSelectAll='true' showDropDownIcon='true' (change)="setGraphData()"></ejs-multiselect>
-                                    </div>
-                                </div>
                                 <div class="row pad-t20">
                                     <div class="col-md-12">
                                         <ejs-dashboardlayout [allowDragging]='allowDragging' [columns]="2" #editLayout [cellSpacing]='cellSpacing' [cellAspectRatio]='cellAspectRatio'>
@@ -126,11 +88,6 @@
                         </ng-template>
                         <ng-template #content>
                             <div id="list-view" class="container-fluid pad-t20">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <ejs-multiselect [dataSource]='sites' [fields]="{ text: 'name', value: 'id' }" [(value)]="selectedSitesPositiveNegative" [mode]='mode' [placeholder]='placeholder' floatLabelType="Always" showClearButton='false' showSelectAll='true' showDropDownIcon='true' (change)="setGraphData()"></ejs-multiselect>
-                                    </div>
-                                </div>
                                 <div class="row pad-t20">
                                     <div class="col-md-12">
                                         <ejs-dashboardlayout [allowDragging]='allowDragging' [columns]="2" #editLayout [cellSpacing]='cellSpacing' [cellAspectRatio]='cellAspectRatio'>
@@ -160,11 +117,6 @@
                         </ng-template>
                         <ng-template #content>
                             <div id="list-view" class="container-fluid pad-t20">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <ejs-multiselect [dataSource]='sites' [fields]="{ text: 'name', value: 'id' }" [(value)]="selectedSitesPositive" [mode]='mode' [placeholder]='placeholder' floatLabelType="Always" showClearButton='false' showSelectAll='true' showDropDownIcon='true' (change)="setGraphData()"></ejs-multiselect>
-                                    </div>
-                                </div>
                                 <div class="row pad-t20">
                                     <div class="col-md-12">
                                         <ejs-dashboardlayout [allowDragging]='allowDragging' [columns]="2" #editLayout [cellSpacing]='cellSpacing' [cellAspectRatio]='cellAspectRatio'>
@@ -195,9 +147,6 @@
                         <ng-template #content>
                             <div id="list-view" class="container-fluid pad-t20">
                                 <div class="row">
-                                    <div class="col-md-3">
-                                        <ejs-dropdownlist [dataSource]="sites" [fields]="{ text: 'name', value: 'id' }" [(value)]="siteId" placeholder="Site" floatLabelType="Always" (change)="siteMapChange()"></ejs-dropdownlist>
-                                    </div>
                                     <div class="col-md-1">
                                         <br/>
                                         <button ejs-button (click)="previousSiteMapDate()">Previous</button>

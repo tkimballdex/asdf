@@ -56,16 +56,11 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	public tab: TabComponent;
 
 	public selectedSites: any;
-	public selectedSitesPositiveNegative: any;
-	public selectedSitesPositive: any;
 	public customers: any;
 	public customerId: string;
 	public variantId: string;
 	public variants: any;
 	public sites: any;
-	public siteId: string;
-	public locations: any;
-	public locationId: string;
 	public analyteId: string;
 	public graphData: any;
 	public startDate: Date;
@@ -82,44 +77,20 @@ export class DashboardComponent extends PageComponent implements OnInit {
 
 	async customerChange() {
 		this.sites = [];
-		this.siteId = null;
-		this.locations = null;
-		this.locationId = null;
 		this.sites = await this.repository.listSites(this.customerId);
 		this.selectedSites = this.sites.map(x => x.id);
-		this.selectedSitesPositiveNegative = this.sites.map(x => x.id);
-		this.selectedSitesPositive = this.sites.map(x => x.id);
 		this.setGraphData();
 	}
 
 	async analyteChange() {
 		this.variants = [];
 		this.variants = await this.repository.listVariants(this.analyteId);
+		if (this.variants.length > 0) this.variantId = this.variants[0].id;
 		this.setGraphData();
 	}
 
 	async siteChange() {
-		this.locations = null;
-		this.locationId = null;
-		this.locations = await this.repository.listLocations(this.siteId);
 		this.setGraphData();
-	}
-
-	async setGraphDataByLocation() {
-		if (!this.chartByLocation) return;
-
-		this.chartByLocation.clearSeries();
-		if (!this.locationId || !this.analyteId) return;
-
-		let graphData = await this.repository.locationVariants({
-			locationId: this.locationId,
-			analyteId: this.analyteId,
-			startDate: this.startDate,
-			endDate: this.endDate
-		});
-
-		graphData.forEach(x => { x.type = 'Spline'; x.xName = 'x'; x.yName = 'y'; });
-		this.chartByLocation.addSeries(graphData);
 	}
 
 	async setGraphDataByVariant() {
@@ -168,7 +139,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 			analyteId: this.analyteId,
 			startDate: this.startDate,
 			endDate: this.endDate,
-			sites: this.selectedSitesPositiveNegative
+			sites: this.selectedSites
 		});
 
 		graphData = [
@@ -190,7 +161,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 			analyteId: this.analyteId,
 			startDate: this.startDate,
 			endDate: this.endDate,
-			sites: this.selectedSitesPositive
+			sites: this.selectedSites
 		});
 
 		let graphData: any = data.map(x => { return { type: 'StackingColumn', xName: 'x', yName: 'y', name: x.siteName, dataSource: x.results } });
@@ -201,21 +172,18 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		var $this = this;
 		setTimeout(function () {
 			if ($this.tab.selectedItem == 0) {
-				$this.setGraphDataByLocation();
-			}
-			else if ($this.tab.selectedItem == 1) {
 				$this.setGraphDataByVariant();
 			}
-			else if ($this.tab.selectedItem == 2) {
+			else if ($this.tab.selectedItem == 1) {
 				$this.setGraphDataByPositiveCases();
 			}
-			else if ($this.tab.selectedItem == 3) {
+			else if ($this.tab.selectedItem == 2) {
 				$this.setGraphDataByPositiveNegativeCases();
 			}
-			else if ($this.tab.selectedItem == 4) {
+			else if ($this.tab.selectedItem == 3) {
 				$this.setGraphDataPositiveSites();
 			}
-			else if ($this.tab.selectedItem == 5) {
+			else if ($this.tab.selectedItem == 4) {
 				$this.siteMapChange();
 			}
 		}, 10);
@@ -225,9 +193,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	polygons: google.maps.Polygon[] = [];
 
 	async siteMapChange() {
-		if (!this.siteId || !this.siteMapDate) return;
-
-		var site = await this.repository.getSite({ siteId: this.siteId, analyteId: this.analyteId, date: this.siteMapDate });
+		if (!this.selectedSites || !this.siteMapDate) return;
 
 		var googleMap = this.map.googleMap;
 
@@ -247,43 +213,47 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.polygons = [];
 		var $this = this;
 
-		site.locations.forEach(function (x) {
-			if (x.latitude && x.longitude) {
-				const marker = new google.maps.Marker({
-					position: { lat: x.latitude, lng: x.longitude },
-					map: googleMap,
-					title: x.name,
-					label: x.name,
-					icon: {
-						url: `http://maps.google.com/mapfiles/ms/icons/${x.positive ? 'red' : x.negative ? 'blue' : 'yellow'}-dot.png`
-					}
-				});
+		$this.selectedSites.forEach(async function (siteId) {
+			var site = await $this.repository.getSite({ siteId: siteId, analyteId: $this.analyteId, date: $this.siteMapDate });
 
-				$this.markers.push(marker);
+			site.locations.forEach(function (x) {
+				if (x.latitude && x.longitude) {
+					const marker = new google.maps.Marker({
+						position: { lat: x.latitude, lng: x.longitude },
+						map: googleMap,
+						title: x.name,
+						label: x.name,
+						icon: {
+							url: `http://maps.google.com/mapfiles/ms/icons/${x.positive ? 'red' : x.negative ? 'blue' : 'yellow'}-dot.png`
+						}
+					});
 
-				marker.addListener('click', () => {
-					infoWindow.open(googleMap, marker);
+					$this.markers.push(marker);
+
+					marker.addListener('click', () => {
+						infoWindow.open(googleMap, marker);
+					});
+				}
+			});
+
+			if (site.boundaries) {
+				site.boundaries.forEach(function (boundaries) {
+					$this.polygons.push(new google.maps.Polygon({
+						map: googleMap,
+						paths: boundaries,
+						strokeColor: "#FF0000",
+						strokeOpacity: 0.8,
+						strokeWeight: 2,
+						fillColor: "#FF0000",
+						fillOpacity: 0.35
+					}));
 				});
 			}
+
+			if ($this.markers.length) {
+				googleMap.fitBounds($this.getBounds($this.markers));
+			}
 		});
-
-		if (site.boundaries) {
-			site.boundaries.forEach(function (boundaries) {
-				$this.polygons.push(new google.maps.Polygon({
-					map: googleMap,
-					paths: boundaries,
-					strokeColor: "#FF0000",
-					strokeOpacity: 0.8,
-					strokeWeight: 2,
-					fillColor: "#FF0000",
-					fillOpacity: 0.35
-				}));
-			});
-		}
-
-		if (this.markers.length) {
-			googleMap.fitBounds(this.getBounds(this.markers));
-		}
 	}
 
 	getBounds(markers) {
@@ -305,7 +275,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	@ViewChild(GoogleMap) map!: GoogleMap;
 
 	dateRangeChange() {
-		this.siteMapDate = new Date(this.startDate);
+		this.siteMapDate = new Date(this.endDate);
 		this.setGraphData();
 	}
 
