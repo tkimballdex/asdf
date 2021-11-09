@@ -20,14 +20,16 @@
                 <e-columns>
                     <e-column width="70">
                         <ng-template #template let-data>
-                            <a [routerLink]="['../edit', data.id]" [state]="{ from: 'Postalcode' }"><i class="fas fa-pencil-alt edit-icon"></i></a>
+                            <a [routerLink]="['../edit', data.id]" [state]="{ from: 'postalCode' }"><i class="fas fa-pencil-alt edit-icon"></i></a>
                         </ng-template>
                     </e-column>
                     <e-column field='code' headerText='Code'></e-column>
                     <e-column field='state' headerText='State'></e-column>
+                    <e-column field='country' headerText='Country'></e-column>
                     <e-column field='landArea' headerText='LandArea'></e-column>
                     <e-column field='waterArea' headerText='WaterArea'></e-column>
                     <e-column field='population' headerText='Population'></e-column>
+                    <e-column field='density' headerText='Density'></e-column>
                 </e-columns>
             </ejs-grid>
         </div>

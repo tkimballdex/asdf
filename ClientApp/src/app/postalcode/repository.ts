@@ -10,19 +10,15 @@ export class PostalcodeRepository {
         return this.http.post<any>(`/postalcode/save`, record);
     }
 
-    public delete(id: string) {
+    public delete(id: number) {
         return this.http.post<any>(`/postalcode/delete/${id}`);
     }
 
-    public get(id: string) {
+    public get(id: number) {
         return this.http.post(`/postalcode/get/${id}`);
     }
 
     public list(filter: any) {
         return this.http.post(`/postalcode/list`, filter);
     }
-
-	public getData(siteId: any) {
-		return this.http.post(`/postalcode/getData/${siteId}`);
-	}
 }

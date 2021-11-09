@@ -14,6 +14,7 @@ import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NumericTextBoxModule } from '@syncfusion/ej2-angular-inputs';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ],
     imports: [
         GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule,
-		CommonModule, DatePickerModule, SwitchModule, FormsModule, ReactiveFormsModule, GoogleMapsModule,
+		CommonModule, DatePickerModule, SwitchModule, FormsModule, ReactiveFormsModule, GoogleMapsModule,NumericTextBoxModule,
         RouterModule.forChild([
             { path: 'list', component: PostalcodeListComponent, canActivate: [MsalGuard] },
             { path: 'add/:siteId', component: PostalcodeEditComponent, canActivate: [MsalGuard] },
