@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { GridComponent } from '@syncfusion/ej2-angular-grids';
+import { GridComponent, ExcelExportProperties, ExcelExportService, Column, extend } from '@syncfusion/ej2-angular-grids';
 import { StateRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
 import { AppService } from '../shared/app.service';
@@ -43,6 +43,23 @@ export class StateListComponent extends PageComponent implements OnInit {
 			countryId: this.form.countryId
 		});
 		this.hideSpinner();
+	}
+
+	async export() {
+		this.showSpinner();
+
+		(this.grid.columns[0] as Column).visible = false;
+		const excelExportProperties: ExcelExportProperties = {
+			includeHiddenColumn: true,
+			fileName: 'states.xlsx'
+		};
+		this.grid.excelExport(excelExportProperties);
+
+		this.hideSpinner();
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	excelExportComplete(): void {
+		(this.grid.columns[0] as Column).visible = true;
 	}
 	//----------------------------------------------------------------------------
 	gridActionHandler(e) {

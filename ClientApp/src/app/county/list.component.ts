@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { GridComponent } from '@syncfusion/ej2-angular-grids';
+import { GridComponent, ExcelExportProperties, ExcelExportService, Column, extend } from '@syncfusion/ej2-angular-grids';
 import { CountyRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
 import { AppService } from '../shared/app.service';
@@ -44,6 +44,22 @@ export class CountyListComponent extends PageComponent implements OnInit {
 			stateId: this.form.stateId
 		});
 		this.hideSpinner();
+	}
+	async export() {
+		this.showSpinner();
+
+		(this.grid.columns[0] as Column).visible = false;
+		const excelExportProperties: ExcelExportProperties = {
+			includeHiddenColumn: true,
+			fileName: 'counties.xlsx'
+		};
+		this.grid.excelExport(excelExportProperties);
+
+		this.hideSpinner();
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	excelExportComplete(): void {
+		(this.grid.columns[0] as Column).visible = true;
 	}
 	//----------------------------------------------------------------------------
 	gridActionHandler(e) {
