@@ -26,19 +26,16 @@ export class StateEditComponent extends PageComponent implements OnInit {
 	async ngOnInit() {
 		var id = parseInt(this.route.snapshot.paramMap.get('id'));
 
-		this.showSpinner();		
-		this.privileges = (await this.appService.getPrivileges()).states;
+		this.showSpinner();	
 		this.app = await this.appService.getData();
+		this.privileges = (await this.appService.getPrivileges()).states;
 		this.record = await this.repository.get(id);
-		this.countries = this.app.countries;
 		this.hideSpinner();			
 
 		this.form = new FormGroup({
 			name: new FormControl(this.record.name, [Validators.required]),
-			fipsCode: new FormControl(this.record.fipsCode, [Validators.required]),
 			countryId: new FormControl(this.record.countryId, [Validators.required]),
-			code: new FormControl(this.record.code, [Validators.required]),
-			geoId: new FormControl(this.record.geoId, [Validators.required])
+			code: new FormControl(this.record.code, [Validators.required])
 		});
 
 		var $this = this;
