@@ -37,7 +37,8 @@ export class StateEditComponent extends PageComponent implements OnInit {
 			name: new FormControl(this.record.name, [Validators.required]),
 			fipsCode: new FormControl(this.record.fipsCode, [Validators.required]),
 			countryId: new FormControl(this.record.countryId, [Validators.required]),
-			code: new FormControl(this.record.code, [Validators.required])
+			code: new FormControl(this.record.code, [Validators.required]),
+			geoId: new FormControl(this.record.geoId, [Validators.required])
 		});
 
 		var $this = this;

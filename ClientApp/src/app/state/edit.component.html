@@ -26,7 +26,7 @@
 
     <div class="row">  
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-state" [value]="record.fipsCode"  formControlName="fipsCode" placeholder="Fips Code" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox id="edit-state" [value]="record.fipsCode"  formControlName="fipsCode" maxlength="3" placeholder="Fips Code" floatLabelType="Always"></ejs-textbox>
             <div *ngIf="this.invalidControl('fipsCode')" class="e-error">
                 Fips Code is required!
             </div>
@@ -44,14 +44,39 @@
             <ejs-numerictextbox [(value)]="record.population" format='N'  step='1' placeholder="Population" floatLabelType="Always"></ejs-numerictextbox>
         </div>
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-state" [value]="record.landarea"  placeholder="Landarea" floatLabelType="Always"></ejs-textbox>
+            <!--<ejs-textbox id="edit-state" [value]="record.landarea"  placeholder="Landarea" floatLabelType="Always"></ejs-textbox>-->
+            <ejs-numerictextbox [(value)]="record.landarea" format='N'  step='1' placeholder="Landarea" floatLabelType="Always"></ejs-numerictextbox>
         </div>        
     </div>
 
     <div class="row pad-b20">  
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-state" [value]="record.waterArea"  placeholder="Waterarea" floatLabelType="Always"></ejs-textbox>
+            <!--<ejs-textbox id="edit-state" [value]="record.waterArea"  placeholder="Waterarea" floatLabelType="Always"></ejs-textbox>-->
+            <ejs-numerictextbox [(value)]="record.waterArea" format='N'  step='1' placeholder="Waterarea" floatLabelType="Always"></ejs-numerictextbox>
         </div>   
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-textbox id="edit-geoId" [value]="record.geoId"  formControlName="geoId" maxlength="4" placeholder="Geo Id" floatLabelType="Always"></ejs-textbox>
+            <div *ngIf="this.invalidControl('geoId')" class="e-error">
+                Geo Id is required!
+            </div>
+        </div>    
+    </div>
+
+    <div class="row pad-b20">
+        <div class="col-md-12 col-lg-10 col-xl-8"><label for="notes" class="edit-label">Boundaries</label></div>
+        <div class="col-md-12 col-lg-10 col-xl-8">
+            <ejs-textbox id="notes" [multiline]='true' #default rows="3" [(value)]="record.boundaries"></ejs-textbox>
+        </div>
+    </div>
+
+    <div class="row pad-b20">  
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-textbox id="edit-state" [value]="record.dwellings"  placeholder="Dwellings" floatLabelType="Always"></ejs-textbox>
+        </div>   
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-numerictextbox [(value)]="record.density" validateDecimalOnType="true" id="numeric" value="12" max="99999" [decimals]="4" maxlength="10" step ="0.0001" placeholder="Density" floatLabelType="Always"></ejs-numerictextbox>
+            <!--<ejs-numerictextbox [(value)]="record.density" format='#####.####' max='99999' min='0' step='0.0001' placeholder="Density" floatLabelType="Always"></ejs-numerictextbox>-->
+        </div>  
     </div>
 
 

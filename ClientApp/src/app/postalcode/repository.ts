@@ -7,22 +7,22 @@ export class PostalcodeRepository {
     }
 
     public save(record: any) {
-        return this.http.post<any>(`/location/save`, record);
+        return this.http.post<any>(`/postalcode/save`, record);
     }
 
     public delete(id: string) {
-        return this.http.post<any>(`/location/delete/${id}`);
+        return this.http.post<any>(`/postalcode/delete/${id}`);
     }
 
     public get(id: string) {
-        return this.http.post(`/location/get/${id}`);
+        return this.http.post(`/postalcode/get/${id}`);
     }
 
     public list(filter: any) {
-        return this.http.post(`/location/list`, filter);
+        return this.http.post(`/postalcode/list`, filter);
     }
 
 	public getData(siteId: any) {
-		return this.http.post(`/location/getData/${siteId}`);
+		return this.http.post(`/postalcode/getData/${siteId}`);
 	}
 }

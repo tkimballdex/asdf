@@ -154,6 +154,10 @@ export interface State {
     id: number;
     name: string;
 }
+export interface Postalcode {
+    id: number;
+    name: string;
+}
 
 export interface Frequency {
     id: number;
@@ -186,4 +190,5 @@ export interface AppData {
 	menuItems: MenuItem[];
 	tenants: Tenant[];
 	analytes: UidName[]; 
+	Postalcodes:Postalcode[];
 }
