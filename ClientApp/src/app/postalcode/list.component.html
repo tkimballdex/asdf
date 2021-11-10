@@ -9,8 +9,8 @@
         <div class="col-3">
             <ejs-textbox [(value)]="form.name" placeholder="Name" floatLabelType="Always"></ejs-textbox>
         </div>
-        <div class="col-1">
-            <ejs-dropdownlist [dataSource]="appService.activeStates" [(value)]="form.active" [fields]="{ text: 'name', value: 'id' }" placeholder="Active" floatLabelType="Always" (change)="searchClick()"></ejs-dropdownlist>
+        <div class="col-2">
+            <ejs-dropdownlist [dataSource]="app.states" [(value)]="form.stateId" [fields]="{ text: 'name', value: 'id' }" placeholder="State" floatLabelType="Always" (change)="searchClick()"></ejs-dropdownlist>
         </div>
         <div class="col-3">
             <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>
@@ -20,7 +20,7 @@
                 <e-columns>
                     <e-column width="70">
                         <ng-template #template let-data>
-                            <a [routerLink]="['../edit', data.id]" [state]="{ from: 'postalCode' }"><i class="fas fa-pencil-alt edit-icon"></i></a>
+                            <a [routerLink]="['../edit', data.id]" [state]="{ from: 'States' }"><i class="fas fa-pencil-alt edit-icon"></i></a>
                         </ng-template>
                     </e-column>
                     <e-column field='code' headerText='Code'></e-column>

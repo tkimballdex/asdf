@@ -5,6 +5,7 @@ import { PageComponent } from '../shared/page.component';
 import { AppService } from '../shared/app.service';
 import { TenantService } from '../shared/tenant.service';
 import { GridFormParams, FormState } from '../shared/formState';
+import { StateListComponent } from '../state/list.component';
 
 @Component({
     selector: 'postalcode-list',
@@ -16,11 +17,15 @@ export class PostalcodeListComponent extends PageComponent implements OnInit {
     }
 
     public list: any;
+	public states: any;
 	public form: FormParams;
 
 	@ViewChild('grid') public grid: GridComponent;
 
     async ngOnInit() {
+		this.app = await this.appService.getData();
+		this.privileges = (await this.appService.getPrivileges()).customers;
+	
 		await this.tenant.validate();
 		this.formState.setup(this, new FormParams());
 		this.search();
@@ -37,7 +42,7 @@ export class PostalcodeListComponent extends PageComponent implements OnInit {
 		this.list = await this.repository.list({
 			tenantId: this.tenant.id,
 			name: this.form.name,
-			active: this.form.active
+			stateId: this.form.stateId
 		});
 		this.hideSpinner();
 	}
@@ -50,5 +55,5 @@ export class PostalcodeListComponent extends PageComponent implements OnInit {
 
 class FormParams extends GridFormParams {
 	name: string;
-	active: number = 1;
+	stateId: number;
 }

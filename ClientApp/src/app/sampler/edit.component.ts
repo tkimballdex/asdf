@@ -44,7 +44,9 @@ export class SamplerEditComponent extends PageComponent implements OnInit {
 			samplingTypeId: new FormControl(this.record.samplingTypeId, [Validators.required]),
 			modelNo: new FormControl(this.record.modelNo, [Validators.required]),
 			brand: new FormControl(this.record.brand, [Validators.required]),
-			serialNo: new FormControl(this.record.serialNo, [Validators.required])
+			serialNo: new FormControl(this.record.serialNo, [Validators.required]),
+			assetNo: new FormControl(this.record.assetNo, [Validators.required]),
+			name: new FormControl(this.record.name, [Validators.required])
 		});
 	}
 	//-----------------------------------------------------------------------------------------
