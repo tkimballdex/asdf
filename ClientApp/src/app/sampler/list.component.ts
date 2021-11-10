@@ -3,6 +3,7 @@ import { GridComponent, ExcelExportProperties, ExcelExportService, Column } from
 import { SamplerRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
 import { TenantService } from '../shared/tenant.service';
+import { GridFormParams, FormState } from '../shared/formState';
 
 @Component({
     selector: 'sampler-list',
@@ -10,17 +11,19 @@ import { TenantService } from '../shared/tenant.service';
 })
 export class SamplerListComponent extends PageComponent implements OnInit {
 
-	constructor(private repository: SamplerRepository, private tenant: TenantService) {
+	constructor(private repository: SamplerRepository, private tenant: TenantService, private formState: FormState) {
         super();
     }
     //------------------------------------------------------------------------------------------------------------------------
+	public form: FormParams;
     public list: any;
-    public name: any;
     public dateFormat: any;
     @ViewChild('grid') public grid: GridComponent;
     //------------------------------------------------------------------------------------------------------------------------
     async ngOnInit() {
+		await this.tenant.validate();
         this.dateFormat = {type:'date', format:'MM/dd/yyyy'};
+		this.formState.setup(this, new FormParams());
 
         if (this.tenant.id) {
             this.search();
@@ -28,11 +31,17 @@ export class SamplerListComponent extends PageComponent implements OnInit {
     }
     //------------------------------------------------------------------------------------------------------------------------
     async search() {
+		this.formState.save(this);
         this.showSpinner();
-        this.list = await this.repository.list({ tenantId: this.tenant.id, name: this.name });
+        this.list = await this.repository.list({ tenantId: this.tenant.id, name: this.form.name });
         this.hideSpinner();
     }
-    //------------------------------------------------------------------------------------------------------------------------
+	//----------------------------------------------------------------------------
+	gridActionHandler(e) {
+		this.form.gridAction(this.grid, e);
+		this.formState.save(this);
+	}
+   //------------------------------------------------------------------------------------------------------------------------
     async export() {
         this.showSpinner();
 
@@ -50,4 +59,8 @@ export class SamplerListComponent extends PageComponent implements OnInit {
         (this.grid.columns[0] as Column).visible = true;
     }
     //------------------------------------------------------------------------------------------------------------------------
+}
+
+class FormParams extends GridFormParams {
+	name: string;
 }

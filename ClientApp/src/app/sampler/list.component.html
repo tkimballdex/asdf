@@ -1,4 +1,4 @@
-<div id="list-view" class="container-fluid">
+<div id="list-view" class="container-fluid" *ngIf="form">
     <div class="row d-flex align-items-end">
         <div class="col-md-6 d-flex align-items-center list-header">
             <span class="list-header-icon"><i class="fas fa-vials"></i></span>
@@ -11,7 +11,7 @@
     </div>
     <div class="row d-flex align-items-end">
         <div class="col-3">
-            <ejs-textbox [(value)]="name" placeholder="Name" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox [(value)]="form.name" placeholder="Name" floatLabelType="Always"></ejs-textbox>
         </div>
         <div class="col-3">
             <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>
@@ -19,7 +19,7 @@
     </div>
     <div class="row">
         <div class="col-12 pad-t20">
-            <ejs-grid #grid [dataSource]='list' *ngIf="list" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }'
+            <ejs-grid #grid [dataSource]='list' *ngIf="list" [allowPaging]="true" [pageSettings]='form.pageSettings' [sortSettings]='form.sortSettings' (actionComplete)='gridActionHandler($event)'
                       [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' [allowSorting]="true" [allowFiltering]="false">
                 <e-columns>
                     <e-column width="70" [visible]='true'>

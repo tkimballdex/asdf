@@ -21,8 +21,8 @@
             <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="searchClick()">Search</button>
         </div>
         <div class="col-12 pad-t20">
-            <ejs-grid #grid [dataSource]='list' *ngIf="list" [allowPaging]="true" [pageSettings]='form.pageSettings' [sortSettings]='form.sortSettings'
-                      [allowExcelExport]='true' [allowSorting]="true" [allowFiltering]="false" (actionComplete)='gridActionHandler($event)'>
+            <ejs-grid #grid [dataSource]='list' *ngIf="list" [allowPaging]="true" [pageSettings]='form.pageSettings' [sortSettings]='form.sortSettings' (actionComplete)='gridActionHandler($event)'
+                      [allowExcelExport]='true' [allowSorting]="true" [allowFiltering]="false">
                 <e-columns>
                     <e-column width="70">
                         <ng-template #template let-data>
