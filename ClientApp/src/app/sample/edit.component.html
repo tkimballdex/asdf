@@ -12,22 +12,39 @@
     <div class="row pad-t20">
         <div class="col-md-6 col-lg-5 col-xl-4 pad-b20">
             <ejs-textbox formControlName="referenceNo" placeholder="Reference No*" floatLabelType="Always" required></ejs-textbox>
+            <div *ngIf="this.invalidControl('referenceNo')" class="e-error">
+                Reference No is required!
+            </div>
         </div>
 
         <div class="col-md-6 col-lg-5 col-xl-4">
             <ejs-datepicker formControlName="scheduledDate" placeholder="Scheduled Date*" floatLabelType="Always" required></ejs-datepicker>
+            <div *ngIf="this.invalidControl('scheduledDate')" class="e-error">
+                Scheduled Date is required!
+            </div>
         </div>
     </div>
 
     <div class="row pad-t10" *ngIf="!record.id">
         <div class="col-md-4">
             <ejs-dropdownlist [dataSource]="customers" [fields]="{ text: 'name', value: 'id' }" formControlName="customerId" placeholder="Customer*" floatLabelType="Always" (change)="customerChange()"></ejs-dropdownlist>
+            <div *ngIf="this.invalidControl('customerId')" class="e-error">
+                Customer is required!
+            </div>
         </div>
+
         <div class="col-md-4" *ngIf="sites">
             <ejs-dropdownlist [dataSource]="sites" [fields]="{ text: 'name', value: 'id' }" formControlName="siteId" placeholder="Site*" floatLabelType="Always" (change)="siteChange()"></ejs-dropdownlist>
+            <div *ngIf="this.invalidControl('siteId')" class="e-error">
+                Site is required!
+            </div>
         </div>
+
         <div class="col-md-4" *ngIf="locations">
             <ejs-dropdownlist [dataSource]="locations" [fields]="{ text: 'name', value: 'id' }" formControlName="locationId" placeholder="Location*" floatLabelType="Always"></ejs-dropdownlist>
+            <div *ngIf="this.invalidControl('locationId')" class="e-error">
+                Location is required!
+            </div>
         </div>
     </div>
 
@@ -56,6 +73,9 @@
                             <div class="row pad-t20">
                                 <div class="col-md-8">
                                     <ejs-dropdownlist [dataSource]="vendors" [fields]="{ text: 'name', value: 'id' }" formControlName="logisticVendorId" placeholder="Logistics Vendor*" floatLabelType="Always"></ejs-dropdownlist>
+                                    <div *ngIf="this.invalidControl('logisticVendorId')" class="e-error">
+                                        Logistics Vendor is required!
+                                    </div>
                                 </div>
                             </div>
 

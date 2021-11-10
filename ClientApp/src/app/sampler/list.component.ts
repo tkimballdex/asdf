@@ -24,10 +24,7 @@ export class SamplerListComponent extends PageComponent implements OnInit {
 		await this.tenant.validate();
         this.dateFormat = {type:'date', format:'MM/dd/yyyy'};
 		this.formState.setup(this, new FormParams());
-
-        if (this.tenant.id) {
-            this.search();
-        }
+        this.search();
     }
     //------------------------------------------------------------------------------------------------------------------------
     async search() {

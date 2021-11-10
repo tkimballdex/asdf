@@ -4,6 +4,7 @@ import { SampleRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
 import { TenantService } from '../shared/tenant.service';
 import { AppService } from '../shared/app.service';
+import { GridFormParams, FormState } from '../shared/formState';
 
 @Component({
     selector: 'sample-list',
@@ -11,7 +12,7 @@ import { AppService } from '../shared/app.service';
 })
 export class SampleListComponent extends PageComponent implements OnInit {
 
-	constructor(private repository: SampleRepository, private tenant: TenantService, private appService: AppService) {
+	constructor(private repository: SampleRepository, private tenant: TenantService, private appService: AppService, private formState: FormState) {
         super();
     }
     //------------------------------------------------------------------------------------------------------------------------
@@ -23,15 +24,8 @@ export class SampleListComponent extends PageComponent implements OnInit {
     //------------------------------------------------------------------------------------------------------------------------
     async ngOnInit() {
         this.dateFormat = {type:'date', format:'MM/dd/yyyy'};
-
-		this.form = this.appService.getFormState(this);
-
-		if (this.form && history.state.formState) {
-			this.search();
-		}
-		else {
-			this.form = new FormParams();
-		}
+		this.formState.setup(this, new FormParams());
+		this.search();
     }
     //------------------------------------------------------------------------------------------------------------------------
 	async search() {
@@ -40,7 +34,12 @@ export class SampleListComponent extends PageComponent implements OnInit {
 		this.list = await this.repository.list({ tenantId: this.tenant.id, name: this.form.name, startDate: this.form.startDate, endDate: this.form.endDate });
 		this.hideSpinner();
 	}
-    //------------------------------------------------------------------------------------------------------------------------
+	//----------------------------------------------------------------------------
+	gridActionHandler(e) {
+		this.form.gridAction(this.grid, e);
+		this.formState.save(this);
+	}
+   //------------------------------------------------------------------------------------------------------------------------
     async export() {
         this.showSpinner();
 
@@ -60,18 +59,17 @@ export class SampleListComponent extends PageComponent implements OnInit {
     //------------------------------------------------------------------------------------------------------------------------
 }
 ///////////////////////////////////////////////////////////////////////////////////
-class FormParams {
+class FormParams extends GridFormParams {
 	constructor() {
+		super();
 		this.name = "";
 
 		var today = new Date();
 		this.startDate = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
-		this.pageSettings = { pageSizes: true, pageCount: 5, currentPage: 1 };
 	}
 
 	public tenantId: string;
 	public name: string;
 	public startDate: Date;
 	public endDate: Date;
-	public pageSettings: PageSettingsModel;
 }
