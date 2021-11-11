@@ -124,7 +124,6 @@ export class MasterPageComponent implements OnInit {
 		if (privileges.testTypes.read) {
 			manageMenu.push({ id: '/auth/testtype/list', text: 'Test Types' });
 		}
-
 		if (privileges.newsArticles.read) {
 			manageMenu.push({ id: '/auth/newsArticle/list', text: 'News Articles' });
 		}
@@ -149,6 +148,14 @@ export class MasterPageComponent implements OnInit {
 
 		if (privileges.postalCodes.read) {
 			dataMenu.push({ id: '/auth/postalcode/list', text: 'Postal Codes' });
+		}
+
+		if (privileges.vendors.read) {
+			dataMenu.push({ id: '/auth/demographicsdata/list', text: 'Demographics Data' });
+		}
+
+		if (privileges.vendors.read) {
+			dataMenu.push({ id: '/auth/economicsdata/list', text: 'Economics Data' });
 		}
 
 		if (dataMenu.length > 0) {
