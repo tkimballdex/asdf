@@ -23,11 +23,15 @@
                             <a [routerLink]="['../edit', data.id]" [state]="{ from: 'locations' }"><i class="fas fa-pencil-alt edit-icon"></i></a>
                         </ng-template>
                     </e-column>
-                    <e-column field='name' headerText='Location'></e-column>
-                    <e-column field='customerName' headerText='Customer Name'></e-column>
-                    <e-column field='siteName' headerText='Site Name'></e-column>
-                    <e-column field='sampler' headerText='Sampler'></e-column>
-                    <e-column field='serviceStartDate' headerText='Start Date' type='date' format='MM/dd/yyyy' width="120"></e-column>
+                    <e-column field='postalCode' headerText='Postalcode'></e-column>
+                    <e-column field='state' headerText='State'></e-column>
+                    <e-column field='county' headerText='County'></e-column>
+                    <e-column field='population' headerText='Population'></e-column>
+                    <e-column field='malePopulation' headerText='Male Population'></e-column>
+                    <e-column field='femalePopulation' headerText='Female Population'></e-column>
+                    <e-column field='medianAge' headerText='Median Age'></e-column>
+                    <e-column field='numberOfBusinesses' headerText='Number of Business'></e-column>
+                    <e-column field='numberOfEmployees' headerText='Number of Employees'></e-column>
                 </e-columns>
             </ejs-grid>
         </div>

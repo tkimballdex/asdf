@@ -34,8 +34,8 @@ export class CountyEditComponent extends PageComponent implements OnInit {
 		this.hideSpinner();			
 
 		this.form = new FormGroup({
-			name: new FormControl(this.record.name, [Validators.required]),
-			stateId: new FormControl(this.record.stateId, [Validators.required]),
+			//name: new FormControl(this.record.name, [Validators.required]),
+			//stateId: new FormControl(this.record.stateId, [Validators.required]),
 		});
 
 		var $this = this;

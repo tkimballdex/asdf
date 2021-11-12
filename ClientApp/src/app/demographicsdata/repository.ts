@@ -7,22 +7,22 @@ export class DemographicsdataRepository {
     }
 
     public save(record: any) {
-        return this.http.post<any>(`/demographicsdata/save`, record);
+        return this.http.post<any>(`/demographicdata/save`, record);
     }
 
     public delete(id: string) {
-        return this.http.post<any>(`/demographicsdata/delete/${id}`);
+        return this.http.post<any>(`/demographicdata/delete/${id}`);
     }
 
     public get(id: string) {
-        return this.http.post(`/demographicsdata/get/${id}`);
+        return this.http.post(`/demographicdata/get/${id}`);
     }
 
     public list(filter: any) {
-        return this.http.post(`/demographicsdata/list`, filter);
+        return this.http.post(`/demographicdata/list`, filter);
     }
 
 	public getData(siteId: any) {
-		return this.http.post(`/demographicsdata/getData/${siteId}`);
+		return this.http.post(`/demographicdata/getData/${siteId}`);
 	}
 }

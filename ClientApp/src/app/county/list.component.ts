@@ -6,6 +6,7 @@ import { AppService } from '../shared/app.service';
 import { TenantService } from '../shared/tenant.service';
 import { GridFormParams, FormState } from '../shared/formState';
 import { StateListComponent } from '../state/list.component';
+import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 
 @Component({
     selector: 'county-list',
@@ -19,6 +20,11 @@ export class CountyListComponent extends PageComponent implements OnInit {
     public list: any;
 	public states: any;
 	public form: FormParams;
+
+
+	@ViewChild('editTab')
+	public editTab: TabComponent;
+	
 	@ViewChild('grid') public grid: GridComponent;
 	//----------------------------------------------------------------------------
     async ngOnInit() {
