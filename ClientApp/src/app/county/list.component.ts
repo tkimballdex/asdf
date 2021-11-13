@@ -5,7 +5,6 @@ import { PageComponent } from '../shared/page.component';
 import { AppService } from '../shared/app.service';
 import { TenantService } from '../shared/tenant.service';
 import { GridFormParams, FormState } from '../shared/formState';
-import { StateListComponent } from '../state/list.component';
 import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 
 @Component({
@@ -21,15 +20,16 @@ export class CountyListComponent extends PageComponent implements OnInit {
 	public states: any;
 	public form: FormParams;
 
-
 	@ViewChild('editTab')
 	public editTab: TabComponent;
 	
 	@ViewChild('grid') public grid: GridComponent;
 	//----------------------------------------------------------------------------
+	
+	//----------------------------------------------------------------------------
     async ngOnInit() {
 		this.app = await this.appService.getData();
-		this.privileges = (await this.appService.getPrivileges()).customers;
+		this.privileges = (await this.appService.getPrivileges()).counties;
 		
 		await this.tenant.validate();
 		this.formState.setup(this, new FormParams());

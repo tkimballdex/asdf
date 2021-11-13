@@ -19,25 +19,95 @@
         <div class="col-3">
             <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>
         </div>
-        <div class="col-12 pad-t20">
-            <ejs-grid [dataSource]='list' *ngIf="list" [allowPaging]="true" [pageSettings]='form.pageSettings' [sortSettings]='form.sortSettings' [allowSorting]="true" [allowFiltering]="false" (actionComplete)='gridActionHandler($event)' [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' #grid>
-                <e-columns>
-                    <e-column width="70">
-                        <ng-template #template let-data>
-                            <a [routerLink]="['../edit', data.id]" [state]="{ from: 'States' }"><i class="fas fa-pencil-alt edit-icon"></i></a>
-                        </ng-template>
-                    </e-column>                    
-                    <e-column field='name' headerText='Name'></e-column>
-                    <e-column field='code' headerText='Code' textAlign='Center'></e-column>
-                    <e-column field='fipsCode' headerText='Fips Code' textAlign='Center'></e-column> 
-                    <e-column field='country' headerText='Country' textAlign='Center'></e-column>                     
-                    <e-column field='landArea' headerText='Land Area' textAlign='Right'></e-column>
-                    <e-column field='waterArea' headerText='Water Area' textAlign='Right'></e-column>
-                    <e-column field='population' headerText='Population' textAlign='Right'></e-column>
-                    <e-column field='density' headerText='Pop. Density' textAlign='Right'></e-column>                                      
-                </e-columns>
-            </ejs-grid>
-        </div>
+    </div>
+    <div class="row pad-t20">
+        <ejs-tab id="edit-tab" class="e-fill"  #editTab>
+            <e-tabitems>
+                <e-tabitem>
+                    <ng-template #headerText>
+                        <div>List</div>
+                    </ng-template>
+                    <ng-template #content>
+                        <div class="col-12 pad-t20">
+                            <ejs-grid [dataSource]='list' [allowPaging]="true" [pageSettings]='form.pageSettings' [sortSettings]='form.sortSettings' [allowSorting]="true" [allowFiltering]="false" *ngIf="list" (actionComplete)='gridActionHandler($event)' [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' #griddemographics>
+                                <e-columns>
+                                    <e-column width="70">
+                                        <ng-template #template let-data>
+                                            <a [routerLink]="['../edit', data.id]" [state]="{ from: 'States' }"><i class="fas fa-pencil-alt edit-icon"></i></a>
+                                        </ng-template>
+                                    </e-column>                    
+                                    <e-column field='code' headerText='Name'></e-column>
+                                    <e-column field='fipsCode' headerText='Fips Code'></e-column>
+                                    <e-column field='geoId' headerText='Geo Id'></e-column>
+                                    <e-column field='state' headerText='State'></e-column>
+                                    <e-column field='country' headerText='County'></e-column>
+                                    <e-column field='landArea' headerText='Land Area'></e-column>
+                                    <e-column field='waterArea' headerText='Water Area'></e-column>
+                                    <e-column field='area' headerText='Area'></e-column>
+                                </e-columns>
+                            </ejs-grid>
+                        </div>
+                    
+                    </ng-template>
+                </e-tabitem>
+                <e-tabitem>
+                    <ng-template #headerText>
+                        <div>Demographics</div>
+                    </ng-template>
+                    <ng-template #content>
+                        <ejs-grid [dataSource]='list' [allowPaging]="true" [pageSettings]='form.pageSettings' [sortSettings]='form.sortSettings' [allowSorting]="true" [allowFiltering]="false" *ngIf="list" (actionComplete)='gridActionHandler($event)' #grid>
+                            <e-columns>
+                                <e-column width="70">
+                                    <ng-template #template let-data>
+                                        <a [routerLink]="['../edit', data.id]" [state]="{ from: 'demographics' }"><i class="fas fa-pencil-alt edit-icon"></i></a>
+                                    </ng-template>
+                                </e-column>
+                                <e-column field='name' headerText='Name'></e-column>
+                                <e-column field='state' headerText='State'></e-column>
+                                <e-column field='population' headerText='Population'></e-column>
+                                <e-column field='density' headerText='Density'></e-column>
+                                <e-column field='populationMedian' headerText='Pop. Median'></e-column>
+                                <e-column field='populationMale' headerText='Pop. Male'></e-column>
+                                <e-column field='populationFemale' headerText='Pop. Female'></e-column>
+                                <e-column field='population18plus' headerText='Pop. 18+'></e-column>
+                                <e-column field='population65plus' headerText='Pop. 65+'></e-column>
+                                <e-column field='familyHouseholds' headerText='FamilyHouseholds'></e-column>
+                                <e-column field='averageHouseholdSize' headerText='Avg.HouseholdSize'></e-column>
+                            </e-columns>
+                        </ejs-grid>
+                        
+                    </ng-template>
+                </e-tabitem>
+                <e-tabitem>
+                    <ng-template #headerText>
+                        <div>Economics</div>
+                    </ng-template>
+                    <ng-template #content>
+                        <ejs-grid [dataSource]='list' [allowPaging]="true" [pageSettings]='form.pageSettings' [sortSettings]='form.sortSettings' [allowSorting]="true" [allowFiltering]="false" *ngIf="list" (actionComplete)='gridActionHandler($event)' #grideconomics>
+                            <e-columns>
+                                <e-column width="70">
+                                    <ng-template #template let-data>
+                                        <a [routerLink]="['../edit', data.id]" [state]="{ from: 'economics' }"><i class="fas fa-pencil-alt edit-icon"></i></a>
+                                    </ng-template>
+                                </e-column>
+                                <e-column field='name' headerText='Name'></e-column>
+                                <e-column field='state' headerText='State'></e-column>
+                                <e-column field='firms' headerText='Firms'></e-column>
+                                <e-column field='firmsUnder5' headerText='FirmsUnder5'></e-column>
+                                <e-column field='firms5To9' headerText='Firms 5to9'></e-column>
+                                <e-column field='firmsUnder20' headerText='FirmUnder20'></e-column>
+                                <e-column field='firms20To99' headerText='Firm 20to99'></e-column>
+                                <e-column field='firms100To499' headerText='Firms100To499'></e-column>
+                                <e-column field='firmsUnder500' headerText='FirmsUnder500'></e-column>
+                                <e-column field='firmsOver500' headerText='FirmsOver500'></e-column>
+                                <e-column field='establishments' headerText='Establishments'></e-column>
+                                <e-column field='employment' headerText='Employment'></e-column>
+                            </e-columns>
+                        </ejs-grid>
+                    </ng-template>
+                </e-tabitem>
+            </e-tabitems>
+        </ejs-tab>        
     </div>
 </div>
 

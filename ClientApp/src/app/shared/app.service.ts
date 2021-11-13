@@ -136,9 +136,7 @@ export interface Privileges {
 	tests: PrivilegeSet;
 	states: PrivilegeSet;
 	counties: PrivilegeSet;
-	postalCodes: PrivilegeSet;
-	demographicsdata:PrivilegeSet;
-	economicsdata:PrivilegeSet
+	postalCodes: PrivilegeSet
 }
 
 export interface MenuItem {
@@ -161,14 +159,7 @@ export interface Postalcode {
     name: string;
 }
 
-export interface demographicsdata {
-    id: number;
-    name: string;
-}
-export interface economicsdata {
-    id: number;
-    name: string;
-}
+
 
 export interface Frequency {
     id: number;
@@ -202,6 +193,5 @@ export interface AppData {
 	tenants: Tenant[];
 	analytes: UidName[]; 
 	Postalcodes:Postalcode[];
-	demographicsdata:demographicsdata[];
-	economicsdata:economicsdata[];
+
 }

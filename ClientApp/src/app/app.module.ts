@@ -100,7 +100,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
 					{ path: 'user', loadChildren: () => import('./user/module').then(m => m.UserModule) },
 					{ path: 'state', loadChildren: () => import('./state/module').then(m => m.StateModule) },
 					{ path: 'county', loadChildren: () => import('./county/module').then(m => m.CountyModule) },
-					{ path: 'demographicsdata', loadChildren: () => import('./demographicsdata/module').then(m => m.DemographicsdataModule) }
+					
 
 				]
 			}

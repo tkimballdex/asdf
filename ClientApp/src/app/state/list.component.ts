@@ -5,6 +5,7 @@ import { PageComponent } from '../shared/page.component';
 import { AppService } from '../shared/app.service';
 import { TenantService } from '../shared/tenant.service';
 import { GridFormParams, FormState } from '../shared/formState';
+import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 
 @Component({
     selector: 'state-list',
@@ -38,9 +39,9 @@ export class StateListComponent extends PageComponent implements OnInit {
 		this.formState.save(this);
 		this.showSpinner();
 		this.list = await this.repository.list({
-			tenantId: this.tenant.id,
-			name: this.form.name,
-			countryId: this.form.countryId
+		//	tenantId: this.tenant.id,
+			//name: this.form.name,
+			//countryId: this.form.countryId
 		});
 		this.hideSpinner();
 	}

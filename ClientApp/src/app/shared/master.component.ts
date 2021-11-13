@@ -150,13 +150,6 @@ export class MasterPageComponent implements OnInit {
 			dataMenu.push({ id: '/auth/postalcode/list', text: 'Postal Codes' });
 		}
 
-		if (privileges.vendors.read) {
-			dataMenu.push({ id: '/auth/demographicsdata/list', text: 'Demographics Data' });
-		}
-
-		if (privileges.vendors.read) {
-			dataMenu.push({ id: '/auth/economicsdata/list', text: 'Economics Data' });
-		}
 
 		if (dataMenu.length > 0) {
 			this.menuItems.push({

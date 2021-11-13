@@ -21,8 +21,4 @@ export class CountyRepository {
     public list(filter: any) {
         return this.http.post(`/county/list`, filter);
     }
-
-	//public getData(id: any) {
-	//	return this.http.post(`/state/getData/${id}`);
-	//}
 }
