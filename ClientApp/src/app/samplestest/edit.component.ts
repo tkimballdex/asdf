@@ -5,6 +5,7 @@ import { AppService } from "../shared/app.service";
 import { PageComponent } from '../shared/page.component';
 import { SampleTestRepository } from './repository';
 import { TenantService } from '../shared/tenant.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'sampletest-edit',
@@ -16,6 +17,7 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
         super();
 	}
 
+	public form: FormGroup;
 	public customers: any;
 	public customerId: string;
 	public sites: any;
@@ -58,28 +60,50 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 			this.customers = await this.repository.listCustomers();
 		}
 
-		this.hideSpinner();        
+		this.hideSpinner();
+
+		this.form = new FormGroup({
+			referenceNo: new FormControl(this.record.referenceNo, [Validators.required]),
+			analyteId: new FormControl(this.record.analyteId, [Validators.required]),
+			testTypeId: new FormControl(this.record.testTypeId, [Validators.required]),
+			sampleId: new FormControl(this.record.sampleId, [Validators.required])
+		});
+
+		if (!this.record.sample) {
+			this.form.addControl('customerId', new FormControl(this.customerId, [Validators.required]));
+			this.form.addControl('siteId', new FormControl(this.siteId, [Validators.required]));
+			this.form.addControl('locationId', new FormControl(this.locationId, [Validators.required]));
+		}
     }
     //-----------------------------------------------------------------------------------------
-    async save() {
-        var add = !this.record.id;
-        this.showSpinner();
+	async save() {
+		this.form.markAllAsTouched();
+
+		if (this.form.invalid) {
+			this.showErrorMessage("Please complete all required fields!");
+			return;
+		}
+
+		Object.assign(this.record, this.form.value);
+
+		var add = !this.record.id;
+		this.showSpinner();
 		this.record.tenantId = this.tenant.id;
-        var returnValue = await this.repository.save(this.record);
-        this.hideSpinner();
+		var returnValue = await this.repository.save(this.record);
+		this.hideSpinner();
 
-        if (returnValue && returnValue.error) {
-            this.showErrorMessage(returnValue.description);
-        }
-        else {
-            var success = returnValue && returnValue.updated === true;
-            this.showSaveMessage(success);
+		if (returnValue && returnValue.error) {
+			this.showErrorMessage(returnValue.description);
+		}
+		else {
+			var success = returnValue && returnValue.updated === true;
+			this.showSaveMessage(success);
 
-            if (success && add) {
-                setTimeout(() => this.router.navigate(['/auth/sampletest/edit', returnValue.id]), 1000);
-            }
-        }
-    }
+			if (success && add) {
+				setTimeout(() => this.router.navigate(['/auth/sampletest/edit', returnValue.id]), 1000);
+			}
+		}
+	}
     //-----------------------------------------------------------------------------------------
     delete() {
         this.deleteDialog = DialogUtility.confirm({
