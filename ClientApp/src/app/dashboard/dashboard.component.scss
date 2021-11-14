@@ -46,3 +46,27 @@
     right: 0;
     cursor: pointer;
 }
+
+#map-canvas
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 20px;
+    padding: 0px;
+}
+#dashboard-map
+{
+    width: 800px;
+    height: 500px;
+    border: 1px solid #aaaaaa;
+}
+/* Slider customization *********************************/
+  #square_slider .e-handle {
+    border-radius: 0;
+    background-color: #f9920b;
+    border: 0;
+    width: 20px;
+    height: 20px;
+  }
+   

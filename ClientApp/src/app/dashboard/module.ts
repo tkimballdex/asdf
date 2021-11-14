@@ -20,6 +20,7 @@ import { ColumnSeriesService, AreaSeriesService, } from '@syncfusion/ej2-angular
 
 import { AccumulationChartModule } from '@syncfusion/ej2-angular-charts';
 import { PieSeriesService, AccumulationDataLabelService } from '@syncfusion/ej2-angular-charts';
+import { SliderModule } from '@syncfusion/ej2-angular-inputs';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { PieSeriesService, AccumulationDataLabelService } from '@syncfusion/ej2-
 		TabModule,
 		AccumulationChartModule,
 		ChartAllModule,
+		SliderModule,
 		RouterModule.forChild([
 			{ path: '', component: DashboardComponent },
 		])

@@ -7,6 +7,7 @@ import { DashboardRepository } from './repository';
 import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 import { CheckBoxSelectionService } from '@syncfusion/ej2-angular-dropdowns';
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
+import { SliderChangeEventArgs, SliderTickEventArgs, SliderTooltipEventArgs } from '@syncfusion/ej2-angular-inputs';
 
 @Component({
 	selector: 'app-dashboard',
@@ -19,24 +20,6 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	public mode: string;
 	constructor(private repository: DashboardRepository, private appService: AppService) {
 		super();
-	}
-
-	async ngOnInit() {
-		this.mode = 'CheckBox';
-		this.app = await this.appService.getData();
-		this.customers = await this.repository.listCustomers();
-		this.variants = [];
-		this.sites = [];
-
-		this.analyteId = this.app.analytes[0].id;
-		this.customerId = this.customers[0].id;
-		await this.analyteChange();
-		await this.customerChange();
-
-		var today = new Date();
-		this.endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-		this.startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 14);
-		this.siteMapDate = this.startDate;
 	}
 
 	@ViewChild('chartByLocation')
@@ -73,9 +56,51 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	public allowDragging: boolean = false;
 	public placeholder: string = 'Site';
 
+	public sliderTooltipData: Object = { placement: 'Before', isVisible: true };
+    public sliderTicksData: Object = { placement: 'After', largeStep: 1 * 86400000 };
+	public sliderStep: number = 86400000;
+    public sliderMin: number;
+    public sliderMax: number;    
+    public sliderValue: number;
+
 	public primaryXAxis: Object = {
 		valueType: 'Category'
 	}
+
+	async ngOnInit() {
+		this.mode = 'CheckBox';
+		this.app = await this.appService.getData();
+		this.customers = await this.repository.listCustomers();
+		this.variants = [];
+		this.sites = [];
+
+		this.analyteId = this.app.analytes[0].id;
+		this.customerId = this.customers[0].id;
+		await this.analyteChange();
+		await this.customerChange();
+
+		var today = new Date();
+		this.endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+		this.startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 14);
+		this.siteMapDate = this.endDate;
+		this.sliderMin = this.startDate.getTime();
+		this.sliderMax = this.endDate.getTime() + 86400000;
+		this.sliderValue = this.endDate.getTime();
+	}	
+
+	tooltipChangeHandler(args: SliderTooltipEventArgs): void {
+        let totalMiliSeconds = Number(args.text);
+        // Converting the current milliseconds to the respective date in desired format
+        //let custom = { year: "numeric", month: "2-digit", day: "2-digit" };
+        args.text = new Date(totalMiliSeconds).toLocaleDateString("en-us", { year: "numeric", month: "short", day: "numeric" });
+    }
+
+    renderingTicksHandler(args: SliderTickEventArgs): void {
+        let totalMiliSeconds = Number(args.value);
+        // Converting the current milliseconds to the respective date in desired format
+        //let custom = { year: "numeric", month: "short", day: "numeric" };
+        args.text = new Date(totalMiliSeconds).toLocaleDateString("en-us", { month: "short", day: "numeric" });
+    }
 
 	async customerChange() {
 		this.sites = [];
@@ -299,17 +324,15 @@ export class DashboardComponent extends PageComponent implements OnInit {
 
 	dateRangeChange() {
 		this.siteMapDate = new Date(this.endDate);
+		this.sliderMax = new Date(this.endDate).getTime();
+		this.sliderMin = new Date(this.startDate).getTime();
+		this.sliderValue = new Date(this.endDate).getTime();
 		this.setGraphData();
 	}
 
-	previousSiteMapDate() {
-		this.siteMapDate.setDate(this.siteMapDate.getDate() - 1);
-		this.siteMapDate = new Date(this.siteMapDate < this.startDate ? this.endDate : this.siteMapDate);
-	}
-
-	nextSiteMapDate() {
-		this.siteMapDate.setDate(this.siteMapDate.getDate() + 1);
-		this.siteMapDate = new Date(this.siteMapDate > this.endDate ? this.startDate : this.siteMapDate);
+	onSliderChanged(args: SliderChangeEventArgs): void {
+        this.siteMapDate = new Date(+args.value);
+		this.siteMapChange();
 	}
 }
 
