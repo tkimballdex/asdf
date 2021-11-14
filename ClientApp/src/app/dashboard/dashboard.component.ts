@@ -197,6 +197,19 @@ export class DashboardComponent extends PageComponent implements OnInit {
 
 		var googleMap = this.map.googleMap;
 
+		const mapStyles = <google.maps.MapTypeStyle[]> [
+			{
+				featureType: "poi",
+				stylers: [{ visibility: "off" }],
+			},
+			{
+				featureType: "transit",
+				elementType: "labels.icon",
+				stylers: [{ visibility: "off" }],
+			}
+		];		
+		googleMap.setOptions({ styles: mapStyles });
+
 		const infoWindow = new google.maps.InfoWindow({
 			content: 'WASHINGTON — President Biden and Democratic leaders in Congress in recent days have slashed their ambitions for a major expansion of America’s social safety net to a package worth $2.3 trillion or less, which will force hard choices about how to scale back a proposal that the president hopes will be transformational.'
 		});
