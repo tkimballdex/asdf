@@ -16,6 +16,7 @@ import { CheckBoxSelectionService } from '@syncfusion/ej2-angular-dropdowns';
 })
 export class DashboardComponent extends PageComponent implements OnInit {
 	public mode: string;
+	public initialized = false;
 	constructor(private repository: DashboardRepository, private appService: AppService) {
 		super();
 	}
@@ -27,14 +28,17 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.variants = [];
 		this.sites = [];
 
-		this.analyteId = this.app.analytes[0].id;
-		this.customerId = this.customers[0].id;
-		await this.analyteChange();
-
 		var today = new Date();
 		this.endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 		this.startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 14);
 		this.siteMapDate = this.startDate;
+
+		this.analyteId = this.app.analytes[0].id;
+		this.customerId = this.customers[0].id;
+		await this.customerChange();
+		await this.analyteChange();
+
+		this.initialized = true;
 	}
 
 	@ViewChild('chartByLocation')
@@ -79,24 +83,23 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.sites = [];
 		this.sites = await this.repository.listSites(this.customerId);
 		this.selectedSites = this.sites.map(x => x.id);
-		this.setGraphData();
 	}
 
 	async analyteChange() {
 		this.variants = [];
+		this.variantId = null;
 		this.variants = await this.repository.listVariants(this.analyteId);
 		if (this.variants.length > 0) this.variantId = this.variants[0].id;
-		this.setGraphData();
+		this.setGraphData('analyteChange');
 	}
 
 	async siteChange() {
-		this.setGraphData();
+		this.setGraphData('siteChange');
 	}
 
 	async setGraphDataByVariant() {
 		if (!this.chartByVariant) return;
 
-		this.chartByVariant.clearSeries();
 		if (!this.customerId || !this.variantId) return;
 
 		let graphData = await this.repository.variantLocations({
@@ -107,13 +110,13 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		});
 
 		graphData.forEach(x => { x.type = 'Spline'; x.xName = 'x'; x.yName = 'y'; });
+		this.chartByVariant.clearSeries();
 		this.chartByVariant.addSeries(graphData);
 	}
 
 	async setGraphDataByPositiveCases() {
 		if (!this.chartPositiveCases) return;
 
-		this.chartPositiveCases.clearSeries();
 		if (!this.customerId || !this.analyteId) return;
 
 		let graphData = await this.repository.positiveCases({
@@ -125,13 +128,13 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		});
 
 		graphData = [{ type: 'Column', xName: 'x', yName: 'y', dataSource: graphData }];
+		this.chartPositiveCases.clearSeries();
 		this.chartPositiveCases.addSeries(graphData);
 	}
 
 	async setGraphDataByPositiveNegativeCases() {
 		if (!this.chartPositiveNegativeCases) return;
 
-		this.chartPositiveNegativeCases.clearSeries();
 		if (!this.customerId || !this.analyteId) return;
 
 		let graphData = await this.repository.positiveNegativeCases({
@@ -147,13 +150,14 @@ export class DashboardComponent extends PageComponent implements OnInit {
 			{ type: 'StackingColumn', xName: 'x', yName: 'positive', dataSource: graphData, name: 'Positive Cases' }
 			
 		];
+
+		this.chartPositiveNegativeCases.clearSeries();
 		this.chartPositiveNegativeCases.addSeries(graphData);
 	}
 
 	async setGraphDataPositiveSites() {
 		if (!this.chartPositiveSites) return;
 
-		this.chartPositiveSites.clearSeries();
 		if (!this.customerId || !this.analyteId) return;
 
 		let data = await this.repository.positiveSiteStack({
@@ -165,12 +169,18 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		});
 
 		let graphData: any = data.map(x => { return { type: 'StackingColumn', xName: 'x', yName: 'y', name: x.siteName, dataSource: x.results } });
+		this.chartPositiveSites.clearSeries();
 		this.chartPositiveSites.addSeries(graphData);
 	}
 
-	setGraphData() {
+	setGraphData(from) {
+		console.dir(from);
 		var $this = this;
+		if (!$this.initialized) return;
+
 		setTimeout(function () {
+			if (!$this.initialized) return;
+
 			if ($this.tab.selectedItem == 0) {
 				$this.setGraphDataByVariant();
 			}
@@ -212,10 +222,11 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.markers = [];
 		this.polygons = [];
 		var $this = this;
+		var points = [];
 
-		$this.selectedSites.forEach(async function (siteId) {
-			var site = await $this.repository.getSite({ siteId: siteId, analyteId: $this.analyteId, date: $this.siteMapDate });
+		var sites = await $this.repository.getSites({ sites: $this.selectedSites, analyteId: $this.analyteId, date: $this.siteMapDate });
 
+		sites.forEach(function (site) {
 			site.locations.forEach(function (x) {
 				if (x.latitude && x.longitude) {
 					const marker = new google.maps.Marker({
@@ -233,6 +244,8 @@ export class DashboardComponent extends PageComponent implements OnInit {
 					marker.addListener('click', () => {
 						infoWindow.open(googleMap, marker);
 					});
+
+					points.push({ lat: x.latitude, lng: x.longitude });
 				}
 			});
 
@@ -247,26 +260,30 @@ export class DashboardComponent extends PageComponent implements OnInit {
 						fillColor: "#FF0000",
 						fillOpacity: 0.35
 					}));
+
+					points = points.concat(boundaries);
 				});
 			}
-
-			if ($this.markers.length) {
-				googleMap.fitBounds($this.getBounds($this.markers));
-			}
 		});
+
+		console.dir(points);
+
+		if (points.length) {
+			googleMap.fitBounds($this.getBounds(points));
+		}
 	}
 
-	getBounds(markers) {
+	getBounds(points) {
 		let north;
 		let south;
 		let east;
 		let west;
 
-		for (const marker of markers) {
-			north = north !== undefined ? Math.max(north, marker.position.lat()) : marker.position.lat();
-			south = south !== undefined ? Math.min(south, marker.position.lat()) : marker.position.lat();
-			east = east !== undefined ? Math.max(east, marker.position.lng()) : marker.position.lng();
-			west = west !== undefined ? Math.min(west, marker.position.lng()) : marker.position.lng();
+		for (const point of points) {
+			north = north !== undefined ? Math.max(north, point.lat) : point.lat;
+			south = south !== undefined ? Math.min(south, point.lat) : point.lat;
+			east = east !== undefined ? Math.max(east, point.lng) : point.lng;
+			west = west !== undefined ? Math.min(west, point.lng) : point.lng;
 		};
 
 		return { north, south, east, west };
@@ -276,7 +293,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 
 	dateRangeChange() {
 		this.siteMapDate = new Date(this.endDate);
-		this.setGraphData();
+		this.setGraphData('dateRangeChange');
 	}
 
 	previousSiteMapDate() {

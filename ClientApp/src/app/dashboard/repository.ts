@@ -20,7 +20,7 @@ export class DashboardRepository {
 		});
 	}
 
-	public getSite(filter: any) {
+	public getSites(filter: any) {
 		return this.http.post<any>(`/dashboard/siteMap`, filter);
 	}
 
