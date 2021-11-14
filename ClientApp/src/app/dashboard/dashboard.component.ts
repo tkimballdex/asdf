@@ -229,6 +229,10 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	markers: google.maps.Marker[] = [];
 	polygons: google.maps.Polygon[] = [];
 
+	getColor(positive, negative) {
+		return positive ? '#ee3300' : negative ? '#33cc00' : '#aaaaaa'
+	}
+
 	async siteMapChange() {
 		if (!this.selectedSites || !this.siteMapDate) return;
 
@@ -275,7 +279,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 						title: x.name,
 						icon: {
 							path: faCircle.icon[4] as string,
-							fillColor: x.positive ? '#ee3300' : x.negative ? '#33cc00' : '#aaaaaa',
+							fillColor: $this.getColor(x.positive, x.negative),
 							fillOpacity: 1,
 							anchor: new google.maps.Point(
 								faCircle.icon[0] / 2, // width
@@ -302,10 +306,10 @@ export class DashboardComponent extends PageComponent implements OnInit {
 					$this.polygons.push(new google.maps.Polygon({
 						map: googleMap,
 						paths: boundaries,
-						strokeColor: "#FF0000",
+						strokeColor: $this.getColor(site.positive, site.negative),
 						strokeOpacity: 0.8,
 						strokeWeight: 2,
-						fillColor: "#FF0000",
+						fillColor: $this.getColor(site.positive, site.negative),
 						fillOpacity: 0.35
 					}));
 
