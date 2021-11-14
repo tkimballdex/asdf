@@ -6,6 +6,7 @@ import { PageComponent } from '../shared/page.component';
 import { DashboardRepository } from './repository';
 import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 import { CheckBoxSelectionService } from '@syncfusion/ej2-angular-dropdowns';
+import { faCircle } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
 	selector: 'app-dashboard',
@@ -30,6 +31,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.analyteId = this.app.analytes[0].id;
 		this.customerId = this.customers[0].id;
 		await this.analyteChange();
+		await this.customerChange();
 
 		var today = new Date();
 		this.endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
@@ -224,7 +226,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 
 		this.markers = [];
 		this.polygons = [];
-		var $this = this;
+		var $this = this;		
 
 		$this.selectedSites.forEach(async function (siteId) {
 			var site = await $this.repository.getSite({ siteId: siteId, analyteId: $this.analyteId, date: $this.siteMapDate });
@@ -235,11 +237,19 @@ export class DashboardComponent extends PageComponent implements OnInit {
 						position: { lat: x.latitude, lng: x.longitude },
 						map: googleMap,
 						title: x.name,
-						label: x.name,
 						icon: {
-							url: `http://maps.google.com/mapfiles/ms/icons/${x.positive ? 'red' : x.negative ? 'blue' : 'yellow'}-dot.png`
-						}
-					});
+							path: faCircle.icon[4] as string,
+							fillColor: x.positive ? '#ee3300' : x.negative ? '#33cc00' : '#aaaaaa',
+							fillOpacity: 1,
+							anchor: new google.maps.Point(
+								faCircle.icon[0] / 2, // width
+								faCircle.icon[1] / 2 // height
+							),
+							strokeWeight: 2,
+							strokeColor: "#ffffff",
+							scale: 0.03,
+						},
+					});					
 
 					$this.markers.push(marker);
 

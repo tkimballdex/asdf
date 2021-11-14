@@ -20,6 +20,31 @@
                 <e-tabitems>
                     <e-tabitem>
                         <ng-template #headerText>
+                            <div>Site Map</div>
+                        </ng-template>
+                        <ng-template #content>
+                            <div id="list-view" class="container-fluid pad-t20">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <br/>
+                                        <button ejs-button (click)="previousSiteMapDate()">Previous</button>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <ejs-datepicker [(value)]="siteMapDate" placeholder="Date" floatLabelType="Always" (change)="siteMapChange()"></ejs-datepicker>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <br/>
+                                        <button ejs-button (click)="nextSiteMapDate()">Next</button>
+                                    </div>
+                                </div>
+                                <div class="row pad-t20">
+                                    <google-map height="600px" width="1000px"></google-map>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </e-tabitem>
+                    <e-tabitem>
+                        <ng-template #headerText>
                             <div>Locations by Variant</div>
                         </ng-template>
                         <ng-template #content>
@@ -140,31 +165,7 @@
                         </ng-template>
                     </e-tabitem>
 
-                    <e-tabitem>
-                        <ng-template #headerText>
-                            <div>Site Map</div>
-                        </ng-template>
-                        <ng-template #content>
-                            <div id="list-view" class="container-fluid pad-t20">
-                                <div class="row">
-                                    <div class="col-md-1">
-                                        <br/>
-                                        <button ejs-button (click)="previousSiteMapDate()">Previous</button>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <ejs-datepicker [(value)]="siteMapDate" placeholder="Date" floatLabelType="Always" (change)="siteMapChange()"></ejs-datepicker>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <br/>
-                                        <button ejs-button (click)="nextSiteMapDate()">Next</button>
-                                    </div>
-                                </div>
-                                <div class="row pad-t20">
-                                    <google-map height="600px" width="1000px"></google-map>
-                                </div>
-                            </div>
-                        </ng-template>
-                    </e-tabitem>
+                    
                 </e-tabitems>
             </ejs-tab>
         </div>
