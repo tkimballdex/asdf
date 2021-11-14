@@ -89,6 +89,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		await this.analyteChange();
 
 		this.initialized = true;
+		this.setGraphData('init');
 	}	
 
 	tooltipChangeHandler(args: SliderTooltipEventArgs): void {
@@ -208,19 +209,19 @@ export class DashboardComponent extends PageComponent implements OnInit {
 			if (!$this.initialized) return;
 
 			if ($this.tab.selectedItem == 0) {
-				$this.setGraphDataByVariant();
+				$this.siteMapChange();
 			}
 			else if ($this.tab.selectedItem == 1) {
-				$this.setGraphDataByPositiveCases();
+				$this.setGraphDataByVariant();
 			}
 			else if ($this.tab.selectedItem == 2) {
-				$this.setGraphDataByPositiveNegativeCases();
+				$this.setGraphDataByPositiveCases();
 			}
 			else if ($this.tab.selectedItem == 3) {
-				$this.setGraphDataPositiveSites();
+				$this.setGraphDataByPositiveNegativeCases();
 			}
 			else if ($this.tab.selectedItem == 4) {
-				$this.siteMapChange();
+				$this.setGraphDataPositiveSites();
 			}
 		}, 10);
 	}
@@ -312,8 +313,6 @@ export class DashboardComponent extends PageComponent implements OnInit {
 				});
 			}
 		});
-
-		console.dir(points);
 
 		if (points.length) {
 			googleMap.fitBounds($this.getBounds(points));
