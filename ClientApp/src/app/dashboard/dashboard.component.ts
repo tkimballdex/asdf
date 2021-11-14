@@ -6,6 +6,8 @@ import { PageComponent } from '../shared/page.component';
 import { DashboardRepository } from './repository';
 import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 import { CheckBoxSelectionService } from '@syncfusion/ej2-angular-dropdowns';
+import { faCircle } from "@fortawesome/free-solid-svg-icons";
+import { SliderChangeEventArgs, SliderTickEventArgs, SliderTooltipEventArgs } from '@syncfusion/ej2-angular-inputs';
 
 @Component({
 	selector: 'app-dashboard',
@@ -19,26 +21,6 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	public initialized = false;
 	constructor(private repository: DashboardRepository, private appService: AppService) {
 		super();
-	}
-
-	async ngOnInit() {
-		this.mode = 'CheckBox';
-		this.app = await this.appService.getData();
-		this.customers = await this.repository.listCustomers();
-		this.variants = [];
-		this.sites = [];
-
-		var today = new Date();
-		this.endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-		this.startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 14);
-		this.siteMapDate = this.startDate;
-
-		this.analyteId = this.app.analytes[0].id;
-		this.customerId = this.customers[0].id;
-		await this.customerChange();
-		await this.analyteChange();
-
-		this.initialized = true;
 	}
 
 	@ViewChild('chartByLocation')
@@ -75,9 +57,53 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	public allowDragging: boolean = false;
 	public placeholder: string = 'Site';
 
+	public sliderTooltipData: Object = { placement: 'Before', isVisible: true };
+    public sliderTicksData: Object = { placement: 'After', largeStep: 1 * 86400000 };
+	public sliderStep: number = 86400000;
+    public sliderMin: number;
+    public sliderMax: number;    
+    public sliderValue: number;
+
 	public primaryXAxis: Object = {
 		valueType: 'Category'
 	}
+
+	async ngOnInit() {
+		this.mode = 'CheckBox';
+		this.app = await this.appService.getData();
+		this.customers = await this.repository.listCustomers();
+		this.variants = [];
+		this.sites = [];
+
+		var today = new Date();
+		this.endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+		this.startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 14);
+		this.siteMapDate = this.endDate;
+		this.sliderMin = this.startDate.getTime();
+		this.sliderMax = this.endDate.getTime() + 86400000;
+		this.sliderValue = this.endDate.getTime();
+
+		this.analyteId = this.app.analytes[0].id;
+		this.customerId = this.customers[0].id;
+		await this.customerChange();
+		await this.analyteChange();
+
+		this.initialized = true;
+	}	
+
+	tooltipChangeHandler(args: SliderTooltipEventArgs): void {
+        let totalMiliSeconds = Number(args.text);
+        // Converting the current milliseconds to the respective date in desired format
+        //let custom = { year: "numeric", month: "2-digit", day: "2-digit" };
+        args.text = new Date(totalMiliSeconds).toLocaleDateString("en-us", { year: "numeric", month: "short", day: "numeric" });
+    }
+
+    renderingTicksHandler(args: SliderTickEventArgs): void {
+        let totalMiliSeconds = Number(args.value);
+        // Converting the current milliseconds to the respective date in desired format
+        //let custom = { year: "numeric", month: "short", day: "numeric" };
+        args.text = new Date(totalMiliSeconds).toLocaleDateString("en-us", { month: "short", day: "numeric" });
+    }
 
 	async customerChange() {
 		this.sites = [];
@@ -207,6 +233,19 @@ export class DashboardComponent extends PageComponent implements OnInit {
 
 		var googleMap = this.map.googleMap;
 
+		const mapStyles = <google.maps.MapTypeStyle[]> [
+			{
+				featureType: "poi",
+				stylers: [{ visibility: "off" }],
+			},
+			{
+				featureType: "transit",
+				elementType: "labels.icon",
+				stylers: [{ visibility: "off" }],
+			}
+		];		
+		googleMap.setOptions({ styles: mapStyles });
+
 		const infoWindow = new google.maps.InfoWindow({
 			content: 'WASHINGTON — President Biden and Democratic leaders in Congress in recent days have slashed their ambitions for a major expansion of America’s social safety net to a package worth $2.3 trillion or less, which will force hard choices about how to scale back a proposal that the president hopes will be transformational.'
 		});
@@ -233,11 +272,19 @@ export class DashboardComponent extends PageComponent implements OnInit {
 						position: { lat: x.latitude, lng: x.longitude },
 						map: googleMap,
 						title: x.name,
-						label: x.name,
 						icon: {
-							url: `http://maps.google.com/mapfiles/ms/icons/${x.positive ? 'red' : x.negative ? 'blue' : 'yellow'}-dot.png`
-						}
-					});
+							path: faCircle.icon[4] as string,
+							fillColor: x.positive ? '#ee3300' : x.negative ? '#33cc00' : '#aaaaaa',
+							fillOpacity: 1,
+							anchor: new google.maps.Point(
+								faCircle.icon[0] / 2, // width
+								faCircle.icon[1] / 2 // height
+							),
+							strokeWeight: 2,
+							strokeColor: "#ffffff",
+							scale: 0.03,
+						},
+					});					
 
 					$this.markers.push(marker);
 
@@ -293,17 +340,15 @@ export class DashboardComponent extends PageComponent implements OnInit {
 
 	dateRangeChange() {
 		this.siteMapDate = new Date(this.endDate);
+		this.sliderMax = new Date(this.endDate).getTime();
+		this.sliderMin = new Date(this.startDate).getTime();
+		this.sliderValue = new Date(this.endDate).getTime();
 		this.setGraphData('dateRangeChange');
 	}
 
-	previousSiteMapDate() {
-		this.siteMapDate.setDate(this.siteMapDate.getDate() - 1);
-		this.siteMapDate = new Date(this.siteMapDate < this.startDate ? this.endDate : this.siteMapDate);
-	}
-
-	nextSiteMapDate() {
-		this.siteMapDate.setDate(this.siteMapDate.getDate() + 1);
-		this.siteMapDate = new Date(this.siteMapDate > this.endDate ? this.startDate : this.siteMapDate);
+	onSliderChanged(args: SliderChangeEventArgs): void {
+        this.siteMapDate = new Date(+args.value);
+		this.siteMapChange();
 	}
 }
 
