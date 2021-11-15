@@ -52,8 +52,8 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	public startDate: Date;
 	public endDate: Date;
 	public siteMapDate: Date;
-	public cellSpacing: number[] = [10, 10];
-	public cellAspectRatio: number = 70 / 25;
+	public cellSpacing: number[] = [20, 20];
+	public cellAspectRatio: number = 100 / 60;
 	public allowDragging: boolean = false;
 	public placeholder: string = 'Site';
 
@@ -64,12 +64,18 @@ export class DashboardComponent extends PageComponent implements OnInit {
     public sliderMax: number;    
     public sliderValue: number;
 
+	public redColorPalette: string[];
+	public colorPalette: string[];
+
 	public primaryXAxis: Object = {
-		valueType: 'Category'
+		valueType: 'Category',
+		majorGridLines: { width: 0 }
 	}
 
 	async ngOnInit() {
 		this.mode = 'CheckBox';
+		this.redColorPalette = ['#ca3433'];
+		this.colorPalette = ['#357cd2', '#00bdae', '#e36593'];
 		this.app = await this.appService.getData();
 		this.customers = await this.repository.listCustomers();
 		this.variants = [];
@@ -207,22 +213,10 @@ export class DashboardComponent extends PageComponent implements OnInit {
 
 		setTimeout(function () {
 			if (!$this.initialized) return;
-
-			if ($this.tab.selectedItem == 0) {
 				$this.siteMapChange();
-			}
-			else if ($this.tab.selectedItem == 1) {
-				$this.setGraphDataByVariant();
-			}
-			else if ($this.tab.selectedItem == 2) {
 				$this.setGraphDataByPositiveCases();
-			}
-			else if ($this.tab.selectedItem == 3) {
 				$this.setGraphDataByPositiveNegativeCases();
-			}
-			else if ($this.tab.selectedItem == 4) {
 				$this.setGraphDataPositiveSites();
-			}
 		}, 10);
 	}
 
@@ -249,10 +243,10 @@ export class DashboardComponent extends PageComponent implements OnInit {
 				stylers: [{ visibility: "off" }],
 			}
 		];		
-		googleMap.setOptions({ styles: mapStyles });
+		googleMap.setOptions({ styles: mapStyles, mapTypeControl: false, streetViewControl: false });
 
 		const infoWindow = new google.maps.InfoWindow({
-			content: 'WASHINGTON — President Biden and Democratic leaders in Congress in recent days have slashed their ambitions for a major expansion of America’s social safety net to a package worth $2.3 trillion or less, which will force hard choices about how to scale back a proposal that the president hopes will be transformational.'
+			content: 'To Set'
 		});
 
 		this.markers.forEach(function (x) {

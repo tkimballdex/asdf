@@ -12,9 +12,59 @@
         <div class="col-md-3">
             <ejs-daterangepicker placeholder='Select a range' floatLabelType="Always" [(startDate)]='startDate' [(endDate)]='endDate' (change)="dateRangeChange()"></ejs-daterangepicker>
         </div>
+    </div>    
+
+    <div class="row pad-t20">
+        <div class="col-md-12 col-lg-10 col-xl-8">
+            <ejs-dashboardlayout id="default_dashboard" width="100%" [allowDragging]='allowDragging' [columns]="12" #editLayout [cellSpacing]='cellSpacing' [cellAspectRatio]='cellAspectRatio'>
+                <e-panels>    
+                    <e-panel [sizeX]="12" [sizeY]="2" [row]="0" [col]="0">
+                        <ng-template #content>
+                            <div class="col-12">
+                                <ejs-slider id='square_slider' [type]="default" [min]="sliderMin" [max]="sliderMax" [value]="sliderValue" [step]="sliderStep" [tooltip]="sliderTooltipData" [ticks]="sliderTicksData" [showButtons]=true
+                                (tooltipChange)='tooltipChangeHandler($event)' (renderingTicks)='renderingTicksHandler($event)' (changed)='onSliderChanged($event)'></ejs-slider>
+                            </div>                             
+                        </ng-template>
+                    </e-panel>                 
+                    <e-panel [sizeX]="12" [sizeY]="6" [row]="2" [col]="0">
+                        <ng-template #content>     
+                                <google-map id="dashboard-map"></google-map>                            
+                        </ng-template>
+                    </e-panel>                                    
+                    <e-panel [sizeX]="12" [sizeY]="5" [row]="8" [col]="0">
+                        <ng-template #header>
+                            <div>Daily Positive Locations</div>
+                        </ng-template>
+                        <ng-template #content>                         
+                            <ejs-chart id="chartPositiveCases" class="dashboard-chart" [primaryXAxis]='primaryXAxis' #chartPositiveCases [palettes]='redColorPalette'>
+                            </ejs-chart>                           
+                        </ng-template>
+                    </e-panel>
+                    <e-panel [sizeX]="6" [sizeY]="5" [row]="13" [col]="0">
+                        <ng-template #header>
+                            <div>Positive Locations by Site</div>
+                        </ng-template>
+                        <ng-template #content>                         
+                                <ejs-chart id="chartPositiveSites" class="dashboard-chart" [primaryXAxis]='primaryXAxis' #chartPositiveSites [palettes]='colorPalette'>                                  
+                                </ejs-chart>                           
+                        </ng-template>
+                    </e-panel>
+                    <e-panel [sizeX]="6" [sizeY]="5" [row]="13" [col]="6">
+                        <ng-template #header>
+                            <div>Positive vs Negative Locations</div>
+                        </ng-template>
+                        <ng-template #content>                         
+                            <ejs-chart id="chartPositiveNegativeCases" class="dashboard-chart" [primaryXAxis]='primaryXAxis' #chartPositiveNegativeCases [palettes]='colorPalette'>
+                            </ejs-chart>                         
+                        </ng-template>
+                    </e-panel>
+                </e-panels>
+            </ejs-dashboardlayout>
+        </div>
     </div>
 
-    <div class="row d-flex pad-t20">
+<!--  
+    <div class="row d-flex pad-t20" visible="false">
         <div class="col-md-12 d-flex">
             <ejs-tab id="edit-tab" class="e-fill" (selected)="setGraphData('tabSelected')" #tab>
                 <e-tabitems>
@@ -23,79 +73,21 @@
                             <div>Site Map</div>
                         </ng-template>
                         <ng-template #content>
-                            <div id="list-view" class="container-fluid pad-t20">                               
-                                <div class="row">
-                                    <div class="col-md-12 col-lg-10 col-xl-8">
-                                        <ejs-slider id='square_slider' [type]="default" [min]="sliderMin" [max]="sliderMax" [value]="sliderValue" [step]="sliderStep" [tooltip]="sliderTooltipData" [ticks]="sliderTicksData" [showButtons]=true
-                                        (tooltipChange)='tooltipChangeHandler($event)' (renderingTicks)='renderingTicksHandler($event)' (changed)='onSliderChanged($event)'></ejs-slider>
-                                    </div>
-                                </div>
-                                <div class="row pad-t20">
-                                    <div id="map-canvas" class="col-md-12 col-lg-10 col-xl-8">
-                                        <google-map id="dashboard-map" width="600px"></google-map>
-                                    </div>                                    
-                                </div>                                
+                            <div id="list-view" class="container-fluid pad-t20">    
+                                
                             </div>
                         </ng-template>
-                    </e-tabitem>
-                    <e-tabitem>
-                        <ng-template #headerText>
-                            <div>Locations by Variant</div>
-                        </ng-template>
-                        <ng-template #content>
-                            <div id="list-view" class="container-fluid pad-t20">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <ejs-dropdownlist [dataSource]="variants" [fields]="{ text: 'name', value: 'id' }" [(value)]="variantId" placeholder="Variant" floatLabelType="Always" (change)="setGraphData('variantChange')"></ejs-dropdownlist>
-                                    </div>
-                                </div>
-
-                                <div class="row pad-t20">
-                                    <div class="col-md-12">
-                                        <ejs-dashboardlayout [allowDragging]='allowDragging' [columns]="2" #editLayout [cellSpacing]='cellSpacing' [cellAspectRatio]='cellAspectRatio'>
-                                            <e-panels>
-                                                <e-panel [sizeX]="2" [sizeY]="2" [row]="1" [col]="0">
-                                                    <ng-template #header>
-                                                        <div>Locations - Daily Results</div>
-                                                    </ng-template>
-                                                    <ng-template #content>
-                                                        <div>
-                                                            <ejs-chart id="chartByVariant" height="400px" [primaryXAxis]='primaryXAxis' #chartByVariant>
-                                                            </ejs-chart>
-                                                        </div>
-                                                    </ng-template>
-                                                </e-panel>
-                                            </e-panels>
-                                        </ejs-dashboardlayout>
-                                    </div>
-                                </div>
-                            </div>
-                        </ng-template>
-                    </e-tabitem>
+                    </e-tabitem>                   
 
                     <e-tabitem>
                         <ng-template #headerText>
-                            <div>Positive Cases</div>
+                            <div>Positive Locations</div>
                         </ng-template>
                         <ng-template #content>
                             <div id="list-view" class="container-fluid pad-t20">
                                 <div class="row pad-t20">
                                     <div class="col-md-12">
-                                        <ejs-dashboardlayout [allowDragging]='allowDragging' [columns]="2" #editLayout [cellSpacing]='cellSpacing' [cellAspectRatio]='cellAspectRatio'>
-                                            <e-panels>
-                                                <e-panel [sizeX]="2" [sizeY]="2" [row]="1" [col]="0">
-                                                    <ng-template #header>
-                                                        <div>Positive Cases - Daily Counts</div>
-                                                    </ng-template>
-                                                    <ng-template #content>
-                                                        <div>
-                                                            <ejs-chart id="chartPositiveCases" height="400px" [primaryXAxis]='primaryXAxis' #chartPositiveCases>
-                                                            </ejs-chart>
-                                                        </div>
-                                                    </ng-template>
-                                                </e-panel>
-                                            </e-panels>
-                                        </ejs-dashboardlayout>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -118,8 +110,7 @@
                                                     </ng-template>
                                                     <ng-template #content>
                                                         <div>
-                                                            <ejs-chart id="chartPositiveNegativeCases" height="400px" [primaryXAxis]='primaryXAxis' #chartPositiveNegativeCases>
-                                                            </ejs-chart>
+                                                            
                                                         </div>
                                                     </ng-template>
                                                 </e-panel>
@@ -129,40 +120,11 @@
                                 </div>
                             </div>
                         </ng-template>
-                    </e-tabitem>
-
-                    <e-tabitem>
-                        <ng-template #headerText>
-                            <div>Positive Cases by Site</div>
-                        </ng-template>
-                        <ng-template #content>
-                            <div id="list-view" class="container-fluid pad-t20">
-                                <div class="row pad-t20">
-                                    <div class="col-md-12">
-                                        <ejs-dashboardlayout [allowDragging]='allowDragging' [columns]="2" #editLayout [cellSpacing]='cellSpacing' [cellAspectRatio]='cellAspectRatio'>
-                                            <e-panels>
-                                                <e-panel [sizeX]="2" [sizeY]="2" [row]="1" [col]="0">
-                                                    <ng-template #header>
-                                                        <div>Positive Cases by Site</div>
-                                                    </ng-template>
-                                                    <ng-template #content>
-                                                        <div>
-                                                            <ejs-chart id="chartPositiveSites" height="400px" [primaryXAxis]='primaryXAxis' #chartPositiveSites>
-                                                            </ejs-chart>
-                                                        </div>
-                                                    </ng-template>
-                                                </e-panel>
-                                            </e-panels>
-                                        </ejs-dashboardlayout>
-                                    </div>
-                                </div>
-                            </div>
-                        </ng-template>
-                    </e-tabitem>
-
-                    
+                    </e-tabitem>              
                 </e-tabitems>
             </ejs-tab>
         </div>
     </div>
+-->
+
 </div>
