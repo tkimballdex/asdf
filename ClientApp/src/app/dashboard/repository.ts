@@ -38,21 +38,6 @@ export class DashboardRepository {
 		});
 	}
 
-	public listVariants(analyteId: string) {
-		return this.http.post(`/variant/list`, {
-			tenantId: this.tenant.id,
-			analyteId: analyteId
-		});
-	}
-
-	public locationVariants(filter: any) {
-		return this.http.post<any[]>(`/dashboard/locationVariants`, filter);
-	}
-
-	public variantLocations(filter: any) {
-		return this.http.post<any[]>(`/dashboard/variantLocations`, filter);
-	}
-
 	public positiveCases(filter: any) {
 		return this.http.post<any>(`/dashboard/positiveCases`, filter);
 	}

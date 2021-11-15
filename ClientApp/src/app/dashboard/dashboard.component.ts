@@ -44,8 +44,6 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	public selectedSites: any;
 	public customers: any;
 	public customerId: string;
-	public variantId: string;
-	public variants: any;
 	public sites: any;
 	public analyteId: string;
 	public graphData: any;
@@ -81,7 +79,6 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.colorPalette = ['#ee5253', '#74b9ff', '#a29bfe', '#ff7675', '#fdcb6e'];
 		this.app = await this.appService.getData();
 		this.customers = await this.repository.listCustomers();
-		this.variants = [];
 		this.sites = [];
 
 		var today = new Date();
@@ -122,32 +119,11 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	}
 
 	async analyteChange() {
-		this.variants = [];
-		this.variantId = null;
-		this.variants = await this.repository.listVariants(this.analyteId);
-		if (this.variants.length > 0) this.variantId = this.variants[0].id;
 		this.setGraphData('analyteChange');
 	}
 
 	async siteChange() {
 		this.setGraphData('siteChange');
-	}
-
-	async setGraphDataByVariant() {
-		if (!this.chartByVariant) return;
-
-		if (!this.customerId || !this.variantId) return;
-
-		let graphData = await this.repository.variantLocations({
-			customerId: this.customerId,
-			variantId: this.variantId,
-			startDate: this.startDate,
-			endDate: this.endDate
-		});
-
-		graphData.forEach(x => { x.type = 'Spline'; x.xName = 'x'; x.yName = 'y'; });
-		this.chartByVariant.clearSeries();
-		this.chartByVariant.addSeries(graphData);
 	}
 
 	async setGraphDataByPositiveCases() {
