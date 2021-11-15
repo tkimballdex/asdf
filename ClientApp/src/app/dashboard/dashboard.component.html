@@ -45,7 +45,7 @@
                             <div>Positive Locations by Site</div>
                         </ng-template>
                         <ng-template #content>                         
-                                <ejs-chart id="chartPositiveSites" class="dashboard-chart" [primaryXAxis]='primaryXAxis' #chartPositiveSites [palettes]='colorPalette'>                                  
+                                <ejs-chart id="chartPositiveSites" class="dashboard-chart" [primaryXAxis]='primaryXAxis' #chartPositiveSites>                                  
                                 </ejs-chart>                           
                         </ng-template>
                     </e-panel>
@@ -54,7 +54,7 @@
                             <div>Positive vs Negative Locations</div>
                         </ng-template>
                         <ng-template #content>                         
-                            <ejs-chart id="chartPositiveNegativeCases" class="dashboard-chart" [primaryXAxis]='primaryXAxis' #chartPositiveNegativeCases [palettes]='colorPalette'>
+                            <ejs-chart id="chartPositiveNegativeCases" class="dashboard-chart" [primaryXAxis]='primaryXAxis' #chartPositiveNegativeCases>
                             </ejs-chart>                         
                         </ng-template>
                     </e-panel>

@@ -65,17 +65,20 @@ export class DashboardComponent extends PageComponent implements OnInit {
     public sliderValue: number;
 
 	public redColorPalette: string[];
+	public greenColorPalette: string[];
 	public colorPalette: string[];
 
 	public primaryXAxis: Object = {
 		valueType: 'Category',
-		majorGridLines: { width: 0 }
+		majorGridLines: { width: 0 },
+		labelRotation: 45
 	}
 
 	async ngOnInit() {
 		this.mode = 'CheckBox';
-		this.redColorPalette = ['#ca3433'];
-		this.colorPalette = ['#357cd2', '#00bdae', '#e36593'];
+		this.redColorPalette = ['#ee5253'];
+		this.greenColorPalette = ['#1abc9c'];
+		this.colorPalette = ['#ee5253', '#74b9ff', '#a29bfe', '#ff7675', '#fdcb6e'];
 		this.app = await this.appService.getData();
 		this.customers = await this.repository.listCustomers();
 		this.variants = [];
@@ -179,9 +182,8 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		});
 
 		graphData = [
-			{ type: 'StackingColumn', xName: 'x', yName: 'negative', dataSource: graphData, name: 'Negative Cases' },
-			{ type: 'StackingColumn', xName: 'x', yName: 'positive', dataSource: graphData, name: 'Positive Cases' }
-			
+			{ type: 'StackingColumn', xName: 'x', yName: 'positive', dataSource: graphData, name: 'Positive Cases', fill: '#ee5253' },
+			{ type: 'StackingColumn', xName: 'x', yName: 'negative', dataSource: graphData, name: 'Negative Cases', fill: '#32bbae' }
 		];
 
 		this.chartPositiveNegativeCases.clearSeries();
@@ -224,7 +226,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	polygons: google.maps.Polygon[] = [];
 
 	getColor(positive, negative) {
-		return positive ? '#ee3300' : negative ? '#33cc00' : '#aaaaaa'
+		return positive ? '#ee5253' : negative ? '#32bbae' : '#aaaaaa'
 	}
 
 	async siteMapChange() {
@@ -304,7 +306,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 						strokeOpacity: 0.8,
 						strokeWeight: 2,
 						fillColor: $this.getColor(site.positive, site.negative),
-						fillOpacity: 0.35
+						fillOpacity: 0.6
 					}));
 
 					points = points.concat(boundaries);
