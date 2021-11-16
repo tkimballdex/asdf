@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, OnInit, ViewChild, Injectable } from '@angular/core';
 import { GoogleMap } from '@angular/google-maps';
-import { ChartComponent } from '@syncfusion/ej2-angular-charts';
+import { ChartComponent, TooltipSettingsModel } from '@syncfusion/ej2-angular-charts';
 import { AppService } from '../shared/app.service';
 import { PageComponent } from '../shared/page.component';
 import { DashboardRepository } from './repository';
@@ -72,6 +72,10 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		labelRotation: 45
 	}
 
+	public tooltip: TooltipSettingsModel =  {
+        enable: true
+    };
+	//-------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.mode = 'CheckBox';
 		this.redColorPalette = ['#ee5253'];
@@ -97,35 +101,35 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.initialized = true;
 		this.setGraphData('init');
 	}	
-
+	//-------------------------------------------------------------------------------------
 	tooltipChangeHandler(args: SliderTooltipEventArgs): void {
         let totalMiliSeconds = Number(args.text);
         // Converting the current milliseconds to the respective date in desired format
         //let custom = { year: "numeric", month: "2-digit", day: "2-digit" };
         args.text = new Date(totalMiliSeconds).toLocaleDateString("en-us", { year: "numeric", month: "short", day: "numeric" });
     }
-
+	//-------------------------------------------------------------------------------------
     renderingTicksHandler(args: SliderTickEventArgs): void {
         let totalMiliSeconds = Number(args.value);
         // Converting the current milliseconds to the respective date in desired format
         //let custom = { year: "numeric", month: "short", day: "numeric" };
         args.text = new Date(totalMiliSeconds).toLocaleDateString("en-us", { month: "short", day: "numeric" });
     }
-
+	//-------------------------------------------------------------------------------------
 	async customerChange() {
 		this.sites = [];
 		this.sites = await this.repository.listSites(this.customerId);
 		this.selectedSites = this.sites.map(x => x.id);
 	}
-
+	//-------------------------------------------------------------------------------------
 	async analyteChange() {
 		this.setGraphData('analyteChange');
 	}
-
+	//-------------------------------------------------------------------------------------
 	async siteChange() {
 		this.setGraphData('siteChange');
 	}
-
+	//-------------------------------------------------------------------------------------
 	async setGraphDataByPositiveCases() {
 		if (!this.chartPositiveCases) return;
 
@@ -139,11 +143,11 @@ export class DashboardComponent extends PageComponent implements OnInit {
 			sites: this.selectedSites
 		});
 
-		graphData = [{ type: 'Column', xName: 'x', yName: 'y', dataSource: graphData }];
+		graphData = [{ type: 'Column', xName: 'x', yName: 'y', dataSource: graphData, name: 'Positive Locations' }];
 		this.chartPositiveCases.clearSeries();
 		this.chartPositiveCases.addSeries(graphData);
 	}
-
+	//-------------------------------------------------------------------------------------
 	async setGraphDataByPositiveNegativeCases() {
 		if (!this.chartPositiveNegativeCases) return;
 
@@ -158,14 +162,14 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		});
 
 		graphData = [
-			{ type: 'StackingColumn', xName: 'x', yName: 'positive', dataSource: graphData, name: 'Positive Cases', fill: '#ee5253' },
-			{ type: 'StackingColumn', xName: 'x', yName: 'negative', dataSource: graphData, name: 'Negative Cases', fill: '#32bbae' }
+			{ type: 'StackingColumn', xName: 'x', yName: 'positive', dataSource: graphData, name: 'Positive Locations', fill: '#ee5253' },
+			{ type: 'StackingColumn', xName: 'x', yName: 'negative', dataSource: graphData, name: 'Negative Locations', fill: '#32bbae' }
 		];
 
 		this.chartPositiveNegativeCases.clearSeries();
 		this.chartPositiveNegativeCases.addSeries(graphData);
 	}
-
+	//-------------------------------------------------------------------------------------
 	async setGraphDataPositiveSites() {
 		if (!this.chartPositiveSites) return;
 
@@ -183,7 +187,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.chartPositiveSites.clearSeries();
 		this.chartPositiveSites.addSeries(graphData);
 	}
-
+	//-------------------------------------------------------------------------------------
 	setGraphData(from) {
 		console.dir(from);
 		var $this = this;

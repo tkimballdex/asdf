@@ -19,7 +19,7 @@ import { PageService, SortService, FilterService, GroupService } from '@syncfusi
 import { ColumnSeriesService, AreaSeriesService, } from '@syncfusion/ej2-angular-charts';
 
 import { AccumulationChartModule } from '@syncfusion/ej2-angular-charts';
-import { PieSeriesService, AccumulationDataLabelService } from '@syncfusion/ej2-angular-charts';
+import { PieSeriesService, AccumulationDataLabelService, LegendService, TooltipService, DateTimeService } from '@syncfusion/ej2-angular-charts';
 import { SliderModule } from '@syncfusion/ej2-angular-inputs';
 
 
@@ -52,6 +52,7 @@ import { SliderModule } from '@syncfusion/ej2-angular-inputs';
 		])
 	],
 	providers: [ColumnSeriesService, AreaSeriesService, PageService, SortService, FilterService, GroupService, CheckBoxSelectionService,
-		PieSeriesService, AccumulationDataLabelService, AccumulationLegendService, AccumulationTooltipService, AccumulationAnnotationService]
+		PieSeriesService, AccumulationDataLabelService, AccumulationLegendService, AccumulationTooltipService, AccumulationAnnotationService,
+		LegendService, TooltipService, DateTimeService]
 })
 export class DashboardModule { }
