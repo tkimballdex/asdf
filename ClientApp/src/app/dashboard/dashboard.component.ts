@@ -225,7 +225,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 				stylers: [{ visibility: "off" }],
 			}
 		];		
-		googleMap.setOptions({ styles: mapStyles, mapTypeControl: false, streetViewControl: false });
+		googleMap.setOptions({ styles: mapStyles, mapTypeControl: false, streetViewControl: false, scrollwheel: false });
 
 		const infoWindow = new google.maps.InfoWindow({
 			content: 'To Set'
