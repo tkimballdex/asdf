@@ -65,6 +65,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	public redColorPalette: string[];
 	public greenColorPalette: string[];
 	public colorPalette: string[];
+	public tooltip: Object;
 
 	public primaryXAxis: Object = {
 		valueType: 'Category',
@@ -88,6 +89,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.sliderMin = this.startDate.getTime();
 		this.sliderMax = this.endDate.getTime() + 86400000;
 		this.sliderValue = this.endDate.getTime();
+		this.tooltip = { enable: true };
 
 		this.analyteId = this.app.analytes[0].id;
 		this.customerId = this.customers[0].id;
