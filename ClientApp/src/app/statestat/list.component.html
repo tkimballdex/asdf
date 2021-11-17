@@ -1,0 +1,50 @@
+<div id="list-view" class="container-fluid" *ngIf="form">
+    <div class="row d-flex align-items-center">
+        <div class="col d-flex align-items-center list-header">
+            <span class="list-header-icon"><i class="fas fa-map-marked"></i></span>
+            <span class="list-header-title">State Statistics</span>
+            <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['../add']" [disabled]="!privileges.create">+ Add</button></span>
+        </div>
+        <div class="col-md-6 d-flex align-items-center justify-content-end list-header">
+            <span class="list-actions"><button ejs-button cssClass="e-outline" [disabled]="!privileges.download" iconCss="fad fa-download" (click)="export()"></button></span>
+        </div>
+    </div>
+    <div class="row d-flex align-items-end list-content">
+        <div class="col-3">
+            <ejs-textbox [(value)]="form.name" placeholder="Name" floatLabelType="Always"></ejs-textbox>
+        </div>
+        <div class="col-2">
+            <ejs-dropdownlist [dataSource]="app.states" [(value)]="form.stateId" [fields]="{ text: 'name', value: 'id' }" placeholder="State" floatLabelType="Always" (change)="searchClick()"></ejs-dropdownlist>
+        </div>
+        <div class="col-3">
+            <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 pad-t20">
+            <ejs-grid [dataSource]='list' [allowPaging]="true" [pageSettings]='form.pageSettings' [sortSettings]='form.sortSettings' 
+            [allowSorting]="true" [allowFiltering]="false" *ngIf="list" (actionComplete)='gridActionHandler($event)' [allowExcelExport]='true' 
+            (excelExportComplete)='excelExportComplete()' #griddemographics>
+                <e-columns>
+                    <e-column width="70">
+                        <ng-template #template let-data>
+                            <a [routerLink]="['../edit', data.id]" [state]="{ from: 'States' }"><i class="fas fa-pencil-alt edit-icon"></i></a>
+                        </ng-template>
+                    </e-column> 
+                    <e-column field='date' type='date' [format]='dateFormat' headerText='Date' width='120'></e-column>                   
+                    <e-column field='state' headerText='State'></e-column>
+                    <e-column field='country' headerText='Country'></e-column>
+                    <e-column field='cases' headerText='Cases' textAlign='Right'></e-column>
+                    <e-column field='tests' headerText='Tests' textAlign='Right'></e-column>
+                    <e-column field='positiveTests' headerText='Positive Tests' textAlign='Right'></e-column>
+                    <e-column field='hospitalized' headerText='Hospitalized' textAlign='Right'></e-column>
+                    <e-column field='vaccinated' headerText='Vaccinated' textAlign='Right'></e-column>    
+                    <e-column field='deaths' headerText='Deaths' textAlign='Right'></e-column>  
+                    <e-column field='icuBedsAvailable' headerText='ICU Beds Avail' textAlign='Right'></e-column>                  
+                </e-columns>
+            </ejs-grid>
+        </div> 
+    </div>  
+</div>
+
