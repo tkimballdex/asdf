@@ -136,7 +136,7 @@ export interface Privileges {
 	tests: PrivilegeSet;
 	states: PrivilegeSet;
 	counties: PrivilegeSet;
-	postalCodes: PrivilegeSet
+	postalCodes: PrivilegeSet;
 }
 
 export interface MenuItem {
@@ -150,6 +150,10 @@ export interface Country {
     id: number;
     name: string;
 }
+export interface County {
+    id: number;
+    name: string;
+}
 export interface State {
     id: number;
     name: string;
@@ -158,9 +162,6 @@ export interface Postalcode {
     id: number;
     name: string;
 }
-
-
-
 export interface Frequency {
     id: number;
     name: string;
@@ -186,6 +187,7 @@ export interface AppData {
 	userId: string;
     privileges: Privileges;
     countries: Country[];
+	counties: County[];
 	states: State[];
     frequencies: Frequency[];
     vendortypes: VendorType[];
@@ -193,5 +195,4 @@ export interface AppData {
 	tenants: Tenant[];
 	analytes: UidName[]; 
 	Postalcodes:Postalcode[];
-
 }

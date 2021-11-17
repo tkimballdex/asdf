@@ -36,7 +36,7 @@
                             <div>Daily Positive Locations</div>
                         </ng-template>
                         <ng-template #content>                         
-                            <ejs-chart id="chartPositiveCases" class="dashboard-chart" [primaryXAxis]='primaryXAxis' #chartPositiveCases [palettes]='redColorPalette'>
+                            <ejs-chart id="chartPositiveCases"  class="dashboard-chart" [primaryXAxis]='primaryXAxis' #chartPositiveCases [palettes]='redColorPalette'>
                             </ejs-chart>                           
                         </ng-template>
                     </e-panel>
@@ -45,7 +45,7 @@
                             <div>Positive Locations by Site</div>
                         </ng-template>
                         <ng-template #content>                         
-                                <ejs-chart id="chartPositiveSites" class="dashboard-chart" [primaryXAxis]='primaryXAxis' #chartPositiveSites>                                  
+                                <ejs-chart id="chartPositiveSites"  class="dashboard-chart" [primaryXAxis]='primaryXAxis' #chartPositiveSites>                                  
                                 </ejs-chart>                           
                         </ng-template>
                     </e-panel>
@@ -63,8 +63,7 @@
         </div>
     </div>
 
-<!--  
-    <div class="row d-flex pad-t20" visible="false">
+    <!--<div class="row d-flex pad-t20" visible="false">
         <div class="col-md-12 d-flex">
             <ejs-tab id="edit-tab" class="e-fill" (selected)="setGraphData('tabSelected')" #tab>
                 <e-tabitems>
@@ -124,7 +123,7 @@
                 </e-tabitems>
             </ejs-tab>
         </div>
-    </div>
--->
+    </div>-->
+
 
 </div>
