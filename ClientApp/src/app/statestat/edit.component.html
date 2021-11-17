@@ -1,0 +1,106 @@
+<div id="edit-view" *ngIf="record && form" [formGroup]="form" class="container-fluid">
+    <div class="row d-flex align-items-center edit-header">
+        <div class="col-md-6 d-flex">
+            <span class="edit-header-icon"><i class="fas fa-map-marked"></i></span>
+            <span class="edit-header-title">State Daily Statistic</span>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end">
+            
+        </div>
+    </div>
+
+    <div class="row pad-t10">         
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-datepicker [(value)]="record.date" formControlName="date" placeholder="Date" floatLabelType="Always"></ejs-datepicker>
+            <div *ngIf="this.invalidControl('date')" class="e-error">
+                Date is required!
+            </div>
+        </div>
+    </div>
+
+    <div class="row">  
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-dropdownlist [dataSource]="app.states" formControlName="stateId" [fields]="{ text: 'name', value: 'id' }" placeholder="State *" floatLabelType="Always"></ejs-dropdownlist>
+            <div *ngIf="this.invalidControl('stateId')" class="e-error">
+                State is required!
+            </div>
+        </div>  
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-dropdownlist [dataSource]="app.analytes" [fields]="{ text: 'name', value: 'id' }" formControlName="analyteId" placeholder="Analyte" floatLabelType="Always"></ejs-dropdownlist>
+            <div *ngIf="this.invalidControl('analyteId')" class="e-error">
+                Analyte is required!
+            </div>
+        </div>        
+    </div>
+
+    <div class="row pad-t20">  
+        <div class="col-md-6 col-lg-5 col-xl-4">           
+            <ejs-numerictextbox [(value)]="record.cases" format='N' step='1' placeholder="Cases" floatLabelType="Always"></ejs-numerictextbox>
+        </div>  
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-numerictextbox [(value)]="record.totalCases" format='N' step='1' placeholder="Total Cases" floatLabelType="Always"></ejs-numerictextbox>
+        </div>   
+    </div> 
+    
+    <div class="row pad-t20">  
+        <div class="col-md-6 col-lg-5 col-xl-4">           
+            <ejs-numerictextbox [(value)]="record.tests" format='N' step='1' placeholder="Tests" floatLabelType="Always"></ejs-numerictextbox>
+        </div>  
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-numerictextbox [(value)]="record.totalTests" format='N' step='1' placeholder="Total Tests" floatLabelType="Always"></ejs-numerictextbox>
+        </div>   
+    </div> 
+    <div class="row">  
+        <div class="col-md-6 col-lg-5 col-xl-4">           
+            <ejs-numerictextbox [(value)]="record.positiveTests" format='N' step='1' placeholder="Positive Tests" floatLabelType="Always"></ejs-numerictextbox>
+        </div>  
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-numerictextbox [(value)]="record.totalPositiveTests" format='N' step='1' placeholder="Total Positive Tests" floatLabelType="Always"></ejs-numerictextbox>
+        </div>   
+    </div> 
+    
+    <div class="row pad-t20">  
+        <div class="col-md-6 col-lg-5 col-xl-4">           
+            <ejs-numerictextbox [(value)]="record.vaccinated" format='N' step='1' placeholder="Vaccinated" floatLabelType="Always"></ejs-numerictextbox>
+        </div>  
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-numerictextbox [(value)]="record.totalVaccinated" format='N' step='1' placeholder="Total Vaccinated" floatLabelType="Always"></ejs-numerictextbox>
+        </div>   
+    </div> 
+    <div class="row">  
+        <div class="col-md-6 col-lg-5 col-xl-4">           
+            <ejs-numerictextbox [(value)]="record.hospitalized" format='N' step='1' placeholder="Hospitalized" floatLabelType="Always"></ejs-numerictextbox>
+        </div>  
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-numerictextbox [(value)]="record.totalHospitalized" format='N' step='1' placeholder="Total Hospitalized" floatLabelType="Always"></ejs-numerictextbox>
+        </div>   
+    </div>  
+    <div class="row">  
+        <div class="col-md-6 col-lg-5 col-xl-4">           
+            <ejs-numerictextbox [(value)]="record.deaths" format='N' step='1' placeholder="Deaths" floatLabelType="Always"></ejs-numerictextbox>
+        </div>  
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-numerictextbox [(value)]="record.totalDeaths" format='N' step='1' placeholder="Total Deaths" floatLabelType="Always"></ejs-numerictextbox>
+        </div>   
+    </div>
+    <div class="row pad-t20 pad-b20">  
+        <div class="col-md-6 col-lg-5 col-xl-4">           
+            <ejs-numerictextbox [(value)]="record.icuBedsAvailable" format='N' step='1' placeholder="ICU Beds Available" floatLabelType="Always"></ejs-numerictextbox>
+        </div>    
+    </div>      
+
+
+    <div class="row d-flex edit-footer">
+        <div class="col-md-6 d-flex justify-content-start">
+            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
+        </div>
+
+        <div class="col-md-6 d-flex justify-content-end">
+            <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
+            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/statestat/list']" [state]='{ formState: true }'>Close</button>
+        </div>
+    </div>
+    
+    <ejs-toast #toast></ejs-toast>
+</div>
+
