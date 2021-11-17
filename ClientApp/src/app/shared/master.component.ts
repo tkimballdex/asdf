@@ -89,6 +89,7 @@ export class MasterPageComponent implements OnInit {
 			sampleMenu.push({ id: '/auth/sample/list', text: 'Samples' });			
 			sampleMenu.push({ id: '/auth/sampletest/list', text: 'Tests' });
 			sampleMenu.push({ id: '/auth/countystat/list', text: 'County Stats' });
+			sampleMenu.push({ id: '/auth/statestat/list', text: 'State Stats' });
 			sampleMenu.push({ id: '/auth/sampletest/import', text: 'Import Tests' });
 		}
 

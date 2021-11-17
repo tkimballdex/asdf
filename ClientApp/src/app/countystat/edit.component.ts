@@ -25,26 +25,24 @@ export class CountystatEditComponent extends PageComponent implements OnInit {
 	//------------------------------------------------------------------------------------
 	async ngOnInit() {
 		
-
+		var id = this.route.snapshot.paramMap.get('id');
 		this.showSpinner();		
-		this.app = await this.appService.getData();
 		this.privileges = (await this.appService.getPrivileges()).counties;
-		this.record = await this.repository.get(id);
-		
-		var id = parseInt(this.route.snapshot.paramMap.get('id'));
-		//this.countries = this.app.countries;
-		this.hideSpinner();			
-
-
-		if (id) {
-			this.record = await this.repository.get(id);
+		this.app = await this.appService.getData();
+		if (id == null) {
+			this.record = {
+				active: true
+			};
 		}
 		else {
-			this.record = {};
+			this.record = await this.repository.get(id);
 		}
+
+		this.hideSpinner();	
 		this.form = new FormGroup({
-			//name: new FormControl(this.record.name, [Validators.required]),
-			//stateId: new FormControl(this.record.stateId, [Validators.required]),
+			date: new FormControl(this.record.date, [Validators.required]),
+			countyId: new FormControl(this.record.countyId, [Validators.required]),
+			analyteId: new FormControl(this.record.analyteId, [Validators.required]),
 		});
 
 		var $this = this;

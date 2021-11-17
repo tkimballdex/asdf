@@ -14,7 +14,7 @@ export class CountystatRepository {
         return this.http.post<any>(`/countystat/delete/${id}`);
     }
 
-    public get(id: number) {
+    public get(id: string) {
         return this.http.post(`/countystat/get/${id}`);
     }
 

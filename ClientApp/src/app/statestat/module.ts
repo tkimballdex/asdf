@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { GoogleMapsModule } from '@angular/google-maps';
 import { StateStatListComponent } from './list.component'
 import { StateStatEditComponent } from './edit.component'
 import { MsalGuard } from '@azure/msal-angular';
@@ -24,7 +23,7 @@ import { TabModule } from '@syncfusion/ej2-angular-navigations';
     ],
     imports: [
         GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule,
-		CommonModule, DatePickerModule, SwitchModule, FormsModule, ReactiveFormsModule, GoogleMapsModule, NumericTextBoxModule, TabModule,
+		CommonModule, DatePickerModule, SwitchModule, FormsModule, ReactiveFormsModule, NumericTextBoxModule, TabModule,
         RouterModule.forChild([
             { path: 'list', component: StateStatListComponent, canActivate: [MsalGuard] },
             { path: 'add', component: StateStatEditComponent, canActivate: [MsalGuard] },

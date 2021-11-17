@@ -8,7 +8,7 @@ import { GridFormParams, FormState } from '../shared/formState';
 import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 
 @Component({
-    selector: 'county-list',
+    selector: 'countystat-list',
     templateUrl: './list.component.html',
 })
 export class CountystatListComponent extends PageComponent implements OnInit {
@@ -19,6 +19,7 @@ export class CountystatListComponent extends PageComponent implements OnInit {
     public list: any;
 	public states: any;
 	public form: FormParams;
+	public dateFormat = {type:'date', format:'MM/dd/yyyy'};
 
 	@ViewChild('editTab')
 	public editTab: TabComponent;

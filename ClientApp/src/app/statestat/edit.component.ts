@@ -21,6 +21,7 @@ export class StateStatEditComponent extends PageComponent implements OnInit {
 	public data: any;
     public deleteDialog: Dialog;
     public form: FormGroup;
+	
 	//------------------------------------------------------------------------------------
 	async ngOnInit() {
 		var id = this.route.snapshot.paramMap.get('id');
