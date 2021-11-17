@@ -1,183 +1,90 @@
 <div id="edit-view" *ngIf="record" class="container-fluid" [formGroup]="form">
     <div class="row d-flex align-items-center edit-header">
         <div class="col-md-6 d-flex">
-            <span class="edit-header-icon"><i class="fas fa-user-crown"></i></span>
-            <span class="edit-header-title">County Stat</span>
-        </div>
-        <div class="col-md-6 d-flex justify-content-end">
-            <ejs-switch [(checked)]="record.active" onLabel="Active" offLabel="Not Active" style="width:100px;height:32px;"></ejs-switch>
+            <span class="edit-header-icon"><i class="fas fa-map-marked"></i></span>
+            <span class="edit-header-title">County Statistic</span>
         </div>
     </div>
 
-    <div class="row pad-t10">
+    <div class="row pad-t10">         
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-tenant" [(value)]="record.county"  placeholder="County" floatLabelType="Always"></ejs-textbox>
-        </div>        
+            <ejs-datepicker [(value)]="record.date" formControlName="date" placeholder="Date" floatLabelType="Always"></ejs-datepicker>
+            <div *ngIf="this.invalidControl('date')" class="e-error">
+                Date is required!
+            </div>
+        </div>
     </div>
 
     <div class="row">  
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-state" [(value)]="record.state"  placeholder="State" floatLabelType="Always"></ejs-textbox>
-        </div>   
+            <ejs-dropdownlist [dataSource]="app.counties" formControlName="countyId" [fields]="{ text: 'name', value: 'id' }" placeholder="County *" floatLabelType="Always"></ejs-dropdownlist>
+            <div *ngIf="this.invalidControl('countyId')" class="e-error">
+                county is required!
+            </div>
+        </div>  
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-Country" [(value)]="record.country"  placeholder="State" floatLabelType="Always"></ejs-textbox>
-        </div>   
-    <div class="row">
-     
-        
+            <ejs-dropdownlist [dataSource]="app.analytes" [fields]="{ text: 'name', value: 'id' }" formControlName="analyteId" placeholder="Analyte" floatLabelType="Always"></ejs-dropdownlist>
+            <div *ngIf="this.invalidControl('analyteId')" class="e-error">
+                Analyte is required!
+            </div>
+        </div>        
+    </div>
+
+    <div class="row pad-t20">  
+        <div class="col-md-6 col-lg-5 col-xl-4">           
+            <ejs-numerictextbox [(value)]="record.cases" format='N' step='1' placeholder="Cases" floatLabelType="Always"></ejs-numerictextbox>
+        </div>  
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-state" [(value)]="record.analyte"  placeholder="Analyte" floatLabelType="Always"></ejs-textbox>
+            <ejs-numerictextbox [(value)]="record.totalCases" format='N' step='1' placeholder="Total Cases" floatLabelType="Always"></ejs-numerictextbox>
         </div>   
+    </div> 
+    
+    <div class="row pad-t20">  
+        <div class="col-md-6 col-lg-5 col-xl-4">           
+            <ejs-numerictextbox [(value)]="record.tests" format='N' step='1' placeholder="Tests" floatLabelType="Always"></ejs-numerictextbox>
+        </div>  
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-datepicker formControlName="date" placeholder="date" floatLabelType="Always"></ejs-datepicker>
+            <ejs-numerictextbox [(value)]="record.totalTests" format='N' step='1' placeholder="Total Tests" floatLabelType="Always"></ejs-numerictextbox>
+        </div>   
+    </div> 
+    <div class="row">  
+        <div class="col-md-6 col-lg-5 col-xl-4">           
+            <ejs-numerictextbox [(value)]="record.positiveTests" format='N' step='1' placeholder="Positive Tests" floatLabelType="Always"></ejs-numerictextbox>
+        </div>  
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-numerictextbox [(value)]="record.totalPositiveTests" format='N' step='1' placeholder="Total Positive Tests" floatLabelType="Always"></ejs-numerictextbox>
+        </div>   
+    </div> 
+    
+    <div class="row pad-t20">  
+        <div class="col-md-6 col-lg-5 col-xl-4">           
+            <ejs-numerictextbox [(value)]="record.vaccinated" format='N' step='1' placeholder="Vaccinated" floatLabelType="Always"></ejs-numerictextbox>
+        </div>  
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-numerictextbox [(value)]="record.totalVaccinated" format='N' step='1' placeholder="Total Vaccinated" floatLabelType="Always"></ejs-numerictextbox>
+        </div>   
+    </div> 
+    <div class="row">  
+        <div class="col-md-6 col-lg-5 col-xl-4">           
+            <ejs-numerictextbox [(value)]="record.hospitalized" format='N' step='1' placeholder="Hospitalized" floatLabelType="Always"></ejs-numerictextbox>
+        </div>  
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-numerictextbox [(value)]="record.totalHospitalized" format='N' step='1' placeholder="Total Hospitalized" floatLabelType="Always"></ejs-numerictextbox>
+        </div>   
+    </div>  
+    <div class="row">  
+        <div class="col-md-6 col-lg-5 col-xl-4">           
+            <ejs-numerictextbox [(value)]="record.deaths" format='N' step='1' placeholder="Deaths" floatLabelType="Always"></ejs-numerictextbox>
+        </div>  
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-numerictextbox [(value)]="record.totalDeaths" format='N' step='1' placeholder="Total Deaths" floatLabelType="Always"></ejs-numerictextbox>
+        </div>   
+    </div>
+    <div class="row pad-t20 pad-b20">  
+        <div class="col-md-6 col-lg-5 col-xl-4">           
+            <ejs-numerictextbox [(value)]="record.icuBedsAvailable" format='N' step='1' placeholder="ICU Beds Available" floatLabelType="Always"></ejs-numerictextbox>
         </div>    
-
-    </div>
-    <div class="row">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-case" [(value)]="record.case"  placeholder="Cases" floatLabelType="Always"></ejs-textbox>
-        </div>   
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-hospitalized" [(value)]="record.hospitalized"  placeholder="Hospitalized" floatLabelType="Always"></ejs-textbox>
-        </div>   
-    </div>
-    <div class="row">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-death" [(value)]="record.deaths"  placeholder="Deaths" floatLabelType="Always"></ejs-textbox>
-        </div>   
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-tests" [(value)]="record.tests"  placeholder="Tests" floatLabelType="Always"></ejs-textbox>
-        </div>   
-    </div>
-    <div class="row">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-Positivetests" [(value)]="record.positivetests"  placeholder="Positive Test" floatLabelType="Always"></ejs-textbox>
-        </div>   
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-icubedsavailable" [(value)]="record.icubedsavailable"  placeholder="Tests" floatLabelType="Always"></ejs-textbox>
-        </div>   
-    </div>
-    <div class="row d-flex pad-t20">
-        <div class="col-md-12 d-flex">
-            <ejs-tab id="edit-tab" class="e-fill" #editTab (created)="editTabCreated()">
-                <e-tabitems>
-                    <e-tabitem>
-                        <ng-template #headerText>
-                            <div>Information</div>
-                        </ng-template>
-                        <ng-template #content>     
-                            <div class="row">
-                                <div class="col-md-12 col-lg-10 col-xl-8">
-                                    <ejs-textbox formControlName="id" required placeholder="county *" floatLabelType="Always"></ejs-textbox>
-                                    <div *ngIf="this.invalidControl('county')" class="e-error">
-                                        county is required!
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12 col-lg-10 col-xl-8">
-                                    <ejs-textbox formControlName="state" placeholder="state" floatLabelType="Always"></ejs-textbox>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12 col-lg-10 col-xl-8">
-                                    <ejs-textbox formControlName="country" placeholder="country *" floatLabelType="Always"></ejs-textbox>
-                                    <div *ngIf="this.invalidControl('country')" class="e-error">
-                                        country is required!
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-lg-10 col-xl-8">
-                                    <ejs-textbox formControlName="Analyte" placeholder="Analyte *" floatLabelType="Always"></ejs-textbox>
-                                    <div *ngIf="this.invalidControl('Analyte')" class="e-error">
-                                        Analyte is required!
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12 col-lg-10 col-xl-8">
-                                    <ejs-textbox formControlName="date" placeholder="date *" floatLabelType="Always"></ejs-textbox>
-                                    <div *ngIf="this.invalidControl('date')" class="e-error">
-                                        date is required!
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-textbox [(value)]="record.case" readonly placeholder="Case" floatLabelType="Always" contenteditable="false"></ejs-textbox>
-                                </div>
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-textbox [(value)]="record.hospitalized" readonly placeholder="Hospitalized" floatLabelType="Always" contenteditable="false"></ejs-textbox>
-                                </div>
-                            </div>
-
-                            <div class="row pad-t20">
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-textbox [(value)]="record.deaths" readonly placeholder="Death" floatLabelType="Always" contenteditable="false"></ejs-textbox>
-                                </div>
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-textbox [(value)]="record.Tests" readonly placeholder="Tests" floatLabelType="Always" contenteditable="false"></ejs-textbox>
-                                </div>
-                            </div>
-
-                            <div class="row pad-t20">
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-textbox [(value)]="record.positivetest" readonly placeholder="positivetest" floatLabelType="Always" contenteditable="false"></ejs-textbox>
-                                </div>
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-textbox [(value)]="record.Icubedavailable" readonly placeholder="Icubedsavailable" floatLabelType="Always" contenteditable="false"></ejs-textbox>
-                                </div>
-                            </div>
-                        </ng-template>
-                    </e-tabitem>
-                    <e-tabitem *ngIf="record.id && app.privileges.countystat.read">
-                        <ng-template #headerText>
-                            <div>Sites</div>
-                        </ng-template>
-                        <ng-template #content>
-                            <div class="row d-flex align-items-center">
-                                <div class="col-md-12 col-lg-10 col-xl-8 d-flex align-items-center subitem-list-header">
-                                    <span class="subitem-list-icon"><i class="fas fa-chart-network"></i></span>
-                                    <span class="subitem-list-title">Sites</span>
-                                    <span class="subitem-list-add"><button ejs-button cssClass="e-outline" [routerLink]="['/auth/countystat/add', record.id]" [disabled]="!app.privileges.sites.create">+ Add</button></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-lg-10 col-xl-8 pad-t20">
-                                    <ejs-grid [dataSource]='record.sites' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="false">
-                                        <e-columns>
-                                            <e-column width="70">
-                                                <ng-template #template let-data>
-                                                    <a [routerLink]="['/auth/countystat/edit', data.id]" [state]="{ from: 'countystat' }"><i class="fas fa-pencil-alt edit-icon"></i></a>
-                                                </ng-template>
-                                            </e-column>
-                                            <e-column field='id' headerText='Id'></e-column>
-                                            <e-column field='county' headerText='County'></e-column>
-                                            <e-column field='state' headerText='State'></e-column>
-                                            <e-column field='country' headerText='Country'></e-column>
-                                            <e-column field='analyte' headerText='Analyte'></e-column>
-                                            <e-column field='date' headerText='Date'></e-column>
-                                            <e-column field='case' headerText='Cases'></e-column>
-                                            <e-column field='hospitalized' headerText='Hospitalized'></e-column>
-                                            <e-column field='deaths' headerText='Deaths'></e-column>
-                                            <e-column field='tests' headerText='Tests'></e-column>
-                                            <e-column field='positivetests' headerText='Positive Tests'></e-column>
-                                            <e-column field='icubedsavailable' headerText='IcuBedsAvailable'></e-column>
-                                        </e-columns>
-                                    </ejs-grid>
-                                </div>
-                            </div>
-                        </ng-template>
-                    </e-tabitem>
-                </e-tabitems>
-            </ejs-tab>
-        </div>
-    </div>
+    </div>      
 
     <div class="row d-flex edit-footer">
         <div class="col-md-6 d-flex justify-content-start">
