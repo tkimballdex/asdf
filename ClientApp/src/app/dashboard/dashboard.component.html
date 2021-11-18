@@ -25,13 +25,42 @@
                                 (tooltipChange)='tooltipChangeHandler($event)' (renderingTicks)='renderingTicksHandler($event)' (changed)='onSliderChanged($event)'></ejs-slider>
                             </div>                             
                         </ng-template>
-                    </e-panel>                 
-                    <e-panel [sizeX]="12" [sizeY]="6" [row]="2" [col]="0">
+                    </e-panel>   
+                    <e-panel [sizeX]="4" [sizeY]="2" [row]="2" [col]="0">
+                        <ng-template #content>
+                            <div class="col-12">
+                                <p style="text-align:center;">My Site</p>
+                                <div style="text-align:center">
+                                    <span style="float:left">15</span>
+                                    <span  style="float:right"><i class="fas fa-arrow-alt-up"></i></span>
+                                    <footer>
+                                        <p>Author: Hege Refsnes<br>
+                                        </p>
+                                      </footer>
+                                </div>  
+                             </div>                           
+                        </ng-template>
+                    </e-panel>  
+                    <e-panel [sizeX]="4" [sizeY]="2" [row]="2" [col]="4">
+                        <ng-template #content>
+                            <div class="col-12">
+                                <p>tile2</p>
+                            </div>                             
+                        </ng-template>
+                    </e-panel>  
+                    <e-panel [sizeX]="4" [sizeY]="2" [row]="2" [col]="8">
+                        <ng-template #content>
+                            <div class="col-12">
+                                <p>tile1</p>           
+                            </div>                             
+                        </ng-template>
+                    </e-panel>                
+                    <e-panel [sizeX]="12" [sizeY]="6" [row]="5" [col]="0">
                         <ng-template #content>     
                                 <google-map id="dashboard-map"></google-map>                            
                         </ng-template>
                     </e-panel>                                    
-                    <e-panel [sizeX]="12" [sizeY]="6" [row]="8" [col]="0">
+                    <e-panel [sizeX]="12" [sizeY]="6" [row]="11" [col]="0">
                         <ng-template #header>
                             <div>Positive vs Negative Locations</div>
                         </ng-template>
@@ -40,7 +69,7 @@
                             </ejs-chart>                         
                         </ng-template>                        
                     </e-panel>
-                    <e-panel [sizeX]="6" [sizeY]="5" [row]="14" [col]="0">
+                    <e-panel [sizeX]="6" [sizeY]="5" [row]="17" [col]="0">
                         <ng-template #header>
                             <div>Daily Positive Locations</div>
                         </ng-template>
@@ -49,7 +78,7 @@
                             </ejs-chart>                           
                         </ng-template>
                     </e-panel>
-                    <e-panel [sizeX]="6" [sizeY]="5" [row]="14" [col]="6">
+                    <e-panel [sizeX]="6" [sizeY]="5" [row]="17" [col]="6">
                         <ng-template #header>
                             <div>Positive Locations by Site</div>
                         </ng-template>
