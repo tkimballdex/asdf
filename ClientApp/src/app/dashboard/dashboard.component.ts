@@ -85,10 +85,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		var today = new Date();
 		this.endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 		this.startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 14);
-		this.siteMapDate = this.endDate;
-		this.sliderMin = this.startDate.getTime();
-		this.sliderMax = this.endDate.getTime() + 86400000;
-		this.sliderValue = this.endDate.getTime();
+		this.dateRangeChange();
 		this.tooltip = { enable: true };
 
 		this.analyteId = this.app.analytes[0].id;
@@ -151,7 +148,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 
 		if (!this.customerId || !this.analyteId) return;
 
-		let graphData = await this.repository.positiveNegativeCases({
+		let data = await this.repository.positiveNegativeCases({
 			customerId: this.customerId,
 			analyteId: this.analyteId,
 			startDate: this.startDate,
@@ -159,13 +156,21 @@ export class DashboardComponent extends PageComponent implements OnInit {
 			sites: this.selectedSites
 		});
 
-		graphData = [
-			{ type: 'StackingColumn', xName: 'x', yName: 'positive', dataSource: graphData, name: 'Positive Cases', fill: '#e35254' },
-			{ type: 'StackingColumn', xName: 'x', yName: 'negative', dataSource: graphData, name: 'Negative Cases', fill: '#1abc9c' }
+		let graphData: any = [
+			{ type: 'StackingColumn', xName: 'x', yName: 'positive', dataSource: data.list, name: 'Positive Cases', fill: '#e35254' },
+			{ type: 'StackingColumn', xName: 'x', yName: 'negative', dataSource: data.list, name: 'Negative Cases', fill: '#1abc9c' }
 		];
 
 		this.chartPositiveNegativeCases.clearSeries();
 		this.chartPositiveNegativeCases.addSeries(graphData);
+
+		if (data.lastDate) {
+			var date = new Date(data.lastDate);
+			this.siteMapDate = this.getAdjustedDate(date);
+			this.sliderValue = this.siteMapDate.getTime();
+		}
+
+		this.siteMapChange();
 	}
 
 	async setGraphDataPositiveSites() {
@@ -187,16 +192,15 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	}
 
 	setGraphData(from) {
-		console.dir(from);
 		var $this = this;
 		if (!$this.initialized) return;
 
 		setTimeout(function () {
 			if (!$this.initialized) return;
-				$this.siteMapChange();
-				$this.setGraphDataByPositiveCases();
-				$this.setGraphDataByPositiveNegativeCases();
-				$this.setGraphDataPositiveSites();
+			console.dir(from);
+			$this.setGraphDataByPositiveCases();
+			$this.setGraphDataByPositiveNegativeCases();
+			$this.setGraphDataPositiveSites();
 		}, 10);
 	}
 
@@ -208,6 +212,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	}
 
 	async siteMapChange() {
+		console.dir(this.siteMapDate);
 		if (!this.selectedSites || !this.siteMapDate) return;
 
 		var googleMap = this.map.googleMap;
@@ -315,11 +320,18 @@ export class DashboardComponent extends PageComponent implements OnInit {
 
 	@ViewChild(GoogleMap) map!: GoogleMap;
 
+	getAdjustedDate(date: Date) {
+		return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12);
+	}
+
 	dateRangeChange() {
-		this.siteMapDate = new Date(this.endDate);
-		this.sliderMax = new Date(this.endDate).getTime();
-		this.sliderMin = new Date(this.startDate).getTime();
-		this.sliderValue = new Date(this.endDate).getTime();
+		this.startDate = this.getAdjustedDate(this.startDate);
+		this.endDate = this.getAdjustedDate(this.endDate);
+
+		this.siteMapDate = this.endDate;
+		this.sliderMax = this.endDate.getTime();
+		this.sliderMin = this.startDate.getTime();
+		this.sliderValue = this.sliderMax;
 		this.setGraphData('dateRangeChange');
 	}
 
