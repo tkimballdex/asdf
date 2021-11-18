@@ -75,7 +75,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 
 	async ngOnInit() {
 		this.mode = 'CheckBox';
-		this.redColorPalette = ['#ee5253'];
+		this.redColorPalette = ['#e35254'];
 		this.greenColorPalette = ['#1abc9c'];
 		this.colorPalette = ['#ee5253', '#74b9ff', '#a29bfe', '#ff7675', '#fdcb6e'];
 		this.app = await this.appService.getData();
@@ -160,8 +160,8 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		});
 
 		graphData = [
-			{ type: 'StackingColumn', xName: 'x', yName: 'positive', dataSource: graphData, name: 'Positive Cases', fill: '#ee5253' },
-			{ type: 'StackingColumn', xName: 'x', yName: 'negative', dataSource: graphData, name: 'Negative Cases', fill: '#32bbae' }
+			{ type: 'StackingColumn', xName: 'x', yName: 'positive', dataSource: graphData, name: 'Positive Cases', fill: '#e35254' },
+			{ type: 'StackingColumn', xName: 'x', yName: 'negative', dataSource: graphData, name: 'Negative Cases', fill: '#1abc9c' }
 		];
 
 		this.chartPositiveNegativeCases.clearSeries();
@@ -204,7 +204,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	polygons: google.maps.Polygon[] = [];
 
 	getColor(positive, negative) {
-		return positive ? '#ee5253' : negative ? '#32bbae' : '#aaaaaa'
+		return positive ? '#e35254' : negative ? '#32bbae' : '#aaaaaa'
 	}
 
 	async siteMapChange() {
