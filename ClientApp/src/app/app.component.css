@@ -210,7 +210,6 @@
 
 /* content area styles */
 #maintext.main-content {
-    height: calc(100vh - 50px);
     z-index: 1000;
     box-sizing: border-box;
     padding: 0px 15px 15px 15px;
