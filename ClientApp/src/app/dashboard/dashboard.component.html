@@ -29,14 +29,23 @@
                     <e-panel [sizeX]="4" [sizeY]="2" [row]="2" [col]="0">
                         <ng-template #content>
                             <div class="col-12">
-                                <p style="text-align:center;">My Site</p>
+                                <p style="text-align:center;" >Today's Positive Tests</p>
                                 <div style="text-align:center">
-                                    <span style="float:left">15</span>
-                                    <span  style="float:right"><i class="fas fa-arrow-alt-up"></i></span>
-                                    <footer>
-                                        <p>Author: Hege Refsnes<br>
-                                        </p>
-                                      </footer>
+                                      <table width="100%">
+                                        <tr>
+                                            <td class ="tilearrow">
+                                              <span *ngIf="customerArrow && !customerArrowZero" class="tileArrowUp"   ><i class="fas fa-long-arrow-alt-up" style="transform: rotate(45deg);"></i></span> 
+                                              <span *ngIf="!customerArrow && !customeArrowZero" class="tileArrowDown"   ><i class="fas fa-long-arrow-alt-up" style="transform: rotate(135deg);"></i></span>
+                                              <span *ngIf="customeArrowZero" class="tileArrowMiddle"   ><i class="fas fa-long-arrow-alt-up" style="transform: rotate(270deg);"></i></span>
+                                            </td>
+                                            <td class="tilevalue">
+                                              {{displaySummary.customerDailyPositiveTests}}                                                
+                                            </td>
+                                            <td  class="tilechange"> 
+                                              {{displaySummary.customerDailyChange}}
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>  
                              </div>                           
                         </ng-template>
@@ -44,15 +53,54 @@
                     <e-panel [sizeX]="4" [sizeY]="2" [row]="2" [col]="4">
                         <ng-template #content>
                             <div class="col-12">
-                                <p>tile2</p>
-                            </div>                             
+                                <p style="text-align:center;" >Today's County Positive Tests</p>
+                                <div style="text-align:center">
+                                  
+
+                                      <table width="100%">
+                                        <tr>
+                                            <td class ="tilearrow">
+                                              <span *ngIf="countyArrow && !countyArrowZero" class="tileArrowUp"   ><i class="fas fa-long-arrow-alt-up" style="transform: rotate(45deg);"></i></span> 
+                                              <span *ngIf="!countyArrow && !countyArrowZero" class="tileArrowDown"   ><i class="fas fa-long-arrow-alt-up" style="transform: rotate(135deg);"></i></span>
+                                              <span *ngIf="countyArrowZero" class="tileArrowMiddle"   ><i class="fas fa-long-arrow-alt-up" style="transform: rotate(270deg);"></i></span>
+                                            </td>
+                                            <td class="tilevalue">
+                                              {{displaySummary.countyDailyCases}}                                                
+                                            </td>
+                                            <td  class="tilechange"> 
+                                              {{displaySummary.countyDailyChage}}
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </div>  
+                             </div>                               
                         </ng-template>
                     </e-panel>  
                     <e-panel [sizeX]="4" [sizeY]="2" [row]="2" [col]="8">
                         <ng-template #content>
                             <div class="col-12">
-                                <p>tile1</p>           
-                            </div>                             
+                                <p style="text-align:center;" >Today's State Positive Tests</p>
+                                <div style="text-align:center">
+                                    
+                                   
+                                      <table width="100%">
+                                          <tr>
+                                              <td class ="tilearrow">
+                                                <span *ngIf="stateArrow && !stateArrowZero" class="tileArrowUp"   ><i class="fas fa-long-arrow-alt-up" style="transform: rotate(45deg);"></i></span> 
+                                                <span *ngIf="!stateArrow && !stateArrowZero" class="tileArrowDown"   ><i class="fas fa-long-arrow-alt-up" style="transform: rotate(135deg);"></i></span>
+                                                <span *ngIf="stateArrowZero" class="tileArrowMiddle"   ><i class="fas fa-long-arrow-alt-up" style="transform: rotate(270deg);"></i></span>
+                                              </td>
+                                              <td class="tilevalue">
+                                                {{displaySummary.stateDailyCases}}                                                
+                                              </td>
+                                              <td  class="tilechange"> 
+                                                {{displaySummary.stateDailyChange}}
+                                              </td>
+                                          </tr>
+                                      </table>
+                                </div>  
+                             </div>                                 
                         </ng-template>
                     </e-panel>                
                     <e-panel [sizeX]="12" [sizeY]="6" [row]="5" [col]="0">

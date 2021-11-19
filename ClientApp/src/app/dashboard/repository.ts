@@ -24,6 +24,9 @@ export class DashboardRepository {
 		return this.http.post<any>(`/dashboard/siteMap`, filter);
 	}
 
+	public getSummary(filter: any) {
+		return this.http.post<any>(`/dashboard/daySummary`, filter);
+	}
 	public listLocations(siteId: string) {
 		return this.http.post(`/location/list`, {
 			tenantId: this.tenant.id,
