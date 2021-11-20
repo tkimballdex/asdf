@@ -81,10 +81,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	}
 
 	async ngOnInit() {
-
-
-		
-
+		var $this = this;
 		this.mode = 'CheckBox';
 		this.redColorPalette = ['#e35254'];
 		this.greenColorPalette = ['#1abc9c'];
@@ -105,10 +102,6 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		await this.analyteChange();
 
 		this.initialized = true;
-		this.setGraphData('init');
-
-		await this.getsummary();	
-		
 	}	
 
 	tooltipChangeHandler(args: SliderTooltipEventArgs): void {
@@ -139,62 +132,28 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.setGraphData('siteChange');
 	}
 
-	async setGraphDataByPositiveCases() {
-		if (!this.chartPositiveCases) return;
-
-		if (!this.customerId || !this.analyteId) return;
-
-		let graphData = await this.repository.positiveCases({
-			customerId: this.customerId,
-			analyteId: this.analyteId,
-			startDate: this.startDate,
-			endDate: this.endDate,
-			sites: this.selectedSites
-		});
-
-		graphData = [{ type: 'Column', xName: 'x', yName: 'y', dataSource: graphData }];
+	setCharts(data) {
+		console.log('setCharts');
+		console.dir(data);
 		this.chartPositiveCases.clearSeries();
-		this.chartPositiveCases.addSeries(graphData);
-
-		
-	}
-
-	async setGraphDataByPositiveNegativeCases() {
-		if (!this.chartPositiveNegativeCases) return;
-
-		if (!this.customerId || !this.analyteId) return;
-
-		let data = await this.repository.positiveNegativeCases({
-			customerId: this.customerId,
-			analyteId: this.analyteId,
-			startDate: this.startDate,
-			endDate: this.endDate,
-			sites: this.selectedSites
-		});
-
-		let graphData: any = [
-			{ type: 'StackingColumn', xName: 'x', yName: 'positive', dataSource: data.list, name: 'Positive Cases', fill: '#e35254' },
-			{ type: 'StackingColumn', xName: 'x', yName: 'negative', dataSource: data.list, name: 'Negative Cases', fill: '#1abc9c' }
-		];
-
 		this.chartPositiveNegativeCases.clearSeries();
-		this.chartPositiveNegativeCases.addSeries(graphData);
+		this.chartPositiveSites.clearSeries();
 
-		if (data.lastDate) {
-			var date = new Date(data.lastDate);
-			this.siteMapDate = this.getAdjustedDate(date);
-			this.sliderValue = this.siteMapDate.getTime();
-		}
+		this.chartPositiveCases.addSeries([{ type: 'Column', xName: 'x', yName: 'y', dataSource: data.positiveCases }]);
 
-		this.siteMapChange();
+		this.chartPositiveNegativeCases.addSeries([
+			{ type: 'StackingColumn', xName: 'x', yName: 'positive', dataSource: data.positiveNegativeCases, name: 'Positive Cases', fill: '#e35254' },
+			{ type: 'StackingColumn', xName: 'x', yName: 'negative', dataSource: data.positiveNegativeCases, name: 'Negative Cases', fill: '#1abc9c' }
+		]);
+
+		this.chartPositiveSites.addSeries(data.positiveSiteStack.map(x => { return { type: 'StackingColumn', xName: 'x', yName: 'y', name: x.siteName, dataSource: x.results } }));
 	}
 
-	async setGraphDataPositiveSites() {
-		if (!this.chartPositiveSites) return;
+	async setGraphData(from) {
+		console.log(`setGraphData ${from}`);
+		if (!this.initialized || !this.customerId || !this.analyteId || !this.selectedSites) return;
 
-		if (!this.customerId || !this.analyteId) return;
-
-		let data = await this.repository.positiveSiteStack({
+		let graphData = await this.repository.getGraphData({
 			customerId: this.customerId,
 			analyteId: this.analyteId,
 			startDate: this.startDate,
@@ -202,24 +161,13 @@ export class DashboardComponent extends PageComponent implements OnInit {
 			sites: this.selectedSites
 		});
 
-		let graphData: any = data.map(x => { return { type: 'StackingColumn', xName: 'x', yName: 'y', name: x.siteName, dataSource: x.results } });
-		this.chartPositiveSites.clearSeries();
-		this.chartPositiveSites.addSeries(graphData);
-	}
+		this.setCharts(graphData);
 
-	setGraphData(from) {
-		var $this = this;
-		if (!$this.initialized) return;
+		var date = new Date(graphData.summaryDate);
+		this.siteMapDate = this.getAdjustedDate(date);
+		this.sliderValue = this.siteMapDate.getTime();
 
-		setTimeout(function () {
-			if (!$this.initialized) return;
-			console.dir(from);
-			$this.setGraphDataByPositiveCases();
-			$this.setGraphDataByPositiveNegativeCases();
-			$this.setGraphDataPositiveSites();
-		}, 10);
-
-		
+		this.getSummary();
 	}
 
 	markers: google.maps.Marker[] = [];
@@ -229,22 +177,16 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		return positive ? '#e35254' : negative ? '#32bbae' : '#aaaaaa'
 	}
 
-	async getsummary() {
-		console.dir(this.siteMapDate);
-		if (!this.selectedSites || !this.siteMapDate) return;
-		var $this = this;
-
-		this.displaySummary = await $this.repository.getSummary({ customerId: $this.customerId, sites: $this.selectedSites, analyteId: $this.analyteId, date: $this.siteMapDate });
-		
-		//console.log("this is summary object"+ this.displaySummary.CustomerDailyChange );
-
-		
-				
+	async getSummary() {
+		if (!this.selectedSites || !this.siteMapDate || !this.initialized) return;
+		var data = await this.repository.dailySummary({ customerId: this.customerId, sites: this.selectedSites, analyteId: this.analyteId, summaryDate: this.siteMapDate });
+		this.displaySummary = data.dailySummary;
+		this.siteMap(data.sites);
 	}
 	
-	async siteMapChange() {
+	siteMap(sites) {
 		console.dir(this.siteMapDate);
-		if (!this.selectedSites || !this.siteMapDate) return;
+		if (!this.selectedSites || !this.siteMapDate || !this.initialized) return;
 
 		var googleMap = this.map.googleMap;
 
@@ -277,8 +219,6 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.polygons = [];
 		var $this = this;
 		var points = [];
-
-		var sites = await $this.repository.getSites({ sites: $this.selectedSites, analyteId: $this.analyteId, date: $this.siteMapDate });
 
 		sites.forEach(function (site) {
 			site.locations.forEach(function (x) {
@@ -364,13 +304,12 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.sliderMin = this.startDate.getTime();
 		this.sliderValue = this.sliderMax;
 		this.setGraphData('dateRangeChange');
-		this.getsummary();
+		this.getSummary();
 	}
 
 	onSliderChanged(args: SliderChangeEventArgs): void {
         this.siteMapDate = new Date(+args.value);
-		this.siteMapChange();
-		this.getsummary();
+		this.getSummary();
 	}
 }
 

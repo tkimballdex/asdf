@@ -26,7 +26,7 @@
                             </div>                             
                         </ng-template>
                     </e-panel>   
-                    <e-panel [sizeX]="4" [sizeY]="2" [row]="2" [col]="0">
+                    <e-panel [sizeX]="4" [sizeY]="2" [row]="2" [col]="0" *ngIf="displaySummary">
                         <ng-template #content>
                             <div class="col-12">
                                 <p style="text-align:center;" >Today's Positive Tests</p>
@@ -54,7 +54,7 @@
                              </div>                           
                         </ng-template>
                     </e-panel>  
-                    <e-panel [sizeX]="4" [sizeY]="2" [row]="2" [col]="4">
+                    <e-panel [sizeX]="4" [sizeY]="2" [row]="2" [col]="4" *ngIf="displaySummary">
                         <ng-template #content>
                             <div class="col-12">
                                 <p style="text-align:center;" >Today's County Positive Tests</p>
@@ -79,7 +79,7 @@
                              </div>                               
                         </ng-template>
                     </e-panel>  
-                    <e-panel [sizeX]="4" [sizeY]="2" [row]="2" [col]="8">
+                    <e-panel [sizeX]="4" [sizeY]="2" [row]="2" [col]="8" *ngIf="displaySummary">
                         <ng-template #content>
                             <div class="col-12">
                                 <p style="text-align:center;" >Today's State Positive Tests</p>
@@ -139,69 +139,5 @@
             </ejs-dashboardlayout>
         </div>
     </div>
-
-<!--  
-    <div class="row d-flex pad-t20" visible="false">
-        <div class="col-md-12 d-flex">
-            <ejs-tab id="edit-tab" class="e-fill" (selected)="setGraphData('tabSelected')" #tab>
-                <e-tabitems>
-                    <e-tabitem>
-                        <ng-template #headerText>
-                            <div>Site Map</div>
-                        </ng-template>
-                        <ng-template #content>
-                            <div id="list-view" class="container-fluid pad-t20">    
-                                
-                            </div>
-                        </ng-template>
-                    </e-tabitem>                   
-
-                    <e-tabitem>
-                        <ng-template #headerText>
-                            <div>Positive Locations</div>
-                        </ng-template>
-                        <ng-template #content>
-                            <div id="list-view" class="container-fluid pad-t20">
-                                <div class="row pad-t20">
-                                    <div class="col-md-12">
-                                       
-                                    </div>
-                                </div>
-                            </div>
-                        </ng-template>
-                    </e-tabitem>
-
-                    <e-tabitem>
-                        <ng-template #headerText>
-                            <div>Positive vs Negative Locations</div>
-                        </ng-template>
-                        <ng-template #content>
-                            <div id="list-view" class="container-fluid pad-t20">
-                                <div class="row pad-t20">
-                                    <div class="col-md-12">
-                                        <ejs-dashboardlayout [allowDragging]='allowDragging' [columns]="2" #editLayout [cellSpacing]='cellSpacing' [cellAspectRatio]='cellAspectRatio'>
-                                            <e-panels>
-                                                <e-panel [sizeX]="2" [sizeY]="2" [row]="1" [col]="0">
-                                                    <ng-template #header>
-                                                        <div>Positive vs Negative Locations - Daily Counts</div>
-                                                    </ng-template>
-                                                    <ng-template #content>
-                                                        <div>
-                                                            
-                                                        </div>
-                                                    </ng-template>
-                                                </e-panel>
-                                            </e-panels>
-                                        </ejs-dashboardlayout>
-                                    </div>
-                                </div>
-                            </div>
-                        </ng-template>
-                    </e-tabitem>              
-                </e-tabitems>
-            </ejs-tab>
-        </div>
-    </div>
--->
 
 </div>

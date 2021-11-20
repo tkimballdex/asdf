@@ -20,36 +20,11 @@ export class DashboardRepository {
 		});
 	}
 
-	public getSites(filter: any) {
-		return this.http.post<any>(`/dashboard/siteMap`, filter);
+	public getGraphData(filter: any) {
+		return this.http.post<any>(`/dashboard/getGraphData`, filter);
 	}
 
-	public getSummary(filter: any) {
-		return this.http.post<any>(`/dashboard/daySummary`, filter);
-	}
-	public listLocations(siteId: string) {
-		return this.http.post(`/location/list`, {
-			tenantId: this.tenant.id,
-			siteId: siteId
-		});
-	}
-
-	public listCustomerLocations(customerId: string) {
-		return this.http.post(`/location/list`, {
-			tenantId: this.tenant.id,
-			customerId: customerId
-		});
-	}
-
-	public positiveCases(filter: any) {
-		return this.http.post<any>(`/dashboard/positiveCases`, filter);
-	}
-
-	public positiveNegativeCases(filter: any) {
-		return this.http.post<any>(`/dashboard/positiveNegativeCases`, filter);
-	}
-
-	public positiveSiteStack(filter: any) {
-		return this.http.post<any[]>(`/dashboard/positiveSiteStack`, filter);
+	public dailySummary(filter: any) {
+		return this.http.post<any>(`/dashboard/dailySummary`, filter);
 	}
 }
