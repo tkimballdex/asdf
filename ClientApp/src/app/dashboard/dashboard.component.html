@@ -34,12 +34,16 @@
                                       <table width="100%">
                                         <tr>
                                             <td class ="tilearrow">
-                                              <span *ngIf="customerArrow && !customerArrowZero" class="tileArrowUp"   ><i class="fas fa-long-arrow-alt-up" style="transform: rotate(45deg);"></i></span> 
-                                              <span *ngIf="!customerArrow && !customeArrowZero" class="tileArrowDown"   ><i class="fas fa-long-arrow-alt-up" style="transform: rotate(135deg);"></i></span>
-                                              <span *ngIf="customeArrowZero" class="tileArrowMiddle"   ><i class="fas fa-long-arrow-alt-up" style="transform: rotate(270deg);"></i></span>
-                                            </td>
+                                                <!--<p>{{customerchange}}</p>-->
+                                              <!--<span class="tileArrowUp" [ngClass]="{ 'tileArrowDown': this.form.get('customerchange').value ===10 }" ><i class="fas fa-long-arrow-alt-up" ></i></span>-->
+
+                                              <span class="fas fa-long-arrow-alt-up" [ngClass]="displaySummary.customerDailyChange  > 0 ? 'tileArrowUp' : displaySummary.customerDailyChange  < 0 ? 'tileArrowDown' : 'tileArrowMiddle'"></span>
+                                              <!--<span [ngClass]="customerchange  > 0 ? 'tileArrowUp' : customerchange  < 0 ? 'tileArrowDown' : 'tileArrowMiddle'">{{ displaySummary.customerDailyPositiveTests  }}</span>-->
+
+                                             </td>
                                             <td class="tilevalue">
-                                              {{displaySummary.customerDailyPositiveTests}}                                                
+                                                <!--<span class="fas far fa-plus" [ngClass]="displaySummary.customerDailyChange  > 0 ? 'tileArrowpositive' : displaySummary.customerDailyChange  < 0 ? 'tileArrownegative' : 'tileArrownegative'"></span>-->
+                                                {{displaySummary.customerDailyTests}}                                                
                                             </td>
                                             <td  class="tilechange"> 
                                               {{displaySummary.customerDailyChange}}
@@ -60,15 +64,13 @@
                                       <table width="100%">
                                         <tr>
                                             <td class ="tilearrow">
-                                              <span *ngIf="countyArrow && !countyArrowZero" class="tileArrowUp"   ><i class="fas fa-long-arrow-alt-up" style="transform: rotate(45deg);"></i></span> 
-                                              <span *ngIf="!countyArrow && !countyArrowZero" class="tileArrowDown"   ><i class="fas fa-long-arrow-alt-up" style="transform: rotate(135deg);"></i></span>
-                                              <span *ngIf="countyArrowZero" class="tileArrowMiddle"   ><i class="fas fa-long-arrow-alt-up" style="transform: rotate(270deg);"></i></span>
-                                            </td>
+                                                <span  class="fas fa-long-arrow-alt-up" [ngClass]="displaySummary.countyDailyChange    > 0 ? 'tileArrowUp' : displaySummary.countyDailyChange  < 0 ? 'tileArrowDown' : 'tileArrowMiddle'"></span>
+                                             </td>
                                             <td class="tilevalue">
                                               {{displaySummary.countyDailyCases}}                                                
                                             </td>
                                             <td  class="tilechange"> 
-                                              {{displaySummary.countyDailyChage}}
+                                              {{displaySummary.countyDailyChange}}
                                             </td>
                                         </tr>
                                     </table>
@@ -87,10 +89,8 @@
                                       <table width="100%">
                                           <tr>
                                               <td class ="tilearrow">
-                                                <span *ngIf="stateArrow && !stateArrowZero" class="tileArrowUp"   ><i class="fas fa-long-arrow-alt-up" style="transform: rotate(45deg);"></i></span> 
-                                                <span *ngIf="!stateArrow && !stateArrowZero" class="tileArrowDown"   ><i class="fas fa-long-arrow-alt-up" style="transform: rotate(135deg);"></i></span>
-                                                <span *ngIf="stateArrowZero" class="tileArrowMiddle"   ><i class="fas fa-long-arrow-alt-up" style="transform: rotate(270deg);"></i></span>
-                                              </td>
+                                                <span class="fas fa-long-arrow-alt-up" [ngClass]="displaySummary.stateDailyChange   > 0 ? 'tileArrowUp' : displaySummary.stateDailyChange  < 0 ? 'tileArrowDown' : 'tileArrowMiddle'"></span>
+                                            </td>
                                               <td class="tilevalue">
                                                 {{displaySummary.stateDailyCases}}                                                
                                               </td>

@@ -114,19 +114,34 @@
 }
 .tileArrowUp{
   
-    rotate: 45deg;
+    transform: rotate(45deg);
     color: red;
 
 }
+
+.tileArrowPositive{
+  
+    transform: rotate(45deg);
+    color: red;
+
+}
+
+.tileArrownegative{
+  
+    transform: rotate(45deg);
+    color: red;
+
+}
+
 .tileArrowDown{
     
-    rotate: 135deg;
+    transform: rotate(135deg);
     color: green;
 }
 
 .tileArrowMiddle{
    
-    rotate: 180deg;
+    transform: rotate(180deg);
     color: gray;
 
 .bottom{

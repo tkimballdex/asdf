@@ -46,16 +46,10 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	public customerId: string;
 	public sites: any;
 
-	public customerArrow: boolean;
-	public customerArrowZero:boolean;
-	public countyArrow: boolean;
-	public countyArrowZero:boolean;
-	public stateArrow: boolean;
-	public stateArrowZero:boolean;
+	public customerchange: number =0;
+	public countychange: number =-12;
+	public statechange: number =0;
 
-
-	public isZero: boolean;
-	public isZero1: boolean;
 	public analyteId: string;
 	public graphData: any;
 	public startDate: Date;
@@ -65,7 +59,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	public cellAspectRatio: number = 100 / 60;
 	public allowDragging: boolean = false;
 	public placeholder: string = 'Site';
-	public displaySummary: any;
+	public displaySummary: Object;
 
 	public sliderTooltipData: Object = { placement: 'Before', isVisible: true };
     public sliderTicksData: Object = { placement: 'After', largeStep: 1 * 86400000 };
@@ -74,14 +68,6 @@ export class DashboardComponent extends PageComponent implements OnInit {
     public sliderMax: number;    
     public sliderValue: number;
 
-	public mySiteDayValue:number;
-	public mySiteDayChange:number;
-
-	public countyCaseDayValue:number;
-	public countyCaseDayChanges:number;
-
-	public stateCaseDayValue:number;
-	public stateCaseDayChanges:number;
 
 	public redColorPalette: string[];
 	public greenColorPalette: string[];
@@ -248,39 +234,11 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		if (!this.selectedSites || !this.siteMapDate) return;
 		var $this = this;
 
-		this.displaySummary = await $this.repository.getSummary({ sites: $this.selectedSites, analyteId: $this.analyteId, date: $this.siteMapDate });
+		this.displaySummary = await $this.repository.getSummary({ customerId: $this.customerId, sites: $this.selectedSites, analyteId: $this.analyteId, date: $this.siteMapDate });
 		
 		//console.log("this is summary object"+ this.displaySummary.CustomerDailyChange );
 
-		if(this.displaySummary.customerDailyChange>0){
-			this.customerArrow=true;
-			this.customerArrowZero=false;
-		}else if(this.displaySummary.customerDailyChange<0){
-			this.customerArrow=false;
-			this.customerArrowZero=false;
-		}else{
-			this.customerArrowZero=true;
-		}
 		
-		if(this.displaySummary.countyDailyChage>0){
-			this.countyArrow=true;
-			this.countyArrowZero=false;
-		}else if(this.displaySummary.countyDailyChage<0){
-			this.countyArrow=false;
-			this.countyArrowZero=false;
-		}else{
-			this.countyArrowZero=true;
-		}
-		
-		if(this.displaySummary.stateDailyChange>0){
-			this.stateArrow=true;
-			this.stateArrowZero=false;
-		}else if(this.displaySummary.stateDailyChange<0){
-			this.stateArrow=false;
-			this.stateArrowZero=false;
-		}else{
-			this.stateArrowZero=true;
-		}
 				
 	}
 	
