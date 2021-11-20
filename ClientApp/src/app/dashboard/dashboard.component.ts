@@ -102,6 +102,12 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		await this.analyteChange();
 
 		this.initialized = true;
+
+		var $this = this;
+		setTimeout(function () {
+			$this.setGraphData('init');
+			$this.getSummary();
+		}, 500);
 	}	
 
 	tooltipChangeHandler(args: SliderTooltipEventArgs): void {
@@ -166,8 +172,6 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		var date = new Date(graphData.summaryDate);
 		this.siteMapDate = this.getAdjustedDate(date);
 		this.sliderValue = this.siteMapDate.getTime();
-
-		this.getSummary();
 	}
 
 	markers: google.maps.Marker[] = [];
@@ -185,9 +189,6 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	}
 	
 	siteMap(sites) {
-		console.dir(this.siteMapDate);
-		if (!this.selectedSites || !this.siteMapDate || !this.initialized) return;
-
 		var googleMap = this.map.googleMap;
 
 		const mapStyles = <google.maps.MapTypeStyle[]> [
@@ -304,7 +305,6 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.sliderMin = this.startDate.getTime();
 		this.sliderValue = this.sliderMax;
 		this.setGraphData('dateRangeChange');
-		this.getSummary();
 	}
 
 	onSliderChanged(args: SliderChangeEventArgs): void {
