@@ -4,7 +4,7 @@
             <ejs-dropdownlist [dataSource]="customers" [fields]="{ text: 'name', value: 'id' }" [(value)]="customerId" placeholder="Customer" floatLabelType="Always" (change)="customerChange()"></ejs-dropdownlist>
         </div>
         <div class="col-md-3">
-            <ejs-multiselect [dataSource]='sites' [fields]="{ text: 'name', value: 'id' }" [(value)]="selectedSites" [mode]='mode' [placeholder]='placeholder' floatLabelType="Always" showClearButton='false' showSelectAll='true' showDropDownIcon='true' (change)="setGraphData('siteChange')"></ejs-multiselect>
+            <ejs-multiselect [dataSource]='sites' [fields]="{ text: 'name', value: 'id' }" [(value)]="selectedSites" [mode]='mode' [placeholder]='placeholder' floatLabelType="Always" showClearButton='false' showSelectAll='true' showDropDownIcon='true' (change)="siteChange()"></ejs-multiselect>
         </div>
         <div class="col-md-3">
             <ejs-dropdownlist [dataSource]="app.analytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="analyteId" placeholder="Analyte" floatLabelType="Always" (change)="analyteChange()"></ejs-dropdownlist>

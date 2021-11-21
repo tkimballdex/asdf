@@ -97,17 +97,16 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.tooltip = { enable: true };
 
 		this.analyteId = this.app.analytes[0].id;
+		this.initialized = true;
 		this.customerId = this.customers[0].id;
 		await this.customerChange();
-		await this.analyteChange();
-
-		this.initialized = true;
 
 		var $this = this;
+
 		setTimeout(function () {
 			$this.setGraphData('init');
 			$this.getSummary();
-		}, 500);
+		}, 1000);
 	}	
 
 	tooltipChangeHandler(args: SliderTooltipEventArgs): void {
@@ -140,7 +139,6 @@ export class DashboardComponent extends PageComponent implements OnInit {
 
 	setCharts(data) {
 		console.log('setCharts');
-		console.dir(data);
 		this.chartPositiveCases.clearSeries();
 		this.chartPositiveNegativeCases.clearSeries();
 		this.chartPositiveSites.clearSeries();
@@ -156,10 +154,10 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	}
 
 	async setGraphData(from) {
-		console.log(`setGraphData ${from}`);
+		console.log(`setGraphData ${from} ${this.initialized}`);
 		if (!this.initialized || !this.customerId || !this.analyteId || !this.selectedSites) return;
 
-		let graphData = await this.repository.getGraphData({
+		this.graphData = await this.repository.getGraphData({
 			customerId: this.customerId,
 			analyteId: this.analyteId,
 			startDate: this.startDate,
@@ -167,9 +165,9 @@ export class DashboardComponent extends PageComponent implements OnInit {
 			sites: this.selectedSites
 		});
 
-		this.setCharts(graphData);
+		this.setCharts(this.graphData);
 
-		var date = new Date(graphData.summaryDate);
+		var date = new Date(this.graphData.summaryDate);
 		this.siteMapDate = this.getAdjustedDate(date);
 		this.sliderValue = this.siteMapDate.getTime();
 	}
