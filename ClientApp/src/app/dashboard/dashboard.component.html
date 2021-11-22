@@ -12,6 +12,9 @@
         <div class="col-md-3">
             <ejs-daterangepicker placeholder='Select a range' floatLabelType="Always" [(startDate)]='startDate' [(endDate)]='endDate' (change)="dateRangeChange()"></ejs-daterangepicker>
         </div>
+        <div class="col-md-3" style="padding-top: 1em">
+            <button ejs-button cssClass="e-outline e-flat" (click)="export()" width="200">Export Graphs</button>
+        </div>
     </div>    
 
     <div class="row pad-t20">

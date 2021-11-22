@@ -23,12 +23,6 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		super();
 	}
 
-	@ViewChild('chartByLocation')
-	public chartByLocation: ChartComponent;
-
-	@ViewChild('chartByVariant')
-	public chartByVariant: ChartComponent;
-
 	@ViewChild('chartPositiveCases')
 	public chartPositiveCases: ChartComponent;
 
@@ -308,6 +302,10 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	onSliderChanged(args: SliderChangeEventArgs): void {
         this.siteMapDate = new Date(+args.value);
 		this.getSummary();
+	}
+
+	export() {
+		this.chartPositiveCases.exportModule.export('PDF', 'Dashboard', 1, [this.chartPositiveNegativeCases, this.chartPositiveCases, this.chartPositiveSites]);
 	}
 }
 
