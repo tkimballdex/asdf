@@ -53,7 +53,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	public cellAspectRatio: number = 100 / 60;
 	public allowDragging: boolean = false;
 	public placeholder: string = 'Site';
-	public displaySummary: Object;
+	public displaySummary = {};
 
 	public sliderTooltipData: Object = { placement: 'Before', isVisible: true };
     public sliderTicksData: Object = { placement: 'After', largeStep: 1 * 86400000 };
@@ -94,13 +94,6 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.initialized = true;
 		this.customerId = this.customers[0].id;
 		await this.customerChange();
-
-		var $this = this;
-
-		setTimeout(function () {
-			$this.setGraphData('init');
-			$this.getSummary();
-		}, 1000);
 	}	
 
 	tooltipChangeHandler(args: SliderTooltipEventArgs): void {
@@ -159,11 +152,12 @@ export class DashboardComponent extends PageComponent implements OnInit {
 			sites: this.selectedSites
 		});
 
-		this.setCharts(this.graphData);
-
 		var date = new Date(this.graphData.summaryDate);
 		this.siteMapDate = this.getAdjustedDate(date);
 		this.sliderValue = this.siteMapDate.getTime();
+
+		await this.getSummary();
+		this.setCharts(this.graphData);
 	}
 
 	markers: google.maps.Marker[] = [];
