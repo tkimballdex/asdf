@@ -127,13 +127,11 @@ export class MasterPageComponent implements OnInit {
 			manageMenu.push({ id: '/auth/testtype/list', text: 'Test Types' });
 		}
 		if (privileges.testTypes.read) {
-			manageMenu.push({ id: '/auth/testTypes/list', text: 'Analytes' });
+			manageMenu.push({ id: '/auth/analyte/list', text: 'Analytes' });
 		}
 		if (privileges.newsArticles.read) {
 			manageMenu.push({ id: '/auth/newsArticle/list', text: 'News Articles' });
 		}
-
-
 		if (manageMenu.length > 0) {
 			this.menuItems.push({
 				text: 'Manage',
@@ -155,8 +153,7 @@ export class MasterPageComponent implements OnInit {
 		if (privileges.postalCodes.read) {
 			dataMenu.push({ id: '/auth/postalcode/list', text: 'Postal Codes' });
 		}
-
-
+		
 		if (dataMenu.length > 0) {
 			this.menuItems.push({
 				text: 'Data',

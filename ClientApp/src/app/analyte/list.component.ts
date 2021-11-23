@@ -1,17 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { GridComponent, ExcelExportProperties, ExcelExportService, Column } from '@syncfusion/ej2-angular-grids';
-import { SamplerRepository } from './repository';
+import { AnalyteRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
 import { TenantService } from '../shared/tenant.service';
 import { GridFormParams, FormState } from '../shared/formState';
 
 @Component({
-    selector: 'sampler-list',
+    selector: 'analyte-list',
     templateUrl: './list.component.html',
 })
 export class AnalyteListComponent extends PageComponent implements OnInit {
 
-	constructor(private repository: SamplerRepository, private tenant: TenantService, private formState: FormState) {
+	constructor(private repository: AnalyteRepository, private tenant: TenantService, private formState: FormState) {
         super();
     }
     //------------------------------------------------------------------------------------------------------------------------

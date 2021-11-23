@@ -3,16 +3,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DialogUtility, Dialog } from '@syncfusion/ej2-popups';
 import { AppService } from "../shared/app.service";
 import { PageComponent } from '../shared/page.component';
-import { SamplerRepository } from './repository';
+import { AnalyteRepository } from './repository';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
+import { TenantService } from '../shared/tenant.service';
 @Component({
-	selector: 'sampler-edit',
+	selector: 'analyte-edit',
 	templateUrl: './edit.component.html',
 	styleUrls: ['./edit.component.scss']
 })
 export class AnalyteEditComponent extends PageComponent implements OnInit {
-	constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private repository: SamplerRepository) {
+	constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private repository: AnalyteRepository, private tenant: TenantService) {
 		super();
 	}
 
@@ -25,28 +25,28 @@ export class AnalyteEditComponent extends PageComponent implements OnInit {
 	async ngOnInit() {
 		this.showSpinner();
 		this.app = await this.appService.getData();
-		this.privileges = this.app.privileges.samples;
+		this.privileges = this.app.privileges.testTypes;
 		var id = this.route.snapshot.paramMap.get('id');
-		this.data = await this.repository.getData();
 
-		if (id) {
-			this.record = await this.repository.get(id);
+		if (id == null) {
+			this.record = {
+				active: true
+			};
 		}
 		else {
-			this.record = {};
+			this.record = await this.repository.get(id);
 		}
-
 		this.hideSpinner();
-		this.record.purchaseDate = this.record.purchaseDate ? new Date(this.record.purchaseDate) : null;
+		
 
 		this.form = new FormGroup({
-			customerId: new FormControl(this.record.customerId, [Validators.required]),
-			samplingTypeId: new FormControl(this.record.samplingTypeId, [Validators.required]),
-			modelNo: new FormControl(this.record.modelNo, [Validators.required]),
-			brand: new FormControl(this.record.brand, [Validators.required]),
-			serialNo: new FormControl(this.record.serialNo, [Validators.required]),
-			assetNo: new FormControl(this.record.assetNo, [Validators.required]),
-			name: new FormControl(this.record.name, [Validators.required])
+			name: new FormControl(this.record.name, [Validators.required]),
+			description:new FormControl(this.record.description, [Validators.required]),
+			resultUnits:new FormControl(this.record.resultUnits, [Validators.required]),
+			minValue:new FormControl(this.record.minValue, [Validators.required]),
+			maxValue:new FormControl(this.record.maxValue, [Validators.required]),
+			lowThreshold: new FormControl(this.record.lowThreshold, []),
+			highThreshold: new FormControl(this.record.highThreshold, []),
 		});
 	}
 	//-----------------------------------------------------------------------------------------
@@ -54,13 +54,14 @@ export class AnalyteEditComponent extends PageComponent implements OnInit {
 		this.form.markAllAsTouched();
 
 		if (this.form.invalid) {
-			this.showErrorMessage("Please complete all required fields!")
+			this.showErrorMessage("Please complete all required fields!");
+			return;
 		}
 		else {
 			Object.assign(this.record, this.form.value);
 
 			var add = !this.record.id;
-
+			this.record.tenantId = this.tenant.id;
 			this.showSpinner();
 			var returnValue = await this.repository.save(this.record);
 			this.hideSpinner();
@@ -74,7 +75,7 @@ export class AnalyteEditComponent extends PageComponent implements OnInit {
 
 				if (success && add) {
 					this.record.id = returnValue.id;
-					history.pushState('', '', `/auth/sampler/edit/${returnValue.id}`);
+					history.pushState('', '', `/auth/analyte/edit/${returnValue.id}`);
 				}
 			}
 		}
@@ -86,6 +87,15 @@ export class AnalyteEditComponent extends PageComponent implements OnInit {
 			content: `Are you sure you want to delete the sampler <b>${this.record.modelNo}</b>?`,
 			okButton: { click: this.deleteOK.bind(this) }
 		});
+	}
+
+	close() {
+		if (history.state.from == 'state') {
+			this.router.navigate(['/auth/analyte/list'], { state: { formState: true } });
+		}
+		else {
+			this.router.navigate(['/auth/analyte/edit', this.record.id], { state: { state: true } });
+		}
 	}
 	//-----------------------------------------------------------------------------------------
 	async deleteOK() {
@@ -99,7 +109,7 @@ export class AnalyteEditComponent extends PageComponent implements OnInit {
 		}
 		else {
 			this.showDeleteMessage(true);
-			setTimeout(() => this.router.navigate(['/auth/sampler/list']), 1000);
+			setTimeout(() => this.router.navigate(['/auth/analyte/list']), 1000);
 		}
 	}
 	//-----------------------------------------------------------------------------------------
