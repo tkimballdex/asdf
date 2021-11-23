@@ -1,0 +1,43 @@
+<div id="list-view" class="container-fluid" *ngIf="form">
+    <div class="row d-flex align-items-end">
+        <div class="col-md-6 d-flex align-items-center list-header">
+            <span class="list-header-icon"><i class="fas fa-vials"></i></span>
+            <span class="list-header-title">Analytes</span>
+            <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['../add']">+ Add</button></span>
+        </div>
+        <div class="col-md-6 d-flex align-items-end justify-content-end list-header">
+            <span class="list-actions"><button ejs-button cssClass="e-outline" iconCss="fad fa-download" (click)="export()"></button></span>
+        </div>
+    </div>
+    <div class="row d-flex align-items-end">
+        <div class="col-3">
+            <ejs-textbox [(value)]="form.name" placeholder="Name" floatLabelType="Always"></ejs-textbox>
+        </div>
+        <div class="col-3">
+            <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 pad-t20">
+            <ejs-grid #grid [dataSource]='list' *ngIf="list" [allowPaging]="true" [pageSettings]='form.pageSettings' [sortSettings]='form.sortSettings' (actionComplete)='gridActionHandler($event)'
+                      [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' [allowSorting]="true" [allowFiltering]="false">
+                <e-columns>
+                    <e-column width="70" [visible]='true'>
+                        <ng-template #template let-data>
+                            <a [routerLink]="['../edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
+                        </ng-template>
+                    </e-column>
+                    <e-column field='purchaseDate' type='date' [format]='dateFormat' headerText='Purchase Date' width='150'></e-column>
+                    <e-column field='customer' headerText='Customer'></e-column>
+                    <e-column field='name' headerText='Name'></e-column>
+                    <e-column field='assetNo' headerText='Assest No'></e-column>
+                    <e-column field='brand' headerText='Brand'></e-column>
+                    <e-column field='modelNo' headerText='Model No'></e-column>
+                    <e-column field='serialNo' headerText='Serial No'></e-column>
+                </e-columns>
+            </ejs-grid>
+        </div>
+    </div>
+</div>
+
+

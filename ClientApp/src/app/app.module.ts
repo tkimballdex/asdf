@@ -102,6 +102,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
 					{ path: 'county', loadChildren: () => import('./county/module').then(m => m.CountyModule) },
 					{ path: 'countystat', loadChildren: () => import('./countystat/module').then(m => m.CountystatModule) },
 					{ path: 'statestat', loadChildren: () => import('./statestat/module').then(m => m.StateStatModule) },
+					{ path: 'analyte', loadChildren: () => import('./analyte/module').then(m => m.AnalyteModule) },
 
 				]
 			}

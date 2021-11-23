@@ -137,6 +137,7 @@ export interface Privileges {
 	states: PrivilegeSet;
 	counties: PrivilegeSet;
 	postalCodes: PrivilegeSet;
+	analytes:PrivilegeSet;
 }
 
 export interface MenuItem {
@@ -159,6 +160,11 @@ export interface State {
     name: string;
 }
 export interface Postalcode {
+    id: number;
+    name: string;
+}
+
+export interface Analyte {
     id: number;
     name: string;
 }
@@ -195,4 +201,5 @@ export interface AppData {
 	tenants: Tenant[];
 	analytes: UidName[]; 
 	Postalcodes:Postalcode[];
+	Analytes:Analyte[];
 }
