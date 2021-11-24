@@ -21,7 +21,7 @@ export class SiteListComponent extends PageComponent implements OnInit {
 	@ViewChild('grid') public grid: GridComponent;
 
     async ngOnInit() {
-		this.privileges = (await this.appService.getPrivileges()).customers;
+		this.privileges = (await this.appService.getPrivileges()).sites;
 		await this.tenant.validate();
 		this.formState.setup(this, new FormParams());
 		this.search();

@@ -25,7 +25,7 @@ export class SamplerEditComponent extends PageComponent implements OnInit {
 	async ngOnInit() {
 		this.showSpinner();
 		this.app = await this.appService.getData();
-		this.privileges = this.app.privileges.samples;
+		this.privileges = this.app.privileges.samplers;
 		var id = this.route.snapshot.paramMap.get('id');
 		this.data = await this.repository.getData();
 

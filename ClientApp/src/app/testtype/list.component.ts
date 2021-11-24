@@ -19,7 +19,7 @@ export class TestTypeListComponent extends PageComponent implements OnInit {
     //--------------------------------------------------------------------------------------------------------------------
     async ngOnInit() {
         this.app = await this.appService.getData();
-        this.privileges = this.app.privileges.testTypes;
+        this.privileges = (await this.appService.getPrivileges()).testTypes;
 
         if (this.tenant.id) {
             this.search();

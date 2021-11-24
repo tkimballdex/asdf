@@ -4,6 +4,7 @@ import { SamplerRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
 import { TenantService } from '../shared/tenant.service';
 import { GridFormParams, FormState } from '../shared/formState';
+import { AppService } from '../shared/app.service';
 
 @Component({
     selector: 'sampler-list',
@@ -11,7 +12,7 @@ import { GridFormParams, FormState } from '../shared/formState';
 })
 export class SamplerListComponent extends PageComponent implements OnInit {
 
-	constructor(private repository: SamplerRepository, private tenant: TenantService, private formState: FormState) {
+	constructor(private repository: SamplerRepository, private appService: AppService,private tenant: TenantService, private formState: FormState) {
         super();
     }
     //------------------------------------------------------------------------------------------------------------------------
@@ -21,6 +22,7 @@ export class SamplerListComponent extends PageComponent implements OnInit {
     @ViewChild('grid') public grid: GridComponent;
     //------------------------------------------------------------------------------------------------------------------------
     async ngOnInit() {
+        this.privileges = (await this.appService.getPrivileges()).samplers;
 		await this.tenant.validate();
         this.dateFormat = {type:'date', format:'MM/dd/yyyy'};
 		this.formState.setup(this, new FormParams());

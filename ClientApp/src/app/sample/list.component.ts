@@ -23,6 +23,7 @@ export class SampleListComponent extends PageComponent implements OnInit {
     @ViewChild('grid') public grid: GridComponent;
     //------------------------------------------------------------------------------------------------------------------------
     async ngOnInit() {
+        this.privileges = (await this.appService.getPrivileges()).samples;
         this.dateFormat = {type:'date', format:'MM/dd/yyyy'};
 		this.formState.setup(this, new FormParams());
 		this.search();

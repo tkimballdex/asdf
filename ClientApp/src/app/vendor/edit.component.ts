@@ -27,7 +27,7 @@ export class VendorEditComponent extends PageComponent implements OnInit {
     async ngOnInit() {       
         this.showSpinner();
         this.app = await this.appService.getData();
-        this.privileges = this.app.privileges.vendors;
+        this.privileges = (await this.appService.getPrivileges()).vendors;
 
         var id = this.route.snapshot.paramMap.get('id');
         this.record = await this.repository.get(id);

@@ -3,6 +3,7 @@ import { GridComponent, ExcelExportProperties, ExcelExportService, Column } from
 import { SampleTestRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
 import { TenantService } from '../shared/tenant.service';
+import { AppService } from "../shared/app.service";
 
 @Component({
     selector: 'sampletest-list',
@@ -10,7 +11,7 @@ import { TenantService } from '../shared/tenant.service';
 })
 export class SampleTestListComponent extends PageComponent implements OnInit {
 
-	constructor(private repository: SampleTestRepository, private tenant: TenantService) {
+	constructor(private repository: SampleTestRepository,private appService: AppService, private tenant: TenantService) {
         super();
     }
     //------------------------------------------------------------------------------------------------------------------------
@@ -20,6 +21,7 @@ export class SampleTestListComponent extends PageComponent implements OnInit {
     @ViewChild('grid') public grid: GridComponent;
     //------------------------------------------------------------------------------------------------------------------------
     async ngOnInit() {
+        this.privileges = (await this.appService.getPrivileges()).tests;
         this.dateFormat = {type:'date', format:'MM/dd/yyyy'};
 
         if (this.tenant.id) {

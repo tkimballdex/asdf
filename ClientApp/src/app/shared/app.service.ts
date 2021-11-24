@@ -119,6 +119,7 @@ export interface PrivilegeSet {
 	delete: boolean;
 	approve: boolean;
 	download: boolean;
+	communicate: boolean;
 }
 
 export interface Privileges {
@@ -137,7 +138,8 @@ export interface Privileges {
 	states: PrivilegeSet;
 	counties: PrivilegeSet;
 	postalCodes: PrivilegeSet;
-	analytes:PrivilegeSet;
+	analytes: PrivilegeSet;
+	samplers: PrivilegeSet;
 }
 
 export interface MenuItem {
@@ -151,14 +153,17 @@ export interface Country {
     id: number;
     name: string;
 }
+
 export interface County {
     id: number;
     name: string;
 }
+
 export interface State {
     id: number;
     name: string;
 }
+
 export interface Postalcode {
     id: number;
     name: string;
@@ -168,10 +173,12 @@ export interface Analyte {
     id: number;
     name: string;
 }
+
 export interface Testtype {
     id: number;
     name: string;
 }
+
 export interface Frequency {
     id: number;
     name: string;

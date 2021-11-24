@@ -28,7 +28,7 @@ export class PostalcodeListComponent extends PageComponent implements OnInit {
 
     async ngOnInit() {
 		this.app = await this.appService.getData();
-		this.privileges = (await this.appService.getPrivileges()).customers;
+		this.privileges = (await this.appService.getPrivileges()).postalCodes;
 	
 		await this.tenant.validate();
 		this.formState.setup(this, new FormParams());

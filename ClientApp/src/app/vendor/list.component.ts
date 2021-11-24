@@ -3,6 +3,7 @@ import { GridComponent, ExcelExportProperties, ExcelExportService, Column } from
 import { VendorRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
 import { TenantService } from '../shared/tenant.service';
+import { AppService } from '../shared/app.service';
 
 @Component({
     selector: 'vendors-list',
@@ -10,7 +11,7 @@ import { TenantService } from '../shared/tenant.service';
 })
 export class VendorListComponent extends PageComponent implements OnInit {
 
-	constructor(private repository: VendorRepository, private tenant: TenantService) {
+	constructor(private repository: VendorRepository, private appService: AppService, private tenant: TenantService) {
         super();
     }
     //------------------------------------------------------------------------------------------------------------------------
@@ -19,6 +20,7 @@ export class VendorListComponent extends PageComponent implements OnInit {
     @ViewChild('grid') public grid: GridComponent;
     //------------------------------------------------------------------------------------------------------------------------
 	async ngOnInit() {
+        this.privileges = (await this.appService.getPrivileges()).vendors;
 		await this.tenant.validate();
 		this.search();
 	}
