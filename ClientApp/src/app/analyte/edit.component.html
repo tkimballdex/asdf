@@ -1,7 +1,7 @@
 <div id="edit-view" *ngIf="record && form" class="container-fluid" [formGroup]="form">
     <div class="row d-flex align-items-center edit-header">
         <div class="col-md-6 d-flex">
-            <span class="edit-header-icon"><i class="fal fa-vial"></i></span>
+            <span class="edit-header-icon"><i class="fas fa-temperature-hot"></i></span>
             <span class="edit-header-title">Analyte</span>
         </div>
         <div class="col-md-6 d-flex justify-content-end">
@@ -62,7 +62,7 @@
             </div>
         </div>    
     </div>
-    
+
     <div class="row d-flex align-items-center edit-footer">
         <div class="col-md-6 d-flex justify-content-start">
             <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>

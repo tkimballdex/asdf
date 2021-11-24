@@ -4,6 +4,7 @@ import { AnalyteRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
 import { TenantService } from '../shared/tenant.service';
 import { GridFormParams, FormState } from '../shared/formState';
+import { AppService } from '../shared/app.service';
 
 @Component({
     selector: 'analyte-list',
@@ -11,7 +12,7 @@ import { GridFormParams, FormState } from '../shared/formState';
 })
 export class AnalyteListComponent extends PageComponent implements OnInit {
 
-	constructor(private repository: AnalyteRepository, private tenant: TenantService, private formState: FormState) {
+	constructor(private repository: AnalyteRepository,  private appService: AppService, private tenant: TenantService, private formState: FormState) {
         super();
     }
     //------------------------------------------------------------------------------------------------------------------------
@@ -21,6 +22,7 @@ export class AnalyteListComponent extends PageComponent implements OnInit {
     @ViewChild('grid') public grid: GridComponent;
     //------------------------------------------------------------------------------------------------------------------------
     async ngOnInit() {
+        this.privileges = (await this.appService.getPrivileges()).analytes;
 		await this.tenant.validate();
         this.dateFormat = {type:'date', format:'MM/dd/yyyy'};
 		this.formState.setup(this, new FormParams());

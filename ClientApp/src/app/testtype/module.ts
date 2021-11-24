@@ -14,12 +14,14 @@ import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 
 @NgModule({
-  declarations: [TestTypeListComponent, TestTypeEditComponent],
+  declarations: [
+    TestTypeListComponent, 
+    TestTypeEditComponent],
   imports: [GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule,
     CommonModule, DatePickerModule, SwitchModule,
     TextBoxModule,
     CommonModule,
-    RouterModule.forRoot([
+    RouterModule.forChild([
         {path: 'list', component: TestTypeListComponent, canActivate:[MsalGuard]},        
         { path: 'add', component: TestTypeEditComponent, canActivate: [MsalGuard] },
         { path: 'edit/:id', component: TestTypeEditComponent, canActivate: [MsalGuard] }

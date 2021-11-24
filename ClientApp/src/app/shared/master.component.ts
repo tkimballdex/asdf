@@ -126,7 +126,7 @@ export class MasterPageComponent implements OnInit {
 		if (privileges.testTypes.read) {
 			manageMenu.push({ id: '/auth/testtype/list', text: 'Test Types' });
 		}
-		if (privileges.testTypes.read) {
+		if (privileges.analytes.read) {
 			manageMenu.push({ id: '/auth/analyte/list', text: 'Analytes' });
 		}
 		if (privileges.newsArticles.read) {
@@ -153,7 +153,7 @@ export class MasterPageComponent implements OnInit {
 		if (privileges.postalCodes.read) {
 			dataMenu.push({ id: '/auth/postalcode/list', text: 'Postal Codes' });
 		}
-		
+
 		if (dataMenu.length > 0) {
 			this.menuItems.push({
 				text: 'Data',

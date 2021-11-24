@@ -168,6 +168,10 @@ export interface Analyte {
     id: number;
     name: string;
 }
+export interface Testtype {
+    id: number;
+    name: string;
+}
 export interface Frequency {
     id: number;
     name: string;
@@ -202,4 +206,5 @@ export interface AppData {
 	analytes: UidName[]; 
 	Postalcodes:Postalcode[];
 	Analytes:Analyte[];
+	testtypes:Testtype[];
 }

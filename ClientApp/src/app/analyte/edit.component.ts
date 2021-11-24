@@ -25,7 +25,7 @@ export class AnalyteEditComponent extends PageComponent implements OnInit {
 	async ngOnInit() {
 		this.showSpinner();
 		this.app = await this.appService.getData();
-		this.privileges = this.app.privileges.testTypes;
+		this.privileges = this.app.privileges.analytes;
 		var id = this.route.snapshot.paramMap.get('id');
 
 		if (id == null) {
