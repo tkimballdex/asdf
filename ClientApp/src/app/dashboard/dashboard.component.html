@@ -18,7 +18,7 @@
     </div>    
 
     <div class="row pad-t20">
-        <div class="col-md-12 col-lg-10 col-xl-8">
+        <div class="col-md-12 col-lg-11 col-xl-10">
             <ejs-dashboardlayout id="default_dashboard" width="100%" [allowDragging]='allowDragging' [columns]="12" #editLayout [cellSpacing]='cellSpacing' [cellAspectRatio]='cellAspectRatio'>
                 <e-panels>    
                     <e-panel [sizeX]="12" [sizeY]="2" [row]="0" [col]="0">
@@ -32,24 +32,18 @@
                     <e-panel [sizeX]="4" [sizeY]="2" [row]="2" [col]="0">
                         <ng-template #content>
                             <div class="col-12">
-                                <p style="text-align:center;" >Today's Positive Tests</p>
+                                <p style="text-align:center;">Our Positive Tests</p>
                                 <div style="text-align:center">
                                       <table width="100%">
                                         <tr>
-                                            <td class ="tilearrow">
-                                                <!--<p>{{customerchange}}</p>-->
-                                              <!--<span class="tileArrowUp" [ngClass]="{ 'tileArrowDown': this.form.get('customerchange').value ===10 }" ><i class="fas fa-long-arrow-alt-up" ></i></span>-->
-
-                                              <span class="fas fa-long-arrow-alt-up" [ngClass]="displaySummary.customerDailyChange  > 0 ? 'tileArrowUp' : displaySummary.customerDailyChange  < 0 ? 'tileArrowDown' : 'tileArrowMiddle'"></span>
-                                              <!--<span [ngClass]="customerchange  > 0 ? 'tileArrowUp' : customerchange  < 0 ? 'tileArrowDown' : 'tileArrowMiddle'">{{ displaySummary.customerDailyPositiveTests  }}</span>-->
-
-                                             </td>
-                                            <td class="tilevalue">
-                                                <!--<span class="fas far fa-plus" [ngClass]="displaySummary.customerDailyChange  > 0 ? 'tileArrowpositive' : displaySummary.customerDailyChange  < 0 ? 'tileArrownegative' : 'tileArrownegative'"></span>-->
+                                            <td class ="tilearrow" width="30%">
+                                              <span class="fas fa-long-arrow-alt-right" [ngClass]="displaySummary.customerDailyChange  > 0 ? 'tileArrowUp' : displaySummary.customerDailyChange  < 0 ? 'tileArrowDown' : 'tileArrowRight'"></span>
+                                            </td>
+                                            <td class="tilevalue" width="40%"> 
                                                 {{displaySummary.customerDailyTests}}                                                
                                             </td>
-                                            <td  class="tilechange"> 
-                                              {{displaySummary.customerDailyChange}}
+                                            <td  class="tilechange" width="30%"> 
+                                                {{displaySummary.customerDailyChange}}
                                             </td>
                                         </tr>
                                     </table>
@@ -60,24 +54,21 @@
                     <e-panel [sizeX]="4" [sizeY]="2" [row]="2" [col]="4">
                         <ng-template #content>
                             <div class="col-12">
-                                <p style="text-align:center;" >Today's County Positive Tests</p>
+                                <p style="text-align:center;">County Positive Tests</p>
                                 <div style="text-align:center">
-                                  
-
                                       <table width="100%">
                                         <tr>
-                                            <td class ="tilearrow">
-                                                <span  class="fas fa-long-arrow-alt-up" [ngClass]="displaySummary.countyDailyChange    > 0 ? 'tileArrowUp' : displaySummary.countyDailyChange  < 0 ? 'tileArrowDown' : 'tileArrowMiddle'"></span>
+                                            <td class ="tilearrow" width="30%">
+                                                <span class="fas fa-long-arrow-alt-right" [ngClass]="displaySummary.countyDailyChange    > 0 ? 'tileArrowUp' : displaySummary.countyDailyChange  < 0 ? 'tileArrowDown' : 'tileArrowRight'"></span>
                                              </td>
-                                            <td class="tilevalue">
+                                            <td class="tilevalue" width="40%">
                                               {{displaySummary.countyDailyCases}}                                                
                                             </td>
-                                            <td  class="tilechange"> 
+                                            <td  class="tilechange" width="30%"> 
                                               {{displaySummary.countyDailyChange}}
                                             </td>
                                         </tr>
                                     </table>
-
                                 </div>  
                              </div>                               
                         </ng-template>
@@ -85,19 +76,17 @@
                     <e-panel [sizeX]="4" [sizeY]="2" [row]="2" [col]="8">
                         <ng-template #content>
                             <div class="col-12">
-                                <p style="text-align:center;" >Today's State Positive Tests</p>
-                                <div style="text-align:center">
-                                    
-                                   
+                                <p style="text-align:center;">State Positive Tests</p>
+                                <div style="text-align:center">   
                                       <table width="100%">
                                           <tr>
-                                              <td class ="tilearrow">
-                                                <span class="fas fa-long-arrow-alt-up" [ngClass]="displaySummary.stateDailyChange   > 0 ? 'tileArrowUp' : displaySummary.stateDailyChange  < 0 ? 'tileArrowDown' : 'tileArrowMiddle'"></span>
+                                              <td class ="tilearrow" width="30%">
+                                                <span class="fas fa-long-arrow-alt-right" [ngClass]="displaySummary.stateDailyChange   > 0 ? 'tileArrowUp' : displaySummary.stateDailyChange  < 0 ? 'tileArrowDown' : 'tileArrowRight'"></span>
                                             </td>
-                                              <td class="tilevalue">
+                                              <td class="tilevalue" width="40%">
                                                 {{displaySummary.stateDailyCases}}                                                
                                               </td>
-                                              <td  class="tilechange"> 
+                                              <td  class="tilechange" width="30%"> 
                                                 {{displaySummary.stateDailyChange}}
                                               </td>
                                           </tr>

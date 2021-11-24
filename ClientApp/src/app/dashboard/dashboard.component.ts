@@ -78,7 +78,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		var $this = this;
 		this.mode = 'CheckBox';
 		this.redColorPalette = ['#e35254'];
-		this.greenColorPalette = ['#1abc9c'];
+		this.greenColorPalette = ['#32bbae'];
 		this.colorPalette = ['#ee5253', '#74b9ff', '#a29bfe', '#ff7675', '#fdcb6e'];
 		this.app = await this.appService.getData();
 		this.customers = await this.repository.listCustomers();
@@ -134,7 +134,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 
 		this.chartPositiveNegativeCases.addSeries([
 			{ type: 'StackingColumn', xName: 'x', yName: 'positive', dataSource: data.positiveNegativeCases, name: 'Positive Cases', fill: '#e35254' },
-			{ type: 'StackingColumn', xName: 'x', yName: 'negative', dataSource: data.positiveNegativeCases, name: 'Negative Cases', fill: '#1abc9c' }
+			{ type: 'StackingColumn', xName: 'x', yName: 'negative', dataSource: data.positiveNegativeCases, name: 'Negative Cases', fill: '#32bbae' }
 		]);
 
 		this.chartPositiveSites.addSeries(data.positiveSiteStack.map(x => { return { type: 'StackingColumn', xName: 'x', yName: 'y', name: x.siteName, dataSource: x.results } }));

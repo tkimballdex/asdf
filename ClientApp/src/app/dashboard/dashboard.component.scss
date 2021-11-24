@@ -92,64 +92,32 @@
     width: 20px;
     height: 20px;
   }
-.tilevalue{
+.tilevalue {
     font-size: 40px;
-    padding-right: 40px;
     text-align:center;
-    
+    vertical-align:middle;
 }
-.tilearrow{
-    font-size: 30px;
+.tilearrow {
+    font-size: 25px;
     padding-left: 10px;
-    text-align:left;
-    
-    
+    text-align:left; 
+    vertical-align: middle;  
 }
-.tilechange{
-    font-size: 12px;
+.tilechange {
+    font-size: 14px;
     padding-right: 10px;
     text-align:right;
-    color: #999999;
-    
+    color: #999999; 
+    vertical-align: middle;   
 }
-.tileArrowUp{
-  
+.tileArrowUp {  
+    transform: rotate(-45deg);
+    color: #e35254;
+}
+.tileArrowDown {    
     transform: rotate(45deg);
-    color: red;
-
+    color: #32bbae;
 }
-
-.tileArrowPositive{
-  
-    transform: rotate(45deg);
-    color: red;
-
-}
-
-.tileArrownegative{
-  
-    transform: rotate(45deg);
-    color: red;
-
-}
-
-.tileArrowDown{
-    
-    transform: rotate(135deg);
-    color: green;
-}
-
-.tileArrowMiddle{
-   
-    transform: rotate(180deg);
+.tileArrowRight {   
     color: gray;
-
-.bottom{
-    position:absolute;                 
-    bottom:0;                         
-    left:0px; 
 }
-
-}
-
-   
