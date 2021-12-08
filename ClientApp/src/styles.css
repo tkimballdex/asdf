@@ -43,6 +43,7 @@ a {
     text-align: center;
     border-width:0px;
     box-shadow: none;
+    border-radius: 3px;
 }
 
 #login-features.e-dashboardlayout.e-control .e-panel .panel-icon {
@@ -74,6 +75,30 @@ a {
     border-radius: 3px;
     color:#ffffff;
     font-weight: 500;
+}
+#login-button:hover
+{
+    background: rgb(52, 138, 252);
+}
+
+#login-button .btn-icon {
+    font-size: 1.5em;
+    color:#ffffff;
+    opacity: 0.6;
+}
+
+.login-panel-action
+{
+    color: #ffffff;
+    text-align: center;
+    line-height:120px;
+    vertical-align: bottom;
+}
+.login-panel-action a:link,
+.login-panel-action a:hover,
+.login-panel-action a:visited
+{
+    color: #ffffff;
 }
 
 mat-form-field.mat-form-field {

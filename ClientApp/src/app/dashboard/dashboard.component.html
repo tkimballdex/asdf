@@ -1,20 +1,20 @@
 <div id="list-view" class="container-fluid" *ngIf="customers">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 col-lg-3 col-xl-3">
             <ejs-dropdownlist [dataSource]="customers" [fields]="{ text: 'name', value: 'id' }" [(value)]="customerId" placeholder="Customer" floatLabelType="Always" (change)="customerChange()"></ejs-dropdownlist>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-lg-3 col-xl-3">
             <ejs-multiselect [dataSource]='sites' [fields]="{ text: 'name', value: 'id' }" [(value)]="selectedSites" [mode]='mode' [placeholder]='placeholder' floatLabelType="Always" showClearButton='false' showSelectAll='true' showDropDownIcon='true' (change)="siteChange()"></ejs-multiselect>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-lg-2 col-xl-2">
             <ejs-dropdownlist [dataSource]="app.analytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="analyteId" placeholder="Analyte" floatLabelType="Always" (change)="analyteChange()"></ejs-dropdownlist>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-lg-3 col-xl-2">
             <ejs-daterangepicker placeholder='Select a range' floatLabelType="Always" [(startDate)]='startDate' [(endDate)]='endDate' (change)="dateRangeChange()"></ejs-daterangepicker>
         </div>
-        <div class="col-md-3" style="padding-top: 1em">
+        <!--<div class="col-md-3" style="padding-top: 1em">
             <button ejs-button cssClass="e-outline e-flat" (click)="export()" width="200">Export Graphs</button>
-        </div>
+        </div>-->
     </div>    
 
     <div class="row pad-t20">

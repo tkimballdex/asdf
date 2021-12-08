@@ -20,7 +20,7 @@
         </div>
         
         <div>        
-            <ejs-dashboardlayout id="login-features" [allowDragging]='true' [allowResizing]='false' [columns]="5" [rows]="2">
+            <ejs-dashboardlayout id="login-features" [allowDragging]='false' [allowResizing]='false' [columns]="5" [rows]="2">
                 <e-panels>
                     <e-panel [row]="0" [col]="0" cssClass="feature-panel">
                         <ng-template #content>
@@ -62,22 +62,22 @@
                         </ng-template>
                     </e-panel>
                     <e-panel [row]="0" [col]="3" [sizeX]="2" [sizeY]="2" >
-                        <ng-template #content>                        
-                            <div class="panel-icon">
-                                <i class="fal fa-sign-in-alt"></i>                            
+                        <ng-template #content>  
+                            <div class="panel-header pad-t20">
+                                Log into SWAPP                             
                             </div>
-                            <div class="panel-header">
-                                Login                              
-                            </div>
-                            <div class="panel-content">
+                            <div class="panel-content pad-t20">
                                 <span *ngIf="!appService.isLoggedIn">
-                                    <button ejs-button id="login-button" cssClass="e-primary" [routerLink]="['/auth']">Log In</button> 
+                                    <button ejs-button id="login-button" cssClass="e-primary" [routerLink]="['/auth']" iconCss='fal fa-sign-in-alt btn-icon'> Log In</button> 
                                 </span>
 
                                 <span *ngIf="appService.isLoggedIn">
-                                    <button ejs-button id="login-button" cssClass="e-primary" [routerLink]="['/auth']">Home Page</button>                                     
-                                </span>
-                            </div>                              
+                                    <button ejs-button id="login-button" cssClass="e-primary" [routerLink]="['/auth']" iconCss='fal fa-sign-in-alt btn-icon'> Home Page</button>                                     
+                                </span>  
+                                <span class="login-panel-action pad-t20">
+                                    <p><a href="https://interome.com/contact">Need an account?</a></p>                                    
+                                </span>                              
+                            </div>                                                     
                         </ng-template>
                     </e-panel>
                     <e-panel [row]="1" [col]="0">
@@ -99,10 +99,10 @@
                                 <i class="fal fa-object-group"></i>                          
                             </div>
                             <div class="panel-header">
-                                Aggreagate                              
+                                Aggregate                              
                             </div>
                             <div class="panel-content">
-                                Aggreagate demographic, environmental, and other public data
+                                Aggregate demographic, environmental, and other public data
                             </div>   
                         </ng-template>
                     </e-panel>
