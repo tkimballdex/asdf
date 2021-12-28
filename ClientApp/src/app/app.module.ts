@@ -29,6 +29,7 @@ import { DashboardLayoutModule } from '@syncfusion/ej2-angular-layouts';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHome, faHomeAlt } from '@fortawesome/pro-solid-svg-icons';
 
+import { CollectionModule } from './collection/module';
 import { SampleModule } from './sample/module';
 import { SampleTestModule } from './samplestest/module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -92,6 +93,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
 					{ path: 'newsArticle', loadChildren: () => import('./newsArticle/module').then(m => m.NewsArticleModule) },
 					{ path: 'vendor', loadChildren: () => import('./vendor/module').then(m => m.VendorModule) },
 					{ path: 'testtype', loadChildren: () => import('./testtype/module').then(m => m.TestTypeModule) },
+					{ path: 'collection', loadChildren: () => import('./collection/module').then(m => m.CollectionModule) },
 					{ path: 'sample', loadChildren: () => import('./sample/module').then(m => m.SampleModule) },
 					{ path: 'sampler', loadChildren: () => import('./sampler/module').then(m => m.SamplerModule) },
 					{ path: 'sampletest', loadChildren: () => import('./samplestest/module').then(m => m.SampleTestModule) },

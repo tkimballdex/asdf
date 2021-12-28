@@ -86,6 +86,7 @@ export class MasterPageComponent implements OnInit {
 		var sampleMenu: MenuItemModel[] = [];		
 
 		if (privileges.samples.read) {
+			sampleMenu.push({ id: '/auth/collection/list', text: 'Collections' });	
 			sampleMenu.push({ id: '/auth/sample/list', text: 'Samples' });			
 			sampleMenu.push({ id: '/auth/sampletest/list', text: 'Tests' });
 			sampleMenu.push({ id: '/auth/countystat/list', text: 'County Stats' });

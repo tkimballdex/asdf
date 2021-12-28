@@ -1,0 +1,179 @@
+<div id="edit-view" *ngIf="record && form" class="container-fluid" [formGroup]="form">
+    <div class="row d-flex align-items-center edit-header">
+        <div class="col-md-6 d-flex">
+            <span class="edit-header-icon"><i class="fal fa-calendar-alt"></i></span>
+            <span class="edit-header-title">Collection</span>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end">
+
+        </div>
+    </div>
+
+    <div class="row pad-t20">
+        <div class="col-md-6 col-lg-5 col-xl-4 pad-b20">
+            <ejs-textbox formControlName="referenceNo" placeholder="Collection No*" floatLabelType="Always" required></ejs-textbox>
+            <div *ngIf="this.invalidControl('referenceNo')" class="e-error">
+                Reference No is required!
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-datepicker formControlName="scheduledDate" placeholder="Scheduled Date*" floatLabelType="Always" required></ejs-datepicker>
+            <div *ngIf="this.invalidControl('scheduledDate')" class="e-error">
+                Scheduled Date is required!
+            </div>
+        </div>
+    </div>
+
+    <div class="row pad-t10" *ngIf="!record.id">
+        <div class="col-md-4">
+            <ejs-dropdownlist [dataSource]="customers" [fields]="{ text: 'name', value: 'id' }" formControlName="customerId" placeholder="Customer*" floatLabelType="Always" (change)="customerChange()"></ejs-dropdownlist>
+            <div *ngIf="this.invalidControl('customerId')" class="e-error">
+                Customer is required!
+            </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="sites">
+            <ejs-dropdownlist [dataSource]="sites" [fields]="{ text: 'name', value: 'id' }" formControlName="siteId" placeholder="Site*" floatLabelType="Always" (change)="siteChange()"></ejs-dropdownlist>
+            <div *ngIf="this.invalidControl('siteId')" class="e-error">
+                Site is required!
+            </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="locations">
+            <ejs-dropdownlist [dataSource]="locations" [fields]="{ text: 'name', value: 'id' }" formControlName="locationId" placeholder="Location*" floatLabelType="Always"></ejs-dropdownlist>
+            <div *ngIf="this.invalidControl('locationId')" class="e-error">
+                Location is required!
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="record.id">
+        <div class="col-md-12 col-lg-10 col-xl-8">
+            <ejs-textbox [(value)]="record.site" disabled placeholder="Site" floatLabelType="Always"></ejs-textbox>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="record.id">
+        <div class="col-md-12 col-lg-10 col-xl-8">
+            <ejs-textbox [(value)]="record.location" disabled placeholder="Location" floatLabelType="Always"></ejs-textbox>
+        </div>
+    </div>
+
+    <div class="row pad-t20">
+        <div class="col-md-12">
+            <ejs-tab id="edit-tab" class="e-fill" #editTab (created)="editTabCreated()">
+                <e-tabitems>
+                    <e-tabitem>
+                        <ng-template #headerText>
+                            <div>Information</div>
+                        </ng-template>
+                        <ng-template #content>
+
+                            <div class="row pad-t20">
+                                <div class="col-md-8">
+                                    <ejs-dropdownlist [dataSource]="vendors" [fields]="{ text: 'name', value: 'id' }" formControlName="vendorId" placeholder="Vendor*" floatLabelType="Always"></ejs-dropdownlist>
+                                    <div *ngIf="this.invalidControl('vendorId')" class="e-error">
+                                        Vendor is required!
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-lg-5 col-xl-4">
+                                    <ejs-textbox [(value)]="record.collectedBy" placeholder="Collected By" floatLabelType="Always"></ejs-textbox>
+                                </div>
+
+                                <div class="col-md-6 col-lg-5 col-xl-4">
+                                    <ejs-datepicker [(value)]="record.collectedDate" placeholder="Collected Date" floatLabelType="Always"></ejs-datepicker>
+                                </div>
+                            </div>
+
+                            
+
+                            <div class="row">
+                                <div class="col-md-6 col-lg-5 col-xl-4">
+                                    <ejs-numerictextbox [(value)]="record.temperature" format='N1' min='-100' max='150' step='0.1' placeholder="Temperature" floatLabelType="Always"></ejs-numerictextbox>
+                                </div>
+                                
+                                <div class="col-md-6 col-lg-5 col-xl-4">
+                                    <ejs-numerictextbox [(value)]="record.humidity" format='N1' min='0' max='100' step='0.1' placeholder="Humidity" floatLabelType="Always"></ejs-numerictextbox>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-lg-5 col-xl-4">
+                                    <ejs-numerictextbox [(value)]="record.flowRate" format='N1' min='0' max='500' step='1' placeholder="Flow Rate" floatLabelType="Always"></ejs-numerictextbox>
+                                </div>                               
+                            </div>
+
+                            <div class="row pad-b20">
+                                <div class="col-md-6 col-lg-5 col-xl-4 d-flex align-items-end">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label for="sampleQc" class="edit-label">Sample QC Result</label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <mat-button-toggle-group id="sampleQc" class="threeStateToggleBtn" formControlName="qcpass">
+                                                <mat-button-toggle [value]="null">None</mat-button-toggle>
+                                                <mat-button-toggle [value]="true" [ngClass]="{ 'success-green': this.form.get('qcpass').value === true }">Pass</mat-button-toggle>
+                                                <mat-button-toggle [value]="false" [ngClass]="{ 'failure-red': this.form.get('qcpass').value === false }">Fail</mat-button-toggle>
+                                            </mat-button-toggle-group>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-5 col-xl-4 d-flex align-items-end">
+                                    <ejs-dropdownlist [dataSource]="record.failureReasons" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.collectionFailureReasonId" placeholder="Failure Reason" floatLabelType="Always"></ejs-dropdownlist>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </e-tabitem>
+                    <e-tabitem *ngIf="record.id">
+                        <ng-template #headerText>
+                            <div>Tests</div>
+                        </ng-template>
+                        <ng-template #content>
+                            <div id="list-view" class="container-fluid">
+                                <div class="row d-flex align-items-end">
+                                    <div class="col-md-6 d-flex align-items-center list-header">
+                                        <span class="list-header-icon"><i class="fas fa-vials"></i></span>
+                                        <span class="list-header-title">Tests</span>
+                                        <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['/auth/sampletest/add', record.id]">+ Add</button></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 pad-t20">
+                                        <ejs-grid #grid [dataSource]='tests' [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }'
+                                                  [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' [allowSorting]="true" [allowFiltering]="false">
+                                            <e-columns>
+                                                <e-column width="70" [visible]='true'>
+                                                    <ng-template #template let-data>
+                                                        <a [routerLink]="['/auth/sampletest/edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
+                                                    </ng-template>
+                                                </e-column>
+                                                <e-column field='testType' headerText='Test Type'></e-column>
+                                                <e-column field='result' headerText='Result'></e-column>
+                                                <e-column field='rejected' headerText='Rejected'></e-column>
+                                                <e-column field='completedDate' type='date' format='MM/dd/yyyy' headerText='Completed On' width='150'></e-column>
+                                            </e-columns>
+                                        </ejs-grid>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </e-tabitem>
+                </e-tabitems>
+            </ejs-tab>
+        </div>
+    </div>
+    <div class="row d-flex align-items-center edit-footer">
+        <div class="col-md-6 d-flex justify-content-start">
+            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
+        </div>
+        <div class="col-sm-6 d-flex justify-content-end">
+            <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
+            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/collection/list']" [state]='{ formState: true }'>Close</button>
+        </div>
+    </div>
+    <ejs-toast #toast></ejs-toast>
+</div>
+
