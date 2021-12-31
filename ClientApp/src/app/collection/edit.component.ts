@@ -31,6 +31,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 	public sites: any;
 	public siteId: string;
 	public locations: any;
+	public data: any;
 
 	@ViewChild('editTab')
 	public editTab: TabComponent;
@@ -40,6 +41,8 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 		this.showSpinner();
 		this.app = await this.appService.getData();
 		this.privileges = this.app.privileges.samples;
+		this.data = await this.repository.getData();
+		
 		var id = this.route.snapshot.paramMap.get('id');
 		this.record = await this.repository.get(id);
 		this.vendors = await this.repository.listVendors();

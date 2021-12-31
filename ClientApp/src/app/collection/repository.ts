@@ -19,6 +19,10 @@ export class CollectionRepository {
         return this.http.post<any>(`/collection/save`, record);
     }
 
+	public getData() {
+		return this.http.post(`/collection/getData`);
+	}
+
     public delete(id: string) {
         return this.http.post<any>(`/sample/delete/${id}`);
     }        
