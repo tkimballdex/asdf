@@ -8,6 +8,7 @@ import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 import { CheckBoxSelectionService } from '@syncfusion/ej2-angular-dropdowns';
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { SliderChangeEventArgs, SliderTickEventArgs, SliderTooltipEventArgs } from '@syncfusion/ej2-angular-inputs';
+import html2canvas from 'html2canvas';
 
 @Component({
 	selector: 'app-dashboard',
@@ -299,7 +300,9 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	}
 
 	export() {
-		this.chartPositiveCases.exportModule.export('PDF', 'Dashboard', 1, [this.chartPositiveNegativeCases, this.chartPositiveCases, this.chartPositiveSites]);
+		html2canvas(document.body).then(canvas => {
+			canvas.toBlob(x => this.downloadFile(x, 'dashboard.png'));
+		});
 	}
 }
 
