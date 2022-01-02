@@ -9,6 +9,7 @@ import { CollectionRepository } from './repository';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { TenantService } from '../shared/tenant.service';
+import { RadioButtonComponent } from '@syncfusion/ej2-angular-buttons';
 
 @Component({
 	selector: 'collection-edit',
@@ -32,9 +33,10 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 	public siteId: string;
 	public locations: any;
 	public data: any;
+	public collectionSuccessful: boolean;
 
-	@ViewChild('editTab')
-	public editTab: TabComponent;
+	@ViewChild('editTab') public editTab: TabComponent;
+	@ViewChild('rbSuccess') public rbSuccess: RadioButtonComponent;
 
 	//-----------------------------------------------------------------------------------------
 	async ngOnInit() {
@@ -57,13 +59,11 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 		this.hideSpinner();
 
 		this.record.collectedDate = this.record.completedDate ? new Date(this.record.collectedDate) : null;
-		this.record.shippedDate = this.record.shippedDate ? new Date(this.record.shippedDate) : null;
-		this.record.receivedDate = this.record.receivedDate ? new Date(this.record.receivedDate) : null;
+		this.collectionSuccessful = this.record.collectionFailureReasonId ? false : true;
 
 		this.form = new FormGroup({
 			referenceNo: new FormControl(this.record.referenceNo, [Validators.required]),
 			scheduledDate: new FormControl(this.record.scheduledDate ? new Date(this.record.scheduledDate) : null),
-			qcpass: new FormControl(this.record.qcpass),
 			vendorId: new FormControl(this.record.vendorId, [Validators.required])
 		});
 
@@ -112,8 +112,8 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 	//-----------------------------------------------------------------------------------------
 	delete() {
 		this.deleteDialog = DialogUtility.confirm({
-			title: 'Delete Vendor',
-			content: `Are you sure you want to delete the vendor <b>${this.record.name}</b>?`,
+			title: 'Delete Collection',
+			content: `Are you sure you want to delete the Collection <b>${this.record.referenceNo}</b>?`,
 			okButton: { click: this.deleteOK.bind(this) }
 		});
 	}
@@ -129,8 +129,12 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 		}
 		else {
 			this.showDeleteMessage(true);
-			setTimeout(() => this.router.navigate(['/auth/sample/list']), 1000);
+			setTimeout(() => this.router.navigate(['/auth/collection/list']), 1000);
 		}
+	}
+	//-----------------------------------------------------------------------------------------
+	toggleCollectionStatus() {
+		//this.collectionSuccessful = ???????
 	}
 	//-----------------------------------------------------------------------------------------
 	async customerChange() {

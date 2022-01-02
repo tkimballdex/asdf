@@ -427,10 +427,22 @@ mat-form-field.mat-form-field {
 .pad-l5 {
     padding-left: 5px;
 }
-
+.mar-t10 {
+    margin-top: 10px;
+}
 .mar-t20 {
     margin-top: 20px;
 }
+.mar-l10 {
+    margin-left: 10px;
+}
+.mar-l20 {
+    margin-left: 20px;
+}
+.bold {
+    font-weight: bold;
+}
+
 
 #edit-view .e-upload .e-icons.e-file-delete-btn {
 	display: none;
