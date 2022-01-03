@@ -58,10 +58,9 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.record.receivedDate = this.record.receivedDate ? new Date(this.record.receivedDate) : null;
 
 		this.form = new FormGroup({
-			referenceNo: new FormControl(this.record.referenceNo, [Validators.required]),
-			scheduledDate: new FormControl(this.record.scheduledDate ? new Date(this.record.scheduledDate) : null),
+			sampleNo: new FormControl(this.record.sampleNo, [Validators.required]),
 			qcpass: new FormControl(this.record.qcpass),
-			logisticVendorId: new FormControl(this.record.logisticVendorId, [Validators.required])
+			vendorId: new FormControl(this.record.vendorId, [Validators.required])
 		});
 
 		if (!id) {

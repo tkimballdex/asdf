@@ -32,7 +32,7 @@ export class CollectionListComponent extends PageComponent implements OnInit {
 	async search() {
 		this.appService.saveFormState(this);
 		this.showSpinner();
-		this.list = await this.repository.list({ tenantId: this.tenant.id, referenceNo: this.form.referenceNo, scheduledDate: this.form.scheduledDate });
+		this.list = await this.repository.list({ tenantId: this.tenant.id, collectionNo: this.form.collectionNo, scheduledDate: this.form.scheduledDate });
 		this.hideSpinner();
 	}
 	//------------------------------------------------------------------------------------------------------------------------
@@ -63,13 +63,13 @@ export class CollectionListComponent extends PageComponent implements OnInit {
 class FormParams extends GridFormParams {
 	constructor() {
 		super();
-		this.referenceNo = "";
+		this.collectionNo = "";
 
 		var today = new Date();
 		this.scheduledDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 	}
 
 	public tenantId: string;
-    public referenceNo: string;
+    public collectionNo: string;
 	public scheduledDate: Date;
 }

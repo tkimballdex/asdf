@@ -165,15 +165,15 @@ export class MasterPageComponent implements OnInit {
 
 		var settingsMenu: MenuItemModel[] = [];
 
-		if (privileges.manageUsers.read) {
+		if (privileges.users.read) {
 			settingsMenu.push({ id: '/auth/user/list', text: 'Users' });
 		}
 
-		if (privileges.manageRoles.read) {
+		if (privileges.roles.read) {
 			settingsMenu.push({ id: '/auth/role/list', text: 'Roles' });
 		}
 
-		if (privileges.manageRoles.read) {
+		if (privileges.roles.read) {
 			settingsMenu.push({ id: '/auth/tenant/list', text: 'Tenants' });
 		}
 

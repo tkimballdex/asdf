@@ -122,11 +122,10 @@ export interface PrivilegeSet {
 	communicate: boolean;
 }
 
-export interface Privileges {
-	
-	managePrivileges: PrivilegeSet;
-	manageRoles: PrivilegeSet;
-	manageUsers: PrivilegeSet;
+export interface Privileges {	
+	privileges: PrivilegeSet;
+	roles: PrivilegeSet;
+	users: PrivilegeSet;
 	newsArticles: PrivilegeSet;	
 	customers: PrivilegeSet;
 	sites: PrivilegeSet;
@@ -140,6 +139,7 @@ export interface Privileges {
 	postalCodes: PrivilegeSet;
 	analytes: PrivilegeSet;
 	samplers: PrivilegeSet;
+	collections: PrivilegeSet;
 }
 
 export interface MenuItem {

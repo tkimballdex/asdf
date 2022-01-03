@@ -54,6 +54,11 @@
                             <ejs-checkbox [(checked)]="record.featureRoles[data.index].download"></ejs-checkbox>
                         </ng-template>
                     </e-column>
+                    <e-column field='communicate' headerText='Communicate' textAlign='Center' width="140">
+                        <ng-template #template let-data>
+                            <ejs-checkbox [(checked)]="record.featureRoles[data.index].communicate"></ejs-checkbox>
+                        </ng-template>
+                    </e-column>
                 </e-columns>
             </ejs-grid>
         </div>    

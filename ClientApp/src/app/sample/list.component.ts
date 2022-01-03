@@ -32,7 +32,7 @@ export class SampleListComponent extends PageComponent implements OnInit {
 	async search() {
 		this.appService.saveFormState(this);
 		this.showSpinner();
-		this.list = await this.repository.list({ tenantId: this.tenant.id, name: this.form.name, startDate: this.form.startDate, endDate: this.form.endDate });
+		this.list = await this.repository.list({ tenantId: this.tenant.id, sampleNo: this.form.sampleNo, referenceNo: this.form.referenceNo, startDate: this.form.startDate, endDate: this.form.endDate });
 		this.hideSpinner();
 	}
 	//----------------------------------------------------------------------------
@@ -63,14 +63,16 @@ export class SampleListComponent extends PageComponent implements OnInit {
 class FormParams extends GridFormParams {
 	constructor() {
 		super();
-		this.name = "";
+        this.sampleNo = "";
+		this.referenceNo = "";
 
 		var today = new Date();
 		this.startDate = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
 	}
 
 	public tenantId: string;
-	public name: string;
+    public sampleNo: string;
+	public referenceNo: string;
 	public startDate: Date;
 	public endDate: Date;
 }

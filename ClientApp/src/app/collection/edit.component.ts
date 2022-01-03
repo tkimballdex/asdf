@@ -62,7 +62,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 		this.collectionSuccessful = this.record.collectionFailureReasonId ? false : true;
 
 		this.form = new FormGroup({
-			referenceNo: new FormControl(this.record.referenceNo, [Validators.required]),
+			collectionNo: new FormControl(this.record.collectionNo, [Validators.required]),
 			scheduledDate: new FormControl(this.record.scheduledDate ? new Date(this.record.scheduledDate) : null),
 			vendorId: new FormControl(this.record.vendorId, [Validators.required])
 		});
@@ -104,7 +104,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 				this.showSaveMessage(success);
 
 				if (success && add) {
-					setTimeout(() => this.router.navigate(['/auth/sample/edit', returnValue.id]), 1000);
+					setTimeout(() => this.router.navigate(['/auth/collection/edit', returnValue.id]), 1000);
 				}
 			}
 		}
@@ -113,7 +113,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 	delete() {
 		this.deleteDialog = DialogUtility.confirm({
 			title: 'Delete Collection',
-			content: `Are you sure you want to delete the Collection <b>${this.record.referenceNo}</b>?`,
+			content: `Are you sure you want to delete the Collection <b>${this.record.collectionNo}</b>?`,
 			okButton: { click: this.deleteOK.bind(this) }
 		});
 	}

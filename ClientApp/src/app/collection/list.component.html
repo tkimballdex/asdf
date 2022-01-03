@@ -11,7 +11,7 @@
     </div>
     <div class="row d-flex align-items-end">
         <div class="col-3">
-            <ejs-textbox [(value)]="form.referenceNo" placeholder="Reference No" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox [(value)]="form.collectionNo" placeholder="Collection No" floatLabelType="Always"></ejs-textbox>
         </div>
         <div class="col-md-3">
             <ejs-datepicker [(value)]="form.scheduledDate" placeholder="Scheduled Date" floatLabelType="Always"></ejs-datepicker>
@@ -30,7 +30,7 @@
                             <a [routerLink]="['../edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
                         </ng-template>
                     </e-column>
-                    <e-column field='referenceNo' headerText='Collection No' width='150'></e-column>
+                    <e-column field='collectionNo' headerText='Collection No' width='150'></e-column>
                     <e-column field='scheduledDate' type='date' [format]='dateFormat' headerText='Scheduled For' width='150'></e-column>
                     <e-column field='site' headerText='Site'></e-column>
                     <e-column field='location' headerText='Location'></e-column>
@@ -38,6 +38,7 @@
                     <e-column field='containers' headerText='Containers' textAlign='Center'></e-column>
                     <e-column field='vendor' headerText='Vendor'></e-column>
                     <e-column field='collectedDate' type='date' [format]='dateFormat' headerText='Collected On' width='150'></e-column>
+                    <e-column field='samples' headerText='Samples' textAlign='Center'></e-column>
                 </e-columns>
             </ejs-grid>
         </div>

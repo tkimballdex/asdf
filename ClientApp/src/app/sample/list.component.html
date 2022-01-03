@@ -1,7 +1,7 @@
 <div id="list-view" class="container-fluid" *ngIf="form">
     <div class="row d-flex align-items-end">
         <div class="col-md-6 d-flex align-items-center list-header">
-            <span class="list-header-icon"><i class="fas fa-vials"></i></span>
+            <span class="list-header-icon"><i class="fas fa-vial"></i></span>
             <span class="list-header-title">Samples</span>
             <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['../add']" [disabled]="!privileges.create">+ Add</button></span>
         </div>
@@ -10,16 +10,19 @@
         </div>
     </div>
     <div class="row d-flex align-items-end">
-        <div class="col-3">
-            <ejs-textbox [(value)]="form.name" placeholder="Reference No" floatLabelType="Always"></ejs-textbox>
+        <div class="col-2">
+            <ejs-textbox [(value)]="form.sampleNo" placeholder="Sample No" floatLabelType="Always"></ejs-textbox>
         </div>
-        <div class="col-md-3">
+        <div class="col-2">
+            <ejs-textbox [(value)]="form.referenceNo" placeholder="Reference No" floatLabelType="Always"></ejs-textbox>
+        </div>
+        <div class="col-md-2">
             <ejs-datepicker [(value)]="form.startDate" placeholder="Start Date" floatLabelType="Always"></ejs-datepicker>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <ejs-datepicker [(value)]="form.endDate" placeholder="End Date" floatLabelType="Always"></ejs-datepicker>
         </div>
-        <div class="col-3">
+        <div class="col-md-2">
             <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>
         </div>
     </div>
@@ -33,13 +36,16 @@
                             <a [routerLink]="['../edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
                         </ng-template>
                     </e-column>
+                    <e-column field='sampleNo' headerText='Sample No' width='150'></e-column>
+                    <e-column field='referenceNo' headerText='Reference No' width='150'></e-column>
                     <e-column field='scheduledDate' type='date' [format]='dateFormat' headerText='Scheduled For' width='150'></e-column>
                     <e-column field='site' headerText='Site'></e-column>
                     <e-column field='location' headerText='Location'></e-column>
                     <e-column field='city' headerText='City'></e-column>
                     <e-column field='logisticVendor' headerText='Logistic Vendor'></e-column>
-                    <e-column field='labVendor' headerText='Ship To Lab'></e-column>
                     <e-column field='collectedDate' type='date' [format]='dateFormat' headerText='Collected On' width='150'></e-column>
+                    <e-column field='labVendor' headerText='Ship To Lab'></e-column>
+                    <e-column field='shippedDate' type='date' [format]='dateFormat' headerText='Shipped On' width='150'></e-column>
                 </e-columns>
             </ejs-grid>
         </div>

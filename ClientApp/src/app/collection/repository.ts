@@ -24,7 +24,7 @@ export class CollectionRepository {
 	}
 
     public delete(id: string) {
-        return this.http.post<any>(`/sample/delete/${id}`);
+        return this.http.post<any>(`/collection/delete/${id}`);
     }        
 
 	public getTests(sampleId: string) {
