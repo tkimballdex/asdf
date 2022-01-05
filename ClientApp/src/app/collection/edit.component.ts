@@ -33,11 +33,8 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 	public siteId: string;
 	public locations: any;
 	public data: any;
-	public collectionSuccessful: boolean;
 
 	@ViewChild('editTab') public editTab: TabComponent;
-	@ViewChild('rbSuccess') public rbSuccess: RadioButtonComponent;
-
 	//-----------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.showSpinner();
@@ -59,9 +56,9 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 		this.hideSpinner();
 
 		this.record.collectedDate = this.record.completedDate ? new Date(this.record.collectedDate) : null;
-		this.collectionSuccessful = this.record.collectionFailureReasonId ? false : true;
 
 		this.form = new FormGroup({
+			collectionSuccessful: new FormControl(!this.record.collectionFailureReasonId),
 			collectionNo: new FormControl(this.record.collectionNo, [Validators.required]),
 			scheduledDate: new FormControl(this.record.scheduledDate ? new Date(this.record.scheduledDate) : null),
 			vendorId: new FormControl(this.record.vendorId, [Validators.required])
@@ -131,10 +128,6 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 			this.showDeleteMessage(true);
 			setTimeout(() => this.router.navigate(['/auth/collection/list']), 1000);
 		}
-	}
-	//-----------------------------------------------------------------------------------------
-	toggleCollectionStatus() {
-		//this.collectionSuccessful = ???????
 	}
 	//-----------------------------------------------------------------------------------------
 	async customerChange() {
