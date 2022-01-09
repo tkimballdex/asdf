@@ -59,7 +59,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 
 		this.form = new FormGroup({
 			collectionSuccessful: new FormControl(!this.record.collectionFailureReasonId),
-			collectionNo: new FormControl(this.record.collectionNo, [Validators.required]),
+			collectionNo: new FormControl(this.record.collectionNo),
 			scheduledDate: new FormControl(this.record.scheduledDate ? new Date(this.record.scheduledDate) : null),
 			vendorId: new FormControl(this.record.vendorId, [Validators.required])
 		});

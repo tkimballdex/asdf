@@ -11,10 +11,7 @@
 
     <div class="row pad-t20 pad-b20">
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="collectionNo" placeholder="Collection No*" required floatLabelType="Always"></ejs-textbox>
-            <div *ngIf="this.invalidControl('collectionNo')" class="e-error">
-                Collection No is required!
-            </div>
+            <ejs-textbox formControlName="collectionNo" placeholder="Collection No" [readonly]="true" floatLabelType="Always"></ejs-textbox>
         </div>
 
         <div class="col-md-6 col-lg-5 col-xl-4">
