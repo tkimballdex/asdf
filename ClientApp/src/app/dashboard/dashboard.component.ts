@@ -300,7 +300,11 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	}
 
 	export() {
-		html2canvas(document.getElementById('default_dashboard')).then(canvas => {
+		html2canvas(
+			document.getElementById('default_dashboard'), {
+			backgroundColor: null,
+			useCORS: true
+		}).then(canvas => {
 			canvas.toBlob(x => this.downloadFile(x, 'dashboard.png'));
 		});
 	}
