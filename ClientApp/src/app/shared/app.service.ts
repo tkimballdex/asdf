@@ -201,6 +201,7 @@ export interface IdName {
 
 export interface AppData {
 	email: string;
+	userName: string;
 	userId: string;
     privileges: Privileges;
     countries: Country[];

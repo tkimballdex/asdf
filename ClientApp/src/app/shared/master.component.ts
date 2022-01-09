@@ -186,8 +186,8 @@ export class MasterPageComponent implements OnInit {
 		}		
     }
     //-------------------------------------------------------------------------------------
-    public openEmailSidebar(data) {
-        this.emailComponent.setList(data.payload);
+	public openEmailSidebar(data) {
+        this.emailComponent.setData(data.payload);
 		this.contactSidebar.show();
 		this.contactSidebarName = 'email';
     }

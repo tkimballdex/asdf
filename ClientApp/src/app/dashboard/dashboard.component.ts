@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation, OnInit, ViewChild, Injectable } from '@angular/core';
 import { GoogleMap } from '@angular/google-maps';
 import { ChartComponent } from '@syncfusion/ej2-angular-charts';
-import { AppService } from '../shared/app.service';
+import { AppService, EventQueueService, AppEvent, AppEventType } from '../shared/app.service';
 import { PageComponent } from '../shared/page.component';
 import { DashboardRepository } from './repository';
 import { TabComponent } from '@syncfusion/ej2-angular-navigations';
@@ -20,7 +20,7 @@ import html2canvas from 'html2canvas';
 export class DashboardComponent extends PageComponent implements OnInit {
 	public mode: string;
 	public initialized = false;
-	constructor(private repository: DashboardRepository, private appService: AppService) {
+	constructor(private repository: DashboardRepository, private appService: AppService, private eventQueue: EventQueueService) {
 		super();
 	}
 
@@ -306,6 +306,32 @@ export class DashboardComponent extends PageComponent implements OnInit {
 			useCORS: true
 		}).then(canvas => {
 			canvas.toBlob(x => this.downloadFile(x, 'dashboard.png'));
+		});
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	sendEmail(): void {
+		var $this = this;
+
+		html2canvas(
+			document.getElementById('default_dashboard'), {
+			backgroundColor: null,
+			useCORS: true
+		}).then(canvas => {
+			canvas.toBlob(function (blob) {
+				var emailList = [{ name: $this.app.userName, email: $this.app.email }];
+
+				var reader = new window.FileReader();
+				reader.readAsDataURL(blob);
+				reader.onloadend = function () {
+					var result: string = reader.result.toString().replace('data:image/png;base64,', '');
+					$this.eventQueue.dispatch(new AppEvent(AppEventType.SendEmail, {
+						subject: 'SWAPP Dashboard',
+						body: 'Export of SWAPP dashboard as of ' + (new Date().toLocaleString()),
+						emailList,
+						attachment: { name: 'dashboard.png', blob: result }
+					}));
+				}
+			});
 		});
 	}
 }
