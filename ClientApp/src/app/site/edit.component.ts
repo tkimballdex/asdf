@@ -202,6 +202,24 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 
 				googleMap.fitBounds($this.getBounds(boundaries));
 			}
+
+			const drawingManager = new google.maps.drawing.DrawingManager({
+				drawingMode: google.maps.drawing.OverlayType.MARKER,
+				drawingControl: true,
+				drawingControlOptions: {
+					position: google.maps.ControlPosition.TOP_CENTER,
+					drawingModes: [
+						google.maps.drawing.OverlayType.POLYGON
+					]
+				}
+			});
+
+			drawingManager.setMap(googleMap);
+
+			google.maps.event.addListener(drawingManager, 'polygoncomplete', function (event) {
+				$this.record.path = event.getPath().xd.map(x => { return [x.lng(), x.lat()]; });
+			});
+
 		}, 0);
 	}
 
