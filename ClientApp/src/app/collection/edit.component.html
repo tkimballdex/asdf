@@ -108,7 +108,7 @@
 
                             <div class="row pad-b20" *ngIf="!form.get('collectionSuccessful').value">                             
                                 <div class="col-md-6 col-lg-5 col-xl-4 d-flex align-items-end">
-                                    <ejs-dropdownlist [dataSource]="record.failureReasons" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.collectionFailureReasonId" placeholder="Failure Reason" floatLabelType="Always"></ejs-dropdownlist>
+                                    <ejs-dropdownlist [dataSource]="data.failureReasons" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.failureReasonId" placeholder="Failure Reason" floatLabelType="Always"></ejs-dropdownlist>
                                 </div>
                             </div>
 

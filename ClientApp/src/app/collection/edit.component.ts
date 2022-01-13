@@ -58,7 +58,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 		this.record.collectedDate = this.record.completedDate ? new Date(this.record.collectedDate) : null;
 
 		this.form = new FormGroup({
-			collectionSuccessful: new FormControl(!this.record.collectionFailureReasonId),
+			collectionSuccessful: new FormControl(!this.record.failureReasonId),
 			collectionNo: new FormControl(this.record.collectionNo),
 			scheduledDate: new FormControl(this.record.scheduledDate ? new Date(this.record.scheduledDate) : null),
 			vendorId: new FormControl(this.record.vendorId, [Validators.required])
@@ -88,6 +88,11 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 
 			var add = !this.record.id;
 			this.record.tenantId = this.tenant.id;
+
+			if(this.form.get('collectionSuccessful').value)
+			{
+				this.record.failureReasonId = null;
+			}
 
 			this.showSpinner();
 			var returnValue = await this.repository.save(this.record);
