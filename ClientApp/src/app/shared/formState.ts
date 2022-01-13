@@ -7,7 +7,7 @@ export class GridFormParams {
 	public sortSettingsCurrent: SortSettingsModel;
 
 	constructor() {
-		this.pageSettings = { pageSizes: true, pageSize: 10, currentPage: 1 };
+		this.pageSettings = { pageSizes: true, pageSize: 12, currentPage: 1 };
 	}
 
 	gridAction(grid: GridComponent, e) {

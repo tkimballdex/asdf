@@ -127,6 +127,7 @@ mat-form-field.mat-form-field {
 #list-view .list-header {
     padding: 0px 15px 15px 15px;
     border-bottom: 1px solid #d8dee6;
+    min-height: 50px;
 }
 
 #list-view .list-header-icon {
@@ -165,6 +166,13 @@ mat-form-field.mat-form-field {
 {
     display:inline-flex;
     float:right;
+    margin-left:10px;
+    color:#0078d6;
+}
+
+#list-view .list-actions button
+{
+    color:#0078d6;
 }
 
 #list-view .list-content {
