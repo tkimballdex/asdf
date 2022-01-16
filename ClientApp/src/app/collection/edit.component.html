@@ -24,14 +24,14 @@
 
     <div class="row" *ngIf="!record.id">
         <div class="col-md-12 col-lg-10 col-xl-8">
-            <ejs-dropdownlist [dataSource]="customers" [fields]="{ text: 'name', value: 'id' }" formControlName="customerId" placeholder="Customer*" floatLabelType="Always" (change)="customerChange()"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="customers" [fields]="{ text: 'name', value: 'id' }" formControlName="customerId" placeholder="Customer*" floatLabelType="Always" (change)="customerChange($event)"></ejs-dropdownlist>
             <div *ngIf="this.invalidControl('customerId')" class="e-error">
                 Customer is required!
             </div>
         </div>
 
         <div class="col-md-6 col-lg-5 col-xl-4" *ngIf="sites">
-            <ejs-dropdownlist [dataSource]="sites" [fields]="{ text: 'name', value: 'id' }" formControlName="siteId" placeholder="Site*" floatLabelType="Always" (change)="siteChange()"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="sites" [fields]="{ text: 'name', value: 'id' }" formControlName="siteId" placeholder="Site*" floatLabelType="Always" (change)="siteChange($event)"></ejs-dropdownlist>
             <div *ngIf="this.invalidControl('siteId')" class="e-error">
                 Site is required!
             </div>

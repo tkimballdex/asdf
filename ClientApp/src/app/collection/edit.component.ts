@@ -28,9 +28,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 
 	public vendors: any;
 	public customers: any;
-	public customerId: string;
 	public sites: any;
-	public siteId: string;
 	public locations: any;
 	public data: any;
 
@@ -55,7 +53,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 
 		this.hideSpinner();
 
-		this.record.collectedDate = this.record.completedDate ? new Date(this.record.collectedDate) : null;
+		this.record.collectedDate = this.record.collectedDate ? new Date(this.record.collectedDate) : null;
 
 		this.form = new FormGroup({
 			collectionSuccessful: new FormControl(!this.record.failureReasonId),
@@ -65,9 +63,9 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 		});
 
 		if (!id) {
-			this.form.addControl('customerId', new FormControl(this.customerId, [Validators.required]));
-			this.form.addControl('siteId', new FormControl(this.siteId, [Validators.required]));
-			this.form.addControl('locationId', new FormControl(this.record.locationId, [Validators.required]));
+			this.form.addControl('customerId', new FormControl('', [Validators.required]));
+			this.form.addControl('siteId', new FormControl('', [Validators.required]));
+			this.form.addControl('locationId', new FormControl('', [Validators.required]));
 		}
 	}
 
@@ -135,18 +133,18 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 		}
 	}
 	//-----------------------------------------------------------------------------------------
-	async customerChange() {
+	async customerChange(e) {
 		this.sites = [];
-		this.siteId = null;
+		this.form.get('siteId').setValue(null);
+		this.form.get('locationId').setValue(null);
 		this.locations = null;
-		this.record.locationId = null;
-		this.sites = await this.repository.listSites(this.customerId);
+		this.sites = await this.repository.listSites(e.itemData.id);
 	}
 	//-----------------------------------------------------------------------------------------
-	async siteChange() {
+	async siteChange(e) {
 		this.locations = null;
-		this.record.locationId = null;
-		this.locations = await this.repository.listLocations(this.siteId);
+		this.form.get('locationId').setValue(null);
+		this.locations = await this.repository.listLocations(e.itemData.id);
 	}
 	//-----------------------------------------------------------------------------------------
 }
