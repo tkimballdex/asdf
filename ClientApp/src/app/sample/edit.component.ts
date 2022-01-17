@@ -56,7 +56,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 				site: collection.site,
 				location: collection.location,
 				locationId: collection.locationId,
-				collectionId: collection.Id
+				collectionId: collection.id
 			};
 		}
 
