@@ -31,6 +31,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 	public sites: any;
 	public siteId: string;
 	public locations: any;
+	public collections: any;
 
 	@ViewChild('editTab')
 	public editTab: TabComponent;
@@ -40,15 +41,23 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.showSpinner();
 		this.app = await this.appService.getData();
 		this.privileges = this.app.privileges.samples;
-		var id = this.route.snapshot.paramMap.get('id');
-		this.record = await this.repository.get(id);
 		this.vendors = await this.repository.listVendors();
 
+		var id = this.route.snapshot.paramMap.get('id');
+
 		if (id) {
+			this.record = await this.repository.get(id);
 			this.tests = await this.repository.getTests(id);
 		}
 		else {
-			this.customers = await this.repository.listCustomers();
+			var collection = await this.repository.getCollection(this.route.snapshot.queryParamMap.get('collectionId'));
+
+			this.record = {
+				site: collection.site,
+				location: collection.location,
+				locationId: collection.locationId,
+				collectionId: collection.Id
+			};
 		}
 
 		this.hideSpinner();
@@ -59,15 +68,8 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 
 		this.form = new FormGroup({
 			sampleNo: new FormControl(this.record.sampleNo),
-			qcpass: new FormControl(this.record.qcpass),
 			vendorId: new FormControl(this.record.vendorId, [Validators.required])
 		});
-
-		if (!id) {
-			this.form.addControl('customerId', new FormControl(this.customerId, [Validators.required]));
-			this.form.addControl('siteId', new FormControl(this.siteId, [Validators.required]));
-			this.form.addControl('locationId', new FormControl(this.record.locationId, [Validators.required]));
-		}
 	}
 
 	editTabCreated() {
@@ -134,13 +136,22 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.siteId = null;
 		this.locations = null;
 		this.record.locationId = null;
-		this.sites = await this.repository.listSites(this.customerId);
+		this.sites = await this.repository.listSites(this.form.get('customerId').value);
 	}
 
 	async siteChange() {
 		this.locations = null;
 		this.record.locationId = null;
 		this.locations = await this.repository.listLocations(this.siteId);
+	}
+
+	async locationChange() {
+		this.collections = null;
+		this.record.collectionId = null;
+		this.collections = await this.repository.listCollections(this.form.get('locationId').value);
+	}
+
+	async collectionChange() {
 	}
 	//-----------------------------------------------------------------------------------------
 }

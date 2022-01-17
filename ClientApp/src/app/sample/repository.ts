@@ -23,6 +23,10 @@ export class SampleRepository {
         return this.http.post(`/sample/list`, filter);
     }
 
+	public getCollection(id: string) {
+		return this.http.post<any>(`/collection/get/${id}`);
+	}
+
 	public getTests(sampleId: string) {
 		return this.http.post(`/sampletest/list`, {
 			sampleId: sampleId,
@@ -47,6 +51,13 @@ export class SampleRepository {
 		return this.http.post(`/location/list`, {
 			tenantId: this.tenant.id,
 			siteId: siteId
+		});
+	}
+
+	public listCollections(locationId: string) {
+		return this.http.post(`/collection/list`, {
+			tenantId: this.tenant.id,
+			locationId: locationId
 		});
 	}
 
