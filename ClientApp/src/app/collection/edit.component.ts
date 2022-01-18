@@ -74,6 +74,14 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 			this.editTab.selectedItem = 1;
 		}
 	}
+
+	setSucessStatus() {
+		this.record.failureReasonId = null;
+	}
+
+	setFailureStatus() {
+		this.record.collectedDate = null;
+	}
 	//-----------------------------------------------------------------------------------------
 	async save() {
 		this.form.markAllAsTouched();

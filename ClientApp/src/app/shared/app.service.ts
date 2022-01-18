@@ -214,5 +214,6 @@ export interface AppData {
 	analytes: UidName[]; 
 	Postalcodes:Postalcode[];
 	Analytes:Analyte[];
-	testtypes:Testtype[];
+	testtypes: Testtype[];
+	collectionStatuses: IdName[];
 }

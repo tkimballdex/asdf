@@ -15,7 +15,10 @@
         </div>
         <div class="col-md-3">
             <ejs-datepicker [(value)]="form.scheduledDate" placeholder="Scheduled Date" floatLabelType="Always"></ejs-datepicker>
-        </div>        
+        </div>
+        <div class="col-2">
+            <ejs-dropdownlist [dataSource]="statuses" [(value)]="form.collectionStatusId" [fields]="{ text: 'name', value: 'id' }" placeholder="Status" floatLabelType="Always"></ejs-dropdownlist>
+        </div>
         <div class="col-3">
             <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>
         </div>
@@ -39,6 +42,7 @@
                     <e-column field='vendor' headerText='Vendor'></e-column>
                     <e-column field='collectedDate' type='date' [format]='dateFormat' headerText='Collected On' width='150'></e-column>
                     <e-column field='samples' headerText='Samples' textAlign='Center'></e-column>
+                    <e-column field='status' headerText='Status' textAlign='Center'></e-column>
                 </e-columns>
             </ejs-grid>
         </div>
