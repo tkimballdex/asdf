@@ -32,6 +32,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 	public siteId: string;
 	public locations: any;
 	public collections: any;
+	public failureReasons: any;
 
 	@ViewChild('editTab')
 	public editTab: TabComponent;
@@ -42,6 +43,10 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.app = await this.appService.getData();
 		this.privileges = this.app.privileges.samples;
 		this.vendors = await this.repository.listVendors();
+
+
+		this.failureReasons = this.app.sampleFailureReasons.slice();
+		this.failureReasons.unshift({ id: 0, name: '' });
 
 		var id = this.route.snapshot.paramMap.get('id');
 
