@@ -7,34 +7,34 @@ import { AppService } from '../shared/app.service';
 import { GridFormParams, FormState } from '../shared/formState';
 
 @Component({
-    selector: 'collection-list',
-    templateUrl: './list.component.html',
+	selector: 'collection-list',
+	templateUrl: './list.component.html',
 })
 export class CollectionListComponent extends PageComponent implements OnInit {
 
 	constructor(private repository: CollectionRepository, private tenant: TenantService, private appService: AppService, private formState: FormState) {
-        super();
-    }
-    //------------------------------------------------------------------------------------------------------------------------
-    public list: any;
-    public name: any;
-    public dateFormat: any;
+		super();
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	public list: any;
+	public name: any;
+	public dateFormat: any;
 	public form: FormParams;
 	public statuses: any;
-    @ViewChild('grid') public grid: GridComponent;
-    //------------------------------------------------------------------------------------------------------------------------
-    async ngOnInit() {
+	@ViewChild('grid') public grid: GridComponent;
+	//------------------------------------------------------------------------------------------------------------------------
+	async ngOnInit() {
 		this.app = await this.appService.getData();
-       this.privileges = (await this.appService.getPrivileges()).samples;
-        this.dateFormat = {type:'date', format:'MM/dd/yyyy'};
+		this.privileges = (await this.appService.getPrivileges()).samples;
+		this.dateFormat = { type: 'date', format: 'MM/dd/yyyy' };
 		this.formState.setup(this, new FormParams());
 
 		this.statuses = this.app.collectionStatuses.slice();
 		this.statuses.unshift({ id: 0, name: 'All' });
 
 		this.search();
-    }
-    //------------------------------------------------------------------------------------------------------------------------
+	}
+	//------------------------------------------------------------------------------------------------------------------------
 	async search() {
 		this.appService.saveFormState(this);
 		this.showSpinner();
@@ -51,24 +51,24 @@ export class CollectionListComponent extends PageComponent implements OnInit {
 		this.form.gridAction(this.grid, e);
 		this.formState.save(this);
 	}
-   //------------------------------------------------------------------------------------------------------------------------
-    async export() {
-        this.showSpinner();
+	//------------------------------------------------------------------------------------------------------------------------
+	async export() {
+		this.showSpinner();
 
-        (this.grid.columns[0] as Column).visible = false;
-        const excelExportProperties: ExcelExportProperties = {
-            includeHiddenColumn: true,
-            fileName: 'collections.xlsx'
-        };
-        this.grid.excelExport(excelExportProperties);
+		(this.grid.columns[0] as Column).visible = false;
+		const excelExportProperties: ExcelExportProperties = {
+			includeHiddenColumn: true,
+			fileName: 'collections.xlsx'
+		};
+		this.grid.excelExport(excelExportProperties);
 
-        this.hideSpinner();
-    }
-    //------------------------------------------------------------------------------------------------------------------------
-    excelExportComplete(): void {
-        (this.grid.columns[0] as Column).visible = true;
-    }
-    //------------------------------------------------------------------------------------------------------------------------
+		this.hideSpinner();
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	excelExportComplete(): void {
+		(this.grid.columns[0] as Column).visible = true;
+	}
+	//------------------------------------------------------------------------------------------------------------------------
 }
 ///////////////////////////////////////////////////////////////////////////////////
 class FormParams extends GridFormParams {

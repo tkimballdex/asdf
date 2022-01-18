@@ -20,19 +20,32 @@ export class SampleListComponent extends PageComponent implements OnInit {
     public name: any;
     public dateFormat: any;
 	public form: FormParams;
-    @ViewChild('grid') public grid: GridComponent;
+	public statuses: any;
+   @ViewChild('grid') public grid: GridComponent;
     //------------------------------------------------------------------------------------------------------------------------
-    async ngOnInit() {
-        this.privileges = (await this.appService.getPrivileges()).samples;
-        this.dateFormat = {type:'date', format:'MM/dd/yyyy'};
+	async ngOnInit() {
+		this.app = await this.appService.getData();
+		this.privileges = (await this.appService.getPrivileges()).samples;
+		this.dateFormat = { type: 'date', format: 'MM/dd/yyyy' };
 		this.formState.setup(this, new FormParams());
+
+		this.statuses = this.app.sampleStatuses.slice();
+		this.statuses.unshift({ id: 0, name: 'All' });
+
 		this.search();
-    }
+	}
     //------------------------------------------------------------------------------------------------------------------------
 	async search() {
 		this.appService.saveFormState(this);
 		this.showSpinner();
-		this.list = await this.repository.list({ tenantId: this.tenant.id, sampleNo: this.form.sampleNo, referenceNo: this.form.referenceNo, startDate: this.form.startDate, endDate: this.form.endDate });
+		this.list = await this.repository.list({
+			tenantId: this.tenant.id,
+			sampleNo: this.form.sampleNo,
+			referenceNo: this.form.referenceNo,
+			startDate: this.form.startDate,
+			endDate: this.form.endDate,
+			sampleStatusId: this.form.sampleStatusId
+		});
 		this.hideSpinner();
 	}
 	//----------------------------------------------------------------------------
@@ -65,6 +78,7 @@ class FormParams extends GridFormParams {
 		super();
         this.sampleNo = "";
 		this.referenceNo = "";
+		this.sampleStatusId = 0;
 
 		var today = new Date();
 		this.startDate = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
@@ -75,4 +89,5 @@ class FormParams extends GridFormParams {
 	public referenceNo: string;
 	public startDate: Date;
 	public endDate: Date;
+	public sampleStatusId: number;
 }

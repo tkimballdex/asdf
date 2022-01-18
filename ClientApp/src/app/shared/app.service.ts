@@ -216,4 +216,5 @@ export interface AppData {
 	Analytes:Analyte[];
 	testtypes: Testtype[];
 	collectionStatuses: IdName[];
+	sampleStatuses: IdName[];
 }
