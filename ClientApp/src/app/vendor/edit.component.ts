@@ -7,7 +7,7 @@ import { AppService } from "../shared/app.service";
 import { PageComponent } from '../shared/page.component';
 import { VendorRepository } from './repository';
 import { TenantService } from '../shared/tenant.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'vendor-edit',
@@ -15,7 +15,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
     styleUrls: ['./edit.component.scss']
 })
 export class VendorEditComponent extends PageComponent implements OnInit {
-	constructor(private fb:FormBuilder, private route: ActivatedRoute, private router: Router, private appService: AppService, private tenant: TenantService, private repository: VendorRepository) {
+	constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private tenant: TenantService, private repository: VendorRepository) {
         super();
     }
 
@@ -24,47 +24,58 @@ export class VendorEditComponent extends PageComponent implements OnInit {
     public form: FormGroup;
 
     //-----------------------------------------------------------------------------------------
-    async ngOnInit() {       
+    async ngOnInit() {    
+        var id = this.route.snapshot.paramMap.get('id');
+
         this.showSpinner();
         this.app = await this.appService.getData();
         this.privileges = (await this.appService.getPrivileges()).vendors;
-
-        var id = this.route.snapshot.paramMap.get('id');
         this.record = await this.repository.get(id);
         this.hideSpinner();     
         
-        this.form = this.fb.group({
-            name: [this.record.name, [Validators.required]],
-            address: [this.record.address, [Validators.required]],
-            city: [this.record.city, [Validators.required]],
-            postalCode: [this.record.postalCode, [Validators.required]],
-            contactName: [this.record.contactName, [Validators.required]],
-            contactEmail: [this.record.contactEmail, [Validators.required]],
-            contactPhoneNo: [this.record.contactPhoneNo, [Validators.required]]
-        })
-        
+        this.form = new FormGroup({
+            name: new FormControl(this.record.name, [Validators.required]),
+            vendorTypeId: new FormControl(this.record.vendorTypeId, [Validators.required]),
+            address: new FormControl(this.record.address, [Validators.required]),
+			city: new FormControl(this.record.city, [Validators.required]),
+			stateId: new FormControl(this.record.stateId, [Validators.required]),
+			postalCode: new FormControl(this.record.postalCode, [Validators.required]),
+            contactName: new FormControl(this.record.contactName, [Validators.required]),
+            contactEmail: new FormControl(this.record.contactEmail, [Validators.required]),
+            contactPhoneNo: new FormControl(this.record.contactPhoneNo, [Validators.required]),
+        });        
     }
     //-----------------------------------------------------------------------------------------
     async save() {
-        var add = !this.record.id;
-        this.showSpinner();
-        this.record.tenantId = this.tenant.id;
-        var returnValue = await this.repository.save(this.record);
-        this.hideSpinner();
+        this.form.markAllAsTouched();
 
-        if (returnValue && returnValue.error) {
-            this.showErrorMessage(returnValue.description);
-        }
-        else {
-            var success = returnValue && returnValue.updated;
-            this.showSaveMessage(success);
+		if (this.form.invalid) {
+			this.showErrorMessage("Please complete all required fields!")
+		}
+		else {
+			Object.assign(this.record, this.form.value);
 
-            if (success) {
-                this.record = returnValue;
+            var add = !this.record.id;
+            this.showSpinner();
+            this.record.tenantId = this.tenant.id;
+            var returnValue = await this.repository.save(this.record);
+            this.hideSpinner();
+
+            if (returnValue && returnValue.error) {
+                this.showErrorMessage(returnValue.description);
             }
+            else {
+                var success = returnValue && returnValue.updated;
+                this.showSaveMessage(success);
 
-            if (success && add) {
-                setTimeout(() => this.router.navigate(['/auth/vendor/edit', returnValue.id]), 1000);
+                if (success) {
+                    this.record = returnValue;
+                }
+
+                if (success && add) {
+                    this.record.id = returnValue.id;
+                    setTimeout(() => this.router.navigate(['/auth/vendor/edit', returnValue.id]), 1000);
+                }
             }
         }
     }
