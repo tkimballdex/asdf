@@ -44,7 +44,6 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.privileges = this.app.privileges.samples;
 		this.vendors = await this.repository.listVendors();
 
-
 		this.failureReasons = this.app.sampleFailureReasons.slice();
 		this.failureReasons.unshift({ id: 0, name: '' });
 

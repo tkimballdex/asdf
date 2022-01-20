@@ -39,7 +39,7 @@
                         <ng-template #content>
 
                             <div class="row pad-t20">
-                                <div class="col-md-8">
+                                <div class="col-md-12 col-lg-10 col-xl-8">
                                     <ejs-dropdownlist [dataSource]="vendors" [fields]="{ text: 'name', value: 'id' }" formControlName="vendorId" placeholder="Logistics Vendor*" floatLabelType="Always"></ejs-dropdownlist>
                                     <div *ngIf="this.invalidControl('vendorId')" class="e-error">
                                         Ship To Lab is required!
@@ -78,7 +78,7 @@
                             </div>
 
                             <div class="row pad-t20">
-                                <div class="col-md-12">
+                                <div class="col-md-12 col-lg-10 col-xl-8">
                                     <ejs-textbox [(value)]="record.labVendor" disabled placeholder="Ship To Lab" floatLabelType="Always"></ejs-textbox>
                                 </div>
                             </div>
