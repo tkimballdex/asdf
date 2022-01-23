@@ -33,6 +33,21 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 	public data: any;
 
 	@ViewChild('editTab') public editTab: TabComponent;
+
+	gridAction(e) {
+		if (e.name == 'actionComplete' && e.requestType == 'save') {
+			console.dir(e);
+			var data = {
+				collectionId: this.record.id,
+				id: e.data.id,
+				containerNo: e.data.containerNo,
+				container: e.data.container,
+				volume: parseInt(e.data.volume)
+			};
+			
+			this.repository.saveContainer(data);
+		}
+	}
 	//-----------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.showSpinner();

@@ -136,16 +136,12 @@
                                 <div class="row">
                                     <div class="col-12 pad-t20">
                                         <ejs-grid #grid [dataSource]='record.containers' [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }'
-                                                  [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' [allowSorting]="true" [allowFiltering]="false">
+                                                  [editSettings]='{ allowEditing: true, allowAdding: true }' [toolbar]="['Add', 'Edit', 'Delete', 'Update', 'Cancel']"
+                                                  [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' [allowSorting]="true" [allowFiltering]="false" (actionComplete)="gridAction($event)">
                                             <e-columns>
-                                                <e-column width="70" [visible]='true'>
-                                                    <ng-template #template let-data>
-                                                        <a [routerLink]="['/auth/collectionContainer/edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
-                                                    </ng-template>
-                                                </e-column>
                                                 <e-column field='containerNo' headerText='Container No'></e-column>
-                                                <e-column field='container' headerText='Container'></e-column>
-                                                <e-column field='volume' headerText='Volume' textAlign='Center'></e-column>
+                                                <e-column field='container' editType='dropdownedit' [edit]='app.containerTypes' headerText='Container'></e-column>
+                                                <e-column field='volume' headerText='Volume' textAlign='Center' editType= 'numericedit' format='N0'></e-column>
                                                 <e-column field='acidity' headerText='Acidity' textAlign='Center'></e-column>
                                                 <e-column field='turbidity' headerText='Turbidity' textAlign='Center'></e-column>
                                                 <e-column field='failureReason' headerText='Failure'></e-column>

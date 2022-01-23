@@ -19,6 +19,10 @@ export class CollectionRepository {
         return this.http.post<any>(`/collection/save`, record);
     }
 
+	public saveContainer(record: any) {
+		return this.http.post<any>(`/collectionContainer/save`, record);
+	}
+
 	public getData() {
 		return this.http.post(`/collection/getData`);
 	}
