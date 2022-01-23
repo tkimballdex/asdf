@@ -26,7 +26,15 @@ export class UserRepository {
 		return this.http.post<boolean>(`/user/sendPasswordResetLink/${id}`);
 	}
 
+	public generateIntegrationKey(id: string) {
+		return this.http.post<string>(`/user/generateIntegrationKey/${id}`);
+	}
+
 	public listCustomers() {
 		return this.http.post(`/customer/list`, {});
+	}
+
+	public listVendors() {
+		return this.http.post(`/user/listVendors`, {});
 	}
 }

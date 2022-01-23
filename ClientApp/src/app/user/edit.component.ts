@@ -18,7 +18,9 @@ export class UserEditComponent extends PageComponent implements OnInit {
 
 	public record: any;
 	public customers: any;
+	public vendors: any;
 	public deleteDialog: Dialog;
+	public integrationKey: string;
 	@ViewChild('grid') public grid: GridComponent;
 
 	async ngOnInit() {
@@ -31,6 +33,9 @@ export class UserEditComponent extends PageComponent implements OnInit {
 
 		this.customers = await this.repository.listCustomers();
 		this.customers.unshift({ id: null, name: '' });
+
+		this.vendors = await this.repository.listVendors();
+		this.vendors.unshift({ id: null, name: '' });
 
 		this.record.roles.forEach(function (x, i) {
 			x.index = i;
@@ -47,6 +52,7 @@ export class UserEditComponent extends PageComponent implements OnInit {
 
 	async save() {
 		var add = !this.record.id;
+		this.record.api = !!this.record.api;
 		this.showSpinner();
 		var returnValue = await this.repository.save(this.record);
 		this.hideSpinner();
@@ -100,5 +106,31 @@ export class UserEditComponent extends PageComponent implements OnInit {
 		}
 
 		this.hideSpinner();
+	}
+
+	async generateIntegrationKey() {
+		this.showSpinner();
+		var key = await this.repository.generateIntegrationKey(this.record.id);
+
+		if (key) {
+			this.integrationKey = key;
+		}
+		else {
+			this.showErrorMessage('Error generating API key!');
+		}
+
+		this.hideSpinner();
+	}
+
+	async changeCustomer() {
+		if (this.record.customerId) {
+			this.record.vendorId = null;
+		}
+	}
+
+	async changeVendor() {
+		if (this.record.vendorId) {
+			this.record.customerId = null;
+		}
 	}
 }
