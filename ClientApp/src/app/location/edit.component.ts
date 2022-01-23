@@ -52,6 +52,7 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 
 		this.form = new FormGroup({
 			name: new FormControl(this.record.name, [Validators.required]),
+			code: new FormControl(this.record.code, [Validators.required]),
 			frequencyId: new FormControl(this.record.frequencyId, [Validators.required])
 		});
 
