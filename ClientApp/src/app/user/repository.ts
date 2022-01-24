@@ -15,7 +15,7 @@ export class UserRepository {
     }
 
     public get(id: string) {
-        return this.http.post(`/user/get/${id}`);
+        return this.http.post<any>(`/user/get/${id}`);
     }
 
     public list(filter: any) {

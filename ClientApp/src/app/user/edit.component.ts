@@ -28,7 +28,7 @@ export class UserEditComponent extends PageComponent implements OnInit {
 
 		var id = this.route.snapshot.paramMap.get('id');
 		this.showSpinner();
-		this.record = await this.repository.get(id);
+		var data = await this.repository.get(id);
 		this.hideSpinner();
 
 		this.customers = await this.repository.listCustomers();
@@ -36,6 +36,11 @@ export class UserEditComponent extends PageComponent implements OnInit {
 
 		this.vendors = await this.repository.listVendors();
 		this.vendors.unshift({ id: null, name: '' });
+
+		this.record = data.record || {};
+		this.record.roles = data.roles;
+		this.record.tenants = data.tenants;
+		this.record.updated = data.updated;
 
 		this.record.roles.forEach(function (x, i) {
 			x.index = i;
@@ -65,7 +70,7 @@ export class UserEditComponent extends PageComponent implements OnInit {
 			this.showSaveMessage(success);
 
 			if (success) {
-				this.record = returnValue;
+				this.record.id = returnValue.id;
 			}
 
 			if (success && add) {
