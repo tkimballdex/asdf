@@ -29,7 +29,29 @@
 
     <div class="row d-flex">
         <div class="col-md-6 d-flex">
-            <ejs-dropdownlist [dataSource]="customers" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.customerId" placeholder="Customer" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="customers" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.customerId" placeholder="Customer" floatLabelType="Always" (change)="changeCustomer()"></ejs-dropdownlist>
+        </div>
+
+        <div class="col-md-6 d-flex">
+            <ejs-dropdownlist [dataSource]="vendors" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.vendorId" placeholder="Vendor" floatLabelType="Always" (change)="changeVendor()"></ejs-dropdownlist>
+        </div>
+    </div>
+
+    <div class="row d-flex">
+        <div class="col-md-6 d-flex">
+        </div>
+
+        <div class="col-md-6 d-flex">
+            <ejs-checkbox [(checked)]="record.api" label="API User" floatLabelType="Always" id="ApiUser"></ejs-checkbox>
+        </div>
+    </div>
+
+    <div class="row d-flex edit-footer" *ngIf="record.id">
+        <div class="col-md-6 d-flex justify-content-start">
+            <button ejs-button cssClass="e-outline e-flat" (click)="generateIntegrationKey()" [disabled]="loading || !privileges.update" style="width: 300px;">Generate API Key</button>
+        </div>
+        <div class="col-md-6 d-flex justify-content-start" *ngIf="integrationKey">
+            <ejs-textbox [(value)]="integrationKey" placeholder="API Key" floatLabelType="Always" disabled="disabled"></ejs-textbox>
         </div>
     </div>
 
