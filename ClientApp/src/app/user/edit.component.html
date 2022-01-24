@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    <div class="row d-flex edit-footer" *ngIf="record.id">
+    <div class="row d-flex edit-footer" *ngIf="record.api">
         <div class="col-md-6 d-flex justify-content-start">
             <button ejs-button cssClass="e-outline e-flat" (click)="generateIntegrationKey()" [disabled]="loading || !privileges.update" style="width: 300px;">Generate API Key</button>
         </div>
