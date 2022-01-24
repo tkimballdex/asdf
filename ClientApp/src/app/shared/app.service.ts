@@ -218,4 +218,5 @@ export interface AppData {
 	collectionStatuses: IdName[];
 	sampleStatuses: IdName[];
 	sampleFailureReasons: IdName[];
+	userTypes: IdName[];
 }

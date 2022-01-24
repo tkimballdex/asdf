@@ -1,19 +1,22 @@
 <div id="list-view" class="container-fluid">
     <div class="row d-flex align-items-end">
-        <div class="col d-flex align-items-end list-header">
+        <div class="col-12 d-flex align-items-center list-header">
             <span class="list-header-icon"><i class="fas fa-user-friends"></i></span>
             <span class="list-header-title">Users</span>
             <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['../add']">+ Add</button></span>
         </div>
     </div>
-    <div class="row d-flex align-items-end list-content">        
-        <div class="col-md-3">
-            <ejs-dropdownlist [dataSource]="tenantList" [fields]="{ text: 'name', value: 'id' }" [(value)]="tenantId" placeholder="Tenant" floatLabelType="Always"></ejs-dropdownlist>
-        </div>
-        <div class="col-3">
+    <div class="row d-flex align-items-end list-content">  
+        <div class="col-sm-6 col-md-3 col-lg-2">
             <ejs-textbox [(value)]="username" placeholder="Username" floatLabelType="Always"></ejs-textbox>
-        </div>
-        <div class="col-3">
+        </div>  
+        <div class="col-sm-6 col-md-3 col-lg-2">
+            <ejs-dropdownlist [dataSource]="userTypes" [fields]="{ text: 'name', value: 'id' }" [(value)]="userTypeId" placeholder="User Type" floatLabelType="Always"></ejs-dropdownlist>
+        </div>    
+        <div class="col-sm-6 col-md-3 col-lg-2">
+            <ejs-dropdownlist [dataSource]="tenantList" [fields]="{ text: 'name', value: 'id' }" [(value)]="tenantId" placeholder="Tenant" floatLabelType="Always"></ejs-dropdownlist>
+        </div>        
+        <div class="col-sm-6 col-md-3 col-lg-2 pad-t20">
             <button ejs-button cssClass="e-primary search-button" iconCss= "fal fa-search pad-r10" (click)="search()">Search</button>
         </div>
         <div class="col-12 pad-t20">
@@ -27,6 +30,8 @@
                     <e-column field='email' headerText='Username'></e-column>
                     <e-column field='firstName' headerText='First Name'></e-column>
                     <e-column field='lastName' headerText='Last Name'></e-column>
+                    <e-column field='phoneNo' headerText='Phone No' hideAtMedia='(min-width: 992px)'></e-column>
+                    <e-column field='userType' headerText='User Type' hideAtMedia='(min-width: 768px)'></e-column>
                 </e-columns>
             </ejs-grid>
         </div>
