@@ -85,14 +85,29 @@ export class MasterPageComponent implements OnInit {
 
 		var sampleMenu: MenuItemModel[] = [];		
 
-		if (privileges.samples.read) {
-			sampleMenu.push({ id: '/auth/collection/list', text: 'Collections' });	
-			sampleMenu.push({ id: '/auth/sample/list', text: 'Samples' });			
-			sampleMenu.push({ id: '/auth/sampletest/list', text: 'Tests' });
-			sampleMenu.push({ id: '/auth/countystat/list', text: 'County Stats' });
-			sampleMenu.push({ id: '/auth/statestat/list', text: 'State Stats' });
-			sampleMenu.push({ id: '/auth/sampletest/import', text: 'Import Tests' });
+		if (privileges.collections.read) {
+			sampleMenu.push({ id: '/auth/collection/list', text: 'Collections' });		
 		}
+
+		if (privileges.samples.read) {
+			sampleMenu.push({ id: '/auth/sample/list', text: 'Samples' });
+		}	
+
+		if (privileges.tests.read) {
+			sampleMenu.push({ id: '/auth/sampletest/list', text: 'Tests' });
+		}	
+
+		if (privileges.samples.read) {
+			sampleMenu.push({ id: '/auth/countystat/list', text: 'County Stats' });
+		}
+
+		if (privileges.samples.read) {
+			sampleMenu.push({ id: '/auth/statestat/list', text: 'State Stats' });
+		}	
+
+		if (privileges.tests.download) {
+			sampleMenu.push({ id: '/auth/sampletest/import', text: 'Import Tests' });
+		}		
 
 		if (sampleMenu.length > 0) {
 			this.menuItems.push({
