@@ -18,7 +18,7 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 	constructor(private fb:FormBuilder, private route: ActivatedRoute, private router: Router, private appService: AppService, private repository: LocationRepository, private tenant: TenantService) {
         super();
     }
-
+	//-----------------------------------------------------------------------------------------------
 	public record: any;
 	public data: any;
     public deleteDialog: Dialog;
@@ -27,7 +27,7 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 	@ViewChild('map') map!: GoogleMap;
 	private siteMarker: google.maps.Marker;
 	public mapOptions: google.maps.MapOptions;
-
+	//-----------------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.privileges = (await this.appService.getPrivileges()).locations;
 		var id = this.route.snapshot.paramMap.get('id');
@@ -114,7 +114,7 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 			}, 0);
 		}
 	}
-
+	//-----------------------------------------------------------------------------------------------
 	getBounds(boundaries) {
 		let north;
 		let south;
@@ -132,7 +132,7 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 
 		return { north, south, east, west };
 	}
-
+	//-----------------------------------------------------------------------------------------------
 	async save() {
 		this.form.markAllAsTouched();
 
@@ -166,7 +166,7 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 			}
 		}
 	}
-
+	//-----------------------------------------------------------------------------------------------
     delete() {
         this.deleteDialog = DialogUtility.confirm({
             title: 'Delete Location',
@@ -174,7 +174,7 @@ export class LocationEditComponent extends PageComponent implements OnInit {
             okButton: { click: this.deleteOK.bind(this) }
         });
     }
-
+	//-----------------------------------------------------------------------------------------------
     async deleteOK() {
         this.showSpinner();
         this.deleteDialog.close();
@@ -189,7 +189,7 @@ export class LocationEditComponent extends PageComponent implements OnInit {
             setTimeout(() => this.router.navigate(['/auth/site/edit', this.record.siteId]), 1000);
         }
     }
-
+	//-----------------------------------------------------------------------------------------------
 	close() {
 		if (history.state.from == 'locations') {
 			this.router.navigate(['/auth/location/list'], { state: { formState: true } });
@@ -198,4 +198,5 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 			this.router.navigate(['/auth/site/edit', this.record.siteId], { state: { locations: true } });
 		}
 	}
+	//-----------------------------------------------------------------------------------------------
 }

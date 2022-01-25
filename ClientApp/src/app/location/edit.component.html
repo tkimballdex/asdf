@@ -54,7 +54,16 @@
         <div class="col-md-6 col-lg-5 col-xl-4">
             <ejs-datepicker [(value)]="record.serviceEndDate" placeholder="Service End Date" floatLabelType="Always"></ejs-datepicker>
         </div>
-    </div>  
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-dropdownlist [(value)]="record.logisticVendorId" [dataSource]="data.logisticVendors" [fields]="{ text: 'name', value: 'id' }" placeholder="Logistic Vendor" floatLabelType="Always"></ejs-dropdownlist>
+        </div>
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-dropdownlist [(value)]="record.labVendorId" [dataSource]="data.labVendors" [fields]="{ text: 'name', value: 'id' }" placeholder="Lab Vendor" floatLabelType="Always"></ejs-dropdownlist>
+        </div>
+    </div>
 
     <div class="row pad-t20">
         <div class="col-md-12 col-lg-10 col-xl-8"><label for="notes" class="edit-label">Notes</label></div>
