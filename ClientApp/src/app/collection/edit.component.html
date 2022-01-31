@@ -9,9 +9,22 @@
         </div>
     </div>
 
-    <div class="row pad-t20 pad-b20">
+    <div class="row pad-t20">
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="collectionNo" placeholder="Collection No" [readonly]="true" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox formControlName="collectionNo" [readonly]="true" placeholder="Collection No" floatLabelType="Always"></ejs-textbox>
+        </div>
+
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-datepicker [value]="record.createdDate" [readonly]="true" placeholder="Created Date*" floatLabelType="Always"></ejs-datepicker>          
+        </div>
+    </div>
+
+    <div class="row pad-b20">
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-dropdownlist [dataSource]="record.statuses" [fields]="{ text: 'name', value: 'id' }" formControlName="collectionStatusId" placeholder="Status*" floatLabelType="Always"></ejs-dropdownlist>
+            <div *ngIf="this.invalidControl('collectionStatusId')" class="e-error">
+                Status is required!
+            </div>
         </div>
 
         <div class="col-md-6 col-lg-5 col-xl-4">
@@ -29,7 +42,8 @@
                 Customer is required!
             </div>
         </div>
-
+    </div>
+    <div class="row" *ngIf="!record.id">
         <div class="col-md-6 col-lg-5 col-xl-4" *ngIf="sites">
             <ejs-dropdownlist [dataSource]="sites" [fields]="{ text: 'name', value: 'id' }" formControlName="siteId" placeholder="Site*" floatLabelType="Always" (change)="siteChange($event)"></ejs-dropdownlist>
             <div *ngIf="this.invalidControl('siteId')" class="e-error">
@@ -73,25 +87,24 @@
                                 </div>
                             </div>
 
-                            <div class="row" *ngIf="record.collectedBy">
+                            <div class="row">
                                 <div class="col-md-6 col-lg-5 col-xl-4">
                                     <ejs-textbox [(value)]="record.collectedBy" disabled placeholder="Collected By" floatLabelType="Always"></ejs-textbox>
-                                </div>                                
+                                </div> 
+                                <div class="col-md-6 col-lg-5 col-xl-4">
+                                    <ejs-datepicker [(value)]="record.collectedDate" placeholder="Collected Date" floatLabelType="Always"></ejs-datepicker>
+                                </div>                               
                             </div> 
                             
                             <div class="row pad-t20 mar-t10">
-                                <div class="col-md-6 col-lg-5 col-xl-4">
+                                <div class="col-md-12 col-lg-10 col-xl-8">
                                     <label for="collStatus" class="edit-label bold" style="font-size:1.1em;">Was the collection successful?</label>
                                     <ejs-radiobutton label="Yes" name="collSuccessful" [value]="true" formControlName="collectionSuccessful" cssClass="mar-l20" (change)="setSucessStatus()"></ejs-radiobutton>
                                     <ejs-radiobutton label="No" name="collSuccessful" [value]="false" formControlName="collectionSuccessful" cssClass="mar-l20" (change)="setFailureStatus()"></ejs-radiobutton>
                                 </div>                               
                             </div>
 
-                            <div class="row pad-t20" *ngIf="form.get('collectionSuccessful').value">
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-datepicker [(value)]="record.collectedDate" placeholder="Collected Date" floatLabelType="Always"></ejs-datepicker>
-                                </div>
-
+                            <div class="row pad-t20" *ngIf="form.get('collectionSuccessful').value">      
                                 <div class="col-md-6 col-lg-5 col-xl-4">
                                     <ejs-numerictextbox [(value)]="record.flowRate" format='N1' min='0' max='500' step='1' placeholder="Flow Rate" floatLabelType="Always"></ejs-numerictextbox>
                                 </div> 
@@ -106,7 +119,7 @@
                                 </div>                                 
                             </div>                       
 
-                            <div class="row pad-b20" *ngIf="!form.get('collectionSuccessful').value">                             
+                            <div class="row" *ngIf="!form.get('collectionSuccessful').value">                             
                                 <div class="col-md-6 col-lg-5 col-xl-4 d-flex align-items-end">
                                     <ejs-dropdownlist [dataSource]="data.failureReasons" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.failureReasonId" placeholder="Failure Reason" floatLabelType="Always"></ejs-dropdownlist>
                                 </div>
@@ -130,20 +143,23 @@
                                     <div class="col-md-12 d-flex align-items-center list-header">
                                         <span class="list-header-icon"><i class="fad fa-flask-potion"></i></span>
                                         <span class="list-header-title">Containers</span>
-                                        <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['/auth/collectioncontainer/add', record.id]">+ Add</button></span>
+                                        <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['/auth/collection/cadd']" [queryParams]="{ collectionId: record.id }">+ Add</button></span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12 pad-t20">
-                                        <ejs-grid #grid [dataSource]='record.containers' [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }'
-                                                  [editSettings]='{ allowEditing: true, allowAdding: true }' [toolbar]="['Add', 'Edit', 'Delete', 'Update', 'Cancel']"
+                                        <ejs-grid #grid [dataSource]='record.containers' [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }'                                                   
                                                   [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' [allowSorting]="true" [allowFiltering]="false" (actionComplete)="gridAction($event)">
                                             <e-columns>
+                                                <e-column width="70" [visible]='true'>
+                                                    <ng-template #template let-data>
+                                                        <a [routerLink]="['/auth/collection/cedit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
+                                                    </ng-template>
+                                                </e-column>
                                                 <e-column field='containerNo' headerText='Container No'></e-column>
                                                 <e-column field='container' editType='dropdownedit' [edit]='app.containerTypes' headerText='Container'></e-column>
                                                 <e-column field='volume' headerText='Volume' textAlign='Center' editType= 'numericedit' format='N0'></e-column>
                                                 <e-column field='acidity' headerText='Acidity' textAlign='Center'></e-column>
-                                                <e-column field='turbidity' headerText='Turbidity' textAlign='Center'></e-column>
                                                 <e-column field='failureReason' headerText='Failure'></e-column>
                                             </e-columns>
                                         </ejs-grid>
@@ -178,9 +194,9 @@
                                                 <e-column field='sampleNo' headerText='Sample No'></e-column>
                                                 <e-column field='referenceNo' headerText='Reference No'></e-column> 
                                                 <e-column field='volume' headerText='Volume' textAlign='Center'></e-column>  
-                                                <e-column field='containerNo' headerText='Container No'></e-column>  
-                                                <e-column field='containerType' headerText='Container Type'></e-column>  
-                                                <e-column field='shipTo' headerText='Ship To' textAlign='Center'></e-column>                              
+                                                <e-column field='containerNo' headerText='Container No'></e-column> 
+                                                <e-column field='shipTo' headerText='Ship To' textAlign='Center'></e-column> 
+                                                <e-column field='status' headerText='Status'></e-column>                              
                                             </e-columns>
                                         </ejs-grid>
                                     </div>

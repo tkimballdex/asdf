@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CollectionListComponent } from './list.component';
 import { CollectionEditComponent } from './edit.component';
+import { CollectionContainerEditComponent } from './cedit.component';
 import { MsalGuard } from '@azure/msal-angular';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -17,7 +18,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
 import { RadioButtonModule, ButtonModule, CheckBoxModule } from '@syncfusion/ej2-angular-buttons';
 import { GridModule, SortService, PageService, EditService, ToolbarService, CommandColumnService, ExcelExportService } from '@syncfusion/ej2-angular-grids';
 import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
@@ -31,7 +31,8 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 @NgModule({
 	declarations: [
 		CollectionListComponent,
-		CollectionEditComponent
+		CollectionEditComponent,
+		CollectionContainerEditComponent
 	],
 	imports: [
 		MatFormFieldModule, MatInputModule, MatIconModule, MatDatepickerModule, MatNativeDateModule, MatButtonModule, MatButtonToggleModule, MatSelectModule, MatTabsModule, MatDialogModule, FormsModule, ReactiveFormsModule,
@@ -39,8 +40,10 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 		TabModule, DatePickerModule, SwitchModule, NumericTextBoxModule, MatButtonToggleModule, CommonModule,
 		RouterModule.forChild([
 			{ path: 'list', component: CollectionListComponent, canActivate: [MsalGuard] },
-			{ path: 'add', component: CollectionEditComponent, canActivate: [MsalGuard] },
+			{ path: 'add', component: CollectionEditComponent, canActivate: [MsalGuard] },			
 			{ path: 'edit/:id', component: CollectionEditComponent, canActivate: [MsalGuard] },
+			{ path: 'cadd', component: CollectionContainerEditComponent, canActivate: [MsalGuard] },
+			{ path: 'cedit/:id', component: CollectionContainerEditComponent, canActivate: [MsalGuard] },
 		])
 	],
 	providers: [

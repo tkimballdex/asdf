@@ -21,6 +21,8 @@ export class CollectionListComponent extends PageComponent implements OnInit {
 	public dateFormat: any;
 	public form: FormParams;
 	public statuses: any;
+	public customers: any;
+	public someId: number;
 	@ViewChild('grid') public grid: GridComponent;
 	//------------------------------------------------------------------------------------------------------------------------
 	async ngOnInit() {
@@ -29,8 +31,11 @@ export class CollectionListComponent extends PageComponent implements OnInit {
 		this.dateFormat = { type: 'date', format: 'MM/dd/yyyy' };
 		this.formState.setup(this, new FormParams());
 
+		this.customers = await this.repository.listCustomers();
+		this.customers.unshift({ id: this.appService.GuidEmpty, name: "All" });
+
 		this.statuses = this.app.collectionStatuses.slice();
-		this.statuses.unshift({ id: 0, name: 'All' });
+		this.statuses.unshift({ id: 0, name: 'All' });		
 
 		this.search();
 	}
@@ -42,6 +47,7 @@ export class CollectionListComponent extends PageComponent implements OnInit {
 			tenantId: this.tenant.id,
 			collectionNo: this.form.collectionNo,
 			scheduledDate: this.form.scheduledDate,
+			customerId: this.form.customerId,
 			collectionStatusId: this.form.collectionStatusId
 		});
 		this.hideSpinner();
@@ -75,6 +81,7 @@ class FormParams extends GridFormParams {
 	constructor() {
 		super();
 		this.collectionNo = "";
+		this.customerId = "00000000-0000-0000-0000-000000000000";
 		this.collectionStatusId = 0;
 
 		var today = new Date();
@@ -84,5 +91,7 @@ class FormParams extends GridFormParams {
 	public tenantId: string;
     public collectionNo: string;
 	public scheduledDate: Date;
+	public customerId: string;
 	public collectionStatusId: number;
 }
+///////////////////////////////////////////////////////////////////////////////////

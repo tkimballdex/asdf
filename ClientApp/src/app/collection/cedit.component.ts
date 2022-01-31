@@ -12,11 +12,11 @@ import { TenantService } from '../shared/tenant.service';
 import { RadioButtonComponent } from '@syncfusion/ej2-angular-buttons';
 
 @Component({
-	selector: 'collection-edit',
-	templateUrl: './edit.component.html',
-	styleUrls: ['./edit.component.scss']
+	selector: 'collectionContainer-edit',
+	templateUrl: './cedit.component.html',
+	styleUrls: ['./cedit.component.scss']
 })
-export class CollectionEditComponent extends PageComponent implements OnInit {
+export class CollectionContainerEditComponent extends PageComponent implements OnInit {
 	constructor(private dialog: MatDialog, private route: ActivatedRoute, private router: Router, private appService: AppService, private tenant: TenantService, private repository: CollectionRepository) {
 		super();
 	}
@@ -24,12 +24,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 	public form: FormGroup;
 	public record: any;
 	public deleteDialog: Dialog;
-	public tests: any;
 
-	public vendors: any;
-	public customers: any;
-	public sites: any;
-	public locations: any;
 	public data: any;
 
 	@ViewChild('editTab') public editTab: TabComponent;	
@@ -41,49 +36,16 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 		this.data = await this.repository.getData();
 		
 		var id = this.route.snapshot.paramMap.get('id');
-		this.record = await this.repository.get(id);
-		this.vendors = await this.repository.listVendors();
-
-		if (id) {
-			this.tests = await this.repository.getTests(id);
-		}
-		else {
-			this.customers = await this.repository.listCustomers();
-		}
+		this.record = await this.repository.getContainer(id);
 
 		this.hideSpinner();
 
-		this.record.collectedDate = this.record.collectedDate ? new Date(this.record.collectedDate) : null;
-
 		this.form = new FormGroup({
 			collectionSuccessful: new FormControl(!this.record.failureReasonId),
-			collectionNo: new FormControl(this.record.collectionNo),
-			scheduledDate: new FormControl(this.record.scheduledDate ? new Date(this.record.scheduledDate) : null),
-			collectionStatusId: new FormControl(this.record.collectionStatusId, [Validators.required]),
-			vendorId: new FormControl(this.record.vendorId, [Validators.required])
+			containerNo: new FormControl(this.record.containerNo),
+			containerTypeId: new FormControl(this.record.containerTypeId, [Validators.required])
 		});
-
-		if (!id) {
-			this.form.addControl('customerId', new FormControl('', [Validators.required]));
-			this.form.addControl('siteId', new FormControl('', [Validators.required]));
-			this.form.addControl('locationId', new FormControl('', [Validators.required]));
-		}
-	}
-	//-----------------------------------------------------------------------------------------
-	gridAction(e) {
-		if (e.name == 'actionComplete' && e.requestType == 'save') {
-			console.dir(e);
-			var data = {
-				collectionId: this.record.id,
-				id: e.data.id,
-				containerNo: e.data.containerNo,
-				container: e.data.container,
-				volume: parseInt(e.data.volume)
-			};
-			
-			this.repository.saveContainer(data);
-		}
-	}
+	}	
 	//-----------------------------------------------------------------------------------------
 	editTabCreated() {
 		if (history.state.tests) {
@@ -128,7 +90,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 				this.showSaveMessage(success);
 
 				if (success && add) {
-					setTimeout(() => this.router.navigate(['/auth/collection/edit', returnValue.id]), 1000);
+					setTimeout(() => this.router.navigate(['/auth/collection/cedit', returnValue.id]), 1000);
 				}
 			}
 		}
@@ -136,8 +98,8 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 	//-----------------------------------------------------------------------------------------
 	delete() {
 		this.deleteDialog = DialogUtility.confirm({
-			title: 'Delete Collection',
-			content: `Are you sure you want to delete the Collection <b>${this.record.collectionNo}</b>?`,
+			title: 'Delete Container',
+			content: `Are you sure you want to delete the Container <b>${this.record.containerNo}</b>?`,
 			okButton: { click: this.deleteOK.bind(this) }
 		});
 	}
@@ -155,20 +117,6 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 			this.showDeleteMessage(true);
 			setTimeout(() => this.router.navigate(['/auth/collection/list']), 1000);
 		}
-	}
-	//-----------------------------------------------------------------------------------------
-	async customerChange(e) {
-		this.sites = [];
-		this.form.get('siteId').setValue(null);
-		this.form.get('locationId').setValue(null);
-		this.locations = null;
-		this.sites = await this.repository.listSites(e.itemData.id);
-	}
-	//-----------------------------------------------------------------------------------------
-	async siteChange(e) {
-		this.locations = null;
-		this.form.get('locationId').setValue(null);
-		this.locations = await this.repository.listLocations(e.itemData.id);
-	}
+	}	
 	//-----------------------------------------------------------------------------------------
 }

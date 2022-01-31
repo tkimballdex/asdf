@@ -75,7 +75,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 			vendorId: new FormControl(this.record.vendorId, [Validators.required])
 		});
 	}
-
+	//-----------------------------------------------------------------------------------------
 	editTabCreated() {
 		if (history.state.tests) {
 			this.editTab.selectedItem = 1;
@@ -134,7 +134,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 			setTimeout(() => this.router.navigate(['/auth/sample/list']), 1000);
 		}
 	}
-
+	//-----------------------------------------------------------------------------------------
 	async customerChange() {
 		this.sites = [];
 		this.siteId = null;
@@ -142,19 +142,19 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.record.locationId = null;
 		this.sites = await this.repository.listSites(this.form.get('customerId').value);
 	}
-
+	//-----------------------------------------------------------------------------------------
 	async siteChange() {
 		this.locations = null;
 		this.record.locationId = null;
 		this.locations = await this.repository.listLocations(this.siteId);
 	}
-
+	//-----------------------------------------------------------------------------------------
 	async locationChange() {
 		this.collections = null;
 		this.record.collectionId = null;
 		this.collections = await this.repository.listCollections(this.form.get('locationId').value);
 	}
-
+	//-----------------------------------------------------------------------------------------
 	async collectionChange() {
 	}
 	//-----------------------------------------------------------------------------------------

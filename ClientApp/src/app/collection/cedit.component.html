@@ -1,0 +1,146 @@
+<div id="edit-view" *ngIf="record && form" class="container-fluid" [formGroup]="form">
+    <div class="row d-flex align-items-center edit-header">
+        <div class="col-md-6 d-flex">
+            <span class="edit-header-icon"><i class="fal fa-calendar-alt"></i></span>
+            <span class="edit-header-title">Collection Container</span>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end">
+
+        </div>
+    </div>
+
+    <div class="row pad-t20">
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-textbox formControlName="containerNo" [readonly]="true" placeholder="Container No" floatLabelType="Always"></ejs-textbox>
+        </div>
+
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-datepicker [value]="record.createdDate" [readonly]="true" placeholder="Created Date*" floatLabelType="Always"></ejs-datepicker>          
+        </div>
+    </div>
+
+    <div class="row pad-t20">
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-textbox [value]="record.collectionName" [readonly]="true" placeholder="Collection - Location" floatLabelType="Always"></ejs-textbox>
+        </div>
+
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-datepicker [value]="record.scheduledDate" [readonly]="true" placeholder="Scheduled Date*" floatLabelType="Always"></ejs-datepicker>          
+        </div>
+    </div>
+
+    <div class="row" *ngIf="record.id">
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-textbox [(value)]="record.customer" disabled placeholder="Customer" floatLabelType="Always"></ejs-textbox>
+        </div>
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-textbox [(value)]="record.site" disabled placeholder="Site" floatLabelType="Always"></ejs-textbox>
+        </div>
+    </div>
+
+    <div class="row pad-t20">
+        <div class="col-md-12">
+            <ejs-tab id="edit-tab" class="e-fill" #editTab (created)="editTabCreated()">
+                <e-tabitems>
+                    <e-tabitem>
+                        <ng-template #headerText>
+                            <div>Information</div>
+                        </ng-template>
+                        <ng-template #content>
+
+                            <div class="row pad-t10">
+                                <div class="col-md-6 col-lg-5 col-xl-4">
+                                    <ejs-dropdownlist [dataSource]="record.containerTypes" [fields]="{ text: 'name', value: 'id' }" formControlName="containerTypeId" placeholder="Container Type*" floatLabelType="Always"></ejs-dropdownlist>
+                                    <div *ngIf="this.invalidControl('containerTypeId')" class="e-error">
+                                        Container Type is required!
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-5 col-xl-4">
+                                    <ejs-numerictextbox [value]="record.expectedVolume" format='N1' min='0' max='500' step='1' placeholder="Expected Volume" floatLabelType="Always"></ejs-numerictextbox>
+                                </div> 
+                            </div>                           
+                            
+                            <div class="row pad-t20 mar-t10">
+                                <div class="col-md-12 col-lg-10 col-xl-8">
+                                    <label for="collStatus" class="edit-label bold" style="font-size:1.1em;">Was the collection successful?</label>
+                                    <ejs-radiobutton label="Yes" name="collSuccessful" [value]="true" formControlName="collectionSuccessful" cssClass="mar-l20" (change)="setSucessStatus()"></ejs-radiobutton>
+                                    <ejs-radiobutton label="No" name="collSuccessful" [value]="false" formControlName="collectionSuccessful" cssClass="mar-l20" (change)="setFailureStatus()"></ejs-radiobutton>
+                                </div>                               
+                            </div>
+
+                            <div class="row pad-t20" *ngIf="form.get('collectionSuccessful').value">      
+                                <div class="col-md-6 col-lg-5 col-xl-4">
+                                    <ejs-numerictextbox [(value)]="record.volume" format='N1' min='0' max='500' step='1' placeholder="Volume" floatLabelType="Always"></ejs-numerictextbox>
+                                </div> 
+                                <div class="col-md-6 col-lg-5 col-xl-4">
+                                    <ejs-numerictextbox [(value)]="record.temperature" format='N1' min='-100' max='150' step='0.1' placeholder="Temperature" floatLabelType="Always"></ejs-numerictextbox>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="form.get('collectionSuccessful').value">                               
+                                <div class="col-md-6 col-lg-5 col-xl-4">
+                                    <ejs-numerictextbox [(value)]="record.acidity" format='N1' min='0' max='14' step='0.1' placeholder="Acidity" floatLabelType="Always"></ejs-numerictextbox>
+                                </div>
+                                <div class="col-md-6 col-lg-5 col-xl-4">
+                                    <ejs-numerictextbox [(value)]="record.conductivity" format='N1' min='0' max='25000' step='0.1' placeholder="Conductivity" floatLabelType="Always"></ejs-numerictextbox>
+                                </div>                                 
+                            </div>                       
+
+                            <div class="row" *ngIf="!form.get('collectionSuccessful').value">                             
+                                <div class="col-md-6 col-lg-5 col-xl-4 d-flex align-items-end">
+                                    <ejs-dropdownlist [dataSource]="data.failureReasons" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.failureReasonId" placeholder="Failure Reason" floatLabelType="Always"></ejs-dropdownlist>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </e-tabitem>                    
+                    <e-tabitem *ngIf="record.id">
+                        <ng-template #headerText>
+                            <div>Samples</div>
+                        </ng-template>
+                        <ng-template #content>
+                            <div id="list-view" class="container-fluid">
+                                <div class="row d-flex align-items-end">
+                                    <div class="col-md-12 d-flex align-items-center list-header">
+                                        <span class="list-header-icon"><i class="fad fa-vial"></i></span>
+                                        <span class="list-header-title">Samples</span>
+                                        <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['/auth/sample/add']" [queryParams]="{ collectionId: record.CollectionId }">+ Add</button></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 pad-t20">
+                                        <ejs-grid #grid [dataSource]='record.samples' [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }'
+                                                  [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' [allowSorting]="true" [allowFiltering]="false">
+                                            <e-columns>
+                                                <e-column width="70" [visible]='true'>
+                                                    <ng-template #template let-data>
+                                                        <a [routerLink]="['/auth/sample/edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
+                                                    </ng-template>
+                                                </e-column>
+                                                <e-column field='sampleNo' headerText='Sample No'></e-column>
+                                                <e-column field='referenceNo' headerText='Reference No'></e-column> 
+                                                <e-column field='volume' headerText='Volume' textAlign='Center'></e-column>  
+                                                <e-column field='containerNo' headerText='Container No'></e-column> 
+                                                <e-column field='shipTo' headerText='Ship To' textAlign='Center'></e-column> 
+                                                <e-column field='status' headerText='Status'></e-column>                              
+                                            </e-columns>
+                                        </ejs-grid>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </e-tabitem>
+                </e-tabitems>
+            </ejs-tab>
+        </div>
+    </div>
+    <div class="row d-flex align-items-center edit-footer">
+        <div class="col-md-6 d-flex justify-content-start">
+            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
+        </div>
+        <div class="col-sm-6 d-flex justify-content-end">
+            <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
+            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/collection/list']" [state]='{ formState: true }'>Close</button>
+        </div>
+    </div>
+    <ejs-toast #toast></ejs-toast>
+</div>
+

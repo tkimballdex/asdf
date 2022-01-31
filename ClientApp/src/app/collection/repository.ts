@@ -17,11 +17,7 @@ export class CollectionRepository {
 
     public save(record: any) {
         return this.http.post<any>(`/collection/save`, record);
-    }
-
-	public saveContainer(record: any) {
-		return this.http.post<any>(`/collectionContainer/save`, record);
-	}
+    }	
 
 	public getData() {
 		return this.http.post(`/collection/getData`);
@@ -29,7 +25,15 @@ export class CollectionRepository {
 
     public delete(id: string) {
         return this.http.post<any>(`/collection/delete/${id}`);
-    }        
+    }   
+	
+	public getContainer(id: string) {
+        return this.http.post(`/collectionContainer/get/${id}`);
+    }
+
+	public saveContainer(record: any) {
+		return this.http.post<any>(`/collectionContainer/save`, record);
+	}
 
 	public getTests(sampleId: string) {
 		return this.http.post(`/sampletest/list`, {
