@@ -81,13 +81,13 @@
         </div>
     </div>
 
-    <div class="row pad-b20 mar-t20">
+    <div class="row pad-b20 mar-t20" *ngIf="form.get('frequencyId').value">
         <div class="col-3">
             <ejs-dropdownlist [dataSource]="app.containerTypes" [fields]="{ text: 'name', value: 'name' }" [(value)]="record.containerType" placeholder="Container Type*" floatLabelType="Always"></ejs-dropdownlist>
         </div>
 
         <div class="col-3">
-            <ejs-dropdownlist [dataSource]="vendors" [fields]="{ text: 'name', value: 'id' }" [(value)]="labVendorId" placeholder="Lab Vendor*" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="vendors" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.labVendorId" placeholder="Lab Vendor*" floatLabelType="Always"></ejs-dropdownlist>
         </div>
 
         <div class="col-3">
@@ -99,7 +99,7 @@
         </div>
     </div>
 
-    <div class="row pad-b20">
+    <div class="row pad-b20" *ngIf="form.get('frequencyId').value">
         <div class="col-3">
             <span class="list-header-add"><button ejs-button cssClass="e-outline" (click)="addContainer()" [disabled]="!record.containerType || !record.samples">+ Add Container</button></span>
         </div>
@@ -115,6 +115,7 @@
                         </ng-template>
                     </e-column>
                     <e-column field='containerType' headerText='Container Type'></e-column>
+                    <e-column field='labVendor' headerText='Lab Vendor'></e-column>
                     <e-column field='samples' headerText='No of Samples' textAlign='Center' format='N0'></e-column>
                     <e-column field='expectedVolume' headerText='Expected Volume' textAlign='Center' format='N1'></e-column>
                 </e-columns>

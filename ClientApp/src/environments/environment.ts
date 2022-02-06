@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-	webApi: 'https://interomeph-be-test.azurewebsites.net',
+	webApi: 'https://localhost:44303',
 	scope: 'https://interomeb2c.onmicrosoft.com/interomephbe/data'
 };
 

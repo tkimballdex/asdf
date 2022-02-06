@@ -102,17 +102,25 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 	async locationChange(e) {
 		this.form.get('logisticVendorId').setValue(e.itemData.logisticVendorId);
 		this.location = e.itemData;
+		this.record.labVendorId = this.location.labVendorId;
 	}
 	//-----------------------------------------------------------------------------------------
 	addContainer() {
+		console.dir(this.vendors);
+		console.dir(this.record);
+
 		this.record.containers.push({
 			containerType: this.record.containerType,
 			expectedVolume: this.record.expectedVolume,
 			samples: this.record.samples,
-			labVendorId: this.record.labVendorId
+			labVendorId: this.record.labVendorId,
+			labVendor: this.vendors.find(x => x.id == this.record.labVendorId).name
 		});
 
 		this.record.containerType = null;
+		this.record.expectedVolume = null;
+		this.record.samples = null;
+
 		if (this.grid) this.grid.refresh();
 	}
 	//-----------------------------------------------------------------------------------------
