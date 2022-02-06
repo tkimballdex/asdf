@@ -27,7 +27,9 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 	public customers: any;
 	public sites: any;
 	public locations: any;
+	public location: any;
 	public data: any;
+	@ViewChild('grid') public grid: GridComponent;
 	//-----------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.showSpinner();
@@ -39,14 +41,14 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 		this.hideSpinner();
 
 		this.record = {
-			'days': {}
+			'days': {},
+			containers: []
 		};
 
 		this.form = new FormGroup({
 			startDate: new FormControl(null),
 			endDate: new FormControl(null),
 			logisticVendorId: new FormControl(null, [Validators.required]),
-			labVendorId: new FormControl(null, [Validators.required]),
 			frequencyId: new FormControl(this.record.frequencyId, [Validators.required])
 		});
 
@@ -99,7 +101,25 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 	//-----------------------------------------------------------------------------------------
 	async locationChange(e) {
 		this.form.get('logisticVendorId').setValue(e.itemData.logisticVendorId);
-		this.form.get('labVendorId').setValue(e.itemData.labVendorId);
+		this.location = e.itemData;
+	}
+	//-----------------------------------------------------------------------------------------
+	addContainer() {
+		this.record.containers.push({
+			containerType: this.record.containerType,
+			expectedVolume: this.record.expectedVolume,
+			samples: this.record.samples,
+			labVendorId: this.record.labVendorId
+		});
+
+		this.record.containerType = null;
+		if (this.grid) this.grid.refresh();
+	}
+	//-----------------------------------------------------------------------------------------
+	deleteContainer(data) {
+		console.dir(data);
+		this.record.containers.splice(data.index, 1);
+		this.grid.refresh();
 	}
 	//-----------------------------------------------------------------------------------------
 }

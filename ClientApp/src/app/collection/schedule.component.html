@@ -41,13 +41,6 @@
                 Logistic Vendor is required!
             </div>
         </div>
-
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist [dataSource]="vendors" [fields]="{ text: 'name', value: 'id' }" formControlName="labVendorId" placeholder="Lab Vendor*" floatLabelType="Always"></ejs-dropdownlist>
-            <div *ngIf="this.invalidControl('labVendorId')" class="e-error">
-                Lab Vendor is required!
-            </div>
-        </div>
     </div>
 
     <div class="row pad-t20" *ngIf="form.get('locationId').value">
@@ -88,12 +81,52 @@
         </div>
     </div>
 
+    <div class="row pad-b20 mar-t20">
+        <div class="col-3">
+            <ejs-dropdownlist [dataSource]="app.containerTypes" [fields]="{ text: 'name', value: 'name' }" [(value)]="record.containerType" placeholder="Container Type*" floatLabelType="Always"></ejs-dropdownlist>
+        </div>
+
+        <div class="col-3">
+            <ejs-dropdownlist [dataSource]="vendors" [fields]="{ text: 'name', value: 'id' }" [(value)]="labVendorId" placeholder="Lab Vendor*" floatLabelType="Always"></ejs-dropdownlist>
+        </div>
+
+        <div class="col-3">
+            <ejs-numerictextbox [(value)]="record.samples" format='N0' min='0' max='10' step='1' placeholder="Number of Samples*" floatLabelType="Always"></ejs-numerictextbox>
+        </div>
+
+        <div class="col-3">
+            <ejs-numerictextbox [(value)]="record.expectedVolume" format='N1' min='0' max='500' step='1' placeholder="Expected Volume" floatLabelType="Always"></ejs-numerictextbox>
+        </div>
+    </div>
+
+    <div class="row pad-b20">
+        <div class="col-3">
+            <span class="list-header-add"><button ejs-button cssClass="e-outline" (click)="addContainer()" [disabled]="!record.containerType || !record.samples">+ Add Container</button></span>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="record.containers.length">
+        <div class="col-12 pad-t20">
+            <ejs-grid #grid [dataSource]='record.containers' [allowPaging]="false">
+                <e-columns>
+                    <e-column width="70" [visible]='true'>
+                        <ng-template #template let-data>
+                            <button ejs-button (click)="deleteContainer(data)"><i class="fas fa-trash-alt edit-icon"></i></button>
+                        </ng-template>
+                    </e-column>
+                    <e-column field='containerType' headerText='Container Type'></e-column>
+                    <e-column field='samples' headerText='No of Samples' textAlign='Center' format='N0'></e-column>
+                    <e-column field='expectedVolume' headerText='Expected Volume' textAlign='Center' format='N1'></e-column>
+                </e-columns>
+            </ejs-grid>
+        </div>
+    </div>
+
     <div class="row d-flex align-items-center edit-footer mar-t20">
         <div class="col-md-6 d-flex justify-content-start">
-            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
+            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update || !record.containers.length">Save</button>
         </div>
         <div class="col-sm-6 d-flex justify-content-end">
-            <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
             <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/collection/list']" [state]='{ formState: true }'>Close</button>
         </div>
     </div>
