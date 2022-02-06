@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CollectionListComponent } from './list.component';
 import { CollectionEditComponent } from './edit.component';
+import { CollectionScheduleComponent } from './schedule.component';
 import { CollectionContainerEditComponent } from './cedit.component';
 import { MsalGuard } from '@azure/msal-angular';
 
@@ -32,6 +33,7 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 	declarations: [
 		CollectionListComponent,
 		CollectionEditComponent,
+		CollectionScheduleComponent,
 		CollectionContainerEditComponent
 	],
 	imports: [
@@ -40,7 +42,8 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 		TabModule, DatePickerModule, SwitchModule, NumericTextBoxModule, MatButtonToggleModule, CommonModule,
 		RouterModule.forChild([
 			{ path: 'list', component: CollectionListComponent, canActivate: [MsalGuard] },
-			{ path: 'add', component: CollectionEditComponent, canActivate: [MsalGuard] },			
+			{ path: 'schedule', component: CollectionScheduleComponent, canActivate: [MsalGuard] },
+			{ path: 'add', component: CollectionEditComponent, canActivate: [MsalGuard] },
 			{ path: 'edit/:id', component: CollectionEditComponent, canActivate: [MsalGuard] },
 			{ path: 'cadd', component: CollectionContainerEditComponent, canActivate: [MsalGuard] },
 			{ path: 'cedit/:id', component: CollectionContainerEditComponent, canActivate: [MsalGuard] },
