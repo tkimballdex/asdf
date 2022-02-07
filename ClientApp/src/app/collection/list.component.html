@@ -4,10 +4,10 @@
             <span class="list-header-icon"><i class="fas fa-calendar-alt"></i></span>
             <span class="list-header-title">Collections</span>
             <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['../add']" [disabled]="!privileges.create">+ Add</button></span>
-            <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['../schedule']" [disabled]="!privileges.create">Schedule</button></span>
         </div>
         <div class="col-md-6 d-flex align-items-end justify-content-end list-header">
-            <span class="list-actions"><button ejs-button cssClass="e-outline" iconCss="fad fa-download" [disabled]="!privileges.download" (click)="export()"></button></span>
+            <span class="list-actions"><button ejs-button cssClass="e-outline" iconCss="fad fa-calendar-plus" [routerLink]="['../schedule']" [disabled]="!privileges.create" title="Create Schedule"></button></span>
+            <span class="list-actions"><button ejs-button cssClass="e-outline" iconCss="fad fa-download" [disabled]="!privileges.download" (click)="export()" title="Download"></button></span>
         </div>
     </div>
     <div class="row d-flex align-items-end">
