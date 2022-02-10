@@ -83,25 +83,25 @@
 
     <div class="row pad-b20 mar-t20" *ngIf="form.get('frequencyId').value">
         <div class="col-3">
-            <ejs-dropdownlist [dataSource]="app.containerTypes" [fields]="{ text: 'name', value: 'name' }" [(value)]="record.containerType" placeholder="Container Type*" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="app.containerTypes" [fields]="{ text: 'name', value: 'name' }" [(value)]="container.containerType" placeholder="Container Type*" floatLabelType="Always"></ejs-dropdownlist>
         </div>
 
         <div class="col-3">
-            <ejs-dropdownlist [dataSource]="vendors" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.labVendorId" placeholder="Lab Vendor*" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="vendors" [fields]="{ text: 'name', value: 'id' }" [(value)]="container.labVendorId" placeholder="Lab Vendor*" floatLabelType="Always"></ejs-dropdownlist>
         </div>
 
         <div class="col-3">
-            <ejs-numerictextbox [(value)]="record.samples" format='N0' min='0' max='10' step='1' placeholder="Number of Samples*" floatLabelType="Always"></ejs-numerictextbox>
+            <ejs-numerictextbox [(value)]="container.samples" format='N0' min='0' max='10' step='1' placeholder="Number of Samples*" floatLabelType="Always"></ejs-numerictextbox>
         </div>
 
         <div class="col-3">
-            <ejs-numerictextbox [(value)]="record.expectedVolume" format='N1' min='0' max='500' step='1' placeholder="Expected Volume" floatLabelType="Always"></ejs-numerictextbox>
+            <ejs-numerictextbox [(value)]="container.expectedVolume" format='N1' min='0' max='500' step='1' placeholder="Expected Volume" floatLabelType="Always"></ejs-numerictextbox>
         </div>
     </div>
 
     <div class="row pad-b20" *ngIf="form.get('frequencyId').value">
         <div class="col-3">
-            <span class="list-header-add"><button ejs-button cssClass="e-outline" (click)="addContainer()" [disabled]="!record.containerType || !record.samples">+ Add Container</button></span>
+            <span class="list-header-add"><button ejs-button cssClass="e-outline" (click)="addContainer()" [disabled]="!container.containerType || !container.samples">+ Add Container</button></span>
         </div>
     </div>
 
