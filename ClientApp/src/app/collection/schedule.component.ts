@@ -29,6 +29,7 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 	public locations: any;
 	public location: any;
 	public data: any;
+	public container: any = {};
 	@ViewChild('grid') public grid: GridComponent;
 	//-----------------------------------------------------------------------------------------
 	async ngOnInit() {
@@ -68,10 +69,9 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 
 			this.record.tenantId = this.tenant.id;
 			console.dir(this.record);
-			return;
 
 			this.showSpinner();
-			var returnValue = await this.repository.save(this.record);
+			var returnValue = await this.repository.saveSchedule(this.record);
 			this.hideSpinner();
 
 			if (returnValue && returnValue.error) {
@@ -80,7 +80,7 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 			else {
 				var success = returnValue && returnValue.updated;
 				this.showSaveMessage(success);
-				setTimeout(() => this.router.navigate(['/auth/collection/list']), 1000);
+				//setTimeout(() => this.router.navigate(['/auth/collection/list']), 1000);
 			}
 		}
 	}
@@ -102,7 +102,6 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 	async locationChange(e) {
 		this.form.get('logisticVendorId').setValue(e.itemData.logisticVendorId);
 		this.location = e.itemData;
-		this.record.labVendorId = this.location.labVendorId;
 	}
 	//-----------------------------------------------------------------------------------------
 	addContainer() {
@@ -110,22 +109,21 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 		console.dir(this.record);
 
 		this.record.containers.push({
-			containerType: this.record.containerType,
-			expectedVolume: this.record.expectedVolume,
-			samples: this.record.samples,
-			labVendorId: this.record.labVendorId,
-			labVendor: this.vendors.find(x => x.id == this.record.labVendorId).name
+			containerType: this.container.containerType,
+			expectedVolume: this.container.expectedVolume,
+			samples: this.container.samples,
+			labVendorId: this.container.labVendorId,
+			labVendor: this.vendors.find(x => x.id == this.container.labVendorId).name
 		});
 
-		this.record.containerType = null;
-		this.record.expectedVolume = null;
-		this.record.samples = null;
+		this.container.containerType = null;
+		this.container.expectedVolume = null;
+		this.container.samples = null;
 
 		if (this.grid) this.grid.refresh();
 	}
 	//-----------------------------------------------------------------------------------------
 	deleteContainer(data) {
-		console.dir(data);
 		this.record.containers.splice(data.index, 1);
 		this.grid.refresh();
 	}
