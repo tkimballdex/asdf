@@ -21,7 +21,7 @@
 
     <div class="row pad-b20">
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist [dataSource]="record.statuses" [fields]="{ text: 'name', value: 'id' }" formControlName="collectionStatusId" placeholder="Status*" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="data.statuses" [fields]="{ text: 'name', value: 'id' }" formControlName="collectionStatusId" placeholder="Status*" floatLabelType="Always"></ejs-dropdownlist>
             <div *ngIf="this.invalidControl('collectionStatusId')" class="e-error">
                 Status is required!
             </div>

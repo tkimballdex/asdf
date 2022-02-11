@@ -49,6 +49,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 		}
 		else {
 			this.customers = await this.repository.listCustomers();
+			this.record.collectionStatusId = 1;
 		}
 
 		this.hideSpinner();
