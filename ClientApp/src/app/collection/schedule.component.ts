@@ -68,19 +68,27 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 			Object.assign(this.record, this.form.value);
 
 			this.record.tenantId = this.tenant.id;
-			console.dir(this.record);
-
 			this.showSpinner();
-			var returnValue = await this.repository.saveSchedule(this.record);
-			this.hideSpinner();
+
+			try {
+				var returnValue = await this.repository.saveSchedule(this.record);
+			}
+			finally {
+				this.hideSpinner();
+			}
 
 			if (returnValue && returnValue.error) {
 				this.showErrorMessage(returnValue.description);
 			}
 			else {
 				var success = returnValue && returnValue.updated;
-				this.showSaveMessage(success);
-				//setTimeout(() => this.router.navigate(['/auth/collection/list']), 1000);
+
+				if (success) {
+					this.showSuccessMessage(`Created ${returnValue.collections} collections!`);
+				}
+				else {
+					this.showErrorMessage('Error occurred!');
+				}
 			}
 		}
 	}
@@ -102,6 +110,7 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 	async locationChange(e) {
 		this.form.get('logisticVendorId').setValue(e.itemData.logisticVendorId);
 		this.location = e.itemData;
+		this.container.labVendorId = this.location.labVendorId;
 	}
 	//-----------------------------------------------------------------------------------------
 	addContainer() {
