@@ -82,26 +82,34 @@
     </div>
 
     <div class="row pad-b20 mar-t20" *ngIf="form.get('frequencyId').value">
-        <div class="col-3">
+        <div class="col-4 col-md-2">
             <ejs-dropdownlist [dataSource]="app.containerTypes" [fields]="{ text: 'name', value: 'name' }" [(value)]="container.containerType" placeholder="Container Type*" floatLabelType="Always"></ejs-dropdownlist>
         </div>
 
-        <div class="col-3">
+        <div class="col-4 col-md-2">
             <ejs-dropdownlist [dataSource]="vendors" [fields]="{ text: 'name', value: 'id' }" [(value)]="container.labVendorId" placeholder="Lab Vendor*" floatLabelType="Always"></ejs-dropdownlist>
         </div>
 
-        <div class="col-3">
+        <div class="col-4 col-md-2">
+            <ejs-multiselect [dataSource]="app.analytes" [fields]="{ text: 'name', value: 'name' }" [(value)]="container.analytes" placeholder="Analytes" floatLabelType="Always"></ejs-multiselect>
+        </div>
+
+        <div class="col-4 col-md-2">
+            <ejs-dropdownlist [dataSource]="app.testTypes" [fields]="{ text: 'name', value: 'name' }" [(value)]="container.testType" placeholder="Test Type" floatLabelType="Always"></ejs-dropdownlist>
+        </div>
+
+        <div class="col-4 col-md-2">
             <ejs-numerictextbox [(value)]="container.samples" format='N0' min='0' max='10' step='1' placeholder="Number of Samples*" floatLabelType="Always"></ejs-numerictextbox>
         </div>
 
-        <div class="col-3">
+        <div class="col-4 col-md-2">
             <ejs-numerictextbox [(value)]="container.expectedVolume" format='N1' min='0' max='500' step='1' placeholder="Expected Volume" floatLabelType="Always"></ejs-numerictextbox>
         </div>
     </div>
 
     <div class="row pad-b20" *ngIf="form.get('frequencyId').value">
         <div class="col-3">
-            <span class="list-header-add"><button ejs-button cssClass="e-outline" (click)="addContainer()" [disabled]="!container.containerType || !container.samples">+ Add Container</button></span>
+            <span class="list-header-add"><button ejs-button cssClass="e-outline" (click)="addContainer()" [disabled]="!container.containerType || !container.samples || !container.analytes">+ Add Container</button></span>
         </div>
     </div>
 
@@ -116,6 +124,8 @@
                     </e-column>
                     <e-column field='containerType' headerText='Container Type'></e-column>
                     <e-column field='labVendor' headerText='Lab Vendor'></e-column>
+                    <e-column field='analyteNames' headerText='Analytes'></e-column>
+                    <e-column field='testType' headerText='Test Type'></e-column>
                     <e-column field='samples' headerText='No of Samples' textAlign='Center' format='N0'></e-column>
                     <e-column field='expectedVolume' headerText='Expected Volume' textAlign='Center' format='N1'></e-column>
                 </e-columns>

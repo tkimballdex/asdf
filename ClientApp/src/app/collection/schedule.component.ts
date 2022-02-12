@@ -84,7 +84,7 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 				var success = returnValue && returnValue.updated;
 
 				if (success) {
-					this.showSuccessMessage(`Created ${returnValue.collections} collections!`);
+					this.showSuccessMessage(`Created ${returnValue.collections} collections, ${returnValue.samples} samples and ${returnValue.tests} tests!`);
 				}
 				else {
 					this.showErrorMessage('Error occurred!');
@@ -114,12 +114,14 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 	}
 	//-----------------------------------------------------------------------------------------
 	addContainer() {
-		console.dir(this.vendors);
-		console.dir(this.record);
+		console.dir(this.container);
 
 		this.record.containers.push({
 			containerType: this.container.containerType,
 			expectedVolume: this.container.expectedVolume,
+			analytes: this.container.analytes,
+			analyteNames: this.container.analytes.join(', '),
+			testType: this.container.testType,
 			samples: this.container.samples,
 			labVendorId: this.container.labVendorId,
 			labVendor: this.vendors.find(x => x.id == this.container.labVendorId).name
@@ -128,6 +130,7 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 		this.container.containerType = null;
 		this.container.expectedVolume = null;
 		this.container.samples = null;
+		this.container.analytes = null;
 
 		if (this.grid) this.grid.refresh();
 	}
