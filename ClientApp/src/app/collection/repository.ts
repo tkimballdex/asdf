@@ -27,6 +27,10 @@ export class CollectionRepository {
 		return this.http.post(`/collection/getData`);
 	}
 
+	public getScheduleData() {
+		return this.http.post(`/collectionSchedule/getData/${this.tenant.id}`);
+	}
+
     public delete(id: string) {
         return this.http.post<any>(`/collection/delete/${id}`);
     }   

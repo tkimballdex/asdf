@@ -30,13 +30,14 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 	public location: any;
 	public data: any;
 	public container: any = {};
+	public analytes: any;
 	@ViewChild('grid') public grid: GridComponent;
 	//-----------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.showSpinner();
 		this.app = await this.appService.getData();
 		this.privileges = this.app.privileges.samples;
-		this.data = await this.repository.getData();
+		this.data = await this.repository.getScheduleData();
 		this.vendors = await this.repository.listVendors();
 		this.customers = await this.repository.listCustomers();
 		this.hideSpinner();
@@ -110,28 +111,27 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 	async locationChange(e) {
 		this.form.get('logisticVendorId').setValue(e.itemData.logisticVendorId);
 		this.location = e.itemData;
-		this.container.labVendorId = this.location.labVendorId;
+		this.resetContainer();
+	}
+	resetContainer() {
+		this.container = {
+			labVendorId: this.location.labVendorId,
+			testTypes: []
+		};
 	}
 	//-----------------------------------------------------------------------------------------
 	addContainer() {
-		console.dir(this.container);
-
 		this.record.containers.push({
 			containerType: this.container.containerType,
 			expectedVolume: this.container.expectedVolume,
-			analytes: this.container.analytes,
-			analyteNames: this.container.analytes.join(', '),
-			testType: this.container.testType,
 			samples: this.container.samples,
 			labVendorId: this.container.labVendorId,
-			labVendor: this.vendors.find(x => x.id == this.container.labVendorId).name
+			labVendor: this.vendors.find(x => x.id == this.container.labVendorId).name,
+			testTypes: this.container.testTypes,
+			testTypeNames: this.container.testTypeNames
 		});
 
-		this.container.containerType = null;
-		this.container.expectedVolume = null;
-		this.container.samples = null;
-		this.container.analytes = null;
-
+		this.resetContainer();
 		if (this.grid) this.grid.refresh();
 	}
 	//-----------------------------------------------------------------------------------------
@@ -140,4 +140,20 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 		this.grid.refresh();
 	}
 	//-----------------------------------------------------------------------------------------
+	changeTestType(e) {
+		this.analytes = this.data.analytes[e.value];
+		this.container.analytes = null;
+	}
+	//-----------------------------------------------------------------------------------------
+	addTestType() {
+		this.container.testTypes.push({
+			testType: this.container.testType,
+			analytes: this.container.analytes,
+			analyteNames: this.container.analytes.join(', ')
+		});
+
+		this.container.analytes = null;
+		this.container.testType = null;
+		this.container.testTypeNames = this.container.testTypes.map(x => `${x.testType}: ${x.analytes.join(', ')}`).join('; ');
+	}
 }
