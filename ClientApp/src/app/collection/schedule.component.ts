@@ -31,6 +31,7 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 	public data: any;
 	public container: any = {};
 	public analytes: any;
+	public showContainer: boolean;
 	@ViewChild('grid') public grid: GridComponent;
 	//-----------------------------------------------------------------------------------------
 	async ngOnInit() {
@@ -86,12 +87,23 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 
 				if (success) {
 					this.showSuccessMessage(`Created ${returnValue.collections} collections, ${returnValue.samples} samples and ${returnValue.tests} tests!`);
+					this.resetForm();
 				}
 				else {
 					this.showErrorMessage('Error occurred!');
 				}
 			}
 		}
+	}
+	resetForm() {
+		this.form.get('customerId').setValue(null);
+		this.form.get('siteId').setValue(null);
+		this.form.get('locationId').setValue(null);
+		this.form.get('frequencyId').setValue(null);
+		this.sites = null;
+		this.locations = null;
+		this.showContainer = false;
+		this.form.markAsUntouched();
 	}
 	//-----------------------------------------------------------------------------------------
 	async customerChange(e) {
@@ -113,6 +125,11 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 		this.location = e.itemData;
 		this.resetContainer();
 	}
+	//-----------------------------------------------------------------------------------------
+	frequencyChange() {
+		this.showContainer = true;
+	}
+	//-----------------------------------------------------------------------------------------
 	resetContainer() {
 		this.container = {
 			labVendorId: this.location.labVendorId,

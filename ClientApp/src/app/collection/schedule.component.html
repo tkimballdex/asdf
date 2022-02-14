@@ -60,7 +60,7 @@
 
     <div class="row pad-b20" *ngIf="form.get('locationId').value">
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist formControlName="frequencyId" [dataSource]="app.frequencies" [fields]="{ text: 'name', value: 'id' }" placeholder="Testing Frequency *" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist formControlName="frequencyId" [dataSource]="app.frequencies" [fields]="{ text: 'name', value: 'id' }" placeholder="Testing Frequency *" floatLabelType="Always" (change)="frequencyChange()"></ejs-dropdownlist>
             <div *ngIf="this.invalidControl('frequencyId')" class="e-error">
                 Testing Frequency is required!
             </div>
@@ -81,7 +81,7 @@
         </div>
     </div>
 
-    <div class="row mar-t20" *ngIf="form.get('frequencyId').value">
+    <div class="row mar-t20" *ngIf="showContainer">
         <div class="col-3">
             <ejs-dropdownlist [dataSource]="app.containerTypes" [fields]="{ text: 'name', value: 'name' }" [(value)]="container.containerType" placeholder="Container Type*" floatLabelType="Always"></ejs-dropdownlist>
         </div>
@@ -99,7 +99,7 @@
         </div>
     </div>
 
-    <div class="row" *ngIf="form.get('frequencyId').value">
+    <div class="row" *ngIf="showContainer">
         <div class="col-3">
             <ejs-dropdownlist [dataSource]="data.testTypes" [(value)]="container.testType" placeholder="Test Type" floatLabelType="Always" (change)="changeTestType($event)"></ejs-dropdownlist>
         </div>
@@ -113,19 +113,19 @@
         </div>
     </div>
 
-    <div class="row pad-b20" *ngIf="form.get('locationId').value">
+    <div class="row pad-b20" *ngIf="showContainer">
         <div class="col-12">
             <ejs-textbox readonly="readonly" [value]="container.testTypeNames" placeholder="Test Types" floatLabelType="Always"></ejs-textbox>
         </div>
     </div>
 
-    <div class="row pad-b20" *ngIf="form.get('frequencyId').value">
+    <div class="row pad-b20" *ngIf="showContainer">
         <div class="col-3">
             <span class="list-header-add"><button ejs-button cssClass="e-outline" (click)="addContainer()" [disabled]="!container.containerType || !container.samples">+ Add Container</button></span>
         </div>
     </div>
 
-    <div class="row" *ngIf="record.containers.length">
+    <div class="row" *ngIf="showContainer">
         <div class="col-12 pad-t20">
             <ejs-grid #grid [dataSource]='record.containers' [allowPaging]="false">
                 <e-columns>
