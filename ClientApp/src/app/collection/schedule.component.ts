@@ -42,11 +42,7 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 		this.vendors = await this.repository.listVendors();
 		this.customers = await this.repository.listCustomers();
 		this.hideSpinner();
-
-		this.record = {
-			'days': {},
-			containers: []
-		};
+		this.resetRecord();
 
 		this.form = new FormGroup({
 			startDate: new FormControl(null),
@@ -95,14 +91,26 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 			}
 		}
 	}
+	//-----------------------------------------------------------------------------------------
+	resetRecord() {
+		this.record = {
+			'days': {},
+			containers: []
+		};
+	}
+	//-----------------------------------------------------------------------------------------
 	resetForm() {
+		this.sites = null;
+		this.locations = null;
+		this.showContainer = false;
+		this.resetRecord();
+
 		this.form.get('customerId').setValue(null);
 		this.form.get('siteId').setValue(null);
 		this.form.get('locationId').setValue(null);
 		this.form.get('frequencyId').setValue(null);
-		this.sites = null;
-		this.locations = null;
-		this.showContainer = false;
+		this.form.get('startDate').setValue(null);
+		this.form.get('endDate').setValue(null);
 		this.form.markAsUntouched();
 	}
 	//-----------------------------------------------------------------------------------------
