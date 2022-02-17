@@ -7,7 +7,7 @@ export class RoleRepository {
     }
 
     public save(record: any) {
-        return this.http.post(`/role/save`, record);
+        return this.http.post<any>(`/role/save`, record);
     }
 
     public delete(id: string) {

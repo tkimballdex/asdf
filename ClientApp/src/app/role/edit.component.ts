@@ -33,12 +33,12 @@ export class RoleEditComponent extends PageComponent implements OnInit {
     async save() {
         var add = !this.record.id;
         this.showSpinner();
-        this.record = await this.repository.save(this.record);
+        var returnValue = await this.repository.save(this.record);
         this.hideSpinner();
-        var success = this.record && this.record.updated;
+		var success = returnValue && returnValue.updated;
         this.showSaveMessage(success);
         if (success && add) {
-            setTimeout(() => this.router.navigate(['/auth/role/edit', this.record.id]), 1000);
+            setTimeout(() => this.router.navigate(['/auth/role/edit', returnValue.id]), 1000);
         }
     }
 
