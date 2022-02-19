@@ -87,7 +87,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 	}
 	//-----------------------------------------------------------------------------------------
 	editTabCreated() {
-		if (history.state.tests) {
+		if (history.state.containers) {
 			this.editTab.selectedItem = 1;
 		}
 	}

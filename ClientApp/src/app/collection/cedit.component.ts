@@ -65,7 +65,7 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 		this.form.markAllAsTouched();
 
 		if (this.form.invalid) {
-			this.showErrorMessage("Please complete all required fields!")
+			this.showErrorMessage("Please complete all required fields!");
 		}
 		else {
 			Object.assign(this.record, this.form.value);
@@ -79,7 +79,7 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 			}
 
 			this.showSpinner();
-			var returnValue = await this.repository.save(this.record);
+			var returnValue = await this.repository.saveContainer(this.record);
 			this.hideSpinner();
 
 			if (returnValue && returnValue.error) {
