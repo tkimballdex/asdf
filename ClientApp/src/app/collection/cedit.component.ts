@@ -34,9 +34,24 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 		this.app = await this.appService.getData();
 		this.privileges = this.app.privileges.samples;
 		this.data = await this.repository.getData();
-		
+
 		var id = this.route.snapshot.paramMap.get('id');
-		this.record = await this.repository.getContainer(id);
+
+		if (id) {
+			this.record = await this.repository.getContainer(id);
+		}
+		else {
+			var collectionId = this.route.snapshot.paramMap.get('collectionId');
+			var collection = await this.repository.get(collectionId);
+
+			this.record = {
+				collectionId: collectionId,
+				collectionName: collection.name,
+				scheduledDate: collection.scheduledDate,
+				customer: collection.customer,
+				site: collection.site
+			};
+		}
 
 		this.hideSpinner();
 
@@ -45,7 +60,7 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 			containerNo: new FormControl(this.record.containerNo),
 			containerTypeId: new FormControl(this.record.containerTypeId, [Validators.required])
 		});
-	}	
+	}
 	//-----------------------------------------------------------------------------------------
 	editTabCreated() {
 		if (history.state.tests) {

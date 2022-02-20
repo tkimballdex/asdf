@@ -45,7 +45,7 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 			{ path: 'schedule', component: CollectionScheduleComponent, canActivate: [MsalGuard] },
 			{ path: 'add', component: CollectionEditComponent, canActivate: [MsalGuard] },
 			{ path: 'edit/:id', component: CollectionEditComponent, canActivate: [MsalGuard] },
-			{ path: 'cadd', component: CollectionContainerEditComponent, canActivate: [MsalGuard] },
+			{ path: 'cadd/:collectionId', component: CollectionContainerEditComponent, canActivate: [MsalGuard] },
 			{ path: 'cedit/:id', component: CollectionContainerEditComponent, canActivate: [MsalGuard] },
 		])
 	],

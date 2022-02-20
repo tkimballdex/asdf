@@ -11,11 +11,11 @@
 
     <div class="row pad-t20">
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="containerNo" [readonly]="true" placeholder="Container No" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox formControlName="containerNo" placeholder="Container No" floatLabelType="Always"></ejs-textbox>
         </div>
 
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-datepicker [value]="record.createdDate" [readonly]="true" placeholder="Created Date*" floatLabelType="Always"></ejs-datepicker>          
+        <div class="col-md-6 col-lg-5 col-xl-4" *ngIf="record.id">
+            <ejs-datepicker [value]="record.createdDate" [readonly]="true" placeholder="Created Date" floatLabelType="Always"></ejs-datepicker>          
         </div>
     </div>
 
@@ -25,11 +25,11 @@
         </div>
 
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-datepicker [value]="record.scheduledDate" [readonly]="true" placeholder="Scheduled Date*" floatLabelType="Always"></ejs-datepicker>          
+            <ejs-datepicker [value]="record.scheduledDate" [readonly]="true" placeholder="Scheduled Date" floatLabelType="Always"></ejs-datepicker>          
         </div>
     </div>
 
-    <div class="row" *ngIf="record.id">
+    <div class="row">
         <div class="col-md-6 col-lg-5 col-xl-4">
             <ejs-textbox [(value)]="record.customer" disabled placeholder="Customer" floatLabelType="Always"></ejs-textbox>
         </div>
@@ -50,7 +50,7 @@
 
                             <div class="row pad-t10">
                                 <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-dropdownlist [dataSource]="record.containerTypes" [fields]="{ text: 'name', value: 'id' }" formControlName="containerTypeId" placeholder="Container Type*" floatLabelType="Always"></ejs-dropdownlist>
+                                    <ejs-dropdownlist [dataSource]="app.containerTypes" [fields]="{ text: 'name', value: 'id' }" formControlName="containerTypeId" placeholder="Container Type*" floatLabelType="Always"></ejs-dropdownlist>
                                     <div *ngIf="this.invalidControl('containerTypeId')" class="e-error">
                                         Container Type is required!
                                     </div>
@@ -76,6 +76,7 @@
                                     <ejs-numerictextbox [(value)]="record.temperature" format='N1' min='-100' max='150' step='0.1' placeholder="Temperature" floatLabelType="Always"></ejs-numerictextbox>
                                 </div>
                             </div>
+
                             <div class="row" *ngIf="form.get('collectionSuccessful').value">                               
                                 <div class="col-md-6 col-lg-5 col-xl-4">
                                     <ejs-numerictextbox [(value)]="record.acidity" format='N1' min='0' max='14' step='0.1' placeholder="Acidity" floatLabelType="Always"></ejs-numerictextbox>

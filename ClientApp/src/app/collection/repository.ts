@@ -12,7 +12,7 @@ export class CollectionRepository {
     }
 
 	public get(id: string) {
-        return this.http.post(`/collection/get/${id}`);
+        return this.http.post<any>(`/collection/get/${id}`);
     }
 
     public save(record: any) {
