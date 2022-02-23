@@ -10,13 +10,21 @@
     </div>
 
     <div class="row pad-t10">        
-        <div class="col-md-4 col-lg-5 col-xl-4">
+        <div class="col-md-6 col-lg-5 col-xl-4">
             <ejs-textbox formControlName="name" placeholder="Name" floatLabelType="Always" required></ejs-textbox>
             <div *ngIf="this.invalidControl('name')" class="e-error">
                 Name is required!
             </div>
         </div>
-        <div class="col-md-4 col-lg-5 col-xl-4">
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-textbox formControlName="code" placeholder="Code" floatLabelType="Always" required></ejs-textbox>
+            <div *ngIf="this.invalidControl('code')" class="e-error">
+                Code is required!
+            </div>
+        </div> 
+    </div>
+    <div class="row"> 
+        <div class="col-md-12 col-lg-10 col-xl-8">
             <ejs-textbox formControlName="description" placeholder="Description" floatLabelType="Always" required></ejs-textbox>
             <div *ngIf="this.invalidControl('description')" class="e-error">
                 Description is required!
@@ -25,7 +33,7 @@
     </div>
 
     <div class="row pad-t20">
-        <div class="col-md-4 col-lg-5 col-xl-4">
+        <div class="col-md-6 col-lg-5 col-xl-4">
             <ejs-textbox formControlName="resultUnits" placeholder="Result Units" floatLabelType="Always" required></ejs-textbox>
             <div *ngIf="this.invalidControl('resultUnits')" class="e-error">
                 Result Units is required!
@@ -34,33 +42,21 @@
     </div>
 
     <div class="row pad-t20">    
-        <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-numerictextbox formControlName="minValue" format='N1' min='0' max='500' step='1' placeholder="Min Value" floatLabelType="Always"></ejs-numerictextbox>
-                <div *ngIf="this.invalidControl('minValue')" class="e-error">
-                Min Value is required!
-            </div>
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-numerictextbox [value]="record.minValue" format='N1' min='0' max='500' step='1' placeholder="Min Value" floatLabelType="Always"></ejs-numerictextbox>                
         </div>    
-        <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-numerictextbox formControlName="maxValue" format='N1' min='0' max='500' step='1' placeholder="Max Value" floatLabelType="Always"></ejs-numerictextbox>
-            <div *ngIf="this.invalidControl('maxValue')" class="e-error">
-                Max Value is required!
-            </div>
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-numerictextbox [value]="record.maxValue" format='N1' min='0' max='500' step='1' placeholder="Max Value" floatLabelType="Always"></ejs-numerictextbox>           
         </div>
     </div>
 
     <div class="row pad-b20">
-        <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-numerictextbox formControlName="highThreshold" format='N1' min='0' max='500' step='1' placeholder="High Threshold" floatLabelType="Always"></ejs-numerictextbox>
-            <div *ngIf="this.invalidControl('highThreshold')" class="e-error">
-                High Threshold is required!
-            </div>
-        </div>   
-        <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-numerictextbox formControlName="lowThreshold" format='N1' min='0' max='500' step='1' placeholder="Low Threshold" floatLabelType="Always"></ejs-numerictextbox>
-             <div *ngIf="this.invalidControl('lowThreshold')" class="e-error">
-                Low Threshold is required!
-            </div>
-        </div>    
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-numerictextbox [value]="record.lowThreshold" format='N1' min='0' max='500' step='1' placeholder="Low Threshold" floatLabelType="Always"></ejs-numerictextbox>            
+        </div>  
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-numerictextbox [value]="record.highThreshold" format='N1' min='0' max='500' step='1' placeholder="High Threshold" floatLabelType="Always"></ejs-numerictextbox>           
+        </div> 
     </div>
 
     <div class="row d-flex align-items-center edit-footer">
