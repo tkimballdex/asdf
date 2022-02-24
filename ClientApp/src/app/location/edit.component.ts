@@ -143,6 +143,9 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 
 		Object.assign(this.record, this.form.value);
 
+		this.record.latitude = parseFloat(this.record.latitude);
+		this.record.longitude = parseFloat(this.record.longitude);
+
 		var add = !this.record.id;
 		this.record.tenantId = this.tenant.id;
 		this.showSpinner();
