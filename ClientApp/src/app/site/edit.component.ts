@@ -217,7 +217,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			drawingManager.setMap(googleMap);
 
 			google.maps.event.addListener(drawingManager, 'polygoncomplete', function (event) {
-				$this.record.path = event.getPath().xd.map(x => { return [x.lng(), x.lat()]; });
+				$this.record.path = event.getPath().getArray().map(x => { return [x.lng(), x.lat()]; });
 			});
 
 		}, 0);
