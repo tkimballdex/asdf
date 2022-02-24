@@ -84,7 +84,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
 				component: MasterPageComponent,
 				canActivate: [MsalGuard],
 				children: [
-					{ path: '', component: HomeComponent },
+					//{ path: '', component: HomeComponent },
+					{ path: '', loadChildren: () => import('./dashboard/module').then(m => m.DashboardModule) },
 					{ path: 'account/tenant', component: ChooseTenantComponent },
 					{ path: 'customer', loadChildren: () => import('./customer/module').then(m => m.CustomerModule) },
 					{ path: 'site', loadChildren: () => import('./site/module').then(m => m.SiteModule) },

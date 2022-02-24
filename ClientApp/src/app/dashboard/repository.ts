@@ -27,4 +27,10 @@ export class DashboardRepository {
 	public dailySummary(filter: any) {
 		return this.http.post<any>(`/dashboard/dailySummary`, filter);
 	}
+
+	public getData() {
+		return this.http.post(`/dashboard/getData`, {
+			tenantId: this.tenant.id
+		});
+	}
 }

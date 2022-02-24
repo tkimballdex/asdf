@@ -1,4 +1,4 @@
-<div id="list-view" class="container-fluid" *ngIf="customers">
+<div id="list-view" class="container-fluid" *ngIf="data.customers">
     <div class="row d-flex align-items-center">
         <div class="col-md-6 d-flex align-items-center list-header">
             <span class="list-header-icon"><i class="fas fa-tachometer-alt"></i></span>
@@ -12,13 +12,13 @@
 
     <div class="row">
         <div class="col-md-3 col-lg-3 col-xl-3">
-            <ejs-dropdownlist [dataSource]="customers" [fields]="{ text: 'name', value: 'id' }" [(value)]="customerId" placeholder="Customer" floatLabelType="Always" (change)="customerChange()"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]='data.customers' [fields]="{ text: 'name', value: 'id' }" [(value)]="customerId" placeholder="Customer" floatLabelType="Always" (change)="customerChange()"></ejs-dropdownlist>
         </div>
         <div class="col-md-3 col-lg-3 col-xl-3">
             <ejs-multiselect [dataSource]='sites' [fields]="{ text: 'name', value: 'id' }" [(value)]="selectedSites" [mode]='mode' [placeholder]='placeholder' floatLabelType="Always" showClearButton='false' showSelectAll='true' showDropDownIcon='true' (change)="siteChange()"></ejs-multiselect>
         </div>
         <div class="col-md-3 col-lg-2 col-xl-2">
-            <ejs-dropdownlist [dataSource]="app.analytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="analyteId" placeholder="Analyte" floatLabelType="Always" (change)="analyteChange()"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]='data.analytes' [fields]="{ text: 'name', value: 'id' }" [(value)]="analyteId" placeholder="Analyte" floatLabelType="Always" (change)="analyteChange()"></ejs-dropdownlist>
         </div>
         <div class="col-md-3 col-lg-3 col-xl-2">
             <ejs-daterangepicker placeholder='Select a range' floatLabelType="Always" [(startDate)]='startDate' [(endDate)]='endDate' (change)="dateRangeChange()"></ejs-daterangepicker>
