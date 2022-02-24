@@ -113,6 +113,8 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			this.record.id = returnValue.id;
 			history.pushState('', '', `/auth/site/edit/${returnValue.id}`);
 		}
+
+		this.mapSetup();
 	}
 
     delete() {
@@ -217,7 +219,12 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			drawingManager.setMap(googleMap);
 
 			google.maps.event.addListener(drawingManager, 'polygoncomplete', function (event) {
-				$this.record.path = event.getPath().xd.map(x => { return [x.lng(), x.lat()]; });
+				$this.polygons.forEach(function (x) {
+					x.setMap(null);
+				});
+				
+				$this.polygons = [event];
+				$this.record.path = event.getPath().getArray().map(x => { return [x.lng(), x.lat()]; });
 			});
 
 		}, 0);
