@@ -13,6 +13,7 @@ import { ChartAllModule } from '@syncfusion/ej2-angular-charts';
 import { DropDownListModule, ListBoxAllModule, CheckBoxSelectionService, ComboBoxModule, MultiSelectModule } from '@syncfusion/ej2-angular-dropdowns';
 import { DatePickerModule, DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { TabModule } from '@syncfusion/ej2-angular-navigations';
+import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
 
 import { AccumulationLegendService, AccumulationTooltipService, AccumulationAnnotationService} from '@syncfusion/ej2-angular-charts';
 import { PageService, SortService, FilterService, GroupService } from '@syncfusion/ej2-angular-grids';
@@ -44,6 +45,7 @@ import { SliderModule } from '@syncfusion/ej2-angular-inputs';
 		TextBoxModule,
 		DashboardLayoutModule,
 		TabModule,
+		ToastAllModule,
 		AccumulationChartModule,
 		ChartAllModule,
 		SliderModule,

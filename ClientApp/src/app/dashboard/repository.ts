@@ -33,4 +33,8 @@ export class DashboardRepository {
 			tenantId: this.tenant.id
 		});
 	}
+
+	public communicate(filter: any) {
+		return this.http.post<any>(`/dashboard/communicate`, filter);
+	}
 }

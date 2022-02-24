@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation, OnInit, ViewChild, Injectable } from '@an
 import { GoogleMap } from '@angular/google-maps';
 import { ChartComponent } from '@syncfusion/ej2-angular-charts';
 import { AppService, EventQueueService, AppEvent, AppEventType } from '../shared/app.service';
+import { TenantService } from '../shared/tenant.service';
 import { PageComponent } from '../shared/page.component';
 import { DashboardRepository } from './repository';
 import { TabComponent } from '@syncfusion/ej2-angular-navigations';
@@ -20,7 +21,7 @@ import html2canvas from 'html2canvas';
 export class DashboardComponent extends PageComponent implements OnInit {
 	public mode: string;
 	public initialized = false;
-	constructor(private repository: DashboardRepository, private appService: AppService, private eventQueue: EventQueueService) {
+	constructor(private repository: DashboardRepository, private appService: AppService, private tenant: TenantService, private eventQueue: EventQueueService) {
 		super();
 	}
 
@@ -62,7 +63,6 @@ export class DashboardComponent extends PageComponent implements OnInit {
     public sliderMin: number;
     public sliderMax: number;    
     public sliderValue: number;
-
 
 	public redColorPalette: string[];
 	public greenColorPalette: string[];
@@ -333,6 +333,26 @@ export class DashboardComponent extends PageComponent implements OnInit {
 				}
 			});
 		});
+	}		
+	//------------------------------------------------------------------------------------------------------------------------
+	async communicate() {
+		this.showSpinner();
+		var returnValue = await this.repository.communicate({
+			tenantId: this.tenant.id,
+			customerId: this.customerId,
+			analyteId: this.analyteId,
+			testDate: this.siteMapDate
+		});
+		this.hideSpinner();
+
+		if (returnValue && returnValue.error) {
+			this.showErrorMessage(returnValue.description);
+		}
+		else {
+			var success = returnValue && returnValue.updated;
+			this.showSuccessMessage("Notifications & Alerts Sent!");
+		}
 	}
+	//------------------------------------------------------------------------------------------------------------------------
 }
 

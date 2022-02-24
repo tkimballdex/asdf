@@ -1,4 +1,4 @@
-<div id="list-view" class="container-fluid" *ngIf="data.customers">
+<div id="list-view" class="container-fluid" *ngIf="data">
     <div class="row d-flex align-items-center">
         <div class="col-md-6 d-flex align-items-center list-header">
             <span class="list-header-icon"><i class="fas fa-tachometer-alt"></i></span>
@@ -7,6 +7,7 @@
         <div class="col-md-6 d-flex align-items-center justify-content-end list-header">
             <span class="list-actions" id="mail"><button ejs-button cssClass="e-outline" iconCss="fas fa-envelope" (click)="sendEmail()"></button></span>
             <span class="list-actions"><button ejs-button cssClass="e-outline" iconCss="fad fa-download" (click)="export()"></button></span>
+            <span class="list-actions"><button ejs-button cssClass="e-outline" iconCss="fas fa-sms" (click)="communicate()"></button></span>
         </div>
     </div>
 
@@ -141,3 +142,4 @@
     </div>
 
 </div>
+<ejs-toast #toast></ejs-toast>
