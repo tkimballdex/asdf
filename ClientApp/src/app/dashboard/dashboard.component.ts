@@ -37,7 +37,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	public tab: TabComponent;
 
 	public selectedSites: any;
-	public customers: any;
+	public data: any;
 	public customerId: string;
 	public sites: any;
 
@@ -82,7 +82,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.greenColorPalette = ['#32bbae'];
 		this.colorPalette = ['#ee5253', '#74b9ff', '#a29bfe', '#ff7675', '#fdcb6e'];
 		this.app = await this.appService.getData();
-		this.customers = await this.repository.listCustomers();
+		this.data = await this.repository.getData();
 		this.sites = [];
 
 		var today = new Date();
@@ -91,9 +91,9 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		this.dateRangeChange();
 		this.tooltip = { enable: true };
 
-		this.analyteId = this.app.analytes[0].id;
+		this.analyteId = this.data.analytes[0].id;
 		this.initialized = true;
-		this.customerId = this.customers[0].id;
+		this.customerId = this.data.customers[0].id;
 		await this.customerChange();
 	}	
 

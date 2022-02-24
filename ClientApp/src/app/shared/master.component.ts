@@ -34,10 +34,10 @@ export class MasterPageComponent implements OnInit {
 		console.dir(this.authService.instance.getActiveAccount());
 
         this.AccountMenuItem = [
-            {
+            /*{
                 id: 'account',
                 text: 'My Account'
-            },
+            },*/
             {
                 id: 'tenant',
                 text: 'Switch Tenant'
