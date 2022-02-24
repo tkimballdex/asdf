@@ -113,6 +113,8 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			this.record.id = returnValue.id;
 			history.pushState('', '', `/auth/site/edit/${returnValue.id}`);
 		}
+
+		this.mapSetup();
 	}
 
     delete() {
