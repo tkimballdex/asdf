@@ -42,10 +42,6 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	public customerId: string;
 	public sites: any;
 
-	public customerchange: number =0;
-	public countychange: number =-12;
-	public statechange: number =0;
-
 	public analyteId: string;
 	public graphData: any;
 	public startDate: Date;
