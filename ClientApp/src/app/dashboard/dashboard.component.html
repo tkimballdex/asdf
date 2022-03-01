@@ -88,11 +88,8 @@
                                 <p style="text-align:center;">Site Estimates</p>
                                 <div style="text-align:center" *ngIf="displaySummary">
                                     <table width="100%">
-                                        <tr>
-                                            <td class="tilearrow" width="30%">
-                                                <span class="fas fa-long-arrow-alt-right" [ngClass]="displaySummary.siteEstimateDirection > 0 ? 'tileArrowUp' : displaySummary.siteEstimateDirection  < 0 ? 'tileArrowDown' : 'tileArrowRight'"></span>
-                                            </td>
-                                            <td class="tilevalue" width="40%">
+                                        <tr>                                            
+                                            <td width="70%">
                                                 {{displaySummary.siteEstimateCurrentCases}}
                                                 <br/>{{displaySummary.siteEstimatePredictedCases}}
                                             </td>
