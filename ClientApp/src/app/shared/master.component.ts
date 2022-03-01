@@ -97,11 +97,11 @@ export class MasterPageComponent implements OnInit {
 			sampleMenu.push({ id: '/auth/sampletest/list', text: 'Tests' });
 		}	
 
-		if (privileges.samples.read) {
+		if (privileges.counties.read) {
 			sampleMenu.push({ id: '/auth/countystat/list', text: 'County Stats' });
 		}
 
-		if (privileges.samples.read) {
+		if (privileges.states.read) {
 			sampleMenu.push({ id: '/auth/statestat/list', text: 'State Stats' });
 		}	
 
