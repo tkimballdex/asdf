@@ -71,6 +71,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.record.receivedDate = this.record.receivedDate ? new Date(this.record.receivedDate) : null;
 
 		this.form = new FormGroup({
+			sampleSuccessful: new FormControl(!this.record.failureReasonId),
 			sampleNo: new FormControl(this.record.sampleNo),
 			vendorId: new FormControl(this.record.vendorId, [Validators.required])
 		});
@@ -80,6 +81,14 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		if (history.state.tests) {
 			this.editTab.selectedItem = 1;
 		}
+	}
+	//-----------------------------------------------------------------------------------------
+	setSucessStatus() {
+		this.record.failureReasonId = null;
+	}
+	//-----------------------------------------------------------------------------------------
+	setFailureStatus() {
+		
 	}
 	//-----------------------------------------------------------------------------------------
 	async save() {
@@ -93,6 +102,11 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 
 			var add = !this.record.id;
 			this.record.tenantId = this.tenant.id;
+
+			if(this.form.get('sampleSuccessful').value)
+			{
+				this.record.failureReasonId = null;
+			}
 
 			this.showSpinner();
 			var returnValue = await this.repository.save(this.record);
