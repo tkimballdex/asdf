@@ -127,6 +127,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
 })
 export class AppModule {
     constructor(library: FaIconLibrary) {
-        library.addIcons(faHome, faHomeAlt);
+        //library.addIcons(faHome, faHomeAlt);
     }
 }
