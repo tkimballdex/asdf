@@ -12,29 +12,37 @@
         </div>
     </div>
     <div class="row d-flex align-items-end">
-        <div class="col-3">
-            <ejs-textbox [(value)]="name" placeholder="Name" floatLabelType="Always"></ejs-textbox>
+        <div class="col-md-4 col-lg-3 col-xl-2">
+            <ejs-textbox [(value)]="form.searchTxt" placeholder="Search For" floatLabelType="Always"></ejs-textbox>
         </div>
-        <div class="col-3">
+        <div class="col-md-6 col-lg-3 col-xl-2">
+            <ejs-dropdownlist [dataSource]="customers" [(value)]="form.customerId" [fields]="{ text: 'name', value: 'id' }" placeholder="Customer" floatLabelType="Always"></ejs-dropdownlist>
+        </div>
+        <div class="col-md-4 col-lg-3 col-xl-2 pad-t20">
             <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>
         </div>
     </div>
     <div class="row">
         <div class="col-12 pad-t20">
-            <ejs-grid #grid [dataSource]='list' *ngIf="list" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }'
+            <ejs-grid #grid [dataSource]='list' *ngIf="list" [allowPaging]="true" [pageSettings]='form.pageSettings' (actionComplete)='gridActionHandler($event)'
                       [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' [allowSorting]="true" [allowFiltering]="false">
                 <e-columns>
                     <e-column width="70" [visible]='true'>
                         <ng-template #template let-data>
                             <a [routerLink]="['../edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
                         </ng-template>
-                    </e-column>                    
-                    <e-column field='referenceNo' headerText='Reference No'></e-column>
-                    <e-column field='sample' headerText='Sample'></e-column>
-                    <e-column field='site' headerText='Site'></e-column>
+                    </e-column>   
+                    <e-column field='testNo' headerText='Test No'></e-column>  
+                    <e-column field='scheduledDate' type='date' [format]='dateFormat' headerText='Scheduled For' width='150'></e-column>    
+                    <e-column field='analyte' headerText='Analyte'></e-column>
                     <e-column field='testType' headerText='Test Type'></e-column>
-                    <e-column field='result' headerText='Result'></e-column>
-                    <e-column field='rejected' headerText='Rejected'></e-column>
+                    <e-column field='sampleNo' headerText='Sample No'></e-column> 
+                    <e-column field='customer' headerText='Customer'></e-column>
+                    <e-column field='site' headerText='Site'></e-column> 
+                    <e-column field='lab' headerText='Lab'></e-column>                            
+                    <e-column field='referenceNo' headerText='Reference No'></e-column> 
+                    <e-column field='rejected' headerText='Rejected'></e-column>   
+                    <e-column field='result' headerText='Result'></e-column>                    
                     <e-column field='completedDate' type='date' [format]='dateFormat' headerText='Completed On' width='150'></e-column>
                 </e-columns>
             </ejs-grid>

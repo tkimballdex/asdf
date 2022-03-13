@@ -11,11 +11,8 @@
 
     <div class="row pad-t10">
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="referenceNo" placeholder="Reference No" floatLabelType="Always"></ejs-textbox>
-            <div *ngIf="this.invalidControl('referenceNo')" class="e-error">
-                Reference No is required!
-            </div>
-        </div>
+            <ejs-textbox formControlName="testNo" placeholder="Test No" floatLabelType="Always" [readonly]="true"></ejs-textbox>
+        </div>        
         <div class="col-md-6 col-lg-5 col-xl-4" *ngIf="record.sample">
             <ejs-datepicker [(value)]="record.createdDate" readonly="true" placeholder="Created Date" floatLabelType="Always"></ejs-datepicker>
         </div>
@@ -83,6 +80,16 @@
         </div>
     </div>
 
+
+    <div class="row pad-t20">
+        <div class="col-md-6 col-lg-5 col-xl-4">            
+            <ejs-textbox formControlName="referenceNo" placeholder="Reference No" floatLabelType="Always"></ejs-textbox>
+            <div *ngIf="this.invalidControl('referenceNo')" class="e-error">
+                Reference No is required!
+            </div>
+        </div>
+    </div>
+   
     <div class="row pad-t20">
         <div class="col-md-6 col-lg-5 col-xl-4 d-flex align-items-end">
             <div class="row">
@@ -155,7 +162,7 @@
 
         <div class="col-md-6 d-flex justify-content-end">
             <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
-            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/sample/edit', record.sampleId]" [state]='{ tests: true }'>Close</button>
+            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/sampletest/list']" [state]='{ formState: true }'>Close</button>
         </div>
     </div>
 
