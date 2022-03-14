@@ -127,7 +127,7 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
             setTimeout(() => this.router.navigate(['/auth/sampletest/list']), 1000);
         }
 	}
-
+	//-----------------------------------------------------------------------------------------
 	async customerChange() {
 		this.sites = [];
 		this.siteId = null;
@@ -137,7 +137,7 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 		this.record.sampleId = null;
 		this.sites = await this.repository.listSites(this.customerId);
 	}
-
+	//-----------------------------------------------------------------------------------------
 	async siteChange() {
 		this.locations = null;
 		this.locationId = null;
@@ -145,7 +145,7 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 		this.record.sampleId = null;
 		this.locations = await this.repository.listLocations(this.siteId);
 	}
-
+	//-----------------------------------------------------------------------------------------
 	async locationChange() {
 		this.samples = null;
 		this.record.sampleId = null;

@@ -33,17 +33,17 @@
                         </ng-template>
                     </e-column>   
                     <e-column field='testNo' headerText='Test No'></e-column>  
-                    <e-column field='scheduledDate' type='date' [format]='dateFormat' headerText='Scheduled For' width='150'></e-column>    
+                    <e-column field='scheduledDate' type='date' [format]='dateFormat' headerText='Scheduled For'></e-column>    
                     <e-column field='analyte' headerText='Analyte'></e-column>
-                    <e-column field='testType' headerText='Test Type'></e-column>
+                    <e-column field='testType' headerText='Test Type' hideAtMedia='(min-width: 1200px)'></e-column>
                     <e-column field='sampleNo' headerText='Sample No'></e-column> 
                     <e-column field='customer' headerText='Customer'></e-column>
                     <e-column field='site' headerText='Site'></e-column> 
                     <e-column field='lab' headerText='Lab'></e-column>                            
-                    <e-column field='referenceNo' headerText='Reference No'></e-column> 
+                    <e-column field='referenceNo' headerText='Reference No' hideAtMedia='(min-width: 1200px)'></e-column> 
                     <e-column field='rejected' headerText='Rejected'></e-column>   
                     <e-column field='result' headerText='Result'></e-column>                    
-                    <e-column field='completedDate' type='date' [format]='dateFormat' headerText='Completed On' width='150'></e-column>
+                    <e-column field='completedDate' type='date' [format]='dateFormat' headerText='Completed On' hideAtMedia='(min-width: 1200px)'></e-column>
                 </e-columns>
             </ejs-grid>
         </div>
