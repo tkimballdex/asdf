@@ -173,6 +173,7 @@
     vertical-align:middle;
     text-align:center;
     padding:10px;
+    font-size: 0px;
 }
 
 .dock-menu.e-close ul .e-menu-item.e-menu-icon {

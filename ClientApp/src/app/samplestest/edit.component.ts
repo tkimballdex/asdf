@@ -18,32 +18,29 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 	}
 
 	public form: FormGroup;
-	public customers: any;
-	public customerId: string;
-	public sites: any;
-	public siteId: string;
-	public locations: any;
-	public locationId: any;
-	public samples: any;
-
     public record: any;
 	public deleteDialog: Dialog;
 	public variants: any;
-	public data: any;
-
+	public recordData: any;
+	public testData: any;
+	public testTypes: any;
+	public resultTypes: any;
+	public analytes: any;
     //-----------------------------------------------------------------------------------------
     async ngOnInit() {       
         this.showSpinner();
         this.app = await this.appService.getData();
         this.privileges = this.app.privileges.tests;
 
+		this.analytes = await this.repository.getAnalytes();
+
 		var id = this.route.snapshot.paramMap.get('id');
 		var sampleId = this.route.snapshot.paramMap.get('sampleId');
 
 		if (id) {
-			this.data = await this.repository.get(id);
-			this.record = this.data.record;
-			this.record.variants = this.data.variants;
+			this.recordData = await this.repository.get(id);
+			this.record = this.recordData.record;
+			this.record.variants = this.recordData.variants;
 		}
 		else if (sampleId) {
 			var sample = await this.repository.getSample(sampleId);
@@ -57,8 +54,9 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 		}
 		else {
 			this.record = {};
-			this.customers = await this.repository.listCustomers();
 		}
+
+		this.testData = await this.repository.getData(this.record.analyteId);
 
 		this.hideSpinner();
 
@@ -66,14 +64,9 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 			referenceNo: new FormControl(this.record.referenceNo, [Validators.required]),
 			analyteId: new FormControl(this.record.analyteId, [Validators.required]),
 			testTypeId: new FormControl(this.record.testTypeId, [Validators.required]),
-			sampleId: new FormControl(this.record.sampleId, [Validators.required])
+			sampleId: new FormControl(this.record.sampleId, [Validators.required]),
+			testSuccessful: new FormControl(!this.record.rejectionReasonId)
 		});
-
-		if (!this.record.sample) {
-			this.form.addControl('customerId', new FormControl(this.customerId, [Validators.required]));
-			this.form.addControl('siteId', new FormControl(this.siteId, [Validators.required]));
-			this.form.addControl('locationId', new FormControl(this.locationId, [Validators.required]));
-		}
     }
     //-----------------------------------------------------------------------------------------
 	async save() {
@@ -128,28 +121,15 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
         }
 	}
 	//-----------------------------------------------------------------------------------------
-	async customerChange() {
-		this.sites = [];
-		this.siteId = null;
-		this.locations = null;
-		this.locationId = null;
-		this.samples = null;
-		this.record.sampleId = null;
-		this.sites = await this.repository.listSites(this.customerId);
+	async analyteChange(e) {
+		this.testTypes = null;
+		this.resultTypes = null;
+		this.form.get('analyteId').setValue(null);
+		this.recordData = await this.repository.getData(e.itemData.id);
+	}
+    //-----------------------------------------------------------------------------------------	
+	setSucessStatus() {
+		this.record.failureReasonId = null;
 	}
 	//-----------------------------------------------------------------------------------------
-	async siteChange() {
-		this.locations = null;
-		this.locationId = null;
-		this.samples = null;
-		this.record.sampleId = null;
-		this.locations = await this.repository.listLocations(this.siteId);
-	}
-	//-----------------------------------------------------------------------------------------
-	async locationChange() {
-		this.samples = null;
-		this.record.sampleId = null;
-		this.samples = await this.repository.listSamples(this.locationId);
-	}
-    //-----------------------------------------------------------------------------------------
 }

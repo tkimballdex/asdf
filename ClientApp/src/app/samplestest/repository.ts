@@ -19,13 +19,20 @@ export class SampleTestRepository {
         return this.http.post<any>(`/sampletest/get/${id}`);
     }
 
-	public getData() {
-		return this.http.post<any>(`/sampletest/getData`);
+	public getData(analyteId: string) {
+		return this.http.post(`/sampletest/getData`, {
+			tenantId: this.tenant.id,
+			analyteId: analyteId
+		});
 	}
 
     public list(filter: any) {
         return this.http.post(`/sampletest/list`, filter);
     }
+
+	public getAnalytes() {
+		return this.http.post<any>(`/sampletest/analyteList/${this.tenant.id}`);
+	}
 
 	public listCustomers() {
 		return this.http.post(`/customer/list`, {
