@@ -31,7 +31,9 @@ export class SampleTestRepository {
     }
 
 	public getAnalytes() {
-		return this.http.post<any>(`/sampletest/analyteList/${this.tenant.id}`);
+		return this.http.post(`/sampletest/analyteList`, {
+			tenantId: this.tenant.id
+		});
 	}
 
 	public listCustomers() {

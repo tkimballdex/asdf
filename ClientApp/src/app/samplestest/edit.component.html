@@ -27,7 +27,7 @@
         </div>
 
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist [dataSource]="testData.testTypes" [fields]="{ text: 'name', value: 'id' }" formControlName="testTypeId" placeholder="Test Type" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="testTypes" [fields]="{ text: 'name', value: 'id' }" formControlName="testTypeId" placeholder="Test Type" floatLabelType="Always"></ejs-dropdownlist>
             <div *ngIf="this.invalidControl('testTypeId')" class="e-error">
                 Test Type is required!
             </div>
@@ -54,10 +54,7 @@
 
     <div class="row pad-t20">
         <div class="col-md-6 col-lg-5 col-xl-4">            
-            <ejs-textbox formControlName="referenceNo" placeholder="Lab Reference No" floatLabelType="Always"></ejs-textbox>
-            <div *ngIf="this.invalidControl('referenceNo')" class="e-error">
-                Reference No is required!
-            </div>
+            <ejs-textbox formControlName="referenceNo" placeholder="Lab Reference No" floatLabelType="Always"></ejs-textbox>           
         </div>
         <div class="col-md-6 col-lg-5 col-xl-4">
             <ejs-datepicker [(value)]="record.completedDate" placeholder="Test Completed On" floatLabelType="Always"></ejs-datepicker>
@@ -72,27 +69,16 @@
         </div>                               
     </div> 
 
-    <div class="row" *ngIf="form.get('testSuccessful').value">
-        <div class="col-md-6 col-lg-5 col-xl-4 d-flex align-items-end">
-            <div class="row">
-                <div class="col-md-12">
-                    <label for="testResult" class="edit-label">Test Result</label>
-                </div>
-                <div class="col-md-12">
-                    <mat-button-toggle-group id="testResult" name="testResult" class="threeStateToggleBtn" [(value)]="record.result">
-                        <mat-button-toggle [value]="null" name="testResult">None</mat-button-toggle>
-                        <mat-button-toggle [value]="true" name="testResult" [ngClass]="{ 'success-green': record.result == true }">Positive</mat-button-toggle>
-                        <mat-button-toggle [value]="false" name="testResult" [ngClass]="{ 'failure-red': record.result == false }">Negative</mat-button-toggle>
-                    </mat-button-toggle-group>
-                </div>
-            </div>
+    <div class="row pad-t10" *ngIf="form.get('testSuccessful').value">
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-dropdownlist [dataSource]="testResults" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.testResultId" placeholder="Test Result" floatLabelType="Always"></ejs-dropdownlist>
         </div>
         <div class="col-md-6 col-lg-5 col-xl-4">
             <ejs-numerictextbox [(value)]="record.resultValue" format='N1' min='-100' max='150' step='0.1' placeholder="ResultValue" floatLabelType="Always"></ejs-numerictextbox>
         </div>
     </div> 
     
-    <div class="row">
+    <div class="row pad-t10">
         <div class="col-md-6 col-lg-5 col-xl-4" *ngIf="!form.get('testSuccessful').value">
             <ejs-dropdownlist [dataSource]="app.rejectionReasons" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.rejectionReasonId" placeholder="Rejection Reason" floatLabelType="Always"></ejs-dropdownlist>
         </div>

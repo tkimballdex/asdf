@@ -24,7 +24,7 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 	public recordData: any;
 	public testData: any;
 	public testTypes: any;
-	public resultTypes: any;
+	public testResults: any;
 	public analytes: any;
     //-----------------------------------------------------------------------------------------
     async ngOnInit() {       
@@ -49,7 +49,8 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 				customer: sample.customer,
 				location: sample.location,
 				site: sample.site,
-				sample: sample.name
+				sample: sample.name,
+				referenceNo: ""
 			}
 		}
 		else {
@@ -57,11 +58,12 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 		}
 
 		this.testData = await this.repository.getData(this.record.analyteId);
+		this.testTypes = this.testData.testTypes;
+		this.testResults = this.testData.testResults;
 
 		this.hideSpinner();
 
 		this.form = new FormGroup({
-			referenceNo: new FormControl(this.record.referenceNo, [Validators.required]),
 			analyteId: new FormControl(this.record.analyteId, [Validators.required]),
 			testTypeId: new FormControl(this.record.testTypeId, [Validators.required]),
 			sampleId: new FormControl(this.record.sampleId, [Validators.required]),
@@ -122,10 +124,15 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 	}
 	//-----------------------------------------------------------------------------------------
 	async analyteChange(e) {
+		this.showSpinner();
 		this.testTypes = null;
-		this.resultTypes = null;
-		this.form.get('analyteId').setValue(null);
-		this.recordData = await this.repository.getData(e.itemData.id);
+		this.testResults = null;
+		this.form.get('analyteId').setValue(e.itemData.id);
+		this.form.get('testTypeId').setValue(null);
+		this.testData = await this.repository.getData(e.itemData.id);
+		this.testTypes = this.testData.testTypes;
+		this.testResults = this.testData.testResults;
+		this.hideSpinner();
 	}
     //-----------------------------------------------------------------------------------------	
 	setSucessStatus() {

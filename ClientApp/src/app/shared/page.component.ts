@@ -47,37 +47,37 @@ export class PageComponent {
     public showSaveMessage(success: boolean) {
         if (success) {
             this.toast.show({
-                content: 'Saved successfully!', timeOut: 2000, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-success'
+                content: 'Record saved successfully!', timeOut: 2000, width:400, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-success e-toast-gen'
             });
         }
         else {
             this.toast.show({
-                content: 'Error occurred!', timeOut: 2000, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-danger'
+                content: 'Error occurred!', timeOut: 2000, width:400, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-danger e-toast-gen'
             });
         }
     }
 
     public showSuccessMessage(message: string) {
         this.toast.show({
-            content: message, timeOut: 2000, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-success'
+            content: message, timeOut: 2000, width:400, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-success'
         });
     }
 
     public showErrorMessage(message: string) {
         this.toast.show({
-            content: message, timeOut: 2000, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-danger'
+            content: message, timeOut: 2000, width:400, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-danger'
         });
     }
 
     public showDeleteMessage(success: boolean) {
         if (success) {
             this.toast.show({
-                content: 'Deleted successfully!', timeOut: 2000, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-success'
+                content: 'Deleted successfully!', timeOut: 2000, width:400, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-success'
             });
         }
         else {
             this.toast.show({
-                content: 'Error occurred while deleting!', timeOut: 2000, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-danger'
+                content: 'Error occurred while deleting!', timeOut: 2000, width:400, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-danger'
             });
         }
     }

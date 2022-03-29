@@ -229,3 +229,8 @@
     box-sizing: border-box;
 }
 /* end - content area styles *************************************/
+.e-toast-gen
+{
+    padding:50px!important;
+    text-align: center;
+}
