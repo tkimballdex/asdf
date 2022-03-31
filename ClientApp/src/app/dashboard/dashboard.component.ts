@@ -169,7 +169,7 @@ export class DashboardComponent extends PageComponent implements OnInit {
 
 	async getSummary() {
 		if (!this.selectedSites || !this.siteMapDate || !this.initialized) return;
-		var data = await this.repository.dailySummary({ customerId: this.customerId, sites: this.selectedSites, analyteId: this.analyteId, startDate: this.startDate, endDate: this.endDate });
+		var data = await this.repository.dailySummary({ customerId: this.customerId, sites: this.selectedSites, analyteId: this.analyteId, summaryDate: this.siteMapDate, startDate: this.startDate, endDate: this.endDate });
 		this.displaySummary = data.dailySummary;
 		this.tileData = data.tileData;
 		this.isCovid = data.isCovid;
