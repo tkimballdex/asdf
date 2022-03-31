@@ -52,6 +52,9 @@ export class DashboardComponent extends PageComponent implements OnInit {
 	public allowDragging: boolean = false;
 	public placeholder: string = 'Site';
 	public displaySummary = {};
+	public tileData = {};
+	public isCovid: boolean = false;
+	public isWater: boolean = false;
 
 	public sliderTooltipData: Object = { placement: 'Before', isVisible: true };
     public sliderTicksData: Object = { placement: 'After', largeStep: 1 * 86400000 };
@@ -168,6 +171,9 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		if (!this.selectedSites || !this.siteMapDate || !this.initialized) return;
 		var data = await this.repository.dailySummary({ customerId: this.customerId, sites: this.selectedSites, analyteId: this.analyteId, startDate: this.startDate, endDate: this.endDate });
 		this.displaySummary = data.dailySummary;
+		this.tileData = data.tileData;
+		this.isCovid = data.isCovid;
+		this.isWater = data.isWater;
 		this.siteMap(data.sites);
 	}
 	

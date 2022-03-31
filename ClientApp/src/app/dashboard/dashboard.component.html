@@ -38,7 +38,9 @@
                             </div>
                         </ng-template>
                     </e-panel>
-                    <e-panel [sizeX]="4" [sizeY]="2" [row]="2" [col]="0">
+
+                    <!--Start Of Covid Analyte Tiles -->
+                    <e-panel [sizeX]="4" [sizeY]="2" [row]="2" [col]="0" *ngIf="isCovid">
                         <ng-template #content>
                             <div class="col-12">
                                 <p style="text-align:center;">Current COVID Prevalence</p>
@@ -60,7 +62,7 @@
                             </div>
                         </ng-template>
                     </e-panel>
-                    <e-panel [sizeX]="4" [sizeY]="2" [row]="2" [col]="4">
+                    <e-panel [sizeX]="4" [sizeY]="2" [row]="2" [col]="4" *ngIf="isCovid">
                         <ng-template #content>
                             <div class="col-12">
                                 <p style="text-align:center;">Predicted COVID Change</p>
@@ -82,7 +84,7 @@
                             </div>
                         </ng-template>
                     </e-panel>
-                    <e-panel [sizeX]="4" [sizeY]="2" [row]="2" [col]="8">
+                    <e-panel [sizeX]="4" [sizeY]="2" [row]="2" [col]="8" *ngIf="isCovid">
                         <ng-template #content>
                             <div class="col-12">
                                 <p style="text-align:center;">Site Estimates</p>
@@ -102,12 +104,83 @@
                             </div>
                         </ng-template>
                     </e-panel>
-                    <e-panel [sizeX]="12" [sizeY]="6" [row]="5" [col]="0">
+                    <!--End Of Covid Analyte Tiles -->
+
+                    <!--Start Of Water Tests Analyte Tiles -->
+                    <e-panel [sizeX]="4" [sizeY]="2" [row]="4" [col]="0" *ngIf="isWater">
+                        <ng-template #content>
+                            <div class="col-12" *ngIf="tileData">
+                                <p style="text-align:center;">{{tileData.tile1Title}}</p>
+                                <div style="text-align:center">
+                                    <table width="100%">
+                                        <tr>
+                                            <td class="tilearrow" width="30%">
+                                                <span class="fas fa-long-arrow-alt-right" [ngClass]="tileData.tile1Direction > 0 ? 'tileArrowUp' : tileData.tile1Direction  <  0 ? 'tileArrowDown' : 'tileArrowRight'"></span>
+                                            </td>
+                                            <td class="tilevalue" width="40%">
+                                                {{tileData.tile1Value}}
+                                            </td>
+                                            <td class="tilechange" width="30%">
+                                                {{tileData.tile1Change}}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </e-panel>
+                    <e-panel [sizeX]="4" [sizeY]="2" [row]="4" [col]="4" *ngIf="isWater">
+                        <ng-template #content>
+                            <div class="col-12" *ngIf="tileData">
+                                <p style="text-align:center;">{{tileData.tile2Title}}</p>
+                                <div style="text-align:center">
+                                    <table width="100%">
+                                        <tr>
+                                            <td class="tilearrow" width="30%">
+                                                <span class="fas fa-long-arrow-alt-right" [ngClass]="tileData.tile2Direction > 0 ? 'tileArrowUp' : tileData.tile2Direction  < 0 ? 'tileArrowDown' : 'tileArrowRight'"></span>
+                                            </td>
+                                            <td class="tilevalue" width="40%">
+                                                {{tileData.tile2Value}}
+                                            </td>
+                                            <td class="tilechange" width="30%">
+                                                {{tileData.tile2Change}}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </e-panel>
+                    <e-panel [sizeX]="4" [sizeY]="2" [row]="4" [col]="8" *ngIf="isWater">
+                        <ng-template #content>
+                            <div class="col-12" *ngIf="tileData">
+                                <p style="text-align:center;">{{tileData.tile3Title}}</p>
+                                <div style="text-align:center">
+                                    <table width="100%">
+                                        <tr>
+                                            <td class="tilearrow" width="30%">
+                                                <span class="fas fa-long-arrow-alt-right" [ngClass]="tileData.tile3Direction > 0 ? 'tileArrowUp' : tileData.tile3Direction  < 0 ? 'tileArrowDown' : 'tileArrowRight'"></span>
+                                            </td>
+                                            <td class="tilevalue" width="40%">
+                                                {{tileData.tile3Value}}
+                                            </td>
+                                            <td class="tilechange" width="30%">
+                                                {{tileData.tile3Change}}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </e-panel>
+                    <!--End Of Water Tests Analyte Tiles -->
+
+                    <e-panel [sizeX]="12" [sizeY]="6" [row]="70" [col]="0">
                         <ng-template #content>
                             <google-map id="dashboard-map"></google-map>
                         </ng-template>
                     </e-panel>
-                    <e-panel [sizeX]="12" [sizeY]="6" [row]="11" [col]="0">
+                    <e-panel [sizeX]="12" [sizeY]="6" [row]="80" [col]="0">
                         <ng-template #header>
                             <div>Positive vs Negative Locations</div>
                         </ng-template>
@@ -116,7 +189,7 @@
                             </ejs-chart>
                         </ng-template>
                     </e-panel>
-                    <e-panel [sizeX]="6" [sizeY]="5" [row]="17" [col]="0">
+                    <e-panel [sizeX]="6" [sizeY]="5" [row]="90" [col]="0">
                         <ng-template #header>
                             <div>Daily Positive Locations</div>
                         </ng-template>
@@ -125,7 +198,7 @@
                             </ejs-chart>
                         </ng-template>
                     </e-panel>
-                    <e-panel [sizeX]="6" [sizeY]="5" [row]="17" [col]="6">
+                    <e-panel [sizeX]="6" [sizeY]="5" [row]="90" [col]="6">
                         <ng-template #header>
                             <div>Positive Locations by Site</div>
                         </ng-template>
