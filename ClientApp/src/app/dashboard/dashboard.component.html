@@ -199,7 +199,8 @@
                             </div>
                         </ng-template>
                     </e-panel>
-                    <e-panel [sizeX]="4" [sizeY]="2" [row]="6" [col]="0" *ngIf="isWater">
+                    
+                    <e-panel [sizeX]="4" [sizeY]="2" [row]="30" [col]="0" *ngIf="isWater">
                         <ng-template #content>
                             <div class="col-12" *ngIf="tileData">
                                 <p style="text-align:center;">{{tileData.tile5Title}}</p>
@@ -222,7 +223,7 @@
                             </div>
                         </ng-template>
                     </e-panel>
-                    <e-panel [sizeX]="4" [sizeY]="2" [row]="6" [col]="4" *ngIf="isWater">
+                    <e-panel [sizeX]="4" [sizeY]="2" [row]="30" [col]="4" *ngIf="isWater">
                         <ng-template #content>
                             <div class="col-12" *ngIf="tileData">
                                 <p style="text-align:center;">{{tileData.tile6Title}}</p>
@@ -245,7 +246,7 @@
                             </div>
                         </ng-template>
                     </e-panel>
-                    <e-panel [sizeX]="4" [sizeY]="2" [row]="6" [col]="8" *ngIf="isWater">
+                    <e-panel [sizeX]="4" [sizeY]="2" [row]="30" [col]="8" *ngIf="isWater">
                         <ng-template #content>
                             <div class="col-12" *ngIf="tileData">
                                 <p style="text-align:center;">{{tileData.tile7Title}}</p>
@@ -270,7 +271,7 @@
                     </e-panel>
                     <!--End Of Water Tests Analyte Tiles -->
 
-                    <e-panel [sizeX]="12" [sizeY]="6" [row]="70" [col]="0">
+                    <e-panel [sizeX]="12" [sizeY]="6" [row]="20" [col]="0">
                         <ng-template #content>
                             <google-map id="dashboard-map"></google-map>
                         </ng-template>
