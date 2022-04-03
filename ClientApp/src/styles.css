@@ -207,7 +207,8 @@ mat-form-field.mat-form-field {
 }
 
 #list-view label{
-    top:75%;
+    padding-top:8px;
+    font-weight: 600;
 }
 
 .e-search:before {
@@ -284,6 +285,7 @@ mat-form-field.mat-form-field {
 
 #edit-view label.e-float-text {
     padding-top:8px;
+    font-weight: 600;
 }
 #edit-view ejs-grid.edit-grid .e-headercelldiv {
     font-weight: 600;
