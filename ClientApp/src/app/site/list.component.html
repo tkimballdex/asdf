@@ -5,9 +5,9 @@
             <span class="list-header-title">Sites</span>
         </div>
         <div class="col-md-6 d-flex align-items-center justify-content-end list-header">
-            <span class="list-actions" id="mail"><button ejs-button cssClass="e-outline" [disabled]="!privileges.update" iconCss="fas fa-envelope" (click)="sendEmail()"></button></span>
-            <span class="list-actions" id="mail"><button ejs-button cssClass="e-outline" [disabled]="!privileges.update" iconCss="fas fa-sms" (click)="sendSms()"></button></span>
-            <span class="list-actions"><button ejs-button cssClass="e-outline" [disabled]="!privileges.download" iconCss="fad fa-download" (click)="export()"></button></span>
+            <span class="list-actions" id="mail"><button ejs-button cssClass="e-outline" [disabled]="!privileges.update" iconCss="fas fa-envelope" (click)="sendEmail()" title="Send Email"></button></span>
+            <span class="list-actions" id="mail"><button ejs-button cssClass="e-outline" [disabled]="!privileges.update" iconCss="fas fa-sms" (click)="sendSms()" title="Send SMS"></button></span>
+            <span class="list-actions"><button ejs-button cssClass="e-outline" [disabled]="!privileges.download" iconCss="fad fa-download" (click)="export()" title="Download List"></button></span>
         </div>
     </div>
     <div class="row d-flex align-items-end list-content">
@@ -35,7 +35,8 @@
                     <e-column field='city' headerText='City'></e-column>
                     <e-column field='state' headerText='State' width="80"></e-column>
                     <e-column field='postalCode' headerText='Postal Code' textAlign='Center' width="130"></e-column>
-                    <e-column field='phoneNo' headerText='Phone No' width="120"></e-column>
+                    <e-column field='notificationEmail' headerText='Notification Email'></e-column>
+                    <e-column field='alerts' headerText='Alert Phone No' width="120"></e-column>
                     <e-column field='locations' headerText='Locations' textAlign='Center' width="120"></e-column>
                 </e-columns>
             </ejs-grid>

@@ -15,11 +15,11 @@ export class SiteListComponent extends PageComponent implements OnInit {
 	constructor(private repository: SiteRepository, public appService: AppService, private tenant: TenantService, private eventQueue: EventQueueService, private formState: FormState) {
         super();
     }
-
+	//------------------------------------------------------------------------------------------------------------------------
 	public form: FormParams;
 	public list: any;
 	@ViewChild('grid') public grid: GridComponent;
-
+	//------------------------------------------------------------------------------------------------------------------------
     async ngOnInit() {
 		this.privileges = (await this.appService.getPrivileges()).sites;
 		await this.tenant.validate();
@@ -71,18 +71,19 @@ export class SiteListComponent extends PageComponent implements OnInit {
 	}
 	//------------------------------------------------------------------------------------------------------------------------
 	sendEmail(): void {
-		var emailList = this.list.map(x => { return this.validateEmail(x.contactEmail) ? { name: x.contactName, email: x.contactEmail } : null; }).filter(x => x != null);
+		var emailList = this.list.map(x => { return this.validateEmail(x.notificationEmail) ? { name: x.contactName, email: x.notificationEmail } : null; }).filter(x => x != null);
 		this.eventQueue.dispatch(new AppEvent(AppEventType.SendEmail, { emailList }));
 	}
 	//------------------------------------------------------------------------------------------------------------------------
 	sendSms(): void {
-		var smsList = this.list.map(x => { return x.phoneNo ? { name: x.contactName, phoneNo: x.contactPhoneNo } : null; }).filter(x => x != null);
+		var smsList = this.list.map(x => { return x.alerts ? { name: x.contactName, phoneNo: x.alerts } : null; }).filter(x => x != null);
 		this.eventQueue.dispatch(new AppEvent(AppEventType.SendSms, smsList));
 	}
 	//------------------------------------------------------------------------------------------------------------------------
 }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class FormParams extends GridFormParams {
 	name: string;
 	active: number = 1;
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
