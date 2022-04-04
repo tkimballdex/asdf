@@ -6,6 +6,7 @@ import { AppService } from "../shared/app.service";
 import { PageComponent } from '../shared/page.component';
 import { CustomerRepository } from './repository';
 import { TabComponent } from '@syncfusion/ej2-angular-navigations';
+import { TenantService } from '../shared/tenant.service';
 
 @Component({
     selector: 'customer-edit',
@@ -13,7 +14,7 @@ import { TabComponent } from '@syncfusion/ej2-angular-navigations';
     styleUrls: ['./edit.component.scss']
 })
 export class CustomerEditComponent extends PageComponent implements OnInit {
-    constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private repository: CustomerRepository) {
+    constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private repository: CustomerRepository, private tenant: TenantService) {
         super();
     }
 
@@ -29,8 +30,19 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 
         this.showSpinner();
         this.app = await this.appService.getData();
-        this.privileges = this.app.privileges.customers;
-		this.record = await this.repository.get(id);
+        this.privileges = this.app.privileges.customers;	
+
+		if(id == null)
+		{
+			this.record = {
+				tenant: this.tenant.name,
+				active: true
+			}
+		}
+		else
+		{
+			this.record = await this.repository.get(id);
+		}
 		this.hideSpinner();
 
 		this.form = new FormGroup({
@@ -38,7 +50,6 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 			serviceStartDate: new FormControl(this.record.serviceStartDate ? new Date(this.record.serviceStartDate) : null),
 			serviceEndDate: new FormControl(this.record.serviceEndDate ? new Date(this.record.serviceEndDate) : null),
 			address: new FormControl(this.record.address, [Validators.required]),
-			address2: new FormControl(this.record.address2, []),
 			city: new FormControl(this.record.city, [Validators.required]),
 			stateId: new FormControl(this.record.stateId, [Validators.required]),
 			postalCode: new FormControl(this.record.postalCode, [Validators.required]),
