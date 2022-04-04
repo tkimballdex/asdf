@@ -77,6 +77,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-6 col-lg-5 col-xl-4">
+                                    <ejs-dropdownlist formControlName="countyId" [dataSource]="app.counties" [fields]="{ text: 'name', value: 'id' }" placeholder="County *" floatLabelType="Always"></ejs-dropdownlist>
+                                    <div *ngIf="this.invalidControl('countyId')" class="e-error">
+                                        County is required!
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="row pad-t20">
                                 <div class="col-md-6 col-lg-5 col-xl-4">

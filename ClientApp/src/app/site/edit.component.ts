@@ -68,12 +68,12 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			city: new FormControl(this.record.city, [Validators.required]),
 			stateId: new FormControl(this.record.stateId, [Validators.required]),
 			postalCode: new FormControl(this.record.postalCode, [Validators.required]),
+			countyId: new FormControl(this.record.countyId, [Validators.required]),
 			contactName: new FormControl(this.record.contactName, [Validators.required]),
 			contactEmail: new FormControl(this.record.contactEmail, [Validators.required, Validators.email]),
 			contactPhoneNo: new FormControl(this.record.contactPhoneNo, [Validators.required, Validators.maxLength(10)])
 		});
 	}
-
 
 	async save() {
 		this.form.markAllAsTouched();
