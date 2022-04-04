@@ -116,7 +116,7 @@ mat-form-field.mat-form-field {
 
 /* Start - List View styles*/
 #list-view {
-    border-radius: 3px;   
+    border-radius: 5px;   
     border: 1px solid #d8dee6;
     background-color: #ffffff;
     box-sizing:border-box;
@@ -148,13 +148,13 @@ mat-form-field.mat-form-field {
 
 #list-view button
 {
-    border-radius: 3px;
+    border-radius: 5px;
 }
 
 #list-view .list-header .e-btn .e-btn-icon, 
 #list-view .list-header .e-css.e-btn .e-btn-icon
 {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 #list-view .search-button
@@ -173,12 +173,12 @@ mat-form-field.mat-form-field {
     display:inline-flex;
     float:right;
     margin-left:10px;
-    color:#0078d6;
+    color:#2a89ff;
 }
 
 #list-view .list-actions button
 {
-    color:#0078d6;
+    color:#2a89ff;
 }
 
 #list-view .list-content {
@@ -298,9 +298,10 @@ mat-form-field.mat-form-field {
 #edit-view .edit-label {
     font-family: "Segoe UI", GeezaPro, "DejaVu Serif", sans-serif;
     font-size: 12px;
-    color: #333333;
+    color: #333;
     margin:0px;
     padding:0px;
+    font-weight: 600;
 }
 #edit-view .edit-grid .edit-icon {
     padding-left: 15px;
