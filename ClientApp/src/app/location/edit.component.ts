@@ -27,6 +27,7 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 	@ViewChild('map') map!: GoogleMap;
 	private siteMarker: google.maps.Marker;
 	public mapOptions: google.maps.MapOptions;
+	public siteAndCustomer: any;
 	//-----------------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.privileges = (await this.appService.getPrivileges()).locations;
@@ -36,8 +37,9 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 		this.app = await this.appService.getData();
 
 		if (id == null) {
+			var siteId = this.route.snapshot.paramMap.get('siteId');
 			this.record = {
-				siteId: this.route.snapshot.paramMap.get('siteId'),
+				siteId: siteId,
 				active: true
 			};
 		}
@@ -55,6 +57,12 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 			code: new FormControl(this.record.code, [Validators.required]),
 			frequencyId: new FormControl(this.record.frequencyId, [Validators.required])
 		});
+
+		if(id == null)
+		{
+			this.record.siteName = this.data.siteName;
+			this.record.customerName = this.data.customerName;
+		}
 
 		var $this = this;
 
