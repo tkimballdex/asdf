@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit, ViewChild, Injectable } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, AfterViewChecked, ViewChild, Injectable } from '@angular/core';
 import { GoogleMap } from '@angular/google-maps';
 import { ChartComponent } from '@syncfusion/ej2-angular-charts';
 import { AppService, EventQueueService, AppEvent, AppEventType } from '../shared/app.service';
@@ -10,6 +10,7 @@ import { CheckBoxSelectionService } from '@syncfusion/ej2-angular-dropdowns';
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { SliderChangeEventArgs, SliderTickEventArgs, SliderTooltipEventArgs } from '@syncfusion/ej2-angular-inputs';
 import html2canvas from 'html2canvas';
+import { DateRangePicker } from '@syncfusion/ej2-angular-calendars';
 
 @Component({
 	selector: 'app-dashboard',
@@ -18,12 +19,15 @@ import html2canvas from 'html2canvas';
 	encapsulation: ViewEncapsulation.None,
 	providers: [CheckBoxSelectionService]
 })
-export class DashboardComponent extends PageComponent implements OnInit {
+export class DashboardComponent extends PageComponent implements OnInit, AfterViewChecked {
 	public mode: string;
 	public initialized = false;
 	constructor(private repository: DashboardRepository, private appService: AppService, private tenant: TenantService, private eventQueue: EventQueueService) {
 		super();
 	}
+
+	@ViewChild('dateRangePicker')
+	public dateRangePicker: DateRangePicker;
 
 	@ViewChild('chartPositiveCases')
 	public chartPositiveCases: ChartComponent;
@@ -87,14 +91,21 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		var today = new Date();
 		this.endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 		this.startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 14);
-		this.dateRangeChange();
 		this.tooltip = { enable: true };
 
 		this.analyteId = this.data.analytes[0].id;
 		this.initialized = true;
 		this.customerId = this.data.customers[0].id;
 		await this.customerChange();
-	}	
+	}
+
+	async ngAfterViewChecked() {
+		if (this.dateRangePicker && !this.dateRangePicker.startDate) {
+			this.dateRangePicker.startDate = this.startDate;
+			this.dateRangePicker.endDate = this.endDate;
+			this.dateRangeChange({ startDate: this.startDate, endDate: this.endDate });
+		}
+	}
 
 	tooltipChangeHandler(args: SliderTooltipEventArgs): void {
         let totalMiliSeconds = Number(args.text);
@@ -285,9 +296,11 @@ export class DashboardComponent extends PageComponent implements OnInit {
 		return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12);
 	}
 
-	dateRangeChange() {
-		this.startDate = this.getAdjustedDate(this.startDate);
-		this.endDate = this.getAdjustedDate(this.endDate);
+	dateRangeChange(e) {
+		if (e && e.startDate && e.endDate) {
+			this.startDate = this.getAdjustedDate(e.startDate);
+			this.endDate = this.getAdjustedDate(e.endDate);
+		}
 
 		this.siteMapDate = this.endDate;
 		this.sliderMax = this.endDate.getTime();

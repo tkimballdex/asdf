@@ -22,7 +22,7 @@
             <ejs-dropdownlist [dataSource]='data.analytes' [fields]="{ text: 'name', value: 'id' }" [(value)]="analyteId" placeholder="Analyte" floatLabelType="Always" (change)="analyteChange()"></ejs-dropdownlist>
         </div>
         <div class="col-md-3 col-lg-3 col-xl-2">
-            <ejs-daterangepicker placeholder='Select a range' floatLabelType="Always" [(startDate)]='startDate' [(endDate)]='endDate' (change)="dateRangeChange()"></ejs-daterangepicker>
+            <ejs-daterangepicker #dateRangePicker placeholder='Select a range' floatLabelType="Always" (change)="dateRangeChange($event)"></ejs-daterangepicker>
         </div>
     </div>
 
