@@ -155,6 +155,8 @@ export class DashboardComponent extends PageComponent implements OnInit, AfterVi
 		console.log(`setGraphData ${from} ${this.initialized}`);
 		if (!this.initialized || !this.customerId || !this.analyteId || !this.selectedSites) return;
 
+		await this.getSummary();
+
 		this.graphData = await this.repository.getGraphData({
 			customerId: this.customerId,
 			analyteId: this.analyteId,
@@ -167,7 +169,6 @@ export class DashboardComponent extends PageComponent implements OnInit, AfterVi
 		this.siteMapDate = this.getAdjustedDate(date);
 		this.sliderValue = this.siteMapDate.getTime();
 
-		await this.getSummary();
 		this.setCharts(this.graphData);
 	}
 
