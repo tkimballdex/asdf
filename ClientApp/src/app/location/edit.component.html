@@ -53,6 +53,9 @@
 
         <div class="col-md-6 col-lg-5 col-xl-4">
             <ejs-datepicker [(value)]="record.serviceEndDate" placeholder="Service End Date" floatLabelType="Always"></ejs-datepicker>
+            <div *ngIf="record.serviceEndDate < record.serviceStartDate && record.serviceEndDate != undefined" class="e-error">
+                End date is before start date!
+            </div>
         </div>
     </div>
     

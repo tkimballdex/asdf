@@ -29,6 +29,9 @@
 
         <div class="col-md-6 col-lg-5 col-xl-4">
             <ejs-datepicker formControlName="serviceEndDate" placeholder="Service End Date" floatLabelType="Always"></ejs-datepicker>
+            <div *ngIf="this.form.controls['serviceEndDate'].value < this.form.controls['serviceStartDate'].value && this.form.controls['serviceEndDate'].value != undefined" class="e-error">
+                End date is before start date!
+            </div>
         </div>
     </div>
 

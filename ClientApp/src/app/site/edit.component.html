@@ -27,6 +27,9 @@
         </div>
         <div class="col-md-6 col-lg-5 col-xl-4">
             <ejs-datepicker formControlName="serviceEndDate" placeholder="Service End Date" floatLabelType="Always"></ejs-datepicker>
+            <div *ngIf="this.form.controls['serviceEndDate'].value < this.form.controls['serviceStartDate'].value && this.form.controls['serviceEndDate'].value != undefined" class="e-error">
+                End date is before start date!
+            </div>
         </div>
     </div>
 
@@ -98,7 +101,7 @@
                             <div class="row pad-t10">
                                 <div class="col-md-12 col-lg-10 col-xl-8"><label for="boundaries" class="edit-label">Boundaries</label></div>
                                 <div class="col-md-12 col-lg-10 col-xl-8">
-                                    <ejs-textbox id="boundaries" [multiline]='true' #default rows="3" [(value)]="record.boundaries"></ejs-textbox>
+                                    <ejs-textbox readonly="true" id="boundaries" [multiline]='true' #default rows="3" [(value)]="record.boundaries"></ejs-textbox>
                                 </div>
                             </div>
 

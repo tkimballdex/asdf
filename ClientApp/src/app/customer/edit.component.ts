@@ -58,7 +58,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 			contactName: new FormControl(this.record.contactName, [Validators.required]),
 			contactEmail: new FormControl(this.record.contactEmail, [Validators.required, Validators.email]),
 			contactPhoneNo: new FormControl(this.record.contactPhoneNo, [Validators.required]),
-			notificationEmail: new FormControl(this.record.notificationEmail, []),
+			notificationEmail: new FormControl(this.record.notificationEmail, [Validators.email]),
 		});
 	}
 

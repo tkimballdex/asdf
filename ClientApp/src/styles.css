@@ -465,7 +465,7 @@ mat-form-field.mat-form-field {
 	display: none;
 }
 
-#edit-view ejs-textbox input[readonly] {
+#edit-view ejs-textbox input[readonly], #edit-view ejs-textbox textarea[readonly] {
 	background-color: #eee;
 }
 
