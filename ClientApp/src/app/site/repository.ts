@@ -27,6 +27,6 @@ export class SiteRepository {
 	}
 
     public getCounties(stateId: number) {
-        return this.http.post(`/site/countyList/${stateId}`);
+        return this.http.post(`/site/countyList?stateId=${stateId}`);
     }
 }
