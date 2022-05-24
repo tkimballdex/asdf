@@ -19,6 +19,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		super();
 	}
 
+	public counties: any;
 	public record: any;
 	public deleteDialog: Dialog;
 	public form: FormGroup;
@@ -56,6 +57,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		}
 		else {
 			this.record = await this.repository.get(id);
+			this.counties = await this.repository.getCounties(this.record.stateId)
 		}
 
 		this.hideSpinner();
@@ -138,6 +140,11 @@ export class SiteEditComponent extends PageComponent implements OnInit {
             this.showDeleteMessage(true);
             setTimeout(() => this.router.navigate(['/auth/customer/edit', this.record.customerId]), 1000);
         }
+	}
+
+	async stateChange(e) {
+		this.counties = null;
+		this.counties = await this.repository.getCounties(e.itemData.id);
 	}
 
 	selectTab(e) {

@@ -41,7 +41,7 @@ export class VendorEditComponent extends PageComponent implements OnInit {
 			stateId: new FormControl(this.record.stateId, [Validators.required]),
 			postalCode: new FormControl(this.record.postalCode, [Validators.required]),
             contactName: new FormControl(this.record.contactName, [Validators.required]),
-            contactEmail: new FormControl(this.record.contactEmail, [Validators.required]),
+            contactEmail: new FormControl(this.record.contactEmail, [Validators.required, Validators.email]),
             contactPhoneNo: new FormControl(this.record.contactPhoneNo, [Validators.required]),
         });        
     }

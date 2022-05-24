@@ -40,6 +40,9 @@
 #header div.hamburger {
     font-size: 1.1em;
     margin-left: 20px;
+}
+
+#hamburger {
     cursor: pointer;
 }
 

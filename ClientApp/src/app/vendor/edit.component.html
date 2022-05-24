@@ -106,9 +106,9 @@
                                 </div>
                                 </div>
                                 <div class="col-md-6 col-lg-5 col-xl-4">                                    
-                                    <ejs-textbox formControlName="contactPhoneNo" placeholder="Contact Phone No *" floatLabelType="Always"></ejs-textbox>
+                                    <ejs-textbox formControlName="contactPhoneNo" placeholder="Contact Phone No *" floatLabelType="Always" pattern="^[0-9]{10}$"></ejs-textbox>
                                     <div *ngIf="this.invalidControl('contactPhoneNo')" class="e-error">
-                                        Contact Phone No is required!
+                                        Contact Phone No is required! 
                                     </div>
                                 </div>
                             </div>

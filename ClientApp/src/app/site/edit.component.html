@@ -65,7 +65,7 @@
 
                             <div class="row">
                                 <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-dropdownlist formControlName="stateId" [dataSource]="app.states" [fields]="{ text: 'name', value: 'id' }" placeholder="State *" floatLabelType="Always"></ejs-dropdownlist>
+                                    <ejs-dropdownlist (change)="stateChange($event)" formControlName="stateId" [dataSource]="app.states" [fields]="{ text: 'name', value: 'id' }" placeholder="State *" floatLabelType="Always"></ejs-dropdownlist>
                                     <div *ngIf="this.invalidControl('stateId')" class="e-error">
                                         State is required!
                                     </div>
@@ -79,7 +79,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-dropdownlist formControlName="countyId" [dataSource]="app.counties" [fields]="{ text: 'name', value: 'id' }" placeholder="County *" floatLabelType="Always"></ejs-dropdownlist>
+                                    <ejs-dropdownlist formControlName="countyId" [dataSource]="counties" [fields]="{ text: 'name', value: 'id' }" placeholder="County *" floatLabelType="Always"></ejs-dropdownlist>
                                     <div *ngIf="this.invalidControl('countyId')" class="e-error">
                                         County is required!
                                     </div>

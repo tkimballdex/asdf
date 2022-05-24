@@ -25,4 +25,8 @@ export class SiteRepository {
     public getCustomer(id: string) {
 		return this.http.post<any>(`/customer/get/${id}`);
 	}
+
+    public getCounties(stateId: number) {
+        return this.http.post(`/site/countyList/${stateId}`);
+    }
 }
