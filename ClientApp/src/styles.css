@@ -474,6 +474,10 @@ mat-form-field.mat-form-field {
     border-bottom-width: 1px;
 }
 
+.invalid-input div {
+    border-bottom: 1px solid #d32f2f !important;
+}
+
 #edit-view .e-error {
     font-size: 0.9em;
     font-weight: 500;
