@@ -80,8 +80,8 @@ export class AnalyteEditComponent extends PageComponent implements OnInit {
 	//-----------------------------------------------------------------------------------------
 	delete() {
 		this.deleteDialog = DialogUtility.confirm({
-			title: 'Delete Vendor',
-			content: `Are you sure you want to delete the sampler <b>${this.record.modelNo}</b>?`,
+			title: 'Delete Analyte',
+			content: `Are you sure you want to delete the analyte <b>${this.record.name}</b>?`,
 			okButton: { click: this.deleteOK.bind(this) }
 		});
 	}

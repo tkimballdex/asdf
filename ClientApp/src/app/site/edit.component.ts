@@ -122,7 +122,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	delete() {
 		this.deleteDialog = DialogUtility.confirm({
 			title: 'Delete Site',
-			content: `Are you sure you want to delete this Site <b>${this.record.userName}</b>?`,
+			content: `Are you sure you want to delete the site <b>${this.record.name}</b>?`,
 			okButton: { click: this.deleteOK.bind(this) }
 		});
 	}
