@@ -119,27 +119,27 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		this.mapSetup();
 	}
 
-    delete() {
-        this.deleteDialog = DialogUtility.confirm({
-            title: 'Delete Site',
-            content: `Are you sure you want to delete this Site <b>${this.record.userName}</b>?`,
-            okButton: { click: this.deleteOK.bind(this) }
-        });
-    }
+	delete() {
+		this.deleteDialog = DialogUtility.confirm({
+			title: 'Delete Site',
+			content: `Are you sure you want to delete this Site <b>${this.record.userName}</b>?`,
+			okButton: { click: this.deleteOK.bind(this) }
+		});
+	}
 
-    async deleteOK() {
-        this.showSpinner();
-        this.deleteDialog.close();
-        var result = await this.repository.delete(this.record.id);
-        this.hideSpinner();
+	async deleteOK() {
+		this.showSpinner();
+		this.deleteDialog.close();
+		var result = await this.repository.delete(this.record.id);
+		this.hideSpinner();
 
-        if (result.error) {
-            this.showErrorMessage(result.description);
-        }
-        else {
-            this.showDeleteMessage(true);
-            setTimeout(() => this.router.navigate(['/auth/customer/edit', this.record.customerId]), 1000);
-        }
+		if (result.error) {
+			this.showErrorMessage(result.description);
+		}
+		else {
+			this.showDeleteMessage(true);
+			setTimeout(() => this.router.navigate(['/auth/customer/edit', this.record.customerId]), 1000);
+		}
 	}
 
 	async stateChange(e) {
@@ -213,7 +213,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			}
 
 			const drawingManager = new google.maps.drawing.DrawingManager({
-				drawingMode: google.maps.drawing.OverlayType.MARKER,
+				drawingMode: null,
 				drawingControl: true,
 				drawingControlOptions: {
 					position: google.maps.ControlPosition.TOP_CENTER,
@@ -229,7 +229,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 				$this.polygons.forEach(function (x) {
 					x.setMap(null);
 				});
-				
+
 				$this.polygons = [event];
 				$this.record.path = event.getPath().getArray().map(x => { return [x.lng(), x.lat()]; });
 			});
