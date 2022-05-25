@@ -19,10 +19,18 @@ export class CustomerListComponent extends PageComponent implements OnInit {
 	//------------------------------------------------------------------------------------------------------------------------
 	public form: FormParams;
 	public list: any;
+	public states: any = null;
 	@ViewChild('grid') public grid: GridComponent;
 	//------------------------------------------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.privileges = (await this.appService.getPrivileges()).customers;
+		
+		if (this.states === null) {
+			this.app = await this.appService.getData();
+			this.states = this.app.states.slice();
+			this.states.unshift({ id: 0, name: 'All' });
+		}
+		
 		await this.tenant.validate();
 		this.formState.setup(this, new FormParams());
 		this.search();
@@ -38,8 +46,9 @@ export class CustomerListComponent extends PageComponent implements OnInit {
 		this.showSpinner();
 		this.list = await this.repository.list({
 			tenantId: this.tenant.id,
-			name: this.form.name,
-			active: this.form.active
+			searchTxt: this.form.searchTxt,
+			stateId: this.form.stateId,
+			active: this.form.active,
 		});
 		this.hideSpinner();
 	}
@@ -84,6 +93,7 @@ export class CustomerListComponent extends PageComponent implements OnInit {
 }
 
 class FormParams extends GridFormParams {
-	name: string;
+	searchTxt: string;
+	stateId: number = 0;
 	active: number = 1;
 }
