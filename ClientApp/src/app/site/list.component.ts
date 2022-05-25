@@ -37,7 +37,7 @@ export class SiteListComponent extends PageComponent implements OnInit {
 		this.showSpinner();
 		this.list = await this.repository.list({
 			tenantId: this.tenant.id,
-			name: this.form.name,
+			searchTxt: this.form.searchTxt,
 			active: this.form.active
 		});
 		this.hideSpinner();
@@ -83,7 +83,7 @@ export class SiteListComponent extends PageComponent implements OnInit {
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class FormParams extends GridFormParams {
-	name: string;
+	searchTxt: string;
 	active: number = 1;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
