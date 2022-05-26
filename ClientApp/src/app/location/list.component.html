@@ -7,7 +7,7 @@
     </div>
     <div class="row d-flex align-items-end list-content">
         <div class="col-3">
-            <ejs-textbox [(value)]="form.name" placeholder="Name" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox [(value)]="form.searchTxt" placeholder="Search" floatLabelType="Always"></ejs-textbox>
         </div>
         <div class="col-1">
             <ejs-dropdownlist [dataSource]="appService.activeStates" [(value)]="form.active" [fields]="{ text: 'name', value: 'id' }" placeholder="Active" floatLabelType="Always" (change)="searchClick()"></ejs-dropdownlist>

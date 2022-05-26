@@ -113,6 +113,7 @@ export class MasterPageComponent implements OnInit {
 			this.menuItems.push({
 				text: 'Samples',
 				iconCss: 'fal fa-vial',
+				id: '/auth/collection/list',
 				items: sampleMenu
 			});
 		}
@@ -152,6 +153,7 @@ export class MasterPageComponent implements OnInit {
 			this.menuItems.push({
 				text: 'Manage',
 				iconCss: 'fal fa-cubes',
+				id: '/auth/customer/list',
 				items: manageMenu
 			});
 		}
@@ -174,6 +176,7 @@ export class MasterPageComponent implements OnInit {
 			this.menuItems.push({
 				text: 'Data',
 				iconCss: 'fal fa-database',
+				id: '/auth/state/list',
 				items: dataMenu
 			});
 		}
@@ -196,6 +199,7 @@ export class MasterPageComponent implements OnInit {
 			this.menuItems.push({
 				text: 'Settings',
 				iconCss: 'fal fa-cog',
+				id: '/auth/user/list',
 				items: settingsMenu
 			});
 		}		
