@@ -26,7 +26,6 @@ export class LocationListComponent extends PageComponent implements OnInit {
 		if (this.customers === null) {
 			this.customers = await this.repository.listCustomers({
 				tenantId: this.tenant.id,
-				active: '1'
 			});
 			this.customers.unshift({ id: this.appService.GuidEmpty, name: "All" });
 		}

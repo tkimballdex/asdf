@@ -27,6 +27,6 @@ export class LocationRepository {
 	}
 
     public listCustomers(filter: any) {
-		return this.http.post(`/customer/list`, filter);
+		return this.http.post(`/customer/basicList`, filter);
 	}
 }
