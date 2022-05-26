@@ -161,7 +161,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		}
 
 		if ($this.record.latitude && $this.record.longitude) {
-			$this.mapOptions = { center: { lat: $this.record.latitude, lng: $this.record.longitude } };
+			$this.mapOptions = { center: { lat: +$this.record.latitude, lng: +$this.record.longitude } };
 		}
 
 		$this.markers.forEach(function (x) {
@@ -176,7 +176,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		$this.polygons = [];
 
 		setTimeout(function () {
-			var googleMap = $this.map.googleMap;
+			var googleMap = $this.map?.googleMap;
 
 			$this.record.locations.forEach(function (x) {
 				if (x.latitude && x.longitude) {
