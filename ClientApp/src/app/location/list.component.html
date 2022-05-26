@@ -6,13 +6,16 @@
         </div>
     </div>
     <div class="row d-flex align-items-end list-content">
-        <div class="col-3">
+        <div class="col-md-4 col-lg-3 col-xl-2">
             <ejs-textbox [(value)]="form.searchTxt" placeholder="Search" floatLabelType="Always"></ejs-textbox>
         </div>
-        <div class="col-1">
+        <div class="col-md-4 col-lg-3 col-xl-2">
+            <ejs-dropdownlist [dataSource]="customers" [(value)]="form.customerId" [fields]="{ text: 'name', value: 'id' }" placeholder="Customer" floatLabelType="Always"></ejs-dropdownlist>
+        </div>
+        <div class="col-md-4 col-lg-2">
             <ejs-dropdownlist [dataSource]="appService.activeStates" [(value)]="form.active" [fields]="{ text: 'name', value: 'id' }" placeholder="Active" floatLabelType="Always" (change)="searchClick()"></ejs-dropdownlist>
         </div>
-        <div class="col-3">
+        <div class="col-md-4 col-lg-3 col-xl-2 pad-t20">
             <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>
         </div>
         <div class="col-12 pad-t20">

@@ -22,6 +22,10 @@ export class SiteRepository {
         return this.http.post(`/site/list`, filter);
     }
 
+    public listCustomers(filter: any) {
+		return this.http.post(`/customer/list`, filter);
+	}
+
     public getCustomer(id: string) {
 		return this.http.post<any>(`/customer/get/${id}`);
 	}

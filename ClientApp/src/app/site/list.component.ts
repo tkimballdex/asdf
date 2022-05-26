@@ -18,17 +18,28 @@ export class SiteListComponent extends PageComponent implements OnInit {
 	//------------------------------------------------------------------------------------------------------------------------
 	public form: FormParams;
 	public list: any;
+	public customers: any = null;
 	public states: any = null;
 	@ViewChild('grid') public grid: GridComponent;
 	//------------------------------------------------------------------------------------------------------------------------
     async ngOnInit() {
 		this.privileges = (await this.appService.getPrivileges()).sites;
 		await this.tenant.validate();
+
+		if (this.customers === null) {
+			this.customers = await this.repository.listCustomers({
+				tenantId: this.tenant.id,
+				active: '1'
+			});
+			this.customers.unshift({ id: this.appService.GuidEmpty, name: "All" });
+		}
+		
 		if (this.states === null) {
 			this.app = await this.appService.getData();
 			this.states = this.app.states.slice();
 			this.states.unshift({ id: 0, name: 'All' });
 		}
+
 		this.formState.setup(this, new FormParams());
 		this.search();
     }
@@ -44,6 +55,7 @@ export class SiteListComponent extends PageComponent implements OnInit {
 		this.list = await this.repository.list({
 			tenantId: this.tenant.id,
 			searchTxt: this.form.searchTxt,
+			customerId: this.form.customerId,
 			stateId: this.form.stateId,
 			active: this.form.active
 		});
@@ -91,6 +103,7 @@ export class SiteListComponent extends PageComponent implements OnInit {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class FormParams extends GridFormParams {
 	searchTxt: string;
+	customerId: string;
 	stateId: number = 0;
 	active: number = 1;
 }

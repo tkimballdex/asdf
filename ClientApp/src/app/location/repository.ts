@@ -25,4 +25,8 @@ export class LocationRepository {
 	public getData(siteId: any) {
 		return this.http.post(`/location/getData/${siteId}`);
 	}
+
+    public listCustomers(filter: any) {
+		return this.http.post(`/customer/list`, filter);
+	}
 }

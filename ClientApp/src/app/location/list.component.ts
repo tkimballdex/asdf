@@ -17,11 +17,19 @@ export class LocationListComponent extends PageComponent implements OnInit {
 
     public list: any;
 	public form: FormParams;
+	public customers: any = null;
 
 	@ViewChild('grid') public grid: GridComponent;
 
     async ngOnInit() {
 		await this.tenant.validate();
+		if (this.customers === null) {
+			this.customers = await this.repository.listCustomers({
+				tenantId: this.tenant.id,
+				active: '1'
+			});
+			this.customers.unshift({ id: this.appService.GuidEmpty, name: "All" });
+		}
 		this.formState.setup(this, new FormParams());
 		this.search();
     }
@@ -37,6 +45,7 @@ export class LocationListComponent extends PageComponent implements OnInit {
 		this.list = await this.repository.list({
 			tenantId: this.tenant.id,
 			searchTxt: this.form.searchTxt,
+			customerId: this.form.customerId,
 			active: this.form.active
 		});
 		this.hideSpinner();
@@ -50,5 +59,6 @@ export class LocationListComponent extends PageComponent implements OnInit {
 
 class FormParams extends GridFormParams {
 	searchTxt: string;
+	customerId: string;
 	active: number = 1;
 }
