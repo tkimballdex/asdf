@@ -102,7 +102,7 @@ export class SiteListComponent extends PageComponent implements OnInit {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class FormParams extends GridFormParams {
 	searchTxt: string;
-	customerId: string;
+	customerId: string = "00000000-0000-0000-0000-000000000000";
 	stateId: number = 0;
 	active: number = 1;
 }

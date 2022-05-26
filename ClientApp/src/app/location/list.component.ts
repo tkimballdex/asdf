@@ -58,6 +58,6 @@ export class LocationListComponent extends PageComponent implements OnInit {
 
 class FormParams extends GridFormParams {
 	searchTxt: string;
-	customerId: string;
+	customerId: string = "00000000-0000-0000-0000-000000000000";
 	active: number = 1;
 }
