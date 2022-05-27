@@ -11,7 +11,7 @@
 
     <div class="row">
         <div class="col-md-12 col-lg-10 col-xl-8">
-            <ejs-dropdownlist [dataSource]="customers" [fields]="{ text: 'name', value: 'id' }" formControlName="customerId" placeholder="Customer*" floatLabelType="Always" (change)="customerChange($event)"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="customers" [fields]="{ text: 'name', value: 'id' }" formControlName="customerId" placeholder="Customer *" floatLabelType="Always" (change)="customerChange($event)"></ejs-dropdownlist>
             <div *ngIf="this.invalidControl('customerId')" class="e-error">
                 Customer is required!
             </div>
@@ -20,14 +20,14 @@
 
     <div class="row">
         <div class="col-md-6 col-lg-5 col-xl-4" *ngIf="sites">
-            <ejs-dropdownlist [dataSource]="sites" [fields]="{ text: 'name', value: 'id' }" formControlName="siteId" placeholder="Site*" floatLabelType="Always" (change)="siteChange($event)"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="sites" [fields]="{ text: 'name', value: 'id' }" formControlName="siteId" placeholder="Site *" floatLabelType="Always" (change)="siteChange($event)"></ejs-dropdownlist>
             <div *ngIf="this.invalidControl('siteId')" class="e-error">
                 Site is required!
             </div>
         </div>
 
         <div class="col-md-6 col-lg-5 col-xl-4" *ngIf="locations">
-            <ejs-dropdownlist [dataSource]="locations" [fields]="{ text: 'name', value: 'id' }" formControlName="locationId" placeholder="Location*" floatLabelType="Always" (change)="locationChange($event)"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="locations" [fields]="{ text: 'name', value: 'id' }" formControlName="locationId" placeholder="Location *" floatLabelType="Always" (change)="locationChange($event)"></ejs-dropdownlist>
             <div *ngIf="this.invalidControl('locationId')" class="e-error">
                 Location is required!
             </div>
@@ -36,7 +36,7 @@
 
     <div class="row pad-b20" *ngIf="form.get('locationId').value">
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist [dataSource]="vendors" [fields]="{ text: 'name', value: 'id' }" formControlName="logisticVendorId" placeholder="Logistic Vendor*" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="vendors" [fields]="{ text: 'name', value: 'id' }" formControlName="logisticVendorId" placeholder="Logistic Vendor *" floatLabelType="Always"></ejs-dropdownlist>
             <div *ngIf="this.invalidControl('logisticVendorId')" class="e-error">
                 Logistic Vendor is required!
             </div>
@@ -45,20 +45,24 @@
 
     <div class="row pad-t20" *ngIf="form.get('locationId').value">
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-datepicker formControlName="startDate" required placeholder="Start Date*" floatLabelType="Always"></ejs-datepicker>
+            <ejs-datepicker formControlName="startDate" required placeholder="Start Date *" floatLabelType="Always"></ejs-datepicker>
             <div *ngIf="this.invalidControl('startDate')" class="e-error">
                 Start Date is required!
             </div>
         </div>
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-datepicker formControlName="endDate" required placeholder="End Date*" floatLabelType="Always"></ejs-datepicker>
+            <ejs-datepicker formControlName="endDate" required placeholder="End Date *" floatLabelType="Always"
+            [ngClass]="{'invalid-input': this.form.errors?.['validateEndDate'] === 'validateEndDate'}"></ejs-datepicker>
             <div *ngIf="this.invalidControl('endDate')" class="e-error">
                 End Date is required!
+            </div>
+            <div *ngIf="this.form.errors?.['validateEndDate'] === 'validateEndDate'" class="e-error">
+                End date is before start date!
             </div>
         </div>
     </div>
 
-    <div class="row pad-b20" *ngIf="form.get('startDate').value && form.get('endDate').value">
+    <div class="row pad-b20" *ngIf="form.get('startDate').value && form.get('endDate').value && this.form.errors?.['validateEndDate'] !== 'validateEndDate'">
         <div class="col-md-6 col-lg-5 col-xl-4">
             <ejs-dropdownlist formControlName="frequencyId" [dataSource]="app.frequencies" [fields]="{ text: 'name', value: 'id' }" placeholder="Testing Frequency *" floatLabelType="Always" (change)="frequencyChange()"></ejs-dropdownlist>
             <div *ngIf="this.invalidControl('frequencyId')" class="e-error">
@@ -83,15 +87,15 @@
 
     <div class="row mar-t20" *ngIf="showContainer">
         <div class="col-3">
-            <ejs-dropdownlist [dataSource]="app.containerTypes" [fields]="{ text: 'name', value: 'name' }" [(value)]="container.containerType" placeholder="Container Type*" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist formControlName="containerType" [dataSource]="app.containerTypes" [fields]="{ text: 'name', value: 'name' }" [(value)]="container.containerType" placeholder="Container Type *" floatLabelType="Always"></ejs-dropdownlist>
         </div>
 
         <div class="col-3">
-            <ejs-dropdownlist [dataSource]="vendors" [fields]="{ text: 'name', value: 'id' }" [(value)]="container.labVendorId" placeholder="Lab Vendor*" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist formControlName="labVendor" [dataSource]="vendors" [fields]="{ text: 'name', value: 'id' }" [(value)]="container.labVendorId" placeholder="Lab Vendor *" floatLabelType="Always"></ejs-dropdownlist>
         </div>
 
         <div class="col-3">
-            <ejs-numerictextbox [(value)]="container.samples" format='N0' min='0' max='10' step='1' placeholder="Number of Samples*" floatLabelType="Always"></ejs-numerictextbox>
+            <ejs-numerictextbox formControlName="numberOfSamples" [(value)]="container.samples" format='N0' min='0' max='10' step='1' placeholder="Number of Samples *" floatLabelType="Always"></ejs-numerictextbox>
         </div>
 
         <div class="col-3">
@@ -146,7 +150,7 @@
 
     <div class="row d-flex align-items-center edit-footer mar-t20">
         <div class="col-md-6 d-flex justify-content-start">
-            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update || !record.containers.length">Save</button>
+            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
         </div>
         <div class="col-sm-6 d-flex justify-content-end">
             <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/collection/list']" [state]='{ formState: true }'>Close</button>

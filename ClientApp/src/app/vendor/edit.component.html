@@ -159,6 +159,39 @@
                             </div>                           
                         </ng-template>
                     </e-tabitem>
+                    <e-tabitem *ngIf="record.id && app.privileges.sites.read">
+                        <ng-template #headerText>
+                            <div>Sites</div>
+                        </ng-template>
+                        <ng-template #content>
+                            <div class="row d-flex align-items-center">
+                                <div class="col-md-12 col-lg-10 col-xl-8 d-flex align-items-center subitem-list-header">
+                                    <span class="subitem-list-icon"><i class="fas fa-chart-network"></i></span>
+                                    <span class="subitem-list-title">Sites</span>
+                                    <span class="subitem-list-add"><button ejs-button cssClass="e-outline" [routerLink]="['/auth/site/add', record.id]" [disabled]="!app.privileges.sites.create">+ Add</button></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-lg-10 col-xl-8 pad-t20">
+                                    <ejs-grid [dataSource]='record.sites' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="false">
+                                        <e-columns>
+                                            <e-column width="70">
+                                                <ng-template #template let-data>
+                                                    <a [routerLink]="['/auth/site/edit', data.id]" [state]="{ from: 'customer' }"><i class="fas fa-pencil-alt edit-icon"></i></a>
+                                                </ng-template>
+                                            </e-column>
+                                            <e-column field='name' headerText='Name'></e-column>
+                                            <e-column field='address' headerText='Address'></e-column>
+                                            <e-column field='city' headerText='City'></e-column>
+                                            <e-column field='state' headerText='State'></e-column>
+                                            <e-column field='postalCode' headerText='Postal Code'></e-column>
+                                            <e-column field='phoneNo' headerText='Phone No'></e-column>
+                                        </e-columns>
+                                    </ejs-grid>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </e-tabitem>
                 </e-tabitems>
             </ejs-tab>
         </div>

@@ -10,6 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { TenantService } from '../shared/tenant.service';
 import { RadioButtonComponent } from '@syncfusion/ej2-angular-buttons';
+import { validateEndDate } from '../shared/validators';
 
 @Component({
 	selector: 'schedule',
@@ -49,12 +50,16 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 			endDate: new FormControl(null),
 			logisticVendorId: new FormControl(null, [Validators.required]),
 			frequencyId: new FormControl(this.record.frequencyId, [Validators.required])
-		});
+		}, { validators: validateEndDate });
 
 		this.form.addControl('customerId', new FormControl('', [Validators.required]));
 		this.form.addControl('siteId', new FormControl('', [Validators.required]));
 		this.form.addControl('locationId', new FormControl('', [Validators.required]));
+		this.form.addControl('containerType', new FormControl('', [Validators.required]));
+		this.form.addControl('labVendor', new FormControl('', [Validators.required]));
+		this.form.addControl('numberOfSamples', new FormControl('', [Validators.required]));
 	}
+	
 	//-----------------------------------------------------------------------------------------
 	async save() {
 		this.form.markAllAsTouched();

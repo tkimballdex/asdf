@@ -43,7 +43,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		this.showSpinner();
 		this.app = await this.appService.getData();
 		this.privileges = this.app.privileges.sites;
-
+		
 		var id = this.route.snapshot.paramMap.get('id');
 		var customerId = this.route.snapshot.paramMap.get('customerId');
 

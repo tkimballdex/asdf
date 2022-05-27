@@ -7,7 +7,7 @@ import { PageComponent } from '../shared/page.component';
 import { CustomerRepository } from './repository';
 import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 import { TenantService } from '../shared/tenant.service';
-import { validateEndDate } from '../shared/validators';
+import { validateServiceEndDate } from '../shared/validators';
 
 @Component({
     selector: 'customer-edit',
@@ -60,7 +60,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 			contactEmail: new FormControl(this.record.contactEmail, [Validators.required, Validators.email]),
 			contactPhoneNo: new FormControl(this.record.contactPhoneNo, [Validators.required]),
 			notificationEmail: new FormControl(this.record.notificationEmail, [Validators.email]),
-		}, { validators: validateEndDate });
+		}, { validators: validateServiceEndDate });
 	}
 
 	editTabCreated() {
@@ -72,12 +72,11 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 	async save() {
 		this.form.markAllAsTouched();
 
-		if (this.form.errors?.['validateEndDate'] === 'endBeforeDate') {
-			this.showErrorMessage("End date is before start date!")
-		} else if (this.form.invalid) {
+		if (this.form.invalid) {
 			this.showErrorMessage("Please complete all required fields!")
-		}
-		else {
+		} else if (this.form.errors?.['validateEndDate'] === 'validateEndDate') {
+			this.showErrorMessage("End date is before start date!")
+		} else {
 			Object.assign(this.record, this.form.value);
 
 			var add = !this.record.id;

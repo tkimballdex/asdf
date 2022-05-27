@@ -29,8 +29,8 @@
 
         <div class="col-md-6 col-lg-5 col-xl-4">
             <ejs-datepicker formControlName="serviceEndDate" placeholder="Service End Date" floatLabelType="Always" id="serviceEndDate"
-            [ngClass]="{'invalid-input': this.form.errors?.['validateEndDate'] === 'endBeforeDate'}"></ejs-datepicker>
-            <div *ngIf="this.form.errors?.['validateEndDate'] === 'endBeforeDate'" class="e-error">
+            [ngClass]="{'invalid-input': this.form.errors?.['validateServiceEndDate'] === 'validateServiceEndDate'}"></ejs-datepicker>
+            <div *ngIf="this.form.errors?.['validateServiceEndDate'] === 'validateServiceEndDate'" class="e-error">
                 End date is before start date!
             </div>
         </div>
