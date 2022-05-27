@@ -22,4 +22,7 @@ export class VendorRepository {
         return this.http.post(`/vendor/list`, filter);
     }
 
+    public listCustomers(filter: any) {
+		return this.http.post(`/customer/basicList`, filter);
+	}
 }

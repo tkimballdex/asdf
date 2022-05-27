@@ -10,10 +10,16 @@
         </div>
     </div>
     <div class="row d-flex align-items-end">
-        <div class="col-3">
-            <ejs-textbox [(value)]="name" placeholder="Name" floatLabelType="Always"></ejs-textbox>
+        <div class="col-md-4 col-lg-3 col-xl-2">
+            <ejs-textbox [(value)]="searchTxt" placeholder="Search" floatLabelType="Always"></ejs-textbox>
         </div>
-        <div class="col-3">
+        <div class="col-md-4 col-lg-3 col-xl-2">
+            <ejs-dropdownlist [dataSource]="states" [(value)]="stateId" [fields]="{ text: 'name', value: 'id' }" placeholder="State" floatLabelType="Always"></ejs-dropdownlist>
+        </div>
+        <div class="col-md-4 col-lg-2">
+            <ejs-dropdownlist [dataSource]="appService.activeStates" [(value)]="active" [fields]="{ text: 'name', value: 'id' }" placeholder="Active" floatLabelType="Always" (change)="search()"></ejs-dropdownlist>
+        </div>
+        <div class="col-md-4 col-lg-3 col-xl-2">
             <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>
         </div>
     </div>

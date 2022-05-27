@@ -11,23 +11,33 @@ import { AppService } from '../shared/app.service';
 })
 export class VendorListComponent extends PageComponent implements OnInit {
 
-	constructor(private repository: VendorRepository, private appService: AppService, private tenant: TenantService) {
+	constructor(private repository: VendorRepository, public appService: AppService, private tenant: TenantService) {
         super();
     }
     //------------------------------------------------------------------------------------------------------------------------
     public list: any;
-    public name: any;
+    public searchTxt: any;
+    public states: any = null;
+    public stateId: number = 0;
+    public active: number = 1;
     @ViewChild('grid') public grid: GridComponent;
     //------------------------------------------------------------------------------------------------------------------------
 	async ngOnInit() {
         this.privileges = (await this.appService.getPrivileges()).vendors;
 		await this.tenant.validate();
+
+        if (this.states === null) {
+			this.app = await this.appService.getData();
+			this.states = this.app.states.slice();
+			this.states.unshift({ id: 0, name: 'All' });
+		}
+
 		this.search();
 	}
     //------------------------------------------------------------------------------------------------------------------------
     async search() {
         this.showSpinner();
-        this.list = await this.repository.list({ tenantId: this.tenant.id, name: this.name });
+        this.list = await this.repository.list({ tenantId: this.tenant.id, searchTxt: this.searchTxt, stateId: this.stateId, active: this.active });
         this.hideSpinner();
     }
     //------------------------------------------------------------------------------------------------------------------------
