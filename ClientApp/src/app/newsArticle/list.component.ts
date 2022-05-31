@@ -27,6 +27,7 @@ export class NewsArticleListComponent extends PageComponent implements OnInit {
 		}
 		else {
 			this.form = new FormParams();
+			this.search();
 		}
 	}
 	//----------------------------------------------------------------------------
@@ -48,7 +49,8 @@ class FormParams {
 		this.title = "";
 
 		var today = new Date();
-		this.endDate = new Date(today.getFullYear(), today.getMonth()+4, 0);
+		this.startDate = new Date(today.getFullYear(), today.getMonth()-5);
+		this.endDate = new Date(today.getFullYear(), today.getMonth()+1, 0);
 		this.pageSettings = { pageSizes: true, pageCount: 5, currentPage: 1 };
 	}
 

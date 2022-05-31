@@ -487,3 +487,7 @@ mat-form-field.mat-form-field {
 .gmnoprint:not(:first-child) {
     display: none;
 }
+
+.fa-trash-alt, .fa-file-download {
+    cursor: pointer;
+}
