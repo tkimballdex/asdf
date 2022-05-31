@@ -19,12 +19,21 @@ export class SamplerListComponent extends PageComponent implements OnInit {
 	public form: FormParams;
     public list: any;
     public dateFormat: any;
+    public customers: any = null;
     @ViewChild('grid') public grid: GridComponent;
     //------------------------------------------------------------------------------------------------------------------------
     async ngOnInit() {
         this.privileges = (await this.appService.getPrivileges()).samplers;
 		await this.tenant.validate();
         this.dateFormat = {type:'date', format:'MM/dd/yyyy'};
+
+        if (this.customers === null) {
+			this.customers = await this.repository.listCustomers({
+				tenantId: this.tenant.id,
+			});
+			this.customers.unshift({ id: this.appService.GuidEmpty, name: "All" });
+		}
+
 		this.formState.setup(this, new FormParams());
         this.search();
     }
@@ -32,7 +41,11 @@ export class SamplerListComponent extends PageComponent implements OnInit {
     async search() {
 		this.formState.save(this);
         this.showSpinner();
-        this.list = await this.repository.list({ tenantId: this.tenant.id, name: this.form.name });
+        this.list = await this.repository.list({ 
+            tenantId: this.tenant.id, 
+            searchTxt: this.form.searchTxt, 
+            customerId: this.form.customerId
+        });
         this.hideSpinner();
     }
 	//----------------------------------------------------------------------------
@@ -61,5 +74,6 @@ export class SamplerListComponent extends PageComponent implements OnInit {
 }
 
 class FormParams extends GridFormParams {
-	name: string;
+	searchTxt: string;
+    customerId: string = "00000000-0000-0000-0000-000000000000";
 }

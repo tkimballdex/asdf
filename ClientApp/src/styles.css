@@ -469,7 +469,7 @@ mat-form-field.mat-form-field {
 	background-color: #eee;
 }
 
-#edit-view .ng-touched.ng-invalid input {
+#edit-view .ng-touched.ng-invalid input, #edit-view .ng-touched.ng-invalid div {
 	border-bottom-color: #d32f2f;
     border-bottom-width: 1px;
 }

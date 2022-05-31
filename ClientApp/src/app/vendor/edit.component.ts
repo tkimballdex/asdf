@@ -30,7 +30,15 @@ export class VendorEditComponent extends PageComponent implements OnInit {
         this.showSpinner();
         this.app = await this.appService.getData();
         this.privileges = (await this.appService.getPrivileges()).vendors;
-        this.record = await this.repository.get(id);
+        if (id == null) {
+			this.record = {
+				tenant: this.tenant.name,
+				active: true
+			}
+		} else {
+		    this.record = await this.repository.get(id);
+		}
+
         this.hideSpinner();     
         
         this.form = new FormGroup({
