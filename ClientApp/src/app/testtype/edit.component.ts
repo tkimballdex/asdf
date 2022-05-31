@@ -18,6 +18,7 @@ export class TestTypeEditComponent extends PageComponent implements OnInit {
 
 public record: any;
 public deleteDialog: Dialog;
+public invalidInputs: boolean = false;
 
 async ngOnInit() {
     this.showSpinner();
@@ -31,15 +32,17 @@ async ngOnInit() {
 
 async save() {
     var add = !this.record.id;
-    this.showSpinner();
-    this.record.tenantId = this.tenant.id;
-    var returnValue = await this.repository.save(this.record);
-    this.hideSpinner();
-
-    if (returnValue && returnValue.error) {
+    
+    if (!this.record.name || !this.record.code || !this.record.description) {
+        this.invalidInputs = true
+        this.showErrorMessage("Please complete all required fields!")
+    } else if (returnValue && returnValue.error) {
         this.showErrorMessage(returnValue.description);
-    }
-    else {
+    } else {
+        this.showSpinner();
+        this.record.tenantId = this.tenant.id;
+        var returnValue = await this.repository.save(this.record);
+        this.hideSpinner();
         var success = returnValue && returnValue.updated;
         this.showSaveMessage(success);
 

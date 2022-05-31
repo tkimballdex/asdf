@@ -32,7 +32,7 @@ export class AnalyteListComponent extends PageComponent implements OnInit {
     async search() {
 		this.formState.save(this);
         this.showSpinner();
-        this.list = await this.repository.list({ tenantId: this.tenant.id, name: this.form.name });
+        this.list = await this.repository.list({ tenantId: this.tenant.id, searchTxt: this.form.searchTxt });
         this.hideSpinner();
     }
 	//----------------------------------------------------------------------------
@@ -61,5 +61,5 @@ export class AnalyteListComponent extends PageComponent implements OnInit {
 }
 
 class FormParams extends GridFormParams {
-	name: string;
+	searchTxt: string;
 }
