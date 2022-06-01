@@ -13,6 +13,7 @@ import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { TabModule } from '@syncfusion/ej2-angular-navigations';
 import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxMaskModule } from 'ngx-mask'
 
 @NgModule({
     declarations: [
@@ -23,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     imports: [
         GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule,
 		TabModule, DatePickerModule, SwitchModule, CommonModule, FormsModule, ReactiveFormsModule,
+        NgxMaskModule.forRoot(),
         RouterModule.forChild([
             { path: 'list', component: CustomerListComponent },
             { path: 'add', component: CustomerEditComponent },

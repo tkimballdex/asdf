@@ -41,8 +41,12 @@
                     <e-column field='city' headerText='City' hideAtMedia='(min-width: 768px)'></e-column>
                     <e-column field='state' headerText='State' width="80" hideAtMedia='(min-width: 768px)'></e-column>
                     <e-column field='postalCode' headerText='Postal Code' textAlign='Center' width="130" hideAtMedia='(min-width: 768px)'></e-column>
-                    <e-column field='notificationEmail' headerText='Notification Email' hideAtMedia='(min-width: 1200px)'></e-column>
-                    <e-column field='alerts' headerText='Alert Phone No' width="140" hideAtMedia='(min-width: 1200px)'></e-column>
+                    <e-column field='contactEmail' headerText='Email' hideAtMedia='(min-width: 1200px)'></e-column>
+                    <e-column headerText='Phone No' width="140" hideAtMedia='(min-width: 1200px)'>
+                        <ng-template #template let-data>
+                            <span>{{data.contactPhoneNo | mask: '(000) 000-0000'}}</span>
+                        </ng-template>
+                    </e-column>
                     <e-column field='locations' headerText='Locations' textAlign='Center' width="110" hideAtMedia='(min-width: 992px)'></e-column>
                 </e-columns>
             </ejs-grid>

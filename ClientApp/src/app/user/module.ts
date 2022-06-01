@@ -10,6 +10,7 @@ import { GridModule, SortService, PageService, EditService, ToolbarService, Comm
 import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
+import { NgxMaskModule } from 'ngx-mask'
 
 @NgModule({
     declarations: [
@@ -19,6 +20,7 @@ import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
     imports: [
         GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule,
         DropDownListModule, CommonModule,
+        NgxMaskModule.forRoot(),
         RouterModule.forChild([
             { path: 'list', component: UserListComponent, canActivate: [MsalGuard] },
             { path: 'add', component: UserEditComponent, canActivate: [MsalGuard] },

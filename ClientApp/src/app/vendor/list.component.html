@@ -38,7 +38,11 @@
                     <e-column field='city' headerText='City'></e-column>
                     <e-column field='state' headerText='State'></e-column>
                     <e-column field='postalCode' headerText='Postal Code'></e-column>
-                    <e-column field='phoneNo' headerText='Phone No'></e-column>
+                    <e-column headerText='Phone No' width="120">
+                        <ng-template #template let-data>
+                            <span>{{data.phoneNo | mask: '(000) 000-0000'}}</span>
+                        </ng-template>
+                    </e-column>
                     <e-column field='contactName' headerText='Contact Name' [visible]='false'></e-column>
                     <e-column field='active' headerText='Active' displayAsCheckBox='true' textAlign='center' width='120'></e-column>
                 </e-columns>

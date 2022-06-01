@@ -30,7 +30,11 @@
                     <e-column field='email' headerText='Username'></e-column>
                     <e-column field='firstName' headerText='First Name'></e-column>
                     <e-column field='lastName' headerText='Last Name'></e-column>
-                    <e-column field='phoneNo' headerText='Phone No' hideAtMedia='(min-width: 992px)'></e-column>
+                    <e-column headerText='Phone No' hideAtMedia='(min-width: 992px)'>
+                        <ng-template #template let-data>
+                            <span>{{data.phoneNo | mask: '(000) 000-0000'}}</span>
+                        </ng-template>
+                    </e-column>
                     <e-column field='userType' headerText='User Type' hideAtMedia='(min-width: 768px)'></e-column>
                 </e-columns>
             </ejs-grid>

@@ -39,7 +39,11 @@
                     <e-column field='city' headerText='City' hideAtMedia='(min-width: 1024px)'></e-column>
                     <e-column field='state' headerText='State' width="90" hideAtMedia='(min-width: 1024px)'></e-column>
                     <e-column field='postalCode' headerText='Postal Code' textAlign='Center' width="130" hideAtMedia='(min-width: 1024px)'></e-column>
-                    <e-column field='phoneNo' headerText='Phone No' width="120"></e-column>
+                    <e-column headerText='Phone No' width="120">
+                        <ng-template #template let-data>
+                            <span>{{data.phoneNo | mask: '(000) 000-0000'}}</span>
+                        </ng-template>
+                    </e-column>
                     <e-column field='contactName' headerText='Contact Name' [visible]='false'></e-column>
                     <e-column field='sites' headerText='Sites' textAlign='Center' width="90"></e-column>
                     <e-column field='locations' headerText='Locations' textAlign='Center' width="120"></e-column>

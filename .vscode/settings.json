@@ -1,5 +1,6 @@
 {
     "liveServer.settings.port": 5501,
     "workbench.tree.renderIndentGuides": "always",
-    "workbench.editor.titleScrollbarSizing": "large"
+    "workbench.editor.titleScrollbarSizing": "large",
+    "angular.enable-strict-mode-prompt": false
 }

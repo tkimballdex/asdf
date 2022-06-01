@@ -209,7 +209,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 					}));
 				});
 
-				googleMap.fitBounds($this.getBounds(boundaries));
+				googleMap?.fitBounds($this.getBounds(boundaries));
 			}
 
 			const drawingManager = new google.maps.drawing.DrawingManager({
