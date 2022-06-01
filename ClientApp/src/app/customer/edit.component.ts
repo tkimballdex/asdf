@@ -61,7 +61,6 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 			contactPhoneNo: new FormControl(this.record.contactPhoneNo, [Validators.required]),
 			notificationEmail: new FormControl(this.record.notificationEmail, [Validators.email]),
 		}, { validators: validateServiceEndDate });
-		console.log(this.record.sites)
 	}
 
 	editTabCreated() {
