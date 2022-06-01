@@ -19,7 +19,7 @@
     </div>
     <div class="row">
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-tenant" [(value)]="record.tenant" disabled placeholder="Tenant" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox id="edit-tenant" [value]="tenant.name" disabled placeholder="Tenant" floatLabelType="Always"></ejs-textbox>
         </div>
         <div class="col-md-6 col-lg-5 col-xl-4">
             <ejs-dropdownlist [dataSource]="app.vendortypes" [fields]="{ text: 'name', value: 'id' }" formControlName="vendorTypeId" placeholder="Vendor Type *" floatLabelType="Always"></ejs-dropdownlist>
