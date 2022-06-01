@@ -6,7 +6,7 @@ import { CustomerEditComponent } from './edit.component';
 import { MapComponent } from './map/map.component'
 import { RadioButtonModule, ButtonModule, CheckBoxModule } from '@syncfusion/ej2-angular-buttons';
 import { GridModule, SortService, PageService, EditService, ToolbarService, CommandColumnService, ExcelExportService } from '@syncfusion/ej2-angular-grids';
-import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
+import { TextBoxModule, MaskedTextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
@@ -22,7 +22,7 @@ import { NgxMaskModule } from 'ngx-mask'
 		MapComponent
     ],
     imports: [
-        GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule,
+        GridModule, RadioButtonModule, ButtonModule, TextBoxModule, MaskedTextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule,
 		TabModule, DatePickerModule, SwitchModule, CommonModule, FormsModule, ReactiveFormsModule,
         NgxMaskModule.forRoot(),
         RouterModule.forChild([

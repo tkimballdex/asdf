@@ -122,7 +122,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-textbox formControlName="contactPhoneNo" placeholder="Phone Number *" floatLabelType="Always" type="Number" pattern="^[0-9]{10}$"></ejs-textbox>
+                                    <ejs-maskedtextbox formControlName="contactPhoneNo" placeholder="Phone Number *" floatLabelType="Always" pattern="^[0-9]{10}$" mask="(000) 000 - 0000"></ejs-maskedtextbox>
                                     <div *ngIf="this.invalidControl('contactPhoneNo')" class="e-error">
                                         Phone number is invalid!
                                     </div>

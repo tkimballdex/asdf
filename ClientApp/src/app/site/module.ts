@@ -8,7 +8,7 @@ import { MsalGuard } from '@azure/msal-angular';
 
 import { RadioButtonModule, ButtonModule, CheckBoxModule } from '@syncfusion/ej2-angular-buttons';
 import { GridModule, SortService, PageService, EditService, ToolbarService, CommandColumnService, ExcelExportService } from '@syncfusion/ej2-angular-grids';
-import { TextBoxModule, NumericTextBoxModule  } from '@syncfusion/ej2-angular-inputs';
+import { TextBoxModule, NumericTextBoxModule, MaskedTextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
@@ -23,7 +23,7 @@ import { NgxMaskModule } from 'ngx-mask'
         SiteEditComponent
     ],
     imports: [
-		GridModule, RadioButtonModule, ButtonModule, TextBoxModule, NumericTextBoxModule , CheckBoxModule, ToastAllModule, GoogleMapsModule,
+		GridModule, RadioButtonModule, ButtonModule, TextBoxModule, NumericTextBoxModule, MaskedTextBoxModule, CheckBoxModule, ToastAllModule, GoogleMapsModule,
         DropDownListModule, DatePickerModule, TabModule, SwitchModule, CommonModule,FormsModule, ReactiveFormsModule,
         NgxMaskModule.forRoot(),
         RouterModule.forChild([

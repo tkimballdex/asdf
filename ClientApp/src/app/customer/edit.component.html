@@ -92,7 +92,7 @@
                                     <ejs-textbox formControlName="website" placeholder="Website" floatLabelType="Always"></ejs-textbox>
                                 </div>
                                 <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-textbox formControlName="phoneNo" placeholder="Main Phone No *" floatLabelType="Always" pattern="^[0-9]{10}$"></ejs-textbox>
+                                    <ejs-maskedtextbox formControlName="phoneNo" placeholder="Main Phone No *" floatLabelType="Always" pattern="^[0-9]{10}$" mask="(000) 000 - 0000"></ejs-maskedtextbox>
                                     <div *ngIf="this.invalidControl('phoneNo')" class="e-error">
                                         Phone number is invalid!
                                     </div>
@@ -116,7 +116,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-textbox formControlName="contactPhoneNo" placeholder="Contact Phone No *" floatLabelType="Always" pattern="^[0-9]{10}$"></ejs-textbox>
+                                    <ejs-maskedtextbox formControlName="contactPhoneNo" placeholder="Contact Phone No *" floatLabelType="Always" pattern="^[0-9]{10}$" mask="(000) 000 - 0000"></ejs-maskedtextbox>
                                     <div *ngIf="this.invalidControl('contactPhoneNo')" class="e-error">
                                         Contact phone number is invalid!
                                     </div>
@@ -162,7 +162,11 @@
                                             <e-column field='city' headerText='City'></e-column>
                                             <e-column field='state' headerText='State'></e-column>
                                             <e-column field='postalCode' headerText='Postal Code'></e-column>
-                                            <e-column field='phoneNo' headerText='Phone No'></e-column>
+                                            <e-column headerText='Phone No'>
+                                                <ng-template #template let-data>
+                                                    <span>{{data.contactPhoneNo | mask: '(000) 000-0000'}}</span>
+                                                </ng-template>
+                                            </e-column>
                                         </e-columns>
                                     </ejs-grid>
                                 </div>

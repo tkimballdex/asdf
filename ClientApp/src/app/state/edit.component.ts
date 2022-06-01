@@ -33,9 +33,9 @@ export class StateEditComponent extends PageComponent implements OnInit {
 		this.hideSpinner();			
 
 		this.form = new FormGroup({
-			name: new FormControl(this.record.name, [Validators.required]),
-			countryId: new FormControl(this.record.countryId, [Validators.required]),
-			code: new FormControl(this.record.code, [Validators.required])
+			name: new FormControl(this.record?.name, [Validators.required]),
+			countryId: new FormControl(this.record?.countryId, [Validators.required]),
+			code: new FormControl(this.record?.code, [Validators.required])
 		});
 
 		var $this = this;

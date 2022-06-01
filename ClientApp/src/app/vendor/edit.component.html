@@ -85,7 +85,10 @@
                                     <ejs-textbox [(value)]="record.website" placeholder="Website" floatLabelType="Always"></ejs-textbox>
                                 </div>
                                 <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-textbox [(value)]="record.phoneNo" placeholder="Main Phone No" floatLabelType="Always"></ejs-textbox>
+                                    <ejs-maskedtextbox formControlName="phoneNo" placeholder="Main Phone No *" floatLabelType="Always" pattern="^[0-9]{10}$" mask="(000) 000 - 0000"></ejs-maskedtextbox>
+                                    <div *ngIf="this.invalidControl('phoneNo')" class="e-error">
+                                        Main Phone No is required! 
+                                    </div>
                                 </div>
                             </div>
 
@@ -106,7 +109,7 @@
                                 </div>
                                 </div>
                                 <div class="col-md-6 col-lg-5 col-xl-4">                                    
-                                    <ejs-textbox formControlName="contactPhoneNo" placeholder="Contact Phone No *" floatLabelType="Always" pattern="^[0-9]{10}$"></ejs-textbox>
+                                    <ejs-maskedtextbox formControlName="contactPhoneNo" placeholder="Contact Phone No *" floatLabelType="Always" pattern="^[0-9]{10}$" mask="(000) 000 - 0000"></ejs-maskedtextbox>
                                     <div *ngIf="this.invalidControl('contactPhoneNo')" class="e-error">
                                         Contact Phone No is required! 
                                     </div>
