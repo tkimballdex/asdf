@@ -218,7 +218,7 @@ export class MasterPageComponent implements OnInit {
 	}
    //-------------------------------------------------------------------------------------
     public selectMainMenu(args: MenuEventArgs): void {
-        if (args.item.id) {
+        if (args.item.id.slice(0, 8) !== 'menuitem') {
             this.router.navigate([args.item.id]);
         }
     }
