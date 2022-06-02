@@ -50,7 +50,6 @@ export class CountyListComponent extends PageComponent implements OnInit {
 			stateId: this.form.stateId
 		});
 		this.hideSpinner();
-		console.log(this.list)
 	}
 	//----------------------------------------------------------------------------
 	async export() {
