@@ -32,6 +32,7 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 	public data: any;
 	public container: any = {};
 	public analytes: any;
+	public testTypes: any;
 	public showContainer: boolean;
 	@ViewChild('grid') public grid: GridComponent;
 	//-----------------------------------------------------------------------------------------
@@ -42,6 +43,8 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 		this.data = await this.repository.getScheduleData();
 		this.vendors = await this.repository.listVendors();
 		this.customers = await this.repository.listCustomers();
+		this.testTypes = await this.repository.listTestTypes({ tenantId: this.tenant.id });
+		this.analytes = await this.repository.listAnalytes({ tenantId: this.tenant.id });
 		this.hideSpinner();
 		this.resetRecord();
 
@@ -55,11 +58,7 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 		this.form.addControl('customerId', new FormControl('', [Validators.required]));
 		this.form.addControl('siteId', new FormControl('', [Validators.required]));
 		this.form.addControl('locationId', new FormControl('', [Validators.required]));
-		this.form.addControl('containerType', new FormControl('', [Validators.required]));
-		this.form.addControl('labVendor', new FormControl('', [Validators.required]));
-		this.form.addControl('numberOfSamples', new FormControl('', [Validators.required]));
 	}
-	
 	//-----------------------------------------------------------------------------------------
 	async save() {
 		this.form.markAllAsTouched();
@@ -156,7 +155,7 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 			expectedVolume: this.container.expectedVolume,
 			samples: this.container.samples,
 			labVendorId: this.container.labVendorId,
-			labVendor: this.vendors.find(x => x.id == this.container.labVendorId).name,
+			labVendor: this.vendors.find(x => x.id == this.container.labVendorId)?.name,
 			testTypes: this.container.testTypes,
 			testTypeNames: this.container.testTypeNames
 		});

@@ -73,4 +73,12 @@ export class CollectionRepository {
 	public listVendors() {
 		return this.http.post(`/vendor/list`, { tenantId: this.tenant.id });
 	}
+
+	public listTestTypes(filter: any) {
+        return this.http.post(`/testType/list`, filter);
+    }
+
+	public listAnalytes(filter: any) {
+        return this.http.post(`/analyte/list`, filter);
+    }
 }
