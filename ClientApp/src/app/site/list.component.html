@@ -1,4 +1,4 @@
-<div id="list-view" class="container-fluid" *ngIf="form">
+<div id="list-view" class="container-fluid" *ngIf="form" (keyup.enter)="searchClick()">
     <div class="row d-flex align-items-end">
         <div class="col-3 d-flex align-items-end list-header">
             <span class="list-header-icon"><i class="fas fa-chart-network"></i></span>

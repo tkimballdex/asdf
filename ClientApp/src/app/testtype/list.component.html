@@ -1,4 +1,4 @@
-<div id="list-view" class="container-fluid" *ngIf="privileges">
+<div id="list-view" class="container-fluid" *ngIf="privileges" (keyup.enter)="search()">
     <div class="row d-flex align-items-end">
         <div class="col d-flex align-items-center list-header">
             <span class="list-header-icon"><i class="fas fa-temperature-hot"></i></span>

@@ -1,4 +1,4 @@
-<div id="list-view" class="container-fluid" *ngIf="app">
+<div id="list-view" class="container-fluid" *ngIf="app" (keyup.enter)="search()">
     <div class="row d-flex align-items-end">
         <div class="col d-flex align-items-center list-header">
             <span class="list-header-icon"><i class="fas fa-calendar-alt"></i></span>
