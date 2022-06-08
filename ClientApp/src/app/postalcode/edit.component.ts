@@ -29,7 +29,15 @@ export class PostalcodeEditComponent extends PageComponent implements OnInit {
 		this.showSpinner();		
 		this.privileges = (await this.appService.getPrivileges()).postalCodes;
 		this.app = await this.appService.getData();
-		this.record = await this.repository.get(id);
+
+		if (!id) {
+			this.record = {
+				tenant: this.tenant.name,
+				active: true
+			}
+		} else {
+			this.record = await this.repository.get(id);
+		}
 	//	this.countries = this.app.countries;
 		this.hideSpinner();			
 
@@ -80,6 +88,29 @@ export class PostalcodeEditComponent extends PageComponent implements OnInit {
 			}
 		}
 	}
+	//------------------------------------------------------------------------------------
+	delete() {
+        this.deleteDialog = DialogUtility.confirm({
+            title: 'Delete Postal Code',
+            content: `Are you sure you want to delete the postal code <b>${this.record.code}</b>?`,
+            okButton: { click: this.deleteOK.bind(this) }
+        });
+    }
+	//------------------------------------------------------------------------------------
+	async deleteOK() {
+        this.showSpinner();
+        this.deleteDialog.close();
+        var result = await this.repository.delete(this.record.id);
+        this.hideSpinner();
+
+        if (result.error) {
+            this.showErrorMessage(result.description);
+        }
+        else {
+            this.showDeleteMessage(true);
+            setTimeout(() => this.router.navigate(['/auth/postalcode/list']), 1000);
+        }
+    }
 	//------------------------------------------------------------------------------------
 	close() {
 		if (history.state.from == 'postalcode') {

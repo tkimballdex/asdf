@@ -1,8 +1,12 @@
-<div id="list-view" class="container-fluid" *ngIf="form">
+<div id="list-view" class="container-fluid" *ngIf="form" (keyup.enter)="search()">
     <div class="row d-flex align-items-center">
         <div class="col d-flex align-items-center list-header">
             <span class="list-header-icon"><i class="fas fa-location"></i></span>
             <span class="list-header-title">Postal Codes</span>
+            <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['../add']" [disabled]="!privileges.create">+ Add</button></span>
+        </div>
+        <div class="col-md-6 d-flex align-items-center justify-content-end list-header">
+            <span class="list-actions"><button ejs-button cssClass="e-outline" [disabled]="!privileges.download" iconCss="fad fa-download" (click)="export(editTab.selectedItem)"></button></span>
         </div>
     </div>
     <div class="row d-flex align-items-end list-content">
@@ -10,7 +14,7 @@
             <ejs-textbox [(value)]="form.name" placeholder="Name" floatLabelType="Always"></ejs-textbox>
         </div>
         <div class="col-2">
-            <ejs-dropdownlist [dataSource]="app.states" [(value)]="form.stateId" [fields]="{ text: 'name', value: 'id' }" placeholder="State" floatLabelType="Always" (change)="searchClick()"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="states" [(value)]="form.stateId" [fields]="{ text: 'name', value: 'id' }" placeholder="State" floatLabelType="Always" (change)="searchClick()"></ejs-dropdownlist>
         </div>
         <div class="col-3">
             <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>
@@ -18,7 +22,7 @@
     </div>
 
     <div class="row pad-t20">
-        <ejs-tab id="edit-tab" class="e-fill"  #editTab>
+        <ejs-tab id="edit-tab" class="e-fill" #editTab>
             <e-tabitems>
                 <e-tabitem>
                     <ng-template #headerText>
@@ -26,7 +30,7 @@
                     </ng-template>
                     <ng-template #content>
                         <div class="col-12 pad-t20 pad-t20">
-                            <ejs-grid [dataSource]='list' [allowPaging]="true" [pageSettings]='form.pageSettings' [sortSettings]='form.sortSettings' [allowSorting]="true" [allowFiltering]="false" *ngIf="list" (actionComplete)='gridActionHandler($event)' [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' #griddemographics>
+                            <ejs-grid [dataSource]='list' [allowPaging]="true" [pageSettings]='form.pageSettings' [sortSettings]='form.sortSettings' [allowSorting]="true" [allowFiltering]="false" *ngIf="list" (actionComplete)='gridActionHandler($event)' [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' #grid>
                                 <e-columns>
                                     <e-column width="70">
                                         <ng-template #template let-data>
@@ -52,7 +56,7 @@
                         <div>Demographics</div>
                     </ng-template>
                     <ng-template #content>
-                        <ejs-grid [dataSource]='list' [allowPaging]="true" [pageSettings]='form.pageSettings' [sortSettings]='form.sortSettings' [allowSorting]="true" [allowFiltering]="false" *ngIf="list" (actionComplete)='gridActionHandler($event)' #grid>
+                        <ejs-grid [dataSource]='list' [allowPaging]="true" [pageSettings]='form.pageSettings' [sortSettings]='form.sortSettings' [allowSorting]="true" [allowFiltering]="false" *ngIf="list" (actionComplete)='gridActionHandler($event)' [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' #griddemographics>
                             <e-columns>
                                 <e-column width="70">
                                     <ng-template #template let-data>
@@ -80,7 +84,7 @@
                         <div>Economics</div>
                     </ng-template>
                     <ng-template #content>
-                        <ejs-grid [dataSource]='list' [allowPaging]="true" [pageSettings]='form.pageSettings' [sortSettings]='form.sortSettings' [allowSorting]="true" [allowFiltering]="false" *ngIf="list" (actionComplete)='gridActionHandler($event)' #grideconomics>
+                        <ejs-grid [dataSource]='list' [allowPaging]="true" [pageSettings]='form.pageSettings' [sortSettings]='form.sortSettings' [allowSorting]="true" [allowFiltering]="false" *ngIf="list" (actionComplete)='gridActionHandler($event)' [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' #grideconomics>
                             <e-columns>
                                 <e-column width="70">
                                     <ng-template #template let-data>

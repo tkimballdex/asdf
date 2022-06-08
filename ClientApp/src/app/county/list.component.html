@@ -1,4 +1,4 @@
-<div id="list-view" class="container-fluid" *ngIf="form">
+<div id="list-view" class="container-fluid" *ngIf="form" (keyup.enter)="search()">
     <div class="row d-flex align-items-center">
         <div class="col d-flex align-items-center list-header">
             <span class="list-header-icon"><i class="fas fa-map-marked"></i></span>
@@ -14,7 +14,7 @@
             <ejs-textbox [(value)]="form.name" placeholder="Name" floatLabelType="Always"></ejs-textbox>
         </div>
         <div class="col-2">
-            <ejs-dropdownlist [dataSource]="app.states" [(value)]="form.stateId" [fields]="{ text: 'name', value: 'id' }" placeholder="State" floatLabelType="Always" (change)="searchClick()"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="states" [(value)]="form.stateId" [fields]="{ text: 'name', value: 'id' }" placeholder="State" floatLabelType="Always" (change)="searchClick()"></ejs-dropdownlist>
         </div>
         <div class="col-3">
             <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>

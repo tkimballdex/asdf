@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { GridComponent } from '@syncfusion/ej2-angular-grids';
+import { GridComponent, Column, ExcelExportProperties } from '@syncfusion/ej2-angular-grids';
 import { PostalcodeRepository } from './repository';
 import { PageComponent } from '../shared/page.component';
 import { AppService } from '../shared/app.service';
@@ -18,17 +18,25 @@ export class PostalcodeListComponent extends PageComponent implements OnInit {
     }
 
     public list: any;
-	public states: any;
+	public states: any = null;
 	public form: FormParams;
+	public tabGrid: string;
 	
 	@ViewChild('editTab')
 	public editTab: TabComponent;
 
 	@ViewChild('grid') public grid: GridComponent;
+	@ViewChild('griddemographics') public griddemographics: GridComponent;
+	@ViewChild('grideconomics') public grideconomics: GridComponent;
 
     async ngOnInit() {
-		this.app = await this.appService.getData();
 		this.privileges = (await this.appService.getPrivileges()).postalCodes;
+
+		if (this.states === null) {
+			this.app = await this.appService.getData();
+			this.states = this.app.states.slice();
+			this.states.unshift({ id: 0, name: 'All' });
+		}
 	
 		await this.tenant.validate();
 		this.formState.setup(this, new FormParams());
@@ -51,6 +59,34 @@ export class PostalcodeListComponent extends PageComponent implements OnInit {
 		this.hideSpinner();
 	}
 	//----------------------------------------------------------------------------
+	async export(tabIndex) {
+		this.showSpinner();
+		switch (tabIndex) {
+			case 0:
+				this.tabGrid = 'grid';
+				break;
+			case 1:
+				this.tabGrid = 'griddemographics';
+				break;
+			case 2:
+				this.tabGrid = 'grideconomics';
+				break;
+		}
+		
+		(this[this.tabGrid].columns[0] as Column).visible = false;
+		const excelExportProperties: ExcelExportProperties = {
+			includeHiddenColumn: true,
+			fileName: 'postalcodes.xlsx'
+		};
+		this[this.tabGrid].excelExport(excelExportProperties);
+
+		this.hideSpinner();
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	excelExportComplete(): void {
+		(this[this.tabGrid].columns[0] as Column).visible = true;
+	}
+	//------------------------------------------------------------------------------------------------------------------------
 	gridActionHandler(e) {
 		this.form.gridAction(this.grid, e);
 		this.formState.save(this);
@@ -59,5 +95,5 @@ export class PostalcodeListComponent extends PageComponent implements OnInit {
 
 class FormParams extends GridFormParams {
 	name: string;
-	stateId: number;
+	stateId: number = 0;
 }

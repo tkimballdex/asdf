@@ -17,7 +17,7 @@ export class CountyListComponent extends PageComponent implements OnInit {
     }
 	//----------------------------------------------------------------------------
     public list: any;
-	public states: any;
+	public states: any = null;
 	public form: FormParams;
 	public tabGrid: string;
 
@@ -29,8 +29,13 @@ export class CountyListComponent extends PageComponent implements OnInit {
 	
 	//----------------------------------------------------------------------------
     async ngOnInit() {
-		this.app = await this.appService.getData();
 		this.privileges = (await this.appService.getPrivileges()).counties;
+
+		if (this.states === null) {
+			this.app = await this.appService.getData();
+			this.states = this.app.states.slice();
+			this.states.unshift({ id: 0, name: 'All' });
+		}
 		
 		await this.tenant.validate();
 		this.formState.setup(this, new FormParams());
@@ -90,6 +95,6 @@ export class CountyListComponent extends PageComponent implements OnInit {
 //////////////////////////////////////////////////////////////////////////////////
 class FormParams extends GridFormParams {
 	name: string;
-	stateId: number;
+	stateId: number = 0;
 }
 //////////////////////////////////////////////////////////////////////////////////

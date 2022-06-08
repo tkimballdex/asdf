@@ -27,8 +27,8 @@ import { TabModule } from '@syncfusion/ej2-angular-navigations';
 		CommonModule, DatePickerModule, SwitchModule, FormsModule, ReactiveFormsModule, GoogleMapsModule,NumericTextBoxModule,TabModule,
         RouterModule.forChild([
             { path: 'list', component: PostalcodeListComponent, canActivate: [MsalGuard] },
-            { path: 'add/:siteId', component: PostalcodeEditComponent, canActivate: [MsalGuard] },
-           { path: 'edit/:id', component: PostalcodeEditComponent, canActivate: [MsalGuard] },
+            { path: 'add', component: PostalcodeEditComponent, canActivate: [MsalGuard] },
+            { path: 'edit/:id', component: PostalcodeEditComponent, canActivate: [MsalGuard] },
         ])
     ],
     providers: [
