@@ -11,7 +11,7 @@
     </div>
     <div class="row d-flex align-items-end list-content">
         <div class="col-3">
-            <ejs-textbox [(value)]="form.name" placeholder="Name" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox [(value)]="form.searchTxt" placeholder="Search" floatLabelType="Always"></ejs-textbox>
         </div>
         <div class="col-2">
             <ejs-dropdownlist [dataSource]="states" [(value)]="form.stateId" [fields]="{ text: 'name', value: 'id' }" placeholder="State" floatLabelType="Always" (change)="searchClick()"></ejs-dropdownlist>
