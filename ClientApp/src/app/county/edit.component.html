@@ -11,7 +11,7 @@
 
     <div class="row pad-t10">  
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-state" [value]="record.name" formControlName="name"  placeholder="County Name *" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox id="edit-state" [value]="record.name" formControlName="name" placeholder="County Name *" floatLabelType="Always"></ejs-textbox>
             <div *ngIf="this.invalidControl('name')" class="e-error">
                 County Name is required!
             </div>

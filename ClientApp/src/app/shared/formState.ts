@@ -11,14 +11,14 @@ export class GridFormParams {
 	}
 
 	gridAction(grid: GridComponent, e) {
-		this.pageSettings.currentPage = grid.pagerModule.pagerObj.currentPage;
+		this.pageSettings.currentPage = grid?.pagerModule.pagerObj.currentPage;
 
 		if (e.requestType == 'sorting') {
 			this.sortSettingsCurrent = e.columnName ? { columns: [{ field: e.columnName, direction: e.direction }] } : null;
 		}
 		else if (e.requestType = 'paging') {
-			this.pageSettings.currentPage = grid.pagerModule.pagerObj.currentPage;
-			this.pageSettings.pageSize = grid.pagerModule.pagerObj.pageSize;
+			this.pageSettings.currentPage = grid?.pagerModule.pagerObj.currentPage;
+			this.pageSettings.pageSize = grid?.pagerModule.pagerObj.pageSize;
 		}
 	}
 

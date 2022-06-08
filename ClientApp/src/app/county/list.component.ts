@@ -19,11 +19,12 @@ export class CountyListComponent extends PageComponent implements OnInit {
     public list: any;
 	public states: any;
 	public form: FormParams;
+	public tabGrid: string;
 
-	@ViewChild('editTab')
-	public editTab: TabComponent;
-	
+	@ViewChild('editTab') public editTab: TabComponent;
 	@ViewChild('grid') public grid: GridComponent;
+	@ViewChild('griddemographics') public griddemographics: GridComponent;
+	@ViewChild('grideconomics') public grideconomics: GridComponent;
 	//----------------------------------------------------------------------------
 	
 	//----------------------------------------------------------------------------
@@ -52,15 +53,26 @@ export class CountyListComponent extends PageComponent implements OnInit {
 		this.hideSpinner();
 	}
 	//----------------------------------------------------------------------------
-	async export() {
+	async export(tabIndex) {
 		this.showSpinner();
+		switch (tabIndex) {
+			case 0:
+				this.tabGrid = 'grid';
+				break;
+			case 1:
+				this.tabGrid = 'griddemographics';
+				break;
+			case 2:
+				this.tabGrid = 'grideconomics';
+				break;
+		  }
 
-		(this.grid.columns[0] as Column).visible = false;
+		(this[this.tabGrid].columns[0] as Column).visible = false;
 		const excelExportProperties: ExcelExportProperties = {
 			includeHiddenColumn: true,
 			fileName: 'counties.xlsx'
 		};
-		this.grid.excelExport(excelExportProperties);
+		this[this.tabGrid].excelExport(excelExportProperties);
 
 		this.hideSpinner();
 	}

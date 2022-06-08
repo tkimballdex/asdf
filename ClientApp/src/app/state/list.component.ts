@@ -51,6 +51,7 @@ export class StateListComponent extends PageComponent implements OnInit {
 	}
     //------------------------------------------------------------------------------------------------------------------------
 	async export(tabIndex) {
+		this.showSpinner();
 		switch (tabIndex) {
 			case 0:
 				this.tabGrid = 'grid';
@@ -59,10 +60,10 @@ export class StateListComponent extends PageComponent implements OnInit {
 				this.tabGrid = 'griddemographics';
 				break;
 			case 2:
-				this.tabGrid = 'grideconomics'
+				this.tabGrid = 'grideconomics';
 				break;
-		  }
-		this.showSpinner();
+		}
+
 		(this[this.tabGrid].columns[0] as Column).visible = false;
 		const excelExportProperties: ExcelExportProperties = {
 			includeHiddenColumn: true,
