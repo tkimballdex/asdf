@@ -29,7 +29,15 @@ export class StateEditComponent extends PageComponent implements OnInit {
 		this.showSpinner();	
 		this.app = await this.appService.getData();
 		this.privileges = (await this.appService.getPrivileges()).states;
-		this.record = await this.repository.get(id);
+
+		if (!id) {
+			this.record = {
+				tenant: this.tenant.name,
+				active: true
+			}
+		} else {
+			this.record = await this.repository.get(id);
+		}
 		this.hideSpinner();			
 
 		this.form = new FormGroup({
@@ -75,6 +83,29 @@ export class StateEditComponent extends PageComponent implements OnInit {
 			}
 		}
 	}
+	//------------------------------------------------------------------------------------
+	delete() {
+        this.deleteDialog = DialogUtility.confirm({
+            title: 'Delete State',
+            content: `Are you sure you want to delete the state <b>${this.record.name}</b>?`,
+            okButton: { click: this.deleteOK.bind(this) }
+        });
+    }
+	//------------------------------------------------------------------------------------
+	async deleteOK() {
+        this.showSpinner();
+        this.deleteDialog.close();
+        var result = await this.repository.delete(this.record.id);
+        this.hideSpinner();
+
+        if (result.error) {
+            this.showErrorMessage(result.description);
+        }
+        else {
+            this.showDeleteMessage(true);
+            setTimeout(() => this.router.navigate(['/auth/state/list']), 1000);
+        }
+    }
 	//------------------------------------------------------------------------------------
 	close() {
 		if (history.state.from == 'state') {

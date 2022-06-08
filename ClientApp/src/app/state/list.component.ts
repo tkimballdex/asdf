@@ -18,8 +18,12 @@ export class StateListComponent extends PageComponent implements OnInit {
 
     public list: any;
 	public form: FormParams;
+	public tabGrid: string;
 
 	@ViewChild('grid') public grid: GridComponent;
+	@ViewChild('griddemographics') public griddemographics: GridComponent;
+	@ViewChild('grideconomics') public grideconomics: GridComponent;
+	@ViewChild('editTab') public editTab: TabComponent;
 
     async ngOnInit() {
 		this.app = await this.appService.getData();
@@ -39,30 +43,40 @@ export class StateListComponent extends PageComponent implements OnInit {
 		this.formState.save(this);
 		this.showSpinner();
 		this.list = await this.repository.list({
-		//	tenantId: this.tenant.id,
-			//name: this.form.name,
-			//countryId: this.form.countryId
+			tenantId: this.tenant.id,
+			name: this.form.name,
+			countryId: this.form.countryId
 		});
 		this.hideSpinner();
 	}
-
-	async export() {
+    //------------------------------------------------------------------------------------------------------------------------
+	async export(tabIndex) {
+		switch (tabIndex) {
+			case 0:
+				this.tabGrid = 'grid';
+				break;
+			case 1:
+				this.tabGrid = 'griddemographics';
+				break;
+			case 2:
+				this.tabGrid = 'grideconomics'
+				break;
+		  }
 		this.showSpinner();
-
-		(this.grid.columns[0] as Column).visible = false;
+		(this[this.tabGrid].columns[0] as Column).visible = false;
 		const excelExportProperties: ExcelExportProperties = {
 			includeHiddenColumn: true,
 			fileName: 'states.xlsx'
 		};
-		this.grid.excelExport(excelExportProperties);
+		this[this.tabGrid].excelExport(excelExportProperties);
 
 		this.hideSpinner();
 	}
 	//------------------------------------------------------------------------------------------------------------------------
 	excelExportComplete(): void {
-		(this.grid.columns[0] as Column).visible = true;
+		(this[this.tabGrid].columns[0] as Column).visible = true;
 	}
-	//----------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------------------------------
 	gridActionHandler(e) {
 		this.form.gridAction(this.grid, e);
 		this.formState.save(this);

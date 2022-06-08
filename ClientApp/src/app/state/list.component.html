@@ -1,4 +1,4 @@
-<div id="list-view" class="container-fluid" *ngIf="form">
+<div id="list-view" class="container-fluid" *ngIf="form" (keyup.enter)="search()">
     <div class="row d-flex align-items-center">
         <div class="col-md-6 d-flex align-items-center list-header">
             <span class="list-header-icon"><i class="fas fa-map-marked"></i></span>
@@ -6,7 +6,7 @@
             <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['../add']" [disabled]="!privileges.create">+ Add</button></span>
         </div>
         <div class="col-md-6 d-flex align-items-center justify-content-end list-header">
-            <span class="list-actions"><button ejs-button cssClass="e-outline" [disabled]="!privileges.download" iconCss="fad fa-download" (click)="export()"></button></span>
+            <span class="list-actions"><button ejs-button cssClass="e-outline" [disabled]="!privileges.download" iconCss="fad fa-download" (click)="export(editTab.selectedItem)"></button></span>
         </div>
     </div>
     <div class="row d-flex align-items-end list-content">
@@ -29,7 +29,7 @@
                     </ng-template>
                     <ng-template #content>
                         <div class="col-12 pad-t20">
-                            <ejs-grid [dataSource]='list' [allowPaging]="true" [pageSettings]='form.pageSettings' [sortSettings]='form.sortSettings' [allowSorting]="true" [allowFiltering]="false" *ngIf="list" (actionComplete)='gridActionHandler($event)' [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' #griddemographics>
+                            <ejs-grid [dataSource]='list' [allowPaging]="true" [pageSettings]='form.pageSettings' [sortSettings]='form.sortSettings' [allowSorting]="true" [allowFiltering]="false" *ngIf="list" (actionComplete)='gridActionHandler($event)' [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' #grid>
                                 <e-columns>
                                     <e-column width="70">
                                         <ng-template #template let-data>
@@ -39,8 +39,7 @@
                                     <e-column field='code' headerText='Name'></e-column>
                                     <e-column field='fipsCode' headerText='Fips Code'></e-column>
                                     <e-column field='geoId' headerText='Geo Id'></e-column>
-                                    <e-column field='state' headerText='State'></e-column>
-                                    <e-column field='country' headerText='County'></e-column>
+                                    <e-column field='country' headerText='Country'></e-column>
                                     <e-column field='landArea' headerText='Land Area'></e-column>
                                     <e-column field='waterArea' headerText='Water Area'></e-column>
                                     <e-column field='area' headerText='Area'></e-column>
@@ -55,7 +54,7 @@
                         <div>Demographics</div>
                     </ng-template>
                     <ng-template #content>
-                        <ejs-grid [dataSource]='list' [allowPaging]="true" [pageSettings]='form.pageSettings' [sortSettings]='form.sortSettings' [allowSorting]="true" [allowFiltering]="false" *ngIf="list" (actionComplete)='gridActionHandler($event)' #grid>
+                        <ejs-grid [dataSource]='list' [allowPaging]="true" [pageSettings]='form.pageSettings' [sortSettings]='form.sortSettings' [allowSorting]="true" [allowFiltering]="false" *ngIf="list" (actionComplete)='gridActionHandler($event)' [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' #griddemographics>
                             <e-columns>
                                 <e-column width="70">
                                     <ng-template #template let-data>
@@ -63,7 +62,6 @@
                                     </ng-template>
                                 </e-column>
                                 <e-column field='name' headerText='Name'></e-column>
-                                <e-column field='state' headerText='State'></e-column>
                                 <e-column field='population' headerText='Population'></e-column>
                                 <e-column field='density' headerText='Density'></e-column>
                                 <e-column field='populationMedian' headerText='Pop. Median'></e-column>
@@ -83,7 +81,7 @@
                         <div>Economics</div>
                     </ng-template>
                     <ng-template #content>
-                        <ejs-grid [dataSource]='list' [allowPaging]="true" [pageSettings]='form.pageSettings' [sortSettings]='form.sortSettings' [allowSorting]="true" [allowFiltering]="false" *ngIf="list" (actionComplete)='gridActionHandler($event)' #grideconomics>
+                        <ejs-grid [dataSource]='list' [allowPaging]="true" [pageSettings]='form.pageSettings' [sortSettings]='form.sortSettings' [allowSorting]="true" [allowFiltering]="false" *ngIf="list" (actionComplete)='gridActionHandler($event)' [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' #grideconomics>
                             <e-columns>
                                 <e-column width="70">
                                     <ng-template #template let-data>
@@ -91,7 +89,6 @@
                                     </ng-template>
                                 </e-column>
                                 <e-column field='name' headerText='Name'></e-column>
-                                <e-column field='state' headerText='State'></e-column>
                                 <e-column field='firms' headerText='Firms'></e-column>
                                 <e-column field='firmsUnder5' headerText='FirmsUnder5'></e-column>
                                 <e-column field='firms5To9' headerText='Firms 5to9'></e-column>
