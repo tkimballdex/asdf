@@ -19,25 +19,34 @@ export class VendorListComponent extends PageComponent implements OnInit {
     public searchTxt: any;
     public states: any = null;
     public stateId: number = 0;
+    public vendors: any = null;
+    public vendorTypeId: number = 0;
     public active: number = 1;
     @ViewChild('grid') public grid: GridComponent;
     //------------------------------------------------------------------------------------------------------------------------
 	async ngOnInit() {
         this.privileges = (await this.appService.getPrivileges()).vendors;
+        this.app = await this.appService.getData();
 		await this.tenant.validate();
 
         if (this.states === null) {
-			this.app = await this.appService.getData();
 			this.states = this.app.states.slice();
 			this.states.unshift({ id: 0, name: 'All' });
 		}
+
+        if (this.vendors === null) {
+            this.vendors = this.app.vendortypes.slice();
+			this.vendors.unshift({ id: 0, name: 'All' });
+        } 
+
+
 
 		this.search();
 	}
     //------------------------------------------------------------------------------------------------------------------------
     async search() {
         this.showSpinner();
-        this.list = await this.repository.list({ tenantId: this.tenant.id, searchTxt: this.searchTxt, stateId: this.stateId, active: this.active });
+        this.list = await this.repository.list({ tenantId: this.tenant.id, searchTxt: this.searchTxt, stateId: this.stateId, vendorTypeId: this.vendorTypeId, active: this.active });
         this.hideSpinner();
     }
     //------------------------------------------------------------------------------------------------------------------------

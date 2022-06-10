@@ -460,6 +460,13 @@ mat-form-field.mat-form-field {
     font-weight: bold;
 }
 
+#maintext {
+    min-height: 600px;
+}
+
+#sms-sidebar {
+    max-height: 400px;
+}
 
 #edit-view .e-upload .e-icons.e-file-delete-btn {
 	display: none;

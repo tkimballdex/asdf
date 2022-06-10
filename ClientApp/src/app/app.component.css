@@ -217,6 +217,7 @@
     z-index: 1000;
     box-sizing: border-box;
     padding: 0px 15px 15px 15px;
+    overflow-x: visible;
 }
 
 #maintext .sidebar-menu-content {
