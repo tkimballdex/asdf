@@ -39,18 +39,18 @@
 
                             <div class="row pad-t10">
                                 <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-textbox [(value)]="record.site" disabled placeholder="Site" floatLabelType="Always"></ejs-textbox>
+                                    <ejs-textbox [(value)]="record.site" readonly placeholder="Site" floatLabelType="Always"></ejs-textbox>
                                 </div>
                                 <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-textbox [(value)]="record.location" disabled placeholder="Location" floatLabelType="Always"></ejs-textbox>
+                                    <ejs-textbox [(value)]="record.location" readonly placeholder="Location" floatLabelType="Always"></ejs-textbox>
                                 </div>
                             </div>   
                             <div class="row">
                                 <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-textbox [(value)]="record.container" disabled placeholder="Container" floatLabelType="Always"></ejs-textbox>
+                                    <ejs-textbox [(value)]="record.container" readonly placeholder="Container" floatLabelType="Always"></ejs-textbox>
                                 </div>
                                 <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-numerictextbox [(value)]="record.expectedVolume" format='N1' min='0' max='500' step='1' placeholder="Expected Volume" floatLabelType="Always" disabled></ejs-numerictextbox>
+                                    <ejs-numerictextbox id="sampleExpectedVolume" [(value)]="record.expectedVolume" format='N1' min='0' max='500' step='1' placeholder="Expected Volume" floatLabelType="Always" readOnly="true"></ejs-numerictextbox>
                                 </div>
                             </div>                          
                            

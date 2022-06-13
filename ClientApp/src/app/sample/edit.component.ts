@@ -42,7 +42,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.showSpinner();
 		this.app = await this.appService.getData();
 		this.privileges = this.app.privileges.samples;
-		this.vendors = await this.repository.listVendors();
+		this.vendors = await this.repository.listVendors({ tenantId: this.tenant.id, vendorTypeId: 2 });
 
 		this.failureReasons = this.app.sampleFailureReasons.slice();
 		this.failureReasons.unshift({ id: 0, name: '' });

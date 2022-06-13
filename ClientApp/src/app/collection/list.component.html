@@ -15,13 +15,13 @@
             <ejs-textbox [(value)]="form.collectionNo" placeholder="Collection No" floatLabelType="Always"></ejs-textbox>
         </div>
         <div class="col-sm-6 col-md-3 col-lg-2">
-            <ejs-dropdownlist [dataSource]="statuses" [(value)]="form.collectionStatusId" [fields]="{ text: 'name', value: 'id' }" placeholder="Status" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="statuses" [(value)]="form.collectionStatusId" [fields]="{ text: 'name', value: 'id' }" placeholder="Status" floatLabelType="Always" (change)="search()"></ejs-dropdownlist>
         </div>
         <div class="col-md-6 col-lg-3">
-            <ejs-dropdownlist [dataSource]="customers" [(value)]="form.customerId" [fields]="{ text: 'name', value: 'id' }" placeholder="Customer" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="customers" [(value)]="form.customerId" [fields]="{ text: 'name', value: 'id' }" placeholder="Customer" floatLabelType="Always" (change)="search()"></ejs-dropdownlist>
         </div>
         <div class="col-sm-6 col-md-3 col-lg-2">
-            <ejs-datepicker [(value)]="form.scheduledDate" placeholder="Scheduled Date" floatLabelType="Always"></ejs-datepicker>
+            <ejs-datepicker [(value)]="form.scheduledDate" placeholder="Scheduled Date" floatLabelType="Always" (change)="search()"></ejs-datepicker>
         </div>        
         <div class="col-sm-6 col-md-3 col-lg-2 pad-t20">
             <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>

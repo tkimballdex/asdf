@@ -42,7 +42,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 		
 		var id = this.route.snapshot.paramMap.get('id');
 		this.record = await this.repository.get(id);
-		this.vendors = await this.repository.listVendors();
+		this.vendors = await this.repository.listVendors({ tenantId: this.tenant.id, vendorTypeId: 3 });
 
 		if (id) {
 			this.tests = await this.repository.getTests(id);

@@ -29,12 +29,17 @@
         </div>
     </div>
 
+    <div class="row pad-t20">
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-textbox [(value)]="record.customer" readonly placeholder="Customer" floatLabelType="Always"></ejs-textbox>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox [(value)]="record.customer" disabled placeholder="Customer" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox [(value)]="record.site" readonly placeholder="Site" floatLabelType="Always"></ejs-textbox>
         </div>
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox [(value)]="record.site" disabled placeholder="Site" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox [(value)]="record.location" readonly placeholder="Location" floatLabelType="Always"></ejs-textbox>
         </div>
     </div>
 

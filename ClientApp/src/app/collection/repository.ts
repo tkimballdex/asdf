@@ -70,8 +70,8 @@ export class CollectionRepository {
 		});
 	}
 
-	public listVendors() {
-		return this.http.post(`/vendor/list`, { tenantId: this.tenant.id });
+	public listVendors(filter: any) {
+		return this.http.post(`/vendor/list`, filter);
 	}
 
 	public listTestTypes(filter: any) {

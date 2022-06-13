@@ -11,11 +11,11 @@
 
     <div class="row pad-t20">
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="collectionNo" [readonly]="true" placeholder="Collection No" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox formControlName="collectionNo" readonly placeholder="Collection No" floatLabelType="Always"></ejs-textbox>
         </div>
 
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-datepicker [value]="record.createdDate" [readonly]="true" placeholder="Created Date*" floatLabelType="Always"></ejs-datepicker>          
+            <ejs-datepicker id="collectionCreatedDate" [value]="record.createdDate" [readonly]=true placeholder="Created Date" floatLabelType="Always"></ejs-datepicker>          
         </div>
     </div>
 
@@ -61,10 +61,15 @@
 
     <div class="row" *ngIf="record.id">
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox [(value)]="record.site" disabled placeholder="Site" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox [(value)]="record.customer" readonly placeholder="Customer" floatLabelType="Always"></ejs-textbox>
+        </div>
+    </div>
+    <div class="row" *ngIf="record.id">
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-textbox [(value)]="record.site" readonly placeholder="Site" floatLabelType="Always"></ejs-textbox>
         </div>
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox [(value)]="record.location" disabled placeholder="Location" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox [(value)]="record.location" readonly placeholder="Location" floatLabelType="Always"></ejs-textbox>
         </div>
     </div>
 
@@ -89,7 +94,7 @@
 
                             <div class="row">
                                 <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-textbox [(value)]="record.collectedBy" disabled placeholder="Collected By" floatLabelType="Always"></ejs-textbox>
+                                    <ejs-textbox [(value)]="record.collectedBy" readonly placeholder="Collected By" floatLabelType="Always"></ejs-textbox>
                                 </div> 
                                 <div class="col-md-6 col-lg-5 col-xl-4">
                                     <ejs-datepicker [(value)]="record.collectedDate" placeholder="Collected Date" floatLabelType="Always"></ejs-datepicker>

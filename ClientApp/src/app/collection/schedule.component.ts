@@ -41,7 +41,7 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 		this.app = await this.appService.getData();
 		this.privileges = this.app.privileges.samples;
 		this.data = await this.repository.getScheduleData();
-		this.vendors = await this.repository.listVendors();
+		this.vendors = await this.repository.listVendors({ tenantId: this.tenant.id, vendorTypeId: 3 });
 		this.customers = await this.repository.listCustomers();
 		this.testTypes = await this.repository.listTestTypes({ tenantId: this.tenant.id });
 		this.analytes = await this.repository.listAnalytes({ tenantId: this.tenant.id });

@@ -472,7 +472,7 @@ mat-form-field.mat-form-field {
 	display: none;
 }
 
-#edit-view ejs-textbox input[readonly], #edit-view ejs-textbox textarea[readonly] {
+#edit-view ejs-textbox input[readonly], #edit-view ejs-textbox textarea[readonly], #collectionCreatedDate div, #sampleExpectedVolume div {
 	background-color: #eee;
 }
 
