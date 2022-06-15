@@ -250,8 +250,26 @@ mat-form-field.mat-form-field {
     display: inline-block;
     font-size: 1.8em;
     font-weight: 300;
-    padding: 5px 20px 10px 15px;
+    padding: 15px 20px 20px 15px;
     color:#3c4858;
+}
+
+#edit-view .edit-header-collection-no {
+    color:#3c4858;
+    font-weight: 100;
+    padding: 19px 20px 15px 20px;
+    border-right: 1px dotted #3c485860;
+}
+
+#edit-view .edit-header-status {
+    color:#3c4858;
+    font-weight: 100;
+    padding: 19px 20px 15px 20px;
+    border-right: 1px dotted #3c485860;
+}
+
+.dotted-right {
+    border-right: 1px dotted #3c485860;
 }
 
 #edit-view .e-control {
@@ -472,7 +490,7 @@ mat-form-field.mat-form-field {
 	display: none;
 }
 
-#edit-view ejs-textbox input[readonly], #edit-view ejs-textbox textarea[readonly], #collectionCreatedDate div, #sampleExpectedVolume div {
+#edit-view ejs-textbox input[readonly], #edit-view ejs-textbox textarea[readonly], #collectionCreatedDate div, #sampleExpectedVolume div, #collectionStatus div {
 	background-color: #eee;
 }
 

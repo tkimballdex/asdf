@@ -1,64 +1,57 @@
 <div id="edit-view" *ngIf="record && form" class="container-fluid" [formGroup]="form">
-    <div class="row d-flex align-items-center edit-header">
+    <div class="row  edit-header">
         <div class="col-md-6 d-flex">
             <span class="edit-header-icon"><i class="fal fa-calendar-alt"></i></span>
-            <span class="edit-header-title">Collection</span>
+            <span class="edit-header-title dotted-right">Collection</span>
+
+            <div *ngIf="record.collectionNo" class="edit-header-collection-no">
+                <span>{{record.collectionNo}}</span>
+            </div>
+            
+            <div *ngIf="statusName" class="edit-header-status">
+                <span>{{statusName}}</span>
+            </div>
         </div>
     </div>
 
     <div class="row pad-t20">
         <div class="col-md-12 col-lg-8 col-xl-6">
 
-            <div class="row pad-t20">
-                <div class="col-md-6 col-lg-5 col-xl-4">
-                    <ejs-textbox formControlName="collectionNo" readonly placeholder="Collection No" floatLabelType="Always"></ejs-textbox>
-                </div>
-            </div>
-
             <div class="row pad-b20">
                 <div class="col-md-6 col-lg-5 col-xl-4">
-                    <ejs-dropdownlist [dataSource]="data.statuses" [fields]="{ text: 'name', value: 'id' }" formControlName="collectionStatusId" placeholder="Status *" floatLabelType="Always"></ejs-dropdownlist>
-                    <div *ngIf="this.invalidControl('collectionStatusId')" class="e-error">
-                        Status is required!
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-5 col-xl-4">
-                    <ejs-datepicker formControlName="scheduledDate" required placeholder="Scheduled Date *" floatLabelType="Always"></ejs-datepicker>
+                    <ejs-datepicker formControlName="scheduledDate" required placeholder="Scheduled Date*" floatLabelType="Always"></ejs-datepicker>
                     <div *ngIf="this.invalidControl('scheduledDate')" class="e-error">
                         Scheduled Date is required!
                     </div>
                 </div>
             </div>
 
-            <div class="row" *ngIf="!record.id">
-                <div class="col-md-12 col-lg-10 col-xl-8">
-                    <ejs-dropdownlist [dataSource]="customers" [fields]="{ text: 'name', value: 'id' }" formControlName="customerId" placeholder="Customer *" floatLabelType="Always" (change)="customerChange($event)"></ejs-dropdownlist>
+            <div class="row">
+                <div class="col-md-12 col-lg-10 col-xl-8" *ngIf="customers">
+                    <ejs-dropdownlist [dataSource]="customers" [fields]="{ text: 'name', value: 'id' }" formControlName="customerId" placeholder="Customer*" floatLabelType="Always" (change)="customerChange($event)"></ejs-dropdownlist>
                     <div *ngIf="this.invalidControl('customerId')" class="e-error">
                         Customer is required!
                     </div>
                 </div>
             </div>
-            <div class="row" *ngIf="!record.id">
+            <div class="row">
                 <div class="col-md-6 col-lg-5 col-xl-4" *ngIf="sites">
-                    <ejs-dropdownlist [dataSource]="sites" [fields]="{ text: 'name', value: 'id' }" formControlName="siteId" placeholder="Site *" floatLabelType="Always" (change)="siteChange($event)"></ejs-dropdownlist>
+                    <ejs-dropdownlist [dataSource]="sites" [fields]="{ text: 'name', value: 'id' }" formControlName="siteId" placeholder="Site*" floatLabelType="Always" (change)="siteChange($event)"></ejs-dropdownlist>
                     <div *ngIf="this.invalidControl('siteId')" class="e-error">
                         Site is required!
                     </div>
                 </div>
-            </div>
-            <div class="row" *ngIf="!record.id">
                 <div class="col-md-6 col-lg-5 col-xl-4" *ngIf="locations">
-                    <ejs-dropdownlist [dataSource]="locations" [fields]="{ text: 'name', value: 'id' }" formControlName="locationId" placeholder="Location *" floatLabelType="Always"></ejs-dropdownlist>
+                    <ejs-dropdownlist [dataSource]="locations" [fields]="{ text: 'name', value: 'id' }" formControlName="locationId" placeholder="Location*" floatLabelType="Always"></ejs-dropdownlist>
                     <div *ngIf="this.invalidControl('locationId')" class="e-error">
                         Location is required!
                     </div>
                 </div>
             </div>
 
-            <div class="row pad-t10">
+            <div class="row pad-t20">
                 <div class="col-md-12 col-lg-10 col-xl-8">
-                    <ejs-dropdownlist [dataSource]="vendors" [fields]="{ text: 'name', value: 'id' }" formControlName="vendorId" placeholder="Logistic Vendor *" floatLabelType="Always"></ejs-dropdownlist>
+                    <ejs-dropdownlist [dataSource]="vendors" [fields]="{ text: 'name', value: 'id' }" formControlName="vendorId" placeholder="Logistic Vendor*" floatLabelType="Always"></ejs-dropdownlist>
                     <div *ngIf="this.invalidControl('vendorId')" class="e-error">Logistic Vendor is required!</div>
                 </div>
             </div>
@@ -67,50 +60,62 @@
 
         <div class="col-md-12 col-lg-8 col-xl-6">
 
-            <div class="row pad-b20" *ngIf="form.get('collectionSuccessful').value">
-                <div class="col-md-6 col-lg-5 col-xl-4">
-                    <ejs-datepicker [(value)]="record.collectedDate" formControlName="completedDate" placeholder="Completed Date" floatLabelType="Always"></ejs-datepicker>
-                    <div *ngIf="this.invalidControl('completedDate')" class="e-error">
-                        Completed Date is required!
+            <div class="row pad-t10 pad-b10">
+                <div class="col-md-12 col-lg-10 col-xl-8">
+                    <label for="collCompleted" class="edit-label bold" style="font-size:1.1em;">Was the collection completed?</label>
+                    <ejs-radiobutton label="Yes" name="collCompleted" [value]="true" formControlName="collectionCompleted" cssClass="mar-l20"></ejs-radiobutton>
+                    <ejs-radiobutton label="No" name="collCompleted" [value]="false" formControlName="collectionCompleted" cssClass="mar-l20"></ejs-radiobutton>
+                </div>
+            </div>
+
+            <div *ngIf="form.get('collectionCompleted').value">
+                <div class="row pad-b20">
+                    <div class="col-md-6 col-lg-5 col-xl-4">
+                        <ejs-datepicker [(value)]="record.collectedDate" formControlName="completedDate" placeholder="Completed Date*" floatLabelType="Always"></ejs-datepicker>
+                        <div *ngIf="this.invalidControl('completedDate')" class="e-error">
+                            Completed Date is required!
+                        </div>
+                    </div>
+    
+                    <div class="col-md-6 col-lg-5 col-xl-4">
+                        <ejs-textbox [(value)]="record.collectedBy" readonly placeholder="Collected By"
+                            floatLabelType="Always"></ejs-textbox>
                     </div>
                 </div>
-
-                <div class="col-md-6 col-lg-5 col-xl-4">
-                    <ejs-textbox [(value)]="record.collectedBy" readonly placeholder="Collected By"
-                        floatLabelType="Always"></ejs-textbox>
+    
+                <div class="row pad-t10 pad-b10">
+                    <div class="col-md-12 col-lg-10 col-xl-8">
+                        <label for="collSuccessful" class="edit-label bold" style="font-size:1.1em;">Was the collection successful?*</label>
+                        <ejs-radiobutton label="Yes" name="collSuccessful" [value]="2" formControlName="collectionSuccessful" cssClass="mar-l20" (change)="setStatus()"></ejs-radiobutton>
+                        <ejs-radiobutton label="No" name="collSuccessful" [value]="3" formControlName="collectionSuccessful" cssClass="mar-l20" (change)="setStatus()"></ejs-radiobutton>
+                    </div>
                 </div>
-            </div>
-
-            <div class="row pad-t20 mar-t10 pad-b10">
-                <div class="col-md-12 col-lg-10 col-xl-8">
-                    <label for="collStatus" class="edit-label bold" style="font-size:1.1em;">Was the collection successful?</label>
-                    <ejs-radiobutton label="Not Set" name="collSuccessful" [value]="1" formControlName="collectionSuccessful" cssClass="mar-l20"></ejs-radiobutton>
-                    <ejs-radiobutton label="Yes" name="collSuccessful" [value]="2" formControlName="collectionSuccessful" cssClass="mar-l20" (change)="setSucessStatus()"></ejs-radiobutton>
-                    <ejs-radiobutton label="No" name="collSuccessful" [value]="3" formControlName="collectionSuccessful" cssClass="mar-l20" (change)="setFailureStatus()"></ejs-radiobutton>
+                <div *ngIf="this.invalidControl('collectionSuccessful')" class="e-error">
+                    Collection Successful is required!
                 </div>
-            </div>
-
-            <div class="row" *ngIf="form.get('collectionSuccessful').value">
-                <div class="col-md-6 col-lg-5 col-xl-4">
-                    <ejs-numerictextbox [(value)]="record.flowRate" format='N1' min='0' max='500' step='1' placeholder="Flow Rate" floatLabelType="Always"></ejs-numerictextbox>
+    
+                <div class="row" *ngIf="form.get('collectionSuccessful').value === 2">
+                    <div class="col-md-6 col-lg-5 col-xl-4">
+                        <ejs-numerictextbox [(value)]="record.flowRate" format='N1' min='0' max='500' step='1' placeholder="Flow Rate" floatLabelType="Always"></ejs-numerictextbox>
+                    </div>
                 </div>
-            </div>
-
-            <div class="row pad-b10" *ngIf="form.get('collectionSuccessful').value">
-                <div class="col-md-6 col-lg-5 col-xl-4">
-                    <ejs-numerictextbox [(value)]="record.temperature" format='N1' min='-100' max='150' step='0.1' placeholder="Ambient Temperature" floatLabelType="Always"></ejs-numerictextbox>
+    
+                <div class="row pad-b10" *ngIf="form.get('collectionSuccessful').value === 2">
+                    <div class="col-md-6 col-lg-5 col-xl-4">
+                        <ejs-numerictextbox [(value)]="record.temperature" format='N1' min='-100' max='150' step='0.1' placeholder="Ambient Temperature" floatLabelType="Always"></ejs-numerictextbox>
+                    </div>
+    
+                    <div class="col-md-6 col-lg-5 col-xl-4">
+                        <ejs-numerictextbox [(value)]="record.humidity" format='N1' min='0' max='100' step='0.1' placeholder="Humidity" floatLabelType="Always"></ejs-numerictextbox>
+                    </div>
                 </div>
-
-                <div class="col-md-6 col-lg-5 col-xl-4">
-                    <ejs-numerictextbox [(value)]="record.humidity" format='N1' min='0' max='100' step='0.1' placeholder="Humidity" floatLabelType="Always"></ejs-numerictextbox>
-                </div>
-            </div>
-
-            <div class="row pad-b10" *ngIf="form.get('collectionSuccessful').value === false">
-                <div class="col-md-6 col-lg-5 col-xl-4">
-                    <ejs-dropdownlist [dataSource]="data.failureReasons" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.failureReasonId" formControlName="failureReasonId" placeholder="Failure Reason *" floatLabelType="Always"></ejs-dropdownlist>
-                    <div *ngIf="this.invalidControl('failureReasonId')" class="e-error">
-                        Failure Reason is required!
+    
+                <div class="row pad-b10" *ngIf="form.get('collectionSuccessful').value === 3">
+                    <div class="col-md-6 col-lg-5 col-xl-4">
+                        <ejs-dropdownlist [dataSource]="data.failureReasons" [fields]="{ text: 'name', value: 'id' }" formControlName="failureReasonId" placeholder="Failure Reason*" floatLabelType="Always"></ejs-dropdownlist>
+                        <div *ngIf="this.invalidControl('failureReasonId')" class="e-error">
+                            Failure Reason is required!
+                        </div>
                     </div>
                 </div>
             </div>

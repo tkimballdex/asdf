@@ -49,16 +49,27 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 				collectionName: collection.name,
 				scheduledDate: collection.scheduledDate,
 				customer: collection.customer,
-				site: collection.site
+				site: collection.site,
+				location: collection.location
 			};
 		}
 
 		this.hideSpinner();
 
 		this.form = new FormGroup({
-			collectionSuccessful: new FormControl(!this.record.failureReasonId),
+			collectionSuccessful: new FormControl(this.record.collectionSuccessful),
 			containerNo: new FormControl(this.record.containerNo),
-			containerTypeId: new FormControl(this.record.containerTypeId, [Validators.required])
+			containerTypeId: new FormControl(this.record.containerTypeId, [Validators.required]),
+			failureReasonId: new FormControl(this.record.failureReasonId),
+		});
+
+		this.form.get('collectionSuccessful').valueChanges.subscribe(value => {
+			if (value === true) {
+				this.form.get('failureReasonId').setValidators(null);
+			} else if (value === false) {
+				this.form.get('failureReasonId').setValidators([Validators.required]);
+			}
+			this.form.get('failureReasonId').updateValueAndValidity();
 		});
 	}
 	//-----------------------------------------------------------------------------------------
@@ -91,6 +102,11 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 			if(this.form.get('collectionSuccessful').value)
 			{
 				this.record.failureReasonId = null;
+			} else {
+				this.record.volume = null;
+				this.record.acidity = null;
+				this.record.temperature = null;
+				this.record.conductivity = null;
 			}
 
 			this.showSpinner();

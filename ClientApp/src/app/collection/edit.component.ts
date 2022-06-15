@@ -31,7 +31,9 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 	public sites: any;
 	public locations: any;
 	public data: any;
-	public collectionRadio: any;
+	public statusName: string;
+	public collectionSuccessRadio: any;
+	public collectionCompleteRadio: boolean;
 
 	@ViewChild('editTab') public editTab: TabComponent;
 	//-----------------------------------------------------------------------------------------
@@ -47,11 +49,22 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 
 		if (id) {
 			this.tests = await this.repository.getTests(id);
-		}
-		else {
+			this.customers = await this.repository.listCustomers();
+			this.record.customerId = this.customers.find(e => e.name === this.record.customer).id
+			this.statusName = this.data.statuses.find(m => m.id === this.record.collectionStatusId).name
+			this.sites = await this.repository.listSites(this.record.customerId);
+			this.locations = await this.repository.listLocations(this.record.siteId);
+		} else {
 			this.customers = await this.repository.listCustomers();
 			this.record.collectionStatusId = 1;
-			this.collectionRadio = 1;
+		}
+
+		if (this.record.collectedDate) {
+			this.collectionCompleteRadio = true;
+		}
+
+		if (this.record.failureReasonId) {
+			this.record.collectionStatusId = 3;
 		}
 
 		this.hideSpinner();
@@ -59,39 +72,37 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 		this.record.collectedDate = this.record.collectedDate ? new Date(this.record.collectedDate) : null;
 
 		this.form = new FormGroup({
-			collectionSuccessful: new FormControl(this.collectionRadio),
-			collectionNo: new FormControl(this.record.collectionNo),
+			collectionCompleted: new FormControl(this.collectionCompleteRadio),
+			collectionSuccessful: new FormControl(this.record.collectionStatusId),
 			scheduledDate: new FormControl(this.record.scheduledDate ? new Date(this.record.scheduledDate) : null),
-			collectionStatusId: new FormControl(this.record.collectionStatusId, [Validators.required]),
 			vendorId: new FormControl(this.record.vendorId, [Validators.required]),
 			completedDate: new FormControl(this.record.collectedDate),
-			failureReasonId: new FormControl(this.record.failureReasonId)
+			failureReasonId: new FormControl(this.record.failureReasonId),
+			customerId: new FormControl(this.record.customerId, [Validators.required]),
+			siteId: new FormControl(this.record.siteId, [Validators.required]),
+			locationId: new FormControl(this.record.locationId, [Validators.required])
 		});
 
-		if (!id) {
-			this.form.addControl('customerId', new FormControl('', [Validators.required]));
-			this.form.addControl('siteId', new FormControl('', [Validators.required]));
-			this.form.addControl('locationId', new FormControl('', [Validators.required]));
-		}
+		this.form.get('collectionCompleted').valueChanges.subscribe(value => {
+			if (value === true) {
+				this.form.get('completedDate').setValidators([Validators.required]);
+				this.form.get('collectionSuccessful').setValidators([Validators.required]);
+			} else if (value === false) {
+				this.form.get('completedDate').setValidators(null);
+				this.form.get('collectionSuccessful').setValidators(null);
+			}
+			this.form.get('completedDate').updateValueAndValidity();
+			this.form.get('collectionSuccessful').updateValueAndValidity();
+		});
 
-		// this.form.get('collectionStatusId').valueChanges.subscribe(value => {
-		// 	if (value === 1) {
-		// 		this.form.get('collectedDate').disable();
-		// 		this.form.get('failureReasonId').disable();
-		// 	}
-		// 	this.form.updateValueAndValidity();
-		// });
-
-		// this.form.get('collectionSuccessful').valueChanges.subscribe(value => {
-		// 	if (value === true) {
-		// 		this.form.get('collectedDate').enable();
-		// 		this.form.get('failureReasonId').disable();
-		// 	} else if (value === false) {
-		// 		this.form.get('failureReasonId').enable();
-		// 		this.form.get('collectedDate').disable();
-		// 	}
-		// 	this.form.updateValueAndValidity();
-		// });
+		this.form.get('collectionSuccessful').valueChanges.subscribe(value => {
+			if (value === 2) {
+				this.form.get('failureReasonId').setValidators(null);
+			} else if (value === 3) {
+				this.form.get('failureReasonId').setValidators([Validators.required]);
+			}
+			this.form.get('failureReasonId').updateValueAndValidity();
+		});
 	}
 	//-----------------------------------------------------------------------------------------
 	gridAction(e) {
@@ -115,12 +126,8 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 		}
 	}
 	//-----------------------------------------------------------------------------------------
-	setSucessStatus() {
-		this.record.failureReasonId = null;
-	}
-	//-----------------------------------------------------------------------------------------
-	setFailureStatus() {
-		this.record.collectedDate = null;
+	setStatus() {
+
 	}
 	//-----------------------------------------------------------------------------------------
 	async save() {
@@ -135,8 +142,23 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 			var add = !this.record.id;
 			this.record.tenantId = this.tenant.id;
 
-			if (this.form.get('collectionSuccessful').value) {
+			if (this.form.get('collectionCompleted').value === false) {
+				this.record.collectedDate = null;
 				this.record.failureReasonId = null;
+				this.record.flowRate = null;
+				this.record.humidity = null;
+				this.record.temperature = null;
+				this.record.collectedBy = null;
+			}
+			
+			if (this.form.get('collectionSuccessful').value === 2) {
+				this.record.failureReasonId = null;
+				this.record.collectionStatusId = 2;
+			} else if (this.form.get('collectionSuccessful').value === 3) {
+				this.record.flowRate = null;
+				this.record.humidity = null;
+				this.record.temperature = null;
+				this.record.collectionStatusId = 3;
 			}
 
 			this.showSpinner();
