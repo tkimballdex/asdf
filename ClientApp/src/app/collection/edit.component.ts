@@ -7,7 +7,7 @@ import { AppService } from "../shared/app.service";
 import { PageComponent } from '../shared/page.component';
 import { CollectionRepository } from './repository';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TenantService } from '../shared/tenant.service';
 import { RadioButtonComponent } from '@syncfusion/ej2-angular-buttons';
 
@@ -31,15 +31,16 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 	public sites: any;
 	public locations: any;
 	public data: any;
+	public collectionRadio: any;
 
-	@ViewChild('editTab') public editTab: TabComponent;	
+	@ViewChild('editTab') public editTab: TabComponent;
 	//-----------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.showSpinner();
 		this.app = await this.appService.getData();
 		this.privileges = this.app.privileges.samples;
 		this.data = await this.repository.getData();
-		
+
 		var id = this.route.snapshot.paramMap.get('id');
 		this.record = await this.repository.get(id);
 		this.vendors = await this.repository.listVendors({ tenantId: this.tenant.id, vendorTypeId: 3 });
@@ -50,6 +51,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 		else {
 			this.customers = await this.repository.listCustomers();
 			this.record.collectionStatusId = 1;
+			this.collectionRadio = 1;
 		}
 
 		this.hideSpinner();
@@ -57,11 +59,13 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 		this.record.collectedDate = this.record.collectedDate ? new Date(this.record.collectedDate) : null;
 
 		this.form = new FormGroup({
-			collectionSuccessful: new FormControl(!this.record.failureReasonId),
+			collectionSuccessful: new FormControl(this.collectionRadio),
 			collectionNo: new FormControl(this.record.collectionNo),
 			scheduledDate: new FormControl(this.record.scheduledDate ? new Date(this.record.scheduledDate) : null),
 			collectionStatusId: new FormControl(this.record.collectionStatusId, [Validators.required]),
-			vendorId: new FormControl(this.record.vendorId, [Validators.required])
+			vendorId: new FormControl(this.record.vendorId, [Validators.required]),
+			completedDate: new FormControl(this.record.collectedDate),
+			failureReasonId: new FormControl(this.record.failureReasonId)
 		});
 
 		if (!id) {
@@ -69,6 +73,25 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 			this.form.addControl('siteId', new FormControl('', [Validators.required]));
 			this.form.addControl('locationId', new FormControl('', [Validators.required]));
 		}
+
+		// this.form.get('collectionStatusId').valueChanges.subscribe(value => {
+		// 	if (value === 1) {
+		// 		this.form.get('collectedDate').disable();
+		// 		this.form.get('failureReasonId').disable();
+		// 	}
+		// 	this.form.updateValueAndValidity();
+		// });
+
+		// this.form.get('collectionSuccessful').valueChanges.subscribe(value => {
+		// 	if (value === true) {
+		// 		this.form.get('collectedDate').enable();
+		// 		this.form.get('failureReasonId').disable();
+		// 	} else if (value === false) {
+		// 		this.form.get('failureReasonId').enable();
+		// 		this.form.get('collectedDate').disable();
+		// 	}
+		// 	this.form.updateValueAndValidity();
+		// });
 	}
 	//-----------------------------------------------------------------------------------------
 	gridAction(e) {
@@ -81,7 +104,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 				container: e.data.container,
 				volume: parseInt(e.data.volume)
 			};
-			
+
 			this.repository.saveContainer(data);
 		}
 	}
@@ -112,8 +135,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 			var add = !this.record.id;
 			this.record.tenantId = this.tenant.id;
 
-			if(this.form.get('collectionSuccessful').value)
-			{
+			if (this.form.get('collectionSuccessful').value) {
 				this.record.failureReasonId = null;
 			}
 
