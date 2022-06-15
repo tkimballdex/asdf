@@ -36,7 +36,7 @@
 
     <div class="row pad-b20" *ngIf="form.get('locationId').value">
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist [dataSource]="vendors" [fields]="{ text: 'name', value: 'id' }" formControlName="logisticVendorId" placeholder="Logistic Vendor *" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="logisticVendors" [fields]="{ text: 'name', value: 'id' }" formControlName="logisticVendorId" placeholder="Logistic Vendor *" floatLabelType="Always"></ejs-dropdownlist>
             <div *ngIf="this.invalidControl('logisticVendorId')" class="e-error">
                 Logistic Vendor is required!
             </div>
@@ -91,7 +91,7 @@
         </div>
 
         <div class="col-3">
-            <ejs-dropdownlist [dataSource]="vendors" [fields]="{ text: 'name', value: 'id' }" [(value)]="container.labVendorId" showClearButton="true"
+            <ejs-dropdownlist [dataSource]="labVendors" [fields]="{ text: 'name', value: 'id' }" [(value)]="container.labVendorId" showClearButton="true"
             placeholder="Lab Vendor" floatLabelType="Always"></ejs-dropdownlist>
         </div>
 
@@ -113,8 +113,8 @@
             <ejs-multiselect [dataSource]="analytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="container.analytes" showDropDownIcon="true" placeholder="Analytes" floatLabelType="Always"></ejs-multiselect>
         </div>
 
-        <div class="col-3">
-            <span class="list-header-add"><button ejs-button cssClass="e-outline" (click)="addTestType()" [disabled]="!container.analytes">+ Add Test Type</button></span>
+        <div class="col-3" style="margin-top: 27px;">
+            <span class="list-header-add" style="margin-top: 20px;"><button ejs-button cssClass="e-outline" (click)="addTestType()" [disabled]="!container.analytes">+ Add Test Type</button></span>
         </div>
     </div>
 

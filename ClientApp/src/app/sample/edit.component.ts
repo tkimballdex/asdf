@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common'
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { DialogUtility, Dialog } from '@syncfusion/ej2-popups';
 import { TabComponent } from '@syncfusion/ej2-angular-navigations';
@@ -16,7 +17,7 @@ import { TenantService } from '../shared/tenant.service';
 	styleUrls: ['./edit.component.scss']
 })
 export class SampleEditComponent extends PageComponent implements OnInit {
-	constructor(private dialog: MatDialog, private route: ActivatedRoute, private router: Router, private appService: AppService, private tenant: TenantService, private repository: SampleRepository) {
+	constructor(private dialog: MatDialog, private route: ActivatedRoute, private router: Router, private appService: AppService, private tenant: TenantService, private repository: SampleRepository, private location: Location) {
 		super();
 	}
 
@@ -25,12 +26,13 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 	public deleteDialog: Dialog;
 	public tests: any;
 
-	public vendors: any;
+	public labVendors: any;
 	public customers: any;
 	public customerId: string;
 	public sites: any;
 	public siteId: string;
 	public locations: any;
+	public collection: any;
 	public collections: any;
 	public failureReasons: any;
 
@@ -42,7 +44,8 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.showSpinner();
 		this.app = await this.appService.getData();
 		this.privileges = this.app.privileges.samples;
-		this.vendors = await this.repository.listVendors({ tenantId: this.tenant.id, vendorTypeId: 2 });
+		this.labVendors = await this.repository.listVendors({ tenantId: this.tenant.id, vendorTypeId: 2 });
+		this.collection = await this.repository.getCollection(this.route.snapshot.queryParamMap.get('collectionId'));
 
 		this.failureReasons = this.app.sampleFailureReasons.slice();
 		this.failureReasons.unshift({ id: 0, name: '' });
@@ -54,13 +57,11 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 			this.tests = await this.repository.getTests(id);
 		}
 		else {
-			var collection = await this.repository.getCollection(this.route.snapshot.queryParamMap.get('collectionId'));
-
 			this.record = {
-				site: collection.site,
-				location: collection.location,
-				locationId: collection.locationId,
-				collectionId: collection.id
+				site: this.collection.site,
+				location: this.collection.location,
+				locationId: this.collection.locationId,
+				collectionId: this.collection.id
 			};
 		}
 
@@ -90,6 +91,11 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 	setFailureStatus() {
 		
 	}
+	//-----------------------------------------------------------------------------------------
+	back(): void {
+		this.location.back()
+	}
+	//-----------------------------------------------------------------------------------------
 	//-----------------------------------------------------------------------------------------
 	async save() {
 		this.form.markAllAsTouched();

@@ -24,7 +24,8 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 
 	public form: FormGroup;
 	public record: any;
-	public vendors: any;
+	public logisticVendors: any;
+	public labVendors: any;
 	public customers: any;
 	public sites: any;
 	public locations: any;
@@ -41,7 +42,8 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 		this.app = await this.appService.getData();
 		this.privileges = this.app.privileges.samples;
 		this.data = await this.repository.getScheduleData();
-		this.vendors = await this.repository.listVendors({ tenantId: this.tenant.id, vendorTypeId: 3 });
+		this.logisticVendors = await this.repository.listVendors({ tenantId: this.tenant.id, vendorTypeId: 3 });
+		this.labVendors = await this.repository.listVendors({ tenantId: this.tenant.id, vendorTypeId: 2 });
 		this.customers = await this.repository.listCustomers();
 		this.testTypes = await this.repository.listTestTypes({ tenantId: this.tenant.id });
 		this.analytes = await this.repository.listAnalytes({ tenantId: this.tenant.id });
@@ -155,7 +157,7 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 			expectedVolume: this.container.expectedVolume,
 			samples: this.container.samples,
 			labVendorId: this.container.labVendorId,
-			labVendor: this.vendors.find(x => x.id == this.container.labVendorId)?.name,
+			labVendor: this.labVendors.find(x => x.id == this.container.labVendorId)?.name,
 			testTypes: this.container.testTypes,
 			testTypeNames: this.container.testTypeNames
 		});
