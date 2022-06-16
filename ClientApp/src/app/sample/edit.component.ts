@@ -83,7 +83,6 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 			}
 			this.form.get('failureReasonId').updateValueAndValidity();
 		});
-		console.log(this.data)
 	}
 	//-----------------------------------------------------------------------------------------
 	editTabCreated() {
