@@ -62,16 +62,16 @@
         </div>
     </div>
 
-    <div class="row pad-b20">
+    <div class="row">
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist formControlName="frequencyId" [dataSource]="app.frequencies" [fields]="{ text: 'name', value: 'id' }" placeholder="Testing Frequency*" floatLabelType="Always" (change)="frequencyChange()"></ejs-dropdownlist>
+            <ejs-dropdownlist formControlName="frequencyId" [dataSource]="app.frequencies" [fields]="{ text: 'name', value: 'id' }" placeholder="Testing Frequency*" floatLabelType="Always"></ejs-dropdownlist>
             <div *ngIf="this.invalidControl('frequencyId')" class="e-error">
                 Testing Frequency is required!
             </div>
         </div>
     </div>
 
-    <div class="row pad-b20 mar-t20" *ngIf="form.get('frequencyId').value == 2">
+    <div class="row mar-t20" *ngIf="form.get('frequencyId').value == 2">
         <div class="col-12">
             <ul class="days">
                 <li><ejs-checkbox label="Sunday" [(checked)]="record.days.Sunday"></ejs-checkbox></li>
@@ -85,58 +85,60 @@
         </div>
     </div>
 
-    <div class="row mar-t20" *ngIf="showContainer">
-        <div class="col-3">
-            <ejs-dropdownlist [dataSource]="app.containerTypes" [fields]="{ text: 'name', value: 'name' }" [(value)]="container.containerType" showClearButton="true" placeholder="Container Type" floatLabelType="Always" ></ejs-dropdownlist>
+    <div *ngIf="form.get('locationId').value && form.get('logisticVendorId').value && form.get('endDate').value && form.get('frequencyId').value && !this.form.errors?.['validateEndDate']">
+        <div class="row mar-t20">
+            <div class="col-3">
+                <ejs-dropdownlist [dataSource]="testTypes" [fields]="{ text: 'name', value: 'id' }" [(value)]="container.testType" showClearButton="true" placeholder="Test Type" floatLabelType="Always"></ejs-dropdownlist>
+            </div>
+    
+            <div class="col-6">
+                <ejs-multiselect [dataSource]="analytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="container.analytes" showDropDownIcon="true" placeholder="Analytes" floatLabelType="Always"></ejs-multiselect>
+            </div>
+    
+            <div class="col-3" style="margin-top: 27px;">
+                <span class="list-header-add" style="margin-top: 20px;"><button ejs-button cssClass="e-outline" (click)="addTestType()" [disabled]="!container.analytes || !container.testType">+ Add Test Type</button></span>
+            </div>
         </div>
 
-        <div class="col-3">
-            <ejs-dropdownlist [dataSource]="labVendors" [fields]="{ text: 'name', value: 'id' }" [(value)]="container.labVendorId" showClearButton="true"
-            placeholder="Lab Vendor" floatLabelType="Always"></ejs-dropdownlist>
+        <div class="row">
+            <div class="col-12">
+                <ejs-textbox readonly="readonly" [value]="container.testTypeNames" placeholder="Test Types" floatLabelType="Always"></ejs-textbox>
+            </div>
         </div>
-
-        <div class="col-3">
-            <ejs-numerictextbox [(value)]="container.samples" format='N0' min='0' max='10' step='1' placeholder="Number of Samples" floatLabelType="Always"></ejs-numerictextbox>
+    
+        <div class="row">
+            <div class="col-3">
+                <ejs-dropdownlist [dataSource]="app.containerTypes" [fields]="{ text: 'name', value: 'name' }" [(value)]="container.containerType" showClearButton="true" placeholder="Container Type" floatLabelType="Always" ></ejs-dropdownlist>
+            </div>
+    
+            <div class="col-3">
+                <ejs-dropdownlist [dataSource]="labVendors" [fields]="{ text: 'name', value: 'id' }" [(value)]="container.labVendorId" showClearButton="true"
+                placeholder="Lab Vendor" floatLabelType="Always"></ejs-dropdownlist>
+            </div>
+    
+            <div class="col-3">
+                <ejs-numerictextbox [(value)]="container.samples" format='N0' min='0' max='10' step='1' placeholder="Number of Samples" floatLabelType="Always"></ejs-numerictextbox>
+            </div>
+    
+            <div class="col-3">
+                <ejs-numerictextbox [(value)]="container.expectedVolume" format='N0' min='0' max='500' step='1' placeholder="Expected Volume" floatLabelType="Always"></ejs-numerictextbox>
+            </div>
         </div>
-
-        <div class="col-3">
-            <ejs-numerictextbox [(value)]="container.expectedVolume" format='N0' min='0' max='500' step='1' placeholder="Expected Volume" floatLabelType="Always"></ejs-numerictextbox>
+    
+        <div class="row pad-t20 pad-b10" *ngIf="container.testTypeNames">
+            <div class="col-3">
+                <span class="list-header-add"><button ejs-button cssClass="e-outline" (click)="addContainer()" [disabled]="!container.containerType || !container.samples">+ Add Container</button></span>
+            </div>
         </div>
     </div>
 
-    <div class="row" *ngIf="showContainer">
-        <div class="col-3">
-            <ejs-dropdownlist [dataSource]="testTypes" [fields]="{ text: 'name', value: 'id' }" [(value)]="container.testType" showClearButton="true" placeholder="Test Type" floatLabelType="Always"></ejs-dropdownlist>
-        </div>
-
-        <div class="col-6">
-            <ejs-multiselect [dataSource]="analytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="container.analytes" showDropDownIcon="true" placeholder="Analytes" floatLabelType="Always"></ejs-multiselect>
-        </div>
-
-        <div class="col-3" style="margin-top: 27px;">
-            <span class="list-header-add" style="margin-top: 20px;"><button ejs-button cssClass="e-outline" (click)="addTestType()" [disabled]="!container.analytes">+ Add Test Type</button></span>
-        </div>
-    </div>
-
-    <div class="row pad-b20" *ngIf="showContainer">
-        <div class="col-12">
-            <ejs-textbox readonly="readonly" [value]="container.testTypeNames" placeholder="Test Types" floatLabelType="Always"></ejs-textbox>
-        </div>
-    </div>
-
-    <div class="row pad-b20" *ngIf="showContainer && container.testTypeNames">
-        <div class="col-3">
-            <span class="list-header-add"><button ejs-button cssClass="e-outline" (click)="addContainer()" [disabled]="!container.containerType || !container.samples">+ Add Container</button></span>
-        </div>
-    </div>
-
-    <div class="row" *ngIf="record.containers.length">
+    <div class="row pad-t10" *ngIf="record.containers.length">
         <div class="col-12 pad-t20">
             <ejs-grid #grid [dataSource]='record.containers' [allowPaging]="false">
                 <e-columns>
                     <e-column width="70" [visible]='true'>
                         <ng-template #template let-data>
-                            <button ejs-button (click)="deleteContainer(data)"><i class="fas fa-trash-alt edit-icon"></i></button>
+                            <button ejs-button (click)="deleteContainer(data)"><i class="fas fa-trash edit-icon text-danger"></i></button>
                         </ng-template>
                     </e-column>
                     <e-column field='containerType' headerText='Container Type'></e-column>

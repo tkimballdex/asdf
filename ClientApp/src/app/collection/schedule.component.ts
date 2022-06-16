@@ -140,10 +140,6 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 		this.resetContainer();
 	}
 	//-----------------------------------------------------------------------------------------
-	frequencyChange() {
-		this.showContainer = true;
-	}
-	//-----------------------------------------------------------------------------------------
 	resetContainer() {
 		this.container = {
 			labVendorId: this.location.labVendorId,
