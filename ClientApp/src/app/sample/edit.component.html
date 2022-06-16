@@ -57,10 +57,10 @@
 
                             <div class="row pad-t20 mar-t10 pad-b10">
                                 <div class="col-md-12 col-lg-10 col-xl-8">
-                                    <label for="collStatus" class="edit-label bold" style="font-size:1.1em;">Was the sample successful?</label>
-                                    <ejs-radiobutton #collectionSuccessfulYes label="Yes" name="sampSuccessful" [value]="true" formControlName="sampleSuccessful" cssClass="mar-l20" (change)="setSucessStatus()"></ejs-radiobutton>
-                                    <ejs-radiobutton #collectionSuccessfulNo label="No" name="sampSuccessful" [value]="false" formControlName="sampleSuccessful" cssClass="mar-l20"></ejs-radiobutton>
-                                    <span><i class="pad-t10 mar-l20 pad-r5 fas fa-eraser fa-lg" (click)="clearRadioHandler()"></i> Clear</span>
+                                    <label for="sampSuccessful" class="edit-label bold" style="font-size:1.1em;">Was the sample successful?</label>
+                                    <ejs-radiobutton label="Not Set" name="sampSuccessful" [value]="" formControlName="sampleSuccessful" cssClass="mar-l20"></ejs-radiobutton>
+                                    <ejs-radiobutton label="Yes" name="sampSuccessful" [value]="true" formControlName="sampleSuccessful" cssClass="mar-l20" (change)="setSucessStatus()"></ejs-radiobutton>
+                                    <ejs-radiobutton label="No" name="sampSuccessful" [value]="false" formControlName="sampleSuccessful" cssClass="mar-l20"></ejs-radiobutton>
                                 </div>                               
                             </div>
 

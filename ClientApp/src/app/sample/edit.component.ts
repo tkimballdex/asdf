@@ -37,9 +37,6 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 	public collections: any;
 
 	@ViewChild('editTab') public editTab: TabComponent;
-	@ViewChild('collectionSuccessfulYes') public collectionSuccessfulYes: RadioButtonComponent;	
-	@ViewChild('collectionSuccessfulNo') public collectionSuccessfulNo: RadioButtonComponent;
-
 	//-----------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.showSpinner();
@@ -94,12 +91,6 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 	//-----------------------------------------------------------------------------------------
 	setSucessStatus() {
 		this.record.failureReasonId = null;
-	}
-	//-----------------------------------------------------------------------------------------
-	clearRadioHandler() {
-		this.collectionSuccessfulYes.checked = false;
-		this.collectionSuccessfulNo.checked = false;
-		this.form.get('sampleSuccessful').setValue('')
 	}
 	//-----------------------------------------------------------------------------------------
 	back(): void {

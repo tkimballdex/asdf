@@ -28,8 +28,6 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 	public data: any;
 
 	@ViewChild('editTab') public editTab: TabComponent;	
-	@ViewChild('collectionSuccessfulYes') public collectionSuccessfulYes: RadioButtonComponent;	
-	@ViewChild('collectionSuccessfulNo') public collectionSuccessfulNo: RadioButtonComponent;	
 	//-----------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.showSpinner();
@@ -76,12 +74,6 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 			this.form.get('containerVolume').updateValueAndValidity();
 			this.form.get('failureReasonId').updateValueAndValidity();
 		});
-	}
-	//-----------------------------------------------------------------------------------------
-	clearRadioHandler() {
-		this.collectionSuccessfulYes.checked = false;
-		this.collectionSuccessfulNo.checked = false;
-		this.form.get('collectionSuccessful').setValue('')
 	}
 	//-----------------------------------------------------------------------------------------
 	editTabCreated() {

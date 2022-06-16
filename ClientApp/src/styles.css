@@ -522,6 +522,6 @@ mat-form-field.mat-form-field {
     display: none;
 }
 
-.fa-trash-alt, .fa-file-download, .fa-eraser {
+.fa-trash-alt, .fa-file-download {
     cursor: pointer;
 }
