@@ -4,12 +4,14 @@
             <span class="edit-header-icon"><i class="fal fa-calendar-alt"></i></span>
             <span class="edit-header-title" [ngClass]="{'dotted-right': record.id}">Collection</span>
 
-            <div *ngIf="record.collectionNo" class="edit-header-collection-no lead">
-                <span>{{record.collectionNo}}</span>
+            <div *ngIf="record.collectionNo" class="edit-header-collection-no d-flex flex-column">
+                <span class="header-value">{{record.collectionNo}}</span>
+                <span class="text-center header-tag">Collection No</span>
             </div>
             
-            <div *ngIf="statusName" class="edit-header-status lead">
-                <span>{{statusName}}</span>
+            <div *ngIf="statusName" class="edit-header-status d-flex flex-column">
+                <span class="header-value">{{statusName}}</span>
+                <span class="text-center header-tag">Status</span>
             </div>
         </div>
     </div>

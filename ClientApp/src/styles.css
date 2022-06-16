@@ -257,17 +257,24 @@ mat-form-field.mat-form-field {
 #edit-view .edit-header-collection-no {
     color:#3c4858;
     font-weight: 100;
-    font-size: 1rem;
-    padding: 19px 20px 15px 20px;
+    padding: 18px 20px 15px 20px;
     border-right: 1px dotted #3c485860;
 }
 
 #edit-view .edit-header-status {
     color:#3c4858;
     font-weight: 100;
-    font-size: 1rem;
-    padding: 19px 20px 15px 20px;
+    padding: 18px 20px 15px 20px;
     border-right: 1px dotted #3c485860;
+}
+
+.header-value {
+    font-size: 1.1rem;
+}
+
+.header-tag {
+    font-weight: 500;
+    font-size: .85rem;
 }
 
 .dotted-right {
