@@ -24,6 +24,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 
 	public form: FormGroup;
 	public record: any;
+	public data: any;
 	public deleteDialog: Dialog;
 	public tests: any;
 
@@ -42,6 +43,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.showSpinner();
 		this.app = await this.appService.getData();
 		this.privileges = this.app.privileges.samples;
+		this.data = await this.repository.getData();
 		this.labVendors = await this.repository.listVendors({ tenantId: this.tenant.id, vendorTypeId: 2 });
 		this.collection = await this.repository.getCollection(this.route.snapshot.queryParamMap.get('collectionId'));
 
@@ -81,6 +83,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 			}
 			this.form.get('failureReasonId').updateValueAndValidity();
 		});
+		console.log(this.data)
 	}
 	//-----------------------------------------------------------------------------------------
 	editTabCreated() {

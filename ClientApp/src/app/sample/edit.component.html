@@ -20,7 +20,7 @@
     </div>
     <div class="row">
         <div class="col-md-6 col-lg-5 col-xl-4 pad-b20">
-            <ejs-dropdownlist [dataSource]="record.failureReasons" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.sampleStatusId" placeholder="Status" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="data.statuses" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.sampleStatusId" placeholder="Status" floatLabelType="Always"></ejs-dropdownlist>
         </div>
         <div class="col-md-6 col-lg-5 col-xl-4 pad-b20">
             <ejs-datepicker [(value)]="record.scheduledDate" placeholder="Scheduled Date" floatLabelType="Always" [readonly]="true"></ejs-datepicker>

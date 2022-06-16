@@ -23,6 +23,10 @@ export class SampleRepository {
         return this.http.post(`/sample/list`, filter);
     }
 
+	public getData() {
+		return this.http.post(`/collection/getData`);
+	}
+
 	public getCollection(id: string) {
 		return this.http.post<any>(`/collection/get/${id}`);
 	}
