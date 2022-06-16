@@ -2,13 +2,13 @@
     <div class="row  edit-header">
         <div class="col-md-6 d-flex">
             <span class="edit-header-icon"><i class="fal fa-calendar-alt"></i></span>
-            <span class="edit-header-title dotted-right">Collection</span>
+            <span class="edit-header-title" [ngClass]="{'dotted-right': record.id}">Collection</span>
 
-            <div *ngIf="record.collectionNo" class="edit-header-collection-no">
+            <div *ngIf="record.collectionNo" class="edit-header-collection-no lead">
                 <span>{{record.collectionNo}}</span>
             </div>
             
-            <div *ngIf="statusName" class="edit-header-status">
+            <div *ngIf="statusName" class="edit-header-status lead">
                 <span>{{statusName}}</span>
             </div>
         </div>

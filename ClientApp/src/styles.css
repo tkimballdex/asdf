@@ -257,6 +257,7 @@ mat-form-field.mat-form-field {
 #edit-view .edit-header-collection-no {
     color:#3c4858;
     font-weight: 100;
+    font-size: 1rem;
     padding: 19px 20px 15px 20px;
     border-right: 1px dotted #3c485860;
 }
@@ -264,6 +265,7 @@ mat-form-field.mat-form-field {
 #edit-view .edit-header-status {
     color:#3c4858;
     font-weight: 100;
+    font-size: 1rem;
     padding: 19px 20px 15px 20px;
     border-right: 1px dotted #3c485860;
 }
