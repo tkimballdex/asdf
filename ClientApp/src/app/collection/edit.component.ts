@@ -32,7 +32,6 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 	public locations: any;
 	public data: any;
 	public statusName: string;
-	public collectionSuccessRadio: any;
 	public collectionCompleteRadio: boolean;
 
 	@ViewChild('editTab') public editTab: TabComponent;

@@ -34,7 +34,6 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 	public locations: any;
 	public collection: any;
 	public collections: any;
-	public failureReasons: any;
 
 	@ViewChild('editTab')
 	public editTab: TabComponent;
@@ -46,9 +45,6 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.privileges = this.app.privileges.samples;
 		this.labVendors = await this.repository.listVendors({ tenantId: this.tenant.id, vendorTypeId: 2 });
 		this.collection = await this.repository.getCollection(this.route.snapshot.queryParamMap.get('collectionId'));
-
-		this.failureReasons = this.app.sampleFailureReasons.slice();
-		this.failureReasons.unshift({ id: 0, name: '' });
 
 		var id = this.route.snapshot.paramMap.get('id');
 
@@ -72,9 +68,19 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.record.receivedDate = this.record.receivedDate ? new Date(this.record.receivedDate) : null;
 
 		this.form = new FormGroup({
+			failureReasonId: new FormControl(this.record.failureReasonId),
 			sampleSuccessful: new FormControl(!this.record.failureReasonId),
 			sampleNo: new FormControl(this.record.sampleNo),
 			vendorId: new FormControl(this.record.vendorId, [Validators.required])
+		});
+
+		this.form.get('sampleSuccessful').valueChanges.subscribe(value => {
+			if (value === true) {
+				this.form.get('failureReasonId').setValidators(null);
+			} else if (value === false) {
+				this.form.get('failureReasonId').setValidators([Validators.required]);
+			}
+			this.form.get('failureReasonId').updateValueAndValidity();
 		});
 	}
 	//-----------------------------------------------------------------------------------------

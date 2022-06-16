@@ -24,6 +24,7 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 	public form: FormGroup;
 	public record: any;
 	public deleteDialog: Dialog;
+	public containerSuccessRadio: boolean;
 
 	public data: any;
 
@@ -39,6 +40,12 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 
 		if (id) {
 			this.record = await this.repository.getContainer(id);
+
+			if (this.record.failureReasonId) {
+				this.containerSuccessRadio = false;
+			} else {
+				this.containerSuccessRadio = true;
+			}
 		}
 		else {
 			var collectionId = this.route.snapshot.paramMap.get('collectionId');
@@ -57,18 +64,22 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 		this.hideSpinner();
 
 		this.form = new FormGroup({
-			collectionSuccessful: new FormControl(this.record.collectionSuccessful),
+			collectionSuccessful: new FormControl(this.containerSuccessRadio),
 			containerNo: new FormControl(this.record.containerNo),
 			containerTypeId: new FormControl(this.record.containerTypeId, [Validators.required]),
 			failureReasonId: new FormControl(this.record.failureReasonId),
+			containerVolume: new FormControl(this.record.volume),
 		});
 
 		this.form.get('collectionSuccessful').valueChanges.subscribe(value => {
 			if (value === true) {
+				this.form.get('containerVolume').setValidators([Validators.required]);
 				this.form.get('failureReasonId').setValidators(null);
 			} else if (value === false) {
+				this.form.get('containerVolume').setValidators(null);
 				this.form.get('failureReasonId').setValidators([Validators.required]);
 			}
+			this.form.get('containerVolume').updateValueAndValidity();
 			this.form.get('failureReasonId').updateValueAndValidity();
 		});
 	}
@@ -79,31 +90,21 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 		}
 	}
 	//-----------------------------------------------------------------------------------------
-	setSucessStatus() {
-		this.record.failureReasonId = null;
-	}
-	//-----------------------------------------------------------------------------------------
-	setFailureStatus() {
-		this.record.collectedDate = null;
-	}
-	//-----------------------------------------------------------------------------------------
 	async save() {
 		this.form.markAllAsTouched();
 
 		if (this.form.invalid) {
 			this.showErrorMessage("Please complete all required fields!");
-		}
-		else {
+		} else {
 			Object.assign(this.record, this.form.value);
 
 			var add = !this.record.id;
 			this.record.tenantId = this.tenant.id;
 
-			if(this.form.get('collectionSuccessful').value)
-			{
+			if (this.form.get('collectionSuccessful').value) {
 				this.record.failureReasonId = null;
 			} else {
-				this.record.volume = null;
+				this.record.volume = 0;
 				this.record.acidity = null;
 				this.record.temperature = null;
 				this.record.conductivity = null;
@@ -115,8 +116,7 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 
 			if (returnValue && returnValue.error) {
 				this.showErrorMessage(returnValue.description);
-			}
-			else {
+			} else {
 				var success = returnValue && returnValue.updated;
 				this.showSaveMessage(success);
 
