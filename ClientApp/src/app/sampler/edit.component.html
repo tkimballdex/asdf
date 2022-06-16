@@ -11,7 +11,7 @@
 
     <div class="row pad-t10">        
         <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="name" placeholder="Name *" floatLabelType="Always" required></ejs-textbox>
+            <ejs-textbox formControlName="name" placeholder="Name*" floatLabelType="Always" required></ejs-textbox>
             <div *ngIf="this.invalidControl('name')" class="e-error">
                 Name is required!
             </div>
@@ -21,13 +21,13 @@
 
     <div class="row pad-t20">
         <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-dropdownlist formControlName="customerId" [dataSource]="data.customers" [fields]="{ text: 'name', value: 'id' }" placeholder="Customer *" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist formControlName="customerId" [dataSource]="data.customers" [fields]="{ text: 'name', value: 'id' }" placeholder="Customer*" floatLabelType="Always"></ejs-dropdownlist>
             <div *ngIf="this.invalidControl('customerId')" class="e-error">
                 Customer is required!
             </div>
         </div>
         <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="assetNo" placeholder="Asset No *" floatLabelType="Always" required></ejs-textbox>
+            <ejs-textbox formControlName="assetNo" placeholder="Asset No*" floatLabelType="Always" required></ejs-textbox>
             <div *ngIf="this.invalidControl('assetNo')" class="e-error">
                 Asset No is required!
             </div>
@@ -36,13 +36,13 @@
 
     <div class="row pad-t20">        
         <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="modelNo" placeholder="Model No *" floatLabelType="Always" required></ejs-textbox>
+            <ejs-textbox formControlName="modelNo" placeholder="Model No*" floatLabelType="Always" required></ejs-textbox>
             <div *ngIf="this.invalidControl('modelNo')" class="e-error">
                 Model No is required!
             </div>
         </div>
         <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="serialNo" placeholder="Serial No *" floatLabelType="Always" required></ejs-textbox>
+            <ejs-textbox formControlName="serialNo" placeholder="Serial No*" floatLabelType="Always" required></ejs-textbox>
             <div *ngIf="this.invalidControl('serialNo')" class="e-error">
                 Serial No is required!
             </div>
@@ -50,7 +50,7 @@
     </div>
     <div class="row">
         <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="brand" placeholder="Brand *" floatLabelType="Always" required></ejs-textbox>
+            <ejs-textbox formControlName="brand" placeholder="Brand*" floatLabelType="Always" required></ejs-textbox>
             <div *ngIf="this.invalidControl('brand')" class="e-error">
                 Brand is required!
             </div>
@@ -62,7 +62,7 @@
 
     <div class="row pad-t20">
         <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-dropdownlist formControlName="samplingTypeId" [dataSource]="data.samplingTypes" [fields]="{ text: 'name', value: 'id' }" placeholder="Sampling Type *" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist formControlName="samplingTypeId" [dataSource]="data.samplingTypes" [fields]="{ text: 'name', value: 'id' }" placeholder="Sampling Type*" floatLabelType="Always"></ejs-dropdownlist>
             <div *ngIf="this.invalidControl('samplingTypeId')" class="e-error">
                 Sampling Type is required!
             </div>

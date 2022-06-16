@@ -11,14 +11,14 @@
 
     <div class="row pad-t10">
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="name" required placeholder="Name *" floatLabelType="Always" enableRtl></ejs-textbox>
+            <ejs-textbox formControlName="name" required placeholder="Name*" floatLabelType="Always" enableRtl></ejs-textbox>
             <div *ngIf="this.invalidControl('name')" class="e-error">
                 Name is required!
             </div>
         </div>
 
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="code" required placeholder="Location Code *" floatLabelType="Always" enableRtl></ejs-textbox>
+            <ejs-textbox formControlName="code" required placeholder="Location Code*" floatLabelType="Always" enableRtl></ejs-textbox>
             <div *ngIf="this.invalidControl('code')" class="e-error">
                 Code is required!
             </div>
@@ -39,7 +39,7 @@
             <ejs-dropdownlist [(value)]="record.samplerId" [dataSource]="data.samplers" [fields]="{ text: 'name', value: 'id' }" placeholder="Sampler" floatLabelType="Always"></ejs-dropdownlist>
         </div>
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist formControlName="frequencyId" [dataSource]="app.frequencies" [fields]="{ text: 'name', value: 'id' }" placeholder="Testing Frequency *" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist formControlName="frequencyId" [dataSource]="app.frequencies" [fields]="{ text: 'name', value: 'id' }" placeholder="Testing Frequency*" floatLabelType="Always"></ejs-dropdownlist>
             <div *ngIf="this.invalidControl('frequencyId')" class="e-error">
                 Testing Frequency is required!
             </div>
@@ -77,10 +77,10 @@
 
     <div class="row pad-t10">
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox [(value)]="record.latitude" disabled placeholder="Latitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
+            <ejs-textbox [(value)]="record.latitude" readonly placeholder="Latitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
         </div>
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox [(value)]="record.longitude" disabled placeholder="Longitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
+            <ejs-textbox [(value)]="record.longitude" readonly placeholder="Longitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
         </div>
     </div>
 
