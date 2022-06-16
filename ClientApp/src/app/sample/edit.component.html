@@ -55,21 +55,22 @@
                             </div>                          
                            
 
-                            <div class="row pad-t20 mar-t10">
+                            <div class="row pad-t20 mar-t10 pad-b10">
                                 <div class="col-md-12 col-lg-10 col-xl-8">
                                     <label for="collStatus" class="edit-label bold" style="font-size:1.1em;">Was the sample successful?</label>
-                                    <ejs-radiobutton label="Yes" name="sampSuccessful" [value]="true" formControlName="sampleSuccessful" cssClass="mar-l20" (change)="setSucessStatus()"></ejs-radiobutton>
-                                    <ejs-radiobutton label="No" name="sampSuccessful" [value]="false" formControlName="sampleSuccessful" cssClass="mar-l20" (change)="setFailureStatus()"></ejs-radiobutton>
+                                    <ejs-radiobutton #collectionSuccessfulYes label="Yes" name="sampSuccessful" [value]="true" formControlName="sampleSuccessful" cssClass="mar-l20" (change)="setSucessStatus()"></ejs-radiobutton>
+                                    <ejs-radiobutton #collectionSuccessfulNo label="No" name="sampSuccessful" [value]="false" formControlName="sampleSuccessful" cssClass="mar-l20"></ejs-radiobutton>
+                                    <span><i class="pad-t10 mar-l20 pad-r5 fas fa-eraser fa-lg" (click)="clearRadioHandler()"></i> Clear</span>
                                 </div>                               
                             </div>
 
-                            <div class="row" *ngIf="form.get('sampleSuccessful').value">      
+                            <div class="row" *ngIf="form.get('sampleSuccessful').value === true">      
                                 <div class="col-md-6 col-lg-5 col-xl-4">
                                     <ejs-numerictextbox [(value)]="record.volume" format='N1' min='0' max='500' step='1' placeholder="Volume" floatLabelType="Always"></ejs-numerictextbox>
                                 </div> 
                             </div>
 
-                            <div class="row" *ngIf="form.get('sampleSuccessful').value">
+                            <div class="row" *ngIf="form.get('sampleSuccessful').value === true">
                                 <div class="col-md-6 col-lg-5 col-xl-4">
                                     <ejs-textbox [(value)]="record.collectedBy" placeholder="Collected By" floatLabelType="Always"></ejs-textbox>
                                 </div>
@@ -79,7 +80,7 @@
                                 </div>
                             </div>
 
-                            <div class="row" *ngIf="!form.get('sampleSuccessful').value">                             
+                            <div class="row" *ngIf="form.get('sampleSuccessful').value === false">                             
                                 <div class="col-md-6 col-lg-5 col-xl-4">
                                     <ejs-dropdownlist [dataSource]="app.sampleFailureReasons" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.failureReasonId" formControlName="failureReasonId" placeholder="Failure Reason*" floatLabelType="Always"></ejs-dropdownlist>
                                     <div *ngIf="this.invalidControl('failureReasonId')" class="e-error">

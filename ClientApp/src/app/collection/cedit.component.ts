@@ -24,11 +24,12 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 	public form: FormGroup;
 	public record: any;
 	public deleteDialog: Dialog;
-	public containerSuccessRadio: boolean;
 
 	public data: any;
 
 	@ViewChild('editTab') public editTab: TabComponent;	
+	@ViewChild('collectionSuccessfulYes') public collectionSuccessfulYes: RadioButtonComponent;	
+	@ViewChild('collectionSuccessfulNo') public collectionSuccessfulNo: RadioButtonComponent;	
 	//-----------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.showSpinner();
@@ -40,14 +41,7 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 
 		if (id) {
 			this.record = await this.repository.getContainer(id);
-
-			if (this.record.failureReasonId) {
-				this.containerSuccessRadio = false;
-			} else {
-				this.containerSuccessRadio = true;
-			}
-		}
-		else {
+		} else {
 			var collectionId = this.route.snapshot.paramMap.get('collectionId');
 			var collection = await this.repository.get(collectionId);
 
@@ -64,7 +58,7 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 		this.hideSpinner();
 
 		this.form = new FormGroup({
-			collectionSuccessful: new FormControl(this.containerSuccessRadio),
+			collectionSuccessful: new FormControl(''),
 			containerNo: new FormControl(this.record.containerNo),
 			containerTypeId: new FormControl(this.record.containerTypeId, [Validators.required]),
 			failureReasonId: new FormControl(this.record.failureReasonId),
@@ -84,6 +78,12 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 		});
 	}
 	//-----------------------------------------------------------------------------------------
+	clearRadioHandler() {
+		this.collectionSuccessfulYes.checked = false;
+		this.collectionSuccessfulNo.checked = false;
+		this.form.get('collectionSuccessful').setValue('')
+	}
+	//-----------------------------------------------------------------------------------------
 	editTabCreated() {
 		if (history.state.tests) {
 			this.editTab.selectedItem = 1;
@@ -101,9 +101,9 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 			var add = !this.record.id;
 			this.record.tenantId = this.tenant.id;
 
-			if (this.form.get('collectionSuccessful').value) {
+			if (this.form.get('collectionSuccessful').value === true) {
 				this.record.failureReasonId = null;
-			} else {
+			} else if (this.form.get('collectionSuccessful').value === false) {
 				this.record.volume = 0;
 				this.record.acidity = null;
 				this.record.temperature = null;

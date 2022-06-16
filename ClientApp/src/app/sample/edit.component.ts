@@ -10,6 +10,7 @@ import { SampleRepository } from './repository';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { TenantService } from '../shared/tenant.service';
+import { RadioButtonComponent } from '@syncfusion/ej2-angular-buttons';
 
 @Component({
 	selector: 'sample-edit',
@@ -35,8 +36,9 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 	public collection: any;
 	public collections: any;
 
-	@ViewChild('editTab')
-	public editTab: TabComponent;
+	@ViewChild('editTab') public editTab: TabComponent;
+	@ViewChild('collectionSuccessfulYes') public collectionSuccessfulYes: RadioButtonComponent;	
+	@ViewChild('collectionSuccessfulNo') public collectionSuccessfulNo: RadioButtonComponent;
 
 	//-----------------------------------------------------------------------------------------
 	async ngOnInit() {
@@ -69,7 +71,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 
 		this.form = new FormGroup({
 			failureReasonId: new FormControl(this.record.failureReasonId),
-			sampleSuccessful: new FormControl(!this.record.failureReasonId),
+			sampleSuccessful: new FormControl(''),
 			sampleNo: new FormControl(this.record.sampleNo),
 			vendorId: new FormControl(this.record.vendorId, [Validators.required])
 		});
@@ -94,29 +96,28 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.record.failureReasonId = null;
 	}
 	//-----------------------------------------------------------------------------------------
-	setFailureStatus() {
-		
+	clearRadioHandler() {
+		this.collectionSuccessfulYes.checked = false;
+		this.collectionSuccessfulNo.checked = false;
+		this.form.get('sampleSuccessful').setValue('')
 	}
 	//-----------------------------------------------------------------------------------------
 	back(): void {
 		this.location.back()
 	}
 	//-----------------------------------------------------------------------------------------
-	//-----------------------------------------------------------------------------------------
 	async save() {
 		this.form.markAllAsTouched();
 
 		if (this.form.invalid) {
 			this.showErrorMessage("Please complete all required fields!")
-		}
-		else {
+		} else {
 			Object.assign(this.record, this.form.value);
 
 			var add = !this.record.id;
 			this.record.tenantId = this.tenant.id;
 
-			if(this.form.get('sampleSuccessful').value)
-			{
+			if (this.form.get('sampleSuccessful').value === true) {
 				this.record.failureReasonId = null;
 			}
 
@@ -126,8 +127,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 
 			if (returnValue && returnValue.error) {
 				this.showErrorMessage(returnValue.description);
-			}
-			else {
+			} else {
 				var success = returnValue && returnValue.updated;
 				this.showSaveMessage(success);
 

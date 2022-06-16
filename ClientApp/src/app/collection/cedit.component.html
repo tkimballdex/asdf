@@ -67,13 +67,14 @@
                             
                             <div class="row pad-t20 mar-t10 pad-b15">
                                 <div class="col-md-12 col-lg-10 col-xl-8">
-                                    <label for="collStatus" class="edit-label bold" style="font-size:1.1em;">Was the container successful?</label>
-                                    <ejs-radiobutton label="Yes" name="collSuccessful" [value]="true" formControlName="collectionSuccessful" cssClass="mar-l20"></ejs-radiobutton>
-                                    <ejs-radiobutton label="No" name="collSuccessful" [value]="false" formControlName="collectionSuccessful" cssClass="mar-l20"></ejs-radiobutton>
+                                    <label for="collSuccessful" class="edit-label bold" style="font-size:1.1em;">Was the container successful?</label>
+                                    <ejs-radiobutton #collectionSuccessfulYes label="Yes" name="collSuccessful" [value]="true" formControlName="collectionSuccessful" cssClass="mar-l20"></ejs-radiobutton>
+                                    <ejs-radiobutton #collectionSuccessfulNo label="No" name="collSuccessful" [value]="false" formControlName="collectionSuccessful" cssClass="mar-l20"></ejs-radiobutton>
+                                    <span><i class="pad-t10 mar-l20 pad-r5 fas fa-eraser fa-lg" (click)="clearRadioHandler()"></i> Clear</span>
                                 </div>                               
                             </div>
 
-                            <div class="row" *ngIf="form.get('collectionSuccessful').value">      
+                            <div class="row" *ngIf="form.get('collectionSuccessful').value === true">      
                                 <div class="col-md-6 col-lg-5 col-xl-4">
                                     <ejs-numerictextbox [(value)]="record.volume" format='N1' min='0' max='500' step='1' formControlName="containerVolume" placeholder="Volume*" floatLabelType="Always"></ejs-numerictextbox>
                                     <div *ngIf="this.invalidControl('containerVolume')" class="e-error">
@@ -85,7 +86,7 @@
                                 </div>
                             </div>
 
-                            <div class="row pad-b10" *ngIf="form.get('collectionSuccessful').value">                               
+                            <div class="row pad-b10" *ngIf="form.get('collectionSuccessful').value === true">                               
                                 <div class="col-md-6 col-lg-5 col-xl-4">
                                     <ejs-numerictextbox [(value)]="record.acidity" format='N1' min='0' max='14' step='0.1' placeholder="Acidity" floatLabelType="Always"></ejs-numerictextbox>
                                 </div>
