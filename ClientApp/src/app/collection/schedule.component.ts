@@ -135,7 +135,9 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 	}
 	//-----------------------------------------------------------------------------------------
 	async locationChange(e) {
-		this.form.get('logisticVendorId').setValue(e.itemData.logisticVendorId);
+		if (e.itemData.logisticVendorId) {
+			this.form.get('logisticVendorId').setValue(e.itemData.logisticVendorId);
+		}
 		this.location = e.itemData;
 		this.resetContainer();
 	}
