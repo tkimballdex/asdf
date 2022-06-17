@@ -17,7 +17,7 @@
 
     <div class="row">  
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist [dataSource]="app.counties" formControlName="countyId" [fields]="{ text: 'name', value: 'id' }" placeholder="County *" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="app.counties" formControlName="countyId" [fields]="{ text: 'name', value: 'id' }" placeholder="County*" floatLabelType="Always"></ejs-dropdownlist>
             <div *ngIf="this.invalidControl('countyId')" class="e-error">
                 county is required!
             </div>
