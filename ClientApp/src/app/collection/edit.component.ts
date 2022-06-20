@@ -32,7 +32,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 	public locations: any;
 	public data: any;
 	public statusName: string;
-	public collectionCompleteRadio: boolean;
+	public collectionCompleteBool: boolean = false;
 
 	@ViewChild('editTab') public editTab: TabComponent;
 	//-----------------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 		}
 
 		if (this.record.collectedDate) {
-			this.collectionCompleteRadio = true;
+			this.collectionCompleteBool = true;
 		}
 
 		if (this.record.failureReasonId) {
@@ -71,7 +71,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 		this.record.collectedDate = this.record.collectedDate ? new Date(this.record.collectedDate) : null;
 
 		this.form = new FormGroup({
-			collectionCompleted: new FormControl(this.collectionCompleteRadio),
+			collectionCompleted: new FormControl(this.collectionCompleteBool),
 			collectionSuccessful: new FormControl(this.record.collectionStatusId),
 			scheduledDate: new FormControl(this.record.scheduledDate ? new Date(this.record.scheduledDate) : null),
 			vendorId: new FormControl(this.record.vendorId, [Validators.required]),
@@ -148,9 +148,8 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 				this.record.humidity = null;
 				this.record.temperature = null;
 				this.record.collectedBy = null;
-			}
-			
-			if (this.form.get('collectionSuccessful').value === 2) {
+				this.record.collectionStatusId = 1;
+			} else if (this.form.get('collectionSuccessful').value === 2) {
 				this.record.failureReasonId = null;
 				this.record.collectionStatusId = 2;
 			} else if (this.form.get('collectionSuccessful').value === 3) {
@@ -159,6 +158,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 				this.record.temperature = null;
 				this.record.collectionStatusId = 3;
 			}
+			this.statusName = this.data.statuses.find(m => m.id === this.record.collectionStatusId).name;
 
 			this.showSpinner();
 			var returnValue = await this.repository.save(this.record);

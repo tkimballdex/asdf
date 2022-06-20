@@ -24,6 +24,7 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 	public form: FormGroup;
 	public record: any;
 	public deleteDialog: Dialog;
+	public containerSuccessfulBool: boolean = null;
 
 	public data: any;
 
@@ -39,6 +40,7 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 
 		if (id) {
 			this.record = await this.repository.getContainer(id);
+			this.containerSuccessfulBool = this.record.failureReasonId ? false : true;
 		} else {
 			var collectionId = this.route.snapshot.paramMap.get('collectionId');
 			var collection = await this.repository.get(collectionId);
@@ -56,14 +58,14 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 		this.hideSpinner();
 
 		this.form = new FormGroup({
-			collectionSuccessful: new FormControl(''),
+			containerSuccessful: new FormControl(this.containerSuccessfulBool),
 			containerNo: new FormControl(this.record.containerNo),
 			containerTypeId: new FormControl(this.record.containerTypeId, [Validators.required]),
 			failureReasonId: new FormControl(this.record.failureReasonId),
 			containerVolume: new FormControl(this.record.volume),
 		});
 
-		this.form.get('collectionSuccessful').valueChanges.subscribe(value => {
+		this.form.get('containerSuccessful').valueChanges.subscribe(value => {
 			if (value === true) {
 				this.form.get('containerVolume').setValidators([Validators.required]);
 				this.form.get('failureReasonId').setValidators(null);
@@ -84,6 +86,9 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 	//-----------------------------------------------------------------------------------------
 	async save() {
 		this.form.markAllAsTouched();
+		if (this.record.volume === 0) {
+			this.form.get('containerVolume').setValue(null)
+		}
 
 		if (this.form.invalid) {
 			this.showErrorMessage("Please complete all required fields!");
@@ -93,9 +98,9 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 			var add = !this.record.id;
 			this.record.tenantId = this.tenant.id;
 
-			if (this.form.get('collectionSuccessful').value === true) {
+			if (this.form.get('containerSuccessful').value === true) {
 				this.record.failureReasonId = null;
-			} else if (this.form.get('collectionSuccessful').value === false) {
+			} else if (this.form.get('containerSuccessful').value === false) {
 				this.record.volume = 0;
 				this.record.acidity = null;
 				this.record.temperature = null;

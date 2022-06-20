@@ -36,6 +36,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 	public locations: any;
 	public collection: any;
 	public collections: any;
+	public sampleSuccessfulBool: boolean = null;
 
 	@ViewChild('editTab') public editTab: TabComponent;
 	//-----------------------------------------------------------------------------------------
@@ -52,6 +53,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		if (id) {
 			this.record = await this.repository.get(id);
 			this.tests = await this.repository.getTests(id);
+			this.sampleSuccessfulBool = this.record.failureReasonId ? false : true;
 		}
 		else {
 			this.record = {
@@ -70,7 +72,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 
 		this.form = new FormGroup({
 			failureReasonId: new FormControl(this.record.failureReasonId),
-			sampleSuccessful: new FormControl(''),
+			sampleSuccessful: new FormControl(this.sampleSuccessfulBool),
 			sampleNo: new FormControl(this.record.sampleNo),
 			vendorId: new FormControl(this.record.vendorId, [Validators.required])
 		});
@@ -83,6 +85,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 			}
 			this.form.get('failureReasonId').updateValueAndValidity();
 		});
+		console.log(this.record)
 	}
 	//-----------------------------------------------------------------------------------------
 	editTabCreated() {
@@ -112,6 +115,8 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 
 			if (this.form.get('sampleSuccessful').value === true) {
 				this.record.failureReasonId = null;
+			} else if (this.form.get('sampleSuccessful').value === false) {
+				this.record.collectedDate = null;
 			}
 
 			this.showSpinner();
