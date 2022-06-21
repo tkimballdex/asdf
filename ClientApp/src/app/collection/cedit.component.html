@@ -15,7 +15,7 @@
         </div>
 
         <div class="col-md-6 col-lg-5 col-xl-4" *ngIf="record.id">
-            <ejs-datepicker [value]="record.createdDate" [readonly]="true" placeholder="Created Date" floatLabelType="Always"></ejs-datepicker>          
+            <ejs-datepicker id="containerCreatedDate" [value]="record.createdDate" [readonly]="true" placeholder="Created Date" floatLabelType="Always"></ejs-datepicker>          
         </div>
     </div>
 
@@ -25,7 +25,7 @@
         </div>
 
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-datepicker [value]="record.scheduledDate" [readonly]="true" placeholder="Scheduled Date" floatLabelType="Always"></ejs-datepicker>          
+            <ejs-datepicker id="containerScheduledDate" [value]="record.scheduledDate" [readonly]="true" placeholder="Scheduled Date" floatLabelType="Always"></ejs-datepicker>          
         </div>
     </div>
 

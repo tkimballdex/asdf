@@ -20,14 +20,14 @@
 
     <div class="row">
         <div class="col-md-6 col-lg-5 col-xl-4" *ngIf="analytes">
-            <ejs-dropdownlist [dataSource]="analytes" [fields]="{ text: 'name', value: 'id' }" formControlName="analyteId" placeholder="Analyte" floatLabelType="Always" (change)="analyteChange($event)"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="analytes" [fields]="{ text: 'name', value: 'id' }" formControlName="analyteId" placeholder="Analyte*" floatLabelType="Always" (change)="analyteChange($event)"></ejs-dropdownlist>
             <div *ngIf="this.invalidControl('analyteId')" class="e-error">
                 Analyte is required!
             </div>
         </div>
 
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist [dataSource]="testTypes" [fields]="{ text: 'name', value: 'id' }" formControlName="testTypeId" placeholder="Test Type" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="testTypes" [fields]="{ text: 'name', value: 'id' }" formControlName="testTypeId" placeholder="Test Type*" floatLabelType="Always"></ejs-dropdownlist>
             <div *ngIf="this.invalidControl('testTypeId')" class="e-error">
                 Test Type is required!
             </div>
@@ -64,12 +64,13 @@
     <div class="row pad-t20 mar-t10">
         <div class="col-md-12 col-lg-10 col-xl-8">
             <label for="collStatus" class="edit-label bold" style="font-size:1.1em;">Was the Test successful?</label>
+            <ejs-radiobutton label="Not Set" name="testSuccessful" [value]="null" formControlName="testSuccessful" cssClass="mar-l20" (change)="setNullStatus()"></ejs-radiobutton>
             <ejs-radiobutton label="Yes" name="testSuccessful" [value]="true" formControlName="testSuccessful" cssClass="mar-l20" (change)="setSucessStatus()"></ejs-radiobutton>
             <ejs-radiobutton label="No" name="testSuccessful" [value]="false" formControlName="testSuccessful" cssClass="mar-l20" (change)="setFailureStatus()"></ejs-radiobutton>
         </div>                               
     </div> 
 
-    <div class="row pad-t10" *ngIf="form.get('testSuccessful').value">
+    <div class="row pad-t10" *ngIf="form.get('testSuccessful').value === true">
         <div class="col-md-6 col-lg-5 col-xl-4">
             <ejs-dropdownlist [dataSource]="testResults" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.testResultId" placeholder="Test Result" floatLabelType="Always"></ejs-dropdownlist>
         </div>
@@ -79,7 +80,7 @@
     </div> 
     
     <div class="row pad-t10">
-        <div class="col-md-6 col-lg-5 col-xl-4" *ngIf="!form.get('testSuccessful').value">
+        <div class="col-md-6 col-lg-5 col-xl-4" *ngIf="form.get('testSuccessful').value === false">
             <ejs-dropdownlist [dataSource]="app.rejectionReasons" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.rejectionReasonId" placeholder="Rejection Reason" floatLabelType="Always"></ejs-dropdownlist>
         </div>
     </div>

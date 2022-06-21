@@ -66,24 +66,17 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 
 		this.hideSpinner();
 
+		this.collection.scheduledDate = this.collection.scheduledDate ? new Date(this.collection.scheduledDate) : null;
 		this.record.collectedDate = this.record.completedDate ? new Date(this.record.collectedDate) : null;
 		this.record.shippedDate = this.record.shippedDate ? new Date(this.record.shippedDate) : null;
 		this.record.receivedDate = this.record.receivedDate ? new Date(this.record.receivedDate) : null;
 
 		this.form = new FormGroup({
+			sampleStatusId: new FormControl(this.record.sampleStatusId, [Validators.required]),
 			failureReasonId: new FormControl(this.record.failureReasonId),
 			sampleSuccessful: new FormControl(this.sampleSuccessfulBool),
 			sampleNo: new FormControl(this.record.sampleNo),
 			vendorId: new FormControl(this.record.vendorId, [Validators.required])
-		});
-
-		this.form.get('sampleSuccessful').valueChanges.subscribe(value => {
-			if (value === true) {
-				this.form.get('failureReasonId').setValidators(null);
-			} else if (value === false) {
-				this.form.get('failureReasonId').setValidators([Validators.required]);
-			}
-			this.form.get('failureReasonId').updateValueAndValidity();
 		});
 	}
 	//-----------------------------------------------------------------------------------------
@@ -95,6 +88,21 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 	//-----------------------------------------------------------------------------------------
 	setSucessStatus() {
 		this.record.failureReasonId = null;
+		this.form.get('failureReasonId').setValidators(null);
+		this.form.get('failureReasonId').updateValueAndValidity();
+	}
+	//-----------------------------------------------------------------------------------------
+	setFailureStatus() {
+		this.record.collectedDate = null;
+		this.form.get('failureReasonId').setValidators([Validators.required]);
+		this.form.get('failureReasonId').updateValueAndValidity();
+	}
+	//-----------------------------------------------------------------------------------------
+	setNullStatus() {
+		this.record.failureReasonId = null;
+		this.record.collectedDate = null;
+		this.form.get('failureReasonId').setValidators(null);
+		this.form.get('failureReasonId').updateValueAndValidity();
 	}
 	//-----------------------------------------------------------------------------------------
 	back(): void {
@@ -111,12 +119,6 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 
 			var add = !this.record.id;
 			this.record.tenantId = this.tenant.id;
-
-			if (this.form.get('sampleSuccessful').value === true) {
-				this.record.failureReasonId = null;
-			} else if (this.form.get('sampleSuccessful').value === false) {
-				this.record.collectedDate = null;
-			}
 
 			this.showSpinner();
 			var returnValue = await this.repository.save(this.record);
@@ -138,7 +140,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 	delete() {
 		this.deleteDialog = DialogUtility.confirm({
 			title: 'Delete Vendor',
-			content: `Are you sure you want to delete the vendor <b>${this.record.name}</b>?`,
+			content: `Are you sure you want to delete the sample <b>${this.record.sampleNo}</b>?`,
 			okButton: { click: this.deleteOK.bind(this) }
 		});
 	}

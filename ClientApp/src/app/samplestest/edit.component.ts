@@ -26,6 +26,7 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 	public testTypes: any;
 	public testResults: any;
 	public analytes: any;
+	public testSuccessfulBool: boolean = null;
     //-----------------------------------------------------------------------------------------
     async ngOnInit() {       
         this.showSpinner();
@@ -41,8 +42,7 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 			this.recordData = await this.repository.get(id);
 			this.record = this.recordData.record;
 			this.record.variants = this.recordData.variants;
-		}
-		else if (sampleId) {
+		} else if (sampleId) {
 			var sample = await this.repository.getSample(sampleId);
 			this.record = {
 				sampleId: sampleId,
@@ -52,8 +52,7 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 				sample: sample.name,
 				referenceNo: ""
 			}
-		}
-		else {
+		} else {
 			this.record = {};
 		}
 
@@ -63,11 +62,13 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 
 		this.hideSpinner();
 
+		this.record.createdDate = this.record.createdDate ? new Date(this.record.createdDate) : null;
+
 		this.form = new FormGroup({
 			analyteId: new FormControl(this.record.analyteId, [Validators.required]),
 			testTypeId: new FormControl(this.record.testTypeId, [Validators.required]),
-			sampleId: new FormControl(this.record.sampleId, [Validators.required]),
-			testSuccessful: new FormControl(!this.record.rejectionReasonId)
+			sampleId: new FormControl(this.record.sampleId),
+			testSuccessful: new FormControl(this.testSuccessfulBool)
 		});
     }
     //-----------------------------------------------------------------------------------------
@@ -89,8 +90,7 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 
 		if (returnValue && returnValue.error) {
 			this.showErrorMessage(returnValue.description);
-		}
-		else {
+		} else {
 			var success = returnValue && returnValue.updated === true;
 			this.showSaveMessage(success);
 
@@ -103,7 +103,7 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
     delete() {
         this.deleteDialog = DialogUtility.confirm({
             title: 'Delete Test',
-            content: `Are you sure you want to delete the test <b>${this.record.referenceNo}</b>?`,
+            content: `Are you sure you want to delete the test <b>${this.record.testNo}</b>?`,
             okButton: { click: this.deleteOK.bind(this) }
         });
     }
@@ -116,8 +116,7 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 
         if (result.error) {
             this.showErrorMessage(result.description);
-        }
-        else {
+        } else {
             this.showDeleteMessage(true);
             setTimeout(() => this.router.navigate(['/auth/sampletest/list']), 1000);
         }
@@ -134,9 +133,17 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 		this.testResults = this.testData.testResults;
 		this.hideSpinner();
 	}
-    //-----------------------------------------------------------------------------------------	
+	//-----------------------------------------------------------------------------------------	
 	setSucessStatus() {
 		this.record.failureReasonId = null;
+	}
+	//-----------------------------------------------------------------------------------------	
+	setFailureStatus() {
+
+	}
+	//-----------------------------------------------------------------------------------------
+	setNullStatus() {
+
 	}
 	//-----------------------------------------------------------------------------------------
 }

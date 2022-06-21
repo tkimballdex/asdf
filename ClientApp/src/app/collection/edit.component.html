@@ -1,22 +1,22 @@
 <div id="edit-view" *ngIf="record && form" class="container-fluid" [formGroup]="form">
-    <div class="row  edit-header">
+    <div class="row edit-header">
         <div class="col-md-6 d-flex">
             <span class="edit-header-icon"><i class="fal fa-calendar-alt"></i></span>
-            <span class="edit-header-title" [ngClass]="{'dotted-right': record.id}">Collection</span>
+            <span class="edit-header-title" [ngClass]="{'dotted-right': record.id}" style="height: 70px;">Collection</span>
 
-            <div *ngIf="record.collectionNo" class="edit-header-collection-no d-flex flex-column">
+            <div *ngIf="record.collectionNo" class="edit-header-collection-no d-flex flex-column" style="height: 70px;">
                 <span class="header-value pad-b5">{{record.collectionNo}}</span>
                 <span class="text-center header-tag">Collection No</span>
             </div>
             
-            <div *ngIf="statusName" class="edit-header-status d-flex flex-column">
+            <div *ngIf="statusName" class="edit-header-status d-flex flex-column" style="height: 70px;">
                 <span class="header-value pad-b5">{{statusName}}</span>
                 <span class="text-center header-tag">Status</span>
             </div>
         </div>
     </div>
 
-    <div class="row pad-t20">
+    <div class="row pad-t15">
         <div class="col-md-12 col-lg-8 col-xl-6">
 
             <div class="row pad-b20">

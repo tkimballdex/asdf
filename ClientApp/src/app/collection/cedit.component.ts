@@ -72,6 +72,9 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 			} else if (value === false) {
 				this.form.get('containerVolume').setValidators(null);
 				this.form.get('failureReasonId').setValidators([Validators.required]);
+			} else if (value === null) {
+				this.form.get('containerVolume').setValidators(null);
+				this.form.get('failureReasonId').setValidators(null);
 			}
 			this.form.get('containerVolume').updateValueAndValidity();
 			this.form.get('failureReasonId').updateValueAndValidity();
