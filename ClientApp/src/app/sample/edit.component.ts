@@ -76,7 +76,9 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 			failureReasonId: new FormControl(this.record.failureReasonId),
 			sampleSuccessful: new FormControl(this.sampleSuccessfulBool),
 			sampleNo: new FormControl(this.record.sampleNo),
-			vendorId: new FormControl(this.record.vendorId, [Validators.required])
+			vendorId: new FormControl(this.record.vendorId, [Validators.required]),
+			volume: new FormControl(this.record.volume),
+			collectedDate: new FormControl(this.record.collectedDate),
 		});
 	}
 	//-----------------------------------------------------------------------------------------
@@ -119,6 +121,21 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 
 			var add = !this.record.id;
 			this.record.tenantId = this.tenant.id;
+
+			if (this.form.get('sampleSuccessful').value === true) {
+				this.record.failureReasonId = null;
+			} else if (this.form.get('sampleSuccessful').value === false) {
+				this.record.volume = 0;
+				this.record.acidity = null;
+				this.record.temperature = null;
+				this.record.conductivity = null;
+			} else if (this.form.get('sampleSuccessful').value === null) {
+				this.record.failureReasonId = null;
+				this.record.volume = 0;
+				this.record.acidity = null;
+				this.record.temperature = null;
+				this.record.conductivity = null;
+			}
 
 			this.showSpinner();
 			var returnValue = await this.repository.save(this.record);

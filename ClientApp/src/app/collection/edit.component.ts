@@ -22,6 +22,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 	}
 
 	public form: FormGroup;
+	public id: any;
 	public record: any;
 	public deleteDialog: Dialog;
 	public tests: any;
@@ -33,6 +34,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 	public data: any;
 	public statusName: string;
 	public collectionCompleteBool: boolean = false;
+	public collectionSuccessfulBool: boolean;
 
 	@ViewChild('editTab') public editTab: TabComponent;
 	//-----------------------------------------------------------------------------------------
@@ -42,12 +44,12 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 		this.privileges = this.app.privileges.samples;
 		this.data = await this.repository.getData();
 
-		var id = this.route.snapshot.paramMap.get('id');
-		this.record = await this.repository.get(id);
+		this.id = this.route.snapshot.paramMap.get('id');
+		this.record = await this.repository.get(this.id);
 		this.vendors = await this.repository.listVendors({ tenantId: this.tenant.id, vendorTypeId: 3 });
 
-		if (id) {
-			this.tests = await this.repository.getTests(id);
+		if (this.id) {
+			this.tests = await this.repository.getTests(this.id);
 			this.customers = await this.repository.listCustomers();
 			this.record.customerId = this.customers.find(e => e.name === this.record.customer).id
 			this.statusName = this.data.statuses.find(m => m.id === this.record.collectionStatusId).name
@@ -66,20 +68,24 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 			this.record.collectionStatusId = 3;
 		}
 
+		if (this.record.collectionStatusId === 1) {
+			this.collectionSuccessfulBool = null
+		}
+
 		this.hideSpinner();
 
 		this.record.collectedDate = this.record.collectedDate ? new Date(this.record.collectedDate) : null;
 
 		this.form = new FormGroup({
 			collectionCompleted: new FormControl(this.collectionCompleteBool),
-			collectionSuccessful: new FormControl(this.record.collectionStatusId),
+			collectionSuccessful: new FormControl(this.collectionSuccessfulBool),
 			scheduledDate: new FormControl(this.record.scheduledDate ? new Date(this.record.scheduledDate) : null),
 			vendorId: new FormControl(this.record.vendorId, [Validators.required]),
 			completedDate: new FormControl(this.record.collectedDate),
 			failureReasonId: new FormControl(this.record.failureReasonId),
 			customerId: new FormControl(this.record.customerId, [Validators.required]),
 			siteId: new FormControl(this.record.siteId, [Validators.required]),
-			locationId: new FormControl(this.record.locationId, [Validators.required])
+			locationId: new FormControl(this.record.locationId, [Validators.required]),
 		});
 
 		this.form.get('collectionCompleted').valueChanges.subscribe(value => {
@@ -125,10 +131,6 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 		}
 	}
 	//-----------------------------------------------------------------------------------------
-	setStatus() {
-
-	}
-	//-----------------------------------------------------------------------------------------
 	async save() {
 		this.form.markAllAsTouched();
 
@@ -158,8 +160,9 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 				this.record.temperature = null;
 				this.record.collectionStatusId = 3;
 			}
+			
+			this.record.collectionSuccessful = null;
 			this.statusName = this.data.statuses.find(m => m.id === this.record.collectionStatusId).name;
-
 			this.showSpinner();
 			var returnValue = await this.repository.save(this.record);
 			this.hideSpinner();

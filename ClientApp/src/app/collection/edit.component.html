@@ -9,7 +9,7 @@
                 <span class="text-center header-tag">Collection No</span>
             </div>
             
-            <div *ngIf="statusName" class="edit-header-status d-flex flex-column" style="height: 70px;">
+            <div *ngIf="statusName && id" class="edit-header-status d-flex flex-column" style="height: 70px;">
                 <span class="header-value pad-b5">{{statusName}}</span>
                 <span class="text-center header-tag">Status</span>
             </div>
@@ -88,13 +88,14 @@
                 <div class="row pad-b10">
                     <div class="col-md-12 col-lg-10 col-xl-8">
                         <label for="collSuccessful" class="edit-label bold" style="font-size:1.1em;">Was the collection successful?*</label>
-                        <ejs-radiobutton label="Yes" name="collSuccessful" [value]="2" formControlName="collectionSuccessful" cssClass="mar-l20" (change)="setStatus()"></ejs-radiobutton>
-                        <ejs-radiobutton label="No" name="collSuccessful" [value]="3" formControlName="collectionSuccessful" cssClass="mar-l20" (change)="setStatus()"></ejs-radiobutton>
+                        <ejs-radiobutton label="Yes" name="collSuccessful" [value]="2" formControlName="collectionSuccessful" cssClass="mar-l20"></ejs-radiobutton>
+                        <ejs-radiobutton label="No" name="collSuccessful" [value]="3" formControlName="collectionSuccessful" cssClass="mar-l20"></ejs-radiobutton>
+                        <div *ngIf="this.invalidControl('collectionSuccessful')" class="e-error">
+                            Collection Successful is required!
+                        </div>
                     </div>
                 </div>
-                <div *ngIf="this.invalidControl('collectionSuccessful')" class="e-error">
-                    Collection Successful is required!
-                </div>
+                
     
                 <div class="row" *ngIf="form.get('collectionSuccessful').value === 2">
                     <div class="col-md-6 col-lg-5 col-xl-4">
