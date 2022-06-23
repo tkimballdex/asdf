@@ -34,7 +34,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 	public data: any;
 	public statusName: string;
 	public collectionCompleteBool: boolean = false;
-	public collectionSuccessfulBool: boolean;
+	public collectionSuccessfulBool: any;
 
 	@ViewChild('editTab') public editTab: TabComponent;
 	//-----------------------------------------------------------------------------------------
@@ -51,8 +51,8 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 		if (this.id) {
 			this.tests = await this.repository.getTests(this.id);
 			this.customers = await this.repository.listCustomers();
-			this.record.customerId = this.customers.find(e => e.name === this.record.customer).id
-			this.statusName = this.data.statuses.find(m => m.id === this.record.collectionStatusId).name
+			this.record.customerId = this.customers.find(e => e.name === this.record.customer).id;
+			this.statusName = this.data.statuses.find(m => m.id === this.record.collectionStatusId).name;
 			this.sites = await this.repository.listSites(this.record.customerId);
 			this.locations = await this.repository.listLocations(this.record.siteId);
 		} else {
@@ -70,6 +70,8 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 
 		if (this.record.collectionStatusId === 1) {
 			this.collectionSuccessfulBool = null
+		} else {
+			this.collectionSuccessfulBool = this.record.collectionStatusId;
 		}
 
 		this.hideSpinner();
