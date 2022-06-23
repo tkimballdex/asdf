@@ -1,4 +1,4 @@
-<div id="list-view" class="container-fluid" *ngIf="form" (keyup.enter)="search()">
+<div id="list-view" class="container-fluid" *ngIf="form">
     <div class="row d-flex align-items-end">
         <div class="col-md-6 d-flex align-items-center list-header">
             <span class="list-header-icon"><i class="fas fa-calendar-alt"></i></span>
@@ -12,7 +12,7 @@
     </div>
     <div class="row d-flex align-items-end">
         <div class="col-sm-6 col-md-3 col-lg-2">
-            <ejs-textbox [(value)]="form.collectionNo" placeholder="Collection No" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox [(value)]="form.collectionNo" placeholder="Collection No" floatLabelType="Always" (keyup.enter)="search()"></ejs-textbox>
         </div>
         <div class="col-sm-6 col-md-3 col-lg-2">
             <ejs-dropdownlist [dataSource]="statuses" [(value)]="form.collectionStatusId" [fields]="{ text: 'name', value: 'id' }" placeholder="Status" floatLabelType="Always" (change)="search()"></ejs-dropdownlist>

@@ -1,4 +1,4 @@
-<div id="list-view" class="container-fluid" (keyup.enter)="search()">
+<div id="list-view" class="container-fluid" >
     <div class="row d-flex align-items-end">
         <div class="col-md-6 d-flex align-items-center list-header">
             <span class="list-header-icon"><i class="fas fa-handshake-alt"></i></span>
@@ -11,7 +11,7 @@
     </div>
     <div class="row d-flex align-items-end">
         <div class="col-md-4 col-lg-3 col-xl-2">
-            <ejs-textbox [(value)]="searchTxt" placeholder="Search" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox [(value)]="searchTxt" placeholder="Search" floatLabelType="Always" (keyup.enter)="search()"></ejs-textbox>
         </div>
         <div class="col-md-4 col-lg-3 col-xl-2">
             <ejs-dropdownlist [dataSource]="states" [(value)]="stateId" [fields]="{ text: 'name', value: 'id' }" placeholder="State" floatLabelType="Always" (change)="search()"></ejs-dropdownlist>

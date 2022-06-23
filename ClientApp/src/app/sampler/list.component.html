@@ -1,4 +1,4 @@
-<div id="list-view" class="container-fluid" *ngIf="form" (keyup.enter)="search()">
+<div id="list-view" class="container-fluid" *ngIf="form">
     <div class="row d-flex align-items-end">
         <div class="col-md-6 d-flex align-items-center list-header">
             <span class="list-header-icon"><i class="fas fa-vials"></i></span>
@@ -11,7 +11,7 @@
     </div>
     <div class="row d-flex align-items-end">
         <div class="col-md-4 col-lg-3 col-xl-2">
-            <ejs-textbox [(value)]="form.searchTxt" placeholder="Search" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox [(value)]="form.searchTxt" placeholder="Search" floatLabelType="Always" (keyup.enter)="search()"></ejs-textbox>
         </div>
         <div class="col-md-4 col-lg-3 col-xl-2">
             <ejs-dropdownlist [dataSource]="customers" [(value)]="form.customerId" [fields]="{ text: 'name', value: 'id' }" placeholder="Customer" floatLabelType="Always"></ejs-dropdownlist>
