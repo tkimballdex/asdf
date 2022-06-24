@@ -32,7 +32,6 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
         this.showSpinner();
         this.app = await this.appService.getData();
         this.privileges = this.app.privileges.tests;
-
 		this.analytes = await this.repository.getAnalytes();
 
 		var id = this.route.snapshot.paramMap.get('id');
@@ -136,14 +135,6 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 	//-----------------------------------------------------------------------------------------	
 	setSucessStatus() {
 		this.record.failureReasonId = null;
-	}
-	//-----------------------------------------------------------------------------------------	
-	setFailureStatus() {
-
-	}
-	//-----------------------------------------------------------------------------------------
-	setNullStatus() {
-
 	}
 	//-----------------------------------------------------------------------------------------
 }
