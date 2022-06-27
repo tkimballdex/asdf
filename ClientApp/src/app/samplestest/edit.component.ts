@@ -132,9 +132,5 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 		this.testResults = this.testData.testResults;
 		this.hideSpinner();
 	}
-	//-----------------------------------------------------------------------------------------	
-	setSucessStatus() {
-		this.record.failureReasonId = null;
-	}
 	//-----------------------------------------------------------------------------------------
 }
