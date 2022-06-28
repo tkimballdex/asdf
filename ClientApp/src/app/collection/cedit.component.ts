@@ -89,7 +89,7 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 	//-----------------------------------------------------------------------------------------
 	async save() {
 		this.form.markAllAsTouched();
-		if (this.record.volume === 0) {
+		if (this.form.get('containerVolume').value === 0) {
 			this.form.get('containerVolume').setValue(null)
 		}
 

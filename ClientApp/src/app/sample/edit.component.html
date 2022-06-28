@@ -63,7 +63,7 @@
 
             <div class="row" *ngIf="form.get('sampleSuccessful').value === true">      
                 <div class="col-md-8 col-lg-6 col-xl-4">
-                    <ejs-numerictextbox [(value)]="record.volume" format='N1' min='0' max='500' step='1' formControlName="volume" placeholder="Volume*" floatLabelType="Always"></ejs-numerictextbox>
+                    <ejs-numerictextbox format='N1' min='0' max='500' step='1' formControlName="volume" placeholder="Volume*" floatLabelType="Always"></ejs-numerictextbox>
                     <div *ngIf="this.invalidControl('volume')" class="e-error">
                         Volume is required!
                     </div>
@@ -75,7 +75,7 @@
 
             <div class="row pad-b10" *ngIf="form.get('sampleSuccessful').value === true">
                 <div class="col-md-8 col-lg-6 col-xl-4">
-                    <ejs-datepicker [(value)]="record.collectedDate" formControlName="collectedDate" placeholder="Collected Date" floatLabelType="Always"></ejs-datepicker>
+                    <ejs-datepicker formControlName="collectedDate" placeholder="Collected Date" floatLabelType="Always"></ejs-datepicker>
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4">
                     <ejs-textbox [(value)]="record.collectedBy" placeholder="Collected By" floatLabelType="Always"></ejs-textbox>
@@ -84,7 +84,7 @@
 
             <div class="row pad-b10" *ngIf="form.get('sampleSuccessful').value === false">                             
                 <div class="col-md-6 col-lg-5 col-xl-4">
-                    <ejs-dropdownlist [dataSource]="app.sampleFailureReasons" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.failureReasonId" formControlName="failureReasonId" placeholder="Failure Reason*" floatLabelType="Always"></ejs-dropdownlist>
+                    <ejs-dropdownlist [dataSource]="app.sampleFailureReasons" [fields]="{ text: 'name', value: 'id' }" formControlName="failureReasonId" placeholder="Failure Reason*" floatLabelType="Always"></ejs-dropdownlist>
                     <div *ngIf="this.invalidControl('failureReasonId')" class="e-error">
                         Failure Reason is required!
                     </div>

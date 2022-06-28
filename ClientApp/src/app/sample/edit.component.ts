@@ -117,7 +117,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 	//-----------------------------------------------------------------------------------------
 	async save() {
 		this.form.markAllAsTouched();
-		if (this.record.volume === 0) {
+		if (this.form.get('volume').value === 0) {
 			this.form.get('volume').setValue(null)
 		}
 
