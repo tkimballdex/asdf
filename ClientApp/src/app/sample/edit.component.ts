@@ -47,7 +47,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.app = await this.appService.getData();
 		this.privileges = this.app.privileges.samples;
 		this.data = await this.repository.getData();
-		this.labVendors = await this.repository.listVendors({ tenantId: this.tenant.id, vendorTypeId: 2 });
+		this.labVendors = await this.repository.listVendors({ tenantId: this.tenant.id, vendorTypeId: 2, active: 1 });
 		this.collection = await this.repository.getCollection(this.route.snapshot.queryParamMap.get('collectionId'));
 
 		this.id = this.route.snapshot.paramMap.get('id');
