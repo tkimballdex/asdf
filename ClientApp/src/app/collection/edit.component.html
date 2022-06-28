@@ -73,14 +73,14 @@
             <div *ngIf="form.get('collectionCompleted').value">
                 <div class="row pad-b20">
                     <div class="col-md-6 col-lg-5 col-xl-4">
-                        <ejs-datepicker [(value)]="record.collectedDate" formControlName="completedDate" placeholder="Completed Date*" floatLabelType="Always"></ejs-datepicker>
+                        <ejs-datepicker [(value)]="record.completedDate" formControlName="completedDate" placeholder="Completed Date*" floatLabelType="Always"></ejs-datepicker>
                         <div *ngIf="this.invalidControl('completedDate')" class="e-error">
                             Completed Date is required!
                         </div>
                     </div>
     
                     <div class="col-md-6 col-lg-5 col-xl-4">
-                        <ejs-textbox [(value)]="record.collectedBy" readonly placeholder="Collected By"
+                        <ejs-textbox [(value)]="record.completedBy" readonly placeholder="Completed By"
                             floatLabelType="Always"></ejs-textbox>
                     </div>
                 </div>

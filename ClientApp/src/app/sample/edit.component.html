@@ -75,11 +75,10 @@
 
             <div class="row pad-b10" *ngIf="form.get('sampleSuccessful').value === true">
                 <div class="col-md-8 col-lg-6 col-xl-4">
-                    <ejs-textbox [(value)]="record.collectedBy" placeholder="Collected By" floatLabelType="Always"></ejs-textbox>
-                </div>
-
-                <div class="col-md-8 col-lg-6 col-xl-4">
                     <ejs-datepicker [(value)]="record.collectedDate" formControlName="collectedDate" placeholder="Collected Date" floatLabelType="Always"></ejs-datepicker>
+                </div>
+                <div class="col-md-8 col-lg-6 col-xl-4">
+                    <ejs-textbox [(value)]="record.collectedBy" placeholder="Collected By" floatLabelType="Always"></ejs-textbox>
                 </div>
             </div>
 

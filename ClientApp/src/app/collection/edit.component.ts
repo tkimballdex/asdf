@@ -60,7 +60,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 			this.record.collectionStatusId = 1;
 		}
 
-		if (this.record.collectedDate) {
+		if (this.record.completedDate) {
 			this.collectionCompleteBool = true;
 		}
 
@@ -76,14 +76,14 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 
 		this.hideSpinner();
 
-		this.record.collectedDate = this.record.collectedDate ? new Date(this.record.collectedDate) : null;
+		this.record.completedDate = this.record.completedDate ? new Date(this.record.completedDate) : null;
 
 		this.form = new FormGroup({
 			collectionCompleted: new FormControl(this.collectionCompleteBool),
 			collectionSuccessful: new FormControl(this.collectionSuccessfulBool),
 			scheduledDate: new FormControl(this.record.scheduledDate ? new Date(this.record.scheduledDate) : null),
 			vendorId: new FormControl(this.record.vendorId, [Validators.required]),
-			completedDate: new FormControl(this.record.collectedDate),
+			completedDate: new FormControl(this.record.completedDate),
 			failureReasonId: new FormControl(this.record.failureReasonId),
 			customerId: new FormControl(this.record.customerId, [Validators.required]),
 			siteId: new FormControl(this.record.siteId, [Validators.required]),
@@ -146,12 +146,12 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 			this.record.tenantId = this.tenant.id;
 
 			if (this.form.get('collectionCompleted').value === false) {
-				this.record.collectedDate = null;
+				this.record.completedDate = null;
 				this.record.failureReasonId = null;
 				this.record.flowRate = null;
 				this.record.humidity = null;
 				this.record.temperature = null;
-				this.record.collectedBy = null;
+				this.record.completedBy = null;
 				this.record.collectionStatusId = 1;
 			} else if (this.form.get('collectionSuccessful').value === 2) {
 				this.record.failureReasonId = null;
