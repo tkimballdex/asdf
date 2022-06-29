@@ -69,8 +69,8 @@
 
             <div class="row" *ngIf="form.get('containerSuccessful').value === true">      
                 <div class="col-md-6 col-lg-5 col-xl-4">
-                    <ejs-numerictextbox format='N1' min='0' max='500' step='1' formControlName="containerVolume" showClearButton="true" placeholder="Volume*" floatLabelType="Always"></ejs-numerictextbox>
-                    <div *ngIf="this.invalidControl('containerVolume')" class="e-error">
+                    <ejs-numerictextbox format='N1' min='0' max='500' step='1' formControlName="volume" showClearButton="true" placeholder="Volume*" floatLabelType="Always"></ejs-numerictextbox>
+                    <div *ngIf="this.invalidControl('volume')" class="e-error">
                         Volume is required!
                     </div>
                 </div> 

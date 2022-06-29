@@ -68,21 +68,21 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 			containerNo: new FormControl(this.record.containerNo),
 			containerTypeId: new FormControl(this.record.containerTypeId, [Validators.required]),
 			failureReasonId: new FormControl(this.record.failureReasonId),
-			containerVolume: new FormControl(this.record.volume),
+			volume: new FormControl(this.record.volume),
 		});
 
 		this.form.get('containerSuccessful').valueChanges.subscribe(value => {
 			if (value === true) {
-				this.form.get('containerVolume').setValidators([Validators.required]);
+				this.form.get('volume').setValidators([Validators.required]);
 				this.form.get('failureReasonId').setValidators(null);
 			} else if (value === false) {
-				this.form.get('containerVolume').setValidators(null);
+				this.form.get('volume').setValidators(null);
 				this.form.get('failureReasonId').setValidators([Validators.required]);
 			} else if (value === null) {
-				this.form.get('containerVolume').setValidators(null);
+				this.form.get('volume').setValidators(null);
 				this.form.get('failureReasonId').setValidators(null);
 			}
-			this.form.get('containerVolume').updateValueAndValidity();
+			this.form.get('volume').updateValueAndValidity();
 			this.form.get('failureReasonId').updateValueAndValidity();
 		});
 	}
@@ -95,8 +95,8 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 	//-----------------------------------------------------------------------------------------
 	async save() {
 		this.form.markAllAsTouched();
-		if (this.form.get('containerVolume').value === 0) {
-			this.form.get('containerVolume').setValue(null)
+		if (this.form.get('volume').value === 0) {
+			this.form.get('volume').setValue(null)
 		}
 
 		if (this.form.invalid) {
@@ -110,13 +110,13 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 			if (this.form.get('containerSuccessful').value === true) {
 				this.record.failureReasonId = null;
 			} else if (this.form.get('containerSuccessful').value === false) {
-				// this.record.volume = 0;
+				this.record.volume = 0;
 				this.record.acidity = null;
 				this.record.temperature = null;
 				this.record.conductivity = null;
 			} else if (this.form.get('containerSuccessful').value === null) {
 				this.record.failureReasonId = null;
-				// this.record.volume = 0;
+				this.record.volume = 0;
 				this.record.acidity = null;
 				this.record.temperature = null;
 				this.record.conductivity = null;

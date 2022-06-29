@@ -130,17 +130,14 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 
 			if (this.form.get('sampleSuccessful').value === true) {
 				this.record.failureReasonId = null;
-				this.form.get('failureReasonId').setValue(null)
 				this.record.sampleStatusId = 2;
 			} else if (this.form.get('sampleSuccessful').value === false) {
 				this.record.volume = 0;
-				this.form.get('volume').setValue(0)
 				this.record.collectedDate = null;
 				this.record.sampleStatusId = 3;
 			} else if (this.form.get('sampleSuccessful').value === null) {
 				this.record.failureReasonId = null;
 				this.record.volume = 0;
-				this.form.get('volume').setValue(0)
 				this.record.collectedDate = null;
 				this.record.sampleStatusId = 1;
 			}
