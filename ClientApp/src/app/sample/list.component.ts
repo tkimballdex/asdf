@@ -82,6 +82,7 @@ class FormParams extends GridFormParams {
 
 		var today = new Date();
 		this.startDate = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+		this.endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 	}
 
 	public tenantId: string;

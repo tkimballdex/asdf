@@ -10,19 +10,19 @@
     </div>
     <div class="row d-flex align-items-end">
         <div class="col-2">
-            <ejs-textbox [(value)]="form.sampleNo" placeholder="Sample No" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox [(value)]="form.sampleNo" placeholder="Sample No" floatLabelType="Always" (keyup.enter)="search()"></ejs-textbox>
         </div>
         <div class="col-2">
-            <ejs-textbox [(value)]="form.referenceNo" placeholder="Reference No" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox [(value)]="form.referenceNo" placeholder="Reference No" floatLabelType="Always" (keyup.enter)="search()"></ejs-textbox>
         </div>
         <div class="col-md-2">
-            <ejs-datepicker [(value)]="form.startDate" placeholder="Start Date" floatLabelType="Always"></ejs-datepicker>
+            <ejs-datepicker [(value)]="form.startDate" placeholder="Start Date" floatLabelType="Always" (change)="search()"></ejs-datepicker>
         </div>
         <div class="col-md-2">
-            <ejs-datepicker [(value)]="form.endDate" placeholder="End Date" floatLabelType="Always"></ejs-datepicker>
+            <ejs-datepicker [(value)]="form.endDate" placeholder="End Date" floatLabelType="Always" (change)="search()"></ejs-datepicker>
         </div>
         <div class="col-2">
-            <ejs-dropdownlist [dataSource]="statuses" [(value)]="form.sampleStatusId" [fields]="{ text: 'name', value: 'id' }" placeholder="Status" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="statuses" [(value)]="form.sampleStatusId" [fields]="{ text: 'name', value: 'id' }" placeholder="Status" floatLabelType="Always" (change)="search()"></ejs-dropdownlist>
         </div>
         <div class="col-md-2">
             <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>

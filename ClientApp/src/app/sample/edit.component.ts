@@ -55,6 +55,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		if (this.id) {
 			this.record = await this.repository.get(this.id);
 			this.tests = await this.repository.getTests(this.id);
+			this.collection = await this.repository.getCollection(this.record.collectionId);
 			this.statusName = this.data.statuses.find(m => m.id === this.record.sampleStatusId).name;
 			if (this.record.failureReasonId) {
 				this.sampleSuccessfulBool = false;
