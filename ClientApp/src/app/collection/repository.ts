@@ -33,6 +33,10 @@ export class CollectionRepository {
 
     public delete(id: string) {
         return this.http.post<any>(`/collection/delete/${id}`);
+    }  
+	
+	public deleteContainer(id: string) {
+        return this.http.post<any>(`/collectionContainer/delete/${id}`);
     }   
 	
 	public getContainer(id: string) {

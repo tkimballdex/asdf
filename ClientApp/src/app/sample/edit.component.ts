@@ -63,8 +63,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 			} else {
 				this.sampleSuccessfulBool = null;
 			}
-		}
-		else {
+		} else {
 			this.record = {
 				site: this.collection.site,
 				location: this.collection.location,

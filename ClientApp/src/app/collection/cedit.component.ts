@@ -40,7 +40,13 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 
 		if (id) {
 			this.record = await this.repository.getContainer(id);
-			this.containerSuccessfulBool = this.record.failureReasonId ? false : true;
+			if (this.record.failureReasonId) {
+				this.containerSuccessfulBool = false;
+			} else if (this.record.volume > 0) {
+				this.containerSuccessfulBool = true;
+			} else {
+				this.containerSuccessfulBool = null;
+			}
 		} else {
 			var collectionId = this.route.snapshot.paramMap.get('collectionId');
 			var collection = await this.repository.get(collectionId);
@@ -104,7 +110,13 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 			if (this.form.get('containerSuccessful').value === true) {
 				this.record.failureReasonId = null;
 			} else if (this.form.get('containerSuccessful').value === false) {
-				this.record.volume = 0;
+				// this.record.volume = 0;
+				this.record.acidity = null;
+				this.record.temperature = null;
+				this.record.conductivity = null;
+			} else if (this.form.get('containerSuccessful').value === null) {
+				this.record.failureReasonId = null;
+				// this.record.volume = 0;
 				this.record.acidity = null;
 				this.record.temperature = null;
 				this.record.conductivity = null;
@@ -138,13 +150,12 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 	async deleteOK() {
 		this.showSpinner();
 		this.deleteDialog.close();
-		var result = await this.repository.delete(this.record.id);
+		var result = await this.repository.deleteContainer(this.record.id);
 		this.hideSpinner();
 
 		if (result.error) {
 			this.showErrorMessage(result.description);
-		}
-		else {
+		} else {
 			this.showDeleteMessage(true);
 			setTimeout(() => this.router.navigate(['/auth/collection/list']), 1000);
 		}

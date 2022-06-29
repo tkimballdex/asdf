@@ -4,42 +4,98 @@
             <span class="edit-header-icon"><i class="fal fa-calendar-alt"></i></span>
             <span class="edit-header-title">Collection Container</span>
         </div>
-        <div class="col-md-6 d-flex justify-content-end">
-
-        </div>
     </div>
 
-    <div class="row pad-t20">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="containerNo" placeholder="Container No" floatLabelType="Always"></ejs-textbox>
+
+    <div class="row">
+        <div class="col-md-12 col-lg-8 col-xl-6">
+
+            <div class="row pad-t20">
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <ejs-textbox formControlName="containerNo" placeholder="Container No" floatLabelType="Always"></ejs-textbox>
+                </div>
+        
+                <div class="col-md-8 col-lg-6 col-xl-5" *ngIf="record.id">
+                    <ejs-datepicker id="containerCreatedDate" [value]="record.createdDate" [readonly]="true" placeholder="Created Date" floatLabelType="Always"></ejs-datepicker>          
+                </div>
+            </div>
+        
+            <div class="row pad-t20">
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <ejs-textbox [value]="record.collectionName" [readonly]="true" placeholder="Collection - Location" floatLabelType="Always"></ejs-textbox>
+                </div>
+        
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <ejs-datepicker id="containerScheduledDate" [value]="record.scheduledDate" [readonly]="true" placeholder="Scheduled Date" floatLabelType="Always"></ejs-datepicker>          
+                </div>
+            </div>
+        
+            <div class="row pad-t20">
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <ejs-textbox [(value)]="record.customer" readonly placeholder="Customer" floatLabelType="Always"></ejs-textbox>
+                </div>
+            </div>
+            <div class="row pad-b10">
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <ejs-textbox [(value)]="record.site" readonly placeholder="Site" floatLabelType="Always"></ejs-textbox>
+                </div>
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <ejs-textbox [(value)]="record.location" readonly placeholder="Location" floatLabelType="Always"></ejs-textbox>
+                </div>
+            </div>
         </div>
 
-        <div class="col-md-6 col-lg-5 col-xl-4" *ngIf="record.id">
-            <ejs-datepicker id="containerCreatedDate" [value]="record.createdDate" [readonly]="true" placeholder="Created Date" floatLabelType="Always"></ejs-datepicker>          
-        </div>
-    </div>
+        <div class="col-md-12 col-lg-8 col-xl-6">
+            <div class="row pad-t10">
+                <div class="col-md-8 col-lg-6 col-xl-4">
+                    <ejs-dropdownlist [dataSource]="app.containerTypes" [fields]="{ text: 'name', value: 'id' }" formControlName="containerTypeId" placeholder="Container Type*" floatLabelType="Always"></ejs-dropdownlist>
+                    <div *ngIf="this.invalidControl('containerTypeId')" class="e-error">
+                        Container Type is required!
+                    </div>
+                </div>
+                <div class="col-md-8 col-lg-6 col-xl-4">
+                    <ejs-numerictextbox [value]="record.expectedVolume" format='N1' min='0' max='500' step='1' placeholder="Expected Volume" floatLabelType="Always"></ejs-numerictextbox>
+                </div> 
+            </div>                           
+            
+            <div class="row pad-t20 mar-t10 pad-b15">
+                <div class="col-md-12 col-lg-10 col-xl-8">
+                    <label for="collSuccessful" class="edit-label bold" style="font-size:1.1em;">Was the container successful?</label>
+                    <ejs-radiobutton label="Not Set" name="collSuccessful" [value]="null" formControlName="containerSuccessful" cssClass="mar-l20"></ejs-radiobutton>
+                    <ejs-radiobutton label="Yes" name="collSuccessful" [value]="true" formControlName="containerSuccessful" cssClass="mar-l20"></ejs-radiobutton>
+                    <ejs-radiobutton label="No" name="collSuccessful" [value]="false" formControlName="containerSuccessful" cssClass="mar-l20"></ejs-radiobutton>
+                </div>                               
+            </div>
 
-    <div class="row pad-t20">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox [value]="record.collectionName" [readonly]="true" placeholder="Collection - Location" floatLabelType="Always"></ejs-textbox>
-        </div>
+            <div class="row" *ngIf="form.get('containerSuccessful').value === true">      
+                <div class="col-md-6 col-lg-5 col-xl-4">
+                    <ejs-numerictextbox format='N1' min='0' max='500' step='1' formControlName="containerVolume" showClearButton="true" placeholder="Volume*" floatLabelType="Always"></ejs-numerictextbox>
+                    <div *ngIf="this.invalidControl('containerVolume')" class="e-error">
+                        Volume is required!
+                    </div>
+                </div> 
+                <div class="col-md-6 col-lg-5 col-xl-4">
+                    <ejs-numerictextbox [(value)]="record.temperature" format='N1' min='-100' max='150' step='0.1' placeholder="Temperature" floatLabelType="Always"></ejs-numerictextbox>
+                </div>
+            </div>
 
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-datepicker id="containerScheduledDate" [value]="record.scheduledDate" [readonly]="true" placeholder="Scheduled Date" floatLabelType="Always"></ejs-datepicker>          
-        </div>
-    </div>
+            <div class="row pad-b10" *ngIf="form.get('containerSuccessful').value === true">                               
+                <div class="col-md-6 col-lg-5 col-xl-4">
+                    <ejs-numerictextbox [(value)]="record.acidity" format='N1' min='0' max='14' step='0.1' placeholder="Acidity" floatLabelType="Always"></ejs-numerictextbox>
+                </div>
+                <div class="col-md-6 col-lg-5 col-xl-4">
+                    <ejs-numerictextbox [(value)]="record.conductivity" format='N1' min='0' max='25000' step='0.1' placeholder="Conductivity" floatLabelType="Always"></ejs-numerictextbox>
+                </div>                                 
+            </div>                       
 
-    <div class="row pad-t20">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox [(value)]="record.customer" readonly placeholder="Customer" floatLabelType="Always"></ejs-textbox>
-        </div>
-    </div>
-    <div class="row pad-b10">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox [(value)]="record.site" readonly placeholder="Site" floatLabelType="Always"></ejs-textbox>
-        </div>
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox [(value)]="record.location" readonly placeholder="Location" floatLabelType="Always"></ejs-textbox>
+            <div class="row pad-b10" *ngIf="form.get('containerSuccessful').value === false">                             
+                <div class="col-md-6 col-lg-5 col-xl-4">
+                    <ejs-dropdownlist [dataSource]="data.failureReasons" [fields]="{ text: 'name', value: 'id' }" formControlName="failureReasonId" placeholder="Failure Reason*" floatLabelType="Always"></ejs-dropdownlist>
+                    <div *ngIf="this.invalidControl('failureReasonId')" class="e-error">
+                        Failure Reason is required!
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -47,64 +103,6 @@
         <div class="col-md-12">
             <ejs-tab id="edit-tab" class="e-fill" #editTab (created)="editTabCreated()">
                 <e-tabitems>
-                    <e-tabitem>
-                        <ng-template #headerText>
-                            <div>Information</div>
-                        </ng-template>
-                        <ng-template #content>
-
-                            <div class="row pad-t10">
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-dropdownlist [dataSource]="app.containerTypes" [fields]="{ text: 'name', value: 'id' }" formControlName="containerTypeId" placeholder="Container Type*" floatLabelType="Always"></ejs-dropdownlist>
-                                    <div *ngIf="this.invalidControl('containerTypeId')" class="e-error">
-                                        Container Type is required!
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-numerictextbox [value]="record.expectedVolume" format='N1' min='0' max='500' step='1' placeholder="Expected Volume" floatLabelType="Always"></ejs-numerictextbox>
-                                </div> 
-                            </div>                           
-                            
-                            <div class="row pad-t20 mar-t10 pad-b15">
-                                <div class="col-md-12 col-lg-10 col-xl-8">
-                                    <label for="collSuccessful" class="edit-label bold" style="font-size:1.1em;">Was the container successful?</label>
-                                    <ejs-radiobutton label="Not Set" name="collSuccessful" [value]="null" formControlName="containerSuccessful" cssClass="mar-l20"></ejs-radiobutton>
-                                    <ejs-radiobutton label="Yes" name="collSuccessful" [value]="true" formControlName="containerSuccessful" cssClass="mar-l20"></ejs-radiobutton>
-                                    <ejs-radiobutton label="No" name="collSuccessful" [value]="false" formControlName="containerSuccessful" cssClass="mar-l20"></ejs-radiobutton>
-                                </div>                               
-                            </div>
-
-                            <div class="row" *ngIf="form.get('containerSuccessful').value === true">      
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-numerictextbox format='N1' min='0' max='500' step='1' formControlName="containerVolume" showClearButton="true" placeholder="Volume*" floatLabelType="Always"></ejs-numerictextbox>
-                                    <div *ngIf="this.invalidControl('containerVolume')" class="e-error">
-                                        Volume is required!
-                                    </div>
-                                </div> 
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-numerictextbox [(value)]="record.temperature" format='N1' min='-100' max='150' step='0.1' placeholder="Temperature" floatLabelType="Always"></ejs-numerictextbox>
-                                </div>
-                            </div>
-
-                            <div class="row pad-b10" *ngIf="form.get('containerSuccessful').value === true">                               
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-numerictextbox [(value)]="record.acidity" format='N1' min='0' max='14' step='0.1' placeholder="Acidity" floatLabelType="Always"></ejs-numerictextbox>
-                                </div>
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-numerictextbox [(value)]="record.conductivity" format='N1' min='0' max='25000' step='0.1' placeholder="Conductivity" floatLabelType="Always"></ejs-numerictextbox>
-                                </div>                                 
-                            </div>                       
-
-                            <div class="row pad-b10" *ngIf="form.get('containerSuccessful').value === false">                             
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-dropdownlist [dataSource]="data.failureReasons" [fields]="{ text: 'name', value: 'id' }" formControlName="failureReasonId" placeholder="Failure Reason*" floatLabelType="Always"></ejs-dropdownlist>
-                                    <div *ngIf="this.invalidControl('failureReasonId')" class="e-error">
-                                        Failure Reason is required!
-                                    </div>
-                                </div>
-                            </div>
-                        </ng-template>
-                    </e-tabitem>                    
                     <e-tabitem *ngIf="record.id">
                         <ng-template #headerText>
                             <div>Samples</div>
