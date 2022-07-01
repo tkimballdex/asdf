@@ -48,7 +48,6 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.privileges = this.app.privileges.samples;
 		this.data = await this.repository.getData();
 		this.labVendors = await this.repository.listVendors({ tenantId: this.tenant.id, vendorTypeId: 2, active: 1 });
-		this.collection = await this.repository.getCollection(this.route.snapshot.queryParamMap.get('collectionId'));
 
 		this.id = this.route.snapshot.paramMap.get('id');
 
@@ -65,6 +64,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 				this.sampleSuccessfulBool = null;
 			}
 		} else {
+			this.collection = await this.repository.getCollection(this.route.snapshot.queryParamMap.get('collectionId'));
 			this.record = {
 				site: this.collection.site,
 				location: this.collection.location,
@@ -76,7 +76,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.hideSpinner();
 
 		this.collection.scheduledDate = this.collection.scheduledDate ? new Date(this.collection.scheduledDate) : null;
-		this.record.collectedDate = this.record.completedDate ? new Date(this.record.collectedDate) : null;
+		this.record.completedDate = this.record.completedDate ? new Date(this.record.completedDate) : null;
 		this.record.shippedDate = this.record.shippedDate ? new Date(this.record.shippedDate) : null;
 		this.record.receivedDate = this.record.receivedDate ? new Date(this.record.receivedDate) : null;
 
@@ -86,7 +86,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 			sampleNo: new FormControl(this.record.sampleNo),
 			vendorId: new FormControl(this.record.vendorId, [Validators.required]),
 			volume: new FormControl(this.record.volume),
-			collectedDate: new FormControl(this.record.collectedDate),
+			completedDate: new FormControl(this.record.completedDate),
 		});
 
 		this.form.get('sampleSuccessful').valueChanges.subscribe(value => {
@@ -134,12 +134,12 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 				this.record.sampleStatusId = 2;
 			} else if (this.form.get('sampleSuccessful').value === false) {
 				this.record.volume = 0;
-				this.record.collectedDate = null;
+				this.record.completedDate = null;
 				this.record.sampleStatusId = 3;
 			} else if (this.form.get('sampleSuccessful').value === null) {
 				this.record.failureReasonId = null;
 				this.record.volume = 0;
-				this.record.collectedDate = null;
+				this.record.completedDate = null;
 				this.record.sampleStatusId = 1;
 			}
 			this.statusName = this.data.statuses.find(m => m.id === this.record.sampleStatusId).name;
@@ -158,6 +158,14 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 					setTimeout(() => this.router.navigate(['/auth/sample/edit', returnValue.id]), 1000);
 				}
 			}
+		}
+		
+		if (this.record.failureReasonId) {
+			this.sampleSuccessfulBool = false;
+		} else if (this.record.volume > 0) {
+			this.sampleSuccessfulBool = true;
+		} else {
+			this.sampleSuccessfulBool = null;
 		}
 	}
 	//-----------------------------------------------------------------------------------------

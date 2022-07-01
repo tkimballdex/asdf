@@ -48,7 +48,7 @@ export class SampleListComponent extends PageComponent implements OnInit {
 		});
 		this.hideSpinner();
 	}
-	//----------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------------------------------
 	gridActionHandler(e) {
 		this.form.gridAction(this.grid, e);
 		this.formState.save(this);

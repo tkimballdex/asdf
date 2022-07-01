@@ -24,12 +24,17 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-8 col-lg-6 col-xl-5 pad-b20">
+                <div class="col-md-8 col-lg-6 col-xl-5 pad-b10">
                     <ejs-datepicker id="containerScheduledDate" [(value)]="collection.scheduledDate" placeholder="Scheduled Date" floatLabelType="Always" [readonly]="true"></ejs-datepicker>
                 </div>
             </div>   
         
-            <div class="row">
+            <div *ngIf="id" class="row">
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <ejs-textbox [(value)]="record.customer" readonly placeholder="Customer" floatLabelType="Always"></ejs-textbox>
+                </div>
+            </div>
+            <div class="row pad-b10">
                 <div class="col-md-8 col-lg-6 col-xl-5">
                     <ejs-textbox [(value)]="record.site" readonly placeholder="Site" floatLabelType="Always"></ejs-textbox>
                 </div>
@@ -75,10 +80,10 @@
 
             <div class="row pad-b10" *ngIf="form.get('sampleSuccessful').value === true">
                 <div class="col-md-8 col-lg-6 col-xl-4">
-                    <ejs-datepicker formControlName="collectedDate" placeholder="Collected Date" floatLabelType="Always"></ejs-datepicker>
+                    <ejs-datepicker formControlName="completedDate" placeholder="Completed Date" floatLabelType="Always"></ejs-datepicker>
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4">
-                    <ejs-textbox [(value)]="record.collectedBy" placeholder="Collected By" floatLabelType="Always"></ejs-textbox>
+                    <ejs-textbox [(value)]="record.collectedBy" placeholder="Completed By" floatLabelType="Always"></ejs-textbox>
                 </div>
             </div>
 
@@ -91,36 +96,10 @@
                 </div>
             </div>
 
-            <div class="row pad-t10 pad-b10">
+            <div class="row pad-t10">
                 <div class="col-md-12 col-lg-10 col-xl-8"><label for="notes" class="edit-label">Notes</label></div>
                 <div class="col-sm-12 col-md-8 col-lg-12 col-xl-8">
                     <ejs-textbox id="notes" [multiline]='true' #default rows="2" [(value)]="record.notes"></ejs-textbox>
-                </div>
-            </div>
-
-            <div *ngIf="form.get('sampleSuccessful').value === true">
-                <div class="row pad-t10">
-                    <div class="col-md-8 col-lg-6 col-xl-4">
-                        <ejs-datepicker [(value)]="record.shippedDate" placeholder="Shipped Date" floatLabelType="Always"></ejs-datepicker>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-8 col-lg-6 col-xl-4">
-                        <ejs-textbox [(value)]="record.carrier" placeholder="Carrier" floatLabelType="Always"></ejs-textbox>
-                    </div>
-                    <div class="col-md-8 col-lg-6 col-xl-4">
-                        <ejs-textbox [(value)]="record.trackingNo" placeholder="Tracking No" floatLabelType="Always"></ejs-textbox>
-                    </div>
-                </div>
-
-                <div class="row pad-t10 pad-b10">
-                    <div class="col-md-8 col-lg-6 col-xl-4">
-                        <ejs-textbox [(value)]="record.receivedBy" placeholder="Received By" floatLabelType="Always"></ejs-textbox>
-                    </div>
-                    <div class="col-md-8 col-lg-6 col-xl-4">
-                        <ejs-datepicker [(value)]="record.receivedDate" placeholder="Received Date" floatLabelType="Always"></ejs-datepicker>
-                    </div>                                
                 </div>
             </div>
         </div>
@@ -159,6 +138,43 @@
                                                 <e-column field='completedDate' type='date' format='MM/dd/yyyy' headerText='Completed On' width='150'></e-column>
                                             </e-columns>
                                         </ejs-grid>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </e-tabitem>
+                    <e-tabitem *ngIf="sampleSuccessfulBool === true">
+                        <ng-template #headerText>
+                            <div>Shipment</div>
+                        </ng-template>
+                        <ng-template #content>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-md-8 col-lg-6 col-xl-4">
+                                                <ejs-datepicker [(value)]="record.shippedDate" placeholder="Shipped Date" floatLabelType="Always"></ejs-datepicker>
+                                            </div>
+                                            <div class="col-md-8 col-lg-6 col-xl-4">
+                                                <ejs-datepicker [(value)]="record.deliveryDate" placeholder="Delivery Date" floatLabelType="Always"></ejs-datepicker>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8 col-lg-6 col-xl-4">
+                                                <ejs-textbox [(value)]="record.carrier" placeholder="Carrier" floatLabelType="Always"></ejs-textbox>
+                                            </div>
+                                            <div class="col-md-8 col-lg-6 col-xl-4">
+                                                <ejs-textbox [(value)]="record.trackingNo" placeholder="Tracking No" floatLabelType="Always"></ejs-textbox>
+                                            </div>
+                                        </div>
+                                        <div class="row pad-t10 pad-b10">
+                                            <div class="col-md-8 col-lg-6 col-xl-4">
+                                                <ejs-datepicker [(value)]="record.receivedDate" placeholder="Received Date" floatLabelType="Always"></ejs-datepicker>
+                                            </div>  
+                                            <div class="col-md-8 col-lg-6 col-xl-4">
+                                                <ejs-textbox [(value)]="record.receivedBy" placeholder="Received By" floatLabelType="Always"></ejs-textbox>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
