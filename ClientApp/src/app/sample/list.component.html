@@ -16,10 +16,7 @@
             <ejs-textbox [(value)]="form.referenceNo" placeholder="Reference No" floatLabelType="Always" (keyup.enter)="search()"></ejs-textbox>
         </div>
         <div class="col-md-2">
-            <ejs-datepicker [(value)]="form.startDate" placeholder="Start Date" floatLabelType="Always" (change)="search()"></ejs-datepicker>
-        </div>
-        <div class="col-md-2">
-            <ejs-datepicker [(value)]="form.endDate" placeholder="End Date" floatLabelType="Always" (change)="search()"></ejs-datepicker>
+            <ejs-daterangepicker #dateRangePicker placeholder='Select Range' floatLabelType="Always" [showClearButton]="false" (change)="dateRangeChange($event); search();"></ejs-daterangepicker>
         </div>
         <div class="col-2">
             <ejs-dropdownlist [dataSource]="statuses" [(value)]="form.sampleStatusId" [fields]="{ text: 'name', value: 'id' }" placeholder="Status" floatLabelType="Always" (change)="search()"></ejs-dropdownlist>

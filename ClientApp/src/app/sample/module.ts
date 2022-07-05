@@ -24,7 +24,7 @@ import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { NumericTextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
-import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { DatePickerModule, DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { TabModule } from '@syncfusion/ej2-angular-navigations';
 import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 
@@ -36,7 +36,7 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 	imports: [
 		MatFormFieldModule, MatInputModule, MatIconModule, MatDatepickerModule, MatNativeDateModule, MatButtonModule, MatButtonToggleModule, MatSelectModule, MatTabsModule, MatDialogModule, FormsModule, ReactiveFormsModule,
 		GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule,
-		TabModule, DatePickerModule, SwitchModule, NumericTextBoxModule, MatButtonToggleModule, CommonModule,
+		TabModule, DatePickerModule, DateRangePickerModule, SwitchModule, NumericTextBoxModule, MatButtonToggleModule, CommonModule,
 		RouterModule.forChild([
 			{ path: 'list', component: SampleListComponent, canActivate: [MsalGuard] },
 			{ path: 'add', component: SampleEditComponent, canActivate: [MsalGuard] },

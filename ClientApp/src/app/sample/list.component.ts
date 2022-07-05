@@ -5,6 +5,7 @@ import { PageComponent } from '../shared/page.component';
 import { TenantService } from '../shared/tenant.service';
 import { AppService } from '../shared/app.service';
 import { GridFormParams, FormState } from '../shared/formState';
+import { DateRangePicker } from '@syncfusion/ej2-angular-calendars';
 
 @Component({
     selector: 'sample-list',
@@ -21,7 +22,11 @@ export class SampleListComponent extends PageComponent implements OnInit {
     public dateFormat: any;
 	public form: FormParams;
 	public statuses: any;
+	public startDate: Date;
+	public endDate: Date;
+
    @ViewChild('grid') public grid: GridComponent;
+   @ViewChild('dateRangePicker') public dateRangePicker: DateRangePicker;
     //------------------------------------------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.app = await this.appService.getData();
@@ -29,10 +34,21 @@ export class SampleListComponent extends PageComponent implements OnInit {
 		this.dateFormat = { type: 'date', format: 'MM/dd/yyyy' };
 		this.formState.setup(this, new FormParams());
 
+		var today = new Date();
+		this.endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+		this.startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
 		this.statuses = this.app.sampleStatuses.slice();
 		this.statuses.unshift({ id: 0, name: 'All' });
 
 		this.search();
+	}
+
+	ngAfterViewChecked() {
+		if (this.dateRangePicker && !this.dateRangePicker.startDate) {
+			this.dateRangePicker.startDate = this.startDate;
+			this.dateRangePicker.endDate = this.endDate;
+			this.dateRangeChange({ startDate: this.startDate, endDate: this.endDate });
+		}
 	}
     //------------------------------------------------------------------------------------------------------------------------
 	async search() {
@@ -42,8 +58,8 @@ export class SampleListComponent extends PageComponent implements OnInit {
 			tenantId: this.tenant.id,
 			sampleNo: this.form.sampleNo,
 			referenceNo: this.form.referenceNo,
-			startDate: this.form.startDate,
-			endDate: this.form.endDate,
+			startDate: this.startDate,
+			endDate: this.endDate,
 			sampleStatusId: this.form.sampleStatusId
 		});
 		this.hideSpinner();
@@ -53,7 +69,18 @@ export class SampleListComponent extends PageComponent implements OnInit {
 		this.form.gridAction(this.grid, e);
 		this.formState.save(this);
 	}
-   //------------------------------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------------------------------
+	dateRangeChange(e) {
+		if (e && e.startDate && e.endDate) {
+			this.startDate = this.getAdjustedDate(e.startDate);
+			this.endDate = this.getAdjustedDate(e.endDate);
+		}
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	getAdjustedDate(date: Date) {
+		return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12);
+	}
+    //------------------------------------------------------------------------------------------------------------------------
     async export() {
         this.showSpinner();
 

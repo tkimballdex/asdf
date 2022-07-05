@@ -79,6 +79,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.record.completedDate = this.record.completedDate ? new Date(this.record.completedDate) : null;
 		this.record.shippedDate = this.record.shippedDate ? new Date(this.record.shippedDate) : null;
 		this.record.receivedDate = this.record.receivedDate ? new Date(this.record.receivedDate) : null;
+		this.record.deliveryDate = this.record.deliveryDate ? new Date(this.record.deliveryDate) : null;
 
 		this.form = new FormGroup({
 			failureReasonId: new FormControl(this.record.failureReasonId),

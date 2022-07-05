@@ -42,7 +42,6 @@ export class ShipmentListComponent extends PageComponent implements OnInit {
 			tenantId: this.tenant.id,
 		});
 		this.hideSpinner();
-		console.log(this.repository.list({tenantId: this.tenant.id}));
 	}
 	//----------------------------------------------------------------------------
 	gridActionHandler(e) {

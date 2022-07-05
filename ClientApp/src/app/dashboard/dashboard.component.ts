@@ -136,7 +136,6 @@ export class DashboardComponent extends PageComponent implements OnInit, AfterVi
 	}
 
 	setCharts(data) {
-		console.log('setCharts');
 		this.chartPositiveCases.clearSeries();
 		this.chartPositiveNegativeCases.clearSeries();
 		this.chartPositiveSites.clearSeries();
