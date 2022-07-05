@@ -12,7 +12,10 @@
 
             <div class="row pad-t20">
                 <div class="col-md-8 col-lg-6 col-xl-5">
-                    <ejs-textbox formControlName="containerNo" placeholder="Container No" floatLabelType="Always"></ejs-textbox>
+                    <ejs-textbox formControlName="containerNo" placeholder="Container No*" floatLabelType="Always"></ejs-textbox>
+                    <div *ngIf="this.invalidControl('containerNo')" class="e-error">
+                        Container No is required!
+                    </div>
                 </div>
         
                 <div class="col-md-8 col-lg-6 col-xl-5" *ngIf="record.id">
@@ -54,7 +57,7 @@
                     </div>
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4">
-                    <ejs-numerictextbox [value]="record.expectedVolume" format='N1' min='0' max='500' step='1' placeholder="Expected Volume" floatLabelType="Always"></ejs-numerictextbox>
+                    <ejs-numerictextbox [(value)]="record.expectedVolume" format='N1' min='0' max='500' step='1' placeholder="Expected Volume" floatLabelType="Always"></ejs-numerictextbox>
                 </div> 
             </div>                           
             
@@ -113,7 +116,7 @@
                                     <div class="col-md-12 d-flex align-items-center list-header">
                                         <span class="list-header-icon"><i class="fad fa-vial"></i></span>
                                         <span class="list-header-title">Samples</span>
-                                        <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['/auth/sample/add']" [queryParams]="{ collectionId: record.id }">+ Add</button></span>
+                                        <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['/auth/sample/add']" [queryParams]="{ collectionId: record.collectionId }">+ Add</button></span>
                                     </div>
                                 </div>
                                 <div class="row">

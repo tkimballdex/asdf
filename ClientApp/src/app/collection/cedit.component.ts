@@ -65,7 +65,7 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 
 		this.form = new FormGroup({
 			containerSuccessful: new FormControl(this.containerSuccessfulBool),
-			containerNo: new FormControl(this.record.containerNo),
+			containerNo: new FormControl(this.record.containerNo, [Validators.required]),
 			containerTypeId: new FormControl(this.record.containerTypeId, [Validators.required]),
 			failureReasonId: new FormControl(this.record.failureReasonId),
 			volume: new FormControl(this.record.volume),
