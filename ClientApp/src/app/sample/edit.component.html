@@ -16,11 +16,17 @@
 
             <div class="row pad-t15">
                 <div class="col-md-8 col-lg-6 col-xl-5">
-                    <ejs-textbox formControlName="sampleNo" placeholder="Sample No" floatLabelType="Always"></ejs-textbox>
+                    <ejs-textbox formControlName="sampleNo" placeholder="Sample No*" floatLabelType="Always"></ejs-textbox>
+                    <div *ngIf="this.invalidControl('sampleNo')" class="e-error">
+                        Sample No is required!
+                    </div>
                 </div>
         
                 <div class="col-md-8 col-lg-6 col-xl-5">
-                    <ejs-textbox [(value)]="record.referenceNo" placeholder="Reference No" floatLabelType="Always"></ejs-textbox>
+                    <ejs-textbox formControlName="referenceNo" placeholder="Reference No*" floatLabelType="Always"></ejs-textbox>
+                    <div *ngIf="this.invalidControl('referenceNo')" class="e-error">
+                        Reference No is required!
+                    </div>
                 </div>
             </div>
             <div class="row">

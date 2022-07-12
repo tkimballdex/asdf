@@ -23,6 +23,7 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 
 	public form: FormGroup;
 	public record: any;
+	public collection: any;
 	public deleteDialog: Dialog;
 	public containerSuccessfulBool: boolean = null;
 
@@ -49,15 +50,15 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 			}
 		} else {
 			var collectionId = this.route.snapshot.paramMap.get('collectionId');
-			var collection = await this.repository.get(collectionId);
+			this.collection = await this.repository.get(collectionId);
 
 			this.record = {
 				collectionId: collectionId,
-				collectionName: collection.name,
-				scheduledDate: collection.scheduledDate,
-				customer: collection.customer,
-				site: collection.site,
-				location: collection.location
+				collectionName: this.collection.name,
+				scheduledDate: this.collection.scheduledDate,
+				customer: this.collection.customer,
+				site: this.collection.site,
+				location: this.collection.location
 			};
 		}
 
