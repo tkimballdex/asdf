@@ -26,6 +26,10 @@ import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { TabModule } from '@syncfusion/ej2-angular-navigations';
 import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
+import { BoldReportViewerModule } from '@boldreports/angular-reporting-components';
+import '@boldreports/javascript-reporting-controls/Scripts/bold.report-viewer.min';
+import '@boldreports/javascript-reporting-controls/Scripts/data-visualization/ej.bulletgraph.min';
+import '@boldreports/javascript-reporting-controls/Scripts/data-visualization/ej.chart.min';
 
 @NgModule({
 	declarations: [
@@ -35,7 +39,7 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 	imports: [
 		MatFormFieldModule, MatInputModule, MatIconModule, MatDatepickerModule, MatNativeDateModule, MatButtonModule, MatButtonToggleModule, MatSelectModule, MatTabsModule, MatDialogModule, FormsModule, ReactiveFormsModule,
 		GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule,
-		TabModule, DatePickerModule, SwitchModule, NumericTextBoxModule, MatButtonToggleModule, CommonModule,
+		TabModule, DatePickerModule, SwitchModule, NumericTextBoxModule, MatButtonToggleModule, CommonModule, BoldReportViewerModule,
 		RouterModule.forChild([
 			{ path: 'list', component: ShipmentListComponent, canActivate: [MsalGuard] },
 			{ path: 'edit/:id', component: ShipmentEditComponent, canActivate: [MsalGuard] },

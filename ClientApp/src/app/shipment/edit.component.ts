@@ -8,7 +8,7 @@ import { AppService } from "../shared/app.service";
 import { PageComponent } from '../shared/page.component';
 import { ShipmentRepository } from './repository';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TenantService } from '../shared/tenant.service';
 import { RadioButtonComponent } from '@syncfusion/ej2-angular-buttons';
 
@@ -20,6 +20,8 @@ import { RadioButtonComponent } from '@syncfusion/ej2-angular-buttons';
 export class ShipmentEditComponent extends PageComponent implements OnInit {
 	constructor(private dialog: MatDialog, private route: ActivatedRoute, private router: Router, private appService: AppService, private tenant: TenantService, private repository: ShipmentRepository, private location: Location) {
 		super();
+		this.serviceUrl = 'https://demos.boldreports.com/services/api/ReportViewer';
+        this.reportPath = '~/Resources/docs/sales-order-detail.rdl';
 	}
 
 	public form: FormGroup;
@@ -39,70 +41,73 @@ export class ShipmentEditComponent extends PageComponent implements OnInit {
 	public collection: any;
 	public collections: any;
 	public sampleSuccessfulBool: boolean = null;
+	title = 'reportviewerapp';
+	public serviceUrl: string;
+	public reportPath: string;
 
 	@ViewChild('editTab') public editTab: TabComponent;
 	//-----------------------------------------------------------------------------------------
 	async ngOnInit() {
-		this.showSpinner();
-		this.app = await this.appService.getData();
-		this.privileges = this.app.privileges.samples;
-		this.data = await this.repository.getData();
-		this.labVendors = await this.repository.listVendors({ tenantId: this.tenant.id, vendorTypeId: 2, active: 1 });
-		this.collection = await this.repository.getCollection(this.route.snapshot.queryParamMap.get('collectionId'));
+		// this.showSpinner();
+		// this.app = await this.appService.getData();
+		// this.privileges = this.app.privileges.samples;
+		// this.data = await this.repository.getData();
+		// this.labVendors = await this.repository.listVendors({ tenantId: this.tenant.id, vendorTypeId: 2, active: 1 });
+		// this.collection = await this.repository.getCollection(this.route.snapshot.queryParamMap.get('collectionId'));
 
-		this.id = this.route.snapshot.paramMap.get('id');
+		// this.id = this.route.snapshot.paramMap.get('id');
 
-		if (this.id) {
-			this.record = await this.repository.get(this.id);
-			this.tests = await this.repository.getTests(this.id);
-			this.collection = await this.repository.getCollection(this.record.collectionId);
-			this.statusName = this.data.statuses.find(m => m.id === this.record.sampleStatusId).name;
-			if (this.record.failureReasonId) {
-				this.sampleSuccessfulBool = false;
-			} else if (this.record.volume > 0) {
-				this.sampleSuccessfulBool = true;
-			} else {
-				this.sampleSuccessfulBool = null;
-			}
-		} else {
-			this.record = {
-				site: this.collection.site,
-				location: this.collection.location,
-				locationId: this.collection.locationId,
-				collectionId: this.collection.id
-			};
-		}
+		// if (this.id) {
+		// 	this.record = await this.repository.get(this.id);
+		// 	this.tests = await this.repository.getTests(this.id);
+		// 	this.collection = await this.repository.getCollection(this.record.collectionId);
+		// 	this.statusName = this.data.statuses.find(m => m.id === this.record.sampleStatusId).name;
+		// 	if (this.record.failureReasonId) {
+		// 		this.sampleSuccessfulBool = false;
+		// 	} else if (this.record.volume > 0) {
+		// 		this.sampleSuccessfulBool = true;
+		// 	} else {
+		// 		this.sampleSuccessfulBool = null;
+		// 	}
+		// } else {
+		// 	this.record = {
+		// 		site: this.collection.site,
+		// 		location: this.collection.location,
+		// 		locationId: this.collection.locationId,
+		// 		collectionId: this.collection.id
+		// 	};
+		// }
 
-		this.hideSpinner();
+		// this.hideSpinner();
 
-		this.collection.scheduledDate = this.collection.scheduledDate ? new Date(this.collection.scheduledDate) : null;
-		this.record.completedDate = this.record.completedDate ? new Date(this.record.completedDate) : null;
-		this.record.shippedDate = this.record.shippedDate ? new Date(this.record.shippedDate) : null;
-		this.record.receivedDate = this.record.receivedDate ? new Date(this.record.receivedDate) : null;
+		// this.collection.scheduledDate = this.collection.scheduledDate ? new Date(this.collection.scheduledDate) : null;
+		// this.record.completedDate = this.record.completedDate ? new Date(this.record.completedDate) : null;
+		// this.record.shippedDate = this.record.shippedDate ? new Date(this.record.shippedDate) : null;
+		// this.record.receivedDate = this.record.receivedDate ? new Date(this.record.receivedDate) : null;
 
-		this.form = new FormGroup({
-			failureReasonId: new FormControl(this.record.failureReasonId),
-			sampleSuccessful: new FormControl(this.sampleSuccessfulBool),
-			sampleNo: new FormControl(this.record.sampleNo),
-			vendorId: new FormControl(this.record.vendorId, [Validators.required]),
-			volume: new FormControl(this.record.volume),
-			completedDate: new FormControl(this.record.completedDate),
-		});
+		// this.form = new FormGroup({
+		// 	failureReasonId: new FormControl(this.record.failureReasonId),
+		// 	sampleSuccessful: new FormControl(this.sampleSuccessfulBool),
+		// 	sampleNo: new FormControl(this.record.sampleNo),
+		// 	vendorId: new FormControl(this.record.vendorId, [Validators.required]),
+		// 	volume: new FormControl(this.record.volume),
+		// 	completedDate: new FormControl(this.record.completedDate),
+		// });
 
-		this.form.get('sampleSuccessful').valueChanges.subscribe(value => {
-			if (value === true) {
-				this.form.get('volume').setValidators([Validators.required]);
-				this.form.get('failureReasonId').setValidators(null);
-			} else if (value === false) {
-				this.form.get('failureReasonId').setValidators([Validators.required]);
-				this.form.get('volume').setValidators(null);
-			} else if (value === null) {
-				this.form.get('failureReasonId').setValidators(null);
-				this.form.get('volume').setValidators(null);
-			}
-			this.form.get('volume').updateValueAndValidity();
-			this.form.get('failureReasonId').updateValueAndValidity();
-		});
+		// this.form.get('sampleSuccessful').valueChanges.subscribe(value => {
+		// 	if (value === true) {
+		// 		this.form.get('volume').setValidators([Validators.required]);
+		// 		this.form.get('failureReasonId').setValidators(null);
+		// 	} else if (value === false) {
+		// 		this.form.get('failureReasonId').setValidators([Validators.required]);
+		// 		this.form.get('volume').setValidators(null);
+		// 	} else if (value === null) {
+		// 		this.form.get('failureReasonId').setValidators(null);
+		// 		this.form.get('volume').setValidators(null);
+		// 	}
+		// 	this.form.get('volume').updateValueAndValidity();
+		// 	this.form.get('failureReasonId').updateValueAndValidity();
+		// });
 	}
 	//-----------------------------------------------------------------------------------------
 	editTabCreated() {
