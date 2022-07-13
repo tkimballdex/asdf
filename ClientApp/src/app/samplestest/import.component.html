@@ -1,12 +1,12 @@
 <div id="list-view" class="container-fluid">
     <div class="row d-flex align-items-end">
-        <div class="col-md-6 d-flex align-items-center list-header">
+        <div class="col-md-12 d-flex align-items-center list-header">
             <span class="list-header-icon"><i class="fas fa-vials"></i></span>
             <span class="list-header-title">Import Samples</span>
         </div>
     </div>
 
-    <div class="row d-flex align-items-end">
+    <div class="row d-flex align-items-end pad-t10">
         <div class="col-6">
             Upload document
             <ejs-uploader [autoUpload]='true' [asyncSettings]="uploadSettings" (uploading)="onUpload($event)" (success)="onUploadSuccess($event)"></ejs-uploader>

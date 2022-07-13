@@ -48,6 +48,7 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 			} else {
 				this.containerSuccessfulBool = null;
 			}
+			this.collection = await this.repository.get(this.record.collectionId);
 		} else {
 			var collectionId = this.route.snapshot.paramMap.get('collectionId');
 			this.collection = await this.repository.get(collectionId);
