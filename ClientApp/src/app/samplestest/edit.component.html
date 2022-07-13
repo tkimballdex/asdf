@@ -29,7 +29,7 @@
                     </div>
                 </div>
         
-                <div *ngIf="testTypes.length > 0" class="col-md-6 col-lg-6 col-xl-5">
+                <div *ngIf="testTypes?.length > 0" class="col-md-6 col-lg-6 col-xl-5">
                     <ejs-dropdownlist [dataSource]="testTypes" [fields]="{ text: 'name', value: 'id' }" formControlName="testTypeId" placeholder="Test Type*" floatLabelType="Always"></ejs-dropdownlist>
                     <div *ngIf="this.invalidControl('testTypeId')" class="e-error">
                         Test Type is required!
@@ -37,7 +37,7 @@
                 </div>
             </div>    
         
-            <div class="row pad-t20" *ngIf="record.sample">
+            <div class="row pad-t15" *ngIf="record.sample">
                 <div class="col-md-6 col-lg-6 col-xl-5">
                     <ejs-textbox [(value)]="record.customer" readonly placeholder="Customer" floatLabelType="Always"></ejs-textbox>
                 </div>
@@ -55,7 +55,7 @@
                 </div>
             </div>
         
-            <div class="row pad-t20">
+            <div class="row pad-t15">
                 <div class="col-md-6 col-lg-6 col-xl-5">            
                     <ejs-textbox [(value)]="record.referenceNo" placeholder="Lab Reference No" floatLabelType="Always"></ejs-textbox>           
                 </div>
