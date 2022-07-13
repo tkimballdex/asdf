@@ -9,95 +9,102 @@
         </div>
     </div>
 
-    <div class="row pad-t10">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox [(value)]="record.testNo" placeholder="Test No" floatLabelType="Always" [readonly]="true"></ejs-textbox>
-        </div>        
-        <div class="col-md-6 col-lg-5 col-xl-4" *ngIf="record.sample">
-            <ejs-datepicker [(value)]="record.createdDate" readonly="true" placeholder="Created Date" floatLabelType="Always"></ejs-datepicker>
-        </div>
-    </div>
-
     <div class="row">
-        <div class="col-md-6 col-lg-5 col-xl-4" *ngIf="analytes">
-            <ejs-dropdownlist [dataSource]="analytes" [fields]="{ text: 'name', value: 'id' }" formControlName="analyteId" placeholder="Analyte*" floatLabelType="Always" (change)="analyteChange($event)"></ejs-dropdownlist>
-            <div *ngIf="this.invalidControl('analyteId')" class="e-error">
-                Analyte is required!
+        
+        <div class="col-md-12 col-lg-8 col-xl-6">
+            <div class="row pad-t10">
+                <div class="col-md-6 col-lg-6 col-xl-5">
+                    <ejs-textbox [(value)]="record.testNo" placeholder="Test No" floatLabelType="Always" [readonly]="true"></ejs-textbox>
+                </div>        
+                <div class="col-md-6 col-lg-6 col-xl-5" *ngIf="record.sample">
+                    <ejs-datepicker [(value)]="record.createdDate" readonly="true" placeholder="Created Date" floatLabelType="Always"></ejs-datepicker>
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-xl-5" *ngIf="analytes">
+                    <ejs-dropdownlist [dataSource]="analytes" [fields]="{ text: 'name', value: 'id' }" formControlName="analyteId" placeholder="Analyte*" floatLabelType="Always" (change)="analyteChange($event)"></ejs-dropdownlist>
+                    <div *ngIf="this.invalidControl('analyteId')" class="e-error">
+                        Analyte is required!
+                    </div>
+                </div>
+        
+                <div class="col-md-6 col-lg-6 col-xl-5">
+                    <ejs-dropdownlist [dataSource]="testTypes" [fields]="{ text: 'name', value: 'id' }" formControlName="testTypeId" placeholder="Test Type*" floatLabelType="Always"></ejs-dropdownlist>
+                    <div *ngIf="this.invalidControl('testTypeId')" class="e-error">
+                        Test Type is required!
+                    </div>
+                </div>
+            </div>    
+        
+            <div class="row pad-t20" *ngIf="record.sample">
+                <div class="col-md-6 col-lg-6 col-xl-5">
+                    <ejs-textbox [(value)]="record.customer" readonly placeholder="Customer" floatLabelType="Always"></ejs-textbox>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-5">
+                    <ejs-textbox [(value)]="record.site" readonly placeholder="Site" floatLabelType="Always"></ejs-textbox>
+                </div>        
+            </div>
+        
+            <div class="row" *ngIf="record.sample">
+                <div class="col-md-6 col-lg-6 col-xl-5">
+                    <ejs-textbox [(value)]="record.location" readonly placeholder="Location" floatLabelType="Always"></ejs-textbox>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-5">
+                    <ejs-textbox [(value)]="record.sample" readonly placeholder="Sample" floatLabelType="Always"></ejs-textbox>
+                </div>
+            </div>
+        
+            <div class="row pad-t20">
+                <div class="col-md-6 col-lg-6 col-xl-5">            
+                    <ejs-textbox [(value)]="record.referenceNo" placeholder="Lab Reference No" floatLabelType="Always"></ejs-textbox>           
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-5">
+                    <ejs-datepicker [(value)]="record.completedDate" placeholder="Test Completed On" floatLabelType="Always"></ejs-datepicker>
+                </div>
             </div>
         </div>
 
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist [dataSource]="testTypes" [fields]="{ text: 'name', value: 'id' }" formControlName="testTypeId" placeholder="Test Type*" floatLabelType="Always"></ejs-dropdownlist>
-            <div *ngIf="this.invalidControl('testTypeId')" class="e-error">
-                Test Type is required!
+        <div class="col-md-12 col-lg-8 col-xl-6">
+            <div class="row pad-t20 mar-t10">
+                <div class="col-md-12 col-lg-10 col-xl-8">
+                    <label for="collStatus" class="edit-label bold" style="font-size:1.1em;">Was the Test successful?</label>
+                    <ejs-radiobutton label="Not Set" name="testSuccessful" [value]="null" formControlName="testSuccessful" cssClass="mar-l20"></ejs-radiobutton>
+                    <ejs-radiobutton label="Yes" name="testSuccessful" [value]="true" formControlName="testSuccessful" cssClass="mar-l20"></ejs-radiobutton>
+                    <ejs-radiobutton label="No" name="testSuccessful" [value]="false" formControlName="testSuccessful" cssClass="mar-l20"></ejs-radiobutton>
+                </div>                               
+            </div> 
+        
+            <div class="row pad-t10" *ngIf="form.get('testSuccessful').value === true">
+                <div class="col-md-6 col-lg-6 col-xl-4">
+                    <ejs-dropdownlist [dataSource]="testResults" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.testResultId" placeholder="Test Result" floatLabelType="Always"></ejs-dropdownlist>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-4">
+                    <ejs-numerictextbox [(value)]="record.resultValue" format='N1' min='-100' max='150' step='0.1' placeholder="Result Value" floatLabelType="Always"></ejs-numerictextbox>
+                </div>
+            </div> 
+            
+            <div class="row pad-t10">
+                <div class="col-md-6 col-lg-6 col-xl-4" *ngIf="form.get('testSuccessful').value === false">
+                    <ejs-dropdownlist [dataSource]="app.testFailureReasons" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.rejectionReasonId" placeholder="Rejection Reason" floatLabelType="Always"></ejs-dropdownlist>
+                </div>
             </div>
-        </div>
-    </div>    
-
-    <div class="row pad-t20" *ngIf="record.sample">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox [(value)]="record.customer" readonly placeholder="Customer" floatLabelType="Always"></ejs-textbox>
-        </div>
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox [(value)]="record.site" readonly placeholder="Site" floatLabelType="Always"></ejs-textbox>
-        </div>        
-    </div>
-
-    <div class="row" *ngIf="record.sample">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox [(value)]="record.location" readonly placeholder="Location" floatLabelType="Always"></ejs-textbox>
-        </div>
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox [(value)]="record.sample" readonly placeholder="Sample" floatLabelType="Always"></ejs-textbox>
-        </div>
-    </div>
-
-    <div class="row pad-t20">
-        <div class="col-md-6 col-lg-5 col-xl-4">            
-            <ejs-textbox [(value)]="record.referenceNo" placeholder="Lab Reference No" floatLabelType="Always"></ejs-textbox>           
-        </div>
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-datepicker [(value)]="record.completedDate" placeholder="Test Completed On" floatLabelType="Always"></ejs-datepicker>
-        </div>
-    </div>
-
-    <div class="row pad-t20 mar-t10">
-        <div class="col-md-12 col-lg-10 col-xl-8">
-            <label for="collStatus" class="edit-label bold" style="font-size:1.1em;">Was the Test successful?</label>
-            <ejs-radiobutton label="Not Set" name="testSuccessful" [value]="null" formControlName="testSuccessful" cssClass="mar-l20"></ejs-radiobutton>
-            <ejs-radiobutton label="Yes" name="testSuccessful" [value]="true" formControlName="testSuccessful" cssClass="mar-l20"></ejs-radiobutton>
-            <ejs-radiobutton label="No" name="testSuccessful" [value]="false" formControlName="testSuccessful" cssClass="mar-l20"></ejs-radiobutton>
-        </div>                               
-    </div> 
-
-    <div class="row pad-t10" *ngIf="form.get('testSuccessful').value === true">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist [dataSource]="testResults" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.testResultId" placeholder="Test Result" floatLabelType="Always"></ejs-dropdownlist>
-        </div>
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-numerictextbox [(value)]="record.resultValue" format='N1' min='-100' max='150' step='0.1' placeholder="Result Value" floatLabelType="Always"></ejs-numerictextbox>
-        </div>
-    </div> 
-    
-    <div class="row pad-t10">
-        <div class="col-md-6 col-lg-5 col-xl-4" *ngIf="form.get('testSuccessful').value === false">
-            <ejs-dropdownlist [dataSource]="app.testFailureReasons" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.rejectionReasonId" placeholder="Rejection Reason" floatLabelType="Always"></ejs-dropdownlist>
-        </div>
-    </div>
-
-    <div class="row pad-t20" *ngIf="record.variants && form.get('testSuccessful').value">
-        <div class="col-md-12 col-lg-10 col-xl-8">
-            <ejs-grid id="variants-grid" [dataSource]='record.variants' class="edit-grid" [allowPaging]="false" [allowSorting]="true" [allowFiltering]="false">
-                <e-columns>
-                    <e-column field='name' headerText='Variant Name'></e-column>
-
-                    <e-column field='resultValue' headerText='Result' textAlign='Center' width="220">
-                        <ng-template #template let-data>
-                            <ejs-numerictextbox [(value)]="record.variants[data.index].resultValue" format='N1' min='-100' max='1000' step='0.1' floatLabelType="Always"></ejs-numerictextbox>
-                        </ng-template>
-                    </e-column>
-                </e-columns>
-            </ejs-grid>
+        
+            <div class="row pad-t20" *ngIf="record.variants && form.get('testSuccessful').value">
+                <div class="col-md-12 col-lg-12 col-xl-8">
+                    <ejs-grid id="variants-grid" [dataSource]='record.variants' class="edit-grid" [allowPaging]="false" [allowSorting]="true" [allowFiltering]="false">
+                        <e-columns>
+                            <e-column field='name' headerText='Variant Name'></e-column>
+        
+                            <e-column field='resultValue' headerText='Result' textAlign='Center' width="220">
+                                <ng-template #template let-data>
+                                    <ejs-numerictextbox [(value)]="record.variants[data.index].resultValue" format='N1' min='-100' max='1000' step='0.1' floatLabelType="Always"></ejs-numerictextbox>
+                                </ng-template>
+                            </e-column>
+                        </e-columns>
+                    </ejs-grid>
+                </div>
+            </div>
         </div>
     </div>
 
