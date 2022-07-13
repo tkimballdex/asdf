@@ -67,7 +67,29 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 			analyteId: new FormControl(this.record.analyteId, [Validators.required]),
 			testTypeId: new FormControl(this.record.testTypeId, [Validators.required]),
 			sampleId: new FormControl(this.record.sampleId),
-			testSuccessful: new FormControl(this.testSuccessfulBool)
+			testSuccessful: new FormControl(this.testSuccessfulBool),
+			testResult: new FormControl(this.record.testResultId),
+			resultValue: new FormControl(this.record.resultValue),
+			rejectionReason: new FormControl(this.record.rejectionReasonId)
+		});
+
+		this.form.get('testSuccessful').valueChanges.subscribe(value => {
+			if (value === true) {
+				this.form.get('testResult').setValidators([Validators.required]);
+				this.form.get('resultValue').setValidators([Validators.required]);
+				this.form.get('rejectionReason').setValidators(null);
+			} else if (value === false) {
+				this.form.get('rejectionReason').setValidators([Validators.required]);
+				this.form.get('testResult').setValidators(null);
+				this.form.get('resultValue').setValidators(null);
+			} else if (value === null) {
+				this.form.get('rejectionReason').setValidators(null);
+				this.form.get('testResult').setValidators(null);
+				this.form.get('resultValue').setValidators(null);
+			}
+			this.form.get('testResult').updateValueAndValidity();
+			this.form.get('resultValue').updateValueAndValidity();
+			this.form.get('rejectionReason').updateValueAndValidity();
 		});
     }
     //-----------------------------------------------------------------------------------------
