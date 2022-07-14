@@ -30,6 +30,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	public toolbar: ToolbarItems[];
 	public analyteParams: IEditCell;
 	public analytes: any;
+	public analyteList: any;
 	public test: any;
 
 	@ViewChild('editTab')
@@ -47,7 +48,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		this.privileges = this.app.privileges.sites;
 		this.dateFormat = { type: 'date', format: 'MM/dd/yyyy' };
 		this.editSettings = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Normal' };
-		this.toolbar = ['Edit', 'Update', 'Cancel'];
+		this.toolbar = ['Add', 'Edit', 'Update', 'Cancel'];
 		
 		var id = this.route.snapshot.paramMap.get('id');
 		var customerId = this.route.snapshot.paramMap.get('customerId');
@@ -63,11 +64,11 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		else {
 			this.record = await this.repository.get(id);
 			this.counties = await this.repository.getCounties(this.record.stateId)
+			this.analyteList = await this.repository.listAnalytes({ tenantId: this.tenant.id });
 			this.analytes = await this.repository.getSiteAnalytes(id);
-			console.log(this.analytes)
 			this.analyteParams = {
 				params: {
-					dataSource: new DataManager(this.analytes),
+					dataSource: new DataManager(this.analyteList),
 					query: new Query(),
 					actionComplete: () => false
 				}

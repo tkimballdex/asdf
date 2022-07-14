@@ -37,4 +37,8 @@ export class SiteRepository {
     public getSiteAnalytes(siteId: string) {
         return this.http.post(`/site/analyteList?siteId=${siteId}`);
     }
+
+    public listAnalytes(filter: any) {
+        return this.http.post(`/analyte/list`, filter);
+    }
 }
