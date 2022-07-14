@@ -282,7 +282,7 @@
                             <div *ngIf="isWater">Compliant vs Non-Compliant Locations</div>
                         </ng-template>
                         <ng-template #content>
-                            <ejs-chart id="chartPositiveNegativeCases" class="dashboard-chart" [primaryXAxis]='primaryXAxis' #chartPositiveNegativeCases [tooltip]='tooltip'>
+                            <ejs-chart id="chartPositiveNegativeCases" class="dashboard-chart" [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis' #chartPositiveNegativeCases [tooltip]='tooltip'>
                             </ejs-chart>
                         </ng-template>
                     </e-panel>
@@ -292,7 +292,7 @@
                             <div *ngIf="isWater">Daily Non-Compliant Locations</div>
                         </ng-template>
                         <ng-template #content>
-                            <ejs-chart id="chartPositiveCases" class="dashboard-chart" [primaryXAxis]='primaryXAxis' #chartPositiveCases [palettes]='redColorPalette' [tooltip]='tooltip'>
+                            <ejs-chart id="chartPositiveCases" class="dashboard-chart" [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis' #chartPositiveCases [palettes]='redColorPalette' [tooltip]='tooltip'>
                             </ejs-chart>
                         </ng-template>
                     </e-panel>
@@ -302,7 +302,7 @@
                             <div *ngIf="isWater">Non-Compliant Locations by Site</div>
                         </ng-template>
                         <ng-template #content>
-                            <ejs-chart id="chartPositiveSites" class="dashboard-chart" [primaryXAxis]='primaryXAxis' #chartPositiveSites [tooltip]='tooltip'>
+                            <ejs-chart id="chartPositiveSites" class="dashboard-chart" [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis' #chartPositiveSites [tooltip]='tooltip'>
                             </ejs-chart>
                         </ng-template>
                     </e-panel>

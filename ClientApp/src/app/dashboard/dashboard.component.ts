@@ -77,6 +77,10 @@ export class DashboardComponent extends PageComponent implements OnInit, AfterVi
 		majorGridLines: { width: 0 },
 		labelRotation: 45
 	}
+	public primaryYAxis: Object = {
+		valueType: 'Double',
+		interval: 1
+	}
 
 	async ngOnInit() {
 		var $this = this;
