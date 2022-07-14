@@ -16,7 +16,6 @@
 @import '../node_modules/@syncfusion/ej2-layouts/styles/fabric.css';  
 @import "../node_modules/@syncfusion/ej2-angular-layouts/styles/fabric.css";
 @import '../node_modules/@syncfusion/ej2-richtexteditor/styles/fabric.css';  
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import "~leaflet/dist/leaflet.css";
 
 html, body {
@@ -200,7 +199,7 @@ mat-form-field.mat-form-field {
     padding:10px 8px;
 }
 
-#list-view .edit-icon {
+#list-view .edit-icon, .edit-icon {
     padding-left: 15px;
     padding-right: 15px;
     color: #fd7e14;

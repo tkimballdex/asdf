@@ -35,7 +35,7 @@ export class AnalyteListComponent extends PageComponent implements OnInit {
         this.list = await this.repository.list({ tenantId: this.tenant.id, searchTxt: this.form.searchTxt });
         this.hideSpinner();
     }
-	//----------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------------------------------
 	gridActionHandler(e) {
 		this.form.gridAction(this.grid, e);
 		this.formState.save(this);

@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-customer" [(value)]="record.customer" disabled placeholder="Customer" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox id="edit-customer" [(value)]="record.customer" readonly placeholder="Customer" floatLabelType="Always"></ejs-textbox>
         </div>
     </div>
 
@@ -178,6 +178,26 @@
                                 </div>
                                 <div class="col-md-12 col-lg-8 col-xl-5 pad-t20">
                                     <google-map height="450px" width="100%" [options]="mapOptions" #map style="border-width:1px; box-sizing: border-box;"></google-map>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </e-tabitem>
+                    <e-tabitem>
+                        <ng-template #headerText>
+                            <div>Analytes</div>
+                        </ng-template>
+                        <ng-template #content>
+                            <div class="row">
+                                <div class="col-12 pad-t20">
+                                    <ejs-grid #grid [dataSource]='analytes' *ngIf="app.analytes" [editSettings]='editSettings' [allowPaging]="true" [allowSorting]="true" [toolbar]='toolbar'>
+                                        <e-columns>
+                                            <e-column field='name' headerText='Name' editType= 'dropdownedit' [edit]='analyteParams'></e-column>
+                                            <e-column field='lowThreshold' headerText='Low Threshold' editType= 'numericedit'></e-column>
+                                            <e-column field='highThreshold' headerText='High Threshold' editType= 'numericedit'></e-column>
+                                            <e-column field='lastUpdatedBy' headerText='Last Updated By'></e-column>
+                                            <e-column field='lastUpdatedDate' headerText='Last Updated Date' type='date' [format]='dateFormat' editType='datepickeredit'></e-column>
+                                        </e-columns>
+                                    </ejs-grid>
                                 </div>
                             </div>
                         </ng-template>

@@ -33,4 +33,8 @@ export class SiteRepository {
     public getCounties(stateId: number) {
         return this.http.post(`/site/countyList?stateId=${stateId}`);
     }
+
+    public getSiteAnalytes(siteId: string) {
+        return this.http.post(`/site/analyteList?siteId=${siteId}`);
+    }
 }

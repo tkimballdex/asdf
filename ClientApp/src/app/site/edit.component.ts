@@ -8,6 +8,8 @@ import { PageComponent } from '../shared/page.component';
 import { TenantService } from '../shared/tenant.service';
 import { SiteRepository } from './repository';
 import { TabComponent } from '@syncfusion/ej2-angular-navigations';
+import { EditSettingsModel, ToolbarItems, IEditCell } from '@syncfusion/ej2-angular-grids';
+import { Query, DataManager } from '@syncfusion/ej2-data';
 
 @Component({
 	selector: 'site-edit',
@@ -23,6 +25,12 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	public record: any;
 	public deleteDialog: Dialog;
 	public form: FormGroup;
+	public dateFormat: any;
+	public editSettings: EditSettingsModel;
+	public toolbar: ToolbarItems[];
+	public analyteParams: IEditCell;
+	public analytes: any;
+	public test: any;
 
 	@ViewChild('editTab')
 	public editTab: TabComponent;
@@ -32,17 +40,14 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	public mapOptions: google.maps.MapOptions;
 	markers: google.maps.Marker[] = [];
 	polygons: google.maps.Polygon[] = [];
-
-	editTabCreated() {
-		if (history.state.locations) {
-			this.editTab.selectedItem = 1;
-		}
-	}
-
+	//------------------------------------------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.showSpinner();
 		this.app = await this.appService.getData();
 		this.privileges = this.app.privileges.sites;
+		this.dateFormat = { type: 'date', format: 'MM/dd/yyyy' };
+		this.editSettings = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Normal' };
+		this.toolbar = ['Edit', 'Update', 'Cancel'];
 		
 		var id = this.route.snapshot.paramMap.get('id');
 		var customerId = this.route.snapshot.paramMap.get('customerId');
@@ -58,6 +63,16 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		else {
 			this.record = await this.repository.get(id);
 			this.counties = await this.repository.getCounties(this.record.stateId)
+			this.analytes = await this.repository.getSiteAnalytes(id);
+			console.log(this.analytes)
+			this.analyteParams = {
+				params: {
+					dataSource: new DataManager(this.analytes),
+					query: new Query(),
+					actionComplete: () => false
+				}
+			};
+			
 		}
 
 		this.hideSpinner();
@@ -76,7 +91,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			contactPhoneNo: new FormControl(this.record.contactPhoneNo, [Validators.required, Validators.maxLength(10)])
 		});
 	}
-
+	//------------------------------------------------------------------------------------------------------------------------
 	async save() {
 		this.form.markAllAsTouched();
 
@@ -118,7 +133,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 
 		this.mapSetup();
 	}
-
+	//------------------------------------------------------------------------------------------------------------------------
 	delete() {
 		this.deleteDialog = DialogUtility.confirm({
 			title: 'Delete Site',
@@ -126,7 +141,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			okButton: { click: this.deleteOK.bind(this) }
 		});
 	}
-
+	//------------------------------------------------------------------------------------------------------------------------
 	async deleteOK() {
 		this.showSpinner();
 		this.deleteDialog.close();
@@ -141,18 +156,24 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			setTimeout(() => this.router.navigate(['/auth/customer/edit', this.record.customerId]), 1000);
 		}
 	}
-
+	//------------------------------------------------------------------------------------------------------------------------
+	editTabCreated() {
+		if (history.state.locations) {
+			this.editTab.selectedItem = 1;
+		}
+	}
+	//------------------------------------------------------------------------------------------------------------------------
 	async stateChange(e) {
 		this.counties = null;
 		this.counties = await this.repository.getCounties(e.itemData.id);
 	}
-
+	//------------------------------------------------------------------------------------------------------------------------
 	selectTab(e) {
 		if (this.editTab.selectedItem == 1) {
 			this.mapSetup();
 		}
 	}
-
+	//------------------------------------------------------------------------------------------------------------------------
 	mapSetup() {
 		var $this = this;
 
@@ -236,7 +257,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 
 		}, 0);
 	}
-
+	//------------------------------------------------------------------------------------------------------------------------
 	getBounds(boundaries) {
 		let north;
 		let south;
@@ -254,7 +275,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 
 		return { north, south, east, west };
 	}
-
+	//------------------------------------------------------------------------------------------------------------------------
 	close() {
 		if (history.state.from == 'sites') {
 			this.router.navigate(['/auth/site/list'], { state: { formState: true } });
