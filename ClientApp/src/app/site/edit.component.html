@@ -194,6 +194,8 @@
                                             <e-column field='name' headerText='Name' editType= 'dropdownedit' [edit]='analyteParams'></e-column>
                                             <e-column field='lowThreshold' headerText='Low Threshold' editType= 'numericedit'></e-column>
                                             <e-column field='highThreshold' headerText='High Threshold' editType= 'numericedit'></e-column>
+                                            <e-column field='' headerText='Send Notification' [displayAsCheckBox]="true"></e-column>
+                                            <e-column field='' headerText='Send Alert' [displayAsCheckBox]="true"></e-column>
                                             <e-column field='lastUpdatedBy' headerText='Last Updated By'></e-column>
                                             <e-column field='lastUpdatedDate' headerText='Last Updated Date' type='date' [format]='dateFormat' editType='datepickeredit'></e-column>
                                         </e-columns>

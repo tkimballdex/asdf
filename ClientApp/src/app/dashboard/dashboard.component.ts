@@ -45,6 +45,7 @@ export class DashboardComponent extends PageComponent implements OnInit, AfterVi
 	public data: any;
 	public customerId: string;
 	public sites: any;
+	public customers: any;
 
 	public analyteId: string;
 	public graphData: any;
@@ -91,6 +92,7 @@ export class DashboardComponent extends PageComponent implements OnInit, AfterVi
 		this.app = await this.appService.getData();
 		this.data = await this.repository.getData();
 		this.sites = [];
+		this.customers = await this.repository.listCustomers();
 
 		var today = new Date();
 		this.endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
