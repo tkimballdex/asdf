@@ -61,10 +61,10 @@
     
     <div class="row">
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist [(value)]="record.logisticVendorId" [dataSource]="data.logisticVendors" [fields]="{ text: 'name', value: 'id' }" placeholder="Logistic Vendor" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist [(value)]="record.logisticVendorId" [dataSource]="logisticVendors" [fields]="{ text: 'name', value: 'id' }" placeholder="Logistic Vendor" floatLabelType="Always"></ejs-dropdownlist>
         </div>
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist [(value)]="record.labVendorId" [dataSource]="data.labVendors" [fields]="{ text: 'name', value: 'id' }" placeholder="Lab Vendor" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist [(value)]="record.labVendorId" [dataSource]="labVendors" [fields]="{ text: 'name', value: 'id' }" placeholder="Lab Vendor" floatLabelType="Always"></ejs-dropdownlist>
         </div>
     </div>
 

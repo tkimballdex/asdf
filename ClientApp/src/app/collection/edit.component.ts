@@ -97,17 +97,10 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 			} else if (value === false) {
 				this.form.get('completedDate').setValidators(null);
 				this.form.get('collectionSuccessful').setValidators(null);
+				this.form.get('failureReasonId').clearValidators();
 			}
 			this.form.get('completedDate').updateValueAndValidity();
 			this.form.get('collectionSuccessful').updateValueAndValidity();
-		});
-
-		this.form.get('collectionSuccessful').valueChanges.subscribe(value => {
-			if (value === 2) {
-				this.form.get('failureReasonId').setValidators(null);
-			} else if (value === 3) {
-				this.form.get('failureReasonId').setValidators([Validators.required]);
-			}
 			this.form.get('failureReasonId').updateValueAndValidity();
 		});
 	}
@@ -131,6 +124,16 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 		if (history.state.containers) {
 			this.editTab.selectedItem = 1;
 		}
+	}
+	//-----------------------------------------------------------------------------------------
+	failedValidatorOff() {
+		this.form.get('failureReasonId').setValidators(null);
+		this.form.get('failureReasonId').updateValueAndValidity();
+	}
+	//-----------------------------------------------------------------------------------------
+	failedValidatorOn() {
+		this.form.get('failureReasonId').addValidators([Validators.required]);
+		this.form.get('failureReasonId').updateValueAndValidity();
 	}
 	//-----------------------------------------------------------------------------------------
 	async save() {
@@ -162,7 +165,7 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 				this.record.temperature = null;
 				this.record.collectionStatusId = 3;
 			}
-			
+
 			this.record.collectionSuccessful = null;
 			this.statusName = this.data.statuses.find(m => m.id === this.record.collectionStatusId).name;
 			this.showSpinner();

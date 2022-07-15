@@ -30,7 +30,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	public toolbar: ToolbarItems[];
 	public analyteParams: IEditCell;
 	public analytes: any;
-	public analyteList: any;
+	public analyteList: any = null;
 	public test: any;
 
 	@ViewChild('editTab')

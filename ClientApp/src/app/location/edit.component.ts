@@ -28,6 +28,11 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 	private siteMarker: google.maps.Marker;
 	public mapOptions: google.maps.MapOptions;
 	public siteAndCustomer: any;
+	public logisticVendors: any;
+	public labVendors: any;
+	public logisticVendorInt: number = 3;
+	public labVendorInt: number = 2;
+	public activeVendorInt: number = 1;
 	//-----------------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.privileges = (await this.appService.getPrivileges()).locations;
@@ -50,6 +55,8 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 		this.record.serviceStartDate = this.appService.getNullableDate(this.record.serviceStartDate);
 		this.record.serviceEndDate = this.appService.getNullableDate(this.record.serviceEndDate);
 		this.data = await this.repository.getData(this.record.siteId);
+		this.logisticVendors = await this.repository.listVendors({ tenantId: this.tenant.id, vendorTypeId: this.logisticVendorInt, active: this.activeVendorInt });
+		this.labVendors = await this.repository.listVendors({ tenantId: this.tenant.id, vendorTypeId: this.labVendorInt, active: this.activeVendorInt });
 		this.hideSpinner();
 
 		this.form = new FormGroup({
@@ -82,8 +89,8 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 				}
 
 				googleMap.addListener('click', function (event) {
-					$this.record.latitude = event.latLng.lat();
-					$this.record.longitude = event.latLng.lng();
+					$this.record.latitude = event.latLng.lat().toPrecision(9);
+					$this.record.longitude = event.latLng.lng().toPrecision(9);
 
 					if ($this.siteMarker) {
 						$this.siteMarker.setMap(null);
