@@ -25,13 +25,6 @@ export class DashboardRepository {
 		return this.http.post<any>(`/dashboard/communicate`, filter);
 	}
 
-	public listCustomers() {
-		return this.http.post(`/customer/list`, {
-			tenantId: this.tenant.id,
-			active: 1
-		});
-	}
-
 	public listSites(customerId: string) {
 		return this.http.post(`/site/list`, {
 			tenantId: this.tenant.id,
