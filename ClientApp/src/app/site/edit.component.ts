@@ -10,6 +10,11 @@ import { SiteRepository } from './repository';
 import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 import { EditSettingsModel, ToolbarItems, IEditCell } from '@syncfusion/ej2-angular-grids';
 import { Query, DataManager } from '@syncfusion/ej2-data';
+import { Browser } from '@syncfusion/ej2-base';
+import { EditService, ToolbarService, PageService, DialogEditEventArgs, SaveEventArgs } from '@syncfusion/ej2-angular-grids';
+import { DataUtil } from '@syncfusion/ej2-data';
+import { AbstractControl } from '@angular/forms';
+import { AreaSeries } from '@syncfusion/ej2-angular-charts';
 
 @Component({
 	selector: 'site-edit',
@@ -21,6 +26,8 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		super();
 	}
 
+	public id: string;
+	public siteData: any;
 	public counties: any;
 	public record: any;
 	public deleteDialog: Dialog;
@@ -29,9 +36,13 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	public editSettings: EditSettingsModel;
 	public toolbar: ToolbarItems[];
 	public analyteParams: IEditCell;
-	public analytes: any;
-	public analyteList: any = null;
+	public siteAnalytes: any = null;
 	public test: any;
+	public tenantAnalytes: any;
+
+    public analyteForm: FormGroup;
+    public pageSettings: Object;
+    public submitClicked: boolean = false;
 
 	@ViewChild('editTab')
 	public editTab: TabComponent;
@@ -45,15 +56,17 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	async ngOnInit() {
 		this.showSpinner();
 		this.app = await this.appService.getData();
+		
 		this.privileges = this.app.privileges.sites;
 		this.dateFormat = { type: 'date', format: 'MM/dd/yyyy' };
-		this.editSettings = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Normal' };
-		this.toolbar = ['Add', 'Edit', 'Update', 'Cancel'];
+		this.editSettings = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Dialog' };
+		this.toolbar = ['Add', 'Edit', 'Delete'];
 		
-		var id = this.route.snapshot.paramMap.get('id');
+		this.id = this.route.snapshot.paramMap.get('id');
+		this.tenantAnalytes = await this.repository.listTenantAnalytes(this.tenant.id);
 		var customerId = this.route.snapshot.paramMap.get('customerId');
 
-		if (id == null) {
+		if (this.id == null) {
 			var customer = await this.repository.getCustomer(customerId);
 			this.record = {
 				customerId: customerId,
@@ -62,24 +75,15 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			}
 		}
 		else {
-			this.record = await this.repository.get(id);
+			this.record = await this.repository.get(this.id);
 			this.counties = await this.repository.getCounties(this.record.stateId)
-			this.analyteList = await this.repository.listAnalytes({ tenantId: this.tenant.id });
-			this.analytes = await this.repository.getSiteAnalytes(id);
-			this.analyteParams = {
-				params: {
-					dataSource: new DataManager(this.analyteList),
-					query: new Query(),
-					actionComplete: () => false
-				}
-			};
-			
+			this.siteAnalytes = await this.repository.getSiteAnalytes(this.id);
 		}
 
 		this.hideSpinner();
 
 		this.form = new FormGroup({
-			name: new FormControl(this.record.name, [Validators.required]),
+			siteName: new FormControl(this.record.name, [Validators.required]),
 			serviceStartDate: new FormControl(this.record.serviceStartDate ? new Date(this.record.serviceStartDate) : null),
 			serviceEndDate: new FormControl(this.record.serviceEndDate ? new Date(this.record.serviceEndDate) : null),
 			address: new FormControl(this.record.address, [Validators.required]),
@@ -92,6 +96,16 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			contactPhoneNo: new FormControl(this.record.contactPhoneNo, [Validators.required, Validators.maxLength(10)])
 		});
 	}
+	//------------------------------------------------------------------------------------------------------------------------
+	createFormGroup(data): FormGroup {
+        return new FormGroup({
+            analyteId: new FormControl(data.analyteId),
+            lowThreshold: new FormControl(data.lowThreshold),
+            highThreshold: new FormControl(data.highThreshold),
+            sendNotifications: new FormControl(data.sendNotifications),
+            sendAlerts: new FormControl(data.sendAlerts),
+        });
+    }
 	//------------------------------------------------------------------------------------------------------------------------
 	async save() {
 		this.form.markAllAsTouched();
@@ -133,6 +147,14 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		}
 
 		this.mapSetup();
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	deleteAnalyte(analyteName) {
+		this.deleteDialog = DialogUtility.confirm({
+			title: 'Delete Analyte',
+			content: `Are you sure you want to delete the site analyte <b>${analyteName}</b>?`,
+			okButton: { click: this.deleteOK.bind(this) }
+		});
 	}
 	//------------------------------------------------------------------------------------------------------------------------
 	delete() {
@@ -276,6 +298,45 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 
 		return { north, south, east, west };
 	}
+	//------------------------------------------------------------------------------------------------------------------------
+	async actionBegin(args) {
+		console.log('args', args)
+        if (args.requestType === 'beginEdit' || args.requestType === 'add') {
+            this.submitClicked = false;
+            this.analyteForm = this.createFormGroup(args.rowData);
+        }
+        if (args.requestType === 'save') {
+            this.submitClicked = true;
+			if (args.action === "edit" || args.action === "add") {
+				const analyteName = await this.repository.getAnalyteName(this.analyteForm.value.analyteId);
+				this.analyteForm.value.analyte = analyteName['name'];
+				this.analyteForm.value.tenantId = this.tenant.id;
+				this.analyteForm.value.siteId = this.record.id;
+				this.analyteForm.value.id = args.data.id
+			} 
+			if (args.action === "add") {
+				this.analyteForm.value.id = this.appService.GuidEmpty;
+			}
+			const response = await this.repository.saveSiteAnalyte(this.analyteForm.value);
+			if (response.updated === true) {
+				this.siteAnalytes = await this.repository.getSiteAnalytes(this.id);
+			}
+        }
+
+		if (args.requestType === "delete") {
+			this.deleteAnalyte(args.data[0].analyte)
+			await this.repository.deleteSiteAnalyte(args.data[0].id)
+		}
+    }
+	//------------------------------------------------------------------------------------------------------------------------
+    actionComplete(args: DialogEditEventArgs) {
+        if ((args.requestType === 'beginEdit' || args.requestType === 'add')) {
+            if (Browser.isDevice) {
+                args.dialog.height = window.innerHeight - 90 + 'px';
+                (<Dialog>args.dialog).dataBind();
+            }
+        }
+    }
 	//------------------------------------------------------------------------------------------------------------------------
 	close() {
 		if (history.state.from == 'sites') {

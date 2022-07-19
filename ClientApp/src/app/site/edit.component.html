@@ -11,8 +11,8 @@
 
     <div class="row pad-t10">
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="name" required placeholder="Site Name*" floatLabelType="Always"></ejs-textbox>
-            <div *ngIf="this.invalidControl('name')" class="e-error">
+            <ejs-textbox formControlName="siteName" required placeholder="Site Name*" floatLabelType="Always"></ejs-textbox>
+            <div *ngIf="this.invalidControl('siteName')" class="e-error">
                 Site Name is required!
             </div>
         </div>
@@ -182,23 +182,53 @@
                             </div>
                         </ng-template>
                     </e-tabitem>
-                    <e-tabitem *ngIf="analyteList !== null">
+                    <e-tabitem *ngIf="siteAnalytes !== null">
                         <ng-template #headerText>
                             <div>Analytes</div>
                         </ng-template>
                         <ng-template #content>
                             <div class="row">
                                 <div class="col-12 pad-t20">
-                                    <ejs-grid #grid [dataSource]='analytes' *ngIf="app.analytes" [editSettings]='editSettings' [allowPaging]="true" [allowSorting]="true" [toolbar]='toolbar'>
+                                    <ejs-grid #grid [dataSource]='siteAnalytes' [editSettings]='editSettings' [allowPaging]="true" [allowSorting]="true" [toolbar]='toolbar' (actionBegin)='actionBegin($event)' (actionComplete)='actionComplete($event)'>
                                         <e-columns>
-                                            <e-column field='name' headerText='Name' editType= 'dropdownedit' [edit]='analyteParams'></e-column>
-                                            <e-column field='lowThreshold' headerText='Low Threshold' editType= 'numericedit'></e-column>
-                                            <e-column field='highThreshold' headerText='High Threshold' editType= 'numericedit'></e-column>
-                                            <e-column field='' headerText='Send Notification' [displayAsCheckBox]="true"></e-column>
-                                            <e-column field='' headerText='Send Alert' [displayAsCheckBox]="true"></e-column>
+                                            <e-column width="70">
+                                                <ng-template #template let-data>
+                                                    <a [routerLink]="['../edit', data.id]" [state]="{ from: 'sites' }"><i class="fas fa-pencil-alt edit-icon"></i></a>
+                                                </ng-template>
+                                            </e-column>
+                                            <e-column field='analyte' headerText='Analyte' ></e-column>
+                                            <e-column field='lowThreshold' headerText='Low Threshold'></e-column>
+                                            <e-column field='highThreshold' headerText='High Threshold'></e-column>
+                                            <e-column field='sendNotifications' headerText='Send Notifications' [displayAsCheckBox]="true"></e-column>
+                                            <e-column field='sendAlerts' headerText='Send Alerts' [displayAsCheckBox]="true"></e-column>
                                             <e-column field='lastUpdatedBy' headerText='Last Updated By'></e-column>
-                                            <e-column field='lastUpdatedDate' headerText='Last Updated Date' type='date' [format]='dateFormat' editType='datepickeredit'></e-column>
+                                            <e-column field='lastUpdatedDate' headerText='Last Updated Date' type='date' [format]='dateFormat'></e-column>
                                         </e-columns>
+                                        <ng-template #editSettingsTemplate let-data>
+                                            <div [formGroup]="analyteForm">
+                                                <div class="form-row">
+                                                    <div class="col-md-6">
+                                                        <ejs-dropdownlist formControlName="analyteId" [dataSource]="tenantAnalytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="data.analyte" placeholder="Analyte" floatLabelType="Always"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row pad-t15">
+                                                    <div class="col-md-6">
+                                                        <ejs-numerictextbox formControlName="lowThreshold" [(value)]="data.lowThreshold" format='N1' step='1' placeholder="Low Threshold" floatLabelType="Always"></ejs-numerictextbox>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <ejs-numerictextbox formControlName="highThreshold" [(value)]="data.highThreshold" format='N1' step='1' placeholder="High Threshold" floatLabelType="Always"></ejs-numerictextbox>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row pad-t15">
+                                                    <div class="col-md-6">
+                                                        <ejs-checkbox formControlName="sendNotifications" [(value)]="data.sendNotifications" label="Send Notification"></ejs-checkbox>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <ejs-checkbox formControlName="sendAlerts" [(value)]="data.sendAlerts" label="Send Alert"></ejs-checkbox>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </ng-template>
                                     </ejs-grid>
                                 </div>
                             </div>

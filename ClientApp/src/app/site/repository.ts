@@ -6,6 +6,10 @@ export class SiteRepository {
     constructor(private http: MsalHttpClient) {
     }
 
+    public getSiteData(siteId: string) {
+        return this.http.post<any>(`/site/getData?siteId=${siteId}`);
+    }
+
     public save(record: any) {
         return this.http.post<any>(`/site/save`, record);
     }
@@ -35,10 +39,26 @@ export class SiteRepository {
     }
 
     public getSiteAnalytes(siteId: string) {
-        return this.http.post(`/site/analyteList?siteId=${siteId}`);
+        return this.http.post(`/siteAnalyte/list?siteId=${siteId}`);
+    }
+
+    public saveSiteAnalyte(data: any) {
+        return this.http.post<any>(`/siteAnalyte/save`, data);
+    }
+
+    public deleteSiteAnalyte(siteAnalyteId: any) {
+        return this.http.post<any>(`/siteAnalyte/delete?id=${siteAnalyteId}`);
+    }
+
+    public getAnalyteName(id: string) {
+        return this.http.post(`/analyte/get/${id}`);
     }
 
     public listAnalytes(filter: any) {
         return this.http.post(`/analyte/list`, filter);
+    }
+
+    public listTenantAnalytes(tenantId: any) {
+        return this.http.post(`/site/tenantAnalytes?tenantId=${tenantId}`);
     }
 }
