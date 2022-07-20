@@ -8,7 +8,7 @@ import { PageComponent } from '../shared/page.component';
 import { TenantService } from '../shared/tenant.service';
 import { SiteRepository } from './repository';
 import { TabComponent } from '@syncfusion/ej2-angular-navigations';
-import { EditSettingsModel, ToolbarItems, IEditCell } from '@syncfusion/ej2-angular-grids';
+import { EditSettingsModel, ToolbarItems, IEditCell, CommandModel } from '@syncfusion/ej2-angular-grids';
 import { Query, DataManager } from '@syncfusion/ej2-data';
 import { Browser } from '@syncfusion/ej2-base';
 import { EditService, ToolbarService, PageService, DialogEditEventArgs, SaveEventArgs } from '@syncfusion/ej2-angular-grids';
@@ -33,15 +33,17 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	public deleteDialog: Dialog;
 	public form: FormGroup;
 	public dateFormat: any;
-	public editSettings: EditSettingsModel;
-	public toolbar: ToolbarItems[];
 	public analyteParams: IEditCell;
 	public siteAnalytes: any = null;
 	public test: any;
 	public tenantAnalytes: any;
 
+	public editSettings: EditSettingsModel;
+	public toolbar: ToolbarItems[];
 	public analyteForm: FormGroup;
 	public pageSettings: Object;
+	public editCommand: CommandModel[];
+	public deleteCommand: CommandModel[];
 	public submitClicked: boolean = false;
 	public siteAnalyteId: string;
 	public doubleClick: any;
@@ -61,9 +63,14 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 
 		this.privileges = this.app.privileges.sites;
 		this.dateFormat = { type: 'date', format: 'MM/dd/yyyy' };
-		this.editSettings = { allowEditing: true, allowAdding: true, mode: 'Dialog', showDeleteConfirmDialog: true };
-		this.toolbar = ['Add', 'Edit'];
-		this.doubleClick = document.createEvent('MouseEvents');
+		this.editSettings = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Dialog', showDeleteConfirmDialog: true };
+		this.toolbar = ['Add'];
+		this.editCommand = [
+			{ type: 'Edit', buttonOption: { cssClass: 'command-button', iconCss: 'e-edit e-icons' } },
+		];
+		this.deleteCommand = [
+			{ type: 'Delete', buttonOption: { cssClass: 'command-button', iconCss: 'e-delete e-icons' } },
+		];
 
 		this.id = this.route.snapshot.paramMap.get('id');
 		this.tenantAnalytes = await this.repository.listTenantAnalytes(this.tenant.id);
@@ -81,6 +88,8 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			this.record = await this.repository.get(this.id);
 			this.counties = await this.repository.getCounties(this.record.stateId)
 			this.siteAnalytes = await this.repository.getSiteAnalytes(this.id);
+
+			// (document.getElementsByClassName('e-tbar-btn')[1] as any).classList.add('hide-edit');
 		}
 
 		this.hideSpinner();
@@ -299,6 +308,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			this.submitClicked = false;
 			this.analyteForm = this.createFormGroup(args.rowData);
 		}
+
 		if (args.requestType === 'save') {
 			this.submitClicked = true;
 			if (args.action === "edit" || args.action === "add") {
@@ -313,6 +323,20 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			}
 			const response = await this.repository.saveSiteAnalyte(this.analyteForm.value);
 			if (response.updated === true) {
+				console.log(12, this.id)
+				this.siteAnalytes = await this.repository.getSiteAnalytes(this.id);
+			}
+		}
+
+		if (args.requestType === 'delete') {
+			this.showSpinner();
+			const result = await this.repository.deleteSiteAnalyte(args.data[0].id);
+			this.hideSpinner();
+
+			if (result.error) {
+				this.showErrorMessage(result.description);
+			} else {
+				this.showDeleteMessage(true);
 				this.siteAnalytes = await this.repository.getSiteAnalytes(this.id);
 			}
 		}
@@ -326,43 +350,6 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			}
 		}
 	}
-	//------------------------------------------------------------------------------------------------------------------------
-	async editSiteAnalyte() {
-		if (document.getElementsByClassName("e-selectionbackground")[0] !== undefined) {
-			(document.getElementsByClassName("e-selectionbackground")[0] as any).click();
-			setTimeout(() => {
-				(document.getElementsByClassName("e-tbar-btn")[1] as any).click();
-			}, 0);
-		} else {
-			setTimeout(function(){
-				(document.getElementsByClassName("e-tbar-btn")[1] as any).click();
-			}, 0);
-		}
-	}
-	//------------------------------------------------------------------------------------------------------------------------
-	deleteSiteAnalyte(data) {
-		this.siteAnalyteId = data.id;
-		this.deleteDialog = DialogUtility.confirm({
-			title: 'Delete Site',
-			content: `Are you sure you want to delete the site analyte <b>${data.analyte}</b>?`,
-			okButton: { click: this.deleteSiteAnalyteOK.bind(this) }
-		});
-	}
-	//------------------------------------------------------------------------------------------------------------------------
-	async deleteSiteAnalyteOK() {
-		this.showSpinner();
-		this.deleteDialog.close();
-		const result = await this.repository.deleteSiteAnalyte(this.siteAnalyteId);
-		this.hideSpinner();
-
-		if (result.error) {
-			this.showErrorMessage(result.description);
-		} else {
-			this.showDeleteMessage(true);
-			this.siteAnalytes = await this.repository.getSiteAnalytes(this.id);
-		}
-	}
-	
 	//------------------------------------------------------------------------------------------------------------------------
 	close() {
 		if (history.state.from == 'sites') {

@@ -191,23 +191,15 @@
                                 <div class="col-12 pad-t20">
                                     <ejs-grid #grid [dataSource]='siteAnalytes' [editSettings]='editSettings' [allowPaging]="true" [allowSorting]="true" [toolbar]='toolbar' (actionBegin)='actionBegin($event)' (actionComplete)='actionComplete($event)'>
                                         <e-columns>
-                                            <e-column width="70">
-                                                <ng-template #template let-data>
-                                                    <a [routerLink]="[]"><i class="fas fa-pencil-alt edit-icon" (click)="editSiteAnalyte()"></i></a>
-                                                </ng-template>
-                                            </e-column>
+                                            <e-column width="70" [commands]='editCommand'></e-column>
                                             <e-column field='analyte' headerText='Analyte' [isPrimaryKey]='true'></e-column>
                                             <e-column field='lowThreshold' headerText='Low Threshold'></e-column>
                                             <e-column field='highThreshold' headerText='High Threshold'></e-column>
                                             <e-column field='sendNotifications' headerText='Send Notifications' [displayAsCheckBox]="true"></e-column>
                                             <e-column field='sendAlerts' headerText='Send Alerts' [displayAsCheckBox]="true"></e-column>
                                             <e-column field='lastUpdatedBy' headerText='Last Updated By'></e-column>
-                                            <e-column field='lastUpdatedDate' headerText='Last Updated Date' type='date' [format]='dateFormat'></e-column>
-                                            <e-column width="70">
-                                                <ng-template #template let-data>
-                                                    <a [routerLink]="[]"><i class="fas fa-trash" (click)="deleteSiteAnalyte(data)"></i></a>
-                                                </ng-template>
-                                            </e-column>
+                                            <e-column field='lastUpdatedDate' headerText='Last Updated Date' type='date' [format]='dateFormat' width="180"></e-column>
+                                            <e-column width="50" [commands]='deleteCommand'></e-column>
                                         </e-columns>
                                         <ng-template #editSettingsTemplate let-data>
                                             <div [formGroup]="analyteForm">

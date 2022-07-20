@@ -205,8 +205,23 @@ mat-form-field.mat-form-field {
     color: #fd7e14;
 }
 
-.fa-trash {
+.e-grid .e-edit::before, .e-grid-menu .e-edit::before {
+    color: #fd7e14;
+    background-color: transparent;
+}
+
+.e-grid .e-unboundcelldiv .e-icons {
     color: #a80000;
+    background-color: transparent;
+}
+
+.command-button {
+    background-color: transparent;
+    border: 0;
+}
+
+.hide-edit {
+    display: hidden;
 }
 
 #list-view label{
