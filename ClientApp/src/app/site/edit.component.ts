@@ -40,9 +40,11 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	public test: any;
 	public tenantAnalytes: any;
 
-    public analyteForm: FormGroup;
-    public pageSettings: Object;
-    public submitClicked: boolean = false;
+	public analyteForm: FormGroup;
+	public pageSettings: Object;
+	public submitClicked: boolean = false;
+	public siteAnalyteId: string;
+	public doubleClick: any;
 
 	@ViewChild('editTab')
 	public editTab: TabComponent;
@@ -56,12 +58,13 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	async ngOnInit() {
 		this.showSpinner();
 		this.app = await this.appService.getData();
-		
+
 		this.privileges = this.app.privileges.sites;
 		this.dateFormat = { type: 'date', format: 'MM/dd/yyyy' };
-		this.editSettings = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Dialog' };
-		this.toolbar = ['Add', 'Edit', 'Delete'];
-		
+		this.editSettings = { allowEditing: true, allowAdding: true, mode: 'Dialog', showDeleteConfirmDialog: true };
+		this.toolbar = ['Add', 'Edit'];
+		this.doubleClick = document.createEvent('MouseEvents');
+
 		this.id = this.route.snapshot.paramMap.get('id');
 		this.tenantAnalytes = await this.repository.listTenantAnalytes(this.tenant.id);
 		var customerId = this.route.snapshot.paramMap.get('customerId');
@@ -98,14 +101,14 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	}
 	//------------------------------------------------------------------------------------------------------------------------
 	createFormGroup(data): FormGroup {
-        return new FormGroup({
-            analyteId: new FormControl(data.analyteId),
-            lowThreshold: new FormControl(data.lowThreshold),
-            highThreshold: new FormControl(data.highThreshold),
-            sendNotifications: new FormControl(data.sendNotifications),
-            sendAlerts: new FormControl(data.sendAlerts),
-        });
-    }
+		return new FormGroup({
+			analyteId: new FormControl(data.analyteId),
+			lowThreshold: new FormControl(data.lowThreshold),
+			highThreshold: new FormControl(data.highThreshold),
+			sendNotifications: new FormControl(data.sendNotifications),
+			sendAlerts: new FormControl(data.sendAlerts),
+		});
+	}
 	//------------------------------------------------------------------------------------------------------------------------
 	async save() {
 		this.form.markAllAsTouched();
@@ -147,14 +150,6 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		}
 
 		this.mapSetup();
-	}
-	//------------------------------------------------------------------------------------------------------------------------
-	deleteAnalyte(analyteName) {
-		this.deleteDialog = DialogUtility.confirm({
-			title: 'Delete Analyte',
-			content: `Are you sure you want to delete the site analyte <b>${analyteName}</b>?`,
-			okButton: { click: this.deleteOK.bind(this) }
-		});
 	}
 	//------------------------------------------------------------------------------------------------------------------------
 	delete() {
@@ -300,20 +295,19 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	}
 	//------------------------------------------------------------------------------------------------------------------------
 	async actionBegin(args) {
-		console.log('args', args)
-        if (args.requestType === 'beginEdit' || args.requestType === 'add') {
-            this.submitClicked = false;
-            this.analyteForm = this.createFormGroup(args.rowData);
-        }
-        if (args.requestType === 'save') {
-            this.submitClicked = true;
+		if (args.requestType === 'beginEdit' || args.requestType === 'add') {
+			this.submitClicked = false;
+			this.analyteForm = this.createFormGroup(args.rowData);
+		}
+		if (args.requestType === 'save') {
+			this.submitClicked = true;
 			if (args.action === "edit" || args.action === "add") {
 				const analyteName = await this.repository.getAnalyteName(this.analyteForm.value.analyteId);
 				this.analyteForm.value.analyte = analyteName['name'];
 				this.analyteForm.value.tenantId = this.tenant.id;
 				this.analyteForm.value.siteId = this.record.id;
 				this.analyteForm.value.id = args.data.id
-			} 
+			}
 			if (args.action === "add") {
 				this.analyteForm.value.id = this.appService.GuidEmpty;
 			}
@@ -321,22 +315,54 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			if (response.updated === true) {
 				this.siteAnalytes = await this.repository.getSiteAnalytes(this.id);
 			}
-        }
-
-		if (args.requestType === "delete") {
-			this.deleteAnalyte(args.data[0].analyte)
-			await this.repository.deleteSiteAnalyte(args.data[0].id)
 		}
-    }
+	}
 	//------------------------------------------------------------------------------------------------------------------------
-    actionComplete(args: DialogEditEventArgs) {
-        if ((args.requestType === 'beginEdit' || args.requestType === 'add')) {
-            if (Browser.isDevice) {
-                args.dialog.height = window.innerHeight - 90 + 'px';
-                (<Dialog>args.dialog).dataBind();
-            }
-        }
-    }
+	actionComplete(args: DialogEditEventArgs) {
+		if ((args.requestType === 'beginEdit' || args.requestType === 'add')) {
+			if (Browser.isDevice) {
+				args.dialog.height = window.innerHeight - 90 + 'px';
+				(<Dialog>args.dialog).dataBind();
+			}
+		}
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	async editSiteAnalyte() {
+		if (document.getElementsByClassName("e-selectionbackground")[0] !== undefined) {
+			(document.getElementsByClassName("e-selectionbackground")[0] as any).click();
+			setTimeout(() => {
+				(document.getElementsByClassName("e-tbar-btn")[1] as any).click();
+			}, 0);
+		} else {
+			setTimeout(function(){
+				(document.getElementsByClassName("e-tbar-btn")[1] as any).click();
+			}, 0);
+		}
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	deleteSiteAnalyte(data) {
+		this.siteAnalyteId = data.id;
+		this.deleteDialog = DialogUtility.confirm({
+			title: 'Delete Site',
+			content: `Are you sure you want to delete the site analyte <b>${data.analyte}</b>?`,
+			okButton: { click: this.deleteSiteAnalyteOK.bind(this) }
+		});
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	async deleteSiteAnalyteOK() {
+		this.showSpinner();
+		this.deleteDialog.close();
+		const result = await this.repository.deleteSiteAnalyte(this.siteAnalyteId);
+		this.hideSpinner();
+
+		if (result.error) {
+			this.showErrorMessage(result.description);
+		} else {
+			this.showDeleteMessage(true);
+			this.siteAnalytes = await this.repository.getSiteAnalytes(this.id);
+		}
+	}
+	
 	//------------------------------------------------------------------------------------------------------------------------
 	close() {
 		if (history.state.from == 'sites') {

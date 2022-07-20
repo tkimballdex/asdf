@@ -205,6 +205,10 @@ mat-form-field.mat-form-field {
     color: #fd7e14;
 }
 
+.fa-trash {
+    color: #a80000;
+}
+
 #list-view label{
     padding-top:8px;
     font-weight: 600;

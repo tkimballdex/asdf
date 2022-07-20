@@ -193,22 +193,27 @@
                                         <e-columns>
                                             <e-column width="70">
                                                 <ng-template #template let-data>
-                                                    <a [routerLink]="['../edit', data.id]" [state]="{ from: 'sites' }"><i class="fas fa-pencil-alt edit-icon"></i></a>
+                                                    <a [routerLink]="[]"><i class="fas fa-pencil-alt edit-icon" (click)="editSiteAnalyte()"></i></a>
                                                 </ng-template>
                                             </e-column>
-                                            <e-column field='analyte' headerText='Analyte' ></e-column>
+                                            <e-column field='analyte' headerText='Analyte' [isPrimaryKey]='true'></e-column>
                                             <e-column field='lowThreshold' headerText='Low Threshold'></e-column>
                                             <e-column field='highThreshold' headerText='High Threshold'></e-column>
                                             <e-column field='sendNotifications' headerText='Send Notifications' [displayAsCheckBox]="true"></e-column>
                                             <e-column field='sendAlerts' headerText='Send Alerts' [displayAsCheckBox]="true"></e-column>
                                             <e-column field='lastUpdatedBy' headerText='Last Updated By'></e-column>
                                             <e-column field='lastUpdatedDate' headerText='Last Updated Date' type='date' [format]='dateFormat'></e-column>
+                                            <e-column width="70">
+                                                <ng-template #template let-data>
+                                                    <a [routerLink]="[]"><i class="fas fa-trash" (click)="deleteSiteAnalyte(data)"></i></a>
+                                                </ng-template>
+                                            </e-column>
                                         </e-columns>
                                         <ng-template #editSettingsTemplate let-data>
                                             <div [formGroup]="analyteForm">
                                                 <div class="form-row">
                                                     <div class="col-md-6">
-                                                        <ejs-dropdownlist formControlName="analyteId" [dataSource]="tenantAnalytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="data.analyte" placeholder="Analyte" floatLabelType="Always"></ejs-dropdownlist>
+                                                        <ejs-dropdownlist formControlName="analyteId" [dataSource]="tenantAnalytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="data.analyteId" placeholder="Analyte" floatLabelType="Always"></ejs-dropdownlist>
                                                     </div>
                                                 </div>
                                                 <div class="form-row pad-t15">
