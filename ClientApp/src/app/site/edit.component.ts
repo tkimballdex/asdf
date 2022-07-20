@@ -323,8 +323,9 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			}
 			const response = await this.repository.saveSiteAnalyte(this.analyteForm.value);
 			if (response.updated === true) {
-				console.log(12, this.id)
 				this.siteAnalytes = await this.repository.getSiteAnalytes(this.id);
+			} else {
+				this.showErrorMessage('Edit existing analyte');
 			}
 		}
 
