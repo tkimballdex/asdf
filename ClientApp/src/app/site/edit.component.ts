@@ -111,9 +111,9 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	//------------------------------------------------------------------------------------------------------------------------
 	createFormGroup(data): FormGroup {
 		return new FormGroup({
-			analyteId: new FormControl(data.analyteId),
-			lowThreshold: new FormControl(data.lowThreshold),
-			highThreshold: new FormControl(data.highThreshold),
+			analyteId: new FormControl(data.analyteId, [Validators.required]),
+			lowThreshold: new FormControl(data.lowThreshold, [Validators.required]),
+			highThreshold: new FormControl(data.highThreshold, [Validators.required]),
 			sendNotifications: new FormControl(data.sendNotifications),
 			sendAlerts: new FormControl(data.sendAlerts),
 		});
@@ -311,22 +311,31 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 
 		if (args.requestType === 'save') {
 			this.submitClicked = true;
+			this.analyteForm.markAllAsTouched();
+			if (this.analyteForm.invalid) {
+				this.showErrorMessage("Please complete all required fields!");
+				this.siteAnalytes = await this.repository.getSiteAnalytes(this.id);
+				return;
+			}
+
 			if (args.action === "edit" || args.action === "add") {
 				const analyteName = await this.repository.getAnalyteName(this.analyteForm.value.analyteId);
 				this.analyteForm.value.analyte = analyteName['name'];
 				this.analyteForm.value.tenantId = this.tenant.id;
 				this.analyteForm.value.siteId = this.record.id;
 				this.analyteForm.value.id = args.data.id
+				if (this.analyteForm.value.sendNotifications === null) {
+					this.analyteForm.value.sendNotifications = false
+				}
+				if (this.analyteForm.value.sendAlerts === null) {
+					this.analyteForm.value.sendAlerts = false
+				}
 			}
 			if (args.action === "add") {
 				this.analyteForm.value.id = this.appService.GuidEmpty;
 			}
 			const response = await this.repository.saveSiteAnalyte(this.analyteForm.value);
-			if (response.updated === true) {
-				this.siteAnalytes = await this.repository.getSiteAnalytes(this.id);
-			} else {
-				this.showErrorMessage('Edit existing analyte');
-			}
+			this.siteAnalytes = await this.repository.getSiteAnalytes(this.id);
 		}
 
 		if (args.requestType === 'delete') {

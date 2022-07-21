@@ -205,15 +205,15 @@
                                             <div [formGroup]="analyteForm">
                                                 <div class="form-row">
                                                     <div class="col-md-6">
-                                                        <ejs-dropdownlist formControlName="analyteId" [dataSource]="tenantAnalytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="data.analyteId" placeholder="Analyte" floatLabelType="Always"></ejs-dropdownlist>
+                                                        <ejs-dropdownlist formControlName="analyteId" [dataSource]="tenantAnalytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="data.analyteId" placeholder="Analyte*" floatLabelType="Always"></ejs-dropdownlist>
                                                     </div>
                                                 </div>
                                                 <div class="form-row pad-t15">
                                                     <div class="col-md-6">
-                                                        <ejs-numerictextbox formControlName="lowThreshold" [(value)]="data.lowThreshold" format='N1' step='1' placeholder="Low Threshold" floatLabelType="Always"></ejs-numerictextbox>
+                                                        <ejs-numerictextbox formControlName="lowThreshold" [(value)]="data.lowThreshold" format='N1' step='1' placeholder="Low Threshold*" floatLabelType="Always"></ejs-numerictextbox>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <ejs-numerictextbox formControlName="highThreshold" [(value)]="data.highThreshold" format='N1' step='1' placeholder="High Threshold" floatLabelType="Always"></ejs-numerictextbox>
+                                                        <ejs-numerictextbox formControlName="highThreshold" [(value)]="data.highThreshold" format='N1' step='1' placeholder="High Threshold*" floatLabelType="Always"></ejs-numerictextbox>
                                                     </div>
                                                 </div>
                                                 <div class="form-row pad-t20">
