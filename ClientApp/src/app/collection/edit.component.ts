@@ -107,7 +107,6 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 	//-----------------------------------------------------------------------------------------
 	gridAction(e) {
 		if (e.name == 'actionComplete' && e.requestType == 'save') {
-			console.dir(e);
 			var data = {
 				collectionId: this.record.id,
 				id: e.data.id,

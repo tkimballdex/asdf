@@ -13,7 +13,6 @@ export class AppComponent implements OnInit {
 	constructor(private authService: MsalService, private msalBroadcastService: MsalBroadcastService) { }
 
 	ngOnInit(): void {
-		console.dir('AppComponent OnInit');
 		this.msalBroadcastService.msalSubject$
 			.pipe(
 				filter((msg: EventMessage) => msg.eventType === EventType.LOGIN_SUCCESS),
