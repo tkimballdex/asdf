@@ -116,6 +116,9 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			highThreshold: new FormControl(data.highThreshold, [Validators.required]),
 			sendNotifications: new FormControl(data.sendNotifications),
 			sendAlerts: new FormControl(data.sendAlerts),
+			showOnDashboard: new FormControl(data.showOnDashboard),
+			showSummary: new FormControl(data.showSummary),
+			showContext: new FormControl(data.showContext),
 		});
 	}
 	//------------------------------------------------------------------------------------------------------------------------

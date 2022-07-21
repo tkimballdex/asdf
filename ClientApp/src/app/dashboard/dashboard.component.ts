@@ -344,8 +344,8 @@ export class DashboardComponent extends PageComponent implements OnInit, AfterVi
 				reader.onloadend = function () {
 					var result: string = reader.result.toString().replace('data:image/png;base64,', '');
 					$this.eventQueue.dispatch(new AppEvent(AppEventType.SendEmail, {
-						subject: 'SWAPP Dashboard',
-						body: 'Export of SWAPP dashboard as of ' + (new Date().toLocaleString()),
+						subject: 'REMAPP Dashboard',
+						body: 'Export of REMAPP dashboard as of ' + (new Date().toLocaleString()),
 						emailList,
 						attachment: { name: 'dashboard.png', blob: result }
 					}));
