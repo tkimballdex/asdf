@@ -39,14 +39,14 @@
                     </e-column>
                     <e-column field='collectionNo' headerText='Collection No' width='150'></e-column>
                     <e-column field='scheduledDate' type='date' [format]='dateFormat' headerText='Scheduled For' width='150'></e-column>
-                    <e-column field='site' headerText='Site'></e-column>
-                    <e-column field='location' headerText='Location'></e-column>
-                    <e-column field='city' headerText='City'></e-column>
-                    <e-column field='containers' headerText='Containers' textAlign='Center'></e-column>
-                    <e-column field='vendor' headerText='Vendor'></e-column>
-                    <e-column field='completedDate' type='date' [format]='dateFormat' headerText='Completed On' width='150'></e-column>
-                    <e-column field='samples' headerText='Samples' textAlign='Center'></e-column>
-                    <e-column field='status' headerText='Status'></e-column>
+                    <e-column field='site' headerText='Site' width='150'></e-column>
+                    <e-column field='location' headerText='Location' hideAtMedia='(min-width: 992px)' width='150'></e-column>
+                    <e-column field='city' headerText='City' hideAtMedia='(min-width: 1200px)' width='120'></e-column>
+                    <e-column field='containers' headerText='Containers' textAlign='Center' width='110'></e-column>
+                    <e-column field='vendor' headerText='Vendor' width='120'></e-column>
+                    <e-column field='completedDate' type='date' [format]='dateFormat' headerText='Completed On' hideAtMedia='(min-width: 1200px)' width='150'></e-column>
+                    <e-column field='samples' headerText='Samples' textAlign='Center' hideAtMedia='(min-width: 992px)' width='120'></e-column>
+                    <e-column field='status' headerText='Status' width='120'></e-column>
                 </e-columns>
             </ejs-grid>
         </div>

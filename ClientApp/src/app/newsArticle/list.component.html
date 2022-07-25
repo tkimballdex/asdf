@@ -16,7 +16,7 @@
         <div class="col-md-2">
             <ejs-datepicker [(value)]="form.endDate" placeholder="End Date" floatLabelType="Always"></ejs-datepicker>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 pad-t10">
             <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>
         </div>
     </div>
@@ -30,7 +30,7 @@
                         </ng-template>
                     </e-column>
                     <e-column field='analyteName' headerText='Analyte' width="150"></e-column>
-                    <e-column field='title' headerText='Title'></e-column>
+                    <e-column field='title' headerText='Title' width="300"></e-column>
                     <e-column field='publishedDate' headerText='Published On' type='date' format='MM/dd/yyyy' width="150"></e-column>
                     <e-column field='createdDate' headerText='Created On' type='date' format='MM/dd/yyyy' width="120"></e-column>
                 </e-columns>

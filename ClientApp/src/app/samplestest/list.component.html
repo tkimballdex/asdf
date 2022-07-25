@@ -1,11 +1,11 @@
 <div id="list-view" class="container-fluid">
     <div class="row d-flex align-items-end">
-        <div class="col-3 d-flex align-items-center list-header">
+        <div class="col-md-6 d-flex align-items-center list-header">
             <span class="list-header-icon"><i class="fas fa-vial"></i></span>
             <span class="list-header-title">Tests</span>
-            <!-- <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['../add']" [disabled]="!privileges?.create">+ Add</button></span> -->
+            <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['../add']" [disabled]="!privileges?.create">+ Add</button></span>
         </div>
-        <div class="col-9 d-flex align-items-end justify-content-end list-header">
+        <div class="col-md-6 d-flex align-items-center justify-content-end list-header">
             <span class="list-actions"><button ejs-button cssClass="e-outline" iconCss="fad fa-download" [disabled]="loading || !privileges?.download" (click)="export()" title="Export"></button></span>
             <span class="list-actions"><button ejs-button cssClass="e-outline" iconCss="fad fa-bells" (click)="sendNotifications()" title="Send Notifications" [disabled]="loading || !privileges?.communicate"></button></span>
             <span class="list-actions"><button ejs-button cssClass="e-outline" iconCss="fad fa-upload" [routerLink]="['../import']" title="Import" [disabled]="loading || !privileges?.create"></button></span>
@@ -32,17 +32,17 @@
                             <a [routerLink]="['../edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
                         </ng-template>
                     </e-column>   
-                    <e-column field='testNo' headerText='Test No'></e-column>  
-                    <e-column field='scheduledDate' type='date' [format]='dateFormat' headerText='Scheduled For'></e-column>    
-                    <e-column field='analyte' headerText='Analyte'></e-column>
-                    <e-column field='testType' headerText='Test Type' hideAtMedia='(min-width: 1200px)'></e-column>
-                    <e-column field='sampleNo' headerText='Sample No'></e-column> 
-                    <e-column field='customer' headerText='Customer'></e-column>
-                    <e-column field='site' headerText='Site'></e-column> 
-                    <e-column field='lab' headerText='Lab'></e-column>                            
-                    <e-column field='referenceNo' headerText='Reference No' hideAtMedia='(min-width: 1200px)'></e-column>  
-                    <e-column field='result' headerText='Result'></e-column>                    
-                    <e-column field='completedDate' type='date' [format]='dateFormat' headerText='Completed On' hideAtMedia='(min-width: 1200px)'></e-column>
+                    <e-column field='testNo' headerText='Test No' width="120"></e-column>  
+                    <e-column field='scheduledDate' type='date' [format]='dateFormat' headerText='Scheduled For' hideAtMedia='(min-width: 768px)' width="140"></e-column>    
+                    <e-column field='analyte' headerText='Analyte' width="130"></e-column>
+                    <e-column field='testType' headerText='Test Type' width="120"></e-column>
+                    <e-column field='sampleNo' headerText='Sample No' hideAtMedia='(min-width: 768px)' width="130"></e-column> 
+                    <e-column field='customer' headerText='Customer' hideAtMedia='(min-width: 1200px)' width="150"></e-column>
+                    <e-column field='site' headerText='Site' hideAtMedia='(min-width: 1200px)' width="150"></e-column> 
+                    <e-column field='lab' headerText='Lab' width="120"></e-column>                            
+                    <e-column field='referenceNo' headerText='Reference No' hideAtMedia='(min-width: 1600px)' width="150"></e-column>  
+                    <e-column field='result' headerText='Result' hideAtMedia='(min-width: 1600px)' width="120"></e-column>                    
+                    <e-column field='completedDate' type='date' [format]='dateFormat' headerText='Completed On' hideAtMedia='(min-width: 1600px)' width="140"></e-column>
                 </e-columns>
             </ejs-grid>
         </div>
