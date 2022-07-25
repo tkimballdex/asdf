@@ -94,15 +94,19 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 		this.form.get('sampleSuccessful').valueChanges.subscribe(value => {
 			if (value === true) {
 				this.form.get('volume').setValidators([Validators.required]);
+				this.form.get('completedDate').setValidators([Validators.required]);
 				this.form.get('failureReasonId').setValidators(null);
 			} else if (value === false) {
 				this.form.get('failureReasonId').setValidators([Validators.required]);
 				this.form.get('volume').setValidators(null);
+				this.form.get('completedDate').setValidators(null);
 			} else if (value === null) {
 				this.form.get('failureReasonId').setValidators(null);
 				this.form.get('volume').setValidators(null);
+				this.form.get('completedDate').setValidators(null);
 			}
 			this.form.get('volume').updateValueAndValidity();
+			this.form.get('completedDate').updateValueAndValidity();
 			this.form.get('failureReasonId').updateValueAndValidity();
 		});
 	}

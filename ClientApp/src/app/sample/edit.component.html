@@ -74,19 +74,22 @@
 
             <div class="row" *ngIf="form.get('sampleSuccessful').value === true">      
                 <div class="col-md-8 col-lg-6 col-xl-4">
-                    <ejs-numerictextbox format='N1' min='0' max='500' step='1' formControlName="volume" placeholder="Volume*" floatLabelType="Always"></ejs-numerictextbox>
+                    <ejs-numerictextbox format='N1' min='0' max='100000' step='1' formControlName="volume" placeholder="Volume*" floatLabelType="Always"></ejs-numerictextbox>
                     <div *ngIf="this.invalidControl('volume')" class="e-error">
                         Volume is required!
                     </div>
                 </div> 
                 <div class="col-md-8 col-lg-6 col-xl-4">
-                    <ejs-numerictextbox id="sampleExpectedVolume" [(value)]="record.expectedVolume" format='N1' min='0' max='500' step='1' placeholder="Expected Volume" floatLabelType="Always" readOnly="true"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="sampleExpectedVolume" [(value)]="record.expectedVolume" format='N1' min='0' max='100000' step='1' placeholder="Expected Volume" floatLabelType="Always" readOnly="true"></ejs-numerictextbox>
                 </div>
             </div>
 
             <div class="row pad-b10" *ngIf="form.get('sampleSuccessful').value === true">
                 <div class="col-md-8 col-lg-6 col-xl-4">
-                    <ejs-datepicker formControlName="completedDate" placeholder="Completed Date" floatLabelType="Always"></ejs-datepicker>
+                    <ejs-datepicker formControlName="completedDate" placeholder="Completed Date*" floatLabelType="Always"></ejs-datepicker>
+                    <div *ngIf="this.invalidControl('completedDate')" class="e-error">
+                        Completed Date is required!
+                    </div>
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4">
                     <ejs-textbox [(value)]="record.collectedBy" placeholder="Completed By" floatLabelType="Always"></ejs-textbox>
