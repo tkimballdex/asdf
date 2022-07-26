@@ -44,7 +44,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	public deleteCommand: CommandModel[];
 	public submitClicked: boolean = false;
 	public siteAnalyteId: string;
-	public doubleClick: any;
+	public editAnalyte: boolean = false;
 
 	@ViewChild('editTab')
 	public editTab: TabComponent;
@@ -304,6 +304,9 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		if (args.requestType === 'beginEdit' || args.requestType === 'add') {
 			this.submitClicked = false;
 			this.analyteForm = this.createFormGroup(args.rowData);
+			if (args.requestType === 'beginEdit') {
+				this.editAnalyte = true;
+			}
 		}
 
 		if (args.requestType === 'save') {
@@ -327,11 +330,14 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 				if (this.analyteForm.value.sendAlerts === null) {
 					this.analyteForm.value.sendAlerts = false
 				}
+
+				if (args.action === "add") {
+					this.analyteForm.value.id = this.appService.GuidEmpty;
+				}
 			}
-			if (args.action === "add") {
-				this.analyteForm.value.id = this.appService.GuidEmpty;
-			}
-			const response = await this.repository.saveSiteAnalyte(this.analyteForm.value);
+			
+			
+			await this.repository.saveSiteAnalyte(this.analyteForm.value);
 			this.siteAnalytes = await this.repository.listSiteAnalytes(this.id);
 		}
 

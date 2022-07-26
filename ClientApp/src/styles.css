@@ -517,7 +517,8 @@ mat-form-field.mat-form-field {
 	display: none;
 }
 
-#edit-view ejs-textbox input[readonly], #edit-view ejs-textbox textarea[readonly], #containerCreatedDate div, #sampleExpectedVolume div, #collectionStatus div, #containerScheduledDate div {
+#edit-view ejs-textbox input[readonly], #edit-view ejs-textbox textarea[readonly], #containerCreatedDate div, 
+#sampleExpectedVolume div, #collectionStatus div, #containerScheduledDate div, #siteAnalyteDropdown div {
 	background-color: #eee;
 }
 
