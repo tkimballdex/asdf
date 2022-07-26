@@ -8,41 +8,62 @@ import { CustomerRepository } from './repository';
 import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 import { TenantService } from '../shared/tenant.service';
 import { validateServiceEndDate } from '../shared/validators';
+import { EditSettingsModel, ToolbarItems, CommandModel, DialogEditEventArgs } from '@syncfusion/ej2-angular-grids';
+import { Browser } from '@syncfusion/ej2-base';
 
 @Component({
-    selector: 'customer-edit',
-    templateUrl: './edit.component.html',
-    styleUrls: ['./edit.component.scss']
+	selector: 'customer-edit',
+	templateUrl: './edit.component.html',
+	styleUrls: ['./edit.component.scss']
 })
 export class CustomerEditComponent extends PageComponent implements OnInit {
-    constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private repository: CustomerRepository, private tenant: TenantService) {
-        super();
-    }
+	constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private repository: CustomerRepository, private tenant: TenantService) {
+		super();
+	}
 
-    public record: any;
-    public deleteDialog: Dialog;
+	public id: string;
+	public record: any;
 	public form: FormGroup;
+	public deleteDialog: Dialog;
+
+	public tenantAnalytes: any;
+	public customerAnalytes: any = null;
+	public dateFormat: any;
+	public editSettings: EditSettingsModel;
+	public toolbar: ToolbarItems[];
+	public editCommand: CommandModel[];
+	public deleteCommand: CommandModel[];
+	public submitClicked: boolean = false;
+	public analyteForm: FormGroup;
 
 	@ViewChild('editTab')
 	public editTab: TabComponent;
+	//------------------------------------------------------------------------------------------------------------------------
+	async ngOnInit() {
+		this.showSpinner();
 
-    async ngOnInit() {
-        var id = this.route.snapshot.paramMap.get('id');
+		this.id = this.route.snapshot.paramMap.get('id');
+		this.app = await this.appService.getData();
+		this.privileges = this.app.privileges.customers;
+		this.tenantAnalytes = await this.repository.listTenantAnalytes(this.tenant.id);
 
-        this.showSpinner();
-        this.app = await this.appService.getData();
-        this.privileges = this.app.privileges.customers;	
+		this.dateFormat = { type: 'date', format: 'MM/dd/yyyy' };
+		this.editSettings = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Dialog', showDeleteConfirmDialog: true };
+		this.toolbar = ['Add'];
+		this.editCommand = [
+			{ type: 'Edit', buttonOption: { cssClass: 'command-button', iconCss: 'e-edit e-icons' } },
+		];
+		this.deleteCommand = [
+			{ type: 'Delete', buttonOption: { cssClass: 'command-button', iconCss: 'e-delete e-icons' } },
+		];
 
-		if(id == null)
-		{
+		if (this.id == null) {
 			this.record = {
 				tenant: this.tenant.name,
 				active: true
 			}
-		}
-		else
-		{
-			this.record = await this.repository.get(id);
+		} else {
+			this.record = await this.repository.get(this.id);
 		}
 		this.hideSpinner();
 
@@ -62,13 +83,21 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 			notificationEmail: new FormControl(this.record.notificationEmail, [Validators.email]),
 		}, { validators: validateServiceEndDate });
 	}
-
+	//------------------------------------------------------------------------------------------------------------------------
+	createFormGroup(data): FormGroup {
+		return new FormGroup({
+			analyteId: new FormControl(data.analyteId, [Validators.required]),
+			sendNotifications: new FormControl(data.sendNotifications),
+			sendAlerts: new FormControl(data.sendAlerts),
+		});
+	}
+	//------------------------------------------------------------------------------------------------------------------------
 	editTabCreated() {
 		if (history.state.sites) {
 			this.editTab.selectedItem = 1;
 		}
 	}
-
+	//------------------------------------------------------------------------------------------------------------------------
 	async save() {
 		this.form.markAllAsTouched();
 
@@ -102,28 +131,86 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 				}
 			}
 		}
-    }
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	async actionBegin(args) {
+		if (args.requestType === 'beginEdit' || args.requestType === 'add') {
+			this.submitClicked = false;
+			this.analyteForm = this.createFormGroup(args.rowData);
+		}
 
-    delete() {
-        this.deleteDialog = DialogUtility.confirm({
-            title: 'Delete Customer',
-            content: `Are you sure you want to delete the customer <b>${this.record.name}</b>?`,
-            okButton: { click: this.deleteOK.bind(this) }
-        });
-    }
+		if (args.requestType === 'save') {
+			this.submitClicked = true;
+			this.analyteForm.markAllAsTouched();
+			if (this.analyteForm.invalid) {
+				this.showErrorMessage("Please complete all required fields!");
+				// this.customerAnalytes = await this.repository.listCustomerAnalytes(this.id);
+				return;
+			}
 
-    async deleteOK() {
-        this.showSpinner();
-        this.deleteDialog.close();
-        var result = await this.repository.delete(this.record.id);
-        this.hideSpinner();
+			if (args.action === "edit" || args.action === "add") {
+				const analyteName = await this.repository.getAnalyteName(this.analyteForm.value.analyteId);
+				this.analyteForm.value.analyte = analyteName['name'];
+				this.analyteForm.value.tenantId = this.tenant.id;
+				this.analyteForm.value.siteId = this.record.id;
+				this.analyteForm.value.id = args.data.id
+				if (this.analyteForm.value.sendNotifications === null) {
+					this.analyteForm.value.sendNotifications = false
+				}
+				if (this.analyteForm.value.sendAlerts === null) {
+					this.analyteForm.value.sendAlerts = false
+				}
+			}
+			if (args.action === "add") {
+				this.analyteForm.value.id = this.appService.GuidEmpty;
+			}
+			const response = await this.repository.saveCustomerAnalyte(this.analyteForm.value);
+			this.customerAnalytes = await this.repository.listCustomerAnalytes(this.id);
+		}
 
-        if (result.error) {
-            this.showErrorMessage(result.description);
-        }
-        else {
-            this.showDeleteMessage(true);
-            setTimeout(() => this.router.navigate(['/auth/customer/list']), 1000);
-        }
-    }
+		if (args.requestType === 'delete') {
+			this.showSpinner();
+			const result = await this.repository.deleteCustomerAnalyte(args.data[0].id);
+			this.hideSpinner();
+
+			if (result.error) {
+				this.showErrorMessage(result.description);
+			} else {
+				this.showDeleteMessage(true);
+				this.customerAnalytes = await this.repository.listCustomerAnalytes(this.id);
+			}
+		}
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	actionComplete(args: DialogEditEventArgs) {
+		if ((args.requestType === 'beginEdit' || args.requestType === 'add')) {
+			if (Browser.isDevice) {
+				args.dialog.height = window.innerHeight - 90 + 'px';
+				(<Dialog>args.dialog).dataBind();
+			}
+		}
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	delete() {
+		this.deleteDialog = DialogUtility.confirm({
+			title: 'Delete Customer',
+			content: `Are you sure you want to delete the customer <b>${this.record.name}</b>?`,
+			okButton: { click: this.deleteOK.bind(this) }
+		});
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	async deleteOK() {
+		this.showSpinner();
+		this.deleteDialog.close();
+		var result = await this.repository.delete(this.record.id);
+		this.hideSpinner();
+
+		if (result.error) {
+			this.showErrorMessage(result.description);
+		}
+		else {
+			this.showDeleteMessage(true);
+			setTimeout(() => this.router.navigate(['/auth/customer/list']), 1000);
+		}
+	}
 }

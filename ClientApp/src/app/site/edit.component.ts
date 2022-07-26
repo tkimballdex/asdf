@@ -8,10 +8,9 @@ import { PageComponent } from '../shared/page.component';
 import { TenantService } from '../shared/tenant.service';
 import { SiteRepository } from './repository';
 import { TabComponent } from '@syncfusion/ej2-angular-navigations';
-import { EditSettingsModel, ToolbarItems, IEditCell, CommandModel } from '@syncfusion/ej2-angular-grids';
+import { EditSettingsModel, ToolbarItems, CommandModel, DialogEditEventArgs } from '@syncfusion/ej2-angular-grids';
 import { Query, DataManager } from '@syncfusion/ej2-data';
 import { Browser } from '@syncfusion/ej2-base';
-import { EditService, ToolbarService, PageService, DialogEditEventArgs, SaveEventArgs } from '@syncfusion/ej2-angular-grids';
 import { DataUtil } from '@syncfusion/ej2-data';
 import { AbstractControl } from '@angular/forms';
 import { AreaSeries } from '@syncfusion/ej2-angular-charts';
@@ -33,7 +32,6 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	public deleteDialog: Dialog;
 	public form: FormGroup;
 	public dateFormat: any;
-	public analyteParams: IEditCell;
 	public siteAnalytes: any = null;
 	public test: any;
 	public tenantAnalytes: any;
@@ -83,11 +81,10 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 				customer: customer.name,
 				active: true
 			}
-		}
-		else {
+		} else {
 			this.record = await this.repository.get(this.id);
 			this.counties = await this.repository.getCounties(this.record.stateId)
-			this.siteAnalytes = await this.repository.getSiteAnalytes(this.id);
+			this.siteAnalytes = await this.repository.listSiteAnalytes(this.id);
 
 			// (document.getElementsByClassName('e-tbar-btn')[1] as any).classList.add('hide-edit');
 		}
@@ -116,9 +113,6 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			highThreshold: new FormControl(data.highThreshold, [Validators.required]),
 			sendNotifications: new FormControl(data.sendNotifications),
 			sendAlerts: new FormControl(data.sendAlerts),
-			showOnDashboard: new FormControl(data.showOnDashboard),
-			showSummary: new FormControl(data.showSummary),
-			showContext: new FormControl(data.showContext),
 		});
 	}
 	//------------------------------------------------------------------------------------------------------------------------
@@ -317,7 +311,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			this.analyteForm.markAllAsTouched();
 			if (this.analyteForm.invalid) {
 				this.showErrorMessage("Please complete all required fields!");
-				this.siteAnalytes = await this.repository.getSiteAnalytes(this.id);
+				this.siteAnalytes = await this.repository.listSiteAnalytes(this.id);
 				return;
 			}
 
@@ -338,7 +332,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 				this.analyteForm.value.id = this.appService.GuidEmpty;
 			}
 			const response = await this.repository.saveSiteAnalyte(this.analyteForm.value);
-			this.siteAnalytes = await this.repository.getSiteAnalytes(this.id);
+			this.siteAnalytes = await this.repository.listSiteAnalytes(this.id);
 		}
 
 		if (args.requestType === 'delete') {
@@ -350,7 +344,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 				this.showErrorMessage(result.description);
 			} else {
 				this.showDeleteMessage(true);
-				this.siteAnalytes = await this.repository.getSiteAnalytes(this.id);
+				this.siteAnalytes = await this.repository.listSiteAnalytes(this.id);
 			}
 		}
 	}
@@ -367,8 +361,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	close() {
 		if (history.state.from == 'sites') {
 			this.router.navigate(['/auth/site/list'], { state: { formState: true } });
-		}
-		else {
+		} else {
 			this.router.navigate(['/auth/customer/edit', this.record.customerId], { state: { sites: true } });
 		}
 	}

@@ -21,4 +21,24 @@ export class CustomerRepository {
     public list(filter: any) {
         return this.http.post(`/customer/list`, filter);
     }
+
+    public listCustomerAnalytes(customerId: string) {
+        return this.http.post(`/customerAnalyte/list?customerId=${customerId}`);
+    }
+
+    public saveCustomerAnalyte(data: any) {
+        return this.http.post<any>(`/customerAnalyte/save`, data);
+    }
+
+    public deleteCustomerAnalyte(customerAnalyteId: any) {
+        return this.http.post<any>(`/customerAnalyte/delete?id=${customerAnalyteId}`);
+    }
+
+    public getAnalyteName(id: string) {
+        return this.http.post(`/analyte/get/${id}`);
+    }
+
+    public listTenantAnalytes(tenantId: any) {
+        return this.http.post(`/site/tenantAnalytes?tenantId=${tenantId}`);
+    }
 }

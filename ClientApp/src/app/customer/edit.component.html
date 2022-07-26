@@ -173,6 +173,47 @@
                             </div>
                         </ng-template>
                     </e-tabitem>
+                    <e-tabitem *ngIf="id !== null">
+                        <ng-template #headerText>
+                            <div>Analytes</div>
+                        </ng-template>
+                        <ng-template #content>
+                            <div class="row">
+                                <div class="col-12 pad-t20">
+                                    <ejs-grid #grid [dataSource]='customerAnalytes' [editSettings]='editSettings' [allowSorting]="true" [toolbar]='toolbar' (actionBegin)='actionBegin($event)' (actionComplete)='actionComplete($event)'>
+                                        <e-columns>
+                                            <e-column [commands]='editCommand' width="70"></e-column>
+                                            <e-column field='analyte' headerText='Analyte' [isPrimaryKey]='true'></e-column>
+                                            <e-column field='sendNotifications' headerText='Send Notifications' [displayAsCheckBox]="true"></e-column>
+                                            <e-column field='sendAlerts' headerText='Send Alerts' [displayAsCheckBox]="true"></e-column>
+                                            <e-column field='lastUpdatedBy' headerText='Last Updated By'></e-column>
+                                            <e-column field='lastUpdatedDate' headerText='Last Updated Date' type='date' [format]='dateFormat' width="180"></e-column>
+                                            <e-column [commands]='deleteCommand' width="50"></e-column>
+                                        </e-columns>
+                                        <ng-template #editSettingsTemplate let-data>
+                                            <div [formGroup]="analyteForm">
+                                                <div class="form-row">
+                                                    <div class="col-md-10">
+                                                        <ejs-dropdownlist formControlName="analyteId" [dataSource]="tenantAnalytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="data.analyteId" placeholder="Analyte*" floatLabelType="Always"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row pad-t20">
+                                                    <div class="col-md-10">
+                                                        <ejs-checkbox formControlName="sendNotifications" [(value)]="data.sendNotifications" label="Send Notifications"></ejs-checkbox>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row pad-t20">
+                                                    <div class="col-md-10">
+                                                        <ejs-checkbox formControlName="sendAlerts" [(value)]="data.sendAlerts" label="Send Alerts"></ejs-checkbox>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </ng-template>
+                                    </ejs-grid>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </e-tabitem>
                 </e-tabitems>
             </ejs-tab>
         </div>

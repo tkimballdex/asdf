@@ -155,4 +155,12 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 		this.hideSpinner();
 	}
 	//-----------------------------------------------------------------------------------------
+	close() {
+		if (history.state.from == 'sampletests') {
+			this.router.navigate(['/auth/sampletest/list'], { state: { formState: true } });
+		} else {
+			this.router.navigate(['/auth/sample/edit', this.record.sampleId], { state: { sampletests: true } });
+		}
+	}
+	//-----------------------------------------------------------------------------------------
 }

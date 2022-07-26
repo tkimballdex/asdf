@@ -38,7 +38,7 @@ export class SiteRepository {
         return this.http.post(`/site/countyList?stateId=${stateId}`);
     }
 
-    public getSiteAnalytes(siteId: string) {
+    public listSiteAnalytes(siteId: string) {
         return this.http.post(`/siteAnalyte/list?siteId=${siteId}`);
     }
 
