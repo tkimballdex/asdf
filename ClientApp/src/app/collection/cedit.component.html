@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4">
-                    <ejs-numerictextbox [(value)]="record.expectedVolume" format='N1' min='0' max='100000' step='1' placeholder="Expected Volume" floatLabelType="Always"></ejs-numerictextbox>
+                    <ejs-numerictextbox [(value)]="record.expectedVolume" format='N1' min='0' max='100000' step='1' placeholder="Expected Volume (mL)" floatLabelType="Always"></ejs-numerictextbox>
                 </div> 
             </div>                           
             
@@ -72,22 +72,22 @@
 
             <div class="row" *ngIf="form.get('containerSuccessful').value === true">      
                 <div class="col-md-6 col-lg-5 col-xl-4">
-                    <ejs-numerictextbox format='N1' min='0' max='500' step='1' formControlName="volume" showClearButton="true" placeholder="Volume*" floatLabelType="Always"></ejs-numerictextbox>
+                    <ejs-numerictextbox format='N1' min='0' max='500' step='1' formControlName="volume" showClearButton="true" placeholder="Volume* (mL)" floatLabelType="Always"></ejs-numerictextbox>
                     <div *ngIf="this.invalidControl('volume')" class="e-error">
                         Volume is required!
                     </div>
                 </div> 
                 <div class="col-md-6 col-lg-5 col-xl-4">
-                    <ejs-numerictextbox [(value)]="record.temperature" format='N1' min='-55' max='212' step='0.1' placeholder="Temperature" floatLabelType="Always"></ejs-numerictextbox>
+                    <ejs-numerictextbox [(value)]="record.temperature" format='N1' min='-55' max='212' step='0.1' placeholder="Temperature (&#8451;)" floatLabelType="Always"></ejs-numerictextbox>
                 </div>
             </div>
 
             <div class="row pad-b10" *ngIf="form.get('containerSuccessful').value === true">                               
                 <div class="col-md-6 col-lg-5 col-xl-4">
-                    <ejs-numerictextbox [(value)]="record.acidity" format='N1' min='0' max='14' step='0.1' placeholder="Acidity" floatLabelType="Always"></ejs-numerictextbox>
+                    <ejs-numerictextbox [(value)]="record.acidity" format='N1' min='0' max='14' step='0.1' placeholder="Acidity (pH)" floatLabelType="Always"></ejs-numerictextbox>
                 </div>
                 <div class="col-md-6 col-lg-5 col-xl-4">
-                    <ejs-numerictextbox [(value)]="record.conductivity" format='N1' min='0' max='25000' step='0.1' placeholder="Conductivity" floatLabelType="Always"></ejs-numerictextbox>
+                    <ejs-numerictextbox [(value)]="record.conductivity" format='N1' min='0' max='25000' step='0.1' placeholder="Conductivity (mho)" floatLabelType="Always"></ejs-numerictextbox>
                 </div>                                 
             </div>                       
 

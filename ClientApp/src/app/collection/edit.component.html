@@ -99,17 +99,17 @@
     
                 <div class="row" *ngIf="form.get('collectionSuccessful').value === 2">
                     <div class="col-md-6 col-lg-5 col-xl-4">
-                        <ejs-numerictextbox [(value)]="record.flowRate" format='N1' min='0' max='500' step='1' placeholder="Flow Rate" floatLabelType="Always"></ejs-numerictextbox>
+                        <ejs-numerictextbox [(value)]="record.flowRate" format='N1' min='0' max='500' step='1' placeholder="Flow Rate (GPM)" floatLabelType="Always"></ejs-numerictextbox>
                     </div>
                 </div>
     
                 <div class="row" *ngIf="form.get('collectionSuccessful').value === 2">
                     <div class="col-md-6 col-lg-5 col-xl-4">
-                        <ejs-numerictextbox [(value)]="record.temperature" format='N1' min='-100' max='150' step='0.1' placeholder="Ambient Temperature" floatLabelType="Always"></ejs-numerictextbox>
+                        <ejs-numerictextbox [(value)]="record.temperature" format='N1' min='-100' max='150' step='0.1' placeholder="Ambient Temperature (&#8451;)" floatLabelType="Always"></ejs-numerictextbox>
                     </div>
     
                     <div class="col-md-6 col-lg-5 col-xl-4">
-                        <ejs-numerictextbox [(value)]="record.humidity" format='N1' min='0' max='100' step='0.1' placeholder="Humidity" floatLabelType="Always"></ejs-numerictextbox>
+                        <ejs-numerictextbox [(value)]="record.humidity" format='N1' min='0' max='100' step='0.1' placeholder="Humidity (%)" floatLabelType="Always"></ejs-numerictextbox>
                     </div>
                 </div>
     
@@ -161,8 +161,8 @@
                                                 </e-column>
                                                 <e-column field='containerNo' headerText='Container No'></e-column>
                                                 <e-column field='container' editType='dropdownedit' [edit]='app.containerTypes' headerText='Container'></e-column>
-                                                <e-column field='volume' headerText='Volume' textAlign='Center' editType='numericedit' format='N0'></e-column>
-                                                <e-column field='acidity' headerText='Acidity' textAlign='Center'></e-column>
+                                                <e-column field='volume' headerText='Volume (mL)' textAlign='Center' editType='numericedit' format='N0'></e-column>
+                                                <e-column field='acidity' headerText='Acidity (pH)' textAlign='Center'></e-column>
                                                 <e-column field='status' headerText='Failure'></e-column>
                                             </e-columns>
                                         </ejs-grid>
