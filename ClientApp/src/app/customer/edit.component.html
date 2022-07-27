@@ -157,12 +157,12 @@
                                                     <a [routerLink]="['/auth/site/edit', data.id]" [state]="{ from: 'customer' }"><i class="fas fa-pencil-alt edit-icon"></i></a>
                                                 </ng-template>
                                             </e-column>
-                                            <e-column field='name' headerText='Name'></e-column>
-                                            <e-column field='address' headerText='Address'></e-column>
-                                            <e-column field='city' headerText='City'></e-column>
-                                            <e-column field='state' headerText='State'></e-column>
-                                            <e-column field='postalCode' headerText='Postal Code'></e-column>
-                                            <e-column headerText='Phone No'>
+                                            <e-column field='name' headerText='Name' width="150"></e-column>
+                                            <e-column field='address' headerText='Address' hideAtMedia='(min-width: 1200px)' width="150"></e-column>
+                                            <e-column field='city' headerText='City' hideAtMedia='(min-width: 1200px)' width="150"></e-column>
+                                            <e-column field='state' headerText='State' width="120"></e-column>
+                                            <e-column field='postalCode' headerText='Postal Code' width="120"></e-column>
+                                            <e-column headerText='Phone No' hideAtMedia='(min-width: 1200px)' width="120">
                                                 <ng-template #template let-data>
                                                     <span>{{data.contactPhoneNo | mask: '(000) 000-0000'}}</span>
                                                 </ng-template>
@@ -179,15 +179,15 @@
                         </ng-template>
                         <ng-template #content>
                             <div class="row">
-                                <div class="col-12 pad-t20">
+                                <div class="col-10 pad-t20">
                                     <ejs-grid #grid [dataSource]='customerAnalytes' [editSettings]='editSettings' [allowSorting]="true" [toolbar]='toolbar' (actionBegin)='actionBegin($event)' (actionComplete)='actionComplete($event)'>
                                         <e-columns>
-                                            <e-column [commands]='editCommand' width="70"></e-column>
-                                            <e-column field='analyte' headerText='Analyte' [isPrimaryKey]='true'></e-column>
-                                            <e-column field='sendNotifications' headerText='Send Notifications' [displayAsCheckBox]="true"></e-column>
-                                            <e-column field='sendAlerts' headerText='Send Alerts' [displayAsCheckBox]="true"></e-column>
-                                            <e-column field='lastUpdatedBy' headerText='Last Updated By'></e-column>
-                                            <e-column field='lastUpdatedDate' headerText='Last Updated Date' type='date' [format]='dateFormat' width="180"></e-column>
+                                            <e-column [commands]='editCommand' width="60"></e-column>
+                                            <e-column field='analyte' headerText='Analyte' [isPrimaryKey]='true' width="150"></e-column>
+                                            <e-column field='sendNotifications' headerText='Send Notifications' [displayAsCheckBox]="true" hideAtMedia='(min-width: 1200px)' width="160"></e-column>
+                                            <e-column field='sendAlerts' headerText='Send Alerts' [displayAsCheckBox]="true" hideAtMedia='(min-width: 1200px)' width="120"></e-column>
+                                            <e-column field='lastUpdatedBy' headerText='Last Updated By' hideAtMedia='(min-width: 1560px)' width="160"></e-column>
+                                            <e-column field='lastUpdatedDate' headerText='Last Updated Date' type='date' [format]='dateFormat' hideAtMedia='(min-width: 1560px)' width="160"></e-column>
                                             <e-column [commands]='deleteCommand' width="50"></e-column>
                                         </e-columns>
                                         <ng-template #editSettingsTemplate let-data>

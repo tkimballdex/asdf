@@ -129,8 +129,10 @@ export class NewsArticleEditComponent extends PageComponent implements OnInit {
 	}
 	//-------------------------------------------------------------------------------------------
 	async downloadDocument(file: any) {
+		this.showSpinner();
 		var blob = await this.repository.downloadDocument(file.id);
 		this.downloadFile(blob, file.name);
+		this.hideSpinner();
 	}
 	//-------------------------------------------------------------------------------------------
 	async deleteDocument(file: any) {

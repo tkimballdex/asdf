@@ -60,7 +60,7 @@
     </div>
 
     <div class="row pad-b20">
-        <div class="col-8 pad-t20">
+        <div class="col-sm-12 col-md-8 pad-t20">
             <ejs-grid [dataSource]="documents" [allowPaging]="false" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="false" [allowFiltering]="false">
                 <e-columns>
                     <e-column width="110" textAlign="center" headerText="Download">
@@ -68,11 +68,11 @@
                             <a [routerLink]="" (click)="downloadDocument(data)" title="Download document"><i class="fas fa-file-download edit-icon"></i></a>
                         </ng-template>
                     </e-column>
-                    <e-column field='name' headerText='Document'></e-column>
-                    <e-column field='size' headerText='File Size' width="100"></e-column>
+                    <e-column field='name' headerText='Document' width="250"></e-column>
+                    <e-column field='size' headerText='File Size' hideAtMedia='(min-width: 992px)' width="100"></e-column>
                     <e-column width="90" headerTextAlign="center" textAlign="center" headerText="Delete">
                         <ng-template #template let-data>
-                            <a [routerLink]="" (click)="deleteDocument(data)" title="Delete document"><i class="fas fa-trash-alt"></i></a>
+                            <a (click)="deleteDocument(data)" title="Delete document"><i class="e-icons e-delete text-danger"></i></a>
                         </ng-template>
                     </e-column>
                 </e-columns>

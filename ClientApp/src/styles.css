@@ -551,4 +551,5 @@ mat-form-field.mat-form-field {
 
 .e-delete:before{
     content: '\e965';
+    cursor: pointer;
 }

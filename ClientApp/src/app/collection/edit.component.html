@@ -159,11 +159,11 @@
                                                         <a [routerLink]="['/auth/collection/cedit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
                                                     </ng-template>
                                                 </e-column>
-                                                <e-column field='containerNo' headerText='Container No'></e-column>
-                                                <e-column field='container' editType='dropdownedit' [edit]='app.containerTypes' headerText='Container'></e-column>
-                                                <e-column field='volume' headerText='Volume (mL)' textAlign='Center' editType='numericedit' format='N0'></e-column>
-                                                <e-column field='acidity' headerText='Acidity (pH)' textAlign='Center'></e-column>
-                                                <e-column field='status' headerText='Failure'></e-column>
+                                                <e-column field='containerNo' headerText='Container No' width="140"></e-column>
+                                                <e-column field='container' editType='dropdownedit' [edit]='app.containerTypes' headerText='Container' hideAtMedia='(min-width: 700px)' width="150"></e-column>
+                                                <e-column field='volume' headerText='Volume (mL)' textAlign='Center' editType='numericedit' format='N0' width="140"></e-column>
+                                                <e-column field='acidity' headerText='Acidity (pH)' textAlign='Center' hideAtMedia='(min-width: 800px)' width="130"></e-column>
+                                                <e-column field='status' headerText='Failure' hideAtMedia='(min-width: 992px)' width="120"></e-column>
                                             </e-columns>
                                         </ejs-grid>
                                     </div>
@@ -193,12 +193,12 @@
                                                         <a [routerLink]="['/auth/sample/edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
                                                     </ng-template>
                                                 </e-column>
-                                                <e-column field='sampleNo' headerText='Sample No'></e-column>
-                                                <e-column field='referenceNo' headerText='Reference No'></e-column>
-                                                <e-column field='volume' headerText='Volume' textAlign='Center'></e-column>
-                                                <e-column field='containerNo' headerText='Container No'></e-column>
-                                                <e-column field='shipTo' headerText='Ship To' textAlign='Center'></e-column>
-                                                <e-column field='status' headerText='Status'></e-column>
+                                                <e-column field='sampleNo' headerText='Sample No' width="140"></e-column>
+                                                <e-column field='referenceNo' headerText='Reference No' width="140"></e-column>
+                                                <e-column field='volume' headerText='Volume' textAlign='Center' hideAtMedia='(min-width: 992px)' width="120"></e-column>
+                                                <e-column field='containerNo' headerText='Container No' hideAtMedia='(min-width: 992px)' width="140"></e-column>
+                                                <e-column field='shipTo' headerText='Ship To' textAlign='Center' hideAtMedia='(min-width: 768px)' width="140"></e-column>
+                                                <e-column field='status' headerText='Status' hideAtMedia='(min-width: 768px)' width="130"></e-column>
                                             </e-columns>
                                         </ejs-grid>
                                     </div>

@@ -41,6 +41,11 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 			this.recordData = await this.repository.get(id);
 			this.record = this.recordData.record;
 			this.record.variants = this.recordData.variants;
+			if (this.record.failureReasonId) {
+				this.testSuccessfulBool = false;
+			} else if (this.record.resultValue) {
+				this.testSuccessfulBool = true;
+			}
 		} else if (sampleId) {
 			var sample = await this.repository.getSample(sampleId);
 			this.record = {
@@ -68,28 +73,29 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 			testTypeId: new FormControl(this.record.testTypeId, [Validators.required]),
 			sampleId: new FormControl(this.record.sampleId),
 			testSuccessful: new FormControl(this.testSuccessfulBool),
-			testResult: new FormControl(this.record.testResultId),
+			testResultId: new FormControl(this.record.testResultId),
 			resultValue: new FormControl(this.record.resultValue),
-			rejectionReason: new FormControl(this.record.rejectionReasonId)
+			failureReasonId: new FormControl(this.record.failureReasonId),
+			completedDate: new FormControl(this.record.completedDate)
 		});
 
 		this.form.get('testSuccessful').valueChanges.subscribe(value => {
 			if (value === true) {
-				this.form.get('testResult').setValidators([Validators.required]);
+				this.form.get('testResultId').setValidators([Validators.required]);
 				this.form.get('resultValue').setValidators([Validators.required]);
-				this.form.get('rejectionReason').setValidators(null);
+				this.form.get('failureReasonId').setValidators(null);
 			} else if (value === false) {
-				this.form.get('rejectionReason').setValidators([Validators.required]);
-				this.form.get('testResult').setValidators(null);
+				this.form.get('failureReasonId').setValidators([Validators.required]);
+				this.form.get('testResultId').setValidators(null);
 				this.form.get('resultValue').setValidators(null);
 			} else if (value === null) {
-				this.form.get('rejectionReason').setValidators(null);
-				this.form.get('testResult').setValidators(null);
+				this.form.get('failureReasonId').setValidators(null);
+				this.form.get('testResultId').setValidators(null);
 				this.form.get('resultValue').setValidators(null);
 			}
-			this.form.get('testResult').updateValueAndValidity();
+			this.form.get('testResultId').updateValueAndValidity();
 			this.form.get('resultValue').updateValueAndValidity();
-			this.form.get('rejectionReason').updateValueAndValidity();
+			this.form.get('failureReasonId').updateValueAndValidity();
 		});
     }
     //-----------------------------------------------------------------------------------------
@@ -103,9 +109,18 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 
 		Object.assign(this.record, this.form.value);
 
+		if (this.form.controls.testSuccessful.value === true || this.form.controls.testSuccessful.value === null) {
+			this.record.failureReasonId = null;
+		} 
+		if (this.form.controls.testSuccessful.value === false || this.form.controls.testSuccessful.value === null) {
+			this.record.resultValue = null;
+			this.record.testResultId = null;
+		}
+
 		var add = !this.record.id;
 		this.showSpinner();
 		this.record.tenantId = this.tenant.id;
+		
 		var returnValue = await this.repository.save(this.record);
 		this.hideSpinner();
 

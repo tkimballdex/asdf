@@ -60,7 +60,7 @@
                     <ejs-textbox [(value)]="record.referenceNo" placeholder="Lab Reference No" floatLabelType="Always"></ejs-textbox>           
                 </div>
                 <div class="col-md-6 col-lg-6 col-xl-5">
-                    <ejs-datepicker [(value)]="record.completedDate" placeholder="Test Completed On" floatLabelType="Always"></ejs-datepicker>
+                    <ejs-datepicker formControlName="completedDate" placeholder="Test Completed On" floatLabelType="Always"></ejs-datepicker>
                 </div>
             </div>
         </div>
@@ -77,8 +77,8 @@
         
             <div class="row pad-t10" *ngIf="form.get('testSuccessful').value === true">
                 <div class="col-md-6 col-lg-6 col-xl-4">
-                    <ejs-dropdownlist [dataSource]="testResults" [fields]="{ text: 'name', value: 'id' }" formControlName="testResult" placeholder="Test Result*" floatLabelType="Always"></ejs-dropdownlist>
-                    <div *ngIf="this.invalidControl('testResult')" class="e-error">
+                    <ejs-dropdownlist formControlName="testResultId" [dataSource]="testResults" [fields]="{ text: 'name', value: 'id' }" placeholder="Test Result*" floatLabelType="Always"></ejs-dropdownlist>
+                    <div *ngIf="this.invalidControl('testResultId')" class="e-error">
                         Test Result is required!
                     </div>
                 </div>
@@ -92,8 +92,8 @@
             
             <div class="row pad-t10">
                 <div class="col-md-6 col-lg-6 col-xl-4" *ngIf="form.get('testSuccessful').value === false">
-                    <ejs-dropdownlist [dataSource]="app.testFailureReasons" [fields]="{ text: 'name', value: 'id' }" formControlName="rejectionReason" placeholder="Rejection Reason*" floatLabelType="Always"></ejs-dropdownlist>
-                    <div *ngIf="this.invalidControl('rejectionReason')" class="e-error">
+                    <ejs-dropdownlist formControlName="failureReasonId" [dataSource]="app.testFailureReasons" [fields]="{ text: 'name', value: 'id' }" placeholder="Rejection Reason*" floatLabelType="Always"></ejs-dropdownlist>
+                    <div *ngIf="this.invalidControl('failureReasonId')" class="e-error">
                         Rejection Reason is required!
                     </div>
                 </div>
