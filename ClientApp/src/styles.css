@@ -544,3 +544,7 @@ mat-form-field.mat-form-field {
 .fa-trash-alt, .fa-file-download {
     cursor: pointer;
 }
+
+.e-emptyrow {
+    text-align: center;
+}

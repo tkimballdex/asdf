@@ -41,9 +41,10 @@ export class AnalyteEditComponent extends PageComponent implements OnInit {
 
 		this.form = new FormGroup({
 			name: new FormControl(this.record.name, [Validators.required]),
-			code:new FormControl(this.record.code, [Validators.required]),
-			description:new FormControl(this.record.description, [Validators.required]),
-			resultUnits:new FormControl(this.record.resultUnits, [Validators.required]),
+			code: new FormControl(this.record.code, [Validators.required]),
+			description: new FormControl(this.record.description, [Validators.required]),
+			resultUnits: new FormControl(this.record.resultUnits, [Validators.required]),
+			analyteCategories: new FormControl('', [Validators.required]),
 		});
 	}
 	//-----------------------------------------------------------------------------------------
