@@ -548,3 +548,7 @@ mat-form-field.mat-form-field {
 .e-emptyrow {
     text-align: center;
 }
+
+.e-delete:before{
+    content: '\e965';
+}

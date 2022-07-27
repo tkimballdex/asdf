@@ -11,6 +11,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialo
 import { TenantService } from '../shared/tenant.service';
 import { RadioButtonComponent } from '@syncfusion/ej2-angular-buttons';
 import { validateEndDate } from '../shared/validators';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
 	selector: 'schedule',
@@ -183,6 +184,6 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 
 		this.container.analytes = null;
 		this.container.testType = null;
-		this.container.testTypeNames = this.container.testTypes.map(x => `${x.testType}: ${x.analytes.join(', ')}`).join('; ');
+		this.container.testTypeNames = this.container.testTypes.map(x => `${x.testType} : ${x.analytes.join(', ')}`).join('; ');
 	}
 }
