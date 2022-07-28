@@ -17,7 +17,7 @@ export class CountystatListComponent extends PageComponent implements OnInit {
     }
 	//----------------------------------------------------------------------------
     public list: any;
-	public states: any;
+	public states: any = null;
 	public form: FormParams;
 	public dateFormat = {type:'date', format:'MM/dd/yyyy'};
 
@@ -32,6 +32,11 @@ export class CountystatListComponent extends PageComponent implements OnInit {
 		this.app = await this.appService.getData();
 		this.privileges = (await this.appService.getPrivileges()).counties;
 		await this.tenant.validate();
+		if (this.states === null) {
+			this.states = this.app.states.slice();
+			this.states.unshift({ id: 0, name: 'All' });
+		}
+
 		this.formState.setup(this, new FormParams());
 		this.search();
     }

@@ -10,13 +10,13 @@
         </div>
     </div>
     <div class="row d-flex align-items-end list-content">
-        <div class="col-3">
+        <div class="col-md-5 col-lg-4 col-xl-3">
             <ejs-textbox [(value)]="form.name" placeholder="Name" floatLabelType="Always"></ejs-textbox>
         </div>
-        <div class="col-2">
+        <div class="col-md-4 col-lg-3 col-xl-2">
             <ejs-dropdownlist [dataSource]="app.states" [(value)]="form.stateId" [fields]="{ text: 'name', value: 'id' }" placeholder="State" floatLabelType="Always" (change)="searchClick()"></ejs-dropdownlist>
         </div>
-        <div class="col-3">
+        <div class="col-md-4 col-lg-3 col-xl-2 pad-t20">
             <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>
         </div>
     </div>
@@ -25,23 +25,23 @@
         <div class="col-12 pad-t20">
             <ejs-grid [dataSource]='list' [allowPaging]="true" [pageSettings]='form.pageSettings' [sortSettings]='form.sortSettings' 
             [allowSorting]="true" [allowFiltering]="false" *ngIf="list" (actionComplete)='gridActionHandler($event)' [allowExcelExport]='true' 
-            (excelExportComplete)='excelExportComplete()' #griddemographics>
+            (excelExportComplete)='excelExportComplete()' #grid>
                 <e-columns>
                     <e-column width="70">
                         <ng-template #template let-data>
                             <a [routerLink]="['../edit', data.id]" [state]="{ from: 'States' }"><i class="fas fa-pencil-alt edit-icon"></i></a>
                         </ng-template>
                     </e-column> 
-                    <e-column field='date' type='date' [format]='dateFormat' headerText='Date' width='120'></e-column>                   
-                    <e-column field='state' headerText='State'></e-column>
-                    <e-column field='country' headerText='Country'></e-column>
-                    <e-column field='cases' headerText='Cases' textAlign='Right'></e-column>
-                    <e-column field='tests' headerText='Tests' textAlign='Right'></e-column>
-                    <e-column field='positiveTests' headerText='Positive Tests' textAlign='Right'></e-column>
-                    <e-column field='hospitalized' headerText='Hospitalized' textAlign='Right'></e-column>
-                    <e-column field='vaccinated' headerText='Vaccinated' textAlign='Right'></e-column>    
-                    <e-column field='deaths' headerText='Deaths' textAlign='Right'></e-column>  
-                    <e-column field='icuBedsAvailable' headerText='ICU Beds Avail' textAlign='Right'></e-column>                  
+                    <e-column field='date' type='date' [format]='dateFormat' headerText='Date' hideAtMedia='(min-width: 1400px)' width='120'></e-column>                   
+                    <e-column field='state' headerText='State' width="110"></e-column>
+                    <e-column field='country' headerText='Country' hideAtMedia='(min-width: 1400px)' width="110"></e-column>
+                    <e-column field='cases' headerText='Cases' width="100"></e-column>
+                    <e-column field='tests' headerText='Tests' width="100"></e-column>
+                    <e-column field='positiveTests' headerText='Positive Tests' width="140"></e-column>
+                    <e-column field='hospitalized' headerText='Hospitalized' hideAtMedia='(min-width: 1050px)' width="120"></e-column>
+                    <e-column field='vaccinated' headerText='Vaccinated' hideAtMedia='(min-width: 1050px)' width="120"></e-column>    
+                    <e-column field='deaths' headerText='Deaths' hideAtMedia='(min-width: 1050px)' width="110"></e-column>  
+                    <e-column field='icuBedsAvailable' headerText='ICU Beds' hideAtMedia='(min-width: 1400px)' width="120"></e-column>                  
                 </e-columns>
             </ejs-grid>
         </div> 

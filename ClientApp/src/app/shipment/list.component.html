@@ -8,23 +8,23 @@
             <span class="list-actions"><button ejs-button cssClass="e-outline" iconCss="fad fa-download" [disabled]="!privileges.download" (click)="export()"></button></span>
         </div>
     </div>
-    <div class="row d-flex align-items-end">
-        <div class="col-2">
+    <div class="row d-flex align-items-end list-content">
+        <div class="col-md-4 col-lg-3 col-xl-2">
             <ejs-textbox [(value)]="form.sampleNo" placeholder="Sample No" floatLabelType="Always" (keyup.enter)="search()"></ejs-textbox>
         </div>
-        <div class="col-2">
+        <div class="col-md-4 col-lg-3 col-xl-2">
             <ejs-textbox [(value)]="form.referenceNo" placeholder="Reference No" floatLabelType="Always" (keyup.enter)="search()"></ejs-textbox>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4 col-lg-3 col-xl-2">
             <ejs-datepicker [(value)]="form.startDate" placeholder="Start Date" floatLabelType="Always" (change)="search()"></ejs-datepicker>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4 col-lg-3 col-xl-2">
             <ejs-datepicker [(value)]="form.endDate" placeholder="End Date" floatLabelType="Always" (change)="search()"></ejs-datepicker>
         </div>
-        <div class="col-2">
+        <div class="col-md-4 col-lg-3 col-xl-2">
             <ejs-dropdownlist [dataSource]="statuses" [(value)]="form.sampleStatusId" [fields]="{ text: 'name', value: 'id' }" placeholder="Status" floatLabelType="Always" (change)="search()"></ejs-dropdownlist>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4 col-lg-3 col-xl-2 pad-t15">
             <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>
         </div>
     </div>

@@ -8,7 +8,7 @@
 
     <div class="row pad-t10">         
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-datepicker [(value)]="record.date" formControlName="date" placeholder="Date" floatLabelType="Always"></ejs-datepicker>
+            <ejs-datepicker formControlName="date" placeholder="Date" floatLabelType="Always"></ejs-datepicker>
             <div *ngIf="this.invalidControl('date')" class="e-error">
                 Date is required!
             </div>
