@@ -21,6 +21,7 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 		super();
 	}
 
+	public id: string;
 	public form: FormGroup;
 	public record: any;
 	public collection: any;
@@ -37,10 +38,10 @@ export class CollectionContainerEditComponent extends PageComponent implements O
 		this.privileges = this.app.privileges.samples;
 		this.data = await this.repository.getData();
 
-		var id = this.route.snapshot.paramMap.get('id');
+		this.id = this.route.snapshot.paramMap.get('id');
 
-		if (id) {
-			this.record = await this.repository.getContainer(id);
+		if (this.id) {
+			this.record = await this.repository.getContainer(this.id);
 			if (this.record.failureReasonId) {
 				this.containerSuccessfulBool = false;
 			} else if (this.record.volume > 0) {
