@@ -7,10 +7,10 @@
         </div>
     </div>
     <div class="row d-flex align-items-end list-content">
-        <div class="col-3">
-            <ejs-textbox [(value)]="rolename" placeholder="Role Name" floatLabelType="Always"></ejs-textbox>
+        <div class="col-md-5 col-lg-3">
+            <ejs-textbox [(value)]="rolename" placeholder="Role Name" floatLabelType="Always" (keyup.enter)="search()"></ejs-textbox>
         </div>
-        <div class="col-3">
+        <div class="col-md-5 col-lg-3 pad-t20">
             <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>
         </div>
         <div class="col-12 pad-t20">

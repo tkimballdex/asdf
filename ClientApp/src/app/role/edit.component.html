@@ -7,7 +7,7 @@
     </div>
 
     <div class="row d-flex pad-t20">
-        <div class="col-md-12 d-flex">
+        <div class="col-xs-12 col-lg-4 d-flex">
             <ejs-textbox [(value)]="record.name" placeholder="Role Name" floatLabelType="Always"></ejs-textbox>
         </div>
     </div>
@@ -17,33 +17,33 @@
         <div class="col-md-12">
             <ejs-grid id="privileges-grid" #grid [dataSource]='record.featureRoles' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="false">
                 <e-columns>
-                    <e-column field='name' headerText='Name'></e-column>
+                    <e-column field='name' headerText='Name' width="120"></e-column>
         
-                    <e-column field='create' headerText='Create' textAlign='Center' width="120">
+                    <e-column field='create' headerText='Create' textAlign='Center' width="100">
                         <ng-template #template let-data>
                             <ejs-checkbox [(checked)]="record.featureRoles[data.index].create"></ejs-checkbox>
                         </ng-template>
                     </e-column>
         
-                    <e-column field='read' headerText='Read' textAlign='Center' width="120">
+                    <e-column field='read' headerText='Read' textAlign='Center' width="100">
                         <ng-template #template let-data>
                             <ejs-checkbox [(checked)]="record.featureRoles[data.index].read"></ejs-checkbox>
                         </ng-template>
                     </e-column>
         
-                    <e-column field='update' headerText='Update' textAlign='Center' width="120">
+                    <e-column field='update' headerText='Update' textAlign='Center' width="100">
                         <ng-template #template let-data>
                             <ejs-checkbox [(checked)]="record.featureRoles[data.index].update"></ejs-checkbox>
                         </ng-template>
                     </e-column>
         
-                    <e-column field='delete' headerText='Delete' textAlign='Center' width="120">
+                    <e-column field='delete' headerText='Delete' textAlign='Center' width="100">
                         <ng-template #template let-data>
                             <ejs-checkbox [(checked)]="record.featureRoles[data.index].delete"></ejs-checkbox>
                         </ng-template>
                     </e-column>
         
-                    <e-column field='approve' headerText='Approve' textAlign='Center' width="120">
+                    <e-column field='approve' headerText='Approve' textAlign='Center' width="100">
                         <ng-template #template let-data>
                             <ejs-checkbox [(checked)]="record.featureRoles[data.index].approve"></ejs-checkbox>
                         </ng-template>

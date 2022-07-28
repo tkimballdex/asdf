@@ -22,7 +22,7 @@
         <div class="col-md-4 col-lg-2">
             <ejs-dropdownlist [dataSource]="appService.activeStates" [(value)]="active" [fields]="{ text: 'name', value: 'id' }" placeholder="Active" floatLabelType="Always" (change)="search()"></ejs-dropdownlist>
         </div>
-        <div class="col-md-4 col-lg-3 col-xl-2">
+        <div class="col-md-4 col-lg-3 col-xl-2 pad-t20">
             <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>
         </div>
     </div>

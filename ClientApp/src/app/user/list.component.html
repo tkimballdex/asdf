@@ -8,13 +8,13 @@
     </div>
     <div class="row d-flex align-items-end list-content">  
         <div class="col-sm-6 col-md-3 col-lg-2">
-            <ejs-textbox [(value)]="username" placeholder="Username" floatLabelType="Always"></ejs-textbox>
+            <ejs-textbox [(value)]="username" placeholder="Username" floatLabelType="Always" (keyup.enter)="search()"></ejs-textbox>
         </div>  
         <div class="col-sm-6 col-md-3 col-lg-2">
-            <ejs-dropdownlist [dataSource]="userTypes" [fields]="{ text: 'name', value: 'id' }" [(value)]="userTypeId" placeholder="User Type" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="userTypes" [fields]="{ text: 'name', value: 'id' }" [(value)]="userTypeId" placeholder="User Type" floatLabelType="Always" (change)="search()"></ejs-dropdownlist>
         </div>    
         <div class="col-sm-6 col-md-3 col-lg-2">
-            <ejs-dropdownlist [dataSource]="tenantList" [fields]="{ text: 'name', value: 'id' }" [(value)]="tenantId" placeholder="Tenant" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist [dataSource]="tenantList" [fields]="{ text: 'name', value: 'id' }" [(value)]="tenantId" placeholder="Tenant" floatLabelType="Always" (change)="search()"></ejs-dropdownlist>
         </div>        
         <div class="col-sm-6 col-md-3 col-lg-2 pad-t20">
             <button ejs-button cssClass="e-primary search-button" iconCss= "fal fa-search pad-r10" (click)="search()">Search</button>
@@ -27,9 +27,9 @@
                             <a [routerLink]="['../edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
                         </ng-template>
                     </e-column>
-                    <e-column field='email' headerText='Username'></e-column>
-                    <e-column field='firstName' headerText='First Name'></e-column>
-                    <e-column field='lastName' headerText='Last Name'></e-column>
+                    <e-column field='email' headerText='Username' width="140"></e-column>
+                    <e-column field='firstName' headerText='First Name' width="120"></e-column>
+                    <e-column field='lastName' headerText='Last Name' width="120"></e-column>
                     <e-column headerText='Phone No' hideAtMedia='(min-width: 992px)'>
                         <ng-template #template let-data>
                             <span>{{data.phoneNo | mask: '(000) 000-0000'}}</span>
