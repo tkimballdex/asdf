@@ -48,7 +48,7 @@ export class MasterPageComponent implements OnInit {
         ];
 
 		if (this.authService.instance.getActiveAccount() != null) {
-            this.AccountMenuItem.push({ id: 'logout', text: 'Sign out' });
+            this.AccountMenuItem.push({ id: 'logout', text: 'Sign Out' });
         }
         else {
             this.AccountMenuItem.push({ id: 'login', text: 'Log In' });
@@ -230,14 +230,12 @@ export class MasterPageComponent implements OnInit {
     public selectAccountMenu(args: MenuEventArgs): void {
 		if (args.item.id == 'logout') {
 			this.authService.logout({ postLogoutRedirectUri: window.location.origin });
-		}
-        else if (args.item.id == 'login') {
+		} else if (args.item.id == 'login') {
             this.authService.loginPopup().toPromise().then(() => {
                 this.router.navigate(['/auth']);
                 setTimeout(() => window.location.reload(), 500);
             });
-        }
-        else if (args.item.id == 'tenant') {
+        } else if (args.item.id === 'tenant') {
             this.router.navigate(['/auth/account/tenant']);
         }
     }
