@@ -25,7 +25,7 @@ html, body {
 }
 
 body {
-    font-family: "Segoe UI", "Helvetica Neue", Helvetica,  sans-serif;
+    font-family: "Public Sans", "Segoe UI", "Helvetica Neue", Helvetica,  sans-serif;
     -webkit-tap-highlight-color: transparent;
     background-color: #f1f5f9;    
 }
@@ -137,7 +137,7 @@ mat-form-field.mat-form-field {
 }
 
 #list-view .list-header-title {
-    font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Oswald", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
     display: inline-block;
     font-size: 1.8em;
     font-weight: 400;
@@ -264,7 +264,7 @@ mat-form-field.mat-form-field {
 }
 
 #edit-view .edit-header-title {
-    font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Oswald", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
     display: inline-block;
     font-size: 1.8em;
     font-weight: 300;
@@ -341,7 +341,7 @@ mat-form-field.mat-form-field {
 }
 
 #edit-view .edit-label {
-    font-family: "Segoe UI", GeezaPro, "DejaVu Serif", sans-serif;
+    font-family: "Public Sans", "Segoe UI", GeezaPro, "DejaVu Serif", sans-serif;
     font-size: 12px;
     color: #333;
     margin:0px;
