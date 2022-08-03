@@ -12,35 +12,37 @@
 @import "../node_modules/@syncfusion/ej2-navigations/styles/fabric.css";
 @import '../node_modules/@syncfusion/ej2-angular-grids/styles/fabric.css';
 @import '../node_modules/@syncfusion/ej2-dropdowns/styles/fabric.css';
-@import '../node_modules/@syncfusion/ej2-angular-dropdowns/styles/fabric.css';  
-@import '../node_modules/@syncfusion/ej2-layouts/styles/fabric.css';  
+@import '../node_modules/@syncfusion/ej2-angular-dropdowns/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-layouts/styles/fabric.css';
 @import "../node_modules/@syncfusion/ej2-angular-layouts/styles/fabric.css";
-@import '../node_modules/@syncfusion/ej2-richtexteditor/styles/fabric.css';  
+@import '../node_modules/@syncfusion/ej2-richtexteditor/styles/fabric.css';
 @import "~leaflet/dist/leaflet.css";
 
-html, body {
+html,
+body {
     height: 100%;
     padding: 0;
     margin: 0;
 }
 
 body {
-    font-family: "Public Sans", "Segoe UI", "Helvetica Neue", Helvetica,  sans-serif;
+    font-family: "Public Sans", "Segoe UI", "Helvetica Neue", Helvetica, sans-serif;
     -webkit-tap-highlight-color: transparent;
-    background-color: #f1f5f9;    
+    background-color: #f1f5f9;
 }
+
 /* body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 #login-features.e-dashboardlayout.e-control .e-panel {
-    background: rgba(0, 110, 255, 0.90);    
+    background: rgba(0, 110, 255, 0.90);
     padding: 10px;
     text-align: center;
-    border-width:0px;
+    border-width: 0px;
     box-shadow: none;
     border-radius: 3px;
 }
@@ -48,55 +50,53 @@ a {
 #login-features.e-dashboardlayout.e-control .e-panel .panel-icon {
     font-size: 1.5em;
     font-weight: 500;
-    color:#daddf0;
+    color: #daddf0;
 }
 
 #login-features.e-dashboardlayout.e-control .e-panel .panel-header {
     font-size: 1.1em;
     font-weight: 500;
-    color:#ffffff;
+    color: #ffffff;
 }
 
 #login-features.e-dashboardlayout.e-control .e-panel .panel-content {
     font-size: 0.9em;
     font-weight: 400;
     padding-top: 10px;
-    color:#daddf0;
+    color: #daddf0;
 }
 
-#login-button
-{
-    margin-top:50px;
-    width:90%;
-    height:50px;
+#login-button {
+    margin-top: 50px;
+    width: 90%;
+    height: 50px;
     border: 1px solid #daddf0;
-    background: rgb(0, 99, 228); 
+    background: rgb(0, 99, 228);
     border-radius: 3px;
-    color:#ffffff;
+    color: #ffffff;
     font-weight: 500;
 }
-#login-button:hover
-{
+
+#login-button:hover {
     background: rgb(52, 138, 252);
 }
 
 #login-button .btn-icon {
     font-size: 1.5em;
-    color:#ffffff;
+    color: #ffffff;
     opacity: 0.6;
 }
 
-.login-panel-action
-{
+.login-panel-action {
     color: #ffffff;
     text-align: center;
-    line-height:120px;
+    line-height: 120px;
     vertical-align: bottom;
 }
+
 .login-panel-action a:link,
 .login-panel-action a:hover,
-.login-panel-action a:visited
-{
+.login-panel-action a:visited {
     color: #ffffff;
 }
 
@@ -104,9 +104,8 @@ mat-form-field.mat-form-field {
     width: 100%;
 }
 
-#edit-view .mat-form-field-label
-{
-    font-size: 1.15em;  
+#edit-view .mat-form-field-label {
+    font-size: 1.15em;
 }
 
 #wrapper .e-control {
@@ -115,11 +114,11 @@ mat-form-field.mat-form-field {
 
 /* Start - List View styles*/
 #list-view {
-    border-radius: 5px;   
+    border-radius: 5px;
     border: 1px solid #d8dee6;
     background-color: #ffffff;
-    box-sizing:border-box;
-    padding:15px;
+    box-sizing: border-box;
+    padding: 15px;
     margin-bottom: 20px;
 }
 
@@ -141,25 +140,22 @@ mat-form-field.mat-form-field {
     display: inline-block;
     font-size: 1.8em;
     font-weight: 400;
-    padding-right:20px;
-    color:#666666;
+    padding-right: 20px;
+    color: #666666;
 }
 
-#list-view button
-{
+#list-view button {
     border-radius: 5px;
 }
 
-#list-view .list-header .e-btn .e-btn-icon, 
-#list-view .list-header .e-css.e-btn .e-btn-icon
-{
+#list-view .list-header .e-btn .e-btn-icon,
+#list-view .list-header .e-css.e-btn .e-btn-icon {
     font-size: 20px;
 }
 
-#list-view .search-button
-{
+#list-view .search-button {
     max-width: 100px;
-    height:32px;
+    height: 32px;
 }
 
 #list-view .list-header-add {
@@ -167,17 +163,16 @@ mat-form-field.mat-form-field {
     padding-left: 20px;
     border-left: 1px dotted #d8dee6;
 }
-#list-view .list-actions
-{
-    display:inline-flex;
-    float:right;
-    margin-left:10px;
-    color:#2a89ff;
+
+#list-view .list-actions {
+    display: inline-flex;
+    float: right;
+    margin-left: 10px;
+    color: #2a89ff;
 }
 
-#list-view .list-actions button
-{
-    color:#2a89ff;
+#list-view .list-actions button {
+    color: #2a89ff;
 }
 
 #list-view .list-content {
@@ -194,18 +189,19 @@ mat-form-field.mat-form-field {
     background-color: #f1f5f9;
 }
 
-#list-view .e-grid .e-rowcell
-{
-    padding:10px 8px;
+#list-view .e-grid .e-rowcell {
+    padding: 10px 8px;
 }
 
-#list-view .edit-icon, .edit-icon {
+#list-view .edit-icon,
+.edit-icon {
     padding-left: 15px;
     padding-right: 15px;
     color: #fd7e14;
 }
 
-.e-grid .e-edit::before, .e-grid-menu .e-edit::before {
+.e-grid .e-edit::before,
+.e-grid-menu .e-edit::before {
     color: #fd7e14;
     background-color: transparent;
 }
@@ -224,8 +220,8 @@ mat-form-field.mat-form-field {
     display: hidden;
 }
 
-#list-view label{
-    padding-top:8px;
+#list-view label {
+    padding-top: 8px;
     font-weight: 600;
 }
 
@@ -235,19 +231,20 @@ mat-form-field.mat-form-field {
     padding-right: 10px;
     opacity: 0.5;
 }
+
 /* End - List View styles*/
 /* Start - Edit View styles*/
 #edit-view {
     padding: 10px 15px 15px 15px;
-    border-radius: 3px;   
+    border-radius: 3px;
     border: 1px solid #d8deee;
     background-color: #ffffff;
-    width:100%;
+    width: 100%;
 }
 
 #edit-view .edit-header {
     border-bottom: 2px solid #d8dee6;
-    padding-bottom:10px;
+    padding-bottom: 10px;
 }
 
 #edit-view .edit-header-icon {
@@ -255,10 +252,10 @@ mat-form-field.mat-form-field {
     font-size: 1.6em;
     background-color: #1e88e5;
     padding: 22px 5px 5px 5px;
-    color:white;
-    margin-top:-20px;
+    color: white;
+    margin-top: -20px;
     border-radius: 3px;
-    width:60px;
+    width: 60px;
     height: 60px;
     text-align: center;
 }
@@ -269,18 +266,18 @@ mat-form-field.mat-form-field {
     font-size: 1.8em;
     font-weight: 300;
     padding: 15px 20px 20px 15px;
-    color:#3c4858;
+    color: #3c4858;
 }
 
 #edit-view .edit-header-collection-no {
-    color:#3c4858;
+    color: #3c4858;
     font-weight: 100;
     padding: 18px 20px 15px 20px;
     border-right: 1px dotted #3c485860;
 }
 
 #edit-view .edit-header-status {
-    color:#3c4858;
+    color: #3c4858;
     font-weight: 100;
     padding: 18px 20px 15px 20px;
     border-right: 1px dotted #3c485860;
@@ -304,13 +301,13 @@ mat-form-field.mat-form-field {
 }
 
 #edit-view .success-green {
-    background-color:#388e3c;
-    color:#ffffff;
+    background-color: #388e3c;
+    color: #ffffff;
 }
 
 #edit-view .failure-red {
-    background-color:#d32f2f;
-    color:#ffffff;
+    background-color: #da291c;
+    color: #ffffff;
 }
 
 #edit-view .threeStateToggleBtn .mat-button-toggle .mat-button-toggle-label-content {
@@ -329,7 +326,7 @@ mat-form-field.mat-form-field {
 } */
 
 #edit-view label.e-float-text {
-    padding-top:8px;
+    padding-top: 8px;
     font-weight: 600;
 }
 #edit-view ejs-grid.edit-grid .e-headercelldiv {
@@ -344,8 +341,8 @@ mat-form-field.mat-form-field {
     font-family: "Public Sans", "Segoe UI", GeezaPro, "DejaVu Serif", sans-serif;
     font-size: 12px;
     color: #333;
-    margin:0px;
-    padding:0px;
+    margin: 0px;
+    padding: 0px;
     font-weight: 600;
 }
 #edit-view .edit-grid .edit-icon {
@@ -363,25 +360,26 @@ mat-form-field.mat-form-field {
     border-top: 2px solid #d8deee;
     padding-top: 15px;
 }
-#edit-view .edit-footer button
-{
+#edit-view .edit-footer button {
     width: 100px;
-    height:36px;
+    height: 36px;
     border-radius: 3px;
 }
 #edit-view .edit-footer .save-button,
 #edit-view .edit-footer #save-button {
     width: 130px;
 }
+
 #edit-view .edit-footer .close-button,
 #edit-view .edit-footer #close-button {
-    margin-left:15px;
+    margin-left: 15px;
 }
 
 /* customize the tab */
 #edit-view .e-tab .e-tab-header .e-toolbar-item:not(.e-separator) {
     border: 1px solid #0078d6;
 }
+#edit-view .e-tab .e-tab-header .e-toolbar-item:not(.e-separator),
 #edit-view .e-tab .e-tab-header .e-toolbar-items {
     border-top: 1px solid #0078d6;
 }
@@ -401,7 +399,7 @@ mat-form-field.mat-form-field {
 }
 
 #edit-view .subitem-list-header {
-    padding-top:10px;
+    padding-top: 10px;
 }
 #edit-view .subitem-list-icon {
     display: inline-block;
@@ -514,16 +512,22 @@ mat-form-field.mat-form-field {
 }
 
 #edit-view .e-upload .e-icons.e-file-delete-btn {
-	display: none;
+    display: none;
 }
 
-#edit-view ejs-textbox input[readonly], #edit-view ejs-textbox textarea[readonly], #containerCreatedDate div, 
-#sampleExpectedVolume div, #collectionStatus div, #containerScheduledDate div, #siteAnalyteDropdown div {
-	background-color: #eee;
+#edit-view ejs-textbox input[readonly],
+#edit-view ejs-textbox textarea[readonly],
+#containerCreatedDate div,
+#sampleExpectedVolume div,
+#collectionStatus div,
+#containerScheduledDate div,
+#siteAnalyteDropdown div {
+    background-color: #eee;
 }
 
-#edit-view .ng-touched.ng-invalid input, #edit-view .ng-touched.ng-invalid div {
-	border-bottom-color: #d32f2f;
+#edit-view .ng-touched.ng-invalid input,
+#edit-view .ng-touched.ng-invalid div {
+    border-bottom-color: #d32f2f;
     border-bottom-width: 1px;
 }
 
@@ -541,7 +545,8 @@ mat-form-field.mat-form-field {
     display: none;
 }
 
-.fa-trash-alt, .fa-file-download {
+.fa-trash-alt,
+.fa-file-download {
     cursor: pointer;
 }
 
@@ -549,7 +554,20 @@ mat-form-field.mat-form-field {
     text-align: center;
 }
 
-.e-delete:before{
+.e-delete:before {
     content: '\e965';
     cursor: pointer;
+}
+
+@media only screen and (max-width: 767px) {
+    .button-top-padding {
+        padding-top: 11px;
+        justify-content: start !important;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .checkbox-top-padding {
+        padding-top: 15px;
+    }
 }

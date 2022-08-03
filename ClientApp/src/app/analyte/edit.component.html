@@ -61,14 +61,14 @@
         <div class="col-xs-2 col-lg-5 col-xl-4">
             <ejs-checkbox [(value)]="record.showOnDashboard" label="Show On Dashboard"></ejs-checkbox>
         </div>
-        <div class="col-xs-2 col-lg-5 col-xl-4" [ngClass]="{'pad-t15': window?.innerWidth < 992}">
+        <div class="col-xs-2 col-lg-5 col-xl-4 checkbox-top-padding">
             <ejs-checkbox [(value)]="record.showMap" label="Show Map"></ejs-checkbox>
         </div>
     </div>
 
     <div class="row pad-t15 pad-b20">
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-checkbox [(value)]="record.showContextData" label="Show Context Data"></ejs-checkbox>
+            <ejs-checkbox [(value)]="record.showContextData" label="Dispay Context Data"></ejs-checkbox>
         </div>
     </div>
 
@@ -76,7 +76,7 @@
         <div class="col-md-6 d-flex justify-content-start">
             <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
         </div>
-        <div class="col-sm-6 d-flex justify-content-end">
+        <div class="col-sm-6 d-flex justify-content-end button-top-padding">
             <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
             <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/analyte/list']" [state]='{ formState: true }'>Close</button>
         </div>

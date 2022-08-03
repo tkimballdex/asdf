@@ -69,7 +69,7 @@
             <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading">Save</button>
             <ejs-toast #toast></ejs-toast>
         </div>
-        <div class="col-md-6 d-flex justify-content-end">
+        <div class="col-md-6 d-flex justify-content-end button-top-padding">
             <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id">Delete</button>
             <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/role/list']">Close</button>
         </div>
