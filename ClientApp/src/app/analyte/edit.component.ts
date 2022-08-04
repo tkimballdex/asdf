@@ -20,6 +20,7 @@ export class AnalyteEditComponent extends PageComponent implements OnInit {
 	public record: any;
 	public deleteDialog: Dialog;
 	public data: any;
+	public analyteCategories: any;
 
 	//-----------------------------------------------------------------------------------------
 	async ngOnInit() {
@@ -27,6 +28,7 @@ export class AnalyteEditComponent extends PageComponent implements OnInit {
 		this.app = await this.appService.getData();
 		this.privileges = this.app.privileges.analytes;
 		var id = this.route.snapshot.paramMap.get('id');
+		this.analyteCategories = await this.repository.getAnalyteCategories({ tenantId: this.tenant.id })
 
 		if (id == null) {
 			this.record = {
@@ -44,7 +46,7 @@ export class AnalyteEditComponent extends PageComponent implements OnInit {
 			code: new FormControl(this.record.code, [Validators.required]),
 			description: new FormControl(this.record.description, [Validators.required]),
 			resultUnits: new FormControl(this.record.resultUnits, [Validators.required]),
-			analyteCategories: new FormControl('', [Validators.required]),
+			categoryId: new FormControl(this.record.categoryId, [Validators.required]),
 		});
 	}
 	//-----------------------------------------------------------------------------------------

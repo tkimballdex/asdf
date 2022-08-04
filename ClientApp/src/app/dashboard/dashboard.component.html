@@ -30,7 +30,7 @@
         <div class="col-md-12 col-lg-11 col-xl-10">
             <ejs-dashboardlayout id="default_dashboard" width="100%" [allowDragging]='allowDragging' [columns]="12" #editLayout [cellSpacing]='cellSpacing' [cellAspectRatio]='cellAspectRatio'>
                 <e-panels>
-                    <e-panel [sizeX]="12" [sizeY]="2" [row]="0" [col]="0">
+                    <e-panel [sizeX]="12" [sizeY]="2" [row]="0" [col]="0" *ngIf="mapXSize !== 2">
                         <ng-template #content>
                             <div class="col-12">
                                 <ejs-slider id='square_slider' [type]="default" [min]="sliderMin" [max]="sliderMax" [value]="sliderValue" [step]="sliderStep" [tooltip]="sliderTooltipData" [ticks]="sliderTicksData" [showButtons]=true
@@ -40,7 +40,7 @@
                     </e-panel>
 
                     <!--Start Of Covid Analyte Tiles -->
-                    <e-panel [sizeX]="4" [sizeY]="2" [row]="2" [col]="0" *ngIf="isCovid">
+                    <e-panel [sizeX]="tileXSize" [sizeY]="tileYSize" [row]="2" [col]="0" *ngIf="isCovid">
                         <ng-template #content>
                             <div class="col-12">
                                 <p style="text-align:center;">Current COVID Prevalence</p>
@@ -62,7 +62,7 @@
                             </div>
                         </ng-template>
                     </e-panel>
-                    <e-panel [sizeX]="4" [sizeY]="2" [row]="2" [col]="4" *ngIf="isCovid">
+                    <e-panel [sizeX]="tileXSize" [sizeY]="tileYSize" [row]="2" [col]="4" *ngIf="isCovid">
                         <ng-template #content>
                             <div class="col-12">
                                 <p style="text-align:center;">Predicted COVID Change</p>
@@ -84,7 +84,7 @@
                             </div>
                         </ng-template>
                     </e-panel>
-                    <e-panel [sizeX]="4" [sizeY]="2" [row]="2" [col]="8" *ngIf="isCovid">
+                    <e-panel [sizeX]="tileXSize" [sizeY]="tileYSize" [row]="2" [col]="8" *ngIf="isCovid">
                         <ng-template #content>
                             <div class="col-12">
                                 <p style="text-align:center;">Site Estimates</p>
@@ -107,7 +107,7 @@
                     <!--End Of Covid Analyte Tiles -->
 
                     <!--Start Of Water Tests Analyte Tiles -->
-                    <e-panel [sizeX]="3" [sizeY]="2" [row]="4" [col]="0" *ngIf="isWater">
+                    <e-panel [sizeX]="tileXSize" [sizeY]="tileYSize" [row]="4" [col]="0" *ngIf="isWater">
                         <ng-template #content>
                             <div class="col-12" *ngIf="tileData">
                                 <p style="text-align:center;">{{tileData.tile1Title}}</p>
@@ -130,7 +130,7 @@
                             </div>
                         </ng-template>
                     </e-panel>
-                    <e-panel [sizeX]="3" [sizeY]="2" [row]="4" [col]="3" *ngIf="isWater">
+                    <e-panel [sizeX]="tileXSize" [sizeY]="tileYSize" [row]="4" [col]="3" *ngIf="isWater">
                         <ng-template #content>
                             <div class="col-12" *ngIf="tileData">
                                 <p style="text-align:center;">{{tileData.tile2Title}}</p>
@@ -153,7 +153,7 @@
                             </div>
                         </ng-template>
                     </e-panel>
-                    <e-panel [sizeX]="3" [sizeY]="2" [row]="4" [col]="6" *ngIf="isWater">
+                    <e-panel [sizeX]="tileXSize" [sizeY]="tileYSize" [row]="4" [col]="6" *ngIf="isWater">
                         <ng-template #content>
                             <div class="col-12" *ngIf="tileData">
                                 <p style="text-align:center;">{{tileData.tile3Title}}</p>
@@ -176,7 +176,7 @@
                             </div>
                         </ng-template>
                     </e-panel>
-                    <e-panel [sizeX]="3" [sizeY]="2" [row]="4" [col]="9" *ngIf="isWater">
+                    <e-panel [sizeX]="tileXSize" [sizeY]="tileYSize" [row]="4" [col]="9" *ngIf="isWater">
                         <ng-template #content>
                             <div class="col-12" *ngIf="tileData">
                                 <p style="text-align:center;">{{tileData.tile4Title}}</p>
@@ -200,7 +200,7 @@
                         </ng-template>
                     </e-panel>
                     
-                    <e-panel [sizeX]="4" [sizeY]="2" [row]="30" [col]="0" *ngIf="isWater">
+                    <e-panel [sizeX]="tileXSize" [sizeY]="tileYSize" [row]="30" [col]="0" *ngIf="isWater">
                         <ng-template #content>
                             <div class="col-12" *ngIf="tileData">
                                 <p style="text-align:center;">{{tileData.tile5Title}}</p>
@@ -223,7 +223,7 @@
                             </div>
                         </ng-template>
                     </e-panel>
-                    <e-panel [sizeX]="4" [sizeY]="2" [row]="30" [col]="4" *ngIf="isWater">
+                    <e-panel [sizeX]="tileXSize" [sizeY]="tileYSize" [row]="30" [col]="4" *ngIf="isWater">
                         <ng-template #content>
                             <div class="col-12" *ngIf="tileData">
                                 <p style="text-align:center;">{{tileData.tile6Title}}</p>
@@ -246,7 +246,7 @@
                             </div>
                         </ng-template>
                     </e-panel>
-                    <e-panel [sizeX]="4" [sizeY]="2" [row]="30" [col]="8" *ngIf="isWater">
+                    <e-panel [sizeX]="tileXSize" [sizeY]="tileYSize" [row]="30" [col]="8" *ngIf="isWater">
                         <ng-template #content>
                             <div class="col-12" *ngIf="tileData">
                                 <p style="text-align:center;">{{tileData.tile7Title}}</p>
@@ -271,12 +271,12 @@
                     </e-panel>
                     <!--End Of Water Tests Analyte Tiles -->
 
-                    <e-panel [sizeX]="12" [sizeY]="6" [row]="20" [col]="0">
+                    <e-panel [sizeX]="mapXSize" [sizeY]="mapYSize" [row]="20" [col]="0">
                         <ng-template #content>
                             <google-map id="dashboard-map"></google-map>
                         </ng-template>
                     </e-panel>
-                    <e-panel [sizeX]="12" [sizeY]="6" [row]="80" [col]="0">
+                    <e-panel [sizeX]="largeChartXSize" [sizeY]="largeChartYSize" [row]="80" [col]="0">
                         <ng-template #header>
                             <div *ngIf="!isWater">Positive vs Negative Locations</div>
                             <div *ngIf="isWater">Compliant vs Non-Compliant Locations</div>
@@ -286,7 +286,7 @@
                             </ejs-chart>
                         </ng-template>
                     </e-panel>
-                    <e-panel [sizeX]="6" [sizeY]="5" [row]="90" [col]="0">
+                    <e-panel [sizeX]="smallChartXSize" [sizeY]="smallChartYSize" [row]="90" [col]="0">
                         <ng-template #header>
                             <div *ngIf="!isWater">Daily Positive Locations</div>
                             <div *ngIf="isWater">Daily Non-Compliant Locations</div>
@@ -296,7 +296,7 @@
                             </ejs-chart>
                         </ng-template>
                     </e-panel>
-                    <e-panel [sizeX]="6" [sizeY]="5" [row]="90" [col]="6">
+                    <e-panel [sizeX]="smallChartXSize" [sizeY]="smallChartYSize" [row]="90" [col]="6">
                         <ng-template #header>
                             <div *ngIf="!isWater">Positive Locations by Site</div>
                             <div *ngIf="isWater">Non-Compliant Locations by Site</div>

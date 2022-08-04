@@ -22,4 +22,8 @@ export class AnalyteRepository {
     public list(filter: any) {
         return this.http.post(`/analyte/list`, filter);
     }
+
+    public getAnalyteCategories(filter: any) {
+        return this.http.post(`/analyte/categories`, filter);
+    }
 }

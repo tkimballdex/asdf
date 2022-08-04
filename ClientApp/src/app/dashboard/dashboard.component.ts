@@ -50,6 +50,15 @@ export class DashboardComponent extends PageComponent implements OnInit, AfterVi
 	public graphData: any;
 	public startDate: Date;
 	public endDate: Date;
+	public mapXSize: number = 12;
+	public mapYSize: number = 6;
+	public largeChartXSize: number = 12;
+	public largeChartYSize: number = 6;
+	public smallChartXSize: number = 6;
+	public smallChartYSize: number = 5;
+	public tileXSize: number = 3;
+	public tileYSize: number = 2;
+
 	public siteMapDate: Date;
 	public cellSpacing: number[] = [20, 20];
 	public cellAspectRatio: number = 100 / 60;
@@ -96,6 +105,16 @@ export class DashboardComponent extends PageComponent implements OnInit, AfterVi
 		this.endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 		this.startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 14);
 		this.tooltip = { enable: true };
+		if (window.matchMedia("only screen and (max-width: 600px)").matches) {
+			this.mapXSize = 2;
+			this.mapYSize = 1;
+			this.largeChartXSize = 4;
+			this.largeChartYSize = 2;
+			this.smallChartXSize = 4;
+			this.smallChartYSize = 2;
+			this.tileXSize = 2;
+			this.tileYSize = 1;
+		};
 
 		this.analyteId = this.data.analytes[0].id;
 		this.initialized = true;
