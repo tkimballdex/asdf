@@ -23,7 +23,7 @@ export class AnalyteRepository {
         return this.http.post(`/analyte/list`, filter);
     }
 
-    public getAnalyteCategories(filter: any) {
-        return this.http.post(`/analyte/categories`, filter);
-    }
+    public getData(filter: any) {
+		return this.http.post(`/analyte/getData`, filter);
+	}
 }

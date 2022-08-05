@@ -26,16 +26,15 @@ export class AnalyteEditComponent extends PageComponent implements OnInit {
 	async ngOnInit() {
 		this.showSpinner();
 		this.app = await this.appService.getData();
+		this.data = await this.repository.getData({ tenantId: this.tenant.id });
 		this.privileges = this.app.privileges.analytes;
 		var id = this.route.snapshot.paramMap.get('id');
-		this.analyteCategories = await this.repository.getAnalyteCategories({ tenantId: this.tenant.id })
 
 		if (id == null) {
 			this.record = {
 				active: true
 			};
-		}
-		else {
+		} else {
 			this.record = await this.repository.get(id);
 		}
 		this.hideSpinner();

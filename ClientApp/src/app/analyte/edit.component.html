@@ -35,7 +35,7 @@
 
     <div class="row pad-t20">
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist formControlName="categoryId" [dataSource]="analyteCategories" [fields]="{ text: 'name', value: 'id' }" placeholder="Category*" floatLabelType="Always"></ejs-dropdownlist>
+            <ejs-dropdownlist formControlName="categoryId" [dataSource]="data.categories" [fields]="{ text: 'name', value: 'id' }" placeholder="Category*" floatLabelType="Always"></ejs-dropdownlist>
             <div *ngIf="this.invalidControl('categoryId')" class="e-error">
                 Category is required!
             </div>
@@ -57,12 +57,18 @@
         </div>
     </div>
 
-    <div class="row pad-t20 pad-b20">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-checkbox [(value)]="record.showContextData" label="Dispay Context Data"></ejs-checkbox>
+    <div class="row pad-t20">
+        <div class="col-xs-2 col-lg-5 col-xl-4">
+            <ejs-checkbox [(value)]="record.showOnDashboard" label="Show Summary"></ejs-checkbox>
         </div>
-        <div class="col-xs-2 col-lg-5 col-xl-4 checkbox-top-padding">
-            <ejs-checkbox [(value)]="record.showMap" label="Display Map"></ejs-checkbox>
+        <div class="col-md-6 col-lg-5 col-xl-4 checkbox-top-padding">
+            <ejs-checkbox [(value)]="record.showContextData" label="Show Context"></ejs-checkbox>
+        </div>
+    </div>
+
+    <div class="row pad-t15 pad-b20">
+        <div class="col-xs-2 col-lg-5 col-xl-4">
+            <ejs-checkbox [(value)]="record.showMap" label="Show Map"></ejs-checkbox>
         </div>
     </div>
 
