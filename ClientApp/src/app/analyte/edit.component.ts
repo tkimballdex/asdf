@@ -20,7 +20,6 @@ export class AnalyteEditComponent extends PageComponent implements OnInit {
 	public record: any;
 	public deleteDialog: Dialog;
 	public data: any;
-	public analyteCategories: any;
 
 	//-----------------------------------------------------------------------------------------
 	async ngOnInit() {
