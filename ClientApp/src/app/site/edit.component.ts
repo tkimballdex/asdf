@@ -85,8 +85,6 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			this.record = await this.repository.get(this.id);
 			this.counties = await this.repository.getCounties(this.record.stateId)
 			this.siteAnalytes = await this.repository.listSiteAnalytes(this.id);
-
-			// (document.getElementsByClassName('e-tbar-btn')[1] as any).classList.add('hide-edit');
 		}
 
 		this.hideSpinner();

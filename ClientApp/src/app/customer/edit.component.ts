@@ -64,6 +64,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 			}
 		} else {
 			this.record = await this.repository.get(this.id);
+			this.customerAnalytes = await this.repository.listCustomerAnalytes(this.id);
 		}
 		this.hideSpinner();
 
@@ -145,7 +146,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 			this.analyteForm.markAllAsTouched();
 			if (this.analyteForm.invalid) {
 				this.showErrorMessage("Please complete all required fields!");
-				// this.customerAnalytes = await this.repository.listCustomerAnalytes(this.id);
+				this.customerAnalytes = await this.repository.listCustomerAnalytes(this.id);
 				return;
 			}
 
@@ -153,13 +154,16 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 				const analyteName = await this.repository.getAnalyteName(this.analyteForm.value.analyteId);
 				this.analyteForm.value.analyte = analyteName['name'];
 				this.analyteForm.value.tenantId = this.tenant.id;
-				this.analyteForm.value.siteId = this.record.id;
+				this.analyteForm.value.customerId = this.record.id;
 				this.analyteForm.value.id = args.data.id
 				if (this.analyteForm.value.sendNotifications === null) {
 					this.analyteForm.value.sendNotifications = false
 				}
 				if (this.analyteForm.value.sendAlerts === null) {
 					this.analyteForm.value.sendAlerts = false
+				}
+				if (this.analyteForm.value.showOnDashboard === null) {
+					this.analyteForm.value.showOnDashboard = false
 				}
 			}
 			if (args.action === "add") {

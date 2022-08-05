@@ -1,4 +1,4 @@
-<div id="edit-view" *ngIf="record" class="container-fluid" [formGroup]="form">
+<div id="edit-view" *ngIf="record && form" class="container-fluid" [formGroup]="form">
     <div class="row d-flex align-items-center edit-header">
         <div class="col-md-6 d-flex">
             <span class="edit-header-icon"><i class="fas fa-user-crown"></i></span>
@@ -173,7 +173,7 @@
                             </div>
                         </ng-template>
                     </e-tabitem>
-                    <e-tabitem *ngIf="id !== null">
+                    <e-tabitem *ngIf="customerAnalytes !== null">
                         <ng-template #headerText>
                             <div>Analytes</div>
                         </ng-template>
