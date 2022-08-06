@@ -174,7 +174,6 @@ export class DashboardComponent extends PageComponent implements OnInit, AfterVi
 	}
 
 	async setGraphData(from) {
-		console.log(`setGraphData ${from} ${this.initialized}`);
 		if (!this.initialized || !this.customerId || !this.analyteId || !this.selectedSites) return;
 
 		await this.getSummary();

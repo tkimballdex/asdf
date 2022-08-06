@@ -197,7 +197,6 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 	}
 	//------------------------------------------------------------------------------------------------------------------------
 	delete() {
-		console.log(window.innerWidth)
 		this.deleteDialog = DialogUtility.confirm({
 			title: 'Delete Customer',
 			content: `Are you sure you want to delete the customer <b>${this.record.name}</b>?`,

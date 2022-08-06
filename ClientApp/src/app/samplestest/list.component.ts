@@ -17,7 +17,6 @@ export class SampleTestListComponent extends PageComponent implements OnInit {
     }
     //------------------------------------------------------------------------------------------------------------------------
     public list: any;
-    public searchTxt: any;
     public customers: any;
     public dateFormat: any;
     public form: FormParams;
