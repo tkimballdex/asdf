@@ -221,7 +221,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		setTimeout(function () {
 			var googleMap = $this.map?.googleMap;
 
-			googleMap.setOptions({ mapTypeControl: true, streetViewControl: false, scrollwheel: true });
+			googleMap.setOptions({ mapTypeControl: true, streetViewControl: false, });
 
 			$this.record.locations.forEach(function (x) {
 				if (x.latitude && x.longitude) {

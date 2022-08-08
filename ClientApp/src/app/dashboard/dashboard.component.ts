@@ -224,7 +224,7 @@ export class DashboardComponent extends PageComponent implements OnInit, AfterVi
 				stylers: [{ visibility: "off" }],
 			}
 		];		
-		googleMap.setOptions({ styles: mapStyles, mapTypeControl: true, streetViewControl: false, scrollwheel: true });
+		googleMap.setOptions({ styles: mapStyles, mapTypeControl: true, streetViewControl: false, });
 
 		this.markers.forEach(function (x) {
 			x.setMap(null);
