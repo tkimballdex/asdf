@@ -224,11 +224,7 @@ export class DashboardComponent extends PageComponent implements OnInit, AfterVi
 				stylers: [{ visibility: "off" }],
 			}
 		];		
-		googleMap.setOptions({ styles: mapStyles, mapTypeControl: false, streetViewControl: false, scrollwheel: false });
-
-		const infoWindow = new google.maps.InfoWindow({
-			content: 'To Set'
-		});
+		googleMap.setOptions({ styles: mapStyles, mapTypeControl: true, streetViewControl: false, scrollwheel: true });
 
 		this.markers.forEach(function (x) {
 			x.setMap(null);
@@ -262,7 +258,11 @@ export class DashboardComponent extends PageComponent implements OnInit, AfterVi
 							strokeColor: "#ffffff",
 							scale: 0.03,
 						},
-					});					
+					});	
+					
+					const infoWindow = new google.maps.InfoWindow({
+						content: x.name
+					});
 
 					$this.markers.push(marker);
 

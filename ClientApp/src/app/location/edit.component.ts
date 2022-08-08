@@ -80,6 +80,8 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 			setTimeout(function () {
 				const googleMap = $this.map.googleMap;
 
+				googleMap.setOptions({ mapTypeControl: true, streetViewControl: false, scrollwheel: true });
+
 				if (hasPosition) {
 					$this.siteMarker = new google.maps.Marker({
 						position: { lat: $this.record.latitude, lng: $this.record.longitude },
