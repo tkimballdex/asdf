@@ -34,10 +34,13 @@ export class MasterPageComponent implements OnInit {
 		console.dir(this.authService.instance.getActiveAccount());
 
         this.AccountMenuItem = [
-            /*{
+            {
                 id: 'account',
                 text: 'My Account'
-            },*/
+            },
+			{
+                separator: true
+            },
             {
                 id: 'tenant',
                 text: 'Switch Tenant'
@@ -237,7 +240,9 @@ export class MasterPageComponent implements OnInit {
             });
         } else if (args.item.id === 'tenant') {
             this.router.navigate(['/auth/account/tenant']);
-        }
+        } else if (args.item.id === 'account') {
+			this.router.navigate(['/auth/account']);
+		}
     }
     //-------------------------------------------------------------------------------------
 	public menuItems: MenuItemModel[];

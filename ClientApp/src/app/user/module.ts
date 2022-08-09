@@ -11,11 +11,13 @@ import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { NgxMaskModule } from 'ngx-mask'
+import { MyAccountComponent } from './account.component';
 
 @NgModule({
     declarations: [
         UserListComponent,
-        UserEditComponent
+        UserEditComponent,
+        MyAccountComponent
     ],
     imports: [
         GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule,
@@ -23,7 +25,7 @@ import { NgxMaskModule } from 'ngx-mask'
         RouterModule.forChild([
             { path: 'list', component: UserListComponent, canActivate: [MsalGuard] },
             { path: 'add', component: UserEditComponent, canActivate: [MsalGuard] },
-           { path: 'edit/:id', component: UserEditComponent, canActivate: [MsalGuard] },
+            { path: 'edit/:id', component: UserEditComponent, canActivate: [MsalGuard] },
         ])
     ],
     providers: [

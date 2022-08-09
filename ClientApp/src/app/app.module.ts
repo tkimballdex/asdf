@@ -34,6 +34,7 @@ import { SampleModule } from './sample/module';
 import { SampleTestModule } from './samplestest/module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
+import { MyAccountComponent } from './user/account.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -86,6 +87,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
 				children: [
 					//{ path: '', component: HomeComponent },
 					{ path: '', loadChildren: () => import('./dashboard/module').then(m => m.DashboardModule) },
+					{ path: 'account', component: MyAccountComponent },
 					{ path: 'account/tenant', component: ChooseTenantComponent },
 					{ path: 'customer', loadChildren: () => import('./customer/module').then(m => m.CustomerModule) },
 					{ path: 'site', loadChildren: () => import('./site/module').then(m => m.SiteModule) },

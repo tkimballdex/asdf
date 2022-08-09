@@ -17,6 +17,7 @@ export class AnalyteListComponent extends PageComponent implements OnInit {
     }
     //------------------------------------------------------------------------------------------------------------------------
 	public form: FormParams;
+    public data: any;
     public list: any;
     public dateFormat: any;
     @ViewChild('grid') public grid: GridComponent;
@@ -24,6 +25,7 @@ export class AnalyteListComponent extends PageComponent implements OnInit {
     async ngOnInit() {
         this.privileges = (await this.appService.getPrivileges()).analytes;
 		await this.tenant.validate();
+        this.data = await this.repository.getData({ tenantId: this.tenant.id });
         this.dateFormat = {type:'date', format:'MM/dd/yyyy'};
 		this.formState.setup(this, new FormParams());
         this.search();
@@ -32,7 +34,7 @@ export class AnalyteListComponent extends PageComponent implements OnInit {
     async search() {
 		this.formState.save(this);
         this.showSpinner();
-        this.list = await this.repository.list({ tenantId: this.tenant.id, searchTxt: this.form.searchTxt });
+        this.list = await this.repository.list({ tenantId: this.tenant.id, searchTxt: this.form.searchTxt, categoryId: this.form.categoryId });
         this.hideSpinner();
     }
 	//------------------------------------------------------------------------------------------------------------------------
@@ -62,4 +64,5 @@ export class AnalyteListComponent extends PageComponent implements OnInit {
 
 class FormParams extends GridFormParams {
 	searchTxt: string;
+    categoryId: number;
 }

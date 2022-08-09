@@ -182,11 +182,11 @@
                                 <div class="col-10 pad-t20">
                                     <ejs-grid #grid [dataSource]='customerAnalytes' [editSettings]='editSettings' [allowSorting]="true" [toolbar]='toolbar' (actionBegin)='actionBegin($event)' (actionComplete)='actionComplete($event)'>
                                         <e-columns>
-                                            <e-column [commands]='editCommand' width="60"></e-column>
+                                            <e-column [commands]='editCommand' width="50"></e-column>
                                             <e-column field='analyte' headerText='Analyte' [isPrimaryKey]='true' width="150"></e-column>
+                                            <e-column field='showOnDashboard' headerText='Show on Dashboard' [displayAsCheckBox]="true" hideAtMedia='(min-width: 1200px)' width="120"></e-column>
                                             <e-column field='sendNotifications' headerText='Send Notifications' [displayAsCheckBox]="true" hideAtMedia='(min-width: 1200px)' width="160"></e-column>
                                             <e-column field='sendAlerts' headerText='Send Alerts' [displayAsCheckBox]="true" hideAtMedia='(min-width: 1200px)' width="120"></e-column>
-                                            <e-column field='showOnDashboard' headerText='Show on Dashboard' [displayAsCheckBox]="true" hideAtMedia='(min-width: 1200px)' width="120"></e-column>
                                             <e-column field='lastUpdatedBy' headerText='Last Updated By' hideAtMedia='(min-width: 1560px)' width="160"></e-column>
                                             <e-column field='lastUpdatedDate' headerText='Last Updated Date' type='date' [format]='dateFormat' hideAtMedia='(min-width: 1560px)' width="160"></e-column>
                                             <e-column [commands]='deleteCommand' width="50"></e-column>
@@ -200,17 +200,17 @@
                                                 </div>
                                                 <div class="form-row pad-t15">
                                                     <div class="col-md-10">
+                                                        <ejs-checkbox formControlName="showOnDashboard" [(value)]="data.showOnDashboard" label="Show On Dashboard"></ejs-checkbox>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row pad-t15">
+                                                    <div class="col-md-10">
                                                         <ejs-checkbox formControlName="sendNotifications" [(value)]="data.sendNotifications" label="Send Notifications"></ejs-checkbox>
                                                     </div>
                                                 </div>
                                                 <div class="form-row pad-t15">
                                                     <div class="col-md-10">
                                                         <ejs-checkbox formControlName="sendAlerts" [(value)]="data.sendAlerts" label="Send Alerts"></ejs-checkbox>
-                                                    </div>
-                                                </div>
-                                                <div class="form-row pad-t15">
-                                                    <div class="col-md-10">
-                                                        <ejs-checkbox formControlName="showOnDashboard" [(value)]="data.showOnDashboard" label="Show On Dashboard"></ejs-checkbox>
                                                     </div>
                                                 </div>
                                             </div> 

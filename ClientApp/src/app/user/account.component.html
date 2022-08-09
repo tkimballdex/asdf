@@ -1,0 +1,18 @@
+<div class="container-fluid" *ngIf="user">
+    <div class="row d-flex align-items-end edit-header">
+        <div class="col-9 d-flex">
+            <span class="edit-header-icon"><i class="fas fa-user"></i></span>
+            <span class="edit-header-title">My Account</span>
+        </div>
+    </div>
+
+    <div class="row d-flex pad-t20">
+        <div class="col-md-6 d-flex">
+            <ejs-textbox [(value)]="user.name" readonly placeholder="Name" floatLabelType="Always"></ejs-textbox>
+        </div>
+        <div class="col-md-6 d-flex">
+            <ejs-textbox [(value)]="user.username" readonly placeholder="Username" floatLabelType="Always"></ejs-textbox>
+        </div>
+    </div>
+
+</div>

@@ -18,7 +18,7 @@ export class RoleRepository {
         return this.http.post(`/role/get/${id}`);
     }
 
-    public list() {
-        return this.http.post(`/role/list`);
+    public list(filter: any) {
+        return this.http.post(`/role/list`, filter);
     }
 }
