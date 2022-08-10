@@ -71,7 +71,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 				locationId: this.collection.locationId,
 				collectionId: this.collection.id
 			};
-			this.record.collectionContainerId = history.state.containerId
+			this.record.containerNo = history.state.containerNo
 		}
 
 		this.hideSpinner();

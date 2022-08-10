@@ -116,12 +116,12 @@
                                     <div class="col-md-12 d-flex align-items-center list-header">
                                         <span class="list-header-icon"><i class="fad fa-vial"></i></span>
                                         <span class="list-header-title">Samples</span>
-                                        <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['/auth/sample/add']" [queryParams]="{ collectionId: record.collectionId }" [state]="{ containerId: id }">+ Add</button></span>
+                                        <span class="list-header-add"><button ejs-button cssClass="e-outline" [routerLink]="['/auth/sample/add']" [queryParams]="{ collectionId: record.collectionId }" [state]="{ containerNo: record.containerNo }">+ Add</button></span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12 pad-t20">
-                                        <ejs-grid #grid [dataSource]='record.samples' [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }'
+                                        <ejs-grid #grid [dataSource]='collection.samples' [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }'
                                                   [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()' [allowSorting]="true" [allowFiltering]="false">
                                             <e-columns>
                                                 <e-column width="70" [visible]='true'>

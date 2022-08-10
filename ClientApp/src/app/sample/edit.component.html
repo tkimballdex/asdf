@@ -50,7 +50,7 @@
             </div>   
             <div class="row pad-b20">
                 <div class="col-md-8 col-lg-6 col-xl-5">
-                    <ejs-dropdownlist [dataSource]="collection?.containers" [fields]="{ text: 'containerNo', value: 'id' }" [(value)]="record.collectionContainerId" placeholder="Container" floatLabelType="Always"></ejs-dropdownlist>
+                    <ejs-dropdownlist [dataSource]="collection?.containers" [fields]="{ text: 'containerNo', value: 'containerNo' }" [(value)]="record.containerNo" placeholder="Container" floatLabelType="Always"></ejs-dropdownlist>
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-5">
                     <ejs-dropdownlist [dataSource]="labVendors" [fields]="{ text: 'name', value: 'id' }" formControlName="vendorId" placeholder="Ship To*" floatLabelType="Always"></ejs-dropdownlist>
