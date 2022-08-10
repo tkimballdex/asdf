@@ -356,6 +356,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	}
 	//------------------------------------------------------------------------------------------------------------------------
 	actionComplete(args: DialogEditEventArgs) {
+		args.dialog.showCloseIcon = false;
 		if ((args.requestType === 'beginEdit' || args.requestType === 'add')) {
 			if (Browser.isDevice) {
 				args.dialog.height = window.innerHeight - 90 + 'px';

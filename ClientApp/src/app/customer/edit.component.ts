@@ -36,8 +36,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 	public submitClicked: boolean = false;
 	public analyteForm: FormGroup;
 
-	@ViewChild('editTab')
-	public editTab: TabComponent;
+	@ViewChild('editTab') public editTab: TabComponent;
 	//------------------------------------------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.showSpinner();
@@ -188,6 +187,8 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 	}
 	//------------------------------------------------------------------------------------------------------------------------
 	actionComplete(args: DialogEditEventArgs) {
+		args.dialog.showCloseIcon = false;
+		args.dialog.width = 300;
 		if ((args.requestType === 'beginEdit' || args.requestType === 'add')) {
 			if (Browser.isDevice) {
 				args.dialog.height = window.innerHeight - 90 + 'px';

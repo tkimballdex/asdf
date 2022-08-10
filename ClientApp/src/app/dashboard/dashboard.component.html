@@ -160,11 +160,11 @@
                                 <div style="text-align:center">
                                     <table width="100%">
                                         <tr>
-                                            <td class="tilearrow" width="30%">
+                                            <td class="tilearrow" width="25%">
                                                 <span class="fas fa-long-arrow-alt-right" [ngClass]="tileData.tile3Direction > 0 ? 'tileArrowUp' : tileData.tile3Direction  < 0 ? 'tileArrowDown' : 'tileArrowRight'"></span>
                                             </td>
-                                            <td class="tilevalue" width="40%">
-                                                {{tileData.tile3Value}}
+                                            <td class="tilevalue" width="55%">
+                                                {{tileData.tile3Value}} mg/L
                                             </td>
                                             <td class="tilechange" width="30%">
                                                 
@@ -211,7 +211,7 @@
                                                 <!--<span class="fas fa-long-arrow-alt-right" [ngClass]="tileData.tile5Direction > 0 ? 'tileArrowUp' : tileData.tile5Direction  < 0 ? 'tileArrowDown' : 'tileArrowRight'"></span>-->
                                             </td>
                                             <td class="tilevalue" width="80%">
-                                                {{tileData.tile5Value}}
+                                                {{tileData.tile5Value}} mg/L
                                             </td>
                                             <td class="tilechange" width="10%">
                                                 
@@ -249,7 +249,7 @@
                     <e-panel [sizeX]="tileXSize" [sizeY]="tileYSize" [row]="30" [col]="8" *ngIf="isWater">
                         <ng-template #content>
                             <div class="col-12" *ngIf="tileData">
-                                <p style="text-align:center;">{{tileData.tile7Title}}</p>
+                                <p style="text-align:center;">{{tileData.tile7Title}} Locations</p>
                                 <div style="text-align:center">
                                     <table width="100%">
                                         <tr>
