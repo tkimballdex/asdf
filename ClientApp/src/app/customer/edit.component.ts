@@ -37,6 +37,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 	public analyteForm: FormGroup;
 
 	@ViewChild('editTab') public editTab: TabComponent;
+	@ViewChild('editSettingsTemplate') public editSettingsTemplate: TabComponent;
 	//------------------------------------------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.showSpinner();
@@ -187,6 +188,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 	}
 	//------------------------------------------------------------------------------------------------------------------------
 	actionComplete(args: DialogEditEventArgs) {
+		args.dialog.overlayClick = args.dialog.close;
 		args.dialog.showCloseIcon = false;
 		args.dialog.width = 300;
 		if ((args.requestType === 'beginEdit' || args.requestType === 'add')) {

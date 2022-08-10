@@ -356,6 +356,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	}
 	//------------------------------------------------------------------------------------------------------------------------
 	actionComplete(args: DialogEditEventArgs) {
+		args.dialog.overlayClick = args.dialog.close;
 		args.dialog.showCloseIcon = false;
 		if ((args.requestType === 'beginEdit' || args.requestType === 'add')) {
 			if (Browser.isDevice) {
