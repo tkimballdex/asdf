@@ -27,49 +27,33 @@
 
     <div class="row pad-t20">  
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-state" [value]="record.fipsCode" maxlength="3" placeholder="Fips Code" floatLabelType="Always"></ejs-textbox>           
+            <ejs-textbox id="edit-state" [value]="record.fipsCode" maxlength="3" placeholder="FIPS Code" floatLabelType="Always"></ejs-textbox>           
         </div>
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-geoId" [value]="record.geoId" maxlength="4" placeholder="Geo Id" floatLabelType="Always"></ejs-textbox>           
+            <ejs-textbox id="edit-geoId" [value]="record.geoId" maxlength="4" placeholder="GEOID" floatLabelType="Always"></ejs-textbox>           
         </div>     
-    </div>
-
-    <div class="row pad-t10">
-        <div class="col-md-12 col-lg-10 col-xl-8"><label for="boundaries" class="edit-label">Boundaries</label></div>
-        <div class="col-md-12 col-lg-10 col-xl-8">
-            <ejs-textbox id="boundaries" [multiline]='true' #default rows="3" [(value)]="record.boundaries"></ejs-textbox>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox [(value)]="record.latitude" readonly placeholder="Latitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
-        </div>
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox [(value)]="record.longitude" readonly placeholder="Longitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
-        </div>
     </div>
 
     <div class="row">  
         <div class="col-md-6 col-lg-5 col-xl-4">           
-            <ejs-numerictextbox [(value)]="record.landArea" format='N'  step='1' placeholder="Land Area" floatLabelType="Always"></ejs-numerictextbox>
+            <ejs-numerictextbox [(value)]="record.landArea" format='N'  step='1' placeholder="Land Area (km&#178;)" floatLabelType="Always" (change)="calculateDensity()"></ejs-numerictextbox>
         </div>  
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-numerictextbox [(value)]="record.waterArea" format='N'  step='1' placeholder="Water Area" floatLabelType="Always"></ejs-numerictextbox>
+            <ejs-numerictextbox [(value)]="record.waterArea" format='N'  step='1' placeholder="Water Area (km&#178;)" floatLabelType="Always"></ejs-numerictextbox>
         </div>   
     </div>
 
     <div class="row pad-t20"> 
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-state" [value]="record.dwellings" placeholder="Dwellings" floatLabelType="Always"></ejs-textbox>
+            <ejs-numerictextbox id="edit-state" [(value)]="record.dwellings" format='N' step='1' placeholder="Dwellings" floatLabelType="Always"></ejs-numerictextbox>
         </div> 
     </div>
     <div class="row pad-b20">  
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-numerictextbox [(value)]="record.population" format='N'  step='1' placeholder="Population" floatLabelType="Always"></ejs-numerictextbox>
+            <ejs-numerictextbox [(value)]="record.population" format='N'  step='1' placeholder="Population" floatLabelType="Always" (change)="calculateDensity()"></ejs-numerictextbox>
         </div>
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-numerictextbox [(value)]="record.density" validateDecimalOnType="true" format='N4' id="numeric" max="99999" [decimals]="4" maxlength="5" step ="0.0001" placeholder="Population Density" floatLabelType="Always"></ejs-numerictextbox>
+            <ejs-numerictextbox [(value)]="record.density" validateDecimalOnType="true" id="numeric" format='N4' max="99999" [decimals]="4" step ="0.0001" readonly placeholder="Population Density (residents/km&#178;)" floatLabelType="Always"></ejs-numerictextbox>
         </div>
     </div>
 

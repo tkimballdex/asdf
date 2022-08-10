@@ -37,6 +37,7 @@ export class CountyEditComponent extends PageComponent implements OnInit {
 			}
 		} else {
 			this.record = await this.repository.get(id);
+			this.calculateDensity();
 		}
 
 		this.countries = this.app.countries;
@@ -48,6 +49,12 @@ export class CountyEditComponent extends PageComponent implements OnInit {
 		});
 
 		var $this = this;
+	}
+	//------------------------------------------------------------------------------------
+	calculateDensity() {
+		if (this.record.population && this.record.landArea) {
+			this.record.density = this.record.population / this.record.landArea;
+		}
 	}
 	//------------------------------------------------------------------------------------
 	async save() {

@@ -37,6 +37,7 @@ export class StateEditComponent extends PageComponent implements OnInit {
 			}
 		} else {
 			this.record = await this.repository.get(id);
+			this.calculateDensity();
 		}
 		this.hideSpinner();			
 
@@ -47,6 +48,12 @@ export class StateEditComponent extends PageComponent implements OnInit {
 		});
 
 		var $this = this;
+	}
+	//------------------------------------------------------------------------------------
+	calculateDensity() {
+		if (this.record.population && this.record.landArea) {
+			this.record.density = this.record.population / this.record.landArea;
+		}
 	}
 	//------------------------------------------------------------------------------------
 	async save() {
