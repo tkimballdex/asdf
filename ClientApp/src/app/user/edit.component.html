@@ -12,37 +12,36 @@
         </div>
     </div>
 
-    <div class="row d-flex pad-t20">
-        <div class="col-md-6 d-flex">
+    <div class="row pad-t20">
+        <div class="col-md-6 col-lg-5 col-xl-4 d-flex align-items-end">
             <ejs-textbox [(value)]="record.firstName" placeholder="First Name" floatLabelType="Always"></ejs-textbox>
         </div>
-        <div class="col-md-6 d-flex">
+        <div class="col-md-6 col-lg-5 col-xl-4 d-flex align-items-end pad-b5">
+            <ejs-checkbox [(checked)]="record.api" label="API User" floatLabelType="Always" id="ApiUser"></ejs-checkbox>
+        </div>        
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-lg-5 col-xl-4">
             <ejs-textbox [(value)]="record.lastName" placeholder="Last Name" floatLabelType="Always"></ejs-textbox>
         </div>
-    </div>
-
-    <div class="row d-flex">
-        <div class="col-md-6 d-flex">
-            <ejs-textbox [(value)]="record.email" placeholder="Email" floatLabelType="Always"></ejs-textbox>
-        </div>
-        <div class="col-md-6 d-flex">
-            <ejs-textbox [(value)]="record.phone" placeholder="Phone No" floatLabelType="Always"></ejs-textbox>
-        </div>
-    </div>
-
-    <div class="row d-flex">
-        <div class="col-md-6 d-flex">
+        <div class="col-md-6 col-lg-5 col-xl-4">
             <ejs-dropdownlist [dataSource]="customers" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.customerId" placeholder="Customer" floatLabelType="Always" (change)="changeCustomer()"></ejs-dropdownlist>
         </div>
+    </div>
 
-        <div class="col-md-6 d-flex">
+    <div class="row">
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-textbox [(value)]="record.email" placeholder="Email" floatLabelType="Always"></ejs-textbox>
+        </div>
+        <div class="col-md-6 col-lg-5 col-xl-4">
             <ejs-dropdownlist [dataSource]="vendors" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.vendorId" placeholder="Vendor" floatLabelType="Always" (change)="changeVendor()"></ejs-dropdownlist>
         </div>
     </div>
 
-    <div class="row d-flex">
-        <div class="col-md-6 d-flex pad-t15 pad-b10">
-            <ejs-checkbox [(checked)]="record.api" label="API User" floatLabelType="Always" id="ApiUser"></ejs-checkbox>
+    <div class="row pad-b10">
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <ejs-textbox [(value)]="record.phone" placeholder="Phone No" floatLabelType="Always"></ejs-textbox>
         </div>
     </div>
 
