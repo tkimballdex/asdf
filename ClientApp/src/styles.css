@@ -522,7 +522,8 @@ mat-form-field.mat-form-field {
 #collectionStatus div,
 #containerScheduledDate div,
 #analyteDropdown div,
-#numeric div {
+#numeric div,
+#shipmentDatepicker div {
     background-color: #eee;
 }
 

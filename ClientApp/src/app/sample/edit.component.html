@@ -92,7 +92,7 @@
                     </div>
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4">
-                    <ejs-textbox [(value)]="record.collectedBy" placeholder="Completed By" floatLabelType="Always"></ejs-textbox>
+                    <ejs-textbox [(value)]="record.completedByName" readonly placeholder="Completed By" floatLabelType="Always"></ejs-textbox>
                 </div>
             </div>
 
@@ -162,26 +162,26 @@
                                     <div>
                                         <div class="row">
                                             <div class="col-md-8 col-lg-6 col-xl-4">
-                                                <ejs-datepicker [(value)]="record.shippedDate" placeholder="Shipped Date" floatLabelType="Always"></ejs-datepicker>
+                                                <ejs-datepicker id="shipmentDatepicker" [(value)]="record.shippedDate" [readonly]="true" placeholder="Shipped Date" floatLabelType="Always"></ejs-datepicker>
                                             </div>
                                             <div class="col-md-8 col-lg-6 col-xl-4">
-                                                <ejs-datepicker [(value)]="record.deliveryDate" placeholder="Delivery Date" floatLabelType="Always"></ejs-datepicker>
+                                                <ejs-datepicker id="shipmentDatepicker" [(value)]="record.deliveryDate" [readonly]="true" placeholder="Delivery Date" floatLabelType="Always"></ejs-datepicker>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-8 col-lg-6 col-xl-4">
-                                                <ejs-textbox [(value)]="record.carrier" placeholder="Carrier" floatLabelType="Always"></ejs-textbox>
+                                                <ejs-textbox [(value)]="record.carrier" readonly placeholder="Carrier" floatLabelType="Always"></ejs-textbox>
                                             </div>
                                             <div class="col-md-8 col-lg-6 col-xl-4">
-                                                <ejs-textbox [(value)]="record.trackingNo" placeholder="Tracking No" floatLabelType="Always"></ejs-textbox>
+                                                <ejs-textbox [(value)]="record.trackingNo" readonly placeholder="Tracking No" floatLabelType="Always"></ejs-textbox>
                                             </div>
                                         </div>
                                         <div class="row pad-t10 pad-b10">
                                             <div class="col-md-8 col-lg-6 col-xl-4">
-                                                <ejs-datepicker [(value)]="record.receivedDate" placeholder="Received Date" floatLabelType="Always"></ejs-datepicker>
+                                                <ejs-datepicker id="shipmentDatepicker" [(value)]="record.receivedDate" [readonly]="true" placeholder="Received Date" floatLabelType="Always"></ejs-datepicker>
                                             </div>  
                                             <div class="col-md-8 col-lg-6 col-xl-4">
-                                                <ejs-textbox [(value)]="record.receivedBy" placeholder="Received By" floatLabelType="Always"></ejs-textbox>
+                                                <ejs-textbox [(value)]="record.receivedBy" readonly placeholder="Received By" floatLabelType="Always"></ejs-textbox>
                                             </div>
                                         </div>
                                     </div>

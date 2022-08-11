@@ -1,11 +1,14 @@
 <div id="edit-view" *ngIf="record" class="container-fluid">
-    <div class="row d-flex align-items-end edit-header">
-        <div class="col-9 d-flex">
+    <div class="row d-flex align-items-center edit-header">
+        <div class="col-md-6 d-flex">
             <span class="edit-header-icon"><i class="fas fa-user"></i></span>
             <span class="edit-header-title">User</span>
         </div>
-        <div class="col-3 d-flex">
-            active
+        <!-- <div class="col-md-6 d-flex justify-content-end pad-b10">
+            <ejs-switch [(checked)]="record.active" onLabel="Active" offLabel="Not Active" style="width:100px;height:32px;"></ejs-switch>
+        </div> -->
+        <div class="col-md-6 d-flex justify-content-end pad-r20">
+            <button ejs-button cssClass="e-outline e-flat" (click)="sendPasswordResetLink()" [disabled]="loading || !privileges.update" style="width: 200px;">Send Password Reset Link</button>
         </div>
     </div>
 
@@ -52,13 +55,7 @@
         </div>
     </div>
 
-    <div class="row d-flex edit-footer" *ngIf="record.id">
-        <div class="col-md-6 d-flex justify-content-start">
-            <button ejs-button cssClass="e-outline e-flat" (click)="sendPasswordResetLink()" [disabled]="loading || !privileges.update" style="width: 300px;">Send Password Reset Link</button>
-        </div>
-    </div>
-
-    <div class="row pad-t20">
+    <div class="row pad-t15">
         <div class="col-md-12"><label for="roles-grid" class="edit-label">User Roles</label></div>
         <div class="col-md-12">
             <ejs-grid id="roles-grid" #grid [dataSource]='record.roles' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="false">
