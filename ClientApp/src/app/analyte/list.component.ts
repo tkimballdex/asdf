@@ -26,6 +26,8 @@ export class AnalyteListComponent extends PageComponent implements OnInit {
         this.privileges = (await this.appService.getPrivileges()).analytes;
 		await this.tenant.validate();
         this.data = await this.repository.getData({ tenantId: this.tenant.id });
+        this.data.categories.unshift({ id: 0, name: "All" });
+
         this.dateFormat = {type:'date', format:'MM/dd/yyyy'};
 		this.formState.setup(this, new FormParams());
         this.search();
@@ -64,5 +66,5 @@ export class AnalyteListComponent extends PageComponent implements OnInit {
 
 class FormParams extends GridFormParams {
 	searchTxt: string;
-    categoryId: number;
+    categoryId: number = 0;
 }
