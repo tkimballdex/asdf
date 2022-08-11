@@ -205,7 +205,7 @@
                                             <div [formGroup]="analyteForm">
                                                 <div class="form-row">
                                                     <div class="col-md-6">
-                                                        <ejs-dropdownlist formControlName="analyteId" [dataSource]="tenantAnalytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="data.analyteId" placeholder="Analyte*" floatLabelType="Always"></ejs-dropdownlist>
+                                                        <ejs-dropdownlist id="{{editAnalyte ? 'analyteDropdown' : null}}" formControlName="analyteId" [dataSource]="tenantAnalytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="data.analyteId" [readonly]="editAnalyte" placeholder="Analyte*" floatLabelType="Always"></ejs-dropdownlist>
                                                     </div>
                                                 </div>
                                                 <div class="form-row pad-t15">

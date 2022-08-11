@@ -35,6 +35,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	public siteAnalytes: any = null;
 	public test: any;
 	public tenantAnalytes: any;
+	public editAnalyte: boolean = false;
 
 	public editSettings: EditSettingsModel;
 	public toolbar: ToolbarItems[];
@@ -44,7 +45,6 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	public deleteCommand: CommandModel[];
 	public submitClicked: boolean = false;
 	public siteAnalyteId: string;
-	public editAnalyte: boolean = false;
 
 	@ViewChild('editTab')
 	public editTab: TabComponent;
@@ -304,9 +304,12 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		if (args.requestType === 'beginEdit' || args.requestType === 'add') {
 			this.submitClicked = false;
 			this.analyteForm = this.createFormGroup(args.rowData);
-			if (args.requestType === 'beginEdit') {
-				this.editAnalyte = true;
-			}
+		}
+
+		if (args.requestType === 'beginEdit') {
+			this.editAnalyte = true;
+		} else if (args.requestType === 'add') {
+			this.editAnalyte = false;
 		}
 
 		if (args.requestType === 'save') {
@@ -356,6 +359,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	}
 	//------------------------------------------------------------------------------------------------------------------------
 	actionComplete(args: DialogEditEventArgs) {
+		args.dialog.allowDragging = false;
 		args.dialog.overlayClick = args.dialog.close;
 		args.dialog.showCloseIcon = false;
 		if ((args.requestType === 'beginEdit' || args.requestType === 'add')) {

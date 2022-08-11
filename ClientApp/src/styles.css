@@ -521,7 +521,7 @@ mat-form-field.mat-form-field {
 #sampleExpectedVolume div,
 #collectionStatus div,
 #containerScheduledDate div,
-#siteAnalyteDropdown div,
+#analyteDropdown div,
 #numeric div {
     background-color: #eee;
 }

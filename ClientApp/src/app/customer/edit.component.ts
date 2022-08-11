@@ -28,6 +28,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 
 	public tenantAnalytes: any;
 	public customerAnalytes: any = null;
+	public editAnalyte: boolean = false;
 	public dateFormat: any;
 	public editSettings: EditSettingsModel;
 	public toolbar: ToolbarItems[];
@@ -141,6 +142,12 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 			this.analyteForm = this.createFormGroup(args.rowData);
 		}
 
+		if (args.requestType === 'beginEdit') {
+			this.editAnalyte = true;
+		} else if (args.requestType === 'add') {
+			this.editAnalyte = false;
+		}
+
 		if (args.requestType === 'save') {
 			this.submitClicked = true;
 			this.analyteForm.markAllAsTouched();
@@ -188,6 +195,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 	}
 	//------------------------------------------------------------------------------------------------------------------------
 	actionComplete(args: DialogEditEventArgs) {
+		args.dialog.allowDragging = false;
 		args.dialog.overlayClick = args.dialog.close;
 		args.dialog.showCloseIcon = false;
 		args.dialog.width = 300;
