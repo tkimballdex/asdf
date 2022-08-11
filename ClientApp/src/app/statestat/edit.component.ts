@@ -85,10 +85,12 @@ export class StateStatEditComponent extends PageComponent implements OnInit {
 		}
 	}
 	//------------------------------------------------------------------------------------
-	delete() {
+	async delete() {
+		const stateName = await this.repository.getState(this.record.stateId);
+		
         this.deleteDialog = DialogUtility.confirm({
             title: 'Delete State Statistic',
-            content: `Are you sure you want to delete this State Statistic <b>${this.record.userName}</b>?`,
+            content: `Are you sure you want to delete this State Statistic <b>${stateName['name']} ${this.record.date.substr(0, 10)}</b>?`,
             okButton: { click: this.deleteOK.bind(this) }
         });
     }

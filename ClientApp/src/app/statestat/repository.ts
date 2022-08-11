@@ -21,4 +21,8 @@ export class StateStatRepository {
     public list(filter: any) {
         return this.http.post(`/statestat/list`, filter);
     }
+
+    public getState(id: number) {
+        return this.http.post(`/state/get/${id}`);
+    }
 }

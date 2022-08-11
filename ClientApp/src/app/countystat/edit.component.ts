@@ -21,7 +21,7 @@ export class CountystatEditComponent extends PageComponent implements OnInit {
 	public data: any;
     public deleteDialog: Dialog;
     public form: FormGroup;
-	public countries: any;
+	public counties: any;
 	//------------------------------------------------------------------------------------
 	async ngOnInit() {
 		
@@ -81,6 +81,31 @@ export class CountystatEditComponent extends PageComponent implements OnInit {
 				history.pushState('', '', `/auth/countystat/edit/${returnValue.id}`);
 			}
 		}
+	}
+	//------------------------------------------------------------------------------------
+	async delete() {
+		const countyName = await this.repository.getCounty(this.record.countyId);
+
+        this.deleteDialog = DialogUtility.confirm({
+            title: 'Delete County Statistic',
+            content: `Are you sure you want to delete this County Statistic <b>${countyName['name']} ${this.record.date.substr(0, 10)}</b>?`,
+            okButton: { click: this.deleteOK.bind(this) }
+        });
+    }
+	//------------------------------------------------------------------------------------
+    async deleteOK() {
+        this.showSpinner();
+        this.deleteDialog.close();
+        var result = await this.repository.delete(this.record.id);
+        this.hideSpinner();
+
+        if (result.error) {
+            this.showErrorMessage(result.description);
+        }
+        else {
+            this.showDeleteMessage(true);
+            setTimeout(() => this.router.navigate(['/auth/countystat/list']), 1000);
+        }
 	}
 	//------------------------------------------------------------------------------------
 	close() {

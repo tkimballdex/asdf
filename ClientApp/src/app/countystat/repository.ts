@@ -21,4 +21,8 @@ export class CountystatRepository {
     public list(filter: any) {
         return this.http.post(`/countystat/list`, filter);
     }
+
+    public getCounty(id: number) {
+        return this.http.post(`/county/get/${id}`);
+    }
 }

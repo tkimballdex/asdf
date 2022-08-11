@@ -104,13 +104,13 @@ export class MasterPageComponent implements OnInit {
 		// 	sampleMenu.push({ id: '/auth/shipment/list', text: 'Shipments' });
 		// }	
 
-		if (privileges.counties.read) {
-			sampleMenu.push({ id: '/auth/countystat/list', text: 'County Stats' });
-		}
-
 		if (privileges.states.read) {
 			sampleMenu.push({ id: '/auth/statestat/list', text: 'State Stats' });
 		}	
+
+		if (privileges.counties.read) {
+			sampleMenu.push({ id: '/auth/countystat/list', text: 'County Stats' });
+		}
 
 		if (privileges.tests.download) {
 			sampleMenu.push({ id: '/auth/sampletest/import', text: 'Import Tests' });

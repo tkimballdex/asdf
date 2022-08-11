@@ -53,6 +53,8 @@ export class StateEditComponent extends PageComponent implements OnInit {
 	calculateDensity() {
 		if (this.record.population && this.record.landArea) {
 			this.record.density = this.record.population / this.record.landArea;
+		} else {
+			this.record.density = 0;
 		}
 	}
 	//------------------------------------------------------------------------------------
