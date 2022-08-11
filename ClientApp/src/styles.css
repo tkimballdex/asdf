@@ -526,6 +526,10 @@ mat-form-field.mat-form-field {
     background-color: #eee;
 }
 
+.e-grid.e-default .e-gridheader th.e-firstcell, .e-grid.e-default .e-gridheader th.e-lastcell {
+    border-left-width: 0;
+}
+
 #edit-view .ng-touched.ng-invalid input,
 #edit-view .ng-touched.ng-invalid div {
     border-bottom-color: #d32f2f;
