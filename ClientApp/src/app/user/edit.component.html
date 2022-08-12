@@ -54,9 +54,10 @@
         </div>
     </div>
 
-    <div class="row pad-t15">
-        <div class="col-md-12"><label for="roles-grid" class="edit-label">User Roles</label></div>
-        <div class="col-md-12">
+    <div class="row pad-t15 pad-b20">
+
+        <div class="col-md-6">
+            <div><label for="roles-grid" class="edit-label">User Roles</label></div>
             <ejs-grid id="roles-grid" #grid [dataSource]='record.roles' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="false">
                 <e-columns>
                     <e-column field='name' headerText='Name'></e-column>
@@ -69,11 +70,9 @@
                 </e-columns>
             </ejs-grid>
         </div>
-    </div>
 
-    <div class="row pad-t20 pad-b20">
-        <div class="col-md-12"><label for="tenants-grid" class="edit-label">User Tenants</label></div>
-        <div class="col-md-12">
+        <div class="col-md-6">
+            <div ><label for="tenants-grid" class="edit-label">User Tenants</label></div>
             <ejs-grid id="tenants-grid" #grid [dataSource]='record.tenants' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="false">
                 <e-columns>
                     <e-column field='name' headerText='Name'></e-column>
@@ -86,6 +85,7 @@
                 </e-columns>
             </ejs-grid>
         </div>
+
     </div>
 
     <div class="row d-flex edit-footer">
