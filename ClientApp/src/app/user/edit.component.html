@@ -45,11 +45,11 @@
         </div>
     </div>
 
-    <div class="row d-flex edit-footer" *ngIf="record.api">
-        <div class="col-md-6 d-flex justify-content-start">
+    <div class="row d-flex edit-footer pad-b10" *ngIf="record.api">
+        <div class="col-md-6 d-flex justify-content-start align-items-end">
             <button ejs-button cssClass="e-outline e-flat" (click)="generateIntegrationKey()" [disabled]="loading || !privileges.update" style="width: 300px;">Generate API Key</button>
         </div>
-        <div class="col-md-6 d-flex justify-content-start" *ngIf="integrationKey">
+        <div class="col-md-4 d-flex justify-content-start align-items-end" *ngIf="integrationKey">
             <ejs-textbox [(value)]="integrationKey" placeholder="API Key" floatLabelType="Always" disabled="disabled"></ejs-textbox>
         </div>
     </div>
