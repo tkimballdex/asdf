@@ -105,6 +105,11 @@ export class PageComponent {
 		a.style.display = "none";
 		a.click();
 	}
+
+    public datePickerFocus(e) {
+		const localVariable = e.model.placeholder.replace(/\s+/g, '');
+        this[localVariable].show();
+    }
 }
 
 class Notify {

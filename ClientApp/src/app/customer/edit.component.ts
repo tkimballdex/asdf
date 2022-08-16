@@ -39,6 +39,8 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 
 	@ViewChild('editTab') public editTab: TabComponent;
 	@ViewChild('editSettingsTemplate') public editSettingsTemplate: TabComponent;
+	@ViewChild('ServiceStartDate') public ServiceStartDate;
+	@ViewChild('ServiceEndDate') public ServiceEndDate;
 	//------------------------------------------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.showSpinner();

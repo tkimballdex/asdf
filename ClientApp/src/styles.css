@@ -570,6 +570,10 @@ mat-form-field.mat-form-field {
         padding-top: 11px;
         justify-content: start !important;
     }
+
+    .input-top-padding {
+        padding-top: 20px;
+    }
 }
 
 @media only screen and (max-width: 991px) {
