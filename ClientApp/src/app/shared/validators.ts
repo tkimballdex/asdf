@@ -1,12 +1,12 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 export function validateServiceEndDate(control: AbstractControl): ValidationErrors {
-      let startDateValue = control.get('serviceStartDate').value;
-      let endDateValue = control.get('serviceEndDate').value;
-  
-      if (endDateValue < startDateValue && endDateValue !== null) {
-        return { 'validateServiceEndDate': 'validateServiceEndDate' }
-      } return null;
+  let startDateValue = control.get('serviceStartDate').value;
+  let endDateValue = control.get('serviceEndDate').value;
+
+  if (endDateValue < startDateValue && endDateValue !== null) {
+    return { 'validateServiceEndDate': 'validateServiceEndDate' }
+  } return null;
 }
 
 export function validateEndDate(control: AbstractControl): ValidationErrors {
@@ -17,4 +17,3 @@ export function validateEndDate(control: AbstractControl): ValidationErrors {
     return { 'validateEndDate': 'validateEndDate' }
   } return null;
 }
-  
