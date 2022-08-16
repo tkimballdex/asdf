@@ -16,11 +16,12 @@ export class SamplerEditComponent extends PageComponent implements OnInit {
 		super();
 	}
 
+	@ViewChild('PurchaseDate') public PurchaseDate;
+
 	public form: FormGroup;
 	public record: any;
 	public deleteDialog: Dialog;
 	public data: any;
-
 	//-----------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.showSpinner();
@@ -31,8 +32,7 @@ export class SamplerEditComponent extends PageComponent implements OnInit {
 
 		if (id) {
 			this.record = await this.repository.get(id);
-		}
-		else {
+		} else {
 			this.record = {};
 		}
 

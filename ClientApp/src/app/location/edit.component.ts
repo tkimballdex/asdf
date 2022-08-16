@@ -24,6 +24,8 @@ export class LocationEditComponent extends PageComponent implements OnInit {
     public deleteDialog: Dialog;
     public form: FormGroup;
     @ViewChild('grid') public grid: GridComponent;
+	@ViewChild('ServiceStartDate') public ServiceStartDate;
+	@ViewChild('ServiceEndDate') public ServiceEndDate;
 	@ViewChild('map') map!: GoogleMap;
 	private siteMarker: google.maps.Marker;
 	public mapOptions: google.maps.MapOptions;

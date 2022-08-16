@@ -46,10 +46,11 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	public submitClicked: boolean = false;
 	public siteAnalyteId: string;
 
-	@ViewChild('editTab')
-	public editTab: TabComponent;
-
+	@ViewChild('editTab') public editTab: TabComponent;
+	@ViewChild('ServiceStartDate') public ServiceStartDate;
+	@ViewChild('ServiceEndDate') public ServiceEndDate;
 	@ViewChild('map') map!: GoogleMap;
+
 	private siteMarker: google.maps.Marker;
 	public mapOptions: google.maps.MapOptions;
 	markers: google.maps.Marker[] = [];

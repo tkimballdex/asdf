@@ -16,17 +16,17 @@
                 Site Name is required!
             </div>
         </div>
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-customer" [(value)]="record.customer" readonly placeholder="Customer" floatLabelType="Always"></ejs-textbox>
+        <div class="col-md-4 col-lg-3 col-xl-2">
+            <ejs-datepicker #ServiceStartDate formControlName="serviceStartDate" placeholder="Service Start Date" floatLabelType="Always" (focus)='datePickerFocus($event)'></ejs-datepicker>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-datepicker formControlName="serviceStartDate" placeholder="Service Start Date" floatLabelType="Always"></ejs-datepicker>
+            <ejs-textbox id="edit-customer" [(value)]="record.customer" readonly placeholder="Customer" floatLabelType="Always"></ejs-textbox>
         </div>
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-datepicker formControlName="serviceEndDate" placeholder="Service End Date" floatLabelType="Always"></ejs-datepicker>
+        <div class="col-md-4 col-lg-3 col-xl-2">
+            <ejs-datepicker #ServiceEndDate formControlName="serviceEndDate" placeholder="Service End Date" floatLabelType="Always" (focus)='datePickerFocus($event)'></ejs-datepicker>
             <div *ngIf="this.form.controls['serviceEndDate'].value < this.form.controls['serviceStartDate'].value && this.form.controls['serviceEndDate'].value != undefined" class="e-error">
                 End date is before start date!
             </div>
@@ -42,93 +42,90 @@
                             <div>Information</div>
                         </ng-template>
                         <ng-template #content>
-                            <div class="row">                                
-                                
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-numerictextbox [(value)]="record.numberOfPeople" [validateDecimalOnType]='true' [decimals]="0" format="n" placeholder="Number Of People" floatLabelType="Always"></ejs-numerictextbox>
-                                </div>
-                            </div>
-                            <div class="row pad-t20">
-                                <div class="col-md-12 col-lg-10 col-xl-8">
-                                    <ejs-textbox formControlName="address" placeholder="Address*" floatLabelType="Always" contenteditable="false"></ejs-textbox>
-                                    <div *ngIf="this.invalidControl('address')" class="e-error">
-                                        Address is required!
-                                    </div>
-                                </div>                                
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12 col-lg-10 col-xl-8">
-                                    <ejs-textbox formControlName="city" placeholder="City*" floatLabelType="Always"></ejs-textbox>
-                                    <div *ngIf="this.invalidControl('city')" class="e-error">
-                                        City is required!
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="row">
                                 <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-dropdownlist (change)="stateChange($event)" formControlName="stateId" [dataSource]="app.states" [fields]="{ text: 'name', value: 'id' }" placeholder="State*" floatLabelType="Always"></ejs-dropdownlist>
-                                    <div *ngIf="this.invalidControl('stateId')" class="e-error">
-                                        State is required!
+
+                                    <div>
+                                        <ejs-textbox formControlName="address" placeholder="Address*" floatLabelType="Always" contenteditable="false"></ejs-textbox>
+                                        <div *ngIf="this.invalidControl('address')" class="e-error">
+                                            Address is required!
+                                        </div>
+                                    </div>  
+
+                                    <div>
+                                        <ejs-textbox formControlName="city" placeholder="City*" floatLabelType="Always"></ejs-textbox>
+                                        <div *ngIf="this.invalidControl('city')" class="e-error">
+                                            City is required!
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <ejs-dropdownlist (change)="stateChange($event)" formControlName="stateId" [dataSource]="app.states" [fields]="{ text: 'name', value: 'id' }" placeholder="State*" floatLabelType="Always"></ejs-dropdownlist>
+                                        <div *ngIf="this.invalidControl('stateId')" class="e-error">
+                                            State is required!
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <ejs-dropdownlist formControlName="countyId" [dataSource]="counties" [fields]="{ text: 'name', value: 'id' }" placeholder="County*" floatLabelType="Always"></ejs-dropdownlist>
+                                        <div *ngIf="this.invalidControl('countyId')" class="e-error">
+                                            County is required!
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <ejs-textbox formControlName="postalCode" placeholder="Postal Code*" floatLabelType="Always"></ejs-textbox>
+                                        <div *ngIf="this.invalidControl('postalCode')" class="e-error">
+                                            Postal code is required!
+                                        </div>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-textbox formControlName="postalCode" placeholder="Postal Code*" floatLabelType="Always"></ejs-textbox>
-                                    <div *ngIf="this.invalidControl('postalCode')" class="e-error">
-                                        Postal code is required!
+                                    <div>
+                                        <ejs-numerictextbox [(value)]="record.numberOfPeople" [validateDecimalOnType]='true' [decimals]="0" format="n" placeholder="Number Of People" floatLabelType="Always"></ejs-numerictextbox>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-dropdownlist formControlName="countyId" [dataSource]="counties" [fields]="{ text: 'name', value: 'id' }" placeholder="County*" floatLabelType="Always"></ejs-dropdownlist>
-                                    <div *ngIf="this.invalidControl('countyId')" class="e-error">
-                                        County is required!
+
+                                    <div>
+                                        <ejs-textbox formControlName="contactName" placeholder="Contact Name*" floatLabelType="Always"></ejs-textbox>
+                                        <div *ngIf="this.invalidControl('contactName')" class="e-error">
+                                            Contact name is required!
+                                        </div>
                                     </div>
+
+                                    <div>
+                                        <ejs-maskedtextbox formControlName="contactPhoneNo" placeholder="Contact Phone No*" floatLabelType="Always" pattern="^[0-9]{10}$" mask="(000) 000 - 0000"></ejs-maskedtextbox>
+                                        <div *ngIf="this.invalidControl('contactPhoneNo')" class="e-error">
+                                            Phone number is invalid!
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <ejs-textbox formControlName="contactEmail" placeholder="Contact Email*" floatLabelType="Always"></ejs-textbox>
+                                        <div *ngIf="this.invalidControl('contactEmail')" class="e-error">
+                                            Email is invalid!
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
 
-                            <div class="row pad-t20">
-                                <div class="col-md-6 col-lg-5 col-xl-4">
+                            <div class="row pad-t15">
+                                <div class="col-md-3 col-lg-2">
                                     <ejs-textbox readonly="true" [(value)]="record.latitude" placeholder="Latitude" floatLabelType="Always"></ejs-textbox>
                                 </div>
-                                <div class="col-md-6 col-lg-5 col-xl-4">
+                                <div class="col-md-3 col-lg-2">
                                     <ejs-textbox readonly="true" [(value)]="record.longitude" placeholder="Longitude" floatLabelType="Always"></ejs-textbox>
                                 </div>
                             </div>
-
-                            <div class="row pad-t10">
+                            
+                            <div class="row pad-t5">
                                 <div class="col-md-12 col-lg-10 col-xl-8"><label for="boundaries" class="edit-label">Boundaries</label></div>
                                 <div class="col-md-12 col-lg-10 col-xl-8">
                                     <ejs-textbox readonly="true" id="boundaries" [multiline]='true' #default rows="3" [(value)]="record.boundaries"></ejs-textbox>
                                 </div>
                             </div>
 
-                            <div class="row pad-t20">
-                                <div class="col-md-12 col-lg-10 col-xl-8">
-                                    <ejs-textbox formControlName="contactName" placeholder="Contact Name*" floatLabelType="Always"></ejs-textbox>
-                                    <div *ngIf="this.invalidControl('contactName')" class="e-error">
-                                        Contact name is required!
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-textbox formControlName="contactEmail" placeholder="Email*" floatLabelType="Always"></ejs-textbox>
-                                    <div *ngIf="this.invalidControl('contactEmail')" class="e-error">
-                                        Email is invalid!
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-maskedtextbox formControlName="contactPhoneNo" placeholder="Phone Number*" floatLabelType="Always" pattern="^[0-9]{10}$" mask="(000) 000 - 0000"></ejs-maskedtextbox>
-                                    <div *ngIf="this.invalidControl('contactPhoneNo')" class="e-error">
-                                        Phone number is invalid!
-                                    </div>
-                                </div>
-
-                            </div>
 
                             <div class="row pad-t20">
                                 <div class="col-md-12 col-lg-10 col-xl-8">
