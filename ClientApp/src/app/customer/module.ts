@@ -12,6 +12,7 @@ import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { TabModule } from '@syncfusion/ej2-angular-navigations';
 import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
+import { ToolbarModule } from '@syncfusion/ej2-angular-navigations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask'
 
@@ -22,7 +23,7 @@ import { NgxMaskModule } from 'ngx-mask'
 		MapComponent
     ],
     imports: [
-        GridModule, RadioButtonModule, ButtonModule, TextBoxModule, MaskedTextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule,
+        GridModule, RadioButtonModule, ButtonModule, TextBoxModule, ToolbarModule, MaskedTextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule,
 		TabModule, DatePickerModule, SwitchModule, CommonModule, FormsModule, ReactiveFormsModule,
         NgxMaskModule.forRoot(),
         RouterModule.forChild([

@@ -235,29 +235,39 @@ mat-form-field.mat-form-field {
 /* End - List View styles*/
 /* Start - Edit View styles*/
 #edit-view {
-    padding: 10px 15px 15px 15px;
-    border-radius: 3px;
-    border: 1px solid #d8deee;
+    padding: 0 15px 15px 15px;
+    /* border-radius: 3px; */
+    /* border: 1px solid #d8deee; */
     background-color: #ffffff;
     width: 100%;
 }
 
 #edit-view .edit-header {
     border-bottom: 2px solid #d8dee6;
-    padding-bottom: 10px;
+    /* padding-bottom: 10px; */
 }
+
+#edit-view .edit-header-back {
+    padding: 22px 20px 0 5px;
+    border-right: 2px solid #d8dee6;
+    margin-right: 5px;
+    color: #1e88e5;
+}
+
+.fa-chevron-left:hover {
+    color: #1e76c4;
+} 
 
 #edit-view .edit-header-icon {
     display: inline-block;
     font-size: 1.6em;
-    background-color: #1e88e5;
-    padding: 22px 5px 5px 5px;
-    color: white;
-    margin-top: -20px;
-    border-radius: 3px;
+    /* background-color: #1e88e5; */
+    padding: 25px 15px 5px 10px;
+    color: #1e88e5;
     width: 60px;
-    height: 60px;
+    /* height: 60px; */
     text-align: center;
+    border-right: 1px dotted #3c485860;
 }
 
 #edit-view .edit-header-title {
@@ -265,35 +275,31 @@ mat-form-field.mat-form-field {
     display: inline-block;
     font-size: 1.8em;
     font-weight: 300;
-    padding: 15px 20px 20px 15px;
+    /* padding: 15px 20px 20px 15px; */
     color: #3c4858;
 }
 
-#edit-view .edit-header-collection-no {
-    color: #3c4858;
-    font-weight: 100;
-    padding: 18px 20px 15px 20px;
-    border-right: 1px dotted #3c485860;
+#edit-view .edit-header-title-no {
+    /* color: #3c4858; */
+    /* font-weight: 100; */
+    padding: 16px 20px 13px;
+    /* border-right: 1px dotted #3c485860; */
 }
 
 #edit-view .edit-header-status {
     color: #3c4858;
     font-weight: 100;
-    padding: 18px 20px 15px 20px;
-    border-right: 1px dotted #3c485860;
+    padding: 16px 15px 13px;
+    /* border-right: 1px dotted #3c485860; */
 }
 
 .header-value {
-    font-size: 1.1rem;
+    font-weight: 500;
+    font-size: 1rem;
 }
 
 .header-tag {
-    font-weight: 500;
-    font-size: .85rem;
-}
-
-.dotted-right {
-    border-right: 1px dotted #3c485860;
+    font-size: .9rem;
 }
 
 #edit-view .e-control {

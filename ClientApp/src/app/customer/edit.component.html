@@ -1,11 +1,28 @@
-<div id="edit-view" *ngIf="record && form" class="container-fluid" [formGroup]="form">
+<div id="edit-view" *ngIf="record && form" class="container-fluid g-0" [formGroup]="form">
     <div class="row d-flex align-items-center edit-header">
         <div class="col-md-6 d-flex">
-            <span class="edit-header-icon"><i class="fas fa-user-crown"></i></span>
-            <span class="edit-header-title">Customer</span>
+            <span class="edit-header-back"><i class="fas fa-chevron-left fa-2x" role="button" 
+            [routerLink]="['/auth/customer/list']" [state]='{ formState: true }'></i></span>
+            <span class="edit-header-icon"><i class="fal fa-user-crown fa-lg"></i></span>
+            <div *ngIf="record.name" class="edit-header-title-no d-flex flex-column">
+                <span class="header-value">{{record.name}}</span>
+                <span class="text-center header-tag">Customer</span>
+            </div>
+            <div *ngIf="record.active" class="edit-header-status d-flex flex-column">
+                <span class="header-value text-center">{{status}}</span>
+                <span class="text-center header-tag">Status</span>
+            </div>
         </div>
         <div class="col-md-6 d-flex justify-content-end">
-            <ejs-switch [(checked)]="record.active" onLabel="Active" offLabel="Not Active" style="width:100px;height:32px;"></ejs-switch>
+            <!-- <ejs-toolbar><button class="btn btn-primary">hi</button></ejs-toolbar> -->
+            <div class="col-md-2 d-flex justify-content-start">
+                <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
+            </div>
+    
+            <div class="col-md-2 d-flex justify-content-end button-top-padding">
+                <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
+            </div>
+            <!-- <ejs-switch [(checked)]="record.active" onLabel="Active" offLabel="Not Active" style="width:100px;height:32px;"></ejs-switch> -->
         </div>
     </div>
 

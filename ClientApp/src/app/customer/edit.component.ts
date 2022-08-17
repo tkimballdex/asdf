@@ -36,6 +36,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 	public deleteCommand: CommandModel[];
 	public submitClicked: boolean = false;
 	public analyteForm: FormGroup;
+	public status: string = "inactive";
 
 	@ViewChild('editTab') public editTab: TabComponent;
 	@ViewChild('editSettingsTemplate') public editSettingsTemplate: TabComponent;
@@ -68,6 +69,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 		} else {
 			this.record = await this.repository.get(this.id);
 			this.customerAnalytes = await this.repository.listCustomerAnalytes(this.id);
+			this.status = this.record.active ? "Active" : "Inactive";
 		}
 		this.hideSpinner();
 
