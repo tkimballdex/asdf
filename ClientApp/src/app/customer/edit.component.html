@@ -1,14 +1,13 @@
 <div id="edit-view" *ngIf="record && form" class="container-fluid g-0" [formGroup]="form">
     <div class="row d-flex align-items-center edit-header">
-        <div class="col-md-6 d-flex">
-            <span class="edit-header-back"><i class="fas fa-arrow-left fa-lg" role="button" 
-            [routerLink]="['/auth/customer/list']" [state]='{ formState: true }'></i></span>
+        <div class="col-md-6 d-flex align-items-center">
+            <span class="edit-header-back"><i class="fas fa-arrow-left fa-lg" role="button" [routerLink]="['/auth/customer/list']" [state]='{ formState: true }'></i></span>
             <span class="edit-header-icon"><i class="fal fa-user-crown fa-lg"></i></span>
-            <div *ngIf="record.name" class="edit-header-title-no d-flex flex-column">
+            <div *ngIf="record.name" class="edit-header-record-no d-flex flex-column">
                 <span class="header-record-value">{{record.name}}</span>
                 <span class="header-tag">Customer</span>
             </div>
-            <div class="edit-header-status d-flex flex-column">
+            <div *ngIf="status" class="edit-header-status d-flex flex-column">
                 <span class="header-status-value">{{status}}</span>
                 <span class="header-tag">Status</span>
             </div>
@@ -34,224 +33,227 @@
         </div>
     </div>
 
-    <div class="row pad-t10">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="name" required placeholder="Name*" floatLabelType="Always"></ejs-textbox>
-            <div *ngIf="this.invalidControl('name')" class="e-error">
-                Name is required!
+    <div class="mar-l10">
+        <div class="row pad-t10">
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-textbox formControlName="name" required placeholder="Name*" floatLabelType="Always"></ejs-textbox>
+                <div *ngIf="this.invalidControl('name')" class="e-error">
+                    Name is required!
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-3 col-xl-2">
+                <ejs-datepicker #ServiceStartDate formControlName="serviceStartDate" placeholder="Service Start Date" floatLabelType="Always" (focus)='datePickerFocus($event)'></ejs-datepicker>
+            </div>  
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-textbox id="edit-tenant" [(value)]="record.tenant" readonly placeholder="Tenant" floatLabelType="Always"></ejs-textbox>
+            </div>  
+
+            <div class="col-md-4 col-lg-3 col-xl-2">
+                <ejs-datepicker #ServiceEndDate formControlName="serviceEndDate" placeholder="Service End Date" floatLabelType="Always" id="serviceEndDate"
+                [ngClass]="{'invalid-input': this.form.errors?.['validateServiceEndDate'] === 'validateServiceEndDate'}" (focus)='datePickerFocus($event)'></ejs-datepicker>
+                <div *ngIf="this.form.errors?.['validateServiceEndDate'] === 'validateServiceEndDate'" class="e-error">
+                    End date is before start date!
+                </div>
             </div>
         </div>
 
-        <div class="col-md-4 col-lg-3 col-xl-2">
-            <ejs-datepicker #ServiceStartDate formControlName="serviceStartDate" placeholder="Service Start Date" floatLabelType="Always" (focus)='datePickerFocus($event)'></ejs-datepicker>
-        </div>  
-    </div>
+        <div class="row d-flex pad-t20">
+            <div class="col-md-12 d-flex">
+                <ejs-tab id="edit-tab" class="e-fill" #editTab (created)="editTabCreated()">
+                    <e-tabitems>
+                        <e-tabitem>
+                            <ng-template #headerText>
+                                <div>Information</div>
+                            </ng-template>
+                            <ng-template #content>  
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-5 col-xl-4">
 
-    <div class="row">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-tenant" [(value)]="record.tenant" readonly placeholder="Tenant" floatLabelType="Always"></ejs-textbox>
-        </div>  
+                                        <div>
+                                            <ejs-textbox formControlName="address" required placeholder="Address*" floatLabelType="Always"></ejs-textbox>
+                                            <div *ngIf="this.invalidControl('address')" class="e-error">
+                                                Address is required!
+                                            </div>
+                                        </div>
 
-        <div class="col-md-4 col-lg-3 col-xl-2">
-            <ejs-datepicker #ServiceEndDate formControlName="serviceEndDate" placeholder="Service End Date" floatLabelType="Always" id="serviceEndDate"
-            [ngClass]="{'invalid-input': this.form.errors?.['validateServiceEndDate'] === 'validateServiceEndDate'}" (focus)='datePickerFocus($event)'></ejs-datepicker>
-            <div *ngIf="this.form.errors?.['validateServiceEndDate'] === 'validateServiceEndDate'" class="e-error">
-                End date is before start date!
+                                        <div>
+                                            <ejs-textbox formControlName="city" placeholder="City*" floatLabelType="Always"></ejs-textbox>
+                                            <div *ngIf="this.invalidControl('city')" class="e-error">
+                                                City is required!
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <ejs-dropdownlist [dataSource]="app.states" formControlName="stateId" [fields]="{ text: 'name', value: 'id' }" placeholder="State*" floatLabelType="Always"></ejs-dropdownlist>
+                                            <div *ngIf="this.invalidControl('stateId')" class="e-error">
+                                                State is required!
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <ejs-textbox formControlName="postalCode" placeholder="Postal Code*" floatLabelType="Always"></ejs-textbox>
+                                            <div *ngIf="this.invalidControl('postalCode')" class="e-error">
+                                                Postal code is required!
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <ejs-textbox [value]="record.latitude" readonly placeholder="Latitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
+                                            </div>
+                                            <div class="col">
+                                                <ejs-textbox [value]="record.longitude" readonly placeholder="Longitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-6 col-lg-5 col-xl-4 input-top-padding">
+
+                                        <div>
+                                            <ejs-maskedtextbox formControlName="phoneNo" placeholder="Main Phone No*" floatLabelType="Always" pattern="^[0-9]{10}$" mask="(000) 000 - 0000"></ejs-maskedtextbox>
+                                            <div *ngIf="this.invalidControl('phoneNo')" class="e-error">
+                                                Phone number is invalid!
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <ejs-textbox formControlName="website" placeholder="Website" floatLabelType="Always"></ejs-textbox>
+                                        </div>
+
+                                        <div>
+                                            <ejs-textbox formControlName="contactName" placeholder="Contact Name*" floatLabelType="Always"></ejs-textbox>
+                                            <div *ngIf="this.invalidControl('contactName')" class="e-error">
+                                                Contact name is required!
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <ejs-maskedtextbox formControlName="contactPhoneNo" placeholder="Contact Phone No*" floatLabelType="Always" pattern="^[0-9]{10}$" mask="(000) 000 - 0000"></ejs-maskedtextbox>
+                                            <div *ngIf="this.invalidControl('contactPhoneNo')" class="e-error">
+                                                Contact phone number is invalid!
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <ejs-textbox formControlName="contactEmail" placeholder="Contact Email*" floatLabelType="Always"></ejs-textbox>
+                                            <div *ngIf="this.invalidControl('contactEmail')" class="e-error">
+                                                Contact email is invalid!
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row pad-t20">
+                                    <div class="col-md-12 col-lg-10 col-xl-8">
+                                        <ejs-textbox formControlName="notificationEmail" placeholder="Notification Email(s)" floatLabelType="Always"></ejs-textbox>
+                                        <div *ngIf="this.invalidControl('notificationEmail')" class="e-error">
+                                            Notification email is invalid!
+                                        </div>
+                                        <label class="font-weight-light">Enter the email(s) seperated by semicolon. Used for test result notification purposes.</label>
+                                    </div>
+                                </div>
+
+                                <div class="row pad-t10">
+                                    <div class="col-md-12 col-lg-10 col-xl-8">
+                                        <ejs-textbox [(value)]="record.alerts" placeholder="Alert Phone Number(s)" floatLabelType="Always"></ejs-textbox>
+                                        <label class="font-weight-light">Enter the phone number(s) to be alerted through SMS, seperated by semicolon. Used for test result alert purposes.</label>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </e-tabitem>
+                        <e-tabitem *ngIf="record.id && app.privileges.sites.read">
+                            <ng-template #headerText>
+                                <div>Sites</div>
+                            </ng-template>
+                            <ng-template #content>
+                                <div class="row d-flex align-items-center">
+                                    <div class="col-md-12 col-lg-10 col-xl-8 d-flex align-items-center subitem-list-header">
+                                        <span class="subitem-list-icon"><i class="fas fa-chart-network"></i></span>
+                                        <span class="subitem-list-title">Sites</span>
+                                        <span class="subitem-list-add"><button ejs-button cssClass="e-outline" [routerLink]="['/auth/site/add', record.id]" [disabled]="!app.privileges.sites.create">+ Add</button></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-10 col-xl-8 pad-t20">
+                                        <ejs-grid [dataSource]='record.sites' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="false">
+                                            <e-columns>
+                                                <e-column width="70">
+                                                    <ng-template #template let-data>
+                                                        <a [routerLink]="['/auth/site/edit', data.id]" [state]="{ from: 'customer' }"><i class="fas fa-pencil-alt edit-icon"></i></a>
+                                                    </ng-template>
+                                                </e-column>
+                                                <e-column field='name' headerText='Name' width="150"></e-column>
+                                                <e-column field='address' headerText='Address' hideAtMedia='(min-width: 1200px)' width="150"></e-column>
+                                                <e-column field='city' headerText='City' hideAtMedia='(min-width: 1200px)' width="150"></e-column>
+                                                <e-column field='state' headerText='State' width="120"></e-column>
+                                                <e-column field='postalCode' headerText='Postal Code' width="120"></e-column>
+                                                <e-column headerText='Phone No' hideAtMedia='(min-width: 1200px)' width="120">
+                                                    <ng-template #template let-data>
+                                                        <span>{{data.contactPhoneNo | mask: '(000) 000-0000'}}</span>
+                                                    </ng-template>
+                                                </e-column>
+                                            </e-columns>
+                                        </ejs-grid>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </e-tabitem>
+                        <e-tabitem *ngIf="customerAnalytes !== null">
+                            <ng-template #headerText>
+                                <div>Analytes</div>
+                            </ng-template>
+                            <ng-template #content>
+                                <div class="row">
+                                    <div class="col-10 pad-t20">
+                                        <ejs-grid #grid [dataSource]='customerAnalytes' [editSettings]='editSettings' [allowSorting]="true" [toolbar]='toolbar' [toolbarModule]="headerText" (actionBegin)='actionBegin($event)' (actionComplete)='actionComplete($event)'>
+                                            <e-columns>
+                                                <e-column [commands]='editCommand' width="50"></e-column>
+                                                <e-column field='analyte' headerText='Analyte' [isPrimaryKey]='true' width="150"></e-column>
+                                                <e-column field='showOnDashboard' headerText='Show on Dashboard' [displayAsCheckBox]="true" hideAtMedia='(min-width: 1200px)' width="120"></e-column>
+                                                <e-column field='sendNotifications' headerText='Send Notifications' [displayAsCheckBox]="true" hideAtMedia='(min-width: 1200px)' width="160"></e-column>
+                                                <e-column field='sendAlerts' headerText='Send Alerts' [displayAsCheckBox]="true" hideAtMedia='(min-width: 1200px)' width="120"></e-column>
+                                                <e-column field='lastUpdatedBy' headerText='Last Updated By' hideAtMedia='(min-width: 1560px)' width="160"></e-column>
+                                                <e-column field='lastUpdatedDate' headerText='Last Updated Date' type='date' [format]='dateFormat' hideAtMedia='(min-width: 1560px)' width="160"></e-column>
+                                                <e-column [commands]='deleteCommand' width="50"></e-column>
+                                            </e-columns>
+                                            <ng-template #editSettingsTemplate let-data>
+                                                <div [formGroup]="analyteForm">
+                                                    <div class="form-row">
+                                                        <div class="col-md-10">
+                                                            <ejs-dropdownlist id="{{editAnalyte ? 'analyteDropdown' : null}}" formControlName="analyteId" [dataSource]="tenantAnalytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="data.analyteId" [readonly]="editAnalyte" placeholder="Analyte*" floatLabelType="Always"></ejs-dropdownlist>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row pad-t15">
+                                                        <div class="col-md-10">
+                                                            <ejs-checkbox formControlName="showOnDashboard" [(value)]="data.showOnDashboard" label="Show On Dashboard"></ejs-checkbox>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row pad-t15">
+                                                        <div class="col-md-10">
+                                                            <ejs-checkbox formControlName="sendNotifications" [(value)]="data.sendNotifications" label="Send Notifications"></ejs-checkbox>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row pad-t15">
+                                                        <div class="col-md-10">
+                                                            <ejs-checkbox formControlName="sendAlerts" [(value)]="data.sendAlerts" label="Send Alerts"></ejs-checkbox>
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                            </ng-template>
+                                        </ejs-grid>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </e-tabitem>
+                    </e-tabitems>
+                </ejs-tab>
             </div>
-        </div>
-    </div>
-
-    <div class="row d-flex pad-t20">
-        <div class="col-md-12 d-flex">
-            <ejs-tab id="edit-tab" class="e-fill" #editTab (created)="editTabCreated()">
-                <e-tabitems>
-                    <e-tabitem>
-                        <ng-template #headerText>
-                            <div>Information</div>
-                        </ng-template>
-                        <ng-template #content>  
-                            <div class="row">
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-
-                                    <div>
-                                        <ejs-textbox formControlName="address" required placeholder="Address*" floatLabelType="Always"></ejs-textbox>
-                                        <div *ngIf="this.invalidControl('address')" class="e-error">
-                                            Address is required!
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <ejs-textbox formControlName="city" placeholder="City*" floatLabelType="Always"></ejs-textbox>
-                                        <div *ngIf="this.invalidControl('city')" class="e-error">
-                                            City is required!
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <ejs-dropdownlist [dataSource]="app.states" formControlName="stateId" [fields]="{ text: 'name', value: 'id' }" placeholder="State*" floatLabelType="Always"></ejs-dropdownlist>
-                                        <div *ngIf="this.invalidControl('stateId')" class="e-error">
-                                            State is required!
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <ejs-textbox formControlName="postalCode" placeholder="Postal Code*" floatLabelType="Always"></ejs-textbox>
-                                        <div *ngIf="this.invalidControl('postalCode')" class="e-error">
-                                            Postal code is required!
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col">
-                                            <ejs-textbox [value]="record.latitude" readonly placeholder="Latitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
-                                        </div>
-                                        <div class="col">
-                                            <ejs-textbox [value]="record.longitude" readonly placeholder="Longitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-6 col-lg-5 col-xl-4 input-top-padding">
-
-                                    <div>
-                                        <ejs-maskedtextbox formControlName="phoneNo" placeholder="Main Phone No*" floatLabelType="Always" pattern="^[0-9]{10}$" mask="(000) 000 - 0000"></ejs-maskedtextbox>
-                                        <div *ngIf="this.invalidControl('phoneNo')" class="e-error">
-                                            Phone number is invalid!
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <ejs-textbox formControlName="website" placeholder="Website" floatLabelType="Always"></ejs-textbox>
-                                    </div>
-
-                                    <div>
-                                        <ejs-textbox formControlName="contactName" placeholder="Contact Name*" floatLabelType="Always"></ejs-textbox>
-                                        <div *ngIf="this.invalidControl('contactName')" class="e-error">
-                                            Contact name is required!
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <ejs-maskedtextbox formControlName="contactPhoneNo" placeholder="Contact Phone No*" floatLabelType="Always" pattern="^[0-9]{10}$" mask="(000) 000 - 0000"></ejs-maskedtextbox>
-                                        <div *ngIf="this.invalidControl('contactPhoneNo')" class="e-error">
-                                            Contact phone number is invalid!
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <ejs-textbox formControlName="contactEmail" placeholder="Contact Email*" floatLabelType="Always"></ejs-textbox>
-                                        <div *ngIf="this.invalidControl('contactEmail')" class="e-error">
-                                            Contact email is invalid!
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="row pad-t20">
-                                <div class="col-md-12 col-lg-10 col-xl-8">
-                                    <ejs-textbox formControlName="notificationEmail" placeholder="Notification Email(s)" floatLabelType="Always"></ejs-textbox>
-                                    <ejs-tooltip content='Enter the email(s) to be notified through email' position="TopRight" target="#notificationEmailTooltip">
-                                        <span id="notificationEmailTooltip" class=""><i class="far fa-info-circle"></i></span>
-                                    </ejs-tooltip>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12 col-lg-10 col-xl-8">
-                                    <ejs-textbox [(value)]="record.alerts" placeholder="Alert Phone Number(s)" floatLabelType="Always"></ejs-textbox>
-                                    <label class="font-weight-light mt-1">Enter the phone number(s) to be alerted through SMS</label>
-                                </div>
-                            </div>
-                        </ng-template>
-                    </e-tabitem>
-                    <e-tabitem *ngIf="record.id && app.privileges.sites.read">
-                        <ng-template #headerText>
-                            <div>Sites</div>
-                        </ng-template>
-                        <ng-template #content>
-                            <div class="row d-flex align-items-center">
-                                <div class="col-md-12 col-lg-10 col-xl-8 d-flex align-items-center subitem-list-header">
-                                    <span class="subitem-list-icon"><i class="fas fa-chart-network"></i></span>
-                                    <span class="subitem-list-title">Sites</span>
-                                    <span class="subitem-list-add"><button ejs-button cssClass="e-outline" [routerLink]="['/auth/site/add', record.id]" [disabled]="!app.privileges.sites.create">+ Add</button></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-lg-10 col-xl-8 pad-t20">
-                                    <ejs-grid [dataSource]='record.sites' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="false">
-                                        <e-columns>
-                                            <e-column width="70">
-                                                <ng-template #template let-data>
-                                                    <a [routerLink]="['/auth/site/edit', data.id]" [state]="{ from: 'customer' }"><i class="fas fa-pencil-alt edit-icon"></i></a>
-                                                </ng-template>
-                                            </e-column>
-                                            <e-column field='name' headerText='Name' width="150"></e-column>
-                                            <e-column field='address' headerText='Address' hideAtMedia='(min-width: 1200px)' width="150"></e-column>
-                                            <e-column field='city' headerText='City' hideAtMedia='(min-width: 1200px)' width="150"></e-column>
-                                            <e-column field='state' headerText='State' width="120"></e-column>
-                                            <e-column field='postalCode' headerText='Postal Code' width="120"></e-column>
-                                            <e-column headerText='Phone No' hideAtMedia='(min-width: 1200px)' width="120">
-                                                <ng-template #template let-data>
-                                                    <span>{{data.contactPhoneNo | mask: '(000) 000-0000'}}</span>
-                                                </ng-template>
-                                            </e-column>
-                                        </e-columns>
-                                    </ejs-grid>
-                                </div>
-                            </div>
-                        </ng-template>
-                    </e-tabitem>
-                    <e-tabitem *ngIf="customerAnalytes !== null">
-                        <ng-template #headerText>
-                            <div>Analytes</div>
-                        </ng-template>
-                        <ng-template #content>
-                            <div class="row">
-                                <div class="col-10 pad-t20">
-                                    <ejs-grid #grid [dataSource]='customerAnalytes' [editSettings]='editSettings' [allowSorting]="true" [toolbar]='toolbar' [toolbarModule]="headerText" (actionBegin)='actionBegin($event)' (actionComplete)='actionComplete($event)'>
-                                        <e-columns>
-                                            <e-column [commands]='editCommand' width="50"></e-column>
-                                            <e-column field='analyte' headerText='Analyte' [isPrimaryKey]='true' width="150"></e-column>
-                                            <e-column field='showOnDashboard' headerText='Show on Dashboard' [displayAsCheckBox]="true" hideAtMedia='(min-width: 1200px)' width="120"></e-column>
-                                            <e-column field='sendNotifications' headerText='Send Notifications' [displayAsCheckBox]="true" hideAtMedia='(min-width: 1200px)' width="160"></e-column>
-                                            <e-column field='sendAlerts' headerText='Send Alerts' [displayAsCheckBox]="true" hideAtMedia='(min-width: 1200px)' width="120"></e-column>
-                                            <e-column field='lastUpdatedBy' headerText='Last Updated By' hideAtMedia='(min-width: 1560px)' width="160"></e-column>
-                                            <e-column field='lastUpdatedDate' headerText='Last Updated Date' type='date' [format]='dateFormat' hideAtMedia='(min-width: 1560px)' width="160"></e-column>
-                                            <e-column [commands]='deleteCommand' width="50"></e-column>
-                                        </e-columns>
-                                        <ng-template #editSettingsTemplate let-data>
-                                            <div [formGroup]="analyteForm">
-                                                <div class="form-row">
-                                                    <div class="col-md-10">
-                                                        <ejs-dropdownlist id="{{editAnalyte ? 'analyteDropdown' : null}}" formControlName="analyteId" [dataSource]="tenantAnalytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="data.analyteId" [readonly]="editAnalyte" placeholder="Analyte*" floatLabelType="Always"></ejs-dropdownlist>
-                                                    </div>
-                                                </div>
-                                                <div class="form-row pad-t15">
-                                                    <div class="col-md-10">
-                                                        <ejs-checkbox formControlName="showOnDashboard" [(value)]="data.showOnDashboard" label="Show On Dashboard"></ejs-checkbox>
-                                                    </div>
-                                                </div>
-                                                <div class="form-row pad-t15">
-                                                    <div class="col-md-10">
-                                                        <ejs-checkbox formControlName="sendNotifications" [(value)]="data.sendNotifications" label="Send Notifications"></ejs-checkbox>
-                                                    </div>
-                                                </div>
-                                                <div class="form-row pad-t15">
-                                                    <div class="col-md-10">
-                                                        <ejs-checkbox formControlName="sendAlerts" [(value)]="data.sendAlerts" label="Send Alerts"></ejs-checkbox>
-                                                    </div>
-                                                </div>
-                                            </div> 
-                                        </ng-template>
-                                    </ejs-grid>
-                                </div>
-                            </div>
-                        </ng-template>
-                    </e-tabitem>
-                </e-tabitems>
-            </ejs-tab>
         </div>
     </div>
 

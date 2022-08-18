@@ -36,7 +36,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 	public deleteCommand: CommandModel[];
 	public submitClicked: boolean = false;
 	public analyteForm: FormGroup;
-	public status: string = "Inactive";
+	public status: string;
 	public activeToggleText: string;
 
 	@ViewChild('editTab') public editTab: TabComponent;

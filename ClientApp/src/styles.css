@@ -235,7 +235,7 @@ mat-form-field.mat-form-field {
 /* End - List View styles*/
 /* Start - Edit View styles*/
 #edit-view {
-    padding: 0 12px 15px;
+    padding: 0 12px 15px 12px;
     /* border-radius: 3px; */
     /* border: 1px solid #d8deee; */
     background-color: #ffffff;
@@ -243,8 +243,95 @@ mat-form-field.mat-form-field {
 }
 
 #edit-view .edit-header {
-    border-bottom: 2px solid #d8dee6;
+    /* height: 60px; */
+    border-bottom: 1px solid #d8dee6;
+    height: 68px;
     /* padding-bottom: 10px; */
+}
+
+#edit-view .edit-header-title {
+    font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    display: inline-block;
+    font-size: 1.8em;
+    font-weight: 300;
+    /* padding: 15px 20px 20px 15px; */
+    color: #3c4858;
+}
+
+#edit-view .edit-header-back {
+    padding: 25px 22px 0px 15px;
+    height: 68px;
+    border-right: 1px solid #d8dee6;
+    color: #1e88e5;
+}
+
+#edit-view .edit-header-icon {
+    display: inline-block;
+    font-size: 1.6em;
+    /* background-color: #1e88e5; */
+    padding: 7px 10px 0px 1px;
+    margin-left: 10px;
+    color: #1e88e5;
+    height: 40px;
+    width: 60px;
+    text-align: center;
+    border-right: 1px dotted #3c485860;
+}
+
+#edit-view .edit-header-record-no {
+    /* color: #3c4858; */
+    /* font-weight: 100; */
+    padding: 0 10px;
+    margin: 12px 0;
+    border-right: 1px dotted #3c485860;
+}
+
+#edit-view .edit-header-status {
+    color: #3c4858;
+    font-weight: 100;
+    padding: 0 10px;
+    margin: 12px 0;
+}
+
+.fa-arrow-left:hover {
+    color: #1864a7;
+}
+
+.fa-arrow-left {
+    font-weight: 200;
+    font-size: 1.5rem;
+}
+
+#toolbar .e-toolbar[_ngcontent-ng-cli-universal-c315],
+.e-toolbar[_ngcontent-ng-cli-universal-c315] .e-hor-nav[_ngcontent-ng-cli-universal-c315] {
+    border: 1.7px solid #d8dee6;
+    border-radius: 5px;
+}
+
+.e-toolbar {
+    border: 0;
+}
+
+#toolbar.e-toolbar .e-popup-down-icon:before,
+#toolbar.e-toolbar .e-popup-up-icon:before {
+    content: '\e984';
+}
+
+.e-toolbar .e-toolbar-pop .e-toolbar-item .e-tbar-btn .e-icons.e-btn-icon {
+    min-width: 35px;
+}
+
+.e-toolbar .e-tbar-btn:hover {
+    background-color: #d1ebff;
+}
+
+#edit-view #toolbar .e-control {
+    width: 13.65%;
+}
+
+.font-weight-light {
+    color: rgb(112, 112, 112);
+    font-size: .75rem;
 }
 
 #toolbar .e-save:before {
@@ -260,42 +347,6 @@ mat-form-field.mat-form-field {
 #toolbar .e-active:before {
     content: '\e345';
     color: #1e88e5;
-}
-
-#edit-view .edit-header-icon {
-    display: inline-block;
-    font-size: 1.6em;
-    /* background-color: #1e88e5; */
-    padding: 25px 15px 5px 10px;
-    color: #1e88e5;
-    width: 60px;
-    /* height: 60px; */
-    text-align: center;
-}
-
-#edit-view .edit-header-title {
-    font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    display: inline-block;
-    font-size: 1.8em;
-    font-weight: 300;
-    /* padding: 15px 20px 20px 15px; */
-    color: #3c4858;
-}
-
-#edit-view .edit-header-title-no {
-    /* color: #3c4858; */
-    /* font-weight: 100; */
-    padding: 4px 20px 1px;
-    margin: 12px 0;
-    border-left: 1px dotted #3c485860;
-}
-
-#edit-view .edit-header-status {
-    color: #3c4858;
-    font-weight: 100;
-    padding: 1px 15px 1px;
-    margin: 12px 0;
-    border-left: 1px dotted #3c485860;
 }
 
 .header-record-value {
