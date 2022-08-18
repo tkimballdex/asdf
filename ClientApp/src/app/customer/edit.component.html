@@ -1,27 +1,35 @@
 <div id="edit-view" *ngIf="record && form" class="container-fluid g-0" [formGroup]="form">
     <div class="row d-flex align-items-center edit-header">
         <div class="col-md-6 d-flex">
-            <span class="edit-header-back"><i class="fas fa-chevron-left fa-2x" role="button" 
+            <span class="edit-header-back"><i class="fas fa-arrow-left fa-lg" role="button" 
             [routerLink]="['/auth/customer/list']" [state]='{ formState: true }'></i></span>
             <span class="edit-header-icon"><i class="fal fa-user-crown fa-lg"></i></span>
             <div *ngIf="record.name" class="edit-header-title-no d-flex flex-column">
-                <span class="header-value">{{record.name}}</span>
-                <span class="text-center header-tag">Customer</span>
+                <span class="header-record-value">{{record.name}}</span>
+                <span class="header-tag">Customer</span>
             </div>
-            <div *ngIf="record.active" class="edit-header-status d-flex flex-column">
-                <span class="header-value text-center">{{status}}</span>
-                <span class="text-center header-tag">Status</span>
+            <div class="edit-header-status d-flex flex-column">
+                <span class="header-status-value">{{status}}</span>
+                <span class="header-tag">Status</span>
             </div>
         </div>
-        <div class="col-md-6 d-flex justify-content-end">
-            <!-- <ejs-toolbar><button class="btn btn-primary">hi</button></ejs-toolbar> -->
-            <div class="col-md-2 d-flex justify-content-start">
+        <div class="col-md-6">
+            <ejs-toolbar id='toolbar' overflowMode='Popup'>
+                <e-items>
+                    <e-item id="saveToolbar" text='Save' tooltipText='Save' (click)="save()" [disabled]="loading || !privileges.update" align='Right' prefixIcon="e-icons e-save"></e-item>
+                    <e-item id="deleteToolbar" text='Delete' tooltipText='Delete' showAlwaysInPopup='true' (click)="delete()" [disabled]="loading || !record.id || !privileges.delete" align='Right' prefixIcon="e-icons e-trash"></e-item>
+                    <e-item id="activeToolbar" [text]=activeToggleText [tooltipText]=activeToggleText (click)="toggleActiveDialog()" showAlwaysInPopup='true' align='Right' prefixIcon="e-icons e-active"></e-item>
+                </e-items>
+            </ejs-toolbar>
+
+
+            <!-- <div class="col-md-2 d-flex justify-content-start">
                 <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
             </div>
     
             <div class="col-md-2 d-flex justify-content-end button-top-padding">
                 <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
-            </div>
+            </div> -->
             <!-- <ejs-switch [(checked)]="record.active" onLabel="Active" offLabel="Not Active" style="width:100px;height:32px;"></ejs-switch> -->
         </div>
     </div>
@@ -144,12 +152,16 @@
                             <div class="row pad-t20">
                                 <div class="col-md-12 col-lg-10 col-xl-8">
                                     <ejs-textbox formControlName="notificationEmail" placeholder="Notification Email(s)" floatLabelType="Always"></ejs-textbox>
+                                    <ejs-tooltip content='Enter the email(s) to be notified through email' position="TopRight" target="#notificationEmailTooltip">
+                                        <span id="notificationEmailTooltip" class=""><i class="far fa-info-circle"></i></span>
+                                    </ejs-tooltip>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-12 col-lg-10 col-xl-8">
                                     <ejs-textbox [(value)]="record.alerts" placeholder="Alert Phone Number(s)" floatLabelType="Always"></ejs-textbox>
+                                    <label class="font-weight-light mt-1">Enter the phone number(s) to be alerted through SMS</label>
                                 </div>
                             </div>
                         </ng-template>
@@ -198,7 +210,7 @@
                         <ng-template #content>
                             <div class="row">
                                 <div class="col-10 pad-t20">
-                                    <ejs-grid #grid [dataSource]='customerAnalytes' [editSettings]='editSettings' [allowSorting]="true" [toolbar]='toolbar' (actionBegin)='actionBegin($event)' (actionComplete)='actionComplete($event)'>
+                                    <ejs-grid #grid [dataSource]='customerAnalytes' [editSettings]='editSettings' [allowSorting]="true" [toolbar]='toolbar' [toolbarModule]="headerText" (actionBegin)='actionBegin($event)' (actionComplete)='actionComplete($event)'>
                                         <e-columns>
                                             <e-column [commands]='editCommand' width="50"></e-column>
                                             <e-column field='analyte' headerText='Analyte' [isPrimaryKey]='true' width="150"></e-column>
@@ -243,7 +255,7 @@
         </div>
     </div>
 
-    <div class="row d-flex edit-footer">
+    <!-- <div class="row d-flex edit-footer">
         <div class="col-md-6 d-flex justify-content-start">
             <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
         </div>
@@ -252,9 +264,6 @@
             <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
             <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/customer/list']" [state]='{ formState: true }'>Close</button>
         </div>
-    </div>
+    </div> -->
     <ejs-toast #toast></ejs-toast>
 </div>
-
-
-

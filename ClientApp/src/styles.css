@@ -235,7 +235,7 @@ mat-form-field.mat-form-field {
 /* End - List View styles*/
 /* Start - Edit View styles*/
 #edit-view {
-    padding: 0 15px 15px 15px;
+    padding: 0 12px 15px;
     /* border-radius: 3px; */
     /* border: 1px solid #d8deee; */
     background-color: #ffffff;
@@ -247,16 +247,20 @@ mat-form-field.mat-form-field {
     /* padding-bottom: 10px; */
 }
 
-#edit-view .edit-header-back {
-    padding: 22px 20px 0 5px;
-    border-right: 2px solid #d8dee6;
-    margin-right: 5px;
+#toolbar .e-save:before {
+    content: '\e954';
     color: #1e88e5;
 }
 
-.fa-chevron-left:hover {
-    color: #1e76c4;
-} 
+#toolbar .e-trash:before {
+    content: '\e965';
+    color: #1e88e5;
+}
+
+#toolbar .e-active:before {
+    content: '\e345';
+    color: #1e88e5;
+}
 
 #edit-view .edit-header-icon {
     display: inline-block;
@@ -267,7 +271,6 @@ mat-form-field.mat-form-field {
     width: 60px;
     /* height: 60px; */
     text-align: center;
-    border-right: 1px dotted #3c485860;
 }
 
 #edit-view .edit-header-title {
@@ -282,24 +285,31 @@ mat-form-field.mat-form-field {
 #edit-view .edit-header-title-no {
     /* color: #3c4858; */
     /* font-weight: 100; */
-    padding: 16px 20px 13px;
-    /* border-right: 1px dotted #3c485860; */
+    padding: 4px 20px 1px;
+    margin: 12px 0;
+    border-left: 1px dotted #3c485860;
 }
 
 #edit-view .edit-header-status {
     color: #3c4858;
     font-weight: 100;
-    padding: 16px 15px 13px;
-    /* border-right: 1px dotted #3c485860; */
+    padding: 1px 15px 1px;
+    margin: 12px 0;
+    border-left: 1px dotted #3c485860;
 }
 
-.header-value {
+.header-record-value {
     font-weight: 500;
     font-size: 1rem;
 }
 
-.header-tag {
+.header-status-value {
+    font-weight: 500;
     font-size: .9rem;
+}
+
+.header-tag {
+    font-size: .8rem;
 }
 
 #edit-view .e-control {
@@ -535,6 +545,10 @@ mat-form-field.mat-form-field {
 
 .e-grid.e-default .e-gridheader th.e-firstcell, .e-grid.e-default .e-gridheader th.e-lastcell {
     border-left-width: 0;
+}
+
+.e-grid {
+    border-top-style: solid;
 }
 
 #edit-view .ng-touched.ng-invalid input,

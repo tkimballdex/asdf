@@ -59,7 +59,7 @@ export class PageComponent {
 
     public showSuccessMessage(message: string) {
         this.toast.show({
-            content: message, timeOut: 2000, width:400, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-success'
+            content: message, timeOut: 2000, width:400, position: { X: 'center', Y: 'bottom' }, cssClass: 'e-toast-success e-toast-gen'
         });
     }
 
