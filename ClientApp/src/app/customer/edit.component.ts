@@ -10,6 +10,15 @@ import { TenantService } from '../shared/tenant.service';
 import { validateServiceEndDate } from '../shared/validators';
 import { EditSettingsModel, ToolbarItems, CommandModel, DialogEditEventArgs } from '@syncfusion/ej2-angular-grids';
 import { Browser } from '@syncfusion/ej2-base';
+import { L10n } from '@syncfusion/ej2-base';
+
+L10n.load({ 
+    'en-US': { 
+        grid: { 
+            "Add": "New", 
+        }, 
+    } 
+}); 
 
 @Component({
 	selector: 'customer-edit',
@@ -140,6 +149,10 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 				}
 			}
 		}
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	analyteTabHandler() {
+		console.log(1,document.getElementsByClassName('e-tbar-btn-text'));
 	}
 	//------------------------------------------------------------------------------------------------------------------------
 	async actionBegin(args) {

@@ -14,6 +14,15 @@ import { Browser } from '@syncfusion/ej2-base';
 import { DataUtil } from '@syncfusion/ej2-data';
 import { AbstractControl } from '@angular/forms';
 import { AreaSeries } from '@syncfusion/ej2-angular-charts';
+import { L10n } from '@syncfusion/ej2-base';
+
+L10n.load({ 
+    'en-US': { 
+        grid: { 
+            "Add": "New", 
+        }, 
+    } 
+}); 
 
 @Component({
 	selector: 'site-edit',

@@ -269,7 +269,7 @@ mat-form-field.mat-form-field {
     display: inline-block;
     font-size: 1.6em;
     /* background-color: #1e88e5; */
-    padding: 7px 10px 0px 1px;
+    padding: 7px 10px 0 0;
     margin-left: 10px;
     color: #1e88e5;
     height: 40px;
