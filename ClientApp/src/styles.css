@@ -302,8 +302,7 @@ mat-form-field.mat-form-field {
     font-size: 1.5rem;
 }
 
-#toolbar .e-toolbar[_ngcontent-ng-cli-universal-c315],
-.e-toolbar[_ngcontent-ng-cli-universal-c315] .e-hor-nav[_ngcontent-ng-cli-universal-c315] {
+.e-toolbar .e-hor-nav {
     border: 1.7px solid #d8dee6;
     border-radius: 5px;
 }
