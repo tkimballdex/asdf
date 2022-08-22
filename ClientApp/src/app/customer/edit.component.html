@@ -3,11 +3,11 @@
         <div class="col-md-7 col-lg-6 col-12 d-flex align-items-center">
             <span class="edit-header-back"><i class="fas fa-arrow-left fa-lg" role="button" [routerLink]="['/auth/customer/list']" [state]='{ formState: true }'></i></span>
             <span class="edit-header-icon"><i class="fal fa-user-crown fa-lg"></i></span>
-            <div *ngIf="record.name" class="edit-header-record-no d-flex flex-column">
+            <div *ngIf="record.name" class="edit-header-record-no d-flex flex-column mobile-record">
                 <span class="header-record-value">{{record.name}}</span>
                 <span class="header-tag">Customer</span>
             </div>
-            <div *ngIf="status" class="edit-header-status d-flex flex-column">
+            <div *ngIf="status" class="edit-header-status d-flex flex-column hidden">
                 <span class="header-status-value">{{status}}</span>
                 <span class="header-tag">Status</span>
             </div>
@@ -17,7 +17,7 @@
                 <e-items>
                     <e-item id="saveToolbar" text='Save' tooltipText='Save' (click)="save()" [disabled]="loading || !privileges.update" align='Right' prefixIcon="e-icons e-save"></e-item>
                     <e-item id="deleteToolbar" text='Delete' tooltipText='Delete' showAlwaysInPopup='true' (click)="delete()" [disabled]="loading || !record.id || !privileges.delete" align='Right' prefixIcon="e-icons e-trash"></e-item>
-                    <e-item id="activeToolbar" [text]=activeToggleText [tooltipText]=activeToggleText (click)="toggleActiveDialog()" showAlwaysInPopup='true' align='Right' prefixIcon="e-icons e-active"></e-item>
+                    <e-item id="activeToolbar" [text]=activeToggleText [tooltipText]=activeToggleText *ngIf="record.id" (click)="toggleActiveDialog()" showAlwaysInPopup='true' align='Right' prefixIcon="e-icons e-active"></e-item>
                 </e-items>
             </ejs-toolbar>
 

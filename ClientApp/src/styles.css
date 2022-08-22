@@ -655,6 +655,14 @@ mat-form-field.mat-form-field {
         border-right: 1px solid #d8dee6;
         width: 141px;
     }
+
+    .mobile-record {
+        border: 0 !important;
+    }
+
+    .hidden {
+        display: none !important;
+    }
 }
 
 @media only screen and (max-width: 991px) {
