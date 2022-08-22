@@ -325,7 +325,7 @@ mat-form-field.mat-form-field {
 }
 
 #edit-view #toolbar .e-control {
-    width: 13.65%;
+    max-width: 120px;
 }
 
 .font-weight-light {
