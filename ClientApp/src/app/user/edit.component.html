@@ -1,103 +1,100 @@
-<div id="edit-view" *ngIf="record" class="container-fluid">
-    <div class="row d-flex align-items-center edit-header">
-        <div class="col-md-6 d-flex">
-            <span class="edit-header-icon"><i class="fas fa-user"></i></span>
+<div id="edit-view" *ngIf="record" class="container-fluid g-0">
+    <div class="row d-flex align-items-center edit-header toolbar-margin">
+        <div class="col-md-7 col-lg-6 col-12 d-flex align-items-center">
+            <span class="edit-header-back"><i class="fas fa-arrow-left fa-lg" role="button" [routerLink]="['/auth/customer/list']" [state]='{ formState: true }'></i></span>
+            <span class="edit-header-icon"><i class="fas fa-user fa-lg"></i></span>
             <span class="edit-header-title">User</span>
         </div>
-        <!-- <div class="col-md-6 d-flex justify-content-end pad-b10">
-            <ejs-switch [(checked)]="record.active" onLabel="Active" offLabel="Not Active" style="width:100px;height:32px;"></ejs-switch>
-        </div> -->
-        <div class="col-md-6 d-flex justify-content-end pad-r20">
-            <button ejs-button cssClass="e-outline e-flat" (click)="sendPasswordResetLink()" [disabled]="loading || !privileges.update" style="width: 200px;">Send Password Reset Link</button>
+        <div class="col-md-5 col-lg-6 col-3 save-toolbar">
+            <ejs-tooltip id="tooltip" target='#toolbar [title]'>
+                <ejs-toolbar id='toolbar' overflowMode='Popup'>
+                    <e-items>
+                        <e-item id="saveToolbar" text='Save' tooltipText='Save' (click)="save()" [disabled]="loading || !privileges.update" align='Right' prefixIcon="e-icons e-save"></e-item>
+                        <e-item id="passwordToolbar" text='Password Reset' tooltipText='Send Password Reset Link' showAlwaysInPopup='true' (click)="sendPasswordResetLink()" [disabled]="loading || !privileges.update || !record.id" align='Right'></e-item>
+                        <e-item id="deleteToolbar" text='Delete' tooltipText='Delete' showAlwaysInPopup='true' (click)="delete()" [disabled]="loading || !record.id || !privileges.delete" align='Right' prefixIcon="e-icons e-trash"></e-item>
+                    </e-items>
+                </ejs-toolbar>
+            </ejs-tooltip>
         </div>
     </div>
 
-    <div class="row pad-t20">
-        <div class="col-md-6 col-lg-5 col-xl-4 d-flex align-items-end">
-            <ejs-textbox [(value)]="record.firstName" placeholder="First Name" floatLabelType="Always"></ejs-textbox>
-        </div>
-        <div class="col-md-6 col-lg-5 col-xl-4 d-flex align-items-end pad-b5">
-            <ejs-checkbox [(checked)]="record.api" label="API User" floatLabelType="Always" id="ApiUser"></ejs-checkbox>
-        </div>        
-    </div>
-
-    <div class="row">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox [(value)]="record.lastName" placeholder="Last Name" floatLabelType="Always"></ejs-textbox>
-        </div>
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist [dataSource]="customers" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.customerId" placeholder="Customer" floatLabelType="Always" (change)="changeCustomer()"></ejs-dropdownlist>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox [(value)]="record.email" placeholder="Email" floatLabelType="Always"></ejs-textbox>
-        </div>
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist [dataSource]="vendors" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.vendorId" placeholder="Vendor" floatLabelType="Always" (change)="changeVendor()"></ejs-dropdownlist>
-        </div>
-    </div>
-
-    <div class="row pad-b10">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox [(value)]="record.phone" placeholder="Phone No" floatLabelType="Always"></ejs-textbox>
-        </div>
-    </div>
-
-    <div class="row d-flex edit-footer pad-b10" *ngIf="record.api">
-        <div class="col-md-6 d-flex justify-content-start align-items-end">
-            <button ejs-button cssClass="e-outline e-flat" (click)="generateIntegrationKey()" [disabled]="loading || !privileges.update" style="width: 300px;">Generate API Key</button>
-        </div>
-        <div class="col-md-4 d-flex justify-content-start align-items-end" *ngIf="integrationKey">
-            <ejs-textbox [(value)]="integrationKey" placeholder="API Key" floatLabelType="Always" disabled="disabled"></ejs-textbox>
-        </div>
-    </div>
-
-    <div class="row pad-t15 pad-b20">
-
-        <div class="col-md-6">
-            <div><label for="roles-grid" class="edit-label">User Roles</label></div>
-            <ejs-grid id="roles-grid" #grid [dataSource]='record.roles' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="false">
-                <e-columns>
-                    <e-column field='name' headerText='Name'></e-column>
-
-                    <e-column headerText='' width="100">
-                        <ng-template #template let-data>
-                            <ejs-checkbox [(checked)]="record.roles[data.index].hasRole"></ejs-checkbox>
-                        </ng-template>
-                    </e-column>
-                </e-columns>
-            </ejs-grid>
+    <div class="mar-l10">
+        <div class="row pad-t20">
+            <div class="col-md-6 col-lg-5 col-xl-4 d-flex align-items-end">
+                <ejs-textbox [(value)]="record.firstName" placeholder="First Name" floatLabelType="Always"></ejs-textbox>
+            </div>
+            <div class="col-md-6 col-lg-5 col-xl-4 d-flex align-items-end pad-b5">
+                <ejs-checkbox [(checked)]="record.api" label="API User" floatLabelType="Always" id="ApiUser"></ejs-checkbox>
+            </div>        
         </div>
 
-        <div class="col-md-6">
-            <div ><label for="tenants-grid" class="edit-label">User Tenants</label></div>
-            <ejs-grid id="tenants-grid" #grid [dataSource]='record.tenants' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="false">
-                <e-columns>
-                    <e-column field='name' headerText='Name'></e-column>
-
-                    <e-column headerText='' width="100">
-                        <ng-template #template let-data>
-                            <ejs-checkbox [(checked)]="record.tenants[data.index].active"></ejs-checkbox>
-                        </ng-template>
-                    </e-column>
-                </e-columns>
-            </ejs-grid>
+        <div class="row">
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-textbox [(value)]="record.lastName" placeholder="Last Name" floatLabelType="Always"></ejs-textbox>
+            </div>
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-dropdownlist [dataSource]="customers" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.customerId" placeholder="Customer" floatLabelType="Always" (change)="changeCustomer()"></ejs-dropdownlist>
+            </div>
         </div>
 
-    </div>
-
-    <div class="row d-flex edit-footer">
-        <div class="col-md-6 d-flex justify-content-start">
-            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
-            <ejs-toast #toast></ejs-toast>
+        <div class="row">
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-textbox [(value)]="record.email" placeholder="Email" floatLabelType="Always"></ejs-textbox>
+            </div>
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-dropdownlist [dataSource]="vendors" [fields]="{ text: 'name', value: 'id' }" [(value)]="record.vendorId" placeholder="Vendor" floatLabelType="Always" (change)="changeVendor()"></ejs-dropdownlist>
+            </div>
         </div>
 
-        <div class="col-md-6 d-flex justify-content-end button-top-padding">
-            <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
-            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/user/list']">Close</button>
+        <div class="row pad-b10">
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-textbox [(value)]="record.phone" placeholder="Phone No" floatLabelType="Always"></ejs-textbox>
+            </div>
+        </div>
+
+        <div class="row d-flex edit-footer pad-b10" *ngIf="record.api">
+            <div class="col-md-6 d-flex justify-content-start align-items-end">
+                <button ejs-button cssClass="e-outline e-flat" (click)="generateIntegrationKey()" [disabled]="loading || !privileges.update" style="width: 300px;">Generate API Key</button>
+            </div>
+            <div class="col-md-4 d-flex justify-content-start align-items-end" *ngIf="integrationKey">
+                <ejs-textbox [(value)]="integrationKey" placeholder="API Key" floatLabelType="Always" disabled="disabled"></ejs-textbox>
+            </div>
+        </div>
+
+        <div class="row pad-t15 pad-b20">
+
+            <div class="col-md-6">
+                <div><label for="roles-grid" class="edit-label">User Roles</label></div>
+                <ejs-grid id="roles-grid" #grid [dataSource]='record.roles' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="false">
+                    <e-columns>
+                        <e-column field='name' headerText='Name'></e-column>
+
+                        <e-column headerText='' width="100">
+                            <ng-template #template let-data>
+                                <ejs-checkbox [(checked)]="record.roles[data.index].hasRole"></ejs-checkbox>
+                            </ng-template>
+                        </e-column>
+                    </e-columns>
+                </ejs-grid>
+            </div>
+
+            <div class="col-md-6">
+                <div ><label for="tenants-grid" class="edit-label">User Tenants</label></div>
+                <ejs-grid id="tenants-grid" #grid [dataSource]='record.tenants' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="false">
+                    <e-columns>
+                        <e-column field='name' headerText='Name'></e-column>
+
+                        <e-column headerText='' width="100">
+                            <ng-template #template let-data>
+                                <ejs-checkbox [(checked)]="record.tenants[data.index].active"></ejs-checkbox>
+                            </ng-template>
+                        </e-column>
+                    </e-columns>
+                </ejs-grid>
+            </div>
+
         </div>
     </div>
+
 </div>
 

@@ -9,6 +9,8 @@ import { RadioButtonModule, ButtonModule, CheckBoxModule } from '@syncfusion/ej2
 import { GridModule, SortService, PageService, EditService, ToolbarService, CommandColumnService } from '@syncfusion/ej2-angular-grids';
 import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
+import { ToolbarModule } from '@syncfusion/ej2-angular-navigations';
+import { TooltipModule } from '@syncfusion/ej2-angular-popups';
 
 @NgModule({
     declarations: [
@@ -16,7 +18,7 @@ import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
         RoleEditComponent
     ],
     imports: [
-        GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule,
+        GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToolbarModule, TooltipModule, ToastAllModule,
         CommonModule,
         RouterModule.forChild([
             { path: 'list', component: RoleListComponent, canActivate: [MsalGuard] },

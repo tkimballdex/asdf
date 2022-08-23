@@ -11,6 +11,8 @@ import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
+import { ToolbarModule } from '@syncfusion/ej2-angular-navigations';
+import { TooltipModule } from '@syncfusion/ej2-angular-popups';
 import { NgxMaskModule } from 'ngx-mask'
 import { MyAccountComponent } from './account.component';
 
@@ -21,7 +23,7 @@ import { MyAccountComponent } from './account.component';
         MyAccountComponent
     ],
     imports: [
-        GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule,
+        GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToolbarModule, TooltipModule, ToastAllModule,
         DropDownListModule, SwitchModule, CommonModule, NgxMaskModule.forRoot(),
         RouterModule.forChild([
             { path: 'list', component: UserListComponent, canActivate: [MsalGuard] },

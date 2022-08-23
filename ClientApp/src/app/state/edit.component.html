@@ -1,79 +1,78 @@
-<div id="edit-view" *ngIf="record && form" [formGroup]="form" class="container-fluid">
-    <div class="row d-flex align-items-center edit-header">
-        <div class="col-md-6 d-flex">
-            <span class="edit-header-icon"><i class="fas fa-map-marked"></i></span>
+<div id="edit-view" *ngIf="record && form" [formGroup]="form" class="container-fluid g-0">
+    <div class="row d-flex align-items-center edit-header toolbar-margin">
+        <div class="col-md-7 col-lg-6 col-12 d-flex align-items-center">
+            <span class="edit-header-back"><i class="fas fa-arrow-left fa-lg" role="button" [routerLink]="['/auth/customer/list']" [state]='{ formState: true }'></i></span>
+            <span class="edit-header-icon"><i class="fas fa-map-marked fa-lg"></i></span>
             <span class="edit-header-title">State</span>
         </div>
-        <div class="col-md-6 d-flex justify-content-end">
-            
+        <div class="col-md-5 col-lg-6 col-3 save-toolbar">
+            <ejs-tooltip id="tooltip" target='#toolbar [title]'>
+                <ejs-toolbar id='toolbar' overflowMode='Popup'>
+                    <e-items>
+                        <e-item id="saveToolbar" text='Save' tooltipText='Save' (click)="save()" [disabled]="loading || !privileges.update" align='Right' prefixIcon="e-icons e-save"></e-item>
+                        <e-item id="deleteToolbar" text='Delete' tooltipText='Delete' showAlwaysInPopup='true' (click)="delete()" [disabled]="loading || !record.id || !privileges.delete" align='Right' prefixIcon="e-icons e-trash"></e-item>
+                    </e-items>
+                </ejs-toolbar>
+            </ejs-tooltip>
         </div>
     </div>
 
-    <div class="row pad-t10">  
-        <div class="col-md-12 col-lg-10 col-xl-8">
-            <ejs-textbox id="edit-state" [value]="record.name" formControlName="name" placeholder="Name*" floatLabelType="Always"></ejs-textbox>
-            <div *ngIf="this.invalidControl('name')" class="e-error">
-                State Name is required!
-            </div>
-        </div>                
-    </div>
-
-    <div class="row">  
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-state" [value]="record.code" formControlName="code" placeholder="State Code*" floatLabelType="Always"></ejs-textbox>
-            <div *ngIf="this.invalidControl('code')" class="e-error">
-                State Code is required!
-            </div>    
-        </div>        
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist [dataSource]="app.countries" formControlName="countryId" [fields]="{ text: 'name', value: 'id' }" placeholder="Country*" floatLabelType="Always"></ejs-dropdownlist>
-            <div *ngIf="this.invalidControl('countryId')" class="e-error">
-                Country is required!
-            </div>
-        </div>       
-    </div>
-
-    <div class="row pad-t20">         
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-state" [value]="record.fipsCode" maxlength="3" placeholder="FIPS Code" floatLabelType="Always"></ejs-textbox>           
-        </div>  
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-geoId" [value]="record.geoId" maxlength="4" placeholder="GEOID" floatLabelType="Always"></ejs-textbox>           
-        </div> 
-    </div>
-
-    <div class="row">         
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-numerictextbox [(value)]="record.landArea" format='N' step='1' placeholder="Land Area (km&#178;)" floatLabelType="Always" (change)="calculateDensity()"></ejs-numerictextbox>
-        </div>  
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-numerictextbox [(value)]="record.waterArea" format='N' step='1' placeholder="Water Area (km&#178;)" floatLabelType="Always"></ejs-numerictextbox>
-        </div>       
-    </div> 
-
-    <div class="row pad-t20"> 
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-numerictextbox id="edit-state" [(value)]="record.dwellings" format='N' step='1' placeholder="Dwellings" floatLabelType="Always"></ejs-numerictextbox>
-        </div> 
-    </div>
-
-    <div class="row pad-b20"> 
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-numerictextbox [(value)]="record.population" format='N' step='1' placeholder="Population" floatLabelType="Always" (change)="calculateDensity()"></ejs-numerictextbox>
-        </div>  
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-numerictextbox [(value)]="record.density" validateDecimalOnType="true" id="numeric" format='N4' max="99999" [decimals]="4" step ="0.0001" readonly placeholder="Population Density (residents/km&#178;)" floatLabelType="Always"></ejs-numerictextbox>
-        </div>  
-    </div>
-
-    <div class="row d-flex edit-footer">
-        <div class="col-md-6 d-flex justify-content-start">
-            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
+    <div class="mar-l10">
+        <div class="row pad-t20">  
+            <div class="col-md-12 col-lg-10 col-xl-8">
+                <ejs-textbox id="edit-state" [value]="record.name" formControlName="name" placeholder="Name*" floatLabelType="Always"></ejs-textbox>
+                <div *ngIf="this.invalidControl('name')" class="e-error">
+                    State Name is required!
+                </div>
+            </div>                
         </div>
 
-        <div class="col-md-6 d-flex justify-content-end button-top-padding">
-            <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
-            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/state/list']" [state]='{ formState: true }'>Close</button>
+        <div class="row">  
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-textbox id="edit-state" [value]="record.code" formControlName="code" placeholder="State Code*" floatLabelType="Always"></ejs-textbox>
+                <div *ngIf="this.invalidControl('code')" class="e-error">
+                    State Code is required!
+                </div>    
+            </div>        
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-dropdownlist [dataSource]="app.countries" formControlName="countryId" [fields]="{ text: 'name', value: 'id' }" placeholder="Country*" floatLabelType="Always"></ejs-dropdownlist>
+                <div *ngIf="this.invalidControl('countryId')" class="e-error">
+                    Country is required!
+                </div>
+            </div>       
+        </div>
+
+        <div class="row pad-t20">         
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-textbox id="edit-state" [value]="record.fipsCode" maxlength="3" placeholder="FIPS Code" floatLabelType="Always"></ejs-textbox>           
+            </div>  
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-textbox id="edit-geoId" [value]="record.geoId" maxlength="4" placeholder="GEOID" floatLabelType="Always"></ejs-textbox>           
+            </div> 
+        </div>
+
+        <div class="row">         
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-numerictextbox [(value)]="record.landArea" format='N' step='1' placeholder="Land Area (km&#178;)" floatLabelType="Always" (change)="calculateDensity()"></ejs-numerictextbox>
+            </div>  
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-numerictextbox [(value)]="record.waterArea" format='N' step='1' placeholder="Water Area (km&#178;)" floatLabelType="Always"></ejs-numerictextbox>
+            </div>       
+        </div> 
+
+        <div class="row pad-t20"> 
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-numerictextbox id="edit-state" [(value)]="record.dwellings" format='N' step='1' placeholder="Dwellings" floatLabelType="Always"></ejs-numerictextbox>
+            </div> 
+        </div>
+
+        <div class="row pad-b20"> 
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-numerictextbox [(value)]="record.population" format='N' step='1' placeholder="Population" floatLabelType="Always" (change)="calculateDensity()"></ejs-numerictextbox>
+            </div>  
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-numerictextbox [(value)]="record.density" validateDecimalOnType="true" id="numeric" format='N4' max="99999" [decimals]="4" step ="0.0001" readonly placeholder="Population Density (residents/km&#178;)" floatLabelType="Always"></ejs-numerictextbox>
+            </div>  
         </div>
     </div>
     

@@ -15,7 +15,8 @@ import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NumericTextBoxModule } from '@syncfusion/ej2-angular-inputs';
-import { TabModule } from '@syncfusion/ej2-angular-navigations';
+import { TabModule, ToolbarModule } from '@syncfusion/ej2-angular-navigations';
+import { TooltipModule } from '@syncfusion/ej2-angular-popups';
 
 @NgModule({
     declarations: [
@@ -23,7 +24,7 @@ import { TabModule } from '@syncfusion/ej2-angular-navigations';
         CountyEditComponent
     ],
     imports: [
-        GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule,
+        GridModule, RadioButtonModule, ButtonModule, TextBoxModule, CheckBoxModule, ToolbarModule, TooltipModule, ToastAllModule, DropDownListModule,
 		CommonModule, DatePickerModule, SwitchModule, FormsModule, ReactiveFormsModule, GoogleMapsModule, NumericTextBoxModule, TabModule,
         RouterModule.forChild([
             { path: 'list', component: CountyListComponent, canActivate: [MsalGuard] },

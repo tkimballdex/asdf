@@ -1,101 +1,104 @@
-<div id="edit-view" *ngIf="record" class="container-fluid" [formGroup]="form">
-    <div class="row d-flex align-items-center edit-header">
-        <div class="col-md-6 d-flex">
-            <span class="edit-header-icon"><i class="fas fa-map-marked"></i></span>
+<div id="edit-view" *ngIf="record && form" class="container-fluid g-0" [formGroup]="form">
+    <div class="row d-flex align-items-center edit-header toolbar-margin">
+        <div class="col-md-7 col-lg-6 col-12 d-flex align-items-center">
+            <span class="edit-header-back"><i class="fas fa-arrow-left fa-lg" role="button" [routerLink]="['/auth/customer/list']" [state]='{ formState: true }'></i></span>
+            <span class="edit-header-icon"><i class="fas fa-map-marked fa-lg"></i></span>
             <span class="edit-header-title">County Statistic</span>
         </div>
-    </div>
-
-    <div class="row pad-t10">         
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-datepicker formControlName="date" placeholder="Date" floatLabelType="Always"></ejs-datepicker>
-            <div *ngIf="this.invalidControl('date')" class="e-error">
-                Date is required!
-            </div>
+        <div class="col-md-5 col-lg-6 col-3 save-toolbar">
+            <ejs-tooltip id="tooltip" target='#toolbar [title]'>
+                <ejs-toolbar id='toolbar' overflowMode='Popup'>
+                    <e-items>
+                        <e-item id="saveToolbar" text='Save' tooltipText='Save' (click)="save()" [disabled]="loading || !privileges.update" align='Right' prefixIcon="e-icons e-save"></e-item>
+                        <e-item id="deleteToolbar" text='Delete' tooltipText='Delete' showAlwaysInPopup='true' (click)="delete()" [disabled]="loading || !record.id || !privileges.delete" align='Right' prefixIcon="e-icons e-trash"></e-item>
+                    </e-items>
+                </ejs-toolbar>
+            </ejs-tooltip>
         </div>
     </div>
 
-    <div class="row">  
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist [dataSource]="app.counties" formControlName="countyId" [fields]="{ text: 'name', value: 'id' }" placeholder="County*" floatLabelType="Always"></ejs-dropdownlist>
-            <div *ngIf="this.invalidControl('countyId')" class="e-error">
-                county is required!
+    <div class="mar-l10">
+        <div class="row pad-t20">         
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-datepicker formControlName="date" placeholder="Date" floatLabelType="Always"></ejs-datepicker>
+                <div *ngIf="this.invalidControl('date')" class="e-error">
+                    Date is required!
+                </div>
             </div>
-        </div>  
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist [dataSource]="app.analytes" [fields]="{ text: 'name', value: 'id' }" formControlName="analyteId" placeholder="Analyte" floatLabelType="Always"></ejs-dropdownlist>
-            <div *ngIf="this.invalidControl('analyteId')" class="e-error">
-                Analyte is required!
-            </div>
-        </div>        
-    </div>
-
-    <div class="row pad-t20">  
-        <div class="col-md-6 col-lg-5 col-xl-4">           
-            <ejs-numerictextbox [(value)]="record.cases" format='N' step='1' min='0' placeholder="Cases" floatLabelType="Always"></ejs-numerictextbox>
-        </div>  
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-numerictextbox [(value)]="record.totalCases" format='N' step='1' min='0' placeholder="Total Cases" floatLabelType="Always"></ejs-numerictextbox>
-        </div>   
-    </div> 
-    
-    <div class="row pad-t20">  
-        <div class="col-md-6 col-lg-5 col-xl-4">           
-            <ejs-numerictextbox [(value)]="record.tests" format='N' step='1' min='0' placeholder="Tests" floatLabelType="Always"></ejs-numerictextbox>
-        </div>  
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-numerictextbox [(value)]="record.totalTests" format='N' step='1' min='0' placeholder="Total Tests" floatLabelType="Always"></ejs-numerictextbox>
-        </div>   
-    </div> 
-    <div class="row">  
-        <div class="col-md-6 col-lg-5 col-xl-4">           
-            <ejs-numerictextbox [(value)]="record.positiveTests" format='N' step='1' min='0' placeholder="Positive Tests" floatLabelType="Always"></ejs-numerictextbox>
-        </div>  
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-numerictextbox [(value)]="record.totalPositiveTests" format='N' step='1' min='0' placeholder="Total Positive Tests" floatLabelType="Always"></ejs-numerictextbox>
-        </div>   
-    </div> 
-    
-    <div class="row pad-t20">  
-        <div class="col-md-6 col-lg-5 col-xl-4">           
-            <ejs-numerictextbox [(value)]="record.vaccinated" format='N' step='1' min='0' placeholder="Vaccinated" floatLabelType="Always"></ejs-numerictextbox>
-        </div>  
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-numerictextbox [(value)]="record.totalVaccinated" format='N' step='1' min='0' placeholder="Total Vaccinated" floatLabelType="Always"></ejs-numerictextbox>
-        </div>   
-    </div> 
-    <div class="row">  
-        <div class="col-md-6 col-lg-5 col-xl-4">           
-            <ejs-numerictextbox [(value)]="record.hospitalized" format='N' step='1' min='0' placeholder="Hospitalized" floatLabelType="Always"></ejs-numerictextbox>
-        </div>  
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-numerictextbox [(value)]="record.totalHospitalized" format='N' step='1' min='0' placeholder="Total Hospitalized" floatLabelType="Always"></ejs-numerictextbox>
-        </div>   
-    </div>  
-    <div class="row">  
-        <div class="col-md-6 col-lg-5 col-xl-4">           
-            <ejs-numerictextbox [(value)]="record.deaths" format='N' step='1' min='0' placeholder="Deaths" floatLabelType="Always"></ejs-numerictextbox>
-        </div>  
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-numerictextbox [(value)]="record.totalDeaths" format='N' step='1' min='0' placeholder="Total Deaths" floatLabelType="Always"></ejs-numerictextbox>
-        </div>   
-    </div>
-    <div class="row pad-b20">  
-        <div class="col-md-6 col-lg-5 col-xl-4">           
-            <ejs-numerictextbox [(value)]="record.icuBedsAvailable" format='N' step='1' min='0' placeholder="ICU Beds Available" floatLabelType="Always"></ejs-numerictextbox>
-        </div>    
-    </div>      
-
-    <div class="row d-flex edit-footer">
-        <div class="col-md-6 d-flex justify-content-start">
-            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
         </div>
 
-        <div class="col-md-6 d-flex justify-content-end button-top-padding">
-            <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
-            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/countystat/list']" [state]='{ formState: true }'>Close</button>
+        <div class="row">  
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-dropdownlist [dataSource]="app.counties" formControlName="countyId" [fields]="{ text: 'name', value: 'id' }" placeholder="County*" floatLabelType="Always"></ejs-dropdownlist>
+                <div *ngIf="this.invalidControl('countyId')" class="e-error">
+                    county is required!
+                </div>
+            </div>  
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-dropdownlist [dataSource]="app.analytes" [fields]="{ text: 'name', value: 'id' }" formControlName="analyteId" placeholder="Analyte" floatLabelType="Always"></ejs-dropdownlist>
+                <div *ngIf="this.invalidControl('analyteId')" class="e-error">
+                    Analyte is required!
+                </div>
+            </div>        
         </div>
+
+        <div class="row pad-t20">  
+            <div class="col-md-6 col-lg-5 col-xl-4">           
+                <ejs-numerictextbox [(value)]="record.cases" format='N' step='1' min='0' placeholder="Cases" floatLabelType="Always"></ejs-numerictextbox>
+            </div>  
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-numerictextbox [(value)]="record.totalCases" format='N' step='1' min='0' placeholder="Total Cases" floatLabelType="Always"></ejs-numerictextbox>
+            </div>   
+        </div> 
+        
+        <div class="row pad-t20">  
+            <div class="col-md-6 col-lg-5 col-xl-4">           
+                <ejs-numerictextbox [(value)]="record.tests" format='N' step='1' min='0' placeholder="Tests" floatLabelType="Always"></ejs-numerictextbox>
+            </div>  
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-numerictextbox [(value)]="record.totalTests" format='N' step='1' min='0' placeholder="Total Tests" floatLabelType="Always"></ejs-numerictextbox>
+            </div>   
+        </div> 
+        <div class="row">  
+            <div class="col-md-6 col-lg-5 col-xl-4">           
+                <ejs-numerictextbox [(value)]="record.positiveTests" format='N' step='1' min='0' placeholder="Positive Tests" floatLabelType="Always"></ejs-numerictextbox>
+            </div>  
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-numerictextbox [(value)]="record.totalPositiveTests" format='N' step='1' min='0' placeholder="Total Positive Tests" floatLabelType="Always"></ejs-numerictextbox>
+            </div>   
+        </div> 
+        
+        <div class="row pad-t20">  
+            <div class="col-md-6 col-lg-5 col-xl-4">           
+                <ejs-numerictextbox [(value)]="record.vaccinated" format='N' step='1' min='0' placeholder="Vaccinated" floatLabelType="Always"></ejs-numerictextbox>
+            </div>  
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-numerictextbox [(value)]="record.totalVaccinated" format='N' step='1' min='0' placeholder="Total Vaccinated" floatLabelType="Always"></ejs-numerictextbox>
+            </div>   
+        </div> 
+        <div class="row">  
+            <div class="col-md-6 col-lg-5 col-xl-4">           
+                <ejs-numerictextbox [(value)]="record.hospitalized" format='N' step='1' min='0' placeholder="Hospitalized" floatLabelType="Always"></ejs-numerictextbox>
+            </div>  
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-numerictextbox [(value)]="record.totalHospitalized" format='N' step='1' min='0' placeholder="Total Hospitalized" floatLabelType="Always"></ejs-numerictextbox>
+            </div>   
+        </div>  
+        <div class="row">  
+            <div class="col-md-6 col-lg-5 col-xl-4">           
+                <ejs-numerictextbox [(value)]="record.deaths" format='N' step='1' min='0' placeholder="Deaths" floatLabelType="Always"></ejs-numerictextbox>
+            </div>  
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-numerictextbox [(value)]="record.totalDeaths" format='N' step='1' min='0' placeholder="Total Deaths" floatLabelType="Always"></ejs-numerictextbox>
+            </div>   
+        </div>
+        <div class="row pad-b20">  
+            <div class="col-md-6 col-lg-5 col-xl-4">           
+                <ejs-numerictextbox [(value)]="record.icuBedsAvailable" format='N' step='1' min='0' placeholder="ICU Beds Available" floatLabelType="Always"></ejs-numerictextbox>
+            </div>    
+        </div>      
     </div>
+
     <ejs-toast #toast></ejs-toast>
 </div>
 

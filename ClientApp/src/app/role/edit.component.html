@@ -1,78 +1,81 @@
-<div id="edit-view" *ngIf="record" class="container-fluid">
-    <div class="row d-flex align-items-end edit-header">
-        <div class="col-12 d-flex">
-            <span class="edit-header-icon"><i class="fas fa-shield-check"></i></span>
+<div id="edit-view" *ngIf="record" class="container-fluid g-0">
+    <div class="row d-flex align-items-center edit-header toolbar-margin">
+        <div class="col-md-7 col-lg-6 col-12 d-flex align-items-center">
+            <span class="edit-header-back"><i class="fas fa-arrow-left fa-lg" role="button" [routerLink]="['/auth/customer/list']" [state]='{ formState: true }'></i></span>
+            <span class="edit-header-icon"><i class="fas fa-shield-check fa-lg"></i></span>
             <span class="edit-header-title">Role</span>
-        </div>        
-    </div>
-
-    <div class="row d-flex pad-t20">
-        <div class="col-xs-12 col-lg-4 d-flex">
-            <ejs-textbox [(value)]="record.name" placeholder="Role Name" floatLabelType="Always"></ejs-textbox>
+        </div>
+        <div class="col-md-5 col-lg-6 col-3 save-toolbar">
+            <ejs-tooltip id="tooltip" target='#toolbar [title]'>
+                <ejs-toolbar id='toolbar' overflowMode='Popup'>
+                    <e-items>
+                        <e-item id="saveToolbar" text='Save' tooltipText='Save' (click)="save()" [disabled]="loading" align='Right' prefixIcon="e-icons e-save"></e-item>
+                        <e-item id="deleteToolbar" text='Delete' tooltipText='Delete' showAlwaysInPopup='true' (click)="delete()" [disabled]="loading || !record.id" align='Right' prefixIcon="e-icons e-trash"></e-item>
+                    </e-items>
+                </ejs-toolbar>
+            </ejs-tooltip>
         </div>
     </div>
 
-    <div class="row pad-t20 pad-b20">
-        <div class="col-md-12"><label for="privileges-grid" class="edit-label">Privileges</label></div>
-        <div class="col-md-12">
-            <ejs-grid id="privileges-grid" #grid [dataSource]='record.featureRoles' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="false">
-                <e-columns>
-                    <e-column field='name' headerText='Name' width="120"></e-column>
-        
-                    <e-column field='create' headerText='Create' textAlign='Center' width="100">
-                        <ng-template #template let-data>
-                            <ejs-checkbox [(checked)]="record.featureRoles[data.index].create"></ejs-checkbox>
-                        </ng-template>
-                    </e-column>
-        
-                    <e-column field='read' headerText='Read' textAlign='Center' width="100">
-                        <ng-template #template let-data>
-                            <ejs-checkbox [(checked)]="record.featureRoles[data.index].read"></ejs-checkbox>
-                        </ng-template>
-                    </e-column>
-        
-                    <e-column field='update' headerText='Update' textAlign='Center' width="100">
-                        <ng-template #template let-data>
-                            <ejs-checkbox [(checked)]="record.featureRoles[data.index].update"></ejs-checkbox>
-                        </ng-template>
-                    </e-column>
-        
-                    <e-column field='delete' headerText='Delete' textAlign='Center' width="100">
-                        <ng-template #template let-data>
-                            <ejs-checkbox [(checked)]="record.featureRoles[data.index].delete"></ejs-checkbox>
-                        </ng-template>
-                    </e-column>
-        
-                    <e-column field='approve' headerText='Approve' textAlign='Center' width="100">
-                        <ng-template #template let-data>
-                            <ejs-checkbox [(checked)]="record.featureRoles[data.index].approve"></ejs-checkbox>
-                        </ng-template>
-                    </e-column>
-        
-                    <e-column field='download' headerText='Download' textAlign='Center' width="120">
-                        <ng-template #template let-data>
-                            <ejs-checkbox [(checked)]="record.featureRoles[data.index].download"></ejs-checkbox>
-                        </ng-template>
-                    </e-column>
-                    <e-column field='communicate' headerText='Communicate' textAlign='Center' width="140">
-                        <ng-template #template let-data>
-                            <ejs-checkbox [(checked)]="record.featureRoles[data.index].communicate"></ejs-checkbox>
-                        </ng-template>
-                    </e-column>
-                </e-columns>
-            </ejs-grid>
-        </div>    
+    <div class="mar-l10">
+        <div class="row d-flex pad-t20">
+            <div class="col-xs-12 col-lg-4 d-flex">
+                <ejs-textbox [(value)]="record.name" placeholder="Role Name" floatLabelType="Always"></ejs-textbox>
+            </div>
+        </div>
+
+        <div class="row pad-t20 pad-b20">
+            <div class="col-md-12"><label for="privileges-grid" class="edit-label">Privileges</label></div>
+            <div class="col-md-12">
+                <ejs-grid id="privileges-grid" #grid [dataSource]='record.featureRoles' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="false">
+                    <e-columns>
+                        <e-column field='name' headerText='Name' width="120"></e-column>
+            
+                        <e-column field='create' headerText='Create' textAlign='Center' width="100">
+                            <ng-template #template let-data>
+                                <ejs-checkbox [(checked)]="record.featureRoles[data.index].create"></ejs-checkbox>
+                            </ng-template>
+                        </e-column>
+            
+                        <e-column field='read' headerText='Read' textAlign='Center' width="100">
+                            <ng-template #template let-data>
+                                <ejs-checkbox [(checked)]="record.featureRoles[data.index].read"></ejs-checkbox>
+                            </ng-template>
+                        </e-column>
+            
+                        <e-column field='update' headerText='Update' textAlign='Center' width="100">
+                            <ng-template #template let-data>
+                                <ejs-checkbox [(checked)]="record.featureRoles[data.index].update"></ejs-checkbox>
+                            </ng-template>
+                        </e-column>
+            
+                        <e-column field='delete' headerText='Delete' textAlign='Center' width="100">
+                            <ng-template #template let-data>
+                                <ejs-checkbox [(checked)]="record.featureRoles[data.index].delete"></ejs-checkbox>
+                            </ng-template>
+                        </e-column>
+            
+                        <e-column field='approve' headerText='Approve' textAlign='Center' width="100">
+                            <ng-template #template let-data>
+                                <ejs-checkbox [(checked)]="record.featureRoles[data.index].approve"></ejs-checkbox>
+                            </ng-template>
+                        </e-column>
+            
+                        <e-column field='download' headerText='Download' textAlign='Center' width="120">
+                            <ng-template #template let-data>
+                                <ejs-checkbox [(checked)]="record.featureRoles[data.index].download"></ejs-checkbox>
+                            </ng-template>
+                        </e-column>
+                        <e-column field='communicate' headerText='Communicate' textAlign='Center' width="140">
+                            <ng-template #template let-data>
+                                <ejs-checkbox [(checked)]="record.featureRoles[data.index].communicate"></ejs-checkbox>
+                            </ng-template>
+                        </e-column>
+                    </e-columns>
+                </ejs-grid>
+            </div>    
+        </div>
     </div>
 
-    <div class="row d-flex edit-footer">
-        <div class="col-md-6 d-flex justify-content-start">
-            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading">Save</button>
-            <ejs-toast #toast></ejs-toast>
-        </div>
-        <div class="col-md-6 d-flex justify-content-end button-top-padding">
-            <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id">Delete</button>
-            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/role/list']">Close</button>
-        </div>
-    </div>
 </div>
 
