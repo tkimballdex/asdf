@@ -1,93 +1,102 @@
-<div id="edit-view" *ngIf="record && form" class="container-fluid" [formGroup]="form">
-    <div class="row d-flex align-items-center edit-header">
-        <div class="col-md-6 d-flex">
-            <span class="edit-header-icon"><i class="fal fa-vial"></i></span>
-            <span class="edit-header-title">Sampler</span>
+<div id="edit-view" *ngIf="record && form" class="container-fluid g-0" [formGroup]="form">
+    <div class="row d-flex align-items-center edit-header toolbar-margin">
+        <div class="col-md-7 col-lg-6 col-12 d-flex align-items-center">
+            <span class="edit-header-back"><i class="fas fa-arrow-left fa-lg" role="button" [routerLink]="['/auth/customer/list']" [state]='{ formState: true }'></i></span>
+            <span class="edit-header-icon"><i class="fal fa-vial fa-lg"></i></span>
+            <span *ngIf="!record.name" class="edit-header-title">Sampler</span>
+            <div *ngIf="record.name" class="edit-header-record-no d-flex flex-column mobile-record">
+                <span class="header-record-value">{{record.name}}</span>
+                <span class="header-tag">Sampler</span>
+            </div>
+            <!-- <div *ngIf="status" class="edit-header-status d-flex flex-column hidden">
+                <span class="header-status-value">{{status}}</span>
+                <span class="header-tag">Status</span>
+            </div> -->
         </div>
-        <div class="col-md-6 d-flex justify-content-end">
-
+        <div class="col-md-5 col-lg-6 col-3 save-toolbar">
+            <ejs-tooltip id="tooltip" target='#toolbar [title]'>
+                <ejs-toolbar id='toolbar' overflowMode='Popup'>
+                    <e-items>
+                        <e-item id="saveToolbar" text='Save' tooltipText='Save' (click)="save()" [disabled]="loading || !privileges.update" align='Right' prefixIcon="e-icons e-save"></e-item>
+                        <e-item id="deleteToolbar" text='Delete' tooltipText='Delete' showAlwaysInPopup='true' (click)="delete()" [disabled]="loading || !record.id || !privileges.delete" align='Right' prefixIcon="e-icons e-trash"></e-item>
+                        <!-- <e-item id="activeToolbar" [text]=activeToggleText [tooltipText]=activeToggleText *ngIf="record.id" (click)="toggleActiveDialog()" showAlwaysInPopup='true' align='Right' prefixIcon="e-icons e-active"></e-item> -->
+                    </e-items>
+                </ejs-toolbar>
+            </ejs-tooltip>
         </div>
     </div>
 
-    <div class="row pad-t10">        
-        <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="name" placeholder="Name*" floatLabelType="Always" required></ejs-textbox>
-            <div *ngIf="this.invalidControl('name')" class="e-error">
-                Name is required!
+    <div class="mar-l10">
+        <div class="row pad-t20">        
+            <div class="col-md-4 col-lg-5 col-xl-4">
+                <ejs-textbox formControlName="name" placeholder="Name*" floatLabelType="Always" required></ejs-textbox>
+                <div *ngIf="this.invalidControl('name')" class="e-error">
+                    Name is required!
+                </div>
             </div>
+            
         </div>
-        
-    </div>
 
-    <div class="row pad-t20">
-        <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-dropdownlist formControlName="customerId" [dataSource]="data.customers" [fields]="{ text: 'name', value: 'id' }" placeholder="Customer*" floatLabelType="Always"></ejs-dropdownlist>
-            <div *ngIf="this.invalidControl('customerId')" class="e-error">
-                Customer is required!
+        <div class="row pad-t20">
+            <div class="col-md-4 col-lg-5 col-xl-4">
+                <ejs-dropdownlist formControlName="customerId" [dataSource]="data.customers" [fields]="{ text: 'name', value: 'id' }" placeholder="Customer*" floatLabelType="Always"></ejs-dropdownlist>
+                <div *ngIf="this.invalidControl('customerId')" class="e-error">
+                    Customer is required!
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-5 col-xl-4">
+                <ejs-textbox formControlName="assetNo" placeholder="Asset No*" floatLabelType="Always" required></ejs-textbox>
+                <div *ngIf="this.invalidControl('assetNo')" class="e-error">
+                    Asset No is required!
+                </div>
             </div>
         </div>
-        <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="assetNo" placeholder="Asset No*" floatLabelType="Always" required></ejs-textbox>
-            <div *ngIf="this.invalidControl('assetNo')" class="e-error">
-                Asset No is required!
-            </div>
-        </div>
-    </div>
 
-    <div class="row pad-t20">        
-        <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="modelNo" placeholder="Model No*" floatLabelType="Always" required></ejs-textbox>
-            <div *ngIf="this.invalidControl('modelNo')" class="e-error">
-                Model No is required!
+        <div class="row pad-t20">        
+            <div class="col-md-4 col-lg-5 col-xl-4">
+                <ejs-textbox formControlName="modelNo" placeholder="Model No*" floatLabelType="Always" required></ejs-textbox>
+                <div *ngIf="this.invalidControl('modelNo')" class="e-error">
+                    Model No is required!
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-5 col-xl-4">
+                <ejs-textbox formControlName="serialNo" placeholder="Serial No*" floatLabelType="Always" required></ejs-textbox>
+                <div *ngIf="this.invalidControl('serialNo')" class="e-error">
+                    Serial No is required!
+                </div>
             </div>
         </div>
-        <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="serialNo" placeholder="Serial No*" floatLabelType="Always" required></ejs-textbox>
-            <div *ngIf="this.invalidControl('serialNo')" class="e-error">
-                Serial No is required!
+        <div class="row">
+            <div class="col-md-4 col-lg-5 col-xl-4">
+                <ejs-textbox formControlName="brand" placeholder="Brand*" floatLabelType="Always" required></ejs-textbox>
+                <div *ngIf="this.invalidControl('brand')" class="e-error">
+                    Brand is required!
+                </div>
             </div>
+            <div class="col-md-4 col-lg-5 col-xl-4">
+                <ejs-datepicker #PurchaseDate [(value)]="record.purchaseDate" placeholder="Purchase Date" floatLabelType="Always" (focus)='datePickerFocus($event)'></ejs-datepicker>
+            </div>        
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="brand" placeholder="Brand*" floatLabelType="Always" required></ejs-textbox>
-            <div *ngIf="this.invalidControl('brand')" class="e-error">
-                Brand is required!
-            </div>
-        </div>
-        <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-datepicker #PurchaseDate [(value)]="record.purchaseDate" placeholder="Purchase Date" floatLabelType="Always" (focus)='datePickerFocus($event)'></ejs-datepicker>
-        </div>        
-    </div>
 
-    <div class="row pad-t20">
-        <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-dropdownlist formControlName="samplingTypeId" [dataSource]="data.samplingTypes" [fields]="{ text: 'name', value: 'id' }" placeholder="Sampling Type*" floatLabelType="Always"></ejs-dropdownlist>
-            <div *ngIf="this.invalidControl('samplingTypeId')" class="e-error">
-                Sampling Type is required!
+        <div class="row pad-t20">
+            <div class="col-md-4 col-lg-5 col-xl-4">
+                <ejs-dropdownlist formControlName="samplingTypeId" [dataSource]="data.samplingTypes" [fields]="{ text: 'name', value: 'id' }" placeholder="Sampling Type*" floatLabelType="Always"></ejs-dropdownlist>
+                <div *ngIf="this.invalidControl('samplingTypeId')" class="e-error">
+                    Sampling Type is required!
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-5 col-xl-4">
+                <ejs-dropdownlist [(value)]="record.samplingFrequency" [dataSource]="app.frequencies" [fields]="{ text: 'name', value: 'id' }" placeholder="Sampling Frequency" floatLabelType="Always"></ejs-dropdownlist>
             </div>
         </div>
-        <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-dropdownlist [(value)]="record.samplingFrequency" [dataSource]="app.frequencies" [fields]="{ text: 'name', value: 'id' }" placeholder="Sampling Frequency" floatLabelType="Always"></ejs-dropdownlist>
-        </div>
-    </div>
 
-    <div class="row pad-b20">
-        <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-numerictextbox [(value)]="record.samplingDuration" format='N1' min='0' max='500' step='1' placeholder="Sampling Duration" floatLabelType="Always"></ejs-numerictextbox>
-        </div>    
-        <div class="col-md-4 col-lg-5 col-xl-4">
-            <ejs-numerictextbox [(value)]="record.samplingVolume" format='N1' min='0' max='100000' step='1' placeholder="Volume" floatLabelType="Always"></ejs-numerictextbox>
-        </div>   
-    </div>
-
-    <div class="row d-flex align-items-center edit-footer">
-        <div class="col-md-6 d-flex justify-content-start">
-            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
-        </div>
-        <div class="col-sm-6 d-flex justify-content-end button-top-padding">
-            <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
-            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/sampler/list']" [state]='{ formState: true }'>Close</button>
+        <div class="row pad-b20">
+            <div class="col-md-4 col-lg-5 col-xl-4">
+                <ejs-numerictextbox [(value)]="record.samplingDuration" format='N1' min='0' max='500' step='1' placeholder="Sampling Duration" floatLabelType="Always"></ejs-numerictextbox>
+            </div>    
+            <div class="col-md-4 col-lg-5 col-xl-4">
+                <ejs-numerictextbox [(value)]="record.samplingVolume" format='N1' min='0' max='100000' step='1' placeholder="Volume" floatLabelType="Always"></ejs-numerictextbox>
+            </div>   
         </div>
     </div>
 

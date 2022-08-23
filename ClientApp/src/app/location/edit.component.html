@@ -1,105 +1,114 @@
-<div id="edit-view" *ngIf="record && form" [formGroup]="form" class="container-fluid">
-    <div class="row d-flex align-items-center edit-header">
-        <div class="col-md-6 d-flex">
-            <span class="edit-header-icon"><i class="fas fa-location"></i></span>
-            <span class="edit-header-title">Location</span>
+<div id="edit-view" *ngIf="record && form" [formGroup]="form" class="container-fluid g-0">
+    <div class="row d-flex align-items-center edit-header toolbar-margin">
+        <div class="col-md-7 col-lg-6 col-12 d-flex align-items-center">
+            <span class="edit-header-back"><i class="fas fa-arrow-left fa-lg" role="button" [routerLink]="['/auth/customer/list']" [state]='{ formState: true }'></i></span>
+            <span class="edit-header-icon"><i class="fas fa-location fa-lg"></i></span>
+            <span *ngIf="!record.name" class="edit-header-title">Location</span>
+            <div *ngIf="record.name" class="edit-header-record-no d-flex flex-column mobile-record">
+                <span class="header-record-value">{{record.name}}</span>
+                <span class="header-tag">Location</span>
+            </div>
+            <div *ngIf="status" class="edit-header-status d-flex flex-column hidden">
+                <span class="header-status-value">{{status}}</span>
+                <span class="header-tag">Status</span>
+            </div>
         </div>
-        <div class="col-md-6 d-flex justify-content-end">
-            <ejs-switch [(checked)]="record.active" onLabel="Active" offLabel="Not Active" style="width:100px;height:32px;"></ejs-switch>
+        <div class="col-md-5 col-lg-6 col-3 save-toolbar">
+            <ejs-tooltip id="tooltip" target='#toolbar [title]'>
+                <ejs-toolbar id='toolbar' overflowMode='Popup'>
+                    <e-items>
+                        <e-item id="saveToolbar" text='Save' tooltipText='Save' (click)="save()" [disabled]="loading || !privileges.update" align='Right' prefixIcon="e-icons e-save"></e-item>
+                        <e-item id="deleteToolbar" text='Delete' tooltipText='Delete' showAlwaysInPopup='true' (click)="delete()" [disabled]="loading || !record.id || !privileges.delete" align='Right' prefixIcon="e-icons e-trash"></e-item>
+                        <e-item id="activeToolbar" [text]=activeToggleText [tooltipText]=activeToggleText *ngIf="record.id" (click)="toggleActiveDialog()" showAlwaysInPopup='true' align='Right' prefixIcon="e-icons e-active"></e-item>
+                    </e-items>
+                </ejs-toolbar>
+            </ejs-tooltip>
         </div>
     </div>
 
-    <div class="row pad-t10">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="name" required placeholder="Name*" floatLabelType="Always" enableRtl></ejs-textbox>
-            <div *ngIf="this.invalidControl('name')" class="e-error">
-                Name is required!
+    <div class="mar-l10">
+        <div class="row pad-t20">
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-textbox formControlName="name" required placeholder="Name*" floatLabelType="Always" enableRtl></ejs-textbox>
+                <div *ngIf="this.invalidControl('name')" class="e-error">
+                    Name is required!
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-textbox formControlName="code" required placeholder="Location Code*" floatLabelType="Always" enableRtl></ejs-textbox>
+                <div *ngIf="this.invalidControl('code')" class="e-error">
+                    Code is required!
+                </div>
             </div>
         </div>
 
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox formControlName="code" required placeholder="Location Code*" floatLabelType="Always" enableRtl></ejs-textbox>
-            <div *ngIf="this.invalidControl('code')" class="e-error">
-                Code is required!
+        <div class="row">  
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-textbox id="edit-customer" [value]="record.customerName" readonly placeholder="Customer" floatLabelType="Always"></ejs-textbox>
+            </div>
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-textbox id="edit-site" [value]="record.siteName" readonly placeholder="Site" floatLabelType="Always"></ejs-textbox>
+            </div>        
+        </div>
+
+        <div class="row pad-t20">
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-dropdownlist [(value)]="record.samplerId" [dataSource]="data.samplers" [fields]="{ text: 'name', value: 'id' }" placeholder="Sampler" floatLabelType="Always"></ejs-dropdownlist>
+            </div>
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-dropdownlist formControlName="frequencyId" [dataSource]="app.frequencies" [fields]="{ text: 'name', value: 'id' }" placeholder="Testing Frequency*" floatLabelType="Always"></ejs-dropdownlist>
+                <div *ngIf="this.invalidControl('frequencyId')" class="e-error">
+                    Testing Frequency is required!
+                </div>
+            </div>
+        </div>
+
+        <div class="row">  
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-datepicker #ServiceStartDate [(value)]="record.serviceStartDate" placeholder="Service Start Date" floatLabelType="Always" (focus)='datePickerFocus($event)'></ejs-datepicker>
+            </div>
+
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-datepicker #ServiceEndDate [(value)]="record.serviceEndDate" placeholder="Service End Date" floatLabelType="Always" (focus)='datePickerFocus($event)'></ejs-datepicker>
+                <div *ngIf="record.serviceEndDate < record.serviceStartDate && record.serviceEndDate != undefined" class="e-error">
+                    End date is before start date!
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-dropdownlist [(value)]="record.logisticVendorId" [dataSource]="logisticVendors" [fields]="{ text: 'name', value: 'id' }" placeholder="Logistic Vendor" floatLabelType="Always"></ejs-dropdownlist>
+            </div>
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-dropdownlist [(value)]="record.labVendorId" [dataSource]="labVendors" [fields]="{ text: 'name', value: 'id' }" placeholder="Lab Vendor" floatLabelType="Always"></ejs-dropdownlist>
+            </div>
+        </div>
+
+        <div class="row pad-t20">
+            <div class="col-md-12 col-lg-10 col-xl-8"><label for="notes" class="edit-label">Notes</label></div>
+            <div class="col-md-12 col-lg-10 col-xl-8">
+                <ejs-textbox id="notes" [multiline]='true' #default rows="3" [(value)]="record.notes"></ejs-textbox>
+            </div>
+        </div>
+
+        <div class="row pad-t10">
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-textbox [(value)]="record.latitude" readonly placeholder="Latitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
+            </div>
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-textbox [(value)]="record.longitude" readonly placeholder="Longitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
+            </div>
+        </div>
+
+        <div class="row pad-t10 pad-b20" *ngIf="mapOptions">
+            <div class="col-md-12 col-lg-10 col-xl-8">
+                <google-map height="450px" width="100%" [options]="mapOptions" #map style="box-sizing: border-box;"></google-map>
             </div>
         </div>
     </div>
 
-    <div class="row">  
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-customer" [value]="record.customerName" readonly placeholder="Customer" floatLabelType="Always"></ejs-textbox>
-        </div>
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-site" [value]="record.siteName" readonly placeholder="Site" floatLabelType="Always"></ejs-textbox>
-        </div>        
-    </div>
-
-    <div class="row pad-t20">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist [(value)]="record.samplerId" [dataSource]="data.samplers" [fields]="{ text: 'name', value: 'id' }" placeholder="Sampler" floatLabelType="Always"></ejs-dropdownlist>
-        </div>
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist formControlName="frequencyId" [dataSource]="app.frequencies" [fields]="{ text: 'name', value: 'id' }" placeholder="Testing Frequency*" floatLabelType="Always"></ejs-dropdownlist>
-            <div *ngIf="this.invalidControl('frequencyId')" class="e-error">
-                Testing Frequency is required!
-            </div>
-        </div>
-    </div>
-
-    <div class="row">  
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-datepicker #ServiceStartDate [(value)]="record.serviceStartDate" placeholder="Service Start Date" floatLabelType="Always" (focus)='datePickerFocus($event)'></ejs-datepicker>
-        </div>
-
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-datepicker #ServiceEndDate [(value)]="record.serviceEndDate" placeholder="Service End Date" floatLabelType="Always" (focus)='datePickerFocus($event)'></ejs-datepicker>
-            <div *ngIf="record.serviceEndDate < record.serviceStartDate && record.serviceEndDate != undefined" class="e-error">
-                End date is before start date!
-            </div>
-        </div>
-    </div>
-    
-    <div class="row">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist [(value)]="record.logisticVendorId" [dataSource]="logisticVendors" [fields]="{ text: 'name', value: 'id' }" placeholder="Logistic Vendor" floatLabelType="Always"></ejs-dropdownlist>
-        </div>
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist [(value)]="record.labVendorId" [dataSource]="labVendors" [fields]="{ text: 'name', value: 'id' }" placeholder="Lab Vendor" floatLabelType="Always"></ejs-dropdownlist>
-        </div>
-    </div>
-
-    <div class="row pad-t20">
-        <div class="col-md-12 col-lg-10 col-xl-8"><label for="notes" class="edit-label">Notes</label></div>
-        <div class="col-md-12 col-lg-10 col-xl-8">
-            <ejs-textbox id="notes" [multiline]='true' #default rows="3" [(value)]="record.notes"></ejs-textbox>
-        </div>
-    </div>
-
-    <div class="row pad-t10">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox [(value)]="record.latitude" readonly placeholder="Latitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
-        </div>
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox [(value)]="record.longitude" readonly placeholder="Longitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
-        </div>
-    </div>
-
-    <div class="row pad-t10 pad-b20" *ngIf="mapOptions">
-        <div class="col-md-12 col-lg-10 col-xl-8">
-            <google-map height="450px" width="100%" [options]="mapOptions" #map style="box-sizing: border-box;"></google-map>
-        </div>
-    </div>
-
-    <div class="row d-flex edit-footer">
-        <div class="col-md-6 d-flex justify-content-start">
-            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
-        </div>
-
-        <div class="col-md-6 d-flex justify-content-end button-top-padding">
-            <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
-            <button ejs-button cssClass="e-outline e-flat close-button" (click)="close()">Close</button>
-        </div>
-    </div>
     <ejs-toast #toast></ejs-toast>
 </div>
 

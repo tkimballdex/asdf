@@ -12,7 +12,8 @@ import { TextBoxModule, NumericTextBoxModule, MaskedTextBoxModule } from '@syncf
 import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
-import { TabModule } from '@syncfusion/ej2-angular-navigations';
+import { TabModule, ToolbarModule } from '@syncfusion/ej2-angular-navigations';
+import { TooltipModule } from '@syncfusion/ej2-angular-popups';
 import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask'
@@ -23,7 +24,7 @@ import { NgxMaskModule } from 'ngx-mask'
         SiteEditComponent
     ],
     imports: [
-		GridModule, RadioButtonModule, ButtonModule, TextBoxModule, NumericTextBoxModule, MaskedTextBoxModule, CheckBoxModule, ToastAllModule, GoogleMapsModule,
+		GridModule, RadioButtonModule, ButtonModule, TextBoxModule, ToolbarModule, TooltipModule, NumericTextBoxModule, MaskedTextBoxModule, CheckBoxModule, ToastAllModule, GoogleMapsModule,
         DropDownListModule, DatePickerModule, TabModule, SwitchModule, CommonModule,FormsModule, ReactiveFormsModule,
         NgxMaskModule.forRoot(),
         RouterModule.forChild([

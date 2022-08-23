@@ -54,6 +54,8 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	public deleteCommand: CommandModel[];
 	public submitClicked: boolean = false;
 	public siteAnalyteId: string;
+	public status: string;
+	public activeToggleText: string;
 
 	@ViewChild('editTab') public editTab: TabComponent;
 	@ViewChild('ServiceStartDate') public ServiceStartDate;
@@ -95,6 +97,8 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			this.record = await this.repository.get(this.id);
 			this.counties = await this.repository.getCounties(this.record.stateId)
 			this.siteAnalytes = await this.repository.listSiteAnalytes(this.id);
+			this.status = this.record.active ? "Active" : "Inactive";
+			this.activeToggleText = this.record.active ? "Deactivate" : "Activate";
 		}
 
 		this.hideSpinner();
@@ -186,6 +190,36 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		else {
 			this.showDeleteMessage(true);
 			setTimeout(() => this.router.navigate(['/auth/customer/edit', this.record.customerId]), 1000);
+		}
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	toggleActiveDialog() {
+		this.deleteDialog = DialogUtility.confirm({
+			title: 'Toggle Site',
+			content: `Are you sure you want to <b>${this.activeToggleText}</b> the site <b>${this.record.name}</b>?`,
+			okButton: { click: this.toggleActive.bind(this) }
+		});
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	async toggleActive() {
+		this.showSpinner();
+		this.deleteDialog.close();
+		this.record.active = !this.record.active;
+		this.record.tenantId = this.appService.tenantId;
+		const returnValue = await this.repository.save(this.record);
+		this.hideSpinner();
+
+		if (returnValue.error) {
+			this.showErrorMessage(returnValue.description);
+		} else {
+			const success = returnValue && returnValue.updated;
+			this.showSuccessMessage("Record state saved!");
+
+			if (success) {
+				this.record = returnValue;
+				this.activeToggleText = this.record.active ? "Deactivate" : "Activate";
+				this.status = this.record.active ? "Active" : "Inactive";
+			}
 		}
 	}
 	//------------------------------------------------------------------------------------------------------------------------

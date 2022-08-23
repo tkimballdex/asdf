@@ -35,6 +35,8 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 	public logisticVendorInt: number = 3;
 	public labVendorInt: number = 2;
 	public activeVendorInt: number = 1;
+	public status: string;
+	public activeToggleText: string;
 	//-----------------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.privileges = (await this.appService.getPrivileges()).locations;
@@ -52,6 +54,8 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 		}
 		else {
 			this.record = await this.repository.get(id);
+			this.status = this.record.active ? "Active" : "Inactive";
+			this.activeToggleText = this.record.active ? "Deactivate" : "Activate";
 		}
 
 		this.record.serviceStartDate = this.appService.getNullableDate(this.record.serviceStartDate);
@@ -185,6 +189,36 @@ export class LocationEditComponent extends PageComponent implements OnInit {
 			if (success && add) {
 				this.record.id = returnValue.id;
 				history.pushState('', '', `/auth/location/edit/${returnValue.id}`);
+			}
+		}
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	toggleActiveDialog() {
+		this.deleteDialog = DialogUtility.confirm({
+			title: 'Toggle Location',
+			content: `Are you sure you want to <b>${this.activeToggleText}</b> the location <b>${this.record.name}</b>?`,
+			okButton: { click: this.toggleActive.bind(this) }
+		});
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	async toggleActive() {
+		this.showSpinner();
+		this.deleteDialog.close();
+		this.record.active = !this.record.active;
+		this.record.tenantId = this.appService.tenantId;
+		const returnValue = await this.repository.save(this.record);
+		this.hideSpinner();
+
+		if (returnValue.error) {
+			this.showErrorMessage(returnValue.description);
+		} else {
+			const success = returnValue && returnValue.updated;
+			this.showSuccessMessage("Record state saved!");
+
+			if (success) {
+				this.record = returnValue;
+				this.activeToggleText = this.record.active ? "Deactivate" : "Activate";
+				this.status = this.record.active ? "Active" : "Inactive";
 			}
 		}
 	}

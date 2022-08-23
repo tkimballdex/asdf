@@ -10,7 +10,8 @@ import { TextBoxModule, MaskedTextBoxModule } from '@syncfusion/ej2-angular-inpu
 import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
-import { TabModule } from '@syncfusion/ej2-angular-navigations';
+import { TabModule, ToolbarModule } from '@syncfusion/ej2-angular-navigations';
+import { TooltipModule } from '@syncfusion/ej2-angular-popups';
 import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask'
@@ -21,7 +22,7 @@ import { NgxMaskModule } from 'ngx-mask'
         VendorEditComponent
     ],
     imports: [
-        GridModule, RadioButtonModule, ButtonModule, TextBoxModule, MaskedTextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule, 
+        GridModule, RadioButtonModule, ButtonModule, TextBoxModule, ToolbarModule, TooltipModule, MaskedTextBoxModule, CheckBoxModule, ToastAllModule, DropDownListModule, 
         TabModule, DatePickerModule, SwitchModule, CommonModule, FormsModule, ReactiveFormsModule,
         NgxMaskModule.forRoot(),
         RouterModule.forChild([

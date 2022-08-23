@@ -11,7 +11,8 @@ import { TextBoxModule, UploaderModule } from '@syncfusion/ej2-angular-inputs';
 import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
 import { DropDownListModule, ListBoxAllModule, CheckBoxSelectionService } from '@syncfusion/ej2-angular-dropdowns';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
-import { TabModule } from '@syncfusion/ej2-angular-navigations';
+import { TabModule, ToolbarModule } from '@syncfusion/ej2-angular-navigations';
+import { TooltipModule } from '@syncfusion/ej2-angular-popups';
 import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
 import { ListViewModule } from '@syncfusion/ej2-angular-lists';
 
@@ -21,7 +22,7 @@ import { ListViewModule } from '@syncfusion/ej2-angular-lists';
 		NewsArticleEditComponent
 	],
 	imports: [
-		FormsModule, ReactiveFormsModule, GridModule, RadioButtonModule, ButtonModule, TextBoxModule, UploaderModule, 
+		FormsModule, ReactiveFormsModule, GridModule, RadioButtonModule, ButtonModule, ToolbarModule, TooltipModule, TextBoxModule, UploaderModule, 
 		CheckBoxModule, ToastAllModule, DropDownListModule, ListViewModule, ListBoxAllModule, DatePickerModule, CommonModule, TabModule, RichTextEditorModule,
 		RouterModule.forChild([
 			{ path: 'list', component: NewsArticleListComponent },

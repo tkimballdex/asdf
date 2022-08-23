@@ -1,57 +1,61 @@
-<div id="edit-view" *ngIf="record" class="container-fluid">
-    <div class="row d-flex align-items-center edit-header">
-        <div class="col-md-6 d-flex">
-            <span class="edit-header-icon"><i class="fas fa-temperature-hot"></i></span>
-            <span class="edit-header-title">Test Type</span>
+<div id="edit-view" *ngIf="record" class="container-fluid g-0">
+    <div class="row d-flex align-items-center edit-header toolbar-margin">
+        <div class="col-md-7 col-lg-6 col-12 d-flex align-items-center">
+            <span class="edit-header-back"><i class="fas fa-arrow-left fa-lg" role="button" [routerLink]="['/auth/customer/list']" [state]='{ formState: true }'></i></span>
+            <span class="edit-header-icon"><i class="fas fa-temperature-hot fa-lg"></i></span>
+            <span *ngIf="!record.name" class="edit-header-title">Test Type</span>
+            <div *ngIf="record.name" class="edit-header-record-no d-flex flex-column mobile-record">
+                <span class="header-record-value">{{record.name}}</span>
+                <span class="header-tag">Test Type</span>
+            </div>
         </div>
-        <div class="col-md-6 d-flex justify-content-end">
-
-        </div>
-    </div>
-
-    <div class="row pad-t10">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox [(value)]="record.name" required placeholder="Name*" floatLabelType="Always"></ejs-textbox>
-        </div>
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox [(value)]="record.code" required placeholder="Code*" floatLabelType="Always" maxlength="10"></ejs-textbox>
-        </div>
-    </div>
-
-    <div class="row pad-t10 pad-b20">
-        <div class="col-md-12 col-lg-10 col-xl-8"><label for="description" class="edit-label">Description*</label></div>
-        <div class="col-md-12 col-lg-10 col-xl-8">
-            <ejs-textbox id="description" [multiline]='true' #default rows="2" required [(value)]="record.description"></ejs-textbox>
+        <div class="col-md-5 col-lg-6 col-3 save-toolbar">
+            <ejs-tooltip id="tooltip" target='#toolbar [title]'>
+                <ejs-toolbar id='toolbar' overflowMode='Popup'>
+                    <e-items>
+                        <e-item id="saveToolbar" text='Save' tooltipText='Save' (click)="save()" [disabled]="loading || !privileges.update" align='Right' prefixIcon="e-icons e-save"></e-item>
+                        <e-item id="deleteToolbar" text='Delete' tooltipText='Delete' showAlwaysInPopup='true' (click)="delete()" [disabled]="loading || !record.id || !privileges.delete" align='Right' prefixIcon="e-icons e-trash"></e-item>
+                    </e-items>
+                </ejs-toolbar>
+            </ejs-tooltip>
         </div>
     </div>
 
-    <div class="row pad-t10 pad-b20">
-        <div class="col-md-12 col-lg-10 col-xl-8"><label for="roles-grid" class="edit-label">Analytes</label></div>
-        <div class="col-md-12 col-lg-10 col-xl-8">
-            <ejs-grid id="roles-grid" #grid [dataSource]='record.analytes' class="edit-grid">
-                <e-columns>
-                    <e-column field='name' headerText='Name'></e-column>
+    <div class="mar-l10">
+        <div class="row pad-t20">
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-textbox [(value)]="record.name" required placeholder="Name*" floatLabelType="Always"></ejs-textbox>
+            </div>
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-textbox [(value)]="record.code" required placeholder="Code*" floatLabelType="Always" maxlength="10"></ejs-textbox>
+            </div>
+        </div>
 
-                    <e-column headerText='' width="100">
-                        <ng-template #template let-data>
-                            <ejs-checkbox [(checked)]="record.analytes[data.index].checked"></ejs-checkbox>
-                        </ng-template>
-                    </e-column>
-                </e-columns>
-            </ejs-grid>
+        <div class="row pad-t10 pad-b20">
+            <div class="col-md-12 col-lg-10 col-xl-8"><label for="description" class="edit-label">Description*</label></div>
+            <div class="col-md-12 col-lg-10 col-xl-8">
+                <ejs-textbox id="description" [multiline]='true' #default rows="2" required [(value)]="record.description"></ejs-textbox>
+            </div>
+        </div>
+
+        <div class="row pad-t10 pad-b20">
+            <div class="col-md-12 col-lg-10 col-xl-8"><label for="roles-grid" class="edit-label">Analytes</label></div>
+            <div class="col-md-12 col-lg-10 col-xl-8">
+                <ejs-grid id="roles-grid" #grid [dataSource]='record.analytes' class="edit-grid">
+                    <e-columns>
+                        <e-column field='name' headerText='Name'></e-column>
+
+                        <e-column headerText='' width="100">
+                            <ng-template #template let-data>
+                                <ejs-checkbox [(checked)]="record.analytes[data.index].checked"></ejs-checkbox>
+                            </ng-template>
+                        </e-column>
+                    </e-columns>
+                </ejs-grid>
+            </div>
         </div>
     </div>
 
-    <div class="row d-flex edit-footer">
-        <div class="col-md-6 d-flex justify-content-start">
-            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
-        </div>
-
-        <div class="col-md-6 d-flex justify-content-end button-top-padding">
-            <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
-            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/testtype/list']">Close</button>
-        </div>
-    </div>
     <ejs-toast #toast></ejs-toast>
 </div>
 

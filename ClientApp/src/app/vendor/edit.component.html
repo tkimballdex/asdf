@@ -1,182 +1,191 @@
-<div id="edit-view" *ngIf="record" class="container-fluid" [formGroup]="form">
-    <div class="row d-flex align-items-center edit-header">
-        <div class="col-md-6 d-flex">
-            <span class="edit-header-icon"><i class="fas fa-handshake-alt"></i></span>
-            <span class="edit-header-title">Vendor</span>
+<div id="edit-view" *ngIf="record && form" class="container-fluid g-0" [formGroup]="form">
+    <div class="row d-flex align-items-center edit-header toolbar-margin">
+        <div class="col-md-7 col-lg-6 col-12 d-flex align-items-center">
+            <span class="edit-header-back"><i class="fas fa-arrow-left fa-lg" role="button" [routerLink]="['/auth/customer/list']" [state]='{ formState: true }'></i></span>
+            <span class="edit-header-icon"><i class="fas fa-handshake-alt fa-lg"></i></span>
+            <span *ngIf="!record.name" class="edit-header-title">Vendor</span>
+            <div *ngIf="record.name" class="edit-header-record-no d-flex flex-column mobile-record">
+                <span class="header-record-value">{{record.name}}</span>
+                <span class="header-tag">Vendor</span>
+            </div>
+            <div *ngIf="status" class="edit-header-status d-flex flex-column hidden">
+                <span class="header-status-value">{{status}}</span>
+                <span class="header-tag">Status</span>
+            </div>
         </div>
-        <div class="col-md-6 d-flex justify-content-end">
-            <ejs-switch [(checked)]="record.active" onLabel="Active" offLabel="Not Active" style="width:100px;height:32px;"></ejs-switch>
-        </div>        
+        <div class="col-md-5 col-lg-6 col-3 save-toolbar">
+            <ejs-tooltip id="tooltip" target='#toolbar [title]'>
+                <ejs-toolbar id='toolbar' overflowMode='Popup'>
+                    <e-items>
+                        <e-item id="saveToolbar" text='Save' tooltipText='Save' (click)="save()" [disabled]="loading || !privileges.update" align='Right' prefixIcon="e-icons e-save"></e-item>
+                        <e-item id="deleteToolbar" text='Delete' tooltipText='Delete' showAlwaysInPopup='true' (click)="delete()" [disabled]="loading || !record.id || !privileges.delete" align='Right' prefixIcon="e-icons e-trash"></e-item>
+                        <e-item id="activeToolbar" [text]=activeToggleText [tooltipText]=activeToggleText *ngIf="record.id" (click)="toggleActiveDialog()" showAlwaysInPopup='true' align='Right' prefixIcon="e-icons e-active"></e-item>
+                    </e-items>
+                </ejs-toolbar>
+            </ejs-tooltip>
+        </div>
     </div>
 
-    <div class="row pad-t10">
-        <div class="col-md-12 col-lg-10 col-xl-8">            
-            <ejs-textbox formControlName="name" required placeholder="Name*" floatLabelType="Always"></ejs-textbox>
-            <div *ngIf="this.invalidControl('name')" class="e-error">
-                Name is required!
+    <div class="mar-l10">
+        <div class="row pad-t20">
+            <div class="col-md-12 col-lg-10 col-xl-8">            
+                <ejs-textbox formControlName="name" required placeholder="Name*" floatLabelType="Always"></ejs-textbox>
+                <div *ngIf="this.invalidControl('name')" class="e-error">
+                    Name is required!
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-textbox id="edit-tenant" [value]="tenant.name" readonly placeholder="Tenant" floatLabelType="Always"></ejs-textbox>
+            </div>
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-dropdownlist [dataSource]="app.vendortypes" [fields]="{ text: 'name', value: 'id' }" formControlName="vendorTypeId" placeholder="Vendor Type*" floatLabelType="Always"></ejs-dropdownlist>
+                <div *ngIf="this.invalidControl('vendorTypeId')" class="e-error">
+                    Vendory Type is required!
+                </div>
+            </div>
+        </div>
+
+        <div class="row d-flex pad-t20">
+            <div class="col-md-12 d-flex">
+                <ejs-tab id="edit-tab" class="e-fill">
+                    <e-tabitems>
+                        <e-tabitem>
+                            <ng-template #headerText>
+                                <div>Information</div>
+                            </ng-template>
+                            <ng-template #content>   
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-10 col-xl-8">                                    
+                                        <ejs-textbox formControlName="address" placeholder="Address*" floatLabelType="Always"></ejs-textbox>
+                                        <div *ngIf="this.invalidControl('address')" class="e-error">
+                                            Address is required!
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-10 col-xl-8">                                   
+                                        <ejs-textbox formControlName="city" placeholder="City*" floatLabelType="Always"></ejs-textbox>
+                                        <div *ngIf="this.invalidControl('city')" class="e-error">
+                                            City is required!
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-5 col-xl-4">
+                                        <ejs-dropdownlist [dataSource]="app.states" formControlName="stateId" [fields]="{ text: 'name', value: 'id' }" placeholder="State*" floatLabelType="Always"></ejs-dropdownlist>
+                                        <div *ngIf="this.invalidControl('stateId')" class="e-error">
+                                            State is required!
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-5 col-xl-4">                                   
+                                        <ejs-textbox formControlName="postalCode" placeholder="Postal Code*" floatLabelType="Always"></ejs-textbox>
+                                        <div *ngIf="this.invalidControl('postalCode')" class="e-error">
+                                            Postal Code is required!
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row pad-t20">
+                                    <div class="col-md-6 col-lg-5 col-xl-4">
+                                        <ejs-textbox [(value)]="record.latitude" readonly placeholder="Latitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
+                                    </div>
+                                    <div class="col-md-6 col-lg-5 col-xl-4">
+                                        <ejs-textbox [(value)]="record.longitude" readonly placeholder="Longitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
+                                    </div>
+                                </div>
+
+                                <div class="row pad-t20">
+                                    <div class="col-md-6 col-lg-5 col-xl-4">
+                                        <ejs-textbox [(value)]="record.website" placeholder="Website" floatLabelType="Always"></ejs-textbox>
+                                    </div>
+                                    <div class="col-md-6 col-lg-5 col-xl-4">
+                                        <ejs-maskedtextbox formControlName="phoneNo" placeholder="Main Phone No*" floatLabelType="Always" pattern="^[0-9]{10}$" mask="(000) 000 - 0000"></ejs-maskedtextbox>
+                                        <div *ngIf="this.invalidControl('phoneNo')" class="e-error">
+                                            Main Phone No is required! 
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row pad-t20">
+                                    <div class="col-md-12 col-lg-10 col-xl-8">                                    
+                                        <ejs-textbox formControlName="contactName" placeholder="Contact Name*" floatLabelType="Always"></ejs-textbox>
+                                        <div *ngIf="this.invalidControl('contactName')" class="e-error">
+                                            Contact Name is required!
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-5 col-xl-4">                                   
+                                        <ejs-textbox formControlName="contactEmail" placeholder="Contact Email*" floatLabelType="Always"></ejs-textbox>
+                                        <div *ngIf="this.invalidControl('contactEmail')" class="e-error">
+                                            Contact Email is required!
+                                    </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-5 col-xl-4">                                    
+                                        <ejs-maskedtextbox formControlName="contactPhoneNo" placeholder="Contact Phone No*" floatLabelType="Always" pattern="^[0-9]{10}$" mask="(000) 000 - 0000"></ejs-maskedtextbox>
+                                        <div *ngIf="this.invalidControl('contactPhoneNo')" class="e-error">
+                                            Contact Phone No is required! 
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-10 col-xl-8">
+                                        <ejs-textbox [(value)]="record.notificationEmail" placeholder="Notification Email(s)" floatLabelType="Always"></ejs-textbox>
+                                    </div>
+                                </div>
+                                <div class="row pad-t20">
+                                    <div class="col-md-12 col-lg-10 col-xl-8"><label for="notes" class="edit-label">Notes</label></div>
+                                    <div class="col-md-12 col-lg-10 col-xl-8">
+                                        <ejs-textbox id="notes" [multiline]='true' #default rows="3" [(value)]="record.notes"></ejs-textbox>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </e-tabitem>
+                        <!-- <e-tabitem>
+                            <ng-template #headerText>
+                                <div>Assignments</div>
+                            </ng-template>
+                            <ng-template #content>                            
+                                <div class="row d-flex align-items-end">
+                                    <div class="col d-flex align-items-end subitem-list-header">
+                                        <span class="subitem-list-icon"><i class="fas fa-chart-network"></i></span>
+                                        <span class="subitem-list-title">Servicing Sites</span>
+                                        <span class="subitem-list-add"><button ejs-button cssClass="e-outline" [routerLink]="['/auth/vendor/add', record.id]">+ Add</button></span>
+                                    </div>
+                                </div>
+                                <div class="row">                                
+                                    <div class="col-12 pad-t20">
+                                        <ejs-grid [dataSource]='sitesList' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="true" *ngIf="sitesList">
+                                            <e-columns>
+                                                <e-column width="70">
+                                                    <ng-template #template let-data>
+                                                        <a [routerLink]="['/auth/site/edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
+                                                    </ng-template>
+                                                </e-column>
+                                                <e-column field='name' headerText='Name'></e-column>
+                                                <e-column field='address' headerText='Address'></e-column>
+                                                <e-column field='city' headerText='City'></e-column>
+                                                <e-column field='state' headerText='State'></e-column>
+                                                <e-column field='postalCode' headerText='Postal Code'></e-column>
+                                                <e-column field='phoneNo' headerText='Phone No'></e-column>
+                                            </e-columns>
+                                        </ejs-grid>
+                                    </div>
+                                </div>                           
+                            </ng-template>
+                        </e-tabitem> -->
+                    </e-tabitems>
+                </ejs-tab>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-textbox id="edit-tenant" [value]="tenant.name" readonly placeholder="Tenant" floatLabelType="Always"></ejs-textbox>
-        </div>
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist [dataSource]="app.vendortypes" [fields]="{ text: 'name', value: 'id' }" formControlName="vendorTypeId" placeholder="Vendor Type*" floatLabelType="Always"></ejs-dropdownlist>
-            <div *ngIf="this.invalidControl('vendorTypeId')" class="e-error">
-                Vendory Type is required!
-            </div>
-        </div>
-    </div>
 
-    <div class="row d-flex pad-t20">
-        <div class="col-md-12 d-flex">
-            <ejs-tab id="edit-tab" class="e-fill">
-                <e-tabitems>
-                    <e-tabitem>
-                        <ng-template #headerText>
-                            <div>Information</div>
-                        </ng-template>
-                        <ng-template #content>   
-                            <div class="row">
-                                <div class="col-md-12 col-lg-10 col-xl-8">                                    
-                                    <ejs-textbox formControlName="address" placeholder="Address*" floatLabelType="Always"></ejs-textbox>
-                                    <div *ngIf="this.invalidControl('address')" class="e-error">
-                                        Address is required!
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-md-12 col-lg-10 col-xl-8">                                   
-                                    <ejs-textbox formControlName="city" placeholder="City*" floatLabelType="Always"></ejs-textbox>
-                                    <div *ngIf="this.invalidControl('city')" class="e-error">
-                                        City is required!
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-dropdownlist [dataSource]="app.states" formControlName="stateId" [fields]="{ text: 'name', value: 'id' }" placeholder="State*" floatLabelType="Always"></ejs-dropdownlist>
-                                    <div *ngIf="this.invalidControl('stateId')" class="e-error">
-                                        State is required!
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-5 col-xl-4">                                   
-                                    <ejs-textbox formControlName="postalCode" placeholder="Postal Code*" floatLabelType="Always"></ejs-textbox>
-                                    <div *ngIf="this.invalidControl('postalCode')" class="e-error">
-                                        Postal Code is required!
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row pad-t20">
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-textbox [(value)]="record.latitude" readonly placeholder="Latitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
-                                </div>
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-textbox [(value)]="record.longitude" readonly placeholder="Longitude" floatLabelType="Always" contenteditable="false"></ejs-textbox>
-                                </div>
-                            </div>
-
-                            <div class="row pad-t20">
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-textbox [(value)]="record.website" placeholder="Website" floatLabelType="Always"></ejs-textbox>
-                                </div>
-                                <div class="col-md-6 col-lg-5 col-xl-4">
-                                    <ejs-maskedtextbox formControlName="phoneNo" placeholder="Main Phone No*" floatLabelType="Always" pattern="^[0-9]{10}$" mask="(000) 000 - 0000"></ejs-maskedtextbox>
-                                    <div *ngIf="this.invalidControl('phoneNo')" class="e-error">
-                                        Main Phone No is required! 
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row pad-t20">
-                                <div class="col-md-12 col-lg-10 col-xl-8">                                    
-                                    <ejs-textbox formControlName="contactName" placeholder="Contact Name*" floatLabelType="Always"></ejs-textbox>
-                                    <div *ngIf="this.invalidControl('contactName')" class="e-error">
-                                        Contact Name is required!
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6 col-lg-5 col-xl-4">                                   
-                                    <ejs-textbox formControlName="contactEmail" placeholder="Contact Email*" floatLabelType="Always"></ejs-textbox>
-                                    <div *ngIf="this.invalidControl('contactEmail')" class="e-error">
-                                        Contact Email is required!
-                                </div>
-                                </div>
-                                <div class="col-md-6 col-lg-5 col-xl-4">                                    
-                                    <ejs-maskedtextbox formControlName="contactPhoneNo" placeholder="Contact Phone No*" floatLabelType="Always" pattern="^[0-9]{10}$" mask="(000) 000 - 0000"></ejs-maskedtextbox>
-                                    <div *ngIf="this.invalidControl('contactPhoneNo')" class="e-error">
-                                        Contact Phone No is required! 
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12 col-lg-10 col-xl-8">
-                                    <ejs-textbox [(value)]="record.notificationEmail" placeholder="Notification Email(s)" floatLabelType="Always"></ejs-textbox>
-                                </div>
-                            </div>
-                            <div class="row pad-t20">
-                                <div class="col-md-12 col-lg-10 col-xl-8"><label for="notes" class="edit-label">Notes</label></div>
-                                <div class="col-md-12 col-lg-10 col-xl-8">
-                                    <ejs-textbox id="notes" [multiline]='true' #default rows="3" [(value)]="record.notes"></ejs-textbox>
-                                </div>
-                            </div>
-                        </ng-template>
-                    </e-tabitem>
-                    <!-- <e-tabitem>
-                        <ng-template #headerText>
-                            <div>Assignments</div>
-                        </ng-template>
-                        <ng-template #content>                            
-                            <div class="row d-flex align-items-end">
-                                <div class="col d-flex align-items-end subitem-list-header">
-                                    <span class="subitem-list-icon"><i class="fas fa-chart-network"></i></span>
-                                    <span class="subitem-list-title">Servicing Sites</span>
-                                    <span class="subitem-list-add"><button ejs-button cssClass="e-outline" [routerLink]="['/auth/vendor/add', record.id]">+ Add</button></span>
-                                </div>
-                            </div>
-                            <div class="row">                                
-                                <div class="col-12 pad-t20">
-                                    <ejs-grid [dataSource]='sitesList' class="edit-grid" [allowPaging]="true" [pageSettings]='{ pageSizes: true, pageCount: 10 }' [allowSorting]="true" [allowFiltering]="true" *ngIf="sitesList">
-                                        <e-columns>
-                                            <e-column width="70">
-                                                <ng-template #template let-data>
-                                                    <a [routerLink]="['/auth/site/edit', data.id]"><i class="fas fa-pencil-alt edit-icon"></i></a>
-                                                </ng-template>
-                                            </e-column>
-                                            <e-column field='name' headerText='Name'></e-column>
-                                            <e-column field='address' headerText='Address'></e-column>
-                                            <e-column field='city' headerText='City'></e-column>
-                                            <e-column field='state' headerText='State'></e-column>
-                                            <e-column field='postalCode' headerText='Postal Code'></e-column>
-                                            <e-column field='phoneNo' headerText='Phone No'></e-column>
-                                        </e-columns>
-                                    </ejs-grid>
-                                </div>
-                            </div>                           
-                        </ng-template>
-                    </e-tabitem> -->
-                </e-tabitems>
-            </ejs-tab>
-        </div>
-    </div>
-
-    <div class="row d-flex edit-footer">
-        <div class="col-md-6 d-flex justify-content-start">
-            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
-        </div>
-
-        <div class="col-md-6 d-flex justify-content-end button-top-padding">
-            <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
-            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/vendor/list']">Close</button>
-        </div>
-    </div>
     <ejs-toast #toast></ejs-toast>
 </div>
 

@@ -14,68 +14,69 @@ import { TestTypeRepository } from './repository';
 export class TestTypeEditComponent extends PageComponent implements OnInit {
 	constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private tenant: TenantService, private repository: TestTypeRepository) {
     super();
-}
+    }
 
-public record: any;
-public deleteDialog: Dialog;
-public invalidInputs: boolean = false;
+    public record: any;
+    public deleteDialog: Dialog;
+    public invalidInputs: boolean = false;
 
-async ngOnInit() {
-    this.showSpinner();
-    this.app = await this.appService.getData();
-    this.privileges = this.app.privileges.testTypes;
-
-    var id = this.route.snapshot.paramMap.get('id');
-    this.record = await this.repository.get(id);
-    this.hideSpinner();    
-}
-
-async save() {
-    var add = !this.record.id;
-    
-    if (!this.record.name || !this.record.code || !this.record.description) {
-        this.invalidInputs = true
-        this.showErrorMessage("Please complete all required fields!")
-    } else if (returnValue && returnValue.error) {
-        this.showErrorMessage(returnValue.description);
-    } else {
+    async ngOnInit() {
         this.showSpinner();
-        this.record.tenantId = this.tenant.id;
-        var returnValue = await this.repository.save(this.record);
+        this.app = await this.appService.getData();
+        this.privileges = this.app.privileges.testTypes;
+
+        var id = this.route.snapshot.paramMap.get('id');
+        this.record = await this.repository.get(id);
+        this.hideSpinner();    
+    }
+
+    async save() {
+        var add = !this.record.id;
+        
+        if (!this.record.name || !this.record.code || !this.record.description) {
+            this.invalidInputs = true
+            this.showErrorMessage("Please complete all required fields!")
+        } else if (returnValue && returnValue.error) {
+            this.showErrorMessage(returnValue.description);
+        } else {
+            this.showSpinner();
+            this.record.tenantId = this.tenant.id;
+            var returnValue = await this.repository.save(this.record);
+            this.hideSpinner();
+            var success = returnValue && returnValue.updated;
+            this.showSaveMessage(success);
+
+            if (success) {
+                this.record = returnValue;
+            }
+
+            if (success && add) {
+                setTimeout(() => this.router.navigate(['/auth/testtype/edit', returnValue.id]), 1000);
+            }
+        }
+    }
+    //------------------------------------------------------------------------------------------------------------------------
+    delete() {
+        this.deleteDialog = DialogUtility.confirm({
+            title: 'Delete Test Type',
+            content: `Are you sure you want to delete the Test Type <b>${this.record.name}</b>?`,
+            okButton: { click: this.deleteOK.bind(this) }
+        });
+    }
+    //------------------------------------------------------------------------------------------------------------------------
+    async deleteOK() {
+        this.showSpinner();
+        this.deleteDialog.close();
+        var result = await this.repository.delete(this.record.id);
         this.hideSpinner();
-        var success = returnValue && returnValue.updated;
-        this.showSaveMessage(success);
 
-        if (success) {
-            this.record = returnValue;
+        if (result.error) {
+            this.showErrorMessage(result.description);
         }
-
-        if (success && add) {
-            setTimeout(() => this.router.navigate(['/auth/testtype/edit', returnValue.id]), 1000);
+        else {
+            this.showDeleteMessage(true);
+            setTimeout(() => this.router.navigate(['/auth/testtype/list']), 1000);
         }
     }
-}
-
-delete() {
-    this.deleteDialog = DialogUtility.confirm({
-        title: 'Delete Test Type',
-        content: `Are you sure you want to delete the Test Type <b>${this.record.name}</b>?`,
-        okButton: { click: this.deleteOK.bind(this) }
-    });
-}
-
-async deleteOK() {
-    this.showSpinner();
-    this.deleteDialog.close();
-    var result = await this.repository.delete(this.record.id);
-    this.hideSpinner();
-
-    if (result.error) {
-        this.showErrorMessage(result.description);
-    }
-    else {
-        this.showDeleteMessage(true);
-        setTimeout(() => this.router.navigate(['/auth/testtype/list']), 1000);
-    }
-}
+    //------------------------------------------------------------------------------------------------------------------------
 }

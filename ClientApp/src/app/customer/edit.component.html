@@ -3,6 +3,7 @@
         <div class="col-md-7 col-lg-6 col-12 d-flex align-items-center">
             <span class="edit-header-back"><i class="fas fa-arrow-left fa-lg" role="button" [routerLink]="['/auth/customer/list']" [state]='{ formState: true }'></i></span>
             <span class="edit-header-icon"><i class="fal fa-user-crown fa-lg"></i></span>
+            <span *ngIf="!record.name" class="edit-header-title">Customer</span>
             <div *ngIf="record.name" class="edit-header-record-no d-flex flex-column mobile-record">
                 <span class="header-record-value">{{record.name}}</span>
                 <span class="header-tag">Customer</span>
@@ -26,7 +27,7 @@
     </div>
 
     <div class="mar-l10">
-        <div class="row pad-t10">
+        <div class="row pad-t20">
             <div class="col-md-6 col-lg-5 col-xl-4">
                 <ejs-textbox formControlName="name" required placeholder="Name*" floatLabelType="Always"></ejs-textbox>
                 <div *ngIf="this.invalidControl('name')" class="e-error">
@@ -249,15 +250,5 @@
         </div>
     </div>
 
-    <!-- <div class="row d-flex edit-footer">
-        <div class="col-md-6 d-flex justify-content-start">
-            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
-        </div>
-
-        <div class="col-md-6 d-flex justify-content-end button-top-padding">
-            <button ejs-button cssClass="e-danger" (click)="delete()" [disabled]="loading || !record.id || !privileges.delete">Delete</button>
-            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/customer/list']" [state]='{ formState: true }'>Close</button>
-        </div>
-    </div> -->
     <ejs-toast #toast></ejs-toast>
 </div>
