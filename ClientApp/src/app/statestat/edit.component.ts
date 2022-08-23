@@ -21,7 +21,7 @@ export class StateStatEditComponent extends PageComponent implements OnInit {
 	public data: any;
     public deleteDialog: Dialog;
     public form: FormGroup;
-	
+	public stateName: any;
 	//------------------------------------------------------------------------------------
 	async ngOnInit() {
 		var id = this.route.snapshot.paramMap.get('id');
@@ -37,6 +37,8 @@ export class StateStatEditComponent extends PageComponent implements OnInit {
 		}
 		else {
 			this.record = await this.repository.get(id);
+			const state = await this.repository.getState(this.record.stateId);
+			this.stateName = state['name'];
 		}
 
 		this.hideSpinner();			

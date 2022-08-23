@@ -22,6 +22,7 @@ export class CountystatEditComponent extends PageComponent implements OnInit {
     public deleteDialog: Dialog;
     public form: FormGroup;
 	public counties: any;
+	public countyName: any;
 	//------------------------------------------------------------------------------------
 	async ngOnInit() {
 		
@@ -36,6 +37,8 @@ export class CountystatEditComponent extends PageComponent implements OnInit {
 		}
 		else {
 			this.record = await this.repository.get(id);
+			const county = await this.repository.getCounty(this.record.countyId);
+			this.countyName = county['name'];
 		}
 
 		this.hideSpinner();	

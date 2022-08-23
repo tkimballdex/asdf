@@ -1,7 +1,7 @@
 <div id="edit-view" *ngIf="record && form" [formGroup]="form" class="container-fluid g-0">
     <div class="row d-flex align-items-center edit-header toolbar-margin">
         <div class="col-md-7 col-lg-6 col-12 d-flex align-items-center">
-            <span class="edit-header-back"><i class="fas fa-arrow-left fa-lg" role="button" [routerLink]="['/auth/customer/list']" [state]='{ formState: true }'></i></span>
+            <span class="edit-header-back"><i class="fas fa-arrow-left fa-lg" role="button" (click)="close()"></i></span>
             <span class="edit-header-icon"><i class="fas fa-location fa-lg"></i></span>
             <span *ngIf="!record.name" class="edit-header-title">Location</span>
             <div *ngIf="record.name" class="edit-header-record-no d-flex flex-column mobile-record">

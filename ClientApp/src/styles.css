@@ -236,6 +236,8 @@ mat-form-field.mat-form-field {
 /* Start - Edit View styles*/
 #edit-view {
     padding: 0 12px 15px 12px;
+    border-radius: 5px;
+    border: 1px solid #d8deee;
     background-color: #ffffff;
     width: 100%;
 }
@@ -255,10 +257,14 @@ mat-form-field.mat-form-field {
 }
 
 #edit-view .edit-header-back {
-    padding: 25px 22px 0px 15px;
+    padding: 15px 12px 0px 5px;
     height: 68px;
     border-right: 1px solid #d8dee6;
     color: #1e88e5;
+}
+
+#edit-view .fa-arrow-left {
+    padding: 10px;
 }
 
 #edit-view .edit-header-icon {
@@ -270,13 +276,12 @@ mat-form-field.mat-form-field {
     height: 40px;
     width: 60px;
     text-align: center;
-    border-right: 1px dotted #3c485860;
+    /* border-right: 1px dotted #3c485860; */
 }
 
 #edit-view .edit-header-record-no {
     padding: 0 10px;
     margin: 12px 0;
-    border-right: 1px dotted #3c485860;
 }
 
 #edit-view .edit-header-status {
@@ -284,6 +289,7 @@ mat-form-field.mat-form-field {
     font-weight: 100;
     padding: 0 10px;
     margin: 12px 0;
+    border-left: 1px dotted #3c485860;
 }
 
 .fa-arrow-left:hover {

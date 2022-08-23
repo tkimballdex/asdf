@@ -1,161 +1,162 @@
-<div id="edit-view" *ngIf="record && form" class="container-fluid" [formGroup]="form">
-    <div class="row d-flex align-items-center edit-header">
-        <div class="col-md-6 d-flex">
-            <span class="edit-header-icon"><i class="fal fa-calendar-alt"></i></span>
-            <span class="edit-header-title">Collection</span>
+<div id="edit-view" *ngIf="record && form" class="container-fluid g-0" [formGroup]="form">
+    <div class="row d-flex align-items-center edit-header toolbar-margin">
+        <div class="col-md-7 col-lg-6 col-12 d-flex align-items-center">
+            <span class="edit-header-back"><i class="fas fa-arrow-left fa-lg" role="button" [routerLink]="['/auth/collection/list']" [state]='{ formState: true }'></i></span>
+            <span class="edit-header-icon"><i class="fal fa-calendar-alt fa-lg"></i></span>
+            <span class="edit-header-title">Schedule Collection</span>
         </div>
-        <div class="col-md-6 d-flex justify-content-end">
-
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12 col-lg-10 col-xl-8">
-            <ejs-dropdownlist [dataSource]="customers" [fields]="{ text: 'name', value: 'id' }" formControlName="customerId" placeholder="Customer*" floatLabelType="Always" (change)="customerChange($event)"></ejs-dropdownlist>
-            <div *ngIf="this.invalidControl('customerId')" class="e-error">
-                Customer is required!
-            </div>
+        <div class="col-md-5 col-lg-6 col-3 save-toolbar">
+            <ejs-tooltip id="tooltip" target='#toolbar [title]'>
+                <ejs-toolbar id='toolbar' overflowMode='Popup'>
+                    <e-items>
+                        <e-item id="saveToolbar" text='Save' tooltipText='Save' (click)="save()" [disabled]="loading || !privileges.update" align='Right' prefixIcon="e-icons e-save"></e-item>
+                    </e-items>
+                </ejs-toolbar>
+            </ejs-tooltip>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-6 col-lg-5 col-xl-4" *ngIf="sites">
-            <ejs-dropdownlist [dataSource]="sites" [fields]="{ text: 'name', value: 'id' }" formControlName="siteId" placeholder="Site*" floatLabelType="Always" (change)="siteChange($event)"></ejs-dropdownlist>
-            <div *ngIf="this.invalidControl('siteId')" class="e-error">
-                Site is required!
+    <div class="mar-l10">
+        <div class="row pad-t20">
+            <div class="col-md-12 col-lg-10 col-xl-8">
+                <ejs-dropdownlist [dataSource]="customers" [fields]="{ text: 'name', value: 'id' }" formControlName="customerId" placeholder="Customer*" floatLabelType="Always" (change)="customerChange($event)"></ejs-dropdownlist>
+                <div *ngIf="this.invalidControl('customerId')" class="e-error">
+                    Customer is required!
+                </div>
             </div>
         </div>
 
-        <div class="col-md-6 col-lg-5 col-xl-4" *ngIf="locations">
-            <ejs-dropdownlist [dataSource]="locations" [fields]="{ text: 'name', value: 'id' }" formControlName="locationId" placeholder="Location*" floatLabelType="Always" (change)="locationChange($event)"></ejs-dropdownlist>
-            <div *ngIf="this.invalidControl('locationId')" class="e-error">
-                Location is required!
+        <div class="row">
+            <div class="col-md-6 col-lg-5 col-xl-4" *ngIf="sites">
+                <ejs-dropdownlist [dataSource]="sites" [fields]="{ text: 'name', value: 'id' }" formControlName="siteId" placeholder="Site*" floatLabelType="Always" (change)="siteChange($event)"></ejs-dropdownlist>
+                <div *ngIf="this.invalidControl('siteId')" class="e-error">
+                    Site is required!
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-5 col-xl-4" *ngIf="locations">
+                <ejs-dropdownlist [dataSource]="locations" [fields]="{ text: 'name', value: 'id' }" formControlName="locationId" placeholder="Location*" floatLabelType="Always" (change)="locationChange($event)"></ejs-dropdownlist>
+                <div *ngIf="this.invalidControl('locationId')" class="e-error">
+                    Location is required!
+                </div>
+            </div>
+        </div>
+
+        <div class="row pad-t20">
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-dropdownlist [dataSource]="logisticVendors" [fields]="{ text: 'name', value: 'id' }" formControlName="logisticVendorId" placeholder="Logistic Vendor*" floatLabelType="Always"></ejs-dropdownlist>
+                <div *ngIf="this.invalidControl('logisticVendorId')" class="e-error">
+                    Logistic Vendor is required!
+                </div>
+            </div>
+        </div>
+
+        <div class="row pad-t20">
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-datepicker formControlName="startDate" required placeholder="Start Date*" floatLabelType="Always"></ejs-datepicker>
+                <div *ngIf="this.invalidControl('startDate')" class="e-error">
+                    Start Date is required!
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-datepicker formControlName="endDate" required placeholder="End Date*" floatLabelType="Always"
+                [ngClass]="{'invalid-input': this.form.errors?.['validateEndDate'] === 'validateEndDate'}"></ejs-datepicker>
+                <div *ngIf="this.invalidControl('endDate')" class="e-error">
+                    End Date is required!
+                </div>
+                <div *ngIf="this.form.errors?.['validateEndDate'] === 'validateEndDate'" class="e-error">
+                    End date is before start date!
+                </div>
+            </div>
+        </div>
+
+        <div class="row pad-b10">
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <ejs-dropdownlist formControlName="frequencyId" [dataSource]="app.frequencies" [fields]="{ text: 'name', value: 'id' }" placeholder="Testing Frequency*" floatLabelType="Always"></ejs-dropdownlist>
+                <div *ngIf="this.invalidControl('frequencyId')" class="e-error">
+                    Testing Frequency is required!
+                </div>
+            </div>
+        </div>
+
+        <div class="row mar-t10" *ngIf="form.get('frequencyId').value == 2">
+            <div class="col-12">
+                <ul class="days">
+                    <li><ejs-checkbox label="Sunday" [(checked)]="record.days.Sunday"></ejs-checkbox></li>
+                    <li><ejs-checkbox label="Monday" [(checked)]="record.days.Monday"></ejs-checkbox></li>
+                    <li><ejs-checkbox label="Tuesday" [(checked)]="record.days.Tuesday"></ejs-checkbox></li>
+                    <li><ejs-checkbox label="Wednesday" [(checked)]="record.days.Wednesday"></ejs-checkbox></li>
+                    <li><ejs-checkbox label="Thursday" [(checked)]="record.days.Thursday"></ejs-checkbox></li>
+                    <li><ejs-checkbox label="Friday" [(checked)]="record.days.Friday"></ejs-checkbox></li>
+                    <li><ejs-checkbox label="Saturday" [(checked)]="record.days.Saturday"></ejs-checkbox></li>
+                </ul>
+            </div>
+        </div>
+
+        <div *ngIf="form.get('locationId').value && form.get('logisticVendorId').value && form.get('endDate').value && form.get('frequencyId').value && !this.form.errors?.['validateEndDate']">
+            <div class="row mar-t10">
+                <div class="col-md-6 col-lg-3">
+                    <ejs-dropdownlist [dataSource]="testTypes" [fields]="{ text: 'name', value: 'name' }" [(value)]="container.testType" showClearButton="true" placeholder="Test Type" floatLabelType="Always"></ejs-dropdownlist>
+                </div>
+        
+                <div class="col-md-6 col-lg-4 col-xl-5">
+                    <ejs-multiselect [dataSource]="analytes" [fields]="{ text: 'name', value: 'name' }" [(value)]="container.analytes" showDropDownIcon="true" placeholder="Analytes" floatLabelType="Always"></ejs-multiselect>
+                </div>
+        
+                <div class="col-md-6 col-lg-3 col-xl-2" style="margin-top: 28px;">
+                    <span class="list-header-add"><button ejs-button cssClass="e-outline" (click)="addTestType()" [disabled]="!container.analytes || !container.testType">+ Add Test Type</button></span>
+                </div>
+            </div>
+
+            <div class="row pad-b20 pad-t10">
+                <div class="col-md-12 col-lg-10">
+                    <ejs-textbox readonly="readonly" [value]="container.testTypeNames" placeholder="Test Types" floatLabelType="Always"></ejs-textbox>
+                </div>
+            </div>
+        
+            <div class="row pad-b10" *ngIf="container.testTypeNames">
+                <div class="col-md-6 col-lg-5 col-xl-2">
+                    <ejs-dropdownlist [dataSource]="app.containerTypes" [fields]="{ text: 'name', value: 'name' }" [(value)]="container.containerType" showClearButton="true" placeholder="Container Type" floatLabelType="Always" ></ejs-dropdownlist>
+                </div>
+        
+                <div class="col-md-6 col-lg-5 col-xl-2">
+                    <ejs-dropdownlist [dataSource]="labVendors" [fields]="{ text: 'name', value: 'id' }" [(value)]="container.labVendorId" showClearButton="true"
+                    placeholder="Lab Vendor" floatLabelType="Always"></ejs-dropdownlist>
+                </div>
+        
+                <div class="col-md-6 col-lg-5 col-xl-2">
+                    <ejs-numerictextbox [(value)]="container.samples" format='N0' min='0' max='10' step='1' placeholder="Number of Samples" floatLabelType="Always"></ejs-numerictextbox>
+                </div>
+        
+                <div class="col-md-6 col-lg-5 col-xl-2">
+                    <ejs-numerictextbox [(value)]="container.expectedVolume" format='N0' min='0' max='100000' step='1' placeholder="Expected Volume (mL)" floatLabelType="Always"></ejs-numerictextbox>
+                </div>
+                <div class="col-md-6 col-lg-5 col-xl-2" style="margin-top: 28px;">
+                    <span class="list-header-add"><button ejs-button cssClass="e-outline" (click)="addContainer()" [disabled]="!container.containerType || !container.samples || !container.labVendorId || !container.expectedVolume">+ Add Container</button></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row pad-b10" *ngIf="record.containers.length">
+            <div class="col-lg-12 col-xl-10 pad-t20">
+                <ejs-grid #grid [dataSource]='record.containers' [allowPaging]="false">
+                    <e-columns>
+                        <e-column width="70" [visible]='true'>
+                            <ng-template #template let-data>
+                                <button ejs-button (click)="deleteContainer(data)" style="padding: 2px 2px;"><i class="e-icons e-delete text-danger"></i></button>
+                            </ng-template>
+                        </e-column>
+                        <e-column field='containerType' headerText='Container Type' width="180px"></e-column>
+                        <e-column field='labVendor' headerText='Lab Vendor' width="160px"></e-column>
+                        <e-column field='samples' headerText='No of Samples' textAlign='Center' format='N0' width="120px"></e-column>
+                        <e-column field='expectedVolume' headerText='Expected Volume (mL)' textAlign='Center' format='N1' width="140px"></e-column>
+                        <e-column field='testTypeNames' headerText='Test Types' width="350px"></e-column>
+                    </e-columns>
+                </ejs-grid>
             </div>
         </div>
     </div>
 
-    <div class="row pad-t20">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist [dataSource]="logisticVendors" [fields]="{ text: 'name', value: 'id' }" formControlName="logisticVendorId" placeholder="Logistic Vendor*" floatLabelType="Always"></ejs-dropdownlist>
-            <div *ngIf="this.invalidControl('logisticVendorId')" class="e-error">
-                Logistic Vendor is required!
-            </div>
-        </div>
-    </div>
-
-    <div class="row pad-t20">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-datepicker formControlName="startDate" required placeholder="Start Date*" floatLabelType="Always"></ejs-datepicker>
-            <div *ngIf="this.invalidControl('startDate')" class="e-error">
-                Start Date is required!
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-datepicker formControlName="endDate" required placeholder="End Date*" floatLabelType="Always"
-            [ngClass]="{'invalid-input': this.form.errors?.['validateEndDate'] === 'validateEndDate'}"></ejs-datepicker>
-            <div *ngIf="this.invalidControl('endDate')" class="e-error">
-                End Date is required!
-            </div>
-            <div *ngIf="this.form.errors?.['validateEndDate'] === 'validateEndDate'" class="e-error">
-                End date is before start date!
-            </div>
-        </div>
-    </div>
-
-    <div class="row pad-b10">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-            <ejs-dropdownlist formControlName="frequencyId" [dataSource]="app.frequencies" [fields]="{ text: 'name', value: 'id' }" placeholder="Testing Frequency*" floatLabelType="Always"></ejs-dropdownlist>
-            <div *ngIf="this.invalidControl('frequencyId')" class="e-error">
-                Testing Frequency is required!
-            </div>
-        </div>
-    </div>
-
-    <div class="row mar-t10" *ngIf="form.get('frequencyId').value == 2">
-        <div class="col-12">
-            <ul class="days">
-                <li><ejs-checkbox label="Sunday" [(checked)]="record.days.Sunday"></ejs-checkbox></li>
-                <li><ejs-checkbox label="Monday" [(checked)]="record.days.Monday"></ejs-checkbox></li>
-                <li><ejs-checkbox label="Tuesday" [(checked)]="record.days.Tuesday"></ejs-checkbox></li>
-                <li><ejs-checkbox label="Wednesday" [(checked)]="record.days.Wednesday"></ejs-checkbox></li>
-                <li><ejs-checkbox label="Thursday" [(checked)]="record.days.Thursday"></ejs-checkbox></li>
-                <li><ejs-checkbox label="Friday" [(checked)]="record.days.Friday"></ejs-checkbox></li>
-                <li><ejs-checkbox label="Saturday" [(checked)]="record.days.Saturday"></ejs-checkbox></li>
-            </ul>
-        </div>
-    </div>
-
-    <div *ngIf="form.get('locationId').value && form.get('logisticVendorId').value && form.get('endDate').value && form.get('frequencyId').value && !this.form.errors?.['validateEndDate']">
-        <div class="row mar-t10">
-            <div class="col-md-6 col-lg-3">
-                <ejs-dropdownlist [dataSource]="testTypes" [fields]="{ text: 'name', value: 'name' }" [(value)]="container.testType" showClearButton="true" placeholder="Test Type" floatLabelType="Always"></ejs-dropdownlist>
-            </div>
-    
-            <div class="col-md-6 col-lg-4 col-xl-5">
-                <ejs-multiselect [dataSource]="analytes" [fields]="{ text: 'name', value: 'name' }" [(value)]="container.analytes" showDropDownIcon="true" placeholder="Analytes" floatLabelType="Always"></ejs-multiselect>
-            </div>
-    
-            <div class="col-md-6 col-lg-3 col-xl-2" style="margin-top: 28px;">
-                <span class="list-header-add"><button ejs-button cssClass="e-outline" (click)="addTestType()" [disabled]="!container.analytes || !container.testType">+ Add Test Type</button></span>
-            </div>
-        </div>
-
-        <div class="row pad-b20 pad-t10">
-            <div class="col-md-12 col-lg-10">
-                <ejs-textbox readonly="readonly" [value]="container.testTypeNames" placeholder="Test Types" floatLabelType="Always"></ejs-textbox>
-            </div>
-        </div>
-    
-        <div class="row pad-b10" *ngIf="container.testTypeNames">
-            <div class="col-md-6 col-lg-5 col-xl-2">
-                <ejs-dropdownlist [dataSource]="app.containerTypes" [fields]="{ text: 'name', value: 'name' }" [(value)]="container.containerType" showClearButton="true" placeholder="Container Type" floatLabelType="Always" ></ejs-dropdownlist>
-            </div>
-    
-            <div class="col-md-6 col-lg-5 col-xl-2">
-                <ejs-dropdownlist [dataSource]="labVendors" [fields]="{ text: 'name', value: 'id' }" [(value)]="container.labVendorId" showClearButton="true"
-                placeholder="Lab Vendor" floatLabelType="Always"></ejs-dropdownlist>
-            </div>
-    
-            <div class="col-md-6 col-lg-5 col-xl-2">
-                <ejs-numerictextbox [(value)]="container.samples" format='N0' min='0' max='10' step='1' placeholder="Number of Samples" floatLabelType="Always"></ejs-numerictextbox>
-            </div>
-    
-            <div class="col-md-6 col-lg-5 col-xl-2">
-                <ejs-numerictextbox [(value)]="container.expectedVolume" format='N0' min='0' max='100000' step='1' placeholder="Expected Volume (mL)" floatLabelType="Always"></ejs-numerictextbox>
-            </div>
-            <div class="col-md-6 col-lg-5 col-xl-2" style="margin-top: 28px;">
-                <span class="list-header-add"><button ejs-button cssClass="e-outline" (click)="addContainer()" [disabled]="!container.containerType || !container.samples || !container.labVendorId || !container.expectedVolume">+ Add Container</button></span>
-            </div>
-        </div>
-    </div>
-
-    <div class="row pad-b10" *ngIf="record.containers.length">
-        <div class="col-lg-12 col-xl-10 pad-t20">
-            <ejs-grid #grid [dataSource]='record.containers' [allowPaging]="false">
-                <e-columns>
-                    <e-column width="70" [visible]='true'>
-                        <ng-template #template let-data>
-                            <button ejs-button (click)="deleteContainer(data)" style="padding: 2px 2px;"><i class="e-icons e-delete text-danger"></i></button>
-                        </ng-template>
-                    </e-column>
-                    <e-column field='containerType' headerText='Container Type' width="180px"></e-column>
-                    <e-column field='labVendor' headerText='Lab Vendor' width="160px"></e-column>
-                    <e-column field='samples' headerText='No of Samples' textAlign='Center' format='N0' width="120px"></e-column>
-                    <e-column field='expectedVolume' headerText='Expected Volume (mL)' textAlign='Center' format='N1' width="140px"></e-column>
-                    <e-column field='testTypeNames' headerText='Test Types' width="350px"></e-column>
-                </e-columns>
-            </ejs-grid>
-        </div>
-    </div>
-
-    <div class="row d-flex align-items-center edit-footer mar-t20">
-        <div class="col-sm-6 d-flex justify-content-start">
-            <button ejs-button cssClass="save-button" isPrimary="true" (click)="save()" [disabled]="loading || !privileges.update">Save</button>
-        </div>
-        <div class="col-sm-6 d-flex justify-content-end button-top-padding">
-            <button ejs-button cssClass="e-outline e-flat close-button" [routerLink]="['/auth/collection/list']" [state]='{ formState: true }'>Close</button>
-        </div>
-    </div>
     <ejs-toast #toast></ejs-toast>
 </div>
 
