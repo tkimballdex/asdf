@@ -36,6 +36,10 @@ export class SampleTestRepository {
 		});
 	}
 
+	public getAnalyte(id: string) {
+        return this.http.post(`/analyte/get/${id}`);
+    }
+
 	public listCustomers() {
 		return this.http.post(`/customer/list`, {
 			tenantId: this.tenant.id

@@ -8,17 +8,17 @@ import { TenantService } from '../shared/tenant.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-    selector: 'sampletest-edit',
-    templateUrl: './edit.component.html',
-    styleUrls: ['./edit.component.scss']
+	selector: 'sampletest-edit',
+	templateUrl: './edit.component.html',
+	styleUrls: ['./edit.component.scss']
 })
 export class SampleTestEditComponent extends PageComponent implements OnInit {
 	constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private tenant: TenantService, private repository: SampleTestRepository) {
-        super();
+		super();
 	}
 
 	public form: FormGroup;
-    public record: any;
+	public record: any;
 	public deleteDialog: Dialog;
 	public variants: any;
 	public recordData: any;
@@ -27,11 +27,12 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 	public testResults: any;
 	public analytes: any;
 	public testSuccessfulBool: boolean = null;
-    //-----------------------------------------------------------------------------------------
-    async ngOnInit() {       
-        this.showSpinner();
-        this.app = await this.appService.getData();
-        this.privileges = this.app.privileges.tests;
+	public selectedAnalyteUnit: string = '';
+	//-----------------------------------------------------------------------------------------
+	async ngOnInit() {
+		this.showSpinner();
+		this.app = await this.appService.getData();
+		this.privileges = this.app.privileges.tests;
 		this.analytes = await this.repository.getAnalytes();
 
 		var id = this.route.snapshot.paramMap.get('id');
@@ -79,6 +80,11 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 			completedDate: new FormControl(this.record.completedDate)
 		});
 
+		if (id) {
+			const analyte = await this.repository.getAnalyte(this.form.value.analyteId);
+			this.selectedAnalyteUnit = ` (${analyte['resultUnits']})`;
+		}
+
 		this.form.get('testSuccessful').valueChanges.subscribe(value => {
 			if (value === true) {
 				this.form.get('testResultId').setValidators([Validators.required]);
@@ -97,8 +103,8 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 			this.form.get('resultValue').updateValueAndValidity();
 			this.form.get('failureReasonId').updateValueAndValidity();
 		});
-    }
-    //-----------------------------------------------------------------------------------------
+	}
+	//-----------------------------------------------------------------------------------------
 	async save() {
 		this.form.markAllAsTouched();
 
@@ -111,7 +117,7 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 
 		if (this.form.controls.testSuccessful.value === true || this.form.controls.testSuccessful.value === null) {
 			this.record.failureReasonId = null;
-		} 
+		}
 		if (this.form.controls.testSuccessful.value === false || this.form.controls.testSuccessful.value === null) {
 			this.record.resultValue = null;
 			this.record.testResultId = null;
@@ -120,7 +126,7 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 		var add = !this.record.id;
 		this.showSpinner();
 		this.record.tenantId = this.tenant.id;
-		
+
 		var returnValue = await this.repository.save(this.record);
 		this.hideSpinner();
 
@@ -135,27 +141,27 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 			}
 		}
 	}
-    //-----------------------------------------------------------------------------------------
-    delete() {
-        this.deleteDialog = DialogUtility.confirm({
-            title: 'Delete Test',
-            content: `Are you sure you want to delete the test <b>${this.record.testNo}</b>?`,
-            okButton: { click: this.deleteOK.bind(this) }
-        });
-    }
-    //-----------------------------------------------------------------------------------------
-    async deleteOK() {
-        this.showSpinner();
-        this.deleteDialog.close();
-        var result = await this.repository.delete(this.record.id);
-        this.hideSpinner();
+	//-----------------------------------------------------------------------------------------
+	delete() {
+		this.deleteDialog = DialogUtility.confirm({
+			title: 'Delete Test',
+			content: `Are you sure you want to delete the test <b>${this.record.testNo}</b>?`,
+			okButton: { click: this.deleteOK.bind(this) }
+		});
+	}
+	//-----------------------------------------------------------------------------------------
+	async deleteOK() {
+		this.showSpinner();
+		this.deleteDialog.close();
+		var result = await this.repository.delete(this.record.id);
+		this.hideSpinner();
 
-        if (result.error) {
-            this.showErrorMessage(result.description);
-        } else {
-            this.showDeleteMessage(true);
-            setTimeout(() => this.router.navigate(['/auth/sampletest/list']), 1000);
-        }
+		if (result.error) {
+			this.showErrorMessage(result.description);
+		} else {
+			this.showDeleteMessage(true);
+			setTimeout(() => this.router.navigate(['/auth/sampletest/list']), 1000);
+		}
 	}
 	//-----------------------------------------------------------------------------------------
 	async analyteChange(e) {
@@ -164,6 +170,10 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 		this.testResults = null;
 		this.form.get('analyteId').setValue(e.itemData.id);
 		this.form.get('testTypeId').setValue(null);
+
+		const analyte = await this.repository.getAnalyte(e.value);
+		this.selectedAnalyteUnit = ` (${analyte['resultUnits']})`;
+
 		this.testData = await this.repository.getData(e.itemData.id);
 		this.testTypes = this.testData.testTypes;
 		this.testResults = this.testData.testResults;

@@ -50,7 +50,7 @@ export class SiteRepository {
         return this.http.post<any>(`/siteAnalyte/delete?id=${siteAnalyteId}`);
     }
 
-    public getAnalyteName(id: string) {
+    public getAnalyte(id: string) {
         return this.http.post(`/analyte/get/${id}`);
     }
 

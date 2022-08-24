@@ -47,6 +47,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 	public analyteForm: FormGroup;
 	public status: string;
 	public activeToggleText: string;
+	public selectedAnalyteUnit: any = '';
 
 	@ViewChild('editTab') public editTab: TabComponent;
 	@ViewChild('editSettingsTemplate') public editSettingsTemplate: TabComponent;
@@ -177,7 +178,7 @@ export class CustomerEditComponent extends PageComponent implements OnInit {
 			}
 
 			if (args.action === "edit" || args.action === "add") {
-				const analyteName = await this.repository.getAnalyteName(this.analyteForm.value.analyteId);
+				const analyteName = await this.repository.getAnalyte(this.analyteForm.value.analyteId);
 				this.analyteForm.value.analyte = analyteName['name'];
 				this.analyteForm.value.tenantId = this.tenant.id;
 				this.analyteForm.value.customerId = this.record.id;

@@ -56,6 +56,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	public siteAnalyteId: string;
 	public status: string;
 	public activeToggleText: string;
+	public selectedAnalyteUnit: string = '';
 
 	@ViewChild('editTab') public editTab: TabComponent;
 	@ViewChild('ServiceStartDate') public ServiceStartDate;
@@ -223,6 +224,11 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		}
 	}
 	//------------------------------------------------------------------------------------------------------------------------
+	async analyteHandler(e) {
+		const analyte = await this.repository.getAnalyte(e.value);
+		this.selectedAnalyteUnit = analyte['resultUnits'] ? ` (${analyte['resultUnits']})` : '';
+	}
+	//------------------------------------------------------------------------------------------------------------------------
 	editTabCreated() {
 		if (history.state.locations) {
 			this.editTab.selectedItem = 1;
@@ -352,8 +358,11 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 
 		if (args.requestType === 'beginEdit') {
 			this.editAnalyte = true;
+			const analyte = await this.repository.getAnalyte(this.analyteForm.value.analyteId);
+			this.selectedAnalyteUnit = analyte['resultUnits'] ? ` (${analyte['resultUnits']})` : '';
 		} else if (args.requestType === 'add') {
 			this.editAnalyte = false;
+			this.selectedAnalyteUnit = '';
 		}
 
 		if (args.requestType === 'save') {
@@ -366,7 +375,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			}
 
 			if (args.action === "edit" || args.action === "add") {
-				const analyteName = await this.repository.getAnalyteName(this.analyteForm.value.analyteId);
+				const analyteName = await this.repository.getAnalyte(this.analyteForm.value.analyteId);
 				this.analyteForm.value.analyte = analyteName['name'];
 				this.analyteForm.value.tenantId = this.tenant.id;
 				this.analyteForm.value.siteId = this.record.id;

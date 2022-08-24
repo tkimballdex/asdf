@@ -34,7 +34,7 @@ export class CustomerRepository {
         return this.http.post<any>(`/customerAnalyte/delete?id=${customerAnalyteId}`);
     }
 
-    public getAnalyteName(id: string) {
+    public getAnalyte(id: string) {
         return this.http.post(`/analyte/get/${id}`);
     }
 

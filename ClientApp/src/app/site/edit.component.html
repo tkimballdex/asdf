@@ -218,20 +218,20 @@
                                             </e-columns>
                                             <ng-template #editSettingsTemplate let-data>
                                                 <div [formGroup]="analyteForm">
-                                                    <div class="form-row">
-                                                        <div class="col-md-6">
-                                                            <ejs-dropdownlist id="{{editAnalyte ? 'analyteDropdown' : null}}" formControlName="analyteId" [dataSource]="tenantAnalytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="data.analyteId" [readonly]="editAnalyte" placeholder="Analyte*" floatLabelType="Always"></ejs-dropdownlist>
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <ejs-dropdownlist id="{{editAnalyte ? 'analyteDropdown' : null}}" formControlName="analyteId" [dataSource]="tenantAnalytes" [fields]="{ text: 'name', value: 'id' }" [(value)]="data.analyteId" (change)="analyteHandler($event)" [readonly]="editAnalyte" placeholder="Analyte*" floatLabelType="Always"></ejs-dropdownlist>
                                                         </div>
                                                     </div>
-                                                    <div class="form-row pad-t15">
-                                                        <div class="col-md-6">
-                                                            <ejs-numerictextbox formControlName="lowThreshold" [(value)]="data.lowThreshold" format='N1' step='1' placeholder="Low Threshold*" floatLabelType="Always"></ejs-numerictextbox>
+                                                    <div class="row pad-t15">
+                                                        <div class="form-group col-md-6">
+                                                            <ejs-numerictextbox formControlName="lowThreshold" [(value)]="data.lowThreshold" format='N1' step='1' [placeholder]="'Low Threshold*' + selectedAnalyteUnit" floatLabelType="Always"></ejs-numerictextbox>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <ejs-numerictextbox formControlName="highThreshold" [(value)]="data.highThreshold" format='N1' step='1' placeholder="High Threshold*" floatLabelType="Always"></ejs-numerictextbox>
+                                                            <ejs-numerictextbox formControlName="highThreshold" [(value)]="data.highThreshold" format='N1' step='1' [placeholder]="'High Threshold*' + selectedAnalyteUnit" floatLabelType="Always"></ejs-numerictextbox>
                                                         </div>
                                                     </div>
-                                                    <div class="form-row pad-t20">
+                                                    <div class="row pad-t20">
                                                         <div class="col-md-6">
                                                             <ejs-checkbox formControlName="sendNotifications" [(value)]="data.sendNotifications" label="Send Notifications"></ejs-checkbox>
                                                         </div>
