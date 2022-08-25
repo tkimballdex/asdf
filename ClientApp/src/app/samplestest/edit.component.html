@@ -29,7 +29,7 @@
                         <ejs-textbox [(value)]="record.testNo" placeholder="Test No" floatLabelType="Always" [readonly]="true"></ejs-textbox>
                     </div>        
                     <div class="col-md-6 col-lg-6 col-xl-5" *ngIf="record.sample">
-                        <ejs-datepicker [(value)]="record.createdDate" readonly="true" placeholder="Created Date" floatLabelType="Always"></ejs-datepicker>
+                        <ejs-datepicker id="testCreatedDate" [(value)]="record.createdDate" readonly="true" placeholder="Created Date" floatLabelType="Always"></ejs-datepicker>
                     </div>
                 </div>
             

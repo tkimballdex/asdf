@@ -573,6 +573,7 @@ mat-form-field.mat-form-field {
 #edit-view ejs-textbox input[readonly],
 #edit-view ejs-textbox textarea[readonly],
 #containerCreatedDate div,
+#testCreatedDate div,
 #sampleExpectedVolume div,
 #collectionStatus div,
 #containerScheduledDate div,

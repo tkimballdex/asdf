@@ -35,6 +35,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	}
 
 	public id: string;
+	public customer: any;
 	public siteData: any;
 	public counties: any;
 	public record: any;
@@ -88,10 +89,10 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		var customerId = this.route.snapshot.paramMap.get('customerId');
 
 		if (this.id == null) {
-			var customer = await this.repository.getCustomer(customerId);
+			this.customer = await this.repository.getCustomer(customerId);
 			this.record = {
 				customerId: customerId,
-				customer: customer.name,
+				customer: this.customer.name,
 				active: true
 			}
 		} else {
@@ -113,6 +114,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			stateId: new FormControl(this.record.stateId, [Validators.required]),
 			postalCode: new FormControl(this.record.postalCode, [Validators.required]),
 			countyId: new FormControl(this.record.countyId, [Validators.required]),
+			contactInfoCheckbox: new FormControl(false, [Validators.required]),
 			contactName: new FormControl(this.record.contactName, [Validators.required]),
 			contactEmail: new FormControl(this.record.contactEmail, [Validators.required, Validators.email]),
 			contactPhoneNo: new FormControl(this.record.contactPhoneNo, [Validators.required, Validators.maxLength(10)])
@@ -238,6 +240,14 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 	async stateChange(e) {
 		this.counties = null;
 		this.counties = await this.repository.getCounties(e.itemData.id);
+	}
+	//------------------------------------------------------------------------------------------------------------------------
+	customerContactInfo() {
+		if(!this.form.value.contactInfoCheckbox) {
+			this.form.get('contactName').setValue(this.customer.contactName);
+			this.form.get('contactPhoneNo').setValue(this.customer.contactPhoneNo);
+			this.form.get('contactEmail').setValue(this.customer.contactEmail);
+		}
 	}
 	//------------------------------------------------------------------------------------------------------------------------
 	selectTab(e) {
