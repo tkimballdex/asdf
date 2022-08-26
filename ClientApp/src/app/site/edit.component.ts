@@ -87,7 +87,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 		this.id = this.route.snapshot.paramMap.get('id');
 		this.tenantAnalytes = await this.repository.listTenantAnalytes(this.tenant.id);
 		var customerId = this.route.snapshot.paramMap.get('customerId');
-
+		
 		if (this.id == null) {
 			this.customer = await this.repository.getCustomer(customerId);
 			this.record = {
@@ -97,6 +97,7 @@ export class SiteEditComponent extends PageComponent implements OnInit {
 			}
 		} else {
 			this.record = await this.repository.get(this.id);
+			this.customer = await this.repository.getCustomer(this.record.customerId);
 			this.counties = await this.repository.getCounties(this.record.stateId)
 			this.siteAnalytes = await this.repository.listSiteAnalytes(this.id);
 			this.status = this.record.active ? "Active" : "Inactive";
