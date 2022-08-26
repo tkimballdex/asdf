@@ -24,7 +24,7 @@
     <div class="mar-l10">
         <div class="row pad-t20">         
             <div class="col-md-6 col-lg-5 col-xl-4">
-                <ejs-datepicker formControlName="date" placeholder="Date" floatLabelType="Always"></ejs-datepicker>
+                <ejs-datepicker #Date formControlName="date" placeholder="Date" floatLabelType="Always" (focus)='datePickerFocus($event)'></ejs-datepicker>
                 <div *ngIf="this.invalidControl('date')" class="e-error">
                     Date is required!
                 </div>

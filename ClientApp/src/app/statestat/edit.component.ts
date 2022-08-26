@@ -22,6 +22,7 @@ export class StateStatEditComponent extends PageComponent implements OnInit {
     public deleteDialog: Dialog;
     public form: FormGroup;
 	public stateName: any;
+	@ViewChild('Date') public Date;
 	//------------------------------------------------------------------------------------
 	async ngOnInit() {
 		var id = this.route.snapshot.paramMap.get('id');

@@ -21,7 +21,7 @@
             <ejs-dropdownlist [dataSource]="customers" [(value)]="form.customerId" [fields]="{ text: 'name', value: 'id' }" placeholder="Customer" floatLabelType="Always" (change)="search()"></ejs-dropdownlist>
         </div>
         <div class="col-sm-6 col-md-3 col-lg-2">
-            <ejs-datepicker [(value)]="form.scheduledDate" placeholder="Scheduled Date" floatLabelType="Always" (change)="search()"></ejs-datepicker>
+            <ejs-datepicker #ScheduledDate [(value)]="form.scheduledDate" placeholder="Scheduled Date" floatLabelType="Always" (change)="search()" (focus)='datePickerFocus($event)'></ejs-datepicker>
         </div>        
         <div class="col-sm-6 col-md-3 col-lg-2 pad-t20">
             <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>

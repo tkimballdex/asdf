@@ -11,10 +11,10 @@
             <ejs-textbox [(value)]="form.title" placeholder="Title" floatLabelType="Always" (keyup.enter)="search()"></ejs-textbox>
         </div>
         <div class="col-md-2">
-            <ejs-datepicker [(value)]="form.startDate" placeholder="Start Date" floatLabelType="Always"></ejs-datepicker>
+            <ejs-datepicker #StartDate [(value)]="form.startDate" placeholder="Start Date" floatLabelType="Always" (focus)='datePickerFocus($event)'></ejs-datepicker>
         </div>
         <div class="col-md-2">
-            <ejs-datepicker [(value)]="form.endDate" placeholder="End Date" floatLabelType="Always"></ejs-datepicker>
+            <ejs-datepicker #EndDate [(value)]="form.endDate" placeholder="End Date" floatLabelType="Always" (focus)='datePickerFocus($event)'></ejs-datepicker>
         </div>
         <div class="col-md-2 pad-t10">
             <button ejs-button cssClass="e-primary search-button" iconCss="fal fa-search pad-r10" (click)="search()">Search</button>

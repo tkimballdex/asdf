@@ -23,6 +23,7 @@ export class CountystatEditComponent extends PageComponent implements OnInit {
     public form: FormGroup;
 	public counties: any;
 	public countyName: any;
+	@ViewChild('Date') public Date;
 	//------------------------------------------------------------------------------------
 	async ngOnInit() {
 		

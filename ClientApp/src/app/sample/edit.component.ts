@@ -41,6 +41,7 @@ export class SampleEditComponent extends PageComponent implements OnInit {
 	public sampleSuccessfulBool: boolean = null;
 
 	@ViewChild('editTab') public editTab: TabComponent;
+	@ViewChild('CompletedDate') public CompletedDate;
 	//-----------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.showSpinner();

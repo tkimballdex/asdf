@@ -53,14 +53,14 @@
 
         <div class="row pad-t20">
             <div class="col-md-6 col-lg-5 col-xl-4">
-                <ejs-datepicker formControlName="startDate" required placeholder="Start Date*" floatLabelType="Always"></ejs-datepicker>
+                <ejs-datepicker #StartDate formControlName="startDate" required placeholder="Start Date*" floatLabelType="Always" (focus)='datePickerFocus($event)'></ejs-datepicker>
                 <div *ngIf="this.invalidControl('startDate')" class="e-error">
                     Start Date is required!
                 </div>
             </div>
             <div class="col-md-6 col-lg-5 col-xl-4">
-                <ejs-datepicker formControlName="endDate" required placeholder="End Date*" floatLabelType="Always"
-                [ngClass]="{'invalid-input': this.form.errors?.['validateEndDate'] === 'validateEndDate'}"></ejs-datepicker>
+                <ejs-datepicker #EndDate formControlName="endDate" required placeholder="End Date*" floatLabelType="Always"
+                [ngClass]="{'invalid-input': this.form.errors?.['validateEndDate'] === 'validateEndDate'}" (focus)='datePickerFocus($event)'></ejs-datepicker>
                 <div *ngIf="this.invalidControl('endDate')" class="e-error">
                     End Date is required!
                 </div>

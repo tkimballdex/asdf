@@ -26,7 +26,7 @@ export class SampleListComponent extends PageComponent implements OnInit {
 	public endDate: Date;
 
    @ViewChild('grid') public grid: GridComponent;
-   @ViewChild('dateRangePicker') public dateRangePicker: DateRangePicker;
+   @ViewChild('SelectRange') public SelectRange: DateRangePicker;
     //------------------------------------------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.app = await this.appService.getData();
@@ -44,9 +44,9 @@ export class SampleListComponent extends PageComponent implements OnInit {
 	}
 
 	ngAfterViewChecked() {
-		if (this.dateRangePicker && !this.dateRangePicker.startDate) {
-			this.dateRangePicker.startDate = this.startDate;
-			this.dateRangePicker.endDate = this.endDate;
+		if (this.SelectRange && !this.SelectRange.startDate) {
+			this.SelectRange.startDate = this.startDate;
+			this.SelectRange.endDate = this.endDate;
 			this.dateRangeChange({ startDate: this.startDate, endDate: this.endDate });
 		}
 	}

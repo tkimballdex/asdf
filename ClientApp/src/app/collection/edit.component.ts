@@ -37,6 +37,8 @@ export class CollectionEditComponent extends PageComponent implements OnInit {
 	public collectionSuccessfulBool: any;
 
 	@ViewChild('editTab') public editTab: TabComponent;
+	@ViewChild('ScheduledDate') public ScheduledDate;
+	@ViewChild('CompletedDate') public CompletedDate;
 	//-----------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.showSpinner();

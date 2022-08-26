@@ -24,6 +24,7 @@ export class CollectionListComponent extends PageComponent implements OnInit {
 	public customers: any;
 	public someId: number;
 	@ViewChild('grid') public grid: GridComponent;
+	@ViewChild('ScheduledDate') public ScheduledDate;
 	//------------------------------------------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.app = await this.appService.getData();

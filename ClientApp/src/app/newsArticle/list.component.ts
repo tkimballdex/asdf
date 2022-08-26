@@ -16,6 +16,8 @@ export class NewsArticleListComponent extends PageComponent implements OnInit {
 	public form: FormParams;
 	public list: any;
 	@ViewChild('grid') public grid: GridComponent;
+	@ViewChild('StartDate') public StartDate;
+	@ViewChild('EndDate') public EndDate;
 	//----------------------------------------------------------------------------
 	async ngOnInit() {
 		this.app = await this.appService.getData();

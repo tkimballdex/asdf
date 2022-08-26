@@ -37,6 +37,8 @@ export class CollectionScheduleComponent extends PageComponent implements OnInit
 	public testTypes: any;
 	public showContainer: boolean;
 	@ViewChild('grid') public grid: GridComponent;
+	@ViewChild('StartDate') public StartDate;
+	@ViewChild('EndDate') public EndDate;
 	//-----------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.showSpinner();

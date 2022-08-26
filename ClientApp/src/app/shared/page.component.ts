@@ -107,7 +107,10 @@ export class PageComponent {
 	}
 
     public datePickerFocus(e) {
-		const localVariable = e.model.placeholder.replace(/\s+/g, '');
+		let localVariable = e.model.placeholder.replace(/\s+/g, '');
+        if (localVariable.slice(-1) === '*') {
+            localVariable = localVariable.slice(0, -1);
+        }
         this[localVariable].show();
     }
 }

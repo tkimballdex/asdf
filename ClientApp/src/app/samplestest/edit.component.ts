@@ -28,6 +28,7 @@ export class SampleTestEditComponent extends PageComponent implements OnInit {
 	public analytes: any;
 	public testSuccessfulBool: boolean = null;
 	public selectedAnalyteUnit: string = '';
+	@ViewChild('TestCompletedOn') public TestCompletedOn;
 	//-----------------------------------------------------------------------------------------
 	async ngOnInit() {
 		this.showSpinner();

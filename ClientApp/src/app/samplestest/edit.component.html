@@ -72,7 +72,7 @@
                         <ejs-textbox [(value)]="record.referenceNo" placeholder="Lab Reference No" floatLabelType="Always"></ejs-textbox>           
                     </div>
                     <div class="col-md-6 col-lg-6 col-xl-5">
-                        <ejs-datepicker formControlName="completedDate" placeholder="Test Completed On" floatLabelType="Always"></ejs-datepicker>
+                        <ejs-datepicker #TestCompletedOn formControlName="completedDate" placeholder="Test Completed On" floatLabelType="Always" (focus)='datePickerFocus($event)'></ejs-datepicker>
                     </div>
                 </div>
             </div>
